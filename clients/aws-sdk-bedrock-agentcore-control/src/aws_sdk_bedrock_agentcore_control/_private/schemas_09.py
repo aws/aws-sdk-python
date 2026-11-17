@@ -25,12 +25,17 @@ _sT = "smithy.api#idempotencyToken"
 _CREATING = "CREATING"
 _UPDATING = "UPDATING"
 _DELETING = "DELETING"
-_ACTIVE = "ACTIVE"
+_CF = "CREATE_FAILED"
+_UF = "UPDATE_FAILED"
+_DF = "DELETE_FAILED"
 _smithy = "smithy.api#output"
 _st = "status"
 _uA = "updatedAt"
 _smithya = "smithy.api#http"
+_aRI = "agentRuntimeId"
 _t = "tags"
+_READY = "READY"
+_aRA = "agentRuntimeArn"
 _cA = "createdAt"
 _sQ = "smithy.api#httpQuery"
 _fR = "failureReason"
@@ -39,13 +44,16 @@ _nT = "nextToken"
 _a = "arn"
 _STRING = "STRING"
 _ac = "action"
+_aRN = "agentRuntimeName"
+_nC = "networkConfiguration"
 _aCu = "authorizerConfiguration"
+_lC = "lifecycleConfiguration"
 _eV = "environmentVariables"
+_fC = "filesystemConfigurations"
 _ty = "type"
 _eRA = "executionRoleArn"
 _oV = "optionalValue"
 _con = "configuration"
-_FAILED = "FAILED"
 _rAe = "resourceArn"
 _mT = "maxTokens"
 _mI = "modelId"
@@ -55,10 +63,11 @@ _MO = "METADATA_ONLY"
 _NUMBER = "NUMBER"
 _hI = "harnessId"
 _hN = "harnessName"
+_aCRE = "agentCoreRuntimeEnvironment"
 _tSi = "timeoutSeconds"
 _MA = "MemoryArn"
-_eED = "eventExpiryDuration"
-_eKA = "encryptionKeyArn"
+_CHI = "CreateHarnessInput"
+_cCHR = "com.amazonaws.bedrockagentcorecontrol#CreateHarnessRequest"
 _env = "environment"
 _eAn = "environmentArtifact"
 _sPy = "systemPrompt"
@@ -69,8 +78,16 @@ _memo = "memory"
 _tr = "truncation"
 _ho = "hooks"
 _mIa = "maxIterations"
+_HA = "HarnessArn"
+_HACRE = "HarnessAgentCoreRuntimeEnvironment"
+_HEP = "HarnessEnvironmentProvider"
+_HSar = "HarnessStatus"
+_H = "Harness"
 _hV = "harnessVersion"
+_CHO = "CreateHarnessOutput"
+_cCHRo = "com.amazonaws.bedrockagentcorecontrol#CreateHarnessResponse"
 _ha = "harness"
+_CH = "CreateHarness"
 _DHI = "DeleteHarnessInput"
 _cDHR = "com.amazonaws.bedrockagentcorecontrol#DeleteHarnessRequest"
 _dMM = "deleteManagedMemory"
@@ -229,32 +246,186 @@ _dSA = "dataStreamArn"
 _cCon = "contentConfigurations"
 _SDR = "StreamDeliveryResource"
 _ki = "kinesis"
-_SDRL = "StreamDeliveryResourcesList"
-_SDRt = "StreamDeliveryResources"
-_reso = "resources"
-_CMIr = "CreateMemoryInput"
-_mERA = "memoryExecutionRoleArn"
-_mSe = "memoryStrategies"
-_iK = "indexedKeys"
-_nK = "namespaceKeys"
-_sDR = "streamDeliveryResources"
-_MIe = "MemoryId"
-_MSe = "MemoryStatus"
-_ECO = "EpisodicConsolidationOverride"
-_SCO = "SemanticConsolidationOverride"
-_SCOu = "SummaryConsolidationOverride"
-_UPCO = "UserPreferenceConsolidationOverride"
-_CCC = "CustomConsolidationConfiguration"
-_sCO = "semanticConsolidationOverride"
-_sCOu = "summaryConsolidationOverride"
-_uPCO = "userPreferenceConsolidationOverride"
-_eCO = "episodicConsolidationOverride"
-_CCons = "ConsolidationConfiguration"
-_cCC = "customConsolidationConfiguration"
-_CMO = "CreateMemoryOutput"
-_CM = "CreateMemory"
 
 MEMORY_ARN: StaticSchema = (3, n0, _MA, 0)
+
+CREATE_HARNESS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _CHI,
+    {_sSI: _cCHR, _smith: None},
+    (
+        _hN,
+        _cT,
+        _eRA,
+        _env,
+        _eAn,
+        _eV,
+        _aCu,
+        _mod,
+        _sPy,
+        _too,
+        _sk,
+        _aTl,
+        _memo,
+        _tr,
+        _ho,
+        _mIa,
+        _mT,
+        _tSi,
+        _t,
+    ),
+    (
+        (lambda: schemas.HARNESS_NAME, 1),
+        (lambda: schemas.CLIENT_TOKEN, 2),
+        (lambda: schemas.ROLE_ARN, 1),
+        (lambda: schemas.HARNESS_ENVIRONMENT_PROVIDER_REQUEST, 0),
+        (lambda: schemas.HARNESS_ENVIRONMENT_ARTIFACT, 0),
+        (lambda: schemas.ENVIRONMENT_VARIABLES_MAP, 0),
+        (lambda: schemas.AUTHORIZER_CONFIGURATION, 0),
+        (lambda: schemas.HARNESS_MODEL_CONFIGURATION, 0),
+        (lambda: schemas.HARNESS_SYSTEM_PROMPT, 0),
+        (lambda: schemas.HARNESS_TOOLS, 0),
+        (lambda: schemas.HARNESS_SKILLS, 0),
+        (lambda: schemas.HARNESS_ALLOWED_TOOLS, 0),
+        (lambda: schemas.HARNESS_MEMORY_CONFIGURATION, 0),
+        (lambda: schemas.HARNESS_TRUNCATION_CONFIGURATION, 0),
+        (lambda: schemas.HARNESS_HOOKS, 0),
+        (7, 0),
+        (7, 0),
+        (7, 0),
+        (lambda: schemas.TAGS_MAP, 0),
+    ),
+)
+
+CREATE_HARNESS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _CHO,
+    {_sSI: _cCHRo, _smithy: None},
+    (_ha,),
+    ((lambda: HARNESS, 1),),
+)
+
+CREATE_HARNESS: StaticOperationSchema = (
+    23,
+    n0,
+    _CH,
+    {_smithya: MappingProxyType({"code": 201, "method": "POST", "uri": "/harnesses"})},
+    CREATE_HARNESS_INPUT,
+    CREATE_HARNESS_OUTPUT,
+    (
+        lambda: schemas.ACCESS_DENIED_EXCEPTION,
+        lambda: schemas.CONFLICT_EXCEPTION,
+        lambda: schemas.INTERNAL_SERVER_EXCEPTION,
+        lambda: schemas.SERVICE_QUOTA_EXCEEDED_EXCEPTION,
+        lambda: schemas.THROTTLING_EXCEPTION,
+        lambda: schemas.VALIDATION_EXCEPTION,
+    ),
+)
+
+HARNESS_ARN: StaticSchema = (3, n0, _HA, 0)
+
+HARNESS_AGENT_CORE_RUNTIME_ENVIRONMENT: StaticSchema = (
+    18,
+    n0,
+    _HACRE,
+    0,
+    (_aRA, _aRN, _aRI, _lC, _nC, _fC),
+    (
+        (lambda: schemas.BEDROCK_AGENTCORE_RESOURCE_ARN, 1),
+        (3, 1),
+        (3, 1),
+        (lambda: schemas.LIFECYCLE_CONFIGURATION, 1),
+        (lambda: schemas.NETWORK_CONFIGURATION, 1),
+        (lambda: schemas.FILESYSTEM_CONFIGURATIONS, 0),
+    ),
+)
+
+HARNESS_ENVIRONMENT_PROVIDER: StaticSchema = (
+    19,
+    n0,
+    _HEP,
+    0,
+    (_aCRE,),
+    ((HARNESS_AGENT_CORE_RUNTIME_ENVIRONMENT, 0),),
+)
+
+HARNESS_STATUS: StaticSchema = (
+    14,
+    n0,
+    _HSar,
+    0,
+    (_CREATING, _CF, _UPDATING, _UF, _READY, _DELETING, _DF),
+    (
+        (-1, {_sVm: _CREATING}),
+        (-1, {_sVm: _CF}),
+        (-1, {_sVm: _UPDATING}),
+        (-1, {_sVm: _UF}),
+        (-1, {_sVm: _READY}),
+        (-1, {_sVm: _DELETING}),
+        (-1, {_sVm: _DF}),
+    ),
+)
+
+HARNESS: StaticSchema = (
+    18,
+    n0,
+    _H,
+    0,
+    (
+        _hI,
+        _hN,
+        _a,
+        _st,
+        _hV,
+        _eRA,
+        _cA,
+        _uA,
+        _mod,
+        _sPy,
+        _too,
+        _sk,
+        _aTl,
+        _tr,
+        _env,
+        _eAn,
+        _eV,
+        _aCu,
+        _memo,
+        _ho,
+        _mIa,
+        _mT,
+        _tSi,
+        _fR,
+    ),
+    (
+        (lambda: schemas.HARNESS_ID, 1),
+        (lambda: schemas.HARNESS_NAME, 1),
+        (HARNESS_ARN, 1),
+        (HARNESS_STATUS, 1),
+        (lambda: schemas.HARNESS_VERSION, 0),
+        (lambda: schemas.ROLE_ARN, 1),
+        (lambda: schemas.DATE_TIMESTAMP, 1),
+        (lambda: schemas.DATE_TIMESTAMP, 1),
+        (lambda: schemas.HARNESS_MODEL_CONFIGURATION, 1),
+        (lambda: schemas.HARNESS_SYSTEM_PROMPT, 1),
+        (lambda: schemas.HARNESS_TOOLS, 1),
+        (lambda: schemas.HARNESS_SKILLS, 1),
+        (lambda: schemas.HARNESS_ALLOWED_TOOLS, 1),
+        (lambda: schemas.HARNESS_TRUNCATION_CONFIGURATION, 1),
+        (HARNESS_ENVIRONMENT_PROVIDER, 1),
+        (lambda: schemas.HARNESS_ENVIRONMENT_ARTIFACT, 0),
+        (lambda: schemas.ENVIRONMENT_VARIABLES_MAP, 0),
+        (lambda: schemas.AUTHORIZER_CONFIGURATION, 0),
+        (lambda: schemas.HARNESS_MEMORY_CONFIGURATION, 0),
+        (lambda: schemas.HARNESS_HOOKS, 0),
+        (7, 0),
+        (7, 0),
+        (7, 0),
+        (3, 0),
+    ),
+)
 
 DELETE_HARNESS_INPUT: StaticSchema = (
     18,
@@ -275,7 +446,7 @@ DELETE_HARNESS_OUTPUT: StaticSchema = (
     _DHO,
     {_sSI: _cDHRo, _smithy: None},
     (_ha,),
-    ((lambda: schemas.HARNESS, 0),),
+    ((HARNESS, 0),),
 )
 
 DELETE_HARNESS: StaticOperationSchema = (
@@ -314,7 +485,7 @@ GET_HARNESS_OUTPUT: StaticSchema = (
     _GHO,
     {_sSI: _cGHRo, _smithy: None},
     (_ha,),
-    ((lambda: schemas.HARNESS, 1),),
+    ((HARNESS, 1),),
 )
 
 GET_HARNESS: StaticOperationSchema = (
@@ -382,8 +553,8 @@ HARNESS_SUMMARY: StaticSchema = (
     (
         (lambda: schemas.HARNESS_ID, 1),
         (lambda: schemas.HARNESS_NAME, 1),
-        (lambda: schemas.HARNESS_ARN, 1),
-        (lambda: schemas.HARNESS_STATUS, 1),
+        (HARNESS_ARN, 1),
+        (HARNESS_STATUS, 1),
         (lambda: schemas.DATE_TIMESTAMP, 1),
         (lambda: schemas.DATE_TIMESTAMP, 1),
         (lambda: schemas.HARNESS_VERSION, 0),
@@ -443,9 +614,9 @@ HARNESS_VERSION_SUMMARY: StaticSchema = (
     (
         (lambda: schemas.HARNESS_ID, 1),
         (lambda: schemas.HARNESS_NAME, 1),
-        (lambda: schemas.HARNESS_ARN, 1),
+        (HARNESS_ARN, 1),
         (lambda: schemas.HARNESS_VERSION, 1),
-        (lambda: schemas.HARNESS_STATUS, 1),
+        (HARNESS_STATUS, 1),
         (lambda: schemas.DATE_TIMESTAMP, 1),
         (lambda: schemas.DATE_TIMESTAMP, 1),
         (3, 0),
@@ -532,7 +703,7 @@ UPDATE_HARNESS_OUTPUT: StaticSchema = (
     _UHO,
     {_sSI: _cUHRo, _smithy: None},
     (_ha,),
-    ((lambda: schemas.HARNESS, 1),),
+    ((HARNESS, 1),),
 )
 
 UPDATE_HARNESS: StaticOperationSchema = (
@@ -1144,150 +1315,4 @@ STREAM_DELIVERY_RESOURCE: StaticSchema = (
     0,
     (_ki,),
     ((KINESIS_RESOURCE, 0),),
-)
-
-STREAM_DELIVERY_RESOURCES_LIST: StaticSchema = (
-    16,
-    n0,
-    _SDRL,
-    0,
-    (_mem,),
-    ((STREAM_DELIVERY_RESOURCE, 0),),
-)
-
-STREAM_DELIVERY_RESOURCES: StaticSchema = (
-    18,
-    n0,
-    _SDRt,
-    0,
-    (_reso,),
-    ((STREAM_DELIVERY_RESOURCES_LIST, 1),),
-)
-
-CREATE_MEMORY_INPUT: StaticSchema = (
-    18,
-    n0,
-    _CMIr,
-    {_smith: None},
-    (_cT, _n, _d, _eKA, _mERA, _eED, _mSe, _iK, _nK, _sDR, _t),
-    (
-        (lambda: schemas.NON_EMPTY_STRING, 2),
-        (NAME, 1),
-        (lambda: schemas.DESCRIPTION, 0),
-        (ARN, 0),
-        (ARN, 0),
-        (7, 1),
-        (MEMORY_STRATEGY_INPUT_LIST, 0),
-        (INDEXED_KEYS_LIST, 0),
-        (NAMESPACE_KEYS_LIST, 0),
-        (STREAM_DELIVERY_RESOURCES, 0),
-        (lambda: schemas.TAGS_MAP, 0),
-    ),
-)
-
-CREATE_MEMORY_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _CMO,
-    {_smithy: None},
-    (_memo,),
-    ((lambda: schemas.MEMORY, 0),),
-)
-
-CREATE_MEMORY: StaticOperationSchema = (
-    23,
-    n0,
-    _CM,
-    {
-        _smithya: MappingProxyType(
-            {"code": 202, "method": "POST", "uri": "/memories/create"}
-        )
-    },
-    CREATE_MEMORY_INPUT,
-    CREATE_MEMORY_OUTPUT,
-    (
-        lambda: schemas.ACCESS_DENIED_EXCEPTION,
-        lambda: schemas.CONFLICT_EXCEPTION,
-        lambda: schemas.RESOURCE_NOT_FOUND_EXCEPTION,
-        lambda: schemas.SERVICE_EXCEPTION,
-        lambda: schemas.SERVICE_QUOTA_EXCEEDED_EXCEPTION,
-        lambda: schemas.THROTTLED_EXCEPTION,
-        lambda: schemas.VALIDATION_EXCEPTION,
-    ),
-)
-
-MEMORY_ID: StaticSchema = (3, n0, _MIe, 0)
-
-MEMORY_STATUS: StaticSchema = (
-    14,
-    n0,
-    _MSe,
-    0,
-    (_CREATING, _ACTIVE, _FAILED, _DELETING, _UPDATING),
-    (
-        (-1, {_sVm: _CREATING}),
-        (-1, {_sVm: _ACTIVE}),
-        (-1, {_sVm: _FAILED}),
-        (-1, {_sVm: _DELETING}),
-        (-1, {_sVm: _UPDATING}),
-    ),
-)
-
-EPISODIC_CONSOLIDATION_OVERRIDE: StaticSchema = (
-    18,
-    n0,
-    _ECO,
-    0,
-    (_aTP, _mI),
-    ((PROMPT, 1), (3, 1)),
-)
-
-SEMANTIC_CONSOLIDATION_OVERRIDE: StaticSchema = (
-    18,
-    n0,
-    _SCO,
-    0,
-    (_aTP, _mI),
-    ((PROMPT, 1), (3, 1)),
-)
-
-SUMMARY_CONSOLIDATION_OVERRIDE: StaticSchema = (
-    18,
-    n0,
-    _SCOu,
-    0,
-    (_aTP, _mI),
-    ((PROMPT, 1), (3, 1)),
-)
-
-USER_PREFERENCE_CONSOLIDATION_OVERRIDE: StaticSchema = (
-    18,
-    n0,
-    _UPCO,
-    0,
-    (_aTP, _mI),
-    ((PROMPT, 1), (3, 1)),
-)
-
-CUSTOM_CONSOLIDATION_CONFIGURATION: StaticSchema = (
-    19,
-    n0,
-    _CCC,
-    0,
-    (_sCO, _sCOu, _uPCO, _eCO),
-    (
-        (SEMANTIC_CONSOLIDATION_OVERRIDE, 0),
-        (SUMMARY_CONSOLIDATION_OVERRIDE, 0),
-        (USER_PREFERENCE_CONSOLIDATION_OVERRIDE, 0),
-        (EPISODIC_CONSOLIDATION_OVERRIDE, 0),
-    ),
-)
-
-CONSOLIDATION_CONFIGURATION: StaticSchema = (
-    19,
-    n0,
-    _CCons,
-    0,
-    (_cCC,),
-    ((CUSTOM_CONSOLIDATION_CONFIGURATION, 0),),
 )

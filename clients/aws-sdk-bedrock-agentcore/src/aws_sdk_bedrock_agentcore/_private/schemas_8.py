@@ -8,1137 +8,1278 @@ from . import schemas
 
 
 n0 = "com.amazonaws.bedrockagentcore"
-_sV = "schemaVersion"
-_iC = "inlineContent"
 _s = "smithy.api#required"
 _n = "name"
 _m = "member"
 _sVm = "smithy.api#enumValue"
-_ACTIVE = "ACTIVE"
 _FAILED = "FAILED"
 _st = "status"
-_d = "description"
 _cA = "createdAt"
-_uA = "updatedAt"
 _sm = "smithy.api#error"
 _c = "client"
 _sE = "smithy.api#httpError"
 _mes = "message"
 _smi = "smithy.api#sensitive"
-_sSI = "smithy.synthetic#originalShapeId"
+_aI = "actorId"
+_OTHER = "OTHER"
+_sIe = "sessionId"
 _smit = "smithy.api#input"
-_sH = "smithy.api#httpHeader"
 _sT = "smithy.api#idempotencyToken"
+_sL = "smithy.api#httpLabel"
+_sQ = "smithy.api#httpQuery"
 _smith = "smithy.api#output"
-_se = "server"
 _smithy = "smithy.api#http"
 _p = "payload"
 _smithyap = "smithy.api#default"
 _cTl = "clientToken"
+_GT = "GREATER_THAN"
+_LT = "LESS_THAN"
+_CONTAINS = "CONTAINS"
+_k = "key"
+_op = "operator"
 _va = "value"
-_f = "filters"
+_te = "text"
+_x = "x"
 _mR = "maxResults"
 _nT = "nextToken"
-_DELETED = "DELETED"
-_uI = "userId"
-_to = "tools"
+_fR = "failureReason"
+_so = "source"
+_inl = "inline"
+_met = "metadata"
+_bl = "blob"
+_cont = "content"
+_js = "json"
+_USER = "USER"
+_ASSISTANT = "ASSISTANT"
+_ro = "role"
+_tK = "topK"
+_use = "username"
+_mess = "messages"
 _sQe = "searchQuery"
-_ETHEREUM = "ETHEREUM"
-_SOLANA = "SOLANA"
+_na = "namespaces"
+_tim = "timestamp"
+_mSIe = "memoryStrategyId"
+_mIe = "memoryId"
+_mRI = "memoryRecordId"
+_nam = "namespace"
+_MMe = "MetadataMap"
+_MD = "MemoryDocument"
+_Con = "Content"
+_R = "Role"
+_TOOL = "TOOL"
+_Conv = "Conversational"
+_MJDC = "MemoryJsonDataContent"
+_MJD = "MemoryJsonData"
+_PTa = "PayloadType"
+_conv = "conversational"
+_PTL = "PayloadTypeList"
+_CEI = "CreateEventInput"
+_eTve = "eventTimestamp"
+_br = "branch"
+_eMx = "extractionMode"
+_eCxt = "extractionConfig"
+_Eve = "Event"
+_eIve = "eventId"
+_CEO = "CreateEventOutput"
+_eve = "event"
+_IIE = "InvalidInputException"
+_CEr = "CreateEvent"
+_DEI = "DeleteEventInput"
+_DEO = "DeleteEventOutput"
+_DE = "DeleteEvent"
+_DMRI = "DeleteMemoryRecordInput"
+_DMRO = "DeleteMemoryRecordOutput"
+_DMR = "DeleteMemoryRecord"
+_GEI = "GetEventInput"
+_GEO = "GetEventOutput"
+_GE = "GetEvent"
+_GMRI = "GetMemoryRecordInput"
+_MRe = "MemoryRecord"
+_eAx = "expiresAt"
+_GMRO = "GetMemoryRecordOutput"
+_mRe = "memoryRecord"
+_GMR = "GetMemoryRecord"
+_IPT = "IngestPayloadType"
+_IPL = "IngestPayloadList"
+_IMC = "InlineMemoryContent"
+_CSo = "ContentSource"
+_IDI = "IngestDataInput"
+_cTo = "contentTimestamp"
+_IDO = "IngestDataOutput"
+_IDn = "IngestData"
+_PTag = "PaginationToken"
+_LAIi = "ListActorsInput"
+_LAO = "ListActorsOutput"
+_aSc = "actorSummaries"
+_LA = "ListActors"
+_BF = "BranchFilter"
+_iPB = "includeParentBranches"
+_LE = "LeftExpression"
+_mK = "metadataKey"
+_OT = "OperatorType"
+_ET___ = "EQUALS_TO"
+_EXISTS = "EXISTS"
+_NE_ = "NOT_EXISTS"
+_REi = "RightExpression"
+_mV = "metadataValue"
+_EMFE = "EventMetadataFilterExpression"
+_le = "left"
+_ri = "right"
+_EMFL = "EventMetadataFilterList"
+_FI = "FilterInput"
+_eMve = "eventMetadata"
+_LEI = "ListEventsInput"
+_iP = "includePayloads"
+_fil = "filter"
+_ELv = "EventList"
+_LEO = "ListEventsOutput"
+_even = "events"
+_LEi = "ListEvents"
+_EJS = "ExtractionJobStatus"
+_EJFI = "ExtractionJobFilterInput"
+_sIt = "strategyId"
+_LMEJI = "ListMemoryExtractionJobsInput"
+_MMes = "MessageMetadata"
+_mIes = "messageIndex"
+_ML = "MessagesList"
+_EJM = "ExtractionJobMessages"
+_mL = "messagesList"
+_EJMx = "ExtractionJobMetadata"
+_jID = "jobID"
+_EJML = "ExtractionJobMetadataList"
+_LMEJO = "ListMemoryExtractionJobsOutput"
+_jo = "jobs"
+_LMEJ = "ListMemoryExtractionJobs"
+_MRLE = "MemoryRecordLeftExpression"
+_MROT = "MemoryRecordOperatorType"
+_BEFORE = "BEFORE"
+_AFTER = "AFTER"
+_GTOE_ = "GREATER_THAN_OR_EQUALS"
+_LTOE_ = "LESS_THAN_OR_EQUALS"
+_MRRE = "MemoryRecordRightExpression"
+_MMFE = "MemoryMetadataFilterExpression"
+_MMFL = "MemoryMetadataFilterList"
+_LMRI = "ListMemoryRecordsInput"
+_nP = "namespacePath"
+_mF = "metadataFilters"
+_MRSe = "MemoryRecordSummary"
+_scor = "score"
+_MRSL = "MemoryRecordSummaryList"
+_LMRO = "ListMemoryRecordsOutput"
+_mRS = "memoryRecordSummaries"
+_LMR = "ListMemoryRecords"
+_EFC = "EventFilterCondition"
+_HE = "HAS_EVENTS"
+_SFes = "SessionFilter"
+_eFv = "eventFilter"
+_LSI = "ListSessionsInput"
+_SSes = "SessionSummary"
+_SSL = "SessionSummaryList"
+_LSO = "ListSessionsOutput"
+_sSessi = "sessionSummaries"
+_LS = "ListSessions"
+_SCe = "SearchCriteria"
+_RMRI = "RetrieveMemoryRecordsInput"
+_sCe = "searchCriteria"
+_RMRO = "RetrieveMemoryRecordsOutput"
+_RMR = "RetrieveMemoryRecords"
+_EJ = "ExtractionJob"
+_jI = "jobId"
+_SMEJI = "StartMemoryExtractionJobInput"
+_eJ = "extractionJob"
+_SMEJO = "StartMemoryExtractionJobOutput"
+_SMEJ = "StartMemoryExtractionJob"
+_JKI = "JwtKeyId"
+_LADJ = "LinkedAccountDeveloperJwt"
+_ki = "kid"
+_sub = "sub"
+_Em = "Email"
+_LAE = "LinkedAccountEmail"
+_eAm = "emailAddress"
+_OAA = "OAuth2Authentication"
+_LAOA = "LinkedAccountOAuth2"
+_go = "google"
+_ap = "apple"
+_tel = "telegram"
+_gi = "github"
+_PN = "PhoneNumber"
+_LAS = "LinkedAccountSms"
+_pN = "phoneNumber"
+_LAi = "LinkedAccount"
+_em = "email"
+_sms = "sms"
+_dJ = "developerJwt"
+_oAu = "oAuth2"
+_LAL = "LinkedAccountList"
+_ECW = "EmbeddedCryptoWallet"
 _ne = "network"
-_CPII = "CreatePaymentInstrumentInput"
-_cCPIR = "com.amazonaws.bedrockagentcore#CreatePaymentInstrumentRequest"
-_XABAPUI = "X-Amzn-Bedrock-AgentCore-Payments-User-Id"
-_aN = "agentName"
-_XABAPAN = "X-Amzn-Bedrock-AgentCore-Payments-Agent-Name"
-_pMA = "paymentManagerArn"
-_pCI = "paymentConnectorId"
-_pIT = "paymentInstrumentType"
-_pID = "paymentInstrumentDetails"
-_PII = "PaymentInstrumentId"
-_PIS = "PaymentInstrumentStatus"
-_INITIATED = "INITIATED"
-_BLOCKED = "BLOCKED"
-_PI = "PaymentInstrument"
-_pII = "paymentInstrumentId"
-_CPIO = "CreatePaymentInstrumentOutput"
-_cCPIRo = "com.amazonaws.bedrockagentcore#CreatePaymentInstrumentResponse"
-_pIa = "paymentInstrument"
-_SRE = "SubscriptionRequiredException"
-_sUu = "subscriptionUrl"
-_pNr = "productName"
-_CPIr = "CreatePaymentInstrument"
-_DPII = "DeletePaymentInstrumentInput"
-_cDPIR = "com.amazonaws.bedrockagentcore#DeletePaymentInstrumentRequest"
-_DPIO = "DeletePaymentInstrumentOutput"
-_cDPIRo = "com.amazonaws.bedrockagentcore#DeletePaymentInstrumentResponse"
-_DPI = "DeletePaymentInstrument"
-_GPII = "GetPaymentInstrumentInput"
-_cGPIR = "com.amazonaws.bedrockagentcore#GetPaymentInstrumentRequest"
-_GPIO = "GetPaymentInstrumentOutput"
-_cGPIRo = "com.amazonaws.bedrockagentcore#GetPaymentInstrumentResponse"
-_GPI = "GetPaymentInstrument"
-_BCI = "BlockchainChainId"
-_BASE = "BASE"
-_BS = "BASE_SEPOLIA"
-_SD_ = "SOLANA_DEVNET"
-_IBT = "InstrumentBalanceToken"
-_USDC = "USDC"
-_GPIBI = "GetPaymentInstrumentBalanceInput"
-_cGPIBR = "com.amazonaws.bedrockagentcore#GetPaymentInstrumentBalanceRequest"
-_cha = "chain"
-_tok = "token"
-_TB = "TokenBalance"
-_am = "amount"
-_deci = "decimals"
-_GPIBO = "GetPaymentInstrumentBalanceOutput"
-_cGPIBRo = "com.amazonaws.bedrockagentcore#GetPaymentInstrumentBalanceResponse"
-_tB = "tokenBalance"
-_GPIB = "GetPaymentInstrumentBalance"
-_LPII = "ListPaymentInstrumentsInput"
-_cLPIR = "com.amazonaws.bedrockagentcore#ListPaymentInstrumentsRequest"
-_PISa = "PaymentInstrumentSummary"
-_PISL = "PaymentInstrumentSummaryList"
-_LPIO = "ListPaymentInstrumentsOutput"
-_cLPIRo = "com.amazonaws.bedrockagentcore#ListPaymentInstrumentsResponse"
-_pIay = "paymentInstruments"
-_LPI = "ListPaymentInstruments"
-_Cu = "Currency"
-_USD = "USD"
-_Am = "Amount"
-_cu = "currency"
-_SLe = "SessionLimits"
-_mSA = "maxSpendAmount"
-_CPSI = "CreatePaymentSessionInput"
-_cCPSR = "com.amazonaws.bedrockagentcore#CreatePaymentSessionRequest"
-_li = "limits"
-_eTIM = "expiryTimeInMinutes"
-_AL = "AvailableLimits"
-_aSA = "availableSpendAmount"
-_PSI = "PaymentSessionId"
-_PS = "PaymentSession"
-_pSI = "paymentSessionId"
-_aL = "availableLimits"
-_CPSO = "CreatePaymentSessionOutput"
-_cCPSRo = "com.amazonaws.bedrockagentcore#CreatePaymentSessionResponse"
-_pS = "paymentSession"
-_CPS = "CreatePaymentSession"
-_DPSI = "DeletePaymentSessionInput"
-_cDPSR = "com.amazonaws.bedrockagentcore#DeletePaymentSessionRequest"
-_PSS = "PaymentSessionStatus"
-_EXPIRED = "EXPIRED"
-_DPSO = "DeletePaymentSessionOutput"
-_cDPSRo = "com.amazonaws.bedrockagentcore#DeletePaymentSessionResponse"
-_DPS = "DeletePaymentSession"
-_GPSI = "GetPaymentSessionInput"
-_cGPSR = "com.amazonaws.bedrockagentcore#GetPaymentSessionRequest"
-_GPSO = "GetPaymentSessionOutput"
-_cGPSRo = "com.amazonaws.bedrockagentcore#GetPaymentSessionResponse"
-_GPS = "GetPaymentSession"
-_LPSI = "ListPaymentSessionsInput"
-_cLPSR = "com.amazonaws.bedrockagentcore#ListPaymentSessionsRequest"
-_PSSa = "PaymentSessionSummary"
-_PSSL = "PaymentSessionSummaryList"
-_LPSO = "ListPaymentSessionsOutput"
-_cLPSRo = "com.amazonaws.bedrockagentcore#ListPaymentSessionsResponse"
-_pSa = "paymentSessions"
-_LPS = "ListPaymentSessions"
-_PD = "PaymentDocument"
-_PAL = "Permit2AllowanceLimit"
-_CXPI = "CryptoX402PaymentInput"
-_ve = "version"
-_pAL = "permit2AllowanceLimit"
-_Ve = "Version"
-_WAH = "WwwAuthenticateHeader"
-_WAHL = "WwwAuthenticateHeaderList"
-_MPI = "MppPaymentInput"
-_wAH = "wwwAuthenticateHeaders"
-_bPGF = "buyerPaysGasFees"
-_PIa = "PaymentInput"
-_cX = "cryptoX402"
-_mp = "mpp"
-_PTay = "PaymentType"
-_CX = "CRYPTO_X402"
-_MPP = "MPP"
-_PPI = "ProcessPaymentInput"
-_cPPR = "com.amazonaws.bedrockagentcore#ProcessPaymentRequest"
-_pT = "paymentType"
-_pIaym = "paymentInput"
-_CXPO = "CryptoX402PaymentOutput"
-_MPC = "MppPaymentCredential"
-_MPO = "MppPaymentOutput"
-_sPI = "selectedPaymentId"
-_pCa = "paymentCredential"
-_PO = "PaymentOutput"
-_PPIr = "ProcessPaymentId"
-_PSa = "PaymentStatus"
-_PG = "PROOF_GENERATED"
-_PPO = "ProcessPaymentOutput"
-_cPPRo = "com.amazonaws.bedrockagentcore#ProcessPaymentResponse"
-_pPI = "processPaymentId"
-_pO = "paymentOutput"
-_PPr = "ProcessPayment"
-_MFE = "MetadataFilterExpression"
-_RIeg = "RegistryIdentifier"
-_RIL = "RegistryIdList"
-_SRRI = "SearchRegistryRecordsInput"
-_cSRRR = "com.amazonaws.bedrockagentcore#SearchRegistryRecordsRequest"
-_rIeg = "registryIds"
-_Des = "Description"
-_CD = "CustomDescriptor"
-_SDe = "ServerDefinition"
-_TD = "ToolsDefinition"
-_pVr = "protocolVersion"
-_MDc = "McpDescriptor"
-_Desc = "Descriptors"
-_mc = "mcp"
-_aa = "a2a"
-_cus = "custom"
-_aSg = "agentSkills"
-_DTe = "DescriptorType"
-_MCP = "MCP"
-_AA = "A2A"
-_CUSTOM = "CUSTOM"
-_AS_ = "AGENT_SKILLS"
-_RRN = "RegistryRecordName"
-_RRA = "RegistryRecordArn"
-_RRI = "RegistryRecordId"
-_RAeg = "RegistryArn"
-_RRS = "RegistryRecordStatus"
-_DRAFT = "DRAFT"
-_PA = "PENDING_APPROVAL"
-_APPROVED = "APPROVED"
-_REJECTED = "REJECTED"
-_DEPRECATED = "DEPRECATED"
-_RRV = "RegistryRecordVersion"
-_RRSe = "RegistryRecordSummary"
-_rAeg = "registryArn"
-_rAec = "recordArn"
-_rIec = "recordId"
-_dT = "descriptorType"
-_des = "descriptors"
-_RRSL = "RegistryRecordSummaryList"
-_SRRO = "SearchRegistryRecordsOutput"
-_cSRRRo = "com.amazonaws.bedrockagentcore#SearchRegistryRecordsResponse"
-_rRe = "registryRecords"
-_SRR = "SearchRegistryRecords"
-_ABAC = "AmazonBedrockAgentCore"
-_aw = "aws.auth#sigv4"
-_aws = "aws.api#service"
-_aJ = "aws.protocols#restJson1"
+_lA = "linkedAccounts"
+_wA = "walletAddress"
+_rU = "redirectUrl"
+_PID = "PaymentInstrumentDetails"
+_eCW = "embeddedCryptoWallet"
 
-CREATE_PAYMENT_INSTRUMENT_INPUT: StaticSchema = (
-    18,
+METADATA_MAP: StaticSchema = (
+    17,
     n0,
-    _CPII,
-    {_sSI: _cCPIR, _smit: None},
-    (_uI, _aN, _pMA, _pCI, _pIT, _pID, _cTl),
+    _MMe,
+    0,
+    (_k, _va),
+    ((lambda: schemas.METADATA_KEY, 0), (lambda: schemas.METADATA_VALUE, 0)),
+)
+
+MEMORY_DOCUMENT: StaticSchema = (13, n0, _MD, 4)
+
+CONTENT: StaticSchema = (
+    19,
+    n0,
+    _Con,
+    0,
+    (_te,),
+    ((lambda: schemas.SENSITIVE_STRING, 0),),
+)
+
+ROLE: StaticSchema = (
+    14,
+    n0,
+    _R,
+    0,
+    (_ASSISTANT, _USER, _TOOL, _OTHER),
     (
-        (lambda: schemas.USER_ID, {_sH: _XABAPUI}),
-        (lambda: schemas.PAYMENT_AGENT_NAME, {_sH: _XABAPAN}),
-        (lambda: schemas.PAYMENT_MANAGER_ARN, 1),
-        (lambda: schemas.PAYMENT_CONNECTOR_ID, 1),
-        (lambda: schemas.PAYMENT_INSTRUMENT_TYPE, 1),
-        (lambda: schemas.PAYMENT_INSTRUMENT_DETAILS, 1),
-        (lambda: schemas.CLIENT_TOKEN, 2),
+        (-1, {_sVm: _ASSISTANT}),
+        (-1, {_sVm: _USER}),
+        (-1, {_sVm: _TOOL}),
+        (-1, {_sVm: _OTHER}),
     ),
 )
 
-CREATE_PAYMENT_INSTRUMENT_OUTPUT: StaticSchema = (
+CONVERSATIONAL: StaticSchema = (
     18,
     n0,
-    _CPIO,
-    {_sSI: _cCPIRo, _smith: None},
-    (_pIa,),
-    ((lambda: PAYMENT_INSTRUMENT, 1),),
+    _Conv,
+    0,
+    (_cont, _ro),
+    ((CONTENT, 1), (ROLE, 1)),
 )
 
-CREATE_PAYMENT_INSTRUMENT: StaticOperationSchema = (
+MEMORY_JSON_DATA_CONTENT: StaticSchema = (13, n0, _MJDC, 4)
+
+MEMORY_JSON_DATA: StaticSchema = (
+    18,
+    n0,
+    _MJD,
+    4,
+    (_cont,),
+    ((MEMORY_JSON_DATA_CONTENT, 1),),
+)
+
+PAYLOAD_TYPE: StaticSchema = (
+    19,
+    n0,
+    _PTa,
+    0,
+    (_conv, _bl, _js),
+    ((CONVERSATIONAL, 0), (MEMORY_DOCUMENT, 0), (MEMORY_JSON_DATA, 0)),
+)
+
+PAYLOAD_TYPE_LIST: StaticSchema = (16, n0, _PTL, 0, (_m,), ((PAYLOAD_TYPE, 0),))
+
+CREATE_EVENT_INPUT: StaticSchema = (
+    18,
+    n0,
+    _CEI,
+    {_smit: None},
+    (_mIe, _aI, _sIe, _eTve, _p, _br, _cTl, _met, _eMx, _eCxt),
+    (
+        (lambda: schemas.MEMORY_ID, 9),
+        (lambda: schemas.ACTOR_ID, 1),
+        (lambda: schemas.SESSION_ID, 0),
+        (4, 1),
+        (PAYLOAD_TYPE_LIST, 1),
+        (lambda: schemas.BRANCH, 0),
+        (3, 2),
+        (METADATA_MAP, 0),
+        (lambda: schemas.EXTRACTION_MODE, 0),
+        (lambda: schemas.EXTRACTION_CONFIG, 0),
+    ),
+)
+
+CREATE_EVENT_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _CEO,
+    {_smith: None},
+    (_eve,),
+    ((lambda: EVENT, 1),),
+)
+
+CREATE_EVENT: StaticOperationSchema = (
     23,
     n0,
-    _CPIr,
+    _CEr,
     {
         _smithy: MappingProxyType(
-            {"code": 201, "method": "POST", "uri": "/payments/createPaymentInstrument"}
+            {"code": 201, "method": "POST", "uri": "/memories/{memoryId}/events"}
         )
     },
-    CREATE_PAYMENT_INSTRUMENT_INPUT,
-    CREATE_PAYMENT_INSTRUMENT_OUTPUT,
+    CREATE_EVENT_INPUT,
+    CREATE_EVENT_OUTPUT,
     (
         lambda: schemas.ACCESS_DENIED_EXCEPTION,
-        lambda: schemas.CONFLICT_EXCEPTION,
-        lambda: schemas.INTERNAL_SERVER_EXCEPTION,
+        lambda: INVALID_INPUT_EXCEPTION,
         lambda: schemas.RESOURCE_NOT_FOUND_EXCEPTION,
+        lambda: schemas.RETRYABLE_CONFLICT_EXCEPTION,
+        lambda: schemas.SERVICE_EXCEPTION,
         lambda: schemas.SERVICE_QUOTA_EXCEEDED_EXCEPTION,
-        lambda: SUBSCRIPTION_REQUIRED_EXCEPTION,
-        lambda: schemas.THROTTLING_EXCEPTION,
+        lambda: schemas.THROTTLED_EXCEPTION,
         lambda: schemas.VALIDATION_EXCEPTION,
     ),
 )
 
-PAYMENT_INSTRUMENT_ID: StaticSchema = (3, n0, _PII, 0)
-
-PAYMENT_INSTRUMENT_STATUS: StaticSchema = (
-    14,
+EVENT: StaticSchema = (
+    18,
     n0,
-    _PIS,
+    _Eve,
     0,
-    (_INITIATED, _ACTIVE, _FAILED, _DELETED, _BLOCKED),
+    (_mIe, _aI, _sIe, _eIve, _eTve, _p, _br, _met),
     (
-        (-1, {_sVm: _INITIATED}),
-        (-1, {_sVm: _ACTIVE}),
-        (-1, {_sVm: _FAILED}),
-        (-1, {_sVm: _DELETED}),
-        (-1, {_sVm: _BLOCKED}),
+        (lambda: schemas.MEMORY_ID, 1),
+        (lambda: schemas.ACTOR_ID, 1),
+        (lambda: schemas.SESSION_ID, 1),
+        (lambda: schemas.EVENT_ID, 1),
+        (4, 1),
+        (PAYLOAD_TYPE_LIST, 1),
+        (lambda: schemas.BRANCH, 0),
+        (METADATA_MAP, 0),
     ),
 )
 
-PAYMENT_INSTRUMENT: StaticSchema = (
+INVALID_INPUT_EXCEPTION: StaticSchema = (
     18,
     n0,
-    _PI,
-    0,
-    (_pII, _pMA, _pCI, _uI, _pIT, _pID, _cA, _st, _uA),
+    _IIE,
+    {_sm: _c, _sE: 400},
+    (_mes,),
+    ((3, 1),),
+)
+
+DELETE_EVENT_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DEI,
+    {_smit: None},
+    (_mIe, _sIe, _eIve, _aI),
     (
-        (PAYMENT_INSTRUMENT_ID, 1),
-        (lambda: schemas.PAYMENT_MANAGER_ARN, 1),
-        (lambda: schemas.PAYMENT_CONNECTOR_ID, 1),
-        (lambda: schemas.USER_ID, 1),
-        (lambda: schemas.PAYMENT_INSTRUMENT_TYPE, 1),
-        (lambda: schemas.PAYMENT_INSTRUMENT_DETAILS, 1),
-        (lambda: schemas.DATE_TIMESTAMP, 1),
-        (PAYMENT_INSTRUMENT_STATUS, 1),
-        (lambda: schemas.DATE_TIMESTAMP, 1),
+        (lambda: schemas.MEMORY_ID, 9),
+        (lambda: schemas.SESSION_ID, 9),
+        (lambda: schemas.EVENT_ID, 9),
+        (lambda: schemas.ACTOR_ID, 9),
     ),
 )
 
-SUBSCRIPTION_REQUIRED_EXCEPTION: StaticSchema = (
+DELETE_EVENT_OUTPUT: StaticSchema = (
     18,
     n0,
-    _SRE,
-    {_sm: _c, _sE: 403},
-    (_mes, _sUu, _pNr),
-    ((3, 1), (3, 0), (3, 0)),
+    _DEO,
+    {_smith: None},
+    (_eIve,),
+    ((lambda: schemas.EVENT_ID, 1),),
 )
 
-DELETE_PAYMENT_INSTRUMENT_INPUT: StaticSchema = (
-    18,
-    n0,
-    _DPII,
-    {_sSI: _cDPIR, _smit: None},
-    (_uI, _pMA, _pCI, _pII),
-    (
-        (lambda: schemas.USER_ID, {_sH: _XABAPUI}),
-        (lambda: schemas.PAYMENT_MANAGER_ARN, 1),
-        (lambda: schemas.PAYMENT_CONNECTOR_ID, 1),
-        (PAYMENT_INSTRUMENT_ID, 1),
-    ),
-)
-
-DELETE_PAYMENT_INSTRUMENT_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _DPIO,
-    {_sSI: _cDPIRo, _smith: None},
-    (_st,),
-    ((PAYMENT_INSTRUMENT_STATUS, 1),),
-)
-
-DELETE_PAYMENT_INSTRUMENT: StaticOperationSchema = (
+DELETE_EVENT: StaticOperationSchema = (
     23,
     n0,
-    _DPI,
-    {
-        _smithy: MappingProxyType(
-            {"code": 200, "method": "POST", "uri": "/payments/deletePaymentInstrument"}
-        )
-    },
-    DELETE_PAYMENT_INSTRUMENT_INPUT,
-    DELETE_PAYMENT_INSTRUMENT_OUTPUT,
-    (
-        lambda: schemas.ACCESS_DENIED_EXCEPTION,
-        lambda: schemas.INTERNAL_SERVER_EXCEPTION,
-        lambda: schemas.RESOURCE_NOT_FOUND_EXCEPTION,
-        lambda: schemas.THROTTLING_EXCEPTION,
-        lambda: schemas.VALIDATION_EXCEPTION,
-    ),
-)
-
-GET_PAYMENT_INSTRUMENT_INPUT: StaticSchema = (
-    18,
-    n0,
-    _GPII,
-    {_sSI: _cGPIR, _smit: None},
-    (_uI, _aN, _pMA, _pCI, _pII),
-    (
-        (lambda: schemas.USER_ID, {_sH: _XABAPUI}),
-        (lambda: schemas.PAYMENT_AGENT_NAME, {_sH: _XABAPAN}),
-        (lambda: schemas.PAYMENT_MANAGER_ARN, 1),
-        (lambda: schemas.PAYMENT_CONNECTOR_ID, 0),
-        (PAYMENT_INSTRUMENT_ID, 1),
-    ),
-)
-
-GET_PAYMENT_INSTRUMENT_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _GPIO,
-    {_sSI: _cGPIRo, _smith: None},
-    (_pIa,),
-    ((PAYMENT_INSTRUMENT, 1),),
-)
-
-GET_PAYMENT_INSTRUMENT: StaticOperationSchema = (
-    23,
-    n0,
-    _GPI,
-    {
-        _smithy: MappingProxyType(
-            {"code": 200, "method": "POST", "uri": "/payments/getPaymentInstrument"}
-        )
-    },
-    GET_PAYMENT_INSTRUMENT_INPUT,
-    GET_PAYMENT_INSTRUMENT_OUTPUT,
-    (
-        lambda: schemas.ACCESS_DENIED_EXCEPTION,
-        lambda: schemas.INTERNAL_SERVER_EXCEPTION,
-        lambda: schemas.RESOURCE_NOT_FOUND_EXCEPTION,
-        lambda: schemas.THROTTLING_EXCEPTION,
-        lambda: schemas.VALIDATION_EXCEPTION,
-    ),
-)
-
-BLOCKCHAIN_CHAIN_ID: StaticSchema = (
-    14,
-    n0,
-    _BCI,
-    0,
-    (_BASE, _BS, _ETHEREUM, _SOLANA, _SD_),
-    (
-        (-1, {_sVm: _BASE}),
-        (-1, {_sVm: _BS}),
-        (-1, {_sVm: _ETHEREUM}),
-        (-1, {_sVm: _SOLANA}),
-        (-1, {_sVm: _SD_}),
-    ),
-)
-
-INSTRUMENT_BALANCE_TOKEN: StaticSchema = (
-    14,
-    n0,
-    _IBT,
-    0,
-    (_USDC,),
-    ((-1, {_sVm: _USDC}),),
-)
-
-GET_PAYMENT_INSTRUMENT_BALANCE_INPUT: StaticSchema = (
-    18,
-    n0,
-    _GPIBI,
-    {_sSI: _cGPIBR, _smit: None},
-    (_uI, _aN, _pMA, _pCI, _pII, _cha, _tok),
-    (
-        (lambda: schemas.USER_ID, {_sH: _XABAPUI}),
-        (lambda: schemas.PAYMENT_AGENT_NAME, {_sH: _XABAPAN}),
-        (lambda: schemas.PAYMENT_MANAGER_ARN, 1),
-        (lambda: schemas.PAYMENT_CONNECTOR_ID, 1),
-        (PAYMENT_INSTRUMENT_ID, 1),
-        (BLOCKCHAIN_CHAIN_ID, 1),
-        (INSTRUMENT_BALANCE_TOKEN, 1),
-    ),
-)
-
-GET_PAYMENT_INSTRUMENT_BALANCE_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _GPIBO,
-    {_sSI: _cGPIBRo, _smith: None},
-    (_pII, _tB),
-    ((PAYMENT_INSTRUMENT_ID, 1), (lambda: TOKEN_BALANCE, 1)),
-)
-
-GET_PAYMENT_INSTRUMENT_BALANCE: StaticOperationSchema = (
-    23,
-    n0,
-    _GPIB,
+    _DE,
     {
         _smithy: MappingProxyType(
             {
-                "code": 200,
+                "method": "DELETE",
+                "uri": "/memories/{memoryId}/actor/{actorId}/sessions/{sessionId}/events/{eventId}",
+            }
+        )
+    },
+    DELETE_EVENT_INPUT,
+    DELETE_EVENT_OUTPUT,
+    (
+        lambda: schemas.ACCESS_DENIED_EXCEPTION,
+        INVALID_INPUT_EXCEPTION,
+        lambda: schemas.RESOURCE_NOT_FOUND_EXCEPTION,
+        lambda: schemas.SERVICE_EXCEPTION,
+        lambda: schemas.SERVICE_QUOTA_EXCEEDED_EXCEPTION,
+        lambda: schemas.THROTTLED_EXCEPTION,
+        lambda: schemas.VALIDATION_EXCEPTION,
+    ),
+)
+
+DELETE_MEMORY_RECORD_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DMRI,
+    {_smit: None},
+    (_mIe, _mRI, _nam),
+    (
+        (lambda: schemas.MEMORY_ID, 9),
+        (lambda: schemas.MEMORY_RECORD_ID, 9),
+        (lambda: schemas.NAMESPACE, {_sQ: _nam}),
+    ),
+)
+
+DELETE_MEMORY_RECORD_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DMRO,
+    {_smith: None},
+    (_mRI,),
+    ((lambda: schemas.MEMORY_RECORD_ID, 1),),
+)
+
+DELETE_MEMORY_RECORD: StaticOperationSchema = (
+    23,
+    n0,
+    _DMR,
+    {
+        _smithy: MappingProxyType(
+            {
+                "method": "DELETE",
+                "uri": "/memories/{memoryId}/memoryRecords/{memoryRecordId}",
+            }
+        )
+    },
+    DELETE_MEMORY_RECORD_INPUT,
+    DELETE_MEMORY_RECORD_OUTPUT,
+    (
+        lambda: schemas.ACCESS_DENIED_EXCEPTION,
+        INVALID_INPUT_EXCEPTION,
+        lambda: schemas.RESOURCE_NOT_FOUND_EXCEPTION,
+        lambda: schemas.SERVICE_EXCEPTION,
+        lambda: schemas.SERVICE_QUOTA_EXCEEDED_EXCEPTION,
+        lambda: schemas.THROTTLED_EXCEPTION,
+        lambda: schemas.VALIDATION_EXCEPTION,
+    ),
+)
+
+GET_EVENT_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GEI,
+    {_smit: None},
+    (_mIe, _sIe, _aI, _eIve),
+    (
+        (lambda: schemas.MEMORY_ID, 9),
+        (lambda: schemas.SESSION_ID, 9),
+        (lambda: schemas.ACTOR_ID, 9),
+        (lambda: schemas.EVENT_ID, 9),
+    ),
+)
+
+GET_EVENT_OUTPUT: StaticSchema = (18, n0, _GEO, {_smith: None}, (_eve,), ((EVENT, 1),))
+
+GET_EVENT: StaticOperationSchema = (
+    23,
+    n0,
+    _GE,
+    {
+        _smithy: MappingProxyType(
+            {
+                "method": "GET",
+                "uri": "/memories/{memoryId}/actor/{actorId}/sessions/{sessionId}/events/{eventId}",
+            }
+        )
+    },
+    GET_EVENT_INPUT,
+    GET_EVENT_OUTPUT,
+    (
+        lambda: schemas.ACCESS_DENIED_EXCEPTION,
+        INVALID_INPUT_EXCEPTION,
+        lambda: schemas.RESOURCE_NOT_FOUND_EXCEPTION,
+        lambda: schemas.SERVICE_EXCEPTION,
+        lambda: schemas.SERVICE_QUOTA_EXCEEDED_EXCEPTION,
+        lambda: schemas.THROTTLED_EXCEPTION,
+        lambda: schemas.VALIDATION_EXCEPTION,
+    ),
+)
+
+GET_MEMORY_RECORD_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GMRI,
+    {_smit: None},
+    (_mIe, _mRI, _nam),
+    (
+        (lambda: schemas.MEMORY_ID, 9),
+        (lambda: schemas.MEMORY_RECORD_ID, 9),
+        (lambda: schemas.NAMESPACE, {_sQ: _nam}),
+    ),
+)
+
+GET_MEMORY_RECORD_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GMRO,
+    {_smith: None},
+    (_mRe,),
+    ((lambda: MEMORY_RECORD, 1),),
+)
+
+GET_MEMORY_RECORD: StaticOperationSchema = (
+    23,
+    n0,
+    _GMR,
+    {
+        _smithy: MappingProxyType(
+            {
+                "method": "GET",
+                "uri": "/memories/{memoryId}/memoryRecord/{memoryRecordId}",
+            }
+        )
+    },
+    GET_MEMORY_RECORD_INPUT,
+    GET_MEMORY_RECORD_OUTPUT,
+    (
+        lambda: schemas.ACCESS_DENIED_EXCEPTION,
+        INVALID_INPUT_EXCEPTION,
+        lambda: schemas.RESOURCE_NOT_FOUND_EXCEPTION,
+        lambda: schemas.SERVICE_EXCEPTION,
+        lambda: schemas.SERVICE_QUOTA_EXCEEDED_EXCEPTION,
+        lambda: schemas.THROTTLED_EXCEPTION,
+        lambda: schemas.VALIDATION_EXCEPTION,
+    ),
+)
+
+MEMORY_RECORD: StaticSchema = (
+    18,
+    n0,
+    _MRe,
+    0,
+    (_mRI, _cont, _mSIe, _na, _cA, _tim, _met, _eAx),
+    (
+        (lambda: schemas.MEMORY_RECORD_ID, 1),
+        (lambda: schemas.MEMORY_CONTENT, 1),
+        (lambda: schemas.MEMORY_STRATEGY_ID, 1),
+        (lambda: schemas.NAMESPACES_LIST, 1),
+        (4, 1),
+        (4, 0),
+        (lambda: schemas.MEMORY_RECORD_METADATA_MAP, 0),
+        (4, 0),
+    ),
+)
+
+INGEST_PAYLOAD_TYPE: StaticSchema = (
+    19,
+    n0,
+    _IPT,
+    0,
+    (_conv, _js),
+    ((CONVERSATIONAL, 0), (MEMORY_JSON_DATA, 0)),
+)
+
+INGEST_PAYLOAD_LIST: StaticSchema = (
+    16,
+    n0,
+    _IPL,
+    0,
+    (_m,),
+    ((INGEST_PAYLOAD_TYPE, 0),),
+)
+
+INLINE_MEMORY_CONTENT: StaticSchema = (
+    18,
+    n0,
+    _IMC,
+    0,
+    (_p,),
+    ((INGEST_PAYLOAD_LIST, 1),),
+)
+
+CONTENT_SOURCE: StaticSchema = (19, n0, _CSo, 0, (_inl,), ((INLINE_MEMORY_CONTENT, 0),))
+
+INGEST_DATA_INPUT: StaticSchema = (
+    18,
+    n0,
+    _IDI,
+    {_smit: None},
+    (_mIe, _so, _cTo, _aI, _sIe, _eCxt, _met, _cTl),
+    (
+        (lambda: schemas.MEMORY_ID, 9),
+        (CONTENT_SOURCE, 1),
+        (4, 1),
+        (lambda: schemas.ACTOR_ID, 1),
+        (lambda: schemas.SESSION_ID, 0),
+        (lambda: schemas.EXTRACTION_CONFIG, 0),
+        (METADATA_MAP, 0),
+        (3, 2),
+    ),
+)
+
+INGEST_DATA_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _IDO,
+    {_smith: None},
+    (_sIe,),
+    ((lambda: schemas.SESSION_ID, 1),),
+)
+
+INGEST_DATA: StaticOperationSchema = (
+    23,
+    n0,
+    _IDn,
+    {
+        _smithy: MappingProxyType(
+            {"code": 202, "method": "POST", "uri": "/memories/{memoryId}/ingest"}
+        )
+    },
+    INGEST_DATA_INPUT,
+    INGEST_DATA_OUTPUT,
+    (
+        lambda: schemas.ACCESS_DENIED_EXCEPTION,
+        lambda: schemas.RESOURCE_NOT_FOUND_EXCEPTION,
+        lambda: schemas.SERVICE_EXCEPTION,
+        lambda: schemas.SERVICE_QUOTA_EXCEEDED_EXCEPTION,
+        lambda: schemas.THROTTLED_EXCEPTION,
+        lambda: schemas.VALIDATION_EXCEPTION,
+    ),
+)
+
+PAGINATION_TOKEN: StaticSchema = (3, n0, _PTag, 0)
+
+LIST_ACTORS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _LAIi,
+    {_smit: None},
+    (_mIe, _mR, _nT),
+    (
+        (lambda: schemas.MEMORY_ID, 9),
+        (lambda: schemas.MAX_RESULTS, {_smithyap: 100}),
+        (PAGINATION_TOKEN, 0),
+    ),
+)
+
+LIST_ACTORS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _LAO,
+    {_smith: None},
+    (_aSc, _nT),
+    ((lambda: schemas.ACTOR_SUMMARY_LIST, 1), (PAGINATION_TOKEN, 0)),
+)
+
+LIST_ACTORS: StaticOperationSchema = (
+    23,
+    n0,
+    _LA,
+    {
+        _smithy: MappingProxyType(
+            {"method": "POST", "uri": "/memories/{memoryId}/actors"}
+        )
+    },
+    LIST_ACTORS_INPUT,
+    LIST_ACTORS_OUTPUT,
+    (
+        lambda: schemas.ACCESS_DENIED_EXCEPTION,
+        INVALID_INPUT_EXCEPTION,
+        lambda: schemas.RESOURCE_NOT_FOUND_EXCEPTION,
+        lambda: schemas.SERVICE_EXCEPTION,
+        lambda: schemas.SERVICE_QUOTA_EXCEEDED_EXCEPTION,
+        lambda: schemas.THROTTLED_EXCEPTION,
+        lambda: schemas.VALIDATION_EXCEPTION,
+    ),
+)
+
+BRANCH_FILTER: StaticSchema = (
+    18,
+    n0,
+    _BF,
+    0,
+    (_n, _iPB),
+    ((lambda: schemas.BRANCH_NAME, 1), (2, {_smithyap: True})),
+)
+
+LEFT_EXPRESSION: StaticSchema = (
+    19,
+    n0,
+    _LE,
+    0,
+    (_mK,),
+    ((lambda: schemas.METADATA_KEY, 0),),
+)
+
+OPERATOR_TYPE: StaticSchema = (
+    14,
+    n0,
+    _OT,
+    0,
+    (_ET___, _EXISTS, _NE_),
+    ((-1, {_sVm: _ET___}), (-1, {_sVm: _EXISTS}), (-1, {_sVm: _NE_})),
+)
+
+RIGHT_EXPRESSION: StaticSchema = (
+    19,
+    n0,
+    _REi,
+    0,
+    (_mV,),
+    ((lambda: schemas.METADATA_VALUE, 0),),
+)
+
+EVENT_METADATA_FILTER_EXPRESSION: StaticSchema = (
+    18,
+    n0,
+    _EMFE,
+    0,
+    (_le, _op, _ri),
+    ((LEFT_EXPRESSION, 1), (OPERATOR_TYPE, 1), (RIGHT_EXPRESSION, 0)),
+)
+
+EVENT_METADATA_FILTER_LIST: StaticSchema = (
+    16,
+    n0,
+    _EMFL,
+    0,
+    (_m,),
+    ((EVENT_METADATA_FILTER_EXPRESSION, 0),),
+)
+
+FILTER_INPUT: StaticSchema = (
+    18,
+    n0,
+    _FI,
+    0,
+    (_br, _eMve),
+    ((BRANCH_FILTER, 0), (EVENT_METADATA_FILTER_LIST, 0)),
+)
+
+LIST_EVENTS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _LEI,
+    {_smit: None},
+    (_mIe, _sIe, _aI, _iP, _fil, _mR, _nT),
+    (
+        (lambda: schemas.MEMORY_ID, 9),
+        (lambda: schemas.SESSION_ID, 9),
+        (lambda: schemas.ACTOR_ID, 9),
+        (2, {_smithyap: True}),
+        (FILTER_INPUT, 0),
+        (lambda: schemas.MAX_RESULTS, {_smithyap: 100}),
+        (PAGINATION_TOKEN, 0),
+    ),
+)
+
+LIST_EVENTS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _LEO,
+    {_smith: None},
+    (_even, _nT),
+    ((lambda: EVENT_LIST, 1), (PAGINATION_TOKEN, 0)),
+)
+
+LIST_EVENTS: StaticOperationSchema = (
+    23,
+    n0,
+    _LEi,
+    {
+        _smithy: MappingProxyType(
+            {
                 "method": "POST",
-                "uri": "/payments/getPaymentInstrumentBalance",
+                "uri": "/memories/{memoryId}/actor/{actorId}/sessions/{sessionId}",
             }
         )
     },
-    GET_PAYMENT_INSTRUMENT_BALANCE_INPUT,
-    GET_PAYMENT_INSTRUMENT_BALANCE_OUTPUT,
+    LIST_EVENTS_INPUT,
+    LIST_EVENTS_OUTPUT,
     (
         lambda: schemas.ACCESS_DENIED_EXCEPTION,
-        lambda: schemas.INTERNAL_SERVER_EXCEPTION,
+        INVALID_INPUT_EXCEPTION,
         lambda: schemas.RESOURCE_NOT_FOUND_EXCEPTION,
-        lambda: schemas.THROTTLING_EXCEPTION,
-        lambda: schemas.VALIDATION_EXCEPTION,
-    ),
-)
-
-TOKEN_BALANCE: StaticSchema = (
-    18,
-    n0,
-    _TB,
-    0,
-    (_am, _deci, _tok, _ne, _cha),
-    (
-        (3, 1),
-        (7, 1),
-        (INSTRUMENT_BALANCE_TOKEN, 1),
-        (lambda: schemas.CRYPTO_WALLET_NETWORK, 1),
-        (BLOCKCHAIN_CHAIN_ID, 1),
-    ),
-)
-
-LIST_PAYMENT_INSTRUMENTS_INPUT: StaticSchema = (
-    18,
-    n0,
-    _LPII,
-    {_sSI: _cLPIR, _smit: None},
-    (_uI, _aN, _pMA, _pCI, _nT, _mR),
-    (
-        (lambda: schemas.USER_ID, {_sH: _XABAPUI}),
-        (lambda: schemas.PAYMENT_AGENT_NAME, {_sH: _XABAPAN}),
-        (lambda: schemas.PAYMENT_MANAGER_ARN, 1),
-        (lambda: schemas.PAYMENT_CONNECTOR_ID, 0),
-        (lambda: schemas.NEXT_TOKEN, 0),
-        (7, 0),
-    ),
-)
-
-LIST_PAYMENT_INSTRUMENTS_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _LPIO,
-    {_sSI: _cLPIRo, _smith: None},
-    (_pIay, _nT),
-    ((lambda: PAYMENT_INSTRUMENT_SUMMARY_LIST, 1), (3, 0)),
-)
-
-LIST_PAYMENT_INSTRUMENTS: StaticOperationSchema = (
-    23,
-    n0,
-    _LPI,
-    {
-        _smithy: MappingProxyType(
-            {"code": 200, "method": "POST", "uri": "/payments/listPaymentInstruments"}
-        )
-    },
-    LIST_PAYMENT_INSTRUMENTS_INPUT,
-    LIST_PAYMENT_INSTRUMENTS_OUTPUT,
-    (
-        lambda: schemas.ACCESS_DENIED_EXCEPTION,
-        lambda: schemas.INTERNAL_SERVER_EXCEPTION,
-        lambda: schemas.THROTTLING_EXCEPTION,
-        lambda: schemas.VALIDATION_EXCEPTION,
-    ),
-)
-
-PAYMENT_INSTRUMENT_SUMMARY: StaticSchema = (
-    18,
-    n0,
-    _PISa,
-    0,
-    (_pII, _pMA, _pCI, _uI, _pIT, _st, _cA, _uA),
-    (
-        (PAYMENT_INSTRUMENT_ID, 1),
-        (lambda: schemas.PAYMENT_MANAGER_ARN, 1),
-        (lambda: schemas.PAYMENT_CONNECTOR_ID, 1),
-        (lambda: schemas.USER_ID, 1),
-        (lambda: schemas.PAYMENT_INSTRUMENT_TYPE, 1),
-        (PAYMENT_INSTRUMENT_STATUS, 1),
-        (lambda: schemas.DATE_TIMESTAMP, 1),
-        (lambda: schemas.DATE_TIMESTAMP, 1),
-    ),
-)
-
-PAYMENT_INSTRUMENT_SUMMARY_LIST: StaticSchema = (
-    16,
-    n0,
-    _PISL,
-    0,
-    (_m,),
-    ((PAYMENT_INSTRUMENT_SUMMARY, 0),),
-)
-
-CURRENCY: StaticSchema = (14, n0, _Cu, 0, (_USD,), ((-1, {_sVm: _USD}),))
-
-AMOUNT: StaticSchema = (18, n0, _Am, 0, (_va, _cu), ((3, 1), (CURRENCY, 1)))
-
-SESSION_LIMITS: StaticSchema = (18, n0, _SLe, 0, (_mSA,), ((AMOUNT, 1),))
-
-CREATE_PAYMENT_SESSION_INPUT: StaticSchema = (
-    18,
-    n0,
-    _CPSI,
-    {_sSI: _cCPSR, _smit: None},
-    (_uI, _aN, _pMA, _li, _eTIM, _cTl),
-    (
-        (lambda: schemas.USER_ID, {_sH: _XABAPUI}),
-        (lambda: schemas.PAYMENT_AGENT_NAME, {_sH: _XABAPAN}),
-        (lambda: schemas.PAYMENT_MANAGER_ARN, 1),
-        (SESSION_LIMITS, 0),
-        (7, 1),
-        (lambda: schemas.CLIENT_TOKEN, 2),
-    ),
-)
-
-CREATE_PAYMENT_SESSION_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _CPSO,
-    {_sSI: _cCPSRo, _smith: None},
-    (_pS,),
-    ((lambda: PAYMENT_SESSION, 1),),
-)
-
-CREATE_PAYMENT_SESSION: StaticOperationSchema = (
-    23,
-    n0,
-    _CPS,
-    {
-        _smithy: MappingProxyType(
-            {"code": 201, "method": "POST", "uri": "/payments/createPaymentSession"}
-        )
-    },
-    CREATE_PAYMENT_SESSION_INPUT,
-    CREATE_PAYMENT_SESSION_OUTPUT,
-    (
-        lambda: schemas.ACCESS_DENIED_EXCEPTION,
-        lambda: schemas.CONFLICT_EXCEPTION,
-        lambda: schemas.INTERNAL_SERVER_EXCEPTION,
+        lambda: schemas.SERVICE_EXCEPTION,
         lambda: schemas.SERVICE_QUOTA_EXCEEDED_EXCEPTION,
-        SUBSCRIPTION_REQUIRED_EXCEPTION,
-        lambda: schemas.THROTTLING_EXCEPTION,
+        lambda: schemas.THROTTLED_EXCEPTION,
         lambda: schemas.VALIDATION_EXCEPTION,
     ),
 )
 
-AVAILABLE_LIMITS: StaticSchema = (
-    18,
-    n0,
-    _AL,
-    0,
-    (_aSA, _uA),
-    ((AMOUNT, 0), (lambda: schemas.DATE_TIMESTAMP, 0)),
-)
+EVENT_LIST: StaticSchema = (16, n0, _ELv, 0, (_m,), ((EVENT, 0),))
 
-PAYMENT_SESSION_ID: StaticSchema = (3, n0, _PSI, 0)
-
-PAYMENT_SESSION: StaticSchema = (
-    18,
-    n0,
-    _PS,
-    0,
-    (_pSI, _pMA, _li, _uI, _eTIM, _cA, _aL, _uA),
-    (
-        (PAYMENT_SESSION_ID, 1),
-        (lambda: schemas.PAYMENT_MANAGER_ARN, 1),
-        (SESSION_LIMITS, 0),
-        (lambda: schemas.USER_ID, 1),
-        (7, 1),
-        (lambda: schemas.DATE_TIMESTAMP, 1),
-        (AVAILABLE_LIMITS, 0),
-        (lambda: schemas.DATE_TIMESTAMP, 1),
-    ),
-)
-
-DELETE_PAYMENT_SESSION_INPUT: StaticSchema = (
-    18,
-    n0,
-    _DPSI,
-    {_sSI: _cDPSR, _smit: None},
-    (_uI, _pMA, _pSI),
-    (
-        (lambda: schemas.USER_ID, {_sH: _XABAPUI}),
-        (lambda: schemas.PAYMENT_MANAGER_ARN, 1),
-        (PAYMENT_SESSION_ID, 1),
-    ),
-)
-
-DELETE_PAYMENT_SESSION_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _DPSO,
-    {_sSI: _cDPSRo, _smith: None},
-    (_st,),
-    ((lambda: PAYMENT_SESSION_STATUS, 1),),
-)
-
-DELETE_PAYMENT_SESSION: StaticOperationSchema = (
-    23,
-    n0,
-    _DPS,
-    {
-        _smithy: MappingProxyType(
-            {"code": 200, "method": "POST", "uri": "/payments/deletePaymentSession"}
-        )
-    },
-    DELETE_PAYMENT_SESSION_INPUT,
-    DELETE_PAYMENT_SESSION_OUTPUT,
-    (
-        lambda: schemas.ACCESS_DENIED_EXCEPTION,
-        lambda: schemas.INTERNAL_SERVER_EXCEPTION,
-        lambda: schemas.RESOURCE_NOT_FOUND_EXCEPTION,
-        lambda: schemas.THROTTLING_EXCEPTION,
-        lambda: schemas.VALIDATION_EXCEPTION,
-    ),
-)
-
-PAYMENT_SESSION_STATUS: StaticSchema = (
+EXTRACTION_JOB_STATUS: StaticSchema = (
     14,
     n0,
-    _PSS,
+    _EJS,
     0,
-    (_ACTIVE, _EXPIRED, _DELETED),
-    ((-1, {_sVm: _ACTIVE}), (-1, {_sVm: _EXPIRED}), (-1, {_sVm: _DELETED})),
+    (_FAILED,),
+    ((-1, {_sVm: _FAILED}),),
 )
 
-GET_PAYMENT_SESSION_INPUT: StaticSchema = (
+EXTRACTION_JOB_FILTER_INPUT: StaticSchema = (
     18,
     n0,
-    _GPSI,
-    {_sSI: _cGPSR, _smit: None},
-    (_uI, _aN, _pMA, _pSI),
+    _EJFI,
+    0,
+    (_sIt, _sIe, _aI, _st),
+    ((3, 0), (3, 0), (3, 0), (EXTRACTION_JOB_STATUS, 0)),
+)
+
+LIST_MEMORY_EXTRACTION_JOBS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _LMEJI,
+    {_smit: None},
+    (_mIe, _mR, _fil, _nT),
     (
-        (lambda: schemas.USER_ID, {_sH: _XABAPUI}),
-        (lambda: schemas.PAYMENT_AGENT_NAME, {_sH: _XABAPAN}),
-        (lambda: schemas.PAYMENT_MANAGER_ARN, 1),
-        (PAYMENT_SESSION_ID, 1),
+        (lambda: schemas.MEMORY_ID, 9),
+        (7, {_smithyap: 20}),
+        (EXTRACTION_JOB_FILTER_INPUT, 0),
+        (PAGINATION_TOKEN, 0),
     ),
 )
 
-GET_PAYMENT_SESSION_OUTPUT: StaticSchema = (
+LIST_MEMORY_EXTRACTION_JOBS_OUTPUT: StaticSchema = (
     18,
     n0,
-    _GPSO,
-    {_sSI: _cGPSRo, _smith: None},
-    (_pS,),
-    ((PAYMENT_SESSION, 1),),
+    _LMEJO,
+    {_smith: None},
+    (_jo, _nT),
+    ((lambda: EXTRACTION_JOB_METADATA_LIST, 1), (PAGINATION_TOKEN, 0)),
 )
 
-GET_PAYMENT_SESSION: StaticOperationSchema = (
+LIST_MEMORY_EXTRACTION_JOBS: StaticOperationSchema = (
     23,
     n0,
-    _GPS,
+    _LMEJ,
     {
         _smithy: MappingProxyType(
-            {"code": 200, "method": "POST", "uri": "/payments/getPaymentSession"}
+            {"method": "POST", "uri": "/memories/{memoryId}/extractionJobs"}
         )
     },
-    GET_PAYMENT_SESSION_INPUT,
-    GET_PAYMENT_SESSION_OUTPUT,
+    LIST_MEMORY_EXTRACTION_JOBS_INPUT,
+    LIST_MEMORY_EXTRACTION_JOBS_OUTPUT,
     (
         lambda: schemas.ACCESS_DENIED_EXCEPTION,
-        lambda: schemas.INTERNAL_SERVER_EXCEPTION,
         lambda: schemas.RESOURCE_NOT_FOUND_EXCEPTION,
-        lambda: schemas.THROTTLING_EXCEPTION,
-        lambda: schemas.VALIDATION_EXCEPTION,
-    ),
-)
-
-LIST_PAYMENT_SESSIONS_INPUT: StaticSchema = (
-    18,
-    n0,
-    _LPSI,
-    {_sSI: _cLPSR, _smit: None},
-    (_uI, _aN, _pMA, _nT, _mR),
-    (
-        (lambda: schemas.USER_ID, {_sH: _XABAPUI}),
-        (lambda: schemas.PAYMENT_AGENT_NAME, {_sH: _XABAPAN}),
-        (lambda: schemas.PAYMENT_MANAGER_ARN, 1),
-        (lambda: schemas.NEXT_TOKEN, 0),
-        (7, 0),
-    ),
-)
-
-LIST_PAYMENT_SESSIONS_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _LPSO,
-    {_sSI: _cLPSRo, _smith: None},
-    (_pSa, _nT),
-    ((lambda: PAYMENT_SESSION_SUMMARY_LIST, 1), (lambda: schemas.NEXT_TOKEN, 0)),
-)
-
-LIST_PAYMENT_SESSIONS: StaticOperationSchema = (
-    23,
-    n0,
-    _LPS,
-    {
-        _smithy: MappingProxyType(
-            {"code": 200, "method": "POST", "uri": "/payments/listPaymentSessions"}
-        )
-    },
-    LIST_PAYMENT_SESSIONS_INPUT,
-    LIST_PAYMENT_SESSIONS_OUTPUT,
-    (
-        lambda: schemas.ACCESS_DENIED_EXCEPTION,
-        lambda: schemas.INTERNAL_SERVER_EXCEPTION,
-        lambda: schemas.THROTTLING_EXCEPTION,
-        lambda: schemas.VALIDATION_EXCEPTION,
-    ),
-)
-
-PAYMENT_SESSION_SUMMARY: StaticSchema = (
-    18,
-    n0,
-    _PSSa,
-    0,
-    (_pSI, _pMA, _uI, _eTIM, _cA, _uA),
-    (
-        (PAYMENT_SESSION_ID, 1),
-        (lambda: schemas.PAYMENT_MANAGER_ARN, 1),
-        (lambda: schemas.USER_ID, 1),
-        (7, 1),
-        (lambda: schemas.DATE_TIMESTAMP, 1),
-        (lambda: schemas.DATE_TIMESTAMP, 1),
-    ),
-)
-
-PAYMENT_SESSION_SUMMARY_LIST: StaticSchema = (
-    16,
-    n0,
-    _PSSL,
-    0,
-    (_m,),
-    ((PAYMENT_SESSION_SUMMARY, 0),),
-)
-
-PAYMENT_DOCUMENT: StaticSchema = (13, n0, _PD, 4)
-
-PERMIT2_ALLOWANCE_LIMIT: StaticSchema = (3, n0, _PAL, 0)
-
-CRYPTO_X402_PAYMENT_INPUT: StaticSchema = (
-    18,
-    n0,
-    _CXPI,
-    0,
-    (_ve, _p, _pAL),
-    ((3, 1), (PAYMENT_DOCUMENT, 1), (PERMIT2_ALLOWANCE_LIMIT, 0)),
-)
-
-VERSION: StaticSchema = (3, n0, _Ve, 0)
-
-WWW_AUTHENTICATE_HEADER: StaticSchema = (3, n0, _WAH, 0)
-
-WWW_AUTHENTICATE_HEADER_LIST: StaticSchema = (
-    16,
-    n0,
-    _WAHL,
-    0,
-    (_m,),
-    ((WWW_AUTHENTICATE_HEADER, 0),),
-)
-
-MPP_PAYMENT_INPUT: StaticSchema = (
-    18,
-    n0,
-    _MPI,
-    0,
-    (_ve, _wAH, _bPGF),
-    ((VERSION, 1), (WWW_AUTHENTICATE_HEADER_LIST, 1), (2, 0)),
-)
-
-PAYMENT_INPUT: StaticSchema = (
-    19,
-    n0,
-    _PIa,
-    0,
-    (_cX, _mp),
-    ((CRYPTO_X402_PAYMENT_INPUT, 0), (MPP_PAYMENT_INPUT, 0)),
-)
-
-PAYMENT_TYPE: StaticSchema = (
-    14,
-    n0,
-    _PTay,
-    0,
-    (_CX, _MPP),
-    ((-1, {_sVm: _CX}), (-1, {_sVm: _MPP})),
-)
-
-PROCESS_PAYMENT_INPUT: StaticSchema = (
-    18,
-    n0,
-    _PPI,
-    {_sSI: _cPPR, _smit: None},
-    (_uI, _aN, _pMA, _pSI, _pII, _pT, _pIaym, _cTl),
-    (
-        (lambda: schemas.USER_ID, {_sH: _XABAPUI}),
-        (lambda: schemas.PAYMENT_AGENT_NAME, {_sH: _XABAPAN}),
-        (lambda: schemas.PAYMENT_MANAGER_ARN, 1),
-        (PAYMENT_SESSION_ID, 1),
-        (PAYMENT_INSTRUMENT_ID, 1),
-        (PAYMENT_TYPE, 1),
-        (PAYMENT_INPUT, 1),
-        (lambda: schemas.CLIENT_TOKEN, 2),
-    ),
-)
-
-PROCESS_PAYMENT_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _PPO,
-    {_sSI: _cPPRo, _smith: None},
-    (_pPI, _pMA, _pSI, _pII, _pT, _st, _pO, _cA, _uA),
-    (
-        (lambda: PROCESS_PAYMENT_ID, 1),
-        (lambda: schemas.PAYMENT_MANAGER_ARN, 1),
-        (PAYMENT_SESSION_ID, 1),
-        (PAYMENT_INSTRUMENT_ID, 1),
-        (PAYMENT_TYPE, 1),
-        (lambda: PAYMENT_STATUS, 1),
-        (lambda: PAYMENT_OUTPUT, 1),
-        (lambda: schemas.DATE_TIMESTAMP, 1),
-        (lambda: schemas.DATE_TIMESTAMP, 1),
-    ),
-)
-
-PROCESS_PAYMENT: StaticOperationSchema = (
-    23,
-    n0,
-    _PPr,
-    {
-        _smithy: MappingProxyType(
-            {"code": 200, "method": "POST", "uri": "/payments/processPayment"}
-        )
-    },
-    PROCESS_PAYMENT_INPUT,
-    PROCESS_PAYMENT_OUTPUT,
-    (
-        lambda: schemas.ACCESS_DENIED_EXCEPTION,
-        lambda: schemas.CONFLICT_EXCEPTION,
-        lambda: schemas.INTERNAL_SERVER_EXCEPTION,
-        lambda: schemas.RESOURCE_NOT_FOUND_EXCEPTION,
+        lambda: schemas.SERVICE_EXCEPTION,
         lambda: schemas.SERVICE_QUOTA_EXCEEDED_EXCEPTION,
-        SUBSCRIPTION_REQUIRED_EXCEPTION,
-        lambda: schemas.THROTTLING_EXCEPTION,
+        lambda: schemas.THROTTLED_EXCEPTION,
         lambda: schemas.VALIDATION_EXCEPTION,
     ),
 )
 
-CRYPTO_X402_PAYMENT_OUTPUT: StaticSchema = (
+MESSAGE_METADATA: StaticSchema = (18, n0, _MMes, 0, (_eIve, _mIes), ((3, 1), (7, 1)))
+
+MESSAGES_LIST: StaticSchema = (16, n0, _ML, 0, (_m,), ((MESSAGE_METADATA, 0),))
+
+EXTRACTION_JOB_MESSAGES: StaticSchema = (19, n0, _EJM, 0, (_mL,), ((MESSAGES_LIST, 0),))
+
+EXTRACTION_JOB_METADATA: StaticSchema = (
     18,
     n0,
-    _CXPO,
+    _EJMx,
     0,
-    (_ve, _p),
-    ((3, 1), (PAYMENT_DOCUMENT, 1)),
-)
-
-MPP_PAYMENT_CREDENTIAL: StaticSchema = (3, n0, _MPC, 4)
-
-MPP_PAYMENT_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _MPO,
-    0,
-    (_ve, _sPI, _pCa),
-    ((VERSION, 1), (3, 1), (MPP_PAYMENT_CREDENTIAL, 1)),
-)
-
-PAYMENT_OUTPUT: StaticSchema = (
-    19,
-    n0,
-    _PO,
-    0,
-    (_cX, _mp),
-    ((CRYPTO_X402_PAYMENT_OUTPUT, 0), (MPP_PAYMENT_OUTPUT, 0)),
-)
-
-PROCESS_PAYMENT_ID: StaticSchema = (3, n0, _PPIr, 0)
-
-PAYMENT_STATUS: StaticSchema = (14, n0, _PSa, 0, (_PG,), ((-1, {_sVm: _PG}),))
-
-METADATA_FILTER_EXPRESSION: StaticSchema = (13, n0, _MFE, 0)
-
-REGISTRY_IDENTIFIER: StaticSchema = (3, n0, _RIeg, 0)
-
-REGISTRY_ID_LIST: StaticSchema = (16, n0, _RIL, 0, (_m,), ((REGISTRY_IDENTIFIER, 0),))
-
-SEARCH_REGISTRY_RECORDS_INPUT: StaticSchema = (
-    18,
-    n0,
-    _SRRI,
-    {_sSI: _cSRRR, _smit: None},
-    (_sQe, _rIeg, _mR, _f),
+    (_jID, _mess, _st, _fR, _sIt, _sIe, _aI),
     (
         (3, 1),
-        (REGISTRY_ID_LIST, 1),
+        (EXTRACTION_JOB_MESSAGES, 1),
+        (EXTRACTION_JOB_STATUS, 0),
+        (3, 0),
+        (3, 0),
+        (3, 0),
+        (3, 0),
+    ),
+)
+
+EXTRACTION_JOB_METADATA_LIST: StaticSchema = (
+    16,
+    n0,
+    _EJML,
+    0,
+    (_m,),
+    ((EXTRACTION_JOB_METADATA, 0),),
+)
+
+MEMORY_RECORD_LEFT_EXPRESSION: StaticSchema = (
+    19,
+    n0,
+    _MRLE,
+    0,
+    (_mK,),
+    ((lambda: schemas.METADATA_KEY, 0),),
+)
+
+MEMORY_RECORD_OPERATOR_TYPE: StaticSchema = (
+    14,
+    n0,
+    _MROT,
+    0,
+    (_ET___, _EXISTS, _NE_, _BEFORE, _AFTER, _CONTAINS, _GT, _GTOE_, _LT, _LTOE_),
+    (
+        (-1, {_sVm: _ET___}),
+        (-1, {_sVm: _EXISTS}),
+        (-1, {_sVm: _NE_}),
+        (-1, {_sVm: _BEFORE}),
+        (-1, {_sVm: _AFTER}),
+        (-1, {_sVm: _CONTAINS}),
+        (-1, {_sVm: _GT}),
+        (-1, {_sVm: _GTOE_}),
+        (-1, {_sVm: _LT}),
+        (-1, {_sVm: _LTOE_}),
+    ),
+)
+
+MEMORY_RECORD_RIGHT_EXPRESSION: StaticSchema = (
+    19,
+    n0,
+    _MRRE,
+    0,
+    (_mV,),
+    ((lambda: schemas.MEMORY_RECORD_METADATA_VALUE, 0),),
+)
+
+MEMORY_METADATA_FILTER_EXPRESSION: StaticSchema = (
+    18,
+    n0,
+    _MMFE,
+    0,
+    (_le, _op, _ri),
+    (
+        (MEMORY_RECORD_LEFT_EXPRESSION, 1),
+        (MEMORY_RECORD_OPERATOR_TYPE, 1),
+        (MEMORY_RECORD_RIGHT_EXPRESSION, 0),
+    ),
+)
+
+MEMORY_METADATA_FILTER_LIST: StaticSchema = (
+    16,
+    n0,
+    _MMFL,
+    0,
+    (_m,),
+    ((MEMORY_METADATA_FILTER_EXPRESSION, 0),),
+)
+
+LIST_MEMORY_RECORDS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _LMRI,
+    {_smit: None},
+    (_mIe, _nam, _nP, _mSIe, _mR, _nT, _mF),
+    (
+        (lambda: schemas.MEMORY_ID, 9),
+        (lambda: schemas.NAMESPACE, 0),
+        (lambda: schemas.NAMESPACE, 0),
+        (lambda: schemas.MEMORY_STRATEGY_ID, 0),
+        (lambda: schemas.MAX_RESULTS, {_smithyap: 100}),
+        (PAGINATION_TOKEN, 0),
+        (MEMORY_METADATA_FILTER_LIST, 0),
+    ),
+)
+
+LIST_MEMORY_RECORDS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _LMRO,
+    {_smith: None},
+    (_mRS, _nT),
+    ((lambda: MEMORY_RECORD_SUMMARY_LIST, 1), (PAGINATION_TOKEN, 0)),
+)
+
+LIST_MEMORY_RECORDS: StaticOperationSchema = (
+    23,
+    n0,
+    _LMR,
+    {
+        _smithy: MappingProxyType(
+            {"method": "POST", "uri": "/memories/{memoryId}/memoryRecords"}
+        )
+    },
+    LIST_MEMORY_RECORDS_INPUT,
+    LIST_MEMORY_RECORDS_OUTPUT,
+    (
+        lambda: schemas.ACCESS_DENIED_EXCEPTION,
+        INVALID_INPUT_EXCEPTION,
+        lambda: schemas.RESOURCE_NOT_FOUND_EXCEPTION,
+        lambda: schemas.SERVICE_EXCEPTION,
+        lambda: schemas.SERVICE_QUOTA_EXCEEDED_EXCEPTION,
+        lambda: schemas.THROTTLED_EXCEPTION,
+        lambda: schemas.VALIDATION_EXCEPTION,
+    ),
+)
+
+MEMORY_RECORD_SUMMARY: StaticSchema = (
+    18,
+    n0,
+    _MRSe,
+    0,
+    (_mRI, _cont, _mSIe, _na, _cA, _scor, _tim, _met),
+    (
+        (lambda: schemas.MEMORY_RECORD_ID, 1),
+        (lambda: schemas.MEMORY_CONTENT, 1),
+        (lambda: schemas.MEMORY_STRATEGY_ID, 1),
+        (lambda: schemas.NAMESPACES_LIST, 1),
+        (4, 1),
+        (10, 0),
+        (4, 0),
+        (lambda: schemas.MEMORY_RECORD_METADATA_MAP, 0),
+    ),
+)
+
+MEMORY_RECORD_SUMMARY_LIST: StaticSchema = (
+    16,
+    n0,
+    _MRSL,
+    0,
+    (_m,),
+    ((MEMORY_RECORD_SUMMARY, 0),),
+)
+
+EVENT_FILTER_CONDITION: StaticSchema = (14, n0, _EFC, 0, (_HE,), ((-1, {_sVm: _HE}),))
+
+SESSION_FILTER: StaticSchema = (
+    18,
+    n0,
+    _SFes,
+    0,
+    (_eFv,),
+    ((EVENT_FILTER_CONDITION, 0),),
+)
+
+LIST_SESSIONS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _LSI,
+    {_smit: None},
+    (_mIe, _aI, _mR, _nT, _fil),
+    (
+        (lambda: schemas.MEMORY_ID, 9),
+        (lambda: schemas.ACTOR_ID, 9),
+        (lambda: schemas.MAX_RESULTS, {_smithyap: 100}),
+        (PAGINATION_TOKEN, 0),
+        (SESSION_FILTER, 0),
+    ),
+)
+
+LIST_SESSIONS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _LSO,
+    {_smith: None},
+    (_sSessi, _nT),
+    ((lambda: SESSION_SUMMARY_LIST, 1), (PAGINATION_TOKEN, 0)),
+)
+
+LIST_SESSIONS: StaticOperationSchema = (
+    23,
+    n0,
+    _LS,
+    {
+        _smithy: MappingProxyType(
+            {"method": "POST", "uri": "/memories/{memoryId}/actor/{actorId}/sessions"}
+        )
+    },
+    LIST_SESSIONS_INPUT,
+    LIST_SESSIONS_OUTPUT,
+    (
+        lambda: schemas.ACCESS_DENIED_EXCEPTION,
+        INVALID_INPUT_EXCEPTION,
+        lambda: schemas.RESOURCE_NOT_FOUND_EXCEPTION,
+        lambda: schemas.SERVICE_EXCEPTION,
+        lambda: schemas.SERVICE_QUOTA_EXCEEDED_EXCEPTION,
+        lambda: schemas.THROTTLED_EXCEPTION,
+        lambda: schemas.VALIDATION_EXCEPTION,
+    ),
+)
+
+SESSION_SUMMARY: StaticSchema = (
+    18,
+    n0,
+    _SSes,
+    0,
+    (_sIe, _aI, _cA),
+    ((lambda: schemas.SESSION_ID, 1), (lambda: schemas.ACTOR_ID, 1), (4, 1)),
+)
+
+SESSION_SUMMARY_LIST: StaticSchema = (16, n0, _SSL, 0, (_m,), ((SESSION_SUMMARY, 0),))
+
+SEARCH_CRITERIA: StaticSchema = (
+    18,
+    n0,
+    _SCe,
+    0,
+    (_sQe, _mSIe, _tK, _mF),
+    (
+        (lambda: schemas.SENSITIVE_STRING, 1),
+        (lambda: schemas.MEMORY_STRATEGY_ID, 0),
         (7, {_smithyap: 10}),
-        (METADATA_FILTER_EXPRESSION, 0),
+        (MEMORY_METADATA_FILTER_LIST, 0),
     ),
 )
 
-SEARCH_REGISTRY_RECORDS_OUTPUT: StaticSchema = (
+RETRIEVE_MEMORY_RECORDS_INPUT: StaticSchema = (
     18,
     n0,
-    _SRRO,
-    {_sSI: _cSRRRo, _smith: None},
-    (_rRe,),
-    ((lambda: REGISTRY_RECORD_SUMMARY_LIST, 1),),
+    _RMRI,
+    {_smit: None},
+    (_mIe, _nam, _nP, _sCe, _nT, _mR),
+    (
+        (lambda: schemas.MEMORY_ID, 9),
+        (lambda: schemas.NAMESPACE, 0),
+        (lambda: schemas.NAMESPACE, 0),
+        (SEARCH_CRITERIA, 1),
+        (PAGINATION_TOKEN, 0),
+        (lambda: schemas.MAX_RESULTS, {_smithyap: 100}),
+    ),
 )
 
-SEARCH_REGISTRY_RECORDS: StaticOperationSchema = (
+RETRIEVE_MEMORY_RECORDS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _RMRO,
+    {_smith: None},
+    (_mRS, _nT),
+    ((MEMORY_RECORD_SUMMARY_LIST, 1), (PAGINATION_TOKEN, 0)),
+)
+
+RETRIEVE_MEMORY_RECORDS: StaticOperationSchema = (
     23,
     n0,
-    _SRR,
+    _RMR,
     {
         _smithy: MappingProxyType(
-            {"method": "POST", "uri": "/registry-records/search", "code": 200}
+            {"method": "POST", "uri": "/memories/{memoryId}/retrieve"}
         )
     },
-    SEARCH_REGISTRY_RECORDS_INPUT,
-    SEARCH_REGISTRY_RECORDS_OUTPUT,
+    RETRIEVE_MEMORY_RECORDS_INPUT,
+    RETRIEVE_MEMORY_RECORDS_OUTPUT,
     (
         lambda: schemas.ACCESS_DENIED_EXCEPTION,
-        lambda: schemas.INTERNAL_SERVER_EXCEPTION,
+        INVALID_INPUT_EXCEPTION,
         lambda: schemas.RESOURCE_NOT_FOUND_EXCEPTION,
-        lambda: schemas.THROTTLING_EXCEPTION,
-        lambda: schemas.UNAUTHORIZED_EXCEPTION,
+        lambda: schemas.SERVICE_EXCEPTION,
+        lambda: schemas.SERVICE_QUOTA_EXCEEDED_EXCEPTION,
+        lambda: schemas.THROTTLED_EXCEPTION,
         lambda: schemas.VALIDATION_EXCEPTION,
     ),
 )
 
-DESCRIPTION: StaticSchema = (3, n0, _Des, 4)
+EXTRACTION_JOB: StaticSchema = (18, n0, _EJ, 0, (_jI,), ((3, 1),))
 
-CUSTOM_DESCRIPTOR: StaticSchema = (
+START_MEMORY_EXTRACTION_JOB_INPUT: StaticSchema = (
     18,
     n0,
-    _CD,
-    0,
-    (_iC,),
-    ((lambda: schemas.INLINE_CONTENT, 0),),
+    _SMEJI,
+    {_smit: None},
+    (_mIe, _eJ, _cTl),
+    ((lambda: schemas.MEMORY_ID, 9), (EXTRACTION_JOB, 1), (3, 2)),
 )
 
-SERVER_DEFINITION: StaticSchema = (
+START_MEMORY_EXTRACTION_JOB_OUTPUT: StaticSchema = (
     18,
     n0,
-    _SDe,
-    0,
-    (_sV, _iC),
-    ((lambda: schemas.SCHEMA_VERSION, 0), (lambda: schemas.INLINE_CONTENT, 0)),
+    _SMEJO,
+    {_smith: None},
+    (_jI,),
+    ((3, 1),),
 )
 
-TOOLS_DEFINITION: StaticSchema = (
-    18,
+START_MEMORY_EXTRACTION_JOB: StaticOperationSchema = (
+    23,
     n0,
-    _TD,
-    0,
-    (_pVr, _iC),
-    ((lambda: schemas.SCHEMA_VERSION, 0), (lambda: schemas.INLINE_CONTENT, 0)),
-)
-
-MCP_DESCRIPTOR: StaticSchema = (
-    18,
-    n0,
-    _MDc,
-    0,
-    (_se, _to),
-    ((SERVER_DEFINITION, 1), (TOOLS_DEFINITION, 1)),
-)
-
-DESCRIPTORS: StaticSchema = (
-    18,
-    n0,
-    _Desc,
-    0,
-    (_mc, _aa, _cus, _aSg),
-    (
-        (MCP_DESCRIPTOR, 0),
-        (lambda: schemas.A2A_DESCRIPTOR, 0),
-        (CUSTOM_DESCRIPTOR, 0),
-        (lambda: schemas.AGENT_SKILLS_DESCRIPTOR, 0),
-    ),
-)
-
-DESCRIPTOR_TYPE: StaticSchema = (
-    14,
-    n0,
-    _DTe,
-    0,
-    (_MCP, _AA, _CUSTOM, _AS_),
-    ((-1, {_sVm: _MCP}), (-1, {_sVm: _AA}), (-1, {_sVm: _CUSTOM}), (-1, {_sVm: _AS_})),
-)
-
-REGISTRY_RECORD_NAME: StaticSchema = (3, n0, _RRN, 0)
-
-REGISTRY_RECORD_ARN: StaticSchema = (3, n0, _RRA, 0)
-
-REGISTRY_RECORD_ID: StaticSchema = (3, n0, _RRI, 0)
-
-REGISTRY_ARN: StaticSchema = (3, n0, _RAeg, 0)
-
-REGISTRY_RECORD_STATUS: StaticSchema = (
-    14,
-    n0,
-    _RRS,
-    0,
-    (_DRAFT, _PA, _APPROVED, _REJECTED, _DEPRECATED),
-    (
-        (-1, {_sVm: _DRAFT}),
-        (-1, {_sVm: _PA}),
-        (-1, {_sVm: _APPROVED}),
-        (-1, {_sVm: _REJECTED}),
-        (-1, {_sVm: _DEPRECATED}),
-    ),
-)
-
-REGISTRY_RECORD_VERSION: StaticSchema = (3, n0, _RRV, 0)
-
-REGISTRY_RECORD_SUMMARY: StaticSchema = (
-    18,
-    n0,
-    _RRSe,
-    0,
-    (_rAeg, _rAec, _rIec, _n, _d, _dT, _des, _ve, _st, _cA, _uA),
-    (
-        (REGISTRY_ARN, 1),
-        (REGISTRY_RECORD_ARN, 1),
-        (REGISTRY_RECORD_ID, 1),
-        (REGISTRY_RECORD_NAME, 1),
-        (DESCRIPTION, 0),
-        (DESCRIPTOR_TYPE, 1),
-        (DESCRIPTORS, 1),
-        (REGISTRY_RECORD_VERSION, 1),
-        (REGISTRY_RECORD_STATUS, 1),
-        (lambda: schemas.DATE_TIMESTAMP, 1),
-        (lambda: schemas.DATE_TIMESTAMP, 1),
-    ),
-)
-
-REGISTRY_RECORD_SUMMARY_LIST: StaticSchema = (
-    16,
-    n0,
-    _RRSL,
-    0,
-    (_m,),
-    ((REGISTRY_RECORD_SUMMARY, 0),),
-)
-
-AMAZON_BEDROCK_AGENT_CORE: StaticSchema = (
-    21,
-    n0,
-    _ABAC,
+    _SMEJ,
     {
-        _aw: MappingProxyType({"name": "bedrock-agentcore"}),
-        _aws: MappingProxyType(
-            {
-                "sdkId": "Bedrock AgentCore",
-                "arnNamespace": "bedrock-agentcore",
-                "endpointPrefix": "bedrock-agentcore",
-            }
-        ),
-        _aJ: MappingProxyType(
-            {"http": ("http/1.1",), "eventStreamHttp": ("http/1.1",)}
-        ),
+        _smithy: MappingProxyType(
+            {"method": "POST", "uri": "/memories/{memoryId}/extractionJobs/start"}
+        )
     },
+    START_MEMORY_EXTRACTION_JOB_INPUT,
+    START_MEMORY_EXTRACTION_JOB_OUTPUT,
+    (
+        lambda: schemas.ACCESS_DENIED_EXCEPTION,
+        lambda: schemas.RESOURCE_NOT_FOUND_EXCEPTION,
+        lambda: schemas.SERVICE_EXCEPTION,
+        lambda: schemas.SERVICE_QUOTA_EXCEEDED_EXCEPTION,
+        lambda: schemas.THROTTLED_EXCEPTION,
+        lambda: schemas.VALIDATION_EXCEPTION,
+    ),
+)
+
+JWT_KEY_ID: StaticSchema = (3, n0, _JKI, 0)
+
+LINKED_ACCOUNT_DEVELOPER_JWT: StaticSchema = (
+    18,
+    n0,
+    _LADJ,
+    0,
+    (_ki, _sub),
+    ((JWT_KEY_ID, 1), (3, 1)),
+)
+
+EMAIL: StaticSchema = (3, n0, _Em, 4)
+
+LINKED_ACCOUNT_EMAIL: StaticSchema = (18, n0, _LAE, 4, (_eAm,), ((EMAIL, 1),))
+
+O_AUTH2_AUTHENTICATION: StaticSchema = (
+    18,
+    n0,
+    _OAA,
+    4,
+    (_sub, _eAm, _n, _use),
+    ((3, 1), (EMAIL, 0), (3, 0), (3, 0)),
+)
+
+LINKED_ACCOUNT_O_AUTH2: StaticSchema = (
+    19,
+    n0,
+    _LAOA,
+    0,
+    (_go, _ap, _x, _tel, _gi),
+    (
+        (O_AUTH2_AUTHENTICATION, 0),
+        (O_AUTH2_AUTHENTICATION, 0),
+        (O_AUTH2_AUTHENTICATION, 0),
+        (O_AUTH2_AUTHENTICATION, 0),
+        (O_AUTH2_AUTHENTICATION, 0),
+    ),
+)
+
+PHONE_NUMBER: StaticSchema = (3, n0, _PN, 4)
+
+LINKED_ACCOUNT_SMS: StaticSchema = (18, n0, _LAS, 4, (_pN,), ((PHONE_NUMBER, 1),))
+
+LINKED_ACCOUNT: StaticSchema = (
+    19,
+    n0,
+    _LAi,
+    4,
+    (_em, _sms, _dJ, _oAu),
+    (
+        (LINKED_ACCOUNT_EMAIL, 0),
+        (LINKED_ACCOUNT_SMS, 0),
+        (LINKED_ACCOUNT_DEVELOPER_JWT, 0),
+        (LINKED_ACCOUNT_O_AUTH2, 0),
+    ),
+)
+
+LINKED_ACCOUNT_LIST: StaticSchema = (16, n0, _LAL, 0, (_m,), ((LINKED_ACCOUNT, 0),))
+
+EMBEDDED_CRYPTO_WALLET: StaticSchema = (
+    18,
+    n0,
+    _ECW,
+    0,
+    (_ne, _lA, _wA, _rU),
+    (
+        (lambda: schemas.CRYPTO_WALLET_NETWORK, 1),
+        (LINKED_ACCOUNT_LIST, 1),
+        (3, 0),
+        (3, 0),
+    ),
+)
+
+PAYMENT_INSTRUMENT_DETAILS: StaticSchema = (
+    19,
+    n0,
+    _PID,
+    0,
+    (_eCW,),
+    ((EMBEDDED_CRYPTO_WALLET, 0),),
 )

@@ -28,6 +28,8 @@ _xaebo = "x-amz-expected-bucket-owner"
 _RC = "RequestCharged"
 _smi = "smithy.api#output"
 _xarc = "x-amz-request-charged"
+_VI = "VersionId"
+_xavi = "x-amz-version-id"
 _smith = "smithy.api#http"
 _AR = "AcceptRanges"
 _T = "Type"
@@ -69,7 +71,6 @@ _Ex = "Expiration"
 _SSE = "ServerSideEncryption"
 _SSEKMSKI = "SSEKMSKeyId"
 _xasse = "x-amz-server-side-encryption"
-_VI = "VersionId"
 _xasseakki = "x-amz-server-side-encryption-aws-kms-key-id"
 _xassebke = "x-amz-server-side-encryption-bucket-key-enabled"
 _CC = "CacheControl"
@@ -948,6 +949,7 @@ UPLOAD_PART_OUTPUT: StaticSchema = (
         _SSEKMSKI,
         _BKE,
         _RC,
+        _VI,
     ),
     (
         (lambda: schemas.SERVER_SIDE_ENCRYPTION, {_sH: _xasse}),
@@ -967,6 +969,7 @@ UPLOAD_PART_OUTPUT: StaticSchema = (
         (lambda: schemas.SSEKMS_KEY_ID, {_sH: _xasseakki}),
         (lambda: schemas.BUCKET_KEY_ENABLED, {_sH: _xassebke}),
         (lambda: schemas.REQUEST_CHARGED, {_sH: _xarc}),
+        (lambda: schemas.OBJECT_VERSION_ID, {_sH: _xavi}),
     ),
 )
 
@@ -1044,7 +1047,7 @@ UPLOAD_PART_COPY_OUTPUT: StaticSchema = (
     n0,
     _UPCO,
     {_smi: None},
-    (_CSVI, _CPR, _SSE, _SSECA, _SSECKMD, _SSEKMSKI, _BKE, _RC),
+    (_CSVI, _CPR, _SSE, _SSECA, _SSECKMD, _SSEKMSKI, _BKE, _RC, _VI),
     (
         (lambda: schemas.COPY_SOURCE_VERSION_ID, {_sH: _xacsvi}),
         (lambda: COPY_PART_RESULT, 16),
@@ -1054,6 +1057,7 @@ UPLOAD_PART_COPY_OUTPUT: StaticSchema = (
         (lambda: schemas.SSEKMS_KEY_ID, {_sH: _xasseakki}),
         (lambda: schemas.BUCKET_KEY_ENABLED, {_sH: _xassebke}),
         (lambda: schemas.REQUEST_CHARGED, {_sH: _xarc}),
+        (lambda: schemas.OBJECT_VERSION_ID, {_sH: _xavi}),
     ),
 )
 

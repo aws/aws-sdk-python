@@ -224,6 +224,7 @@ _DTe = "DescriptionType"
 _PT = "PolicyType"
 _IME = "InvalidMarkerException"
 _PNT = "PolicyNameType"
+_IGIE = "InvalidGrantIdException"
 
 ACCOUNT_ID_TYPE: StaticSchema = (3, n0, _AIT, 0)
 
@@ -1180,3 +1181,16 @@ INVALID_MARKER_EXCEPTION: StaticSchema = (
 )
 
 POLICY_NAME_TYPE: StaticSchema = (3, n0, _PNT, 0)
+
+INVALID_GRANT_ID_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _IGIE,
+    {
+        _s: _c,
+        _sE: 400,
+        _aQE: MappingProxyType({"code": "InvalidGrantId", "httpResponseCode": 400}),
+    },
+    (_me,),
+    ((ERROR_MESSAGE_TYPE, 0),),
+)

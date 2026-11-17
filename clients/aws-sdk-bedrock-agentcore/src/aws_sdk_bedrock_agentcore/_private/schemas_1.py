@@ -8,15 +8,21 @@ from . import schemas
 
 
 n0 = "com.amazonaws.bedrockagentcore"
+_sV = "schemaVersion"
 _iC = "inlineContent"
 _s = "smithy.api#required"
 _n = "name"
 _oECA = "onlineEvaluationConfigArn"
 _m = "member"
 _sVm = "smithy.api#enumValue"
+_STOPPED = "STOPPED"
+_ACTIVE = "ACTIVE"
+_DELETING = "DELETING"
 _FAILED = "FAILED"
 _st = "status"
+_d = "description"
 _cA = "createdAt"
+_uA = "updatedAt"
 _smi = "smithy.api#sensitive"
 _tI = "traceId"
 _sIe = "sessionId"
@@ -32,12 +38,41 @@ _smithy = "smithy.api#http"
 _XATI = "X-Amzn-Trace-Id"
 _tP = "traceParent"
 _t = "traceparent"
-_smithyap = "smithy.api#default"
+_COMPLETED = "COMPLETED"
 _cTl = "clientToken"
+_AIAS = "AgentInsightArchiveStatus"
+_ARCHIVED = "ARCHIVED"
+_AICMS = "AgentInsightCustomerMetadataStatus"
+_AVAILABLE = "AVAILABLE"
+_CKU = "CUSTOMER_KEY_UNAVAILABLE"
+_UNAVAILABLE = "UNAVAILABLE"
+_AII = "AgentInsightId"
+_BEI = "BatchEvaluationId"
+_ID = "InsightDescription"
+_IN = "InsightName"
+_IT = "InsightType"
+_FAILURE = "FAILURE"
+_AIS = "AgentInsightSummary"
+_ty = "type"
+_sF = "smithy.api#timestampFormat"
+_dt = "date-time"
+_aSC = "affectedSessionCount"
+_aII = "agentInsightId"
+_aN = "applicationName"
+_bEI = "batchEvaluationId"
+_cMS = "customerMetadataStatus"
+_aS = "archiveStatus"
+_lSA = "lastSeenAt"
+_AISL = "AgentInsightSummaryList"
+_AIC = "AgentInvocationConfig"
+_aCR = "agentCoreRuntime"
+_AID = "AgentInvocationDetails"
+_SD = "SkillDefinition"
 _SMD = "SkillMdDefinition"
 _ASD = "AgentSkillsDescriptor"
 _sM = "skillMd"
 _sD = "skillDefinition"
+_BEA = "BatchEvaluationArn"
 _BETC = "BatchEvaluationTraceConfig"
 _bEA = "batchEvaluationArn"
 _LGAL = "LogGroupArnList"
@@ -76,8 +111,6 @@ _CWLTC = "CloudWatchLogsTraceConfig"
 _lGA = "logGroupArns"
 _sN = "serviceNames"
 _sTt = "startTime"
-_sF = "smithy.api#timestampFormat"
-_dt = "date-time"
 _eT = "endTime"
 _ru = "rule"
 _OETC = "OnlineEvaluationTraceConfig"
@@ -119,7 +152,6 @@ _BEPT = "BrowserEnterprisePolicyType"
 _MANAGED = "MANAGED"
 _RECOMMENDED = "RECOMMENDED"
 _BEP = "BrowserEnterprisePolicy"
-_ty = "type"
 _BEPr = "BrowserEnterprisePolicies"
 _BE = "BrowserExtension"
 _BEr = "BrowserExtensions"
@@ -169,7 +201,7 @@ _sEt = "streamEndpoint"
 _sSt = "streamStatus"
 _LVS = "LiveViewStream"
 _BSSr = "BrowserSessionStream"
-_aS = "automationStream"
+_aSu = "automationStream"
 _lVS = "liveViewStream"
 _VPH = "ViewPortHeight"
 _VPW = "ViewPortWidth"
@@ -253,16 +285,102 @@ _cLBSR = "com.amazonaws.bedrockagentcore#ListBrowserSessionsRequest"
 _mR = "maxResults"
 _nT = "nextToken"
 _BSSro = "BrowserSessionSummary"
-_BSSrow = "BrowserSessionSummaries"
 _LBSO = "ListBrowserSessionsOutput"
 _cLBSRo = "com.amazonaws.bedrockagentcore#ListBrowserSessionsResponse"
 _i = "items"
 _LBS = "ListBrowserSessions"
-_SBSI = "StartBrowserSessionInput"
-_cSBSR = "com.amazonaws.bedrockagentcore#StartBrowserSessionRequest"
-_SBSO = "StartBrowserSessionOutput"
-_cSBSRo = "com.amazonaws.bedrockagentcore#StartBrowserSessionResponse"
-_SBS = "StartBrowserSession"
+_BES = "BatchEvaluationStatus"
+_PENDING = "PENDING"
+_IP = "IN_PROGRESS"
+_CWE = "COMPLETED_WITH_ERRORS"
+_STOPPING = "STOPPING"
+_BED = "BatchEvaluationDescription"
+
+AGENT_INSIGHT_ARCHIVE_STATUS: StaticSchema = (
+    14,
+    n0,
+    _AIAS,
+    0,
+    (_ACTIVE, _ARCHIVED),
+    ((-1, {_sVm: _ACTIVE}), (-1, {_sVm: _ARCHIVED})),
+)
+
+AGENT_INSIGHT_CUSTOMER_METADATA_STATUS: StaticSchema = (
+    14,
+    n0,
+    _AICMS,
+    0,
+    (_AVAILABLE, _CKU, _UNAVAILABLE),
+    ((-1, {_sVm: _AVAILABLE}), (-1, {_sVm: _CKU}), (-1, {_sVm: _UNAVAILABLE})),
+)
+
+AGENT_INSIGHT_ID: StaticSchema = (3, n0, _AII, 0)
+
+BATCH_EVALUATION_ID: StaticSchema = (3, n0, _BEI, 0)
+
+INSIGHT_DESCRIPTION: StaticSchema = (3, n0, _ID, 4)
+
+INSIGHT_NAME: StaticSchema = (3, n0, _IN, 4)
+
+INSIGHT_TYPE: StaticSchema = (14, n0, _IT, 0, (_FAILURE,), ((-1, {_sVm: _FAILURE}),))
+
+AGENT_INSIGHT_SUMMARY: StaticSchema = (
+    18,
+    n0,
+    _AIS,
+    0,
+    (_ty, _n, _d, _cA, _aSC, _aII, _aN, _bEI, _cMS, _uA, _aS, _lSA),
+    (
+        (INSIGHT_TYPE, 1),
+        (INSIGHT_NAME, 1),
+        (INSIGHT_DESCRIPTION, 1),
+        (4, {_sF: _dt, _s: None}),
+        (7, 0),
+        (AGENT_INSIGHT_ID, 1),
+        (lambda: schemas.AGENT_APPLICATION_NAME, 1),
+        (BATCH_EVALUATION_ID, 0),
+        (AGENT_INSIGHT_CUSTOMER_METADATA_STATUS, 1),
+        (4, {_sF: _dt, _s: None}),
+        (AGENT_INSIGHT_ARCHIVE_STATUS, 1),
+        (4, {_sF: _dt}),
+    ),
+)
+
+AGENT_INSIGHT_SUMMARY_LIST: StaticSchema = (
+    16,
+    n0,
+    _AISL,
+    0,
+    (_m,),
+    ((AGENT_INSIGHT_SUMMARY, 0),),
+)
+
+AGENT_INVOCATION_CONFIG: StaticSchema = (
+    19,
+    n0,
+    _AIC,
+    0,
+    (_aCR,),
+    ((lambda: schemas.AGENT_CORE_RUNTIME_INVOCATION, 0),),
+)
+
+AGENT_INVOCATION_DETAILS: StaticSchema = (
+    19,
+    n0,
+    _AID,
+    0,
+    (_aCR,),
+    ((lambda: schemas.AGENT_CORE_RUNTIME_INVOCATION_DETAILS, 0),),
+)
+
+SKILL_DEFINITION: StaticSchema = (
+    18,
+    n0,
+    _SD,
+    0,
+    (_sV, _iC),
+    ((lambda: schemas.SCHEMA_VERSION, 0), (lambda: schemas.INLINE_CONTENT, 0)),
+)
 
 SKILL_MD_DEFINITION: StaticSchema = (
     18,
@@ -279,8 +397,10 @@ AGENT_SKILLS_DESCRIPTOR: StaticSchema = (
     _ASD,
     0,
     (_sM, _sD),
-    ((SKILL_MD_DEFINITION, 1), (lambda: schemas.SKILL_DEFINITION, 0)),
+    ((SKILL_MD_DEFINITION, 1), (SKILL_DEFINITION, 0)),
 )
+
+BATCH_EVALUATION_ARN: StaticSchema = (3, n0, _BEA, 0)
 
 BATCH_EVALUATION_TRACE_CONFIG: StaticSchema = (
     18,
@@ -288,7 +408,7 @@ BATCH_EVALUATION_TRACE_CONFIG: StaticSchema = (
     _BETC,
     0,
     (_bEA,),
-    ((lambda: schemas.BATCH_EVALUATION_ARN, 1),),
+    ((BATCH_EVALUATION_ARN, 1),),
 )
 
 LOG_GROUP_ARN_LIST: StaticSchema = (16, n0, _LGAL, 0, (_m,), ((3, 0),))
@@ -724,7 +844,7 @@ BROWSER_SESSION_STREAM: StaticSchema = (
     n0,
     _BSSr,
     0,
-    (_aS, _lVS),
+    (_aSu, _lVS),
     ((AUTOMATION_STREAM, 1), (LIVE_VIEW_STREAM, 0)),
 )
 
@@ -978,7 +1098,7 @@ LIST_BROWSER_SESSIONS_OUTPUT: StaticSchema = (
     _LBSO,
     {_sSI: _cLBSRo, _smith: None},
     (_i, _nT),
-    ((lambda: BROWSER_SESSION_SUMMARIES, 1), (lambda: schemas.NEXT_TOKEN, 0)),
+    ((lambda: schemas.BROWSER_SESSION_SUMMARIES, 1), (lambda: schemas.NEXT_TOKEN, 0)),
 )
 
 LIST_BROWSER_SESSIONS: StaticOperationSchema = (
@@ -1021,69 +1141,22 @@ BROWSER_SESSION_SUMMARY: StaticSchema = (
     ),
 )
 
-BROWSER_SESSION_SUMMARIES: StaticSchema = (
-    16,
+BATCH_EVALUATION_STATUS: StaticSchema = (
+    14,
     n0,
-    _BSSrow,
+    _BES,
     0,
-    (_m,),
-    ((BROWSER_SESSION_SUMMARY, 0),),
-)
-
-START_BROWSER_SESSION_INPUT: StaticSchema = (
-    18,
-    n0,
-    _SBSI,
-    {_sSI: _cSBSR, _smit: None},
-    (_tI, _tP, _bI, _n, _sTS, _vP, _ext, _pCr, _pCro, _ePn, _ce, _fC, _cTl),
+    (_PENDING, _IP, _COMPLETED, _CWE, _FAILED, _STOPPING, _STOPPED, _DELETING),
     (
-        (3, {_sH: _XATI}),
-        (3, {_sH: _t}),
-        (3, 9),
-        (NAME, 0),
-        (BROWSER_SESSION_TIMEOUT, {_smithyap: 3600}),
-        (VIEW_PORT, 0),
-        (BROWSER_EXTENSIONS, 0),
-        (BROWSER_PROFILE_CONFIGURATION, 0),
-        (PROXY_CONFIGURATION, 0),
-        (BROWSER_ENTERPRISE_POLICIES, 0),
-        (CERTIFICATES, 0),
-        (TOOLS_FILE_SYSTEM_CONFIGURATIONS, 0),
-        (lambda: schemas.CLIENT_TOKEN, 2),
+        (-1, {_sVm: _PENDING}),
+        (-1, {_sVm: _IP}),
+        (-1, {_sVm: _COMPLETED}),
+        (-1, {_sVm: _CWE}),
+        (-1, {_sVm: _FAILED}),
+        (-1, {_sVm: _STOPPING}),
+        (-1, {_sVm: _STOPPED}),
+        (-1, {_sVm: _DELETING}),
     ),
 )
 
-START_BROWSER_SESSION_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _SBSO,
-    {_sSI: _cSBSRo, _smith: None},
-    (_bI, _sIe, _cA, _stre),
-    ((3, 1), (BROWSER_SESSION_ID, 1), (DATE_TIMESTAMP, 1), (BROWSER_SESSION_STREAM, 0)),
-)
-
-START_BROWSER_SESSION: StaticOperationSchema = (
-    23,
-    n0,
-    _SBS,
-    {
-        _smithy: MappingProxyType(
-            {
-                "method": "PUT",
-                "uri": "/browsers/{browserIdentifier}/sessions/start",
-                "code": 200,
-            }
-        )
-    },
-    START_BROWSER_SESSION_INPUT,
-    START_BROWSER_SESSION_OUTPUT,
-    (
-        lambda: schemas.ACCESS_DENIED_EXCEPTION,
-        lambda: schemas.CONFLICT_EXCEPTION,
-        lambda: schemas.INTERNAL_SERVER_EXCEPTION,
-        lambda: schemas.RESOURCE_NOT_FOUND_EXCEPTION,
-        lambda: schemas.SERVICE_QUOTA_EXCEEDED_EXCEPTION,
-        lambda: schemas.THROTTLING_EXCEPTION,
-        lambda: schemas.VALIDATION_EXCEPTION,
-    ),
-)
+BATCH_EVALUATION_DESCRIPTION: StaticSchema = (3, n0, _BED, 0)

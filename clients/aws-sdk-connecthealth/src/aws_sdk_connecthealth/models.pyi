@@ -85,6 +85,57 @@ class ArtifactDetails(_SerdeShape):
     """The reason for failure if the artifact generation failed"""
 
 @dataclass(kw_only=True)
+class Checklist(_SerdeShape):
+    """
+    Contains the sections of a note template checklist and the discussion
+    status of each section.
+    """
+
+    checklist_id: str
+    """
+    The identifier of the checklist. For a managed note template, this value
+    is the template type, such as `HISTORY_AND_PHYSICAL`. For a custom note
+    template, this value is `CUSTOM_` followed by the template base, such as
+    `CUSTOM_GIRPP`.
+    """
+    items: list[ChecklistItem]
+    """
+    The checklist items in template order. The list contains one item for
+    each checklist section, including sections that have not been discussed.
+    """
+
+@dataclass(kw_only=True)
+class ChecklistItem(_SerdeShape):
+    """Contains a checklist item and its discussion status."""
+
+    item_key: str
+    """
+    The key that uniquely identifies the item within the checklist. For a
+    managed note template, this value is a service-defined section key, such
+    as `CHIEF_COMPLAINT`. For a custom note template, this value is the
+    `sectionHeader` of the section that you defined.
+    """
+    status: str
+    """
+    The discussion status of the checklist item. The following values are
+    valid:
+
+    - `DISCUSSED`: The conversation has covered the item.
+
+    - `PARTIALLY_DISCUSSED`: The conversation has covered part of the item.
+
+    - `NOT_DISCUSSED`: The conversation has not covered the item.
+
+    The status usually progresses toward `DISCUSSED`, but it can return to
+    `NOT_DISCUSSED` if a speaker retracts a statement.
+    """
+
+class ChecklistItemStatus(UnknownEnumMixin, StrEnum):
+    DISCUSSED = "DISCUSSED"
+    PARTIALLY_DISCUSSED = "PARTIALLY_DISCUSSED"
+    NOT_DISCUSSED = "NOT_DISCUSSED"
+
+@dataclass(kw_only=True)
 class ClinicalNoteGenerationResult(_SerdeShape):
     """
     Results of clinical note generation including note, transcript, and
@@ -119,6 +170,82 @@ class ConflictException(ServiceError, _SerdeShape):
     assumptions about initial state changing.
     """
 
+    response_metadata: ResponseMetadata = ...
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+@dataclass(kw_only=True)
+class CreateDatasetInput(_SerdeShape):
+    """Dataclass for CreateDatasetInput structure."""
+
+    domain_id: str | None = ...
+    """The unique identifier of the parent Domain."""
+    name: str | None = ...
+    """A name for the dataset."""
+    config: DatasetConfig | None = ...
+    """
+    The configuration of the dataset. The member that you set determines the
+    dataset type. You can't change the configuration after you create the
+    dataset.
+    """
+    client_token: str | None = ...
+    """
+    A unique, case-sensitive identifier to ensure that the operation
+    completes no more than one time. If this token matches a previous
+    request, the operation returns the dataset that the first request
+    created. If you reuse a clientToken with different parameters, the
+    request fails with ConflictException. Use a new clientToken for a
+    request with different parameters.
+
+    This field is autopopulated if not provided.
+    """
+
+class CreateDatasetInputDict(TypedDict, total=False):
+    """Dictionary form of `CreateDatasetInput`."""
+
+    domain_id: Required[str]
+    """The unique identifier of the parent Domain."""
+    name: Required[str]
+    """A name for the dataset."""
+    config: Required[DatasetConfig | DatasetConfigDict]
+    """
+    The configuration of the dataset. The member that you set determines the
+    dataset type. You can't change the configuration after you create the
+    dataset.
+    """
+    client_token: str | None
+    """
+    A unique, case-sensitive identifier to ensure that the operation
+    completes no more than one time. If this token matches a previous
+    request, the operation returns the dataset that the first request
+    created. If you reuse a clientToken with different parameters, the
+    request fails with ConflictException. Use a new clientToken for a
+    request with different parameters.
+
+    This field is autopopulated if not provided.
+    """
+
+@dataclass(kw_only=True)
+class CreateDatasetOutput(_SerdeShape):
+    """Dataclass for CreateDatasetOutput structure."""
+
+    arn: str
+    """The Amazon Resource Name (ARN) of the dataset."""
+    dataset_id: str
+    """The unique identifier of the dataset."""
+    type: str
+    """
+    The type of the dataset, determined by the configuration that you
+    provided.
+    """
+    status: str
+    """The status of the dataset. A new dataset has the status CREATING."""
+    created_at: datetime
+    """The date and time that the dataset was created."""
     response_metadata: ResponseMetadata = ...
     """
     Metadata about the response that produced this output. Use this to
@@ -282,6 +409,129 @@ class CustomTemplateResponse(_SerdeShape):
     template_type: str | None = ...
     """The base template type that was customized"""
 
+@dataclass
+class DatasetArtifactsMedicalCoding(_SerdeShape):
+    """The results of building a medical coding dataset."""
+
+    value: MedicalCodingDatasetArtifacts
+
+@dataclass
+class DatasetArtifactsUnknown(_SerdeShape):
+    """
+    Represents an unknown variant. If you receive this value, you will need
+    to update your library to receive the parsed value. This value may not
+    be deliberately sent.
+    """
+
+    tag: str
+
+DatasetArtifacts = Union[DatasetArtifactsMedicalCoding | DatasetArtifactsUnknown]
+"""The results of building a Dataset, by dataset type."""
+
+class _DatasetArtifactsDeserializer:
+    def deserialize(self, deserializer: ShapeDeserializer) -> DatasetArtifacts: ...
+
+@dataclass
+class DatasetConfigMedicalCoding(_SerdeShape):
+    """
+    The configuration of a medical coding dataset, which tailors medical
+    coding jobs to your coded examples.
+    """
+
+    value: MedicalCodingDatasetConfig
+
+@dataclass
+class DatasetConfigUnknown(_SerdeShape):
+    """
+    Represents an unknown variant. If you receive this value, you will need
+    to update your library to receive the parsed value. This value may not
+    be deliberately sent.
+    """
+
+    tag: str
+
+DatasetConfig = Union[DatasetConfigMedicalCoding | DatasetConfigUnknown]
+"""
+The configuration of a Dataset. Set one member, which determines the
+dataset type.
+"""
+
+class _DatasetConfigDeserializer:
+    def deserialize(self, deserializer: ShapeDeserializer) -> DatasetConfig: ...
+
+class DatasetConfigMedicalCodingDict(TypedDict):
+    medical_coding: MedicalCodingDatasetConfig | MedicalCodingDatasetConfigDict
+    """
+    The configuration of a medical coding dataset, which tailors medical
+    coding jobs to your coded examples.
+    """
+
+DatasetConfigDict = Union[DatasetConfigMedicalCodingDict]
+"""Dictionary form of `DatasetConfig`, setting exactly one variant."""
+
+class DatasetStatus(UnknownEnumMixin, StrEnum):
+    """
+    Lifecycle status of a Dataset. CREATING -> ACTIVE | CREATE_FAILED;
+    ACTIVE | CREATE_FAILED | DELETE_FAILED -> DELETING -> DELETED |
+    DELETE_FAILED.
+    """
+
+    CREATING = "CREATING"
+    """The dataset is being built."""
+    ACTIVE = "ACTIVE"
+    """The dataset is ready and can be referenced by feature requests."""
+    CREATE_FAILED = "CREATE_FAILED"
+    """
+    Building the dataset failed. Nothing usable was built; delete the
+    dataset to free its quota slot. See statusDetails.
+    """
+    DELETING = "DELETING"
+    """The dataset and its provisioned resources are being deleted."""
+    DELETE_FAILED = "DELETE_FAILED"
+    """
+    Deleting the dataset failed partway, so some provisioned resources may
+    remain. Call DeleteDataset again to finish. See statusDetails.
+    """
+    DELETED = "DELETED"
+    """
+    The dataset and its provisioned resources have been deleted. Not
+    returned by GetDataset or ListDatasets.
+    """
+
+@dataclass(kw_only=True)
+class DatasetSummary(_SerdeShape):
+    """Summary information about a Dataset."""
+
+    arn: str
+    """The Amazon Resource Name (ARN) of the dataset."""
+    dataset_id: str
+    """The unique identifier of the dataset."""
+    name: str
+    """The name of the dataset."""
+    type: str
+    """The type of the dataset."""
+    status: str
+    """The status of the dataset."""
+    status_details: str | None = ...
+    """
+    Details about the status of the dataset, such as the reason that it
+    failed to build or delete.
+    """
+    created_at: datetime
+    """The date and time that the dataset was created."""
+    updated_at: datetime
+    """The date and time that the dataset was last updated."""
+
+class DatasetType(UnknownEnumMixin, StrEnum):
+    """
+    The Amazon Connect Health feature a Dataset is for. Set by the service
+    from the DatasetConfig member supplied at create: medicalCoding ->
+    MEDICAL_CODING.
+    """
+
+    MEDICAL_CODING = "MEDICAL_CODING"
+    """Coded examples used to tailor medical coding."""
+
 @dataclass(kw_only=True)
 class DeactivateSubscriptionInput(_SerdeShape):
     """Dataclass for DeactivateSubscriptionInput structure."""
@@ -305,6 +555,44 @@ class DeactivateSubscriptionOutput(_SerdeShape):
 
     subscription: SubscriptionDescription | None = ...
     """"""
+    response_metadata: ResponseMetadata = ...
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+@dataclass(kw_only=True)
+class DeleteDatasetInput(_SerdeShape):
+    """Dataclass for DeleteDatasetInput structure."""
+
+    domain_id: str | None = ...
+    """The unique identifier of the parent Domain."""
+    dataset_id: str | None = ...
+    """The unique identifier of the dataset to delete."""
+
+class DeleteDatasetInputDict(TypedDict, total=False):
+    """Dictionary form of `DeleteDatasetInput`."""
+
+    domain_id: Required[str]
+    """The unique identifier of the parent Domain."""
+    dataset_id: Required[str]
+    """The unique identifier of the dataset to delete."""
+
+@dataclass(kw_only=True)
+class DeleteDatasetOutput(_SerdeShape):
+    """Dataclass for DeleteDatasetOutput structure."""
+
+    arn: str
+    """The Amazon Resource Name (ARN) of the dataset."""
+    dataset_id: str
+    """The unique identifier of the dataset."""
+    status: str
+    """
+    The status of the dataset. After Amazon Connect Health accepts the
+    request, the status is DELETING.
+    """
     response_metadata: ResponseMetadata = ...
     """
     Metadata about the response that produced this output. Use this to
@@ -370,6 +658,12 @@ class EncounterContext(_SerdeShape):
 
     unstructured_context: str | None = ...
     """Unstructured context information in markdown format"""
+    medical_coding_context: MedicalCodingContext | None = ...
+    """Structured patient and encounter context for medical code generation."""
+
+class EncounterType(UnknownEnumMixin, StrEnum):
+    TELEHEALTH = "TELEHEALTH"
+    IN_PERSON = "IN_PERSON"
 
 @dataclass(kw_only=True)
 class EncryptionContext(_SerdeShape):
@@ -387,6 +681,10 @@ class EncryptionType(UnknownEnumMixin, StrEnum):
     AWS_OWNED_KEY = "AWS_OWNED_KEY"
     CUSTOMER_MANAGED_KEY = "CUSTOMER_MANAGED_KEY"
 
+class FeedbackArtifactType(UnknownEnumMixin, StrEnum):
+    CLINICAL_DOC = "CLINICAL_DOC"
+    MEDICAL_CODES = "MEDICAL_CODES"
+
 @dataclass(kw_only=True)
 class FHIRServer(_SerdeShape):
     """FHIR server configuration for input data source"""
@@ -403,6 +701,61 @@ class FHIRServerDict(TypedDict, total=False):
     """FHIR server endpoint URL for accessing patient data."""
     oauth_token: str | None
     """OAuth token for authenticating with the FHIR server."""
+
+@dataclass(kw_only=True)
+class GetDatasetInput(_SerdeShape):
+    """Dataclass for GetDatasetInput structure."""
+
+    domain_id: str | None = ...
+    """The unique identifier of the parent Domain."""
+    dataset_id: str | None = ...
+    """The unique identifier of the dataset."""
+
+class GetDatasetInputDict(TypedDict, total=False):
+    """Dictionary form of `GetDatasetInput`."""
+
+    domain_id: Required[str]
+    """The unique identifier of the parent Domain."""
+    dataset_id: Required[str]
+    """The unique identifier of the dataset."""
+
+@dataclass(kw_only=True)
+class GetDatasetOutput(_SerdeShape):
+    """Dataclass for GetDatasetOutput structure."""
+
+    arn: str
+    """The Amazon Resource Name (ARN) of the dataset."""
+    dataset_id: str
+    """The unique identifier of the dataset."""
+    name: str
+    """The name of the dataset."""
+    type: str
+    """The type of the dataset."""
+    config: DatasetConfig
+    """The configuration that you provided when you created the dataset."""
+    status: str
+    """The status of the dataset."""
+    status_details: str | None = ...
+    """
+    Details about the status of the dataset, such as the reason that it
+    failed to build or delete.
+    """
+    artifacts: DatasetArtifacts | None = ...
+    """
+    The results of building the dataset, such as medical coding evaluation
+    scores. Available after Amazon Connect Health builds the dataset.
+    """
+    created_at: datetime
+    """The date and time that the dataset was created."""
+    updated_at: datetime
+    """The date and time that the dataset was last updated."""
+    response_metadata: ResponseMetadata = ...
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
 @dataclass(kw_only=True)
 class GetDomainInput(_SerdeShape):
@@ -441,6 +794,62 @@ class GetDomainOutput(_SerdeShape):
     """"""
     tags: dict[str, str] | None = ...
     """Tags associated with the Domain"""
+    response_metadata: ResponseMetadata = ...
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+@dataclass(kw_only=True)
+class GetMedicalCodingJobInput(_SerdeShape):
+    """Dataclass for GetMedicalCodingJobInput structure."""
+
+    domain_id: str | None = ...
+    """The unique identifier of the parent Domain."""
+    job_id: str | None = ...
+    """The unique identifier of the medical coding job."""
+
+class GetMedicalCodingJobInputDict(TypedDict, total=False):
+    """Dictionary form of `GetMedicalCodingJobInput`."""
+
+    domain_id: Required[str]
+    """The unique identifier of the parent Domain."""
+    job_id: Required[str]
+    """The unique identifier of the medical coding job."""
+
+@dataclass(kw_only=True)
+class GetMedicalCodingJobOutput(_SerdeShape):
+    """Dataclass for GetMedicalCodingJobOutput structure."""
+
+    job_id: str
+    """The unique identifier of the medical coding job."""
+    job_arn: str
+    """The Amazon Resource Name (ARN) of the medical coding job."""
+    job_status: str
+    """The status of the medical coding job."""
+    creation_time: datetime | None = ...
+    """The date and time that the medical coding job was created."""
+    updated_time: datetime | None = ...
+    """The date and time that the medical coding job was last updated."""
+    text: str
+    """The clinical text that the medical coding job codes."""
+    patient_context: MedicalCodesPatientContext | None = ...
+    """The patient context that you provided for the job."""
+    encounter_context: MedicalCodesEncounterContext | None = ...
+    """The encounter context that you provided for the job."""
+    output_data_config: MedicalCodingOutputDataConfig
+    """The output configuration that you provided for the job."""
+    dataset_id: str | None = ...
+    """
+    The unique identifier of the dataset that the job codes against. Not
+    returned if the job uses the general medical coding knowledge base.
+    """
+    medical_coding_output: MedicalCodingOutput | None = ...
+    """The location of the job results. Returned when the job succeeds."""
+    status_details: str | None = ...
+    """Details about the status of the job, such as the reason that it failed."""
     response_metadata: ResponseMetadata = ...
     """
     Metadata about the response that produced this output. Use this to
@@ -631,6 +1040,64 @@ class JobStatus(UnknownEnumMixin, StrEnum):
     SUCCEEDED = "SUCCEEDED"
 
 @dataclass(kw_only=True)
+class ListDatasetsInput(_SerdeShape):
+    """Dataclass for ListDatasetsInput structure."""
+
+    domain_id: str | None = ...
+    """The unique identifier of the parent Domain."""
+    type: str | None = ...
+    """Returns only datasets of this type."""
+    next_token: str | None = ...
+    """
+    The token for the next page of results, from a previous ListDatasets
+    response. If you don't specify a value, the operation returns the first
+    page of results.
+    """
+    max_results: int | None = ...
+    """
+    The maximum number of datasets to return in one page. The default is
+    100.
+    """
+
+class ListDatasetsInputDict(TypedDict, total=False):
+    """Dictionary form of `ListDatasetsInput`."""
+
+    domain_id: Required[str]
+    """The unique identifier of the parent Domain."""
+    type: str | None
+    """Returns only datasets of this type."""
+    next_token: str | None
+    """
+    The token for the next page of results, from a previous ListDatasets
+    response. If you don't specify a value, the operation returns the first
+    page of results.
+    """
+    max_results: int | None
+    """
+    The maximum number of datasets to return in one page. The default is
+    100.
+    """
+
+@dataclass(kw_only=True)
+class ListDatasetsOutput(_SerdeShape):
+    """Dataclass for ListDatasetsOutput structure."""
+
+    items: list[DatasetSummary]
+    """A list of dataset summaries."""
+    next_token: str | None = ...
+    """
+    The token for the next page of results. Not returned if there are no
+    more results.
+    """
+    response_metadata: ResponseMetadata = ...
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+@dataclass(kw_only=True)
 class ListDomainsInput(_SerdeShape):
     """Dataclass for ListDomainsInput structure."""
 
@@ -755,6 +1222,243 @@ class ManagedTemplateResponse(_SerdeShape):
     """The type of managed template used"""
 
 @dataclass(kw_only=True)
+class MedicalCodeGenerationResult(_SerdeShape):
+    """
+    Results of medical code generation, including the medical codes and the
+    medical coding job.
+    """
+
+    medical_codes_result: ArtifactDetails | None = ...
+    """
+    Details about the generated medical codes. If the status is SKIPPED,
+    medical codes weren't generated, for example because the clinical note
+    wasn't generated or had no content.
+    """
+    job_id: str | None = ...
+    """
+    The identifier of the medical coding job that generated the medical
+    codes. To submit feedback on the medical codes, use this value as the
+    artifactSourceId, with the artifactType MEDICAL_CODES, in
+    SubmitFeedback.
+    """
+
+@dataclass(kw_only=True)
+class MedicalCodeGenerationSettings(_SerdeShape):
+    """
+    Settings for generating medical codes from the clinical note after the
+    session ends. Medical code generation is in preview release and is
+    subject to change. Medical code generation is available in the US East
+    (N. Virginia) and US West (Oregon) AWS Regions.
+    """
+
+    enabled: bool
+    """
+    Specifies whether to generate medical codes for the session. If you set
+    this to true, the service generates medical codes from the clinical note
+    after the session ends, using your permissions for medical coding, the
+    output Amazon S3 location, and the AWS KMS key. You can set this to true
+    only in a Region where medical code generation is available. To provide
+    a medicalCodingContext, you must set this to true.
+    """
+
+@dataclass(kw_only=True)
+class MedicalCodeGenerationSettingsResponse(_SerdeShape):
+    """Response containing settings for medical code generation."""
+
+    enabled: bool | None = ...
+    """Indicates whether medical code generation was requested for the session."""
+
+@dataclass(kw_only=True)
+class MedicalCodesEncounterContext(_SerdeShape):
+    """Encounter context for a medical coding job. All fields are optional."""
+
+    encounter_type: str | None = ...
+    """The type of the encounter, either in person or telehealth."""
+    encounter_reason: str | None = ...
+    """
+    The reason for the encounter. The reason can contain letters, numbers,
+    spaces, periods, commas, and hyphens, and can't contain only spaces.
+    """
+    after_hours: bool | None = ...
+    """
+    Specifies whether the encounter took place outside regular business
+    hours.
+    """
+    encounter_date: str | None = ...
+    """
+    The date of the encounter, in YYYY-MM-DD format. The date can't be more
+    than one day after the current date in UTC.
+    """
+    encounter_duration_minutes: int | None = ...
+    """The duration of the encounter, in minutes, from 1 to 1440."""
+
+class MedicalCodesEncounterContextDict(TypedDict, total=False):
+    """Dictionary form of `MedicalCodesEncounterContext`."""
+
+    encounter_type: str | None
+    """The type of the encounter, either in person or telehealth."""
+    encounter_reason: str | None
+    """
+    The reason for the encounter. The reason can contain letters, numbers,
+    spaces, periods, commas, and hyphens, and can't contain only spaces.
+    """
+    after_hours: bool | None
+    """
+    Specifies whether the encounter took place outside regular business
+    hours.
+    """
+    encounter_date: str | None
+    """
+    The date of the encounter, in YYYY-MM-DD format. The date can't be more
+    than one day after the current date in UTC.
+    """
+    encounter_duration_minutes: int | None
+    """The duration of the encounter, in minutes, from 1 to 1440."""
+
+@dataclass(kw_only=True)
+class MedicalCodesPatientContext(_SerdeShape):
+    """Patient context for a medical coding job. All fields are optional."""
+
+    sex: str | None = ...
+    """The sex of the patient."""
+    status: str | None = ...
+    """The status of the patient, either new or established."""
+    date_of_birth: str | None = ...
+    """
+    The date of birth of the patient, in YYYY-MM-DD format. The date can't
+    be after the current date in UTC.
+    """
+    insurance: str | None = ...
+    """The insurance of the patient."""
+
+class MedicalCodesPatientContextDict(TypedDict, total=False):
+    """Dictionary form of `MedicalCodesPatientContext`."""
+
+    sex: str | None
+    """The sex of the patient."""
+    status: str | None
+    """The status of the patient, either new or established."""
+    date_of_birth: str | None
+    """
+    The date of birth of the patient, in YYYY-MM-DD format. The date can't
+    be after the current date in UTC.
+    """
+    insurance: str | None
+    """The insurance of the patient."""
+
+@dataclass(kw_only=True)
+class MedicalCodingContext(_SerdeShape):
+    """
+    Patient and encounter context for medical code generation. Providing
+    this information can improve the accuracy of the medical codes. To
+    provide it, you must also set enabled to true in
+    medicalCodeGenerationSettings. All fields are optional. The service
+    generates medical codes without any field that you leave out.
+    """
+
+    sex: str | None = ...
+    """The sex of the patient."""
+    status: str | None = ...
+    """The status of the patient, either new or established."""
+    date_of_birth: str | None = ...
+    """
+    The date of birth of the patient, in YYYY-MM-DD format. The date can't
+    be after the current date in UTC.
+    """
+    encounter_type: str | None = ...
+    """The type of the encounter, either in person or telehealth."""
+    encounter_reason: str | None = ...
+    """
+    The reason for the encounter. The reason can contain letters, numbers,
+    spaces, periods, commas, and hyphens, and can't contain only spaces.
+    """
+    after_hours: bool | None = ...
+    """
+    Specifies whether the encounter took place outside regular business
+    hours.
+    """
+    encounter_date: str | None = ...
+    """
+    The date of the encounter, in YYYY-MM-DD format. The date can't be more
+    than one day after the current date in UTC.
+    """
+
+@dataclass(kw_only=True)
+class MedicalCodingDatasetArtifacts(_SerdeShape):
+    """The results of building a medical coding dataset."""
+
+    evaluation_s3_uri: str | None = ...
+    """
+    The Amazon S3 location, under the s3OutputPath of the dataset, of the
+    evaluation scores for the dataset.
+    """
+
+@dataclass(kw_only=True)
+class MedicalCodingDatasetConfig(_SerdeShape):
+    """
+    The configuration of a medical coding dataset. Amazon Connect Health
+    uses the coded examples that are in the input location when you create
+    the dataset, and writes evaluation scores to the output location, with
+    your permissions. Later changes to the input location don't change the
+    dataset.
+    """
+
+    s3_input_path: str
+    """
+    The Amazon S3 location of your coded examples. You need s3:GetObject and
+    s3:ListBucket permissions for it, and kms:Decrypt if you encrypt it with
+    an AWS KMS key.
+    """
+    s3_output_path: str
+    """
+    The Amazon S3 location where Amazon Connect Health writes the evaluation
+    scores for the dataset. You need s3:PutObject permission for it, and
+    kms:GenerateDataKey if you encrypt it with an AWS KMS key.
+    """
+
+class MedicalCodingDatasetConfigDict(TypedDict, total=False):
+    """Dictionary form of `MedicalCodingDatasetConfig`."""
+
+    s3_input_path: Required[str]
+    """
+    The Amazon S3 location of your coded examples. You need s3:GetObject and
+    s3:ListBucket permissions for it, and kms:Decrypt if you encrypt it with
+    an AWS KMS key.
+    """
+    s3_output_path: Required[str]
+    """
+    The Amazon S3 location where Amazon Connect Health writes the evaluation
+    scores for the dataset. You need s3:PutObject permission for it, and
+    kms:GenerateDataKey if you encrypt it with an AWS KMS key.
+    """
+
+@dataclass(kw_only=True)
+class MedicalCodingOutput(_SerdeShape):
+    """The location of the results of a medical coding job."""
+
+    uri: str
+    """The Amazon S3 location of the medical codes that the job generated."""
+
+@dataclass(kw_only=True)
+class MedicalCodingOutputDataConfig(_SerdeShape):
+    """The output configuration for a medical coding job."""
+
+    s3_output_path: str
+    """
+    The Amazon S3 location where Amazon Connect Health writes the results of
+    the job.
+    """
+
+class MedicalCodingOutputDataConfigDict(TypedDict, total=False):
+    """Dictionary form of `MedicalCodingOutputDataConfig`."""
+
+    s3_output_path: Required[str]
+    """
+    The Amazon S3 location where Amazon Connect Health writes the results of
+    the job.
+    """
+
+@dataclass(kw_only=True)
 class MedicalScribeAudioEvent(_SerdeShape):
     """An event containing audio data for the Medical Scribe stream"""
 
@@ -780,6 +1484,32 @@ class MedicalScribeChannelDefinition(_SerdeShape):
     """The channel identifier"""
     participant_role: str
     """The role of the participant on this channel"""
+
+@dataclass(kw_only=True)
+class MedicalScribeChecklistEvent(_SerdeShape):
+    """
+    Real-time extraction is in preview release for Amazon Connect Health and
+    is subject to change. To request access to this feature, contact your
+    AWS account team.
+
+    The session's checklist as of this point in the session. Each event
+    carries every item with its current status, not only the items that
+    changed.
+    """
+
+    snapshot_version: int
+    """
+    The version of this snapshot. Versions increase within a session and can
+    skip values. Keep the snapshot with the highest version and ignore any
+    event whose version is not higher, including after you reconnect to the
+    session. Versions of checklist events and periodontal chart events are
+    independent.
+    """
+    checklists: list[Checklist]
+    """
+    The checklists for the session. The list is empty when no checklist is
+    active.
+    """
 
 @dataclass(kw_only=True)
 class MedicalScribeConfigurationEvent(_SerdeShape):
@@ -877,6 +1607,8 @@ class MedicalScribeListeningSessionDetails(_SerdeShape):
     """Results of post-stream actions"""
     encounter_context_provided: bool | None = ...
     """Indicates whether encounter context was provided"""
+    medical_coding_context_provided: bool | None = ...
+    """Indicates whether medical coding context was provided."""
     stream_status: str | None = ...
     """The current status of the stream"""
     stream_creation_time: datetime | None = ...
@@ -907,6 +1639,34 @@ class MedicalScribeOutputStreamValidationException(_SerdeShape):
     value: ValidationException
 
 @dataclass
+class MedicalScribeOutputStreamPeriodontalChartEvent(_SerdeShape):
+    """
+    Real-time extraction is in preview release for Amazon Connect Health and
+    is subject to change. To request access to this feature, contact your
+    AWS account team.
+
+    A snapshot of the periodontal chart. Amazon Connect Health sends this
+    event only when real-time extraction is enabled for the account and
+    periodontal charting is dictated during the session.
+    """
+
+    value: MedicalScribePeriodontalChartEvent
+
+@dataclass
+class MedicalScribeOutputStreamChecklistEvent(_SerdeShape):
+    """
+    Real-time extraction is in preview release for Amazon Connect Health and
+    is subject to change. To request access to this feature, contact your
+    AWS account team.
+
+    A snapshot of the session's checklist. Amazon Connect Health sends this
+    event only when real-time extraction is enabled for the account and the
+    session uses a supported note template.
+    """
+
+    value: MedicalScribeChecklistEvent
+
+@dataclass
 class MedicalScribeOutputStreamUnknown(_SerdeShape):
     """
     Represents an unknown variant. If you receive this value, you will need
@@ -920,11 +1680,13 @@ MedicalScribeOutputStream = Union[
     MedicalScribeOutputStreamTranscriptEvent
     | MedicalScribeOutputStreamInternalFailureException
     | MedicalScribeOutputStreamValidationException
+    | MedicalScribeOutputStreamPeriodontalChartEvent
+    | MedicalScribeOutputStreamChecklistEvent
     | MedicalScribeOutputStreamUnknown
 ]
 """
-Output stream from Medical Scribe containing transcript events and
-errors
+The output stream of a listening session. It carries transcript events,
+periodontal chart events, checklist events, and errors.
 """
 
 class _MedicalScribeOutputStreamDeserializer:
@@ -937,6 +1699,33 @@ class MedicalScribeParticipantRole(UnknownEnumMixin, StrEnum):
     CLINICIAN = "CLINICIAN"
 
 @dataclass(kw_only=True)
+class MedicalScribePeriodontalChartEvent(_SerdeShape):
+    """
+    Real-time extraction is in preview release for Amazon Connect Health and
+    is subject to change. To request access to this feature, contact your
+    AWS account team.
+
+    The periodontal chart as of this point in the session. Each event
+    carries every tooth charted so far, not only the teeth that changed.
+    """
+
+    snapshot_version: int
+    """
+    The version of this snapshot. Versions increase within a session and can
+    skip values. Keep the snapshot with the highest version and ignore any
+    event whose version is not higher, including after you reconnect to the
+    session. Versions of checklist events and periodontal chart events are
+    independent.
+    """
+    teeth: list[PeriodontalTooth]
+    """
+    The teeth that have a recorded value or are marked missing, in ascending
+    `toothNumber` order.
+    """
+    review_items: list[PeriodontalReview] | None = ...
+    """Items that need the clinician's confirmation."""
+
+@dataclass(kw_only=True)
 class MedicalScribePostStreamActionSettings(_SerdeShape):
     """Settings for actions to perform after the audio stream ends"""
 
@@ -944,6 +1733,11 @@ class MedicalScribePostStreamActionSettings(_SerdeShape):
     """"""
     clinical_note_generation_settings: ClinicalNoteGenerationSettings
     """Settings for clinical note generation"""
+    medical_code_generation_settings: MedicalCodeGenerationSettings | None = ...
+    """
+    Settings for medical code generation. Medical code generation is in
+    preview release and is subject to change.
+    """
 
 @dataclass(kw_only=True)
 class MedicalScribePostStreamActionSettingsResponse(_SerdeShape):
@@ -953,6 +1747,11 @@ class MedicalScribePostStreamActionSettingsResponse(_SerdeShape):
     """"""
     clinical_note_generation_settings: ClinicalNoteGenerationSettingsResponse
     """Settings for clinical note generation"""
+    medical_code_generation_settings: MedicalCodeGenerationSettingsResponse | None = ...
+    """
+    Settings for medical code generation. Returned only if you specified
+    medicalCodeGenerationSettings when you started the session.
+    """
 
 @dataclass(kw_only=True)
 class MedicalScribePostStreamActionsResult(_SerdeShape):
@@ -960,6 +1759,12 @@ class MedicalScribePostStreamActionsResult(_SerdeShape):
 
     clinical_note_generation_result: ClinicalNoteGenerationResult | None = ...
     """Results of clinical note generation"""
+    medical_code_generation_result: MedicalCodeGenerationResult | None = ...
+    """
+    Results of medical code generation. Returned if medical code generation
+    runs for the session. Not returned if you set enabled to false in
+    medicalCodeGenerationSettings.
+    """
 
 @dataclass(kw_only=True)
 class MedicalScribeSessionControlEvent(_SerdeShape):
@@ -1114,10 +1919,129 @@ class PatientInsightsPatientContextDict(TypedDict, total=False):
     pronouns: str | None
     """Pronouns preferred by the patient."""
 
+class PatientStatus(UnknownEnumMixin, StrEnum):
+    NEW = "NEW"
+    ESTABLISHED = "ESTABLISHED"
+
+@dataclass(kw_only=True)
+class PeriodontalReview(_SerdeShape):
+    """
+    An item of the periodontal chart that needs the clinician's
+    confirmation.
+    """
+
+    reason: str
+    """
+    The reason for review. The following values are valid:
+
+    - `SITE_NOT_CHARTED`: One or more sites have no reading.
+
+    - `VALUE_NOT_CHARTED`: A dictated value or charting instruction was not
+      charted, for example because the value was out of range or not valid
+      at its position.
+
+    - `READING_COUNT_MISMATCH`: The number of dictated values did not match
+      the number of open sites. The values were charted as dictated.
+
+    - `LINE_UNCLEAR`: A line of dictation could not be interpreted and was
+      not charted.
+
+    - `TOOTH_UNCLEAR`: A line of dictation did not identify the tooth and
+      was not charted.
+
+    - `MISSING_TOOTH_CONFLICT`: The dictation conflicts with a tooth marked
+      as missing.
+
+    - `MEASUREMENT_NOT_CHARTED`: The dictation included a measurement that
+      the chart does not record, such as plaque, calculus, or the
+      mucogingival junction.
+
+    - `SESSION_ISSUE`: The exam setup could not be used and all teeth were
+      assumed to be present, or the earlier chart could not be restored and
+      charting restarted.
+    """
+    tooth_number: int | None = ...
+    """The tooth that the item refers to."""
+    sites: list[str] | None = ...
+    """The probing sites of that tooth that the item refers to."""
+
+class PeriodontalReviewReason(UnknownEnumMixin, StrEnum):
+    SITE_NOT_CHARTED = "SITE_NOT_CHARTED"
+    VALUE_NOT_CHARTED = "VALUE_NOT_CHARTED"
+    READING_COUNT_MISMATCH = "READING_COUNT_MISMATCH"
+    LINE_UNCLEAR = "LINE_UNCLEAR"
+    TOOTH_UNCLEAR = "TOOTH_UNCLEAR"
+    MISSING_TOOTH_CONFLICT = "MISSING_TOOTH_CONFLICT"
+    MEASUREMENT_NOT_CHARTED = "MEASUREMENT_NOT_CHARTED"
+    SESSION_ISSUE = "SESSION_ISSUE"
+
+@dataclass(kw_only=True)
+class PeriodontalSite(_SerdeShape):
+    """The measurements at one probing site of a tooth."""
+
+    site: str
+    """
+    The probing site. The following values are valid:
+
+    - `DB`: Distobuccal.
+
+    - `B`: Buccal.
+
+    - `MB`: Mesiobuccal.
+
+    - `DL`: Distolingual.
+
+    - `L`: Lingual.
+
+    - `ML`: Mesiolingual.
+    """
+    probing_depth: int | None = ...
+    """The probing depth, in millimeters. The value ranges from 0 to 15."""
+    recession: int | None = ...
+    """
+    The gingival recession, in millimeters. The value ranges from -5 to 15.
+    For example, `-1` represents \"plus one.\"
+    """
+    bleeding: bool | None = ...
+    """Specifies whether the site bled during probing."""
+    suppuration: bool | None = ...
+    """Specifies whether suppuration was present at the site."""
+
+class PeriodontalSiteName(UnknownEnumMixin, StrEnum):
+    DISTOBUCCAL = "DB"
+    BUCCAL = "B"
+    MESIOBUCCAL = "MB"
+    DISTOLINGUAL = "DL"
+    LINGUAL = "L"
+    MESIOLINGUAL = "ML"
+
+@dataclass(kw_only=True)
+class PeriodontalTooth(_SerdeShape):
+    """The chart for one tooth."""
+
+    tooth_number: int
+    """
+    The tooth number in the Universal Numbering System. The value ranges
+    from 1 to 32.
+    """
+    missing: bool
+    """Specifies whether the tooth is missing."""
+    mobility: int | None = ...
+    """The tooth mobility grade. The value ranges from 0 to 3."""
+    furcation: int | None = ...
+    """The furcation involvement class. The value ranges from 0 to 3."""
+    sites: list[PeriodontalSite] | None = ...
+    """
+    The probing sites that have a recorded measurement, in the order `MB`,
+    `B`, `DB`, `ML`, `L`, `DL`.
+    """
+
 class PostStreamArtifactGenerationStatus(UnknownEnumMixin, StrEnum):
     IN_PROGRESS = "IN_PROGRESS"
     FAILED = "FAILED"
     COMPLETED = "COMPLETED"
+    PENDING = "PENDING"
+    SKIPPED = "SKIPPED"
 
 class Pronouns(UnknownEnumMixin, StrEnum):
     HE_HIM = "HE_HIM"
@@ -1164,8 +2088,109 @@ class ServiceQuotaExceededException(ServiceError, _SerdeShape):
     optional.
     """
 
+class Sex(UnknownEnumMixin, StrEnum):
+    MALE = "MALE"
+    FEMALE = "FEMALE"
+    NON_BINARY = "NON_BINARY"
+    UNKNOWN = "UNKNOWN"
+
 class Specialty(UnknownEnumMixin, StrEnum):
     PRIMARY_CARE = "PRIMARY_CARE"
+
+@dataclass(kw_only=True)
+class StartMedicalCodingJobInput(_SerdeShape):
+    """Dataclass for StartMedicalCodingJobInput structure."""
+
+    domain_id: str | None = ...
+    """The unique identifier of the parent Domain."""
+    text: str | None = ...
+    """
+    The clinical text to generate medical codes for, such as a clinical
+    note.
+    """
+    patient_context: MedicalCodesPatientContext | None = ...
+    """
+    Patient context for the job. Providing this information can improve the
+    accuracy of the medical codes.
+    """
+    encounter_context: MedicalCodesEncounterContext | None = ...
+    """
+    Encounter context for the job. Providing this information can improve
+    the accuracy of the medical codes.
+    """
+    output_data_config: MedicalCodingOutputDataConfig | None = ...
+    """The output configuration for the job."""
+    dataset_id: str | None = ...
+    """
+    The unique identifier of an ACTIVE medical coding dataset in the Domain
+    to code against. If you don't specify a dataset, the job uses the
+    general medical coding knowledge base.
+    """
+    client_token: str | None = ...
+    """
+    Unique, case-sensitive identifier that you provide to ensure the
+    idempotency of the request.
+
+    This field is autopopulated if not provided.
+    """
+
+class StartMedicalCodingJobInputDict(TypedDict, total=False):
+    """Dictionary form of `StartMedicalCodingJobInput`."""
+
+    domain_id: Required[str]
+    """The unique identifier of the parent Domain."""
+    text: Required[str]
+    """
+    The clinical text to generate medical codes for, such as a clinical
+    note.
+    """
+    patient_context: MedicalCodesPatientContext | MedicalCodesPatientContextDict | None
+    """
+    Patient context for the job. Providing this information can improve the
+    accuracy of the medical codes.
+    """
+    encounter_context: (
+        MedicalCodesEncounterContext | MedicalCodesEncounterContextDict | None
+    )
+    """
+    Encounter context for the job. Providing this information can improve
+    the accuracy of the medical codes.
+    """
+    output_data_config: Required[
+        MedicalCodingOutputDataConfig | MedicalCodingOutputDataConfigDict
+    ]
+    """The output configuration for the job."""
+    dataset_id: str | None
+    """
+    The unique identifier of an ACTIVE medical coding dataset in the Domain
+    to code against. If you don't specify a dataset, the job uses the
+    general medical coding knowledge base.
+    """
+    client_token: str | None
+    """
+    Unique, case-sensitive identifier that you provide to ensure the
+    idempotency of the request.
+
+    This field is autopopulated if not provided.
+    """
+
+@dataclass(kw_only=True)
+class StartMedicalCodingJobOutput(_SerdeShape):
+    """Dataclass for StartMedicalCodingJobOutput structure."""
+
+    job_arn: str
+    """The Amazon Resource Name (ARN) of the medical coding job."""
+    job_id: str
+    """The unique identifier of the medical coding job."""
+    creation_time: datetime | None = ...
+    """The date and time that the medical coding job was created."""
+    response_metadata: ResponseMetadata = ...
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
 @dataclass(kw_only=True)
 class StartMedicalScribeListeningSessionInput(_SerdeShape):
@@ -1291,6 +2316,111 @@ class StartPatientInsightsJobOutput(_SerdeShape):
     """"""
     creation_time: datetime | None = ...
     """Date and time the patient insights job was submitted."""
+    response_metadata: ResponseMetadata = ...
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+@dataclass(kw_only=True)
+class SubmitFeedbackInput(_SerdeShape):
+    """Dataclass for SubmitFeedbackInput structure."""
+
+    domain_id: str | None = ...
+    """The unique identifier of the parent Domain."""
+    artifact_source_id: str | None = ...
+    """
+    The identifier of the artifact source. For a clinical document, this is
+    the session ID. For a set of medical codes, this is the medical coding
+    job ID.
+    """
+    subscription_id: str | None = ...
+    """The unique identifier of the Subscription."""
+    artifact_type: str | None = ...
+    """
+    The type of artifact that you submit feedback for. The following values
+    are valid:
+
+    - CLINICAL_DOC is the clinical document generated for an ambient
+      documentation session.
+
+    - MEDICAL_CODES is the set of medical codes generated by a medical
+      coding job.
+    """
+    signed_artifact_s3_uri: str | None = ...
+    """
+    The Amazon Simple Storage Service (Amazon S3) URI of the final artifact
+    that the clinician signed.
+    """
+    generated_artifact_s3_uri: str | None = ...
+    """
+    The Amazon S3 URI of the clinical document or set of medical codes that
+    Amazon Connect Health generated.
+    """
+    comments: str | None = ...
+    """Optional comments about the feedback."""
+    client_token: str | None = ...
+    """
+    A unique, case-sensitive identifier that you provide to ensure that the
+    operation completes no more than one time. If this token matches a
+    previous request, the service ignores the request but does not return an
+    error.
+
+    This field is autopopulated if not provided.
+    """
+
+class SubmitFeedbackInputDict(TypedDict, total=False):
+    """Dictionary form of `SubmitFeedbackInput`."""
+
+    domain_id: Required[str]
+    """The unique identifier of the parent Domain."""
+    artifact_source_id: Required[str]
+    """
+    The identifier of the artifact source. For a clinical document, this is
+    the session ID. For a set of medical codes, this is the medical coding
+    job ID.
+    """
+    subscription_id: str | None
+    """The unique identifier of the Subscription."""
+    artifact_type: Required[str]
+    """
+    The type of artifact that you submit feedback for. The following values
+    are valid:
+
+    - CLINICAL_DOC is the clinical document generated for an ambient
+      documentation session.
+
+    - MEDICAL_CODES is the set of medical codes generated by a medical
+      coding job.
+    """
+    signed_artifact_s3_uri: Required[str]
+    """
+    The Amazon Simple Storage Service (Amazon S3) URI of the final artifact
+    that the clinician signed.
+    """
+    generated_artifact_s3_uri: str | None
+    """
+    The Amazon S3 URI of the clinical document or set of medical codes that
+    Amazon Connect Health generated.
+    """
+    comments: str | None
+    """Optional comments about the feedback."""
+    client_token: str | None
+    """
+    A unique, case-sensitive identifier that you provide to ensure that the
+    operation completes no more than one time. If this token matches a
+    previous request, the service ignores the request but does not return an
+    error.
+
+    This field is autopopulated if not provided.
+    """
+
+@dataclass(kw_only=True)
+class SubmitFeedbackOutput(_SerdeShape):
+    """Dataclass for SubmitFeedbackOutput structure."""
+
     response_metadata: ResponseMetadata = ...
     """
     Metadata about the response that produced this output. Use this to
@@ -1454,13 +2584,19 @@ class WebAppConfiguration(_SerdeShape):
 ACTIVATE_SUBSCRIPTION: APIOperation[
     ActivateSubscriptionInput, ActivateSubscriptionOutput
 ]
+CREATE_DATASET: APIOperation[CreateDatasetInput, CreateDatasetOutput]
 CREATE_DOMAIN: APIOperation[CreateDomainInput, CreateDomainOutput]
 CREATE_SUBSCRIPTION: APIOperation[CreateSubscriptionInput, CreateSubscriptionOutput]
 DEACTIVATE_SUBSCRIPTION: APIOperation[
     DeactivateSubscriptionInput, DeactivateSubscriptionOutput
 ]
+DELETE_DATASET: APIOperation[DeleteDatasetInput, DeleteDatasetOutput]
 DELETE_DOMAIN: APIOperation[DeleteDomainInput, DeleteDomainOutput]
+GET_DATASET: APIOperation[GetDatasetInput, GetDatasetOutput]
 GET_DOMAIN: APIOperation[GetDomainInput, GetDomainOutput]
+GET_MEDICAL_CODING_JOB: APIOperation[
+    GetMedicalCodingJobInput, GetMedicalCodingJobOutput
+]
 GET_MEDICAL_SCRIBE_LISTENING_SESSION: APIOperation[
     GetMedicalScribeListeningSessionInput, GetMedicalScribeListeningSessionOutput
 ]
@@ -1468,10 +2604,14 @@ GET_PATIENT_INSIGHTS_JOB: APIOperation[
     GetPatientInsightsJobInput, GetPatientInsightsJobOutput
 ]
 GET_SUBSCRIPTION: APIOperation[GetSubscriptionInput, GetSubscriptionOutput]
+LIST_DATASETS: APIOperation[ListDatasetsInput, ListDatasetsOutput]
 LIST_DOMAINS: APIOperation[ListDomainsInput, ListDomainsOutput]
 LIST_SUBSCRIPTIONS: APIOperation[ListSubscriptionsInput, ListSubscriptionsOutput]
 LIST_TAGS_FOR_RESOURCE: APIOperation[
     ListTagsForResourceInput, ListTagsForResourceOutput
+]
+START_MEDICAL_CODING_JOB: APIOperation[
+    StartMedicalCodingJobInput, StartMedicalCodingJobOutput
 ]
 START_MEDICAL_SCRIBE_LISTENING_SESSION: APIOperation[
     StartMedicalScribeListeningSessionInput, StartMedicalScribeListeningSessionOutput
@@ -1479,5 +2619,6 @@ START_MEDICAL_SCRIBE_LISTENING_SESSION: APIOperation[
 START_PATIENT_INSIGHTS_JOB: APIOperation[
     StartPatientInsightsJobInput, StartPatientInsightsJobOutput
 ]
+SUBMIT_FEEDBACK: APIOperation[SubmitFeedbackInput, SubmitFeedbackOutput]
 TAG_RESOURCE: APIOperation[TagResourceInput, TagResourceOutput]
 UNTAG_RESOURCE: APIOperation[UntagResourceInput, UntagResourceOutput]

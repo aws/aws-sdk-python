@@ -52,23 +52,50 @@ _AVAILABLE = "AVAILABLE"
 _PENDING = "PENDING"
 _FAILED = "FAILED"
 _NI = "NullableInteger"
+_JSA = "JwtSigningAlgorithm"
+_RS = "RS256"
+_RS_ = "RS384"
+_RS__ = "RS512"
+_ES = "ES256"
+_ES_ = "ES384"
+_ES__ = "ES512"
+_LOJSA = "ListOfJwtSigningAlgorithm"
+_JCF = "JwtClaimFormat"
+_SS = "SINGLE_STRING"
+_JAC = "JwtAdditionalClaim"
+_cN = "claimName"
+_sm = "smithy.api#required"
+_r = "required"
+_eV = "expectedValues"
+_LOJAC = "ListOfJwtAdditionalClaim"
+_JI = "JwtIssuer"
+_is = "issuer"
+_a = "audiences"
+_aC = "additionalClaims"
+_jU = "jwksUri"
+_LOJI = "ListOfJwtIssuer"
+_JC = "JwtConfiguration"
+_iss = "issuers"
+_dAe = "defaultAlgorithms"
 _PARN = "ProviderARN"
 _LOARN = "ListOfARNs"
 _AT = "AuthorizerType"
 _TOKEN = "TOKEN"
 _REQUEST = "REQUEST"
 _CUP = "COGNITO_USER_POOLS"
+_JWT = "JWT"
 _A = "Authorizer"
 _ty = "type"
 _pARN = "providerARNs"
 _aT = "authType"
 _aU = "authorizerUri"
-_aC = "authorizerCredentials"
+_aCu = "authorizerCredentials"
 _iS = "identitySource"
 _iVE = "identityValidationExpression"
 _aRTIS = "authorizerResultTtlInSeconds"
+_jC = "jwtConfiguration"
 _BRE = "BadRequestException"
-_sm = "smithy.api#error"
+_smi = "smithy.api#error"
 _cl = "client"
 _sE = "smithy.api#httpError"
 _me = "message"
@@ -80,11 +107,11 @@ _LOSK = "ListOfStageKeys"
 _CAKI = "CreateApiKeyInput"
 _sSI = "smithy.synthetic#originalShapeId"
 _cCAKR = "com.amazonaws.apigateway#CreateApiKeyRequest"
-_smi = "smithy.api#input"
+_smit = "smithy.api#input"
 _gDI = "generateDistinctId"
 _CAKO = "CreateApiKeyOutput"
 _cAK = "com.amazonaws.apigateway#ApiKey"
-_smit = "smithy.api#output"
+_smith = "smithy.api#output"
 _LEE = "LimitExceededException"
 _rAS = "retryAfterSeconds"
 _sH = "smithy.api#httpHeader"
@@ -93,10 +120,12 @@ _NFE = "NotFoundException"
 _TMRE = "TooManyRequestsException"
 _UE = "UnauthorizedException"
 _CAK = "CreateApiKey"
-_smith = "smithy.api#http"
+_smithy = "smithy.api#http"
+_JII = "JwtIssuerInput"
+_LOJII = "ListOfJwtIssuerInput"
+_JCI = "JwtConfigurationInput"
 _CAI = "CreateAuthorizerInput"
 _cCAR = "com.amazonaws.apigateway#CreateAuthorizerRequest"
-_smithy = "smithy.api#required"
 _sL = "smithy.api#httpLabel"
 _CAO = "CreateAuthorizerOutput"
 _cA = "com.amazonaws.apigateway#Authorizer"
@@ -221,7 +250,7 @@ _STPE = "SecurityPolicy_TLS12_PFS_2025_EDGE"
 _STE_ = "SecurityPolicy_TLS12_2018_EDGE"
 _CDNI = "CreateDomainNameInput"
 _cCDNR = "com.amazonaws.apigateway#CreateDomainNameRequest"
-_cN = "certificateName"
+_cNe = "certificateName"
 _cB = "certificateBody"
 _cPK = "certificatePrivateKey"
 _cC = "certificateChain"
@@ -267,114 +296,9 @@ _cT = "contentType"
 _CMO = "CreateModelOutput"
 _cM = "com.amazonaws.apigateway#Model"
 _CM = "CreateModel"
-_CRVI = "CreateRequestValidatorInput"
-_cCRVR = "com.amazonaws.apigateway#CreateRequestValidatorRequest"
-_vRB = "validateRequestBody"
-_vRP = "validateRequestParameters"
-_CRVO = "CreateRequestValidatorOutput"
-_cRV = "com.amazonaws.apigateway#RequestValidator"
-_CRV = "CreateRequestValidator"
-_CRI = "CreateResourceInput"
-_cCRR = "com.amazonaws.apigateway#CreateResourceRequest"
-_pI = "parentId"
-_pP = "pathPart"
-_CT = "ConnectionType"
-_INTERNET = "INTERNET"
-_VL = "VPC_LINK"
-_CHS = "ContentHandlingStrategy"
-_CTB = "CONVERT_TO_BINARY"
-_CTT = "CONVERT_TO_TEXT"
-_SC = "StatusCode"
-_IR = "IntegrationResponse"
-_sPe = "selectionPattern"
-_rP = "responseParameters"
-_rT = "responseTemplates"
-_cH = "contentHandling"
-_MOIR = "MapOfIntegrationResponse"
-_RTM = "ResponseTransferMode"
-_BUFFERED = "BUFFERED"
-_STREAM = "STREAM"
-_TC = "TlsConfig"
-_iSV = "insecureSkipVerification"
-_IT = "IntegrationType"
-_HTTP = "HTTP"
-_AWS = "AWS"
-_MOCK = "MOCK"
-_HP = "HTTP_PROXY"
-_AP = "AWS_PROXY"
-_In = "Integration"
-_hM = "httpMethod"
-_u = "uri"
-_cTo = "connectionType"
-_cIo = "connectionId"
-_cr = "credentials"
-_rPe = "requestParameters"
-_rTe = "requestTemplates"
-_pB = "passthroughBehavior"
-_tIM = "timeoutInMillis"
-_cNa = "cacheNamespace"
-_cKP = "cacheKeyParameters"
-_iR = "integrationResponses"
-_tC = "tlsConfig"
-_rTM = "responseTransferMode"
-_iT = "integrationTarget"
-_MOSTB = "MapOfStringToBoolean"
-_MR = "MethodResponse"
-_rMe = "responseModels"
-_MOMR = "MapOfMethodResponse"
-_M = "Method"
-_aIu = "authorizerId"
-_rVI = "requestValidatorId"
-_oN = "operationName"
-_rMeq = "requestModels"
-_mR = "methodResponses"
-_mI = "methodIntegration"
-_aSu = "authorizationScopes"
-_MOM = "MapOfMethod"
-_CRO = "CreateResourceOutput"
-_cR = "com.amazonaws.apigateway#Resource"
-_rMes = "resourceMethods"
-_CR = "CreateResource"
-_CRAI = "CreateRestApiInput"
-_cCRAR = "com.amazonaws.apigateway#CreateRestApiRequest"
-_cF = "cloneFrom"
-_bMT = "binaryMediaTypes"
-_mCS = "minimumCompressionSize"
-_aKS = "apiKeySource"
-_dEAE = "disableExecuteApiEndpoint"
-_CRAO = "CreateRestApiOutput"
-_cRA = "com.amazonaws.apigateway#RestApi"
-_w = "warnings"
-_rRI = "rootResourceId"
-_aSp = "apiStatus"
-_aSM = "apiStatusMessage"
-_CRA = "CreateRestApi"
 _VLS = "VpcLinkStatus"
 _DELETING = "DELETING"
-_GRT = "GatewayResponseType"
-_D_ = "DEFAULT_4XX"
-_D__ = "DEFAULT_5XX"
-_RNF = "RESOURCE_NOT_FOUND"
-_UNAUTHORIZED = "UNAUTHORIZED"
-_IAK = "INVALID_API_KEY"
-_AD = "ACCESS_DENIED"
-_AF = "AUTHORIZER_FAILURE"
-_ACE = "AUTHORIZER_CONFIGURATION_ERROR"
-_IS = "INVALID_SIGNATURE"
-_ET_ = "EXPIRED_TOKEN"
-_MAT = "MISSING_AUTHENTICATION_TOKEN"
-_IF = "INTEGRATION_FAILURE"
-_IT_ = "INTEGRATION_TIMEOUT"
-_ACE_ = "API_CONFIGURATION_ERROR"
-_UMT = "UNSUPPORTED_MEDIA_TYPE"
-_BRP = "BAD_REQUEST_PARAMETERS"
-_BRB = "BAD_REQUEST_BODY"
-_RTL = "REQUEST_TOO_LARGE"
-_THROTTLED = "THROTTLED"
-_QE = "QUOTA_EXCEEDED"
-_WF = "WAF_FILTERED"
 _Bl = "Blob"
-_L = "Long"
 
 ACCESS_ASSOCIATION_SOURCE_TYPE: StaticSchema = (
     14,
@@ -489,6 +413,71 @@ API_STATUS: StaticSchema = (
 
 NULLABLE_INTEGER: StaticSchema = (7, n0, _NI, 0)
 
+JWT_SIGNING_ALGORITHM: StaticSchema = (
+    14,
+    n0,
+    _JSA,
+    0,
+    (_RS, _RS_, _RS__, _ES, _ES_, _ES__),
+    (
+        (-1, {_sV: _RS}),
+        (-1, {_sV: _RS_}),
+        (-1, {_sV: _RS__}),
+        (-1, {_sV: _ES}),
+        (-1, {_sV: _ES_}),
+        (-1, {_sV: _ES__}),
+    ),
+)
+
+LIST_OF_JWT_SIGNING_ALGORITHM: StaticSchema = (
+    16,
+    n0,
+    _LOJSA,
+    0,
+    (_m,),
+    ((JWT_SIGNING_ALGORITHM, 0),),
+)
+
+JWT_CLAIM_FORMAT: StaticSchema = (14, n0, _JCF, 0, (_SS,), ((-1, {_sV: _SS}),))
+
+JWT_ADDITIONAL_CLAIM: StaticSchema = (
+    18,
+    n0,
+    _JAC,
+    0,
+    (_cN, _f, _r, _eV),
+    ((STRING, 1), (JWT_CLAIM_FORMAT, 1), (BOOLEAN, {_s: False}), (LIST_OF_STRING, 0)),
+)
+
+LIST_OF_JWT_ADDITIONAL_CLAIM: StaticSchema = (
+    16,
+    n0,
+    _LOJAC,
+    0,
+    (_m,),
+    ((JWT_ADDITIONAL_CLAIM, 0),),
+)
+
+JWT_ISSUER: StaticSchema = (
+    18,
+    n0,
+    _JI,
+    0,
+    (_is, _a, _aC, _jU),
+    ((STRING, 0), (LIST_OF_STRING, 0), (LIST_OF_JWT_ADDITIONAL_CLAIM, 0), (STRING, 0)),
+)
+
+LIST_OF_JWT_ISSUER: StaticSchema = (16, n0, _LOJI, 0, (_m,), ((JWT_ISSUER, 0),))
+
+JWT_CONFIGURATION: StaticSchema = (
+    18,
+    n0,
+    _JC,
+    0,
+    (_iss, _dAe),
+    ((LIST_OF_JWT_ISSUER, 0), (LIST_OF_JWT_SIGNING_ALGORITHM, 0)),
+)
+
 PROVIDER_ARN: StaticSchema = (3, n0, _PARN, 0)
 
 LIST_OF_AR_NS: StaticSchema = (16, n0, _LOARN, 0, (_m,), ((PROVIDER_ARN, 0),))
@@ -498,8 +487,8 @@ AUTHORIZER_TYPE: StaticSchema = (
     n0,
     _AT,
     0,
-    (_TOKEN, _REQUEST, _CUP),
-    ((-1, {_sV: _TOKEN}), (-1, {_sV: _REQUEST}), (-1, {_sV: _CUP})),
+    (_TOKEN, _REQUEST, _CUP, _JWT),
+    ((-1, {_sV: _TOKEN}), (-1, {_sV: _REQUEST}), (-1, {_sV: _CUP}), (-1, {_sV: _JWT})),
 )
 
 AUTHORIZER: StaticSchema = (
@@ -507,7 +496,7 @@ AUTHORIZER: StaticSchema = (
     n0,
     _A,
     0,
-    (_i, _n, _ty, _pARN, _aT, _aU, _aC, _iS, _iVE, _aRTIS),
+    (_i, _n, _ty, _pARN, _aT, _aU, _aCu, _iS, _iVE, _aRTIS, _jC),
     (
         (STRING, 0),
         (STRING, 0),
@@ -519,6 +508,7 @@ AUTHORIZER: StaticSchema = (
         (STRING, 0),
         (STRING, 0),
         (NULLABLE_INTEGER, 0),
+        (JWT_CONFIGURATION, 0),
     ),
 )
 
@@ -526,7 +516,7 @@ BAD_REQUEST_EXCEPTION: StaticSchema = (
     18,
     n0,
     _BRE,
-    {_sm: _cl, _sE: 400},
+    {_smi: _cl, _sE: 400},
     (_me,),
     ((STRING, 0),),
 )
@@ -535,7 +525,7 @@ CONFLICT_EXCEPTION: StaticSchema = (
     18,
     n0,
     _CE,
-    {_sm: _cl, _sE: 409},
+    {_smi: _cl, _sE: 409},
     (_me,),
     ((STRING, 0),),
 )
@@ -548,7 +538,7 @@ CREATE_API_KEY_INPUT: StaticSchema = (
     18,
     n0,
     _CAKI,
-    {_sSI: _cCAKR, _smi: None},
+    {_sSI: _cCAKR, _smit: None},
     (_n, _d, _e, _gDI, _v, _sK, _cI, _t),
     (
         (STRING, 0),
@@ -566,7 +556,7 @@ CREATE_API_KEY_OUTPUT: StaticSchema = (
     18,
     n0,
     _CAKO,
-    {_sSI: _cAK, _smit: None},
+    {_sSI: _cAK, _smith: None},
     (_i, _v, _n, _cI, _d, _e, _cD, _lUD, _sK, _t),
     (
         (STRING, 0),
@@ -586,7 +576,7 @@ CREATE_API_KEY: StaticOperationSchema = (
     23,
     n0,
     _CAK,
-    {_smith: MappingProxyType({"method": "POST", "uri": "/apikeys", "code": 201})},
+    {_smithy: MappingProxyType({"method": "POST", "uri": "/apikeys", "code": 201})},
     CREATE_API_KEY_INPUT,
     CREATE_API_KEY_OUTPUT,
     (
@@ -603,7 +593,7 @@ LIMIT_EXCEEDED_EXCEPTION: StaticSchema = (
     18,
     n0,
     _LEE,
-    {_sm: _cl, _sE: 429},
+    {_smi: _cl, _sE: 429},
     (_rAS, _me),
     ((STRING, {_sH: _RA}), (STRING, 0)),
 )
@@ -612,7 +602,7 @@ NOT_FOUND_EXCEPTION: StaticSchema = (
     18,
     n0,
     _NFE,
-    {_sm: _cl, _sE: 404},
+    {_smi: _cl, _sE: 404},
     (_me,),
     ((STRING, 0),),
 )
@@ -621,7 +611,7 @@ TOO_MANY_REQUESTS_EXCEPTION: StaticSchema = (
     18,
     n0,
     _TMRE,
-    {_sm: _cl, _sE: 429},
+    {_smi: _cl, _sE: 429},
     (_rAS, _me),
     ((STRING, {_sH: _RA}), (STRING, 0)),
 )
@@ -630,17 +620,44 @@ UNAUTHORIZED_EXCEPTION: StaticSchema = (
     18,
     n0,
     _UE,
-    {_sm: _cl, _sE: 401},
+    {_smi: _cl, _sE: 401},
     (_me,),
     ((STRING, 0),),
+)
+
+JWT_ISSUER_INPUT: StaticSchema = (
+    18,
+    n0,
+    _JII,
+    0,
+    (_is, _a, _aC),
+    ((STRING, 1), (LIST_OF_STRING, 1), (LIST_OF_JWT_ADDITIONAL_CLAIM, 0)),
+)
+
+LIST_OF_JWT_ISSUER_INPUT: StaticSchema = (
+    16,
+    n0,
+    _LOJII,
+    0,
+    (_m,),
+    ((JWT_ISSUER_INPUT, 0),),
+)
+
+JWT_CONFIGURATION_INPUT: StaticSchema = (
+    18,
+    n0,
+    _JCI,
+    0,
+    (_iss, _dAe),
+    ((LIST_OF_JWT_ISSUER_INPUT, 1), (LIST_OF_JWT_SIGNING_ALGORITHM, 1)),
 )
 
 CREATE_AUTHORIZER_INPUT: StaticSchema = (
     18,
     n0,
     _CAI,
-    {_sSI: _cCAR, _smi: None},
-    (_rAI, _n, _ty, _pARN, _aT, _aU, _aC, _iS, _iVE, _aRTIS),
+    {_sSI: _cCAR, _smit: None},
+    (_rAI, _n, _ty, _pARN, _aT, _aU, _aCu, _iS, _iVE, _aRTIS, _jC),
     (
         (STRING, 9),
         (STRING, 1),
@@ -652,6 +669,7 @@ CREATE_AUTHORIZER_INPUT: StaticSchema = (
         (STRING, 0),
         (STRING, 0),
         (NULLABLE_INTEGER, 0),
+        (JWT_CONFIGURATION_INPUT, 0),
     ),
 )
 
@@ -659,8 +677,8 @@ CREATE_AUTHORIZER_OUTPUT: StaticSchema = (
     18,
     n0,
     _CAO,
-    {_sSI: _cA, _smit: None},
-    (_i, _n, _ty, _pARN, _aT, _aU, _aC, _iS, _iVE, _aRTIS),
+    {_sSI: _cA, _smith: None},
+    (_i, _n, _ty, _pARN, _aT, _aU, _aCu, _iS, _iVE, _aRTIS, _jC),
     (
         (STRING, 0),
         (STRING, 0),
@@ -672,6 +690,7 @@ CREATE_AUTHORIZER_OUTPUT: StaticSchema = (
         (STRING, 0),
         (STRING, 0),
         (NULLABLE_INTEGER, 0),
+        (JWT_CONFIGURATION, 0),
     ),
 )
 
@@ -680,7 +699,7 @@ CREATE_AUTHORIZER: StaticOperationSchema = (
     n0,
     _CA,
     {
-        _smith: MappingProxyType(
+        _smithy: MappingProxyType(
             {"method": "POST", "uri": "/restapis/{restApiId}/authorizers", "code": 201}
         )
     },
@@ -700,7 +719,7 @@ CREATE_BASE_PATH_MAPPING_INPUT: StaticSchema = (
     18,
     n0,
     _CBPMI,
-    {_sSI: _cCBPMR, _smi: None},
+    {_sSI: _cCBPMR, _smit: None},
     (_dN, _dNI, _bP, _rAI, _st),
     ((STRING, 9), (STRING, {_sQ: _dNI}), (STRING, 0), (STRING, 1), (STRING, 0)),
 )
@@ -709,7 +728,7 @@ CREATE_BASE_PATH_MAPPING_OUTPUT: StaticSchema = (
     18,
     n0,
     _CBPMO,
-    {_sSI: _cBPM, _smit: None},
+    {_sSI: _cBPM, _smith: None},
     (_bP, _rAI, _st),
     ((STRING, 0), (STRING, 0), (STRING, 0)),
 )
@@ -719,7 +738,7 @@ CREATE_BASE_PATH_MAPPING: StaticOperationSchema = (
     n0,
     _CBPM,
     {
-        _smith: MappingProxyType(
+        _smithy: MappingProxyType(
             {
                 "method": "POST",
                 "uri": "/domainnames/{domainName}/basepathmappings",
@@ -772,7 +791,7 @@ CREATE_DEPLOYMENT_INPUT: StaticSchema = (
     18,
     n0,
     _CDI,
-    {_sSI: _cCDR, _smi: None},
+    {_sSI: _cCDR, _smit: None},
     (_rAI, _sN, _sD, _d, _cCE, _cCS, _va, _cS, _tE),
     (
         (STRING, 9),
@@ -791,7 +810,7 @@ CREATE_DEPLOYMENT_OUTPUT: StaticSchema = (
     18,
     n0,
     _CDO,
-    {_sSI: _cDo, _smit: None},
+    {_sSI: _cDo, _smith: None},
     (_i, _d, _cD, _aS),
     (
         (STRING, 0),
@@ -806,7 +825,7 @@ CREATE_DEPLOYMENT: StaticOperationSchema = (
     n0,
     _CD,
     {
-        _smith: MappingProxyType(
+        _smithy: MappingProxyType(
             {"method": "POST", "uri": "/restapis/{restApiId}/deployments", "code": 201}
         )
     },
@@ -854,7 +873,7 @@ SERVICE_UNAVAILABLE_EXCEPTION: StaticSchema = (
     18,
     n0,
     _SUE,
-    {_sm: _se, _sE: 503},
+    {_smi: _se, _sE: 503},
     (_rAS, _me),
     ((STRING, {_sH: _RA}), (STRING, 0)),
 )
@@ -915,7 +934,7 @@ CREATE_DOCUMENTATION_PART_INPUT: StaticSchema = (
     18,
     n0,
     _CDPI,
-    {_sSI: _cCDPR, _smi: None},
+    {_sSI: _cCDPR, _smit: None},
     (_rAI, _l, _pr),
     ((STRING, 9), (DOCUMENTATION_PART_LOCATION, 1), (STRING, 1)),
 )
@@ -924,7 +943,7 @@ CREATE_DOCUMENTATION_PART_OUTPUT: StaticSchema = (
     18,
     n0,
     _CDPO,
-    {_sSI: _cDP, _smit: None},
+    {_sSI: _cDP, _smith: None},
     (_i, _l, _pr),
     ((STRING, 0), (DOCUMENTATION_PART_LOCATION, 0), (STRING, 0)),
 )
@@ -934,7 +953,7 @@ CREATE_DOCUMENTATION_PART: StaticOperationSchema = (
     n0,
     _CDP,
     {
-        _smith: MappingProxyType(
+        _smithy: MappingProxyType(
             {
                 "method": "POST",
                 "uri": "/restapis/{restApiId}/documentation/parts",
@@ -958,7 +977,7 @@ CREATE_DOCUMENTATION_VERSION_INPUT: StaticSchema = (
     18,
     n0,
     _CDVI,
-    {_sSI: _cCDVR, _smi: None},
+    {_sSI: _cCDVR, _smit: None},
     (_rAI, _dV, _sN, _d),
     ((STRING, 9), (STRING, 1), (STRING, 0), (STRING, 0)),
 )
@@ -967,7 +986,7 @@ CREATE_DOCUMENTATION_VERSION_OUTPUT: StaticSchema = (
     18,
     n0,
     _CDVO,
-    {_sSI: _cDV, _smit: None},
+    {_sSI: _cDV, _smith: None},
     (_ve, _cD, _d),
     ((STRING, 0), (TIMESTAMP, 0), (STRING, 0)),
 )
@@ -977,7 +996,7 @@ CREATE_DOCUMENTATION_VERSION: StaticOperationSchema = (
     n0,
     _CDV,
     {
-        _smith: MappingProxyType(
+        _smithy: MappingProxyType(
             {
                 "method": "POST",
                 "uri": "/restapis/{restApiId}/documentation/versions",
@@ -1096,10 +1115,10 @@ CREATE_DOMAIN_NAME_INPUT: StaticSchema = (
     18,
     n0,
     _CDNI,
-    {_sSI: _cCDNR, _smi: None},
+    {_sSI: _cCDNR, _smit: None},
     (
         _dN,
-        _cN,
+        _cNe,
         _cB,
         _cPK,
         _cC,
@@ -1139,12 +1158,12 @@ CREATE_DOMAIN_NAME_OUTPUT: StaticSchema = (
     18,
     n0,
     _CDNO,
-    {_sSI: _cDN, _smit: None},
+    {_sSI: _cDN, _smith: None},
     (
         _dN,
         _dNI,
         _dNA,
-        _cN,
+        _cNe,
         _cAe,
         _cUD,
         _rDN,
@@ -1196,7 +1215,7 @@ CREATE_DOMAIN_NAME: StaticOperationSchema = (
     23,
     n0,
     _CDN,
-    {_smith: MappingProxyType({"method": "POST", "uri": "/domainnames", "code": 201})},
+    {_smithy: MappingProxyType({"method": "POST", "uri": "/domainnames", "code": 201})},
     CREATE_DOMAIN_NAME_INPUT,
     CREATE_DOMAIN_NAME_OUTPUT,
     (
@@ -1237,7 +1256,7 @@ CREATE_DOMAIN_NAME_ACCESS_ASSOCIATION_INPUT: StaticSchema = (
     18,
     n0,
     _CDNAAI,
-    {_sSI: _cCDNAAR, _smi: None},
+    {_sSI: _cCDNAAR, _smit: None},
     (_dNA, _aAST, _aAS, _t),
     (
         (STRING, 1),
@@ -1251,7 +1270,7 @@ CREATE_DOMAIN_NAME_ACCESS_ASSOCIATION_OUTPUT: StaticSchema = (
     18,
     n0,
     _CDNAAO,
-    {_sSI: _cDNAA, _smit: None},
+    {_sSI: _cDNAA, _smith: None},
     (_dNAAA, _dNA, _aAST, _aAS, _t),
     (
         (STRING, 0),
@@ -1267,7 +1286,7 @@ CREATE_DOMAIN_NAME_ACCESS_ASSOCIATION: StaticOperationSchema = (
     n0,
     _CDNAA,
     {
-        _smith: MappingProxyType(
+        _smithy: MappingProxyType(
             {"method": "POST", "uri": "/domainnameaccessassociations", "code": 201}
         )
     },
@@ -1286,7 +1305,7 @@ CREATE_MODEL_INPUT: StaticSchema = (
     18,
     n0,
     _CMI,
-    {_sSI: _cCMR, _smi: None},
+    {_sSI: _cCMR, _smit: None},
     (_rAI, _n, _d, _sc, _cT),
     ((STRING, 9), (STRING, 1), (STRING, 0), (STRING, 0), (STRING, 1)),
 )
@@ -1295,7 +1314,7 @@ CREATE_MODEL_OUTPUT: StaticSchema = (
     18,
     n0,
     _CMO,
-    {_sSI: _cM, _smit: None},
+    {_sSI: _cM, _smith: None},
     (_i, _n, _d, _sc, _cT),
     ((STRING, 0), (STRING, 0), (STRING, 0), (STRING, 0), (STRING, 0)),
 )
@@ -1305,7 +1324,7 @@ CREATE_MODEL: StaticOperationSchema = (
     n0,
     _CM,
     {
-        _smith: MappingProxyType(
+        _smithy: MappingProxyType(
             {"method": "POST", "uri": "/restapis/{restApiId}/models", "code": 201}
         )
     },
@@ -1316,343 +1335,6 @@ CREATE_MODEL: StaticOperationSchema = (
         CONFLICT_EXCEPTION,
         LIMIT_EXCEEDED_EXCEPTION,
         NOT_FOUND_EXCEPTION,
-        TOO_MANY_REQUESTS_EXCEPTION,
-        UNAUTHORIZED_EXCEPTION,
-    ),
-)
-
-CREATE_REQUEST_VALIDATOR_INPUT: StaticSchema = (
-    18,
-    n0,
-    _CRVI,
-    {_sSI: _cCRVR, _smi: None},
-    (_rAI, _n, _vRB, _vRP),
-    ((STRING, 9), (STRING, 0), (BOOLEAN, {_s: False}), (BOOLEAN, {_s: False})),
-)
-
-CREATE_REQUEST_VALIDATOR_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _CRVO,
-    {_sSI: _cRV, _smit: None},
-    (_i, _n, _vRB, _vRP),
-    ((STRING, 0), (STRING, 0), (BOOLEAN, {_s: False}), (BOOLEAN, {_s: False})),
-)
-
-CREATE_REQUEST_VALIDATOR: StaticOperationSchema = (
-    23,
-    n0,
-    _CRV,
-    {
-        _smith: MappingProxyType(
-            {
-                "method": "POST",
-                "uri": "/restapis/{restApiId}/requestvalidators",
-                "code": 201,
-            }
-        )
-    },
-    CREATE_REQUEST_VALIDATOR_INPUT,
-    CREATE_REQUEST_VALIDATOR_OUTPUT,
-    (
-        BAD_REQUEST_EXCEPTION,
-        CONFLICT_EXCEPTION,
-        LIMIT_EXCEEDED_EXCEPTION,
-        NOT_FOUND_EXCEPTION,
-        TOO_MANY_REQUESTS_EXCEPTION,
-        UNAUTHORIZED_EXCEPTION,
-    ),
-)
-
-CREATE_RESOURCE_INPUT: StaticSchema = (
-    18,
-    n0,
-    _CRI,
-    {_sSI: _cCRR, _smi: None},
-    (_rAI, _pI, _pP),
-    ((STRING, 9), (STRING, 9), (STRING, 1)),
-)
-
-CREATE_RESOURCE_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _CRO,
-    {_sSI: _cR, _smit: None},
-    (_i, _pI, _pP, _p, _rMes),
-    ((STRING, 0), (STRING, 0), (STRING, 0), (STRING, 0), (lambda: MAP_OF_METHOD, 0)),
-)
-
-CREATE_RESOURCE: StaticOperationSchema = (
-    23,
-    n0,
-    _CR,
-    {
-        _smith: MappingProxyType(
-            {
-                "method": "POST",
-                "uri": "/restapis/{restApiId}/resources/{parentId}",
-                "code": 201,
-            }
-        )
-    },
-    CREATE_RESOURCE_INPUT,
-    CREATE_RESOURCE_OUTPUT,
-    (
-        BAD_REQUEST_EXCEPTION,
-        CONFLICT_EXCEPTION,
-        LIMIT_EXCEEDED_EXCEPTION,
-        NOT_FOUND_EXCEPTION,
-        TOO_MANY_REQUESTS_EXCEPTION,
-        UNAUTHORIZED_EXCEPTION,
-    ),
-)
-
-CONNECTION_TYPE: StaticSchema = (
-    14,
-    n0,
-    _CT,
-    0,
-    (_INTERNET, _VL),
-    ((-1, {_sV: _INTERNET}), (-1, {_sV: _VL})),
-)
-
-CONTENT_HANDLING_STRATEGY: StaticSchema = (
-    14,
-    n0,
-    _CHS,
-    0,
-    (_CTB, _CTT),
-    ((-1, {_sV: _CTB}), (-1, {_sV: _CTT})),
-)
-
-STATUS_CODE: StaticSchema = (3, n0, _SC, 0)
-
-INTEGRATION_RESPONSE: StaticSchema = (
-    18,
-    n0,
-    _IR,
-    0,
-    (_sC, _sPe, _rP, _rT, _cH),
-    (
-        (STATUS_CODE, 0),
-        (STRING, 0),
-        (MAP_OF_STRING_TO_STRING, 0),
-        (MAP_OF_STRING_TO_STRING, 0),
-        (CONTENT_HANDLING_STRATEGY, 0),
-    ),
-)
-
-MAP_OF_INTEGRATION_RESPONSE: StaticSchema = (
-    17,
-    n0,
-    _MOIR,
-    0,
-    (_k, _v),
-    ((STRING, 0), (INTEGRATION_RESPONSE, 0)),
-)
-
-RESPONSE_TRANSFER_MODE: StaticSchema = (
-    14,
-    n0,
-    _RTM,
-    0,
-    (_BUFFERED, _STREAM),
-    ((-1, {_sV: _BUFFERED}), (-1, {_sV: _STREAM})),
-)
-
-TLS_CONFIG: StaticSchema = (18, n0, _TC, 0, (_iSV,), ((BOOLEAN, {_s: False}),))
-
-INTEGRATION_TYPE: StaticSchema = (
-    14,
-    n0,
-    _IT,
-    0,
-    (_HTTP, _AWS, _MOCK, _HP, _AP),
-    (
-        (-1, {_sV: _HTTP}),
-        (-1, {_sV: _AWS}),
-        (-1, {_sV: _MOCK}),
-        (-1, {_sV: _HP}),
-        (-1, {_sV: _AP}),
-    ),
-)
-
-INTEGRATION: StaticSchema = (
-    18,
-    n0,
-    _In,
-    0,
-    (
-        _ty,
-        _hM,
-        _u,
-        _cTo,
-        _cIo,
-        _cr,
-        _rPe,
-        _rTe,
-        _pB,
-        _cH,
-        _tIM,
-        _cNa,
-        _cKP,
-        _iR,
-        _tC,
-        _rTM,
-        _iT,
-    ),
-    (
-        (INTEGRATION_TYPE, 0),
-        (STRING, 0),
-        (STRING, 0),
-        (CONNECTION_TYPE, 0),
-        (STRING, 0),
-        (STRING, 0),
-        (MAP_OF_STRING_TO_STRING, 0),
-        (MAP_OF_STRING_TO_STRING, 0),
-        (STRING, 0),
-        (CONTENT_HANDLING_STRATEGY, 0),
-        (INTEGER, {_s: 0}),
-        (STRING, 0),
-        (LIST_OF_STRING, 0),
-        (MAP_OF_INTEGRATION_RESPONSE, 0),
-        (TLS_CONFIG, 0),
-        (RESPONSE_TRANSFER_MODE, 0),
-        (STRING, 0),
-    ),
-)
-
-MAP_OF_STRING_TO_BOOLEAN: StaticSchema = (
-    17,
-    n0,
-    _MOSTB,
-    0,
-    (_k, _v),
-    ((STRING, 0), (NULLABLE_BOOLEAN, 0)),
-)
-
-METHOD_RESPONSE: StaticSchema = (
-    18,
-    n0,
-    _MR,
-    0,
-    (_sC, _rP, _rMe),
-    ((STATUS_CODE, 0), (MAP_OF_STRING_TO_BOOLEAN, 0), (MAP_OF_STRING_TO_STRING, 0)),
-)
-
-MAP_OF_METHOD_RESPONSE: StaticSchema = (
-    17,
-    n0,
-    _MOMR,
-    0,
-    (_k, _v),
-    ((STRING, 0), (METHOD_RESPONSE, 0)),
-)
-
-METHOD: StaticSchema = (
-    18,
-    n0,
-    _M,
-    0,
-    (_hM, _aTu, _aIu, _aKR, _rVI, _oN, _rPe, _rMeq, _mR, _mI, _aSu),
-    (
-        (STRING, 0),
-        (STRING, 0),
-        (STRING, 0),
-        (NULLABLE_BOOLEAN, 0),
-        (STRING, 0),
-        (STRING, 0),
-        (MAP_OF_STRING_TO_BOOLEAN, 0),
-        (MAP_OF_STRING_TO_STRING, 0),
-        (MAP_OF_METHOD_RESPONSE, 0),
-        (INTEGRATION, 0),
-        (LIST_OF_STRING, 0),
-    ),
-)
-
-MAP_OF_METHOD: StaticSchema = (17, n0, _MOM, 0, (_k, _v), ((STRING, 0), (METHOD, 0)))
-
-CREATE_REST_API_INPUT: StaticSchema = (
-    18,
-    n0,
-    _CRAI,
-    {_sSI: _cCRAR, _smi: None},
-    (_n, _d, _ve, _cF, _bMT, _mCS, _aKS, _eC, _po, _t, _dEAE, _sP, _eAM),
-    (
-        (STRING, 1),
-        (STRING, 0),
-        (STRING, 0),
-        (STRING, 0),
-        (LIST_OF_STRING, 0),
-        (NULLABLE_INTEGER, 0),
-        (API_KEY_SOURCE_TYPE, 0),
-        (ENDPOINT_CONFIGURATION, 0),
-        (STRING, 0),
-        (MAP_OF_STRING_TO_STRING, 0),
-        (BOOLEAN, {_s: False}),
-        (SECURITY_POLICY, 0),
-        (ENDPOINT_ACCESS_MODE, 0),
-    ),
-)
-
-CREATE_REST_API_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _CRAO,
-    {_sSI: _cRA, _smit: None},
-    (
-        _i,
-        _n,
-        _d,
-        _cD,
-        _ve,
-        _w,
-        _bMT,
-        _mCS,
-        _aKS,
-        _eC,
-        _po,
-        _t,
-        _dEAE,
-        _rRI,
-        _sP,
-        _eAM,
-        _aSp,
-        _aSM,
-    ),
-    (
-        (STRING, 0),
-        (STRING, 0),
-        (STRING, 0),
-        (TIMESTAMP, 0),
-        (STRING, 0),
-        (LIST_OF_STRING, 0),
-        (LIST_OF_STRING, 0),
-        (NULLABLE_INTEGER, 0),
-        (API_KEY_SOURCE_TYPE, 0),
-        (ENDPOINT_CONFIGURATION, 0),
-        (STRING, 0),
-        (MAP_OF_STRING_TO_STRING, 0),
-        (BOOLEAN, {_s: False}),
-        (STRING, 0),
-        (SECURITY_POLICY, 0),
-        (ENDPOINT_ACCESS_MODE, 0),
-        (API_STATUS, 0),
-        (STRING, 0),
-    ),
-)
-
-CREATE_REST_API: StaticOperationSchema = (
-    23,
-    n0,
-    _CRA,
-    {_smith: MappingProxyType({"method": "POST", "uri": "/restapis", "code": 201})},
-    CREATE_REST_API_INPUT,
-    CREATE_REST_API_OUTPUT,
-    (
-        BAD_REQUEST_EXCEPTION,
-        CONFLICT_EXCEPTION,
-        LIMIT_EXCEEDED_EXCEPTION,
         TOO_MANY_REQUESTS_EXCEPTION,
         UNAUTHORIZED_EXCEPTION,
     ),
@@ -1672,59 +1354,4 @@ VPC_LINK_STATUS: StaticSchema = (
     ),
 )
 
-GATEWAY_RESPONSE_TYPE: StaticSchema = (
-    14,
-    n0,
-    _GRT,
-    0,
-    (
-        _D_,
-        _D__,
-        _RNF,
-        _UNAUTHORIZED,
-        _IAK,
-        _AD,
-        _AF,
-        _ACE,
-        _IS,
-        _ET_,
-        _MAT,
-        _IF,
-        _IT_,
-        _ACE_,
-        _UMT,
-        _BRP,
-        _BRB,
-        _RTL,
-        _THROTTLED,
-        _QE,
-        _WF,
-    ),
-    (
-        (-1, {_sV: _D_}),
-        (-1, {_sV: _D__}),
-        (-1, {_sV: _RNF}),
-        (-1, {_sV: _UNAUTHORIZED}),
-        (-1, {_sV: _IAK}),
-        (-1, {_sV: _AD}),
-        (-1, {_sV: _AF}),
-        (-1, {_sV: _ACE}),
-        (-1, {_sV: _IS}),
-        (-1, {_sV: _ET_}),
-        (-1, {_sV: _MAT}),
-        (-1, {_sV: _IF}),
-        (-1, {_sV: _IT_}),
-        (-1, {_sV: _ACE_}),
-        (-1, {_sV: _UMT}),
-        (-1, {_sV: _BRP}),
-        (-1, {_sV: _BRB}),
-        (-1, {_sV: _RTL}),
-        (-1, {_sV: _THROTTLED}),
-        (-1, {_sV: _QE}),
-        (-1, {_sV: _WF}),
-    ),
-)
-
 BLOB: StaticSchema = (1, n0, _Bl, 0)
-
-LONG: StaticSchema = (8, n0, _L, {_s: 0})

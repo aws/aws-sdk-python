@@ -15,39 +15,25 @@ _k = "key"
 _v = "value"
 _i = "id"
 _n = "name"
-_cI = "customerId"
 _d = "description"
-_e = "enabled"
 _cD = "createdDate"
 _lUD = "lastUpdatedDate"
-_sK = "stageKeys"
 _t = "tags"
-_st = "stage"
 _th = "throttle"
 _AVAILABLE = "AVAILABLE"
+_sm = "smithy.api#required"
 _ty = "type"
-_pARN = "providerARNs"
-_aT = "authType"
-_aU = "authorizerUri"
-_aC = "authorizerCredentials"
-_iS = "identitySource"
-_iVE = "identityValidationExpression"
-_aRTIS = "authorizerResultTtlInSeconds"
 _rAI = "restApiId"
 _sN = "stageName"
 _sSI = "smithy.synthetic#originalShapeId"
-_smi = "smithy.api#input"
-_cAK = "com.amazonaws.apigateway#ApiKey"
-_smit = "smithy.api#output"
-_smith = "smithy.api#http"
-_smithy = "smithy.api#required"
+_smit = "smithy.api#input"
+_smith = "smithy.api#output"
+_smithy = "smithy.api#http"
 _sL = "smithy.api#httpLabel"
-_cA = "com.amazonaws.apigateway#Authorizer"
 _dN = "domainName"
 _dNI = "domainNameId"
 _sQ = "smithy.api#httpQuery"
 _bP = "basePath"
-_cBPM = "com.amazonaws.apigateway#BasePathMapping"
 _pT = "percentTraffic"
 _sVO = "stageVariableOverrides"
 _uSC = "useStageCache"
@@ -56,13 +42,99 @@ _cCS = "cacheClusterSize"
 _va = "variables"
 _cS = "canarySettings"
 _tE = "tracingEnabled"
+_aTu = "authorizationType"
+_aKR = "apiKeyRequired"
+_p = "path"
 _sC = "statusCode"
 _dV = "documentationVersion"
+_ve = "version"
+_eC = "endpointConfiguration"
+_sP = "securityPolicy"
+_eAM = "endpointAccessMode"
+_po = "policy"
 _dNAAA = "domainNameAccessAssociationArn"
+_CRVI = "CreateRequestValidatorInput"
+_cCRVR = "com.amazonaws.apigateway#CreateRequestValidatorRequest"
+_vRB = "validateRequestBody"
+_vRP = "validateRequestParameters"
+_CRVO = "CreateRequestValidatorOutput"
+_cRV = "com.amazonaws.apigateway#RequestValidator"
+_CRV = "CreateRequestValidator"
+_CRI = "CreateResourceInput"
+_cCRR = "com.amazonaws.apigateway#CreateResourceRequest"
+_pI = "parentId"
+_pP = "pathPart"
+_CT = "ConnectionType"
+_INTERNET = "INTERNET"
+_VL = "VPC_LINK"
+_CHS = "ContentHandlingStrategy"
+_CTB = "CONVERT_TO_BINARY"
+_CTT = "CONVERT_TO_TEXT"
+_SC = "StatusCode"
+_IR = "IntegrationResponse"
+_sPe = "selectionPattern"
+_rP = "responseParameters"
+_rT = "responseTemplates"
+_cH = "contentHandling"
+_MOIR = "MapOfIntegrationResponse"
+_RTM = "ResponseTransferMode"
+_BUFFERED = "BUFFERED"
+_STREAM = "STREAM"
+_TC = "TlsConfig"
+_iSV = "insecureSkipVerification"
+_IT = "IntegrationType"
+_HTTP = "HTTP"
+_AWS = "AWS"
+_MOCK = "MOCK"
+_HP = "HTTP_PROXY"
+_AP = "AWS_PROXY"
+_In = "Integration"
 _hM = "httpMethod"
+_u = "uri"
+_cTo = "connectionType"
+_cIo = "connectionId"
+_cr = "credentials"
+_rPe = "requestParameters"
+_rTe = "requestTemplates"
+_pB = "passthroughBehavior"
+_tIM = "timeoutInMillis"
+_cNa = "cacheNamespace"
+_cKP = "cacheKeyParameters"
+_iR = "integrationResponses"
+_tC = "tlsConfig"
+_rTM = "responseTransferMode"
+_iT = "integrationTarget"
+_MOSTB = "MapOfStringToBoolean"
+_MR = "MethodResponse"
+_rMe = "responseModels"
+_MOMR = "MapOfMethodResponse"
+_M = "Method"
 _aIu = "authorizerId"
 _rVI = "requestValidatorId"
+_oN = "operationName"
+_rMeq = "requestModels"
+_mR = "methodResponses"
+_mI = "methodIntegration"
+_aSu = "authorizationScopes"
+_MOM = "MapOfMethod"
+_CRO = "CreateResourceOutput"
+_cR = "com.amazonaws.apigateway#Resource"
+_rMes = "resourceMethods"
+_CR = "CreateResource"
+_CRAI = "CreateRestApiInput"
+_cCRAR = "com.amazonaws.apigateway#CreateRestApiRequest"
+_cF = "cloneFrom"
+_bMT = "binaryMediaTypes"
+_mCS = "minimumCompressionSize"
+_aKS = "apiKeySource"
+_dEAE = "disableExecuteApiEndpoint"
+_CRAO = "CreateRestApiOutput"
+_cRA = "com.amazonaws.apigateway#RestApi"
 _w = "warnings"
+_rRI = "rootResourceId"
+_aSp = "apiStatus"
+_aSM = "apiStatusMessage"
+_CRA = "CreateRestApi"
 _CS = "CanarySettings"
 _dI = "deploymentId"
 _CSI = "CreateStageInput"
@@ -168,6 +240,28 @@ _DDNAAI = "DeleteDomainNameAccessAssociationInput"
 _cDDNAAR = "com.amazonaws.apigateway#DeleteDomainNameAccessAssociationRequest"
 _DDNAAO = "DeleteDomainNameAccessAssociationOutput"
 _DDNAA = "DeleteDomainNameAccessAssociation"
+_GRT = "GatewayResponseType"
+_D_ = "DEFAULT_4XX"
+_D__ = "DEFAULT_5XX"
+_RNF = "RESOURCE_NOT_FOUND"
+_UNAUTHORIZED = "UNAUTHORIZED"
+_IAK = "INVALID_API_KEY"
+_AD = "ACCESS_DENIED"
+_AF = "AUTHORIZER_FAILURE"
+_ACE = "AUTHORIZER_CONFIGURATION_ERROR"
+_IS = "INVALID_SIGNATURE"
+_ET_ = "EXPIRED_TOKEN"
+_MAT = "MISSING_AUTHENTICATION_TOKEN"
+_IF = "INTEGRATION_FAILURE"
+_IT_ = "INTEGRATION_TIMEOUT"
+_ACE_ = "API_CONFIGURATION_ERROR"
+_UMT = "UNSUPPORTED_MEDIA_TYPE"
+_BRP = "BAD_REQUEST_PARAMETERS"
+_BRB = "BAD_REQUEST_BODY"
+_RTL = "REQUEST_TOO_LARGE"
+_THROTTLED = "THROTTLED"
+_QE = "QUOTA_EXCEEDED"
+_WF = "WAF_FILTERED"
 _DGRI = "DeleteGatewayResponseInput"
 _cDGRR = "com.amazonaws.apigateway#DeleteGatewayResponseRequest"
 _rTes = "responseType"
@@ -190,95 +284,381 @@ _DMRI = "DeleteMethodResponseInput"
 _cDMRR = "com.amazonaws.apigateway#DeleteMethodResponseRequest"
 _DMRO = "DeleteMethodResponseOutput"
 _DMR = "DeleteMethodResponse"
-_DMIe = "DeleteModelInput"
-_cDMRo = "com.amazonaws.apigateway#DeleteModelRequest"
-_mN = "modelName"
-_DMOe = "DeleteModelOutput"
-_DMe = "DeleteModel"
-_DRVI = "DeleteRequestValidatorInput"
-_cDRVR = "com.amazonaws.apigateway#DeleteRequestValidatorRequest"
-_DRVO = "DeleteRequestValidatorOutput"
-_DRV = "DeleteRequestValidator"
-_DRI = "DeleteResourceInput"
-_cDRR = "com.amazonaws.apigateway#DeleteResourceRequest"
-_DRO = "DeleteResourceOutput"
-_DR = "DeleteResource"
-_DRAI = "DeleteRestApiInput"
-_cDRAR = "com.amazonaws.apigateway#DeleteRestApiRequest"
-_DRAO = "DeleteRestApiOutput"
-_DRA = "DeleteRestApi"
-_DSI = "DeleteStageInput"
-_cDSR = "com.amazonaws.apigateway#DeleteStageRequest"
-_DSO = "DeleteStageOutput"
-_DS = "DeleteStage"
-_DUPI = "DeleteUsagePlanInput"
-_cDUPR = "com.amazonaws.apigateway#DeleteUsagePlanRequest"
-_DUPO = "DeleteUsagePlanOutput"
-_DUP = "DeleteUsagePlan"
-_DUPKI = "DeleteUsagePlanKeyInput"
-_cDUPKR = "com.amazonaws.apigateway#DeleteUsagePlanKeyRequest"
-_DUPKO = "DeleteUsagePlanKeyOutput"
-_DUPK = "DeleteUsagePlanKey"
-_DVLI = "DeleteVpcLinkInput"
-_cDVLR = "com.amazonaws.apigateway#DeleteVpcLinkRequest"
-_vLI = "vpcLinkId"
-_DVLO = "DeleteVpcLinkOutput"
-_DVL = "DeleteVpcLink"
-_FSACI = "FlushStageAuthorizersCacheInput"
-_cFSACR = "com.amazonaws.apigateway#FlushStageAuthorizersCacheRequest"
-_FSACO = "FlushStageAuthorizersCacheOutput"
-_FSAC = "FlushStageAuthorizersCache"
-_FSCI = "FlushStageCacheInput"
-_cFSCR = "com.amazonaws.apigateway#FlushStageCacheRequest"
-_FSCO = "FlushStageCacheOutput"
-_FSC = "FlushStageCache"
-_GCCI = "GenerateClientCertificateInput"
-_cGCCR = "com.amazonaws.apigateway#GenerateClientCertificateRequest"
-_GCCO = "GenerateClientCertificateOutput"
-_cCC = "com.amazonaws.apigateway#ClientCertificate"
-_pEC = "pemEncodedCertificate"
-_eD = "expirationDate"
-_GCC = "GenerateClientCertificate"
-_GAI = "GetAccountInput"
-_cGAR = "com.amazonaws.apigateway#GetAccountRequest"
-_GAO = "GetAccountOutput"
-_cAo = "com.amazonaws.apigateway#Account"
-_cRAl = "cloudwatchRoleArn"
-_tS = "throttleSettings"
-_fe = "features"
-_aKV = "apiKeyVersion"
-_GA = "GetAccount"
-_GAKI = "GetApiKeyInput"
-_cGAKR = "com.amazonaws.apigateway#GetApiKeyRequest"
-_iV = "includeValue"
-_GAKO = "GetApiKeyOutput"
-_GAK = "GetApiKey"
-_GAKIe = "GetApiKeysInput"
-_cGAKRo = "com.amazonaws.apigateway#GetApiKeysRequest"
-_pos = "position"
-_nQ = "nameQuery"
-_iVn = "includeValues"
-_LOAK = "ListOfApiKey"
-_GAKOe = "GetApiKeysOutput"
-_cAKo = "com.amazonaws.apigateway#ApiKeys"
-_it = "items"
-_sNm = "smithy.api#jsonName"
-_ite = "item"
-_GAKe = "GetApiKeys"
-_GAIe = "GetAuthorizerInput"
-_cGARo = "com.amazonaws.apigateway#GetAuthorizerRequest"
-_GAOe = "GetAuthorizerOutput"
-_GAe = "GetAuthorizer"
-_GAIet = "GetAuthorizersInput"
-_cGARom = "com.amazonaws.apigateway#GetAuthorizersRequest"
-_LOA = "ListOfAuthorizer"
-_GAOet = "GetAuthorizersOutput"
-_cAom = "com.amazonaws.apigateway#Authorizers"
-_GAet = "GetAuthorizers"
-_GBPMI = "GetBasePathMappingInput"
-_cGBPMR = "com.amazonaws.apigateway#GetBasePathMappingRequest"
-_GBPMO = "GetBasePathMappingOutput"
-_GBPM = "GetBasePathMapping"
+
+CREATE_REQUEST_VALIDATOR_INPUT: StaticSchema = (
+    18,
+    n0,
+    _CRVI,
+    {_sSI: _cCRVR, _smit: None},
+    (_rAI, _n, _vRB, _vRP),
+    (
+        (lambda: schemas.STRING, 9),
+        (lambda: schemas.STRING, 0),
+        (lambda: schemas.BOOLEAN, {_s: False}),
+        (lambda: schemas.BOOLEAN, {_s: False}),
+    ),
+)
+
+CREATE_REQUEST_VALIDATOR_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _CRVO,
+    {_sSI: _cRV, _smith: None},
+    (_i, _n, _vRB, _vRP),
+    (
+        (lambda: schemas.STRING, 0),
+        (lambda: schemas.STRING, 0),
+        (lambda: schemas.BOOLEAN, {_s: False}),
+        (lambda: schemas.BOOLEAN, {_s: False}),
+    ),
+)
+
+CREATE_REQUEST_VALIDATOR: StaticOperationSchema = (
+    23,
+    n0,
+    _CRV,
+    {
+        _smithy: MappingProxyType(
+            {
+                "method": "POST",
+                "uri": "/restapis/{restApiId}/requestvalidators",
+                "code": 201,
+            }
+        )
+    },
+    CREATE_REQUEST_VALIDATOR_INPUT,
+    CREATE_REQUEST_VALIDATOR_OUTPUT,
+    (
+        lambda: schemas.BAD_REQUEST_EXCEPTION,
+        lambda: schemas.CONFLICT_EXCEPTION,
+        lambda: schemas.LIMIT_EXCEEDED_EXCEPTION,
+        lambda: schemas.NOT_FOUND_EXCEPTION,
+        lambda: schemas.TOO_MANY_REQUESTS_EXCEPTION,
+        lambda: schemas.UNAUTHORIZED_EXCEPTION,
+    ),
+)
+
+CREATE_RESOURCE_INPUT: StaticSchema = (
+    18,
+    n0,
+    _CRI,
+    {_sSI: _cCRR, _smit: None},
+    (_rAI, _pI, _pP),
+    (
+        (lambda: schemas.STRING, 9),
+        (lambda: schemas.STRING, 9),
+        (lambda: schemas.STRING, 1),
+    ),
+)
+
+CREATE_RESOURCE_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _CRO,
+    {_sSI: _cR, _smith: None},
+    (_i, _pI, _pP, _p, _rMes),
+    (
+        (lambda: schemas.STRING, 0),
+        (lambda: schemas.STRING, 0),
+        (lambda: schemas.STRING, 0),
+        (lambda: schemas.STRING, 0),
+        (lambda: MAP_OF_METHOD, 0),
+    ),
+)
+
+CREATE_RESOURCE: StaticOperationSchema = (
+    23,
+    n0,
+    _CR,
+    {
+        _smithy: MappingProxyType(
+            {
+                "method": "POST",
+                "uri": "/restapis/{restApiId}/resources/{parentId}",
+                "code": 201,
+            }
+        )
+    },
+    CREATE_RESOURCE_INPUT,
+    CREATE_RESOURCE_OUTPUT,
+    (
+        lambda: schemas.BAD_REQUEST_EXCEPTION,
+        lambda: schemas.CONFLICT_EXCEPTION,
+        lambda: schemas.LIMIT_EXCEEDED_EXCEPTION,
+        lambda: schemas.NOT_FOUND_EXCEPTION,
+        lambda: schemas.TOO_MANY_REQUESTS_EXCEPTION,
+        lambda: schemas.UNAUTHORIZED_EXCEPTION,
+    ),
+)
+
+CONNECTION_TYPE: StaticSchema = (
+    14,
+    n0,
+    _CT,
+    0,
+    (_INTERNET, _VL),
+    ((-1, {_sV: _INTERNET}), (-1, {_sV: _VL})),
+)
+
+CONTENT_HANDLING_STRATEGY: StaticSchema = (
+    14,
+    n0,
+    _CHS,
+    0,
+    (_CTB, _CTT),
+    ((-1, {_sV: _CTB}), (-1, {_sV: _CTT})),
+)
+
+STATUS_CODE: StaticSchema = (3, n0, _SC, 0)
+
+INTEGRATION_RESPONSE: StaticSchema = (
+    18,
+    n0,
+    _IR,
+    0,
+    (_sC, _sPe, _rP, _rT, _cH),
+    (
+        (STATUS_CODE, 0),
+        (lambda: schemas.STRING, 0),
+        (lambda: schemas.MAP_OF_STRING_TO_STRING, 0),
+        (lambda: schemas.MAP_OF_STRING_TO_STRING, 0),
+        (CONTENT_HANDLING_STRATEGY, 0),
+    ),
+)
+
+MAP_OF_INTEGRATION_RESPONSE: StaticSchema = (
+    17,
+    n0,
+    _MOIR,
+    0,
+    (_k, _v),
+    ((lambda: schemas.STRING, 0), (INTEGRATION_RESPONSE, 0)),
+)
+
+RESPONSE_TRANSFER_MODE: StaticSchema = (
+    14,
+    n0,
+    _RTM,
+    0,
+    (_BUFFERED, _STREAM),
+    ((-1, {_sV: _BUFFERED}), (-1, {_sV: _STREAM})),
+)
+
+TLS_CONFIG: StaticSchema = (
+    18,
+    n0,
+    _TC,
+    0,
+    (_iSV,),
+    ((lambda: schemas.BOOLEAN, {_s: False}),),
+)
+
+INTEGRATION_TYPE: StaticSchema = (
+    14,
+    n0,
+    _IT,
+    0,
+    (_HTTP, _AWS, _MOCK, _HP, _AP),
+    (
+        (-1, {_sV: _HTTP}),
+        (-1, {_sV: _AWS}),
+        (-1, {_sV: _MOCK}),
+        (-1, {_sV: _HP}),
+        (-1, {_sV: _AP}),
+    ),
+)
+
+INTEGRATION: StaticSchema = (
+    18,
+    n0,
+    _In,
+    0,
+    (
+        _ty,
+        _hM,
+        _u,
+        _cTo,
+        _cIo,
+        _cr,
+        _rPe,
+        _rTe,
+        _pB,
+        _cH,
+        _tIM,
+        _cNa,
+        _cKP,
+        _iR,
+        _tC,
+        _rTM,
+        _iT,
+    ),
+    (
+        (INTEGRATION_TYPE, 0),
+        (lambda: schemas.STRING, 0),
+        (lambda: schemas.STRING, 0),
+        (CONNECTION_TYPE, 0),
+        (lambda: schemas.STRING, 0),
+        (lambda: schemas.STRING, 0),
+        (lambda: schemas.MAP_OF_STRING_TO_STRING, 0),
+        (lambda: schemas.MAP_OF_STRING_TO_STRING, 0),
+        (lambda: schemas.STRING, 0),
+        (CONTENT_HANDLING_STRATEGY, 0),
+        (lambda: schemas.INTEGER, {_s: 0}),
+        (lambda: schemas.STRING, 0),
+        (lambda: schemas.LIST_OF_STRING, 0),
+        (MAP_OF_INTEGRATION_RESPONSE, 0),
+        (TLS_CONFIG, 0),
+        (RESPONSE_TRANSFER_MODE, 0),
+        (lambda: schemas.STRING, 0),
+    ),
+)
+
+MAP_OF_STRING_TO_BOOLEAN: StaticSchema = (
+    17,
+    n0,
+    _MOSTB,
+    0,
+    (_k, _v),
+    ((lambda: schemas.STRING, 0), (lambda: schemas.NULLABLE_BOOLEAN, 0)),
+)
+
+METHOD_RESPONSE: StaticSchema = (
+    18,
+    n0,
+    _MR,
+    0,
+    (_sC, _rP, _rMe),
+    (
+        (STATUS_CODE, 0),
+        (MAP_OF_STRING_TO_BOOLEAN, 0),
+        (lambda: schemas.MAP_OF_STRING_TO_STRING, 0),
+    ),
+)
+
+MAP_OF_METHOD_RESPONSE: StaticSchema = (
+    17,
+    n0,
+    _MOMR,
+    0,
+    (_k, _v),
+    ((lambda: schemas.STRING, 0), (METHOD_RESPONSE, 0)),
+)
+
+METHOD: StaticSchema = (
+    18,
+    n0,
+    _M,
+    0,
+    (_hM, _aTu, _aIu, _aKR, _rVI, _oN, _rPe, _rMeq, _mR, _mI, _aSu),
+    (
+        (lambda: schemas.STRING, 0),
+        (lambda: schemas.STRING, 0),
+        (lambda: schemas.STRING, 0),
+        (lambda: schemas.NULLABLE_BOOLEAN, 0),
+        (lambda: schemas.STRING, 0),
+        (lambda: schemas.STRING, 0),
+        (MAP_OF_STRING_TO_BOOLEAN, 0),
+        (lambda: schemas.MAP_OF_STRING_TO_STRING, 0),
+        (MAP_OF_METHOD_RESPONSE, 0),
+        (INTEGRATION, 0),
+        (lambda: schemas.LIST_OF_STRING, 0),
+    ),
+)
+
+MAP_OF_METHOD: StaticSchema = (
+    17,
+    n0,
+    _MOM,
+    0,
+    (_k, _v),
+    ((lambda: schemas.STRING, 0), (METHOD, 0)),
+)
+
+CREATE_REST_API_INPUT: StaticSchema = (
+    18,
+    n0,
+    _CRAI,
+    {_sSI: _cCRAR, _smit: None},
+    (_n, _d, _ve, _cF, _bMT, _mCS, _aKS, _eC, _po, _t, _dEAE, _sP, _eAM),
+    (
+        (lambda: schemas.STRING, 1),
+        (lambda: schemas.STRING, 0),
+        (lambda: schemas.STRING, 0),
+        (lambda: schemas.STRING, 0),
+        (lambda: schemas.LIST_OF_STRING, 0),
+        (lambda: schemas.NULLABLE_INTEGER, 0),
+        (lambda: schemas.API_KEY_SOURCE_TYPE, 0),
+        (lambda: schemas.ENDPOINT_CONFIGURATION, 0),
+        (lambda: schemas.STRING, 0),
+        (lambda: schemas.MAP_OF_STRING_TO_STRING, 0),
+        (lambda: schemas.BOOLEAN, {_s: False}),
+        (lambda: schemas.SECURITY_POLICY, 0),
+        (lambda: schemas.ENDPOINT_ACCESS_MODE, 0),
+    ),
+)
+
+CREATE_REST_API_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _CRAO,
+    {_sSI: _cRA, _smith: None},
+    (
+        _i,
+        _n,
+        _d,
+        _cD,
+        _ve,
+        _w,
+        _bMT,
+        _mCS,
+        _aKS,
+        _eC,
+        _po,
+        _t,
+        _dEAE,
+        _rRI,
+        _sP,
+        _eAM,
+        _aSp,
+        _aSM,
+    ),
+    (
+        (lambda: schemas.STRING, 0),
+        (lambda: schemas.STRING, 0),
+        (lambda: schemas.STRING, 0),
+        (lambda: schemas.TIMESTAMP, 0),
+        (lambda: schemas.STRING, 0),
+        (lambda: schemas.LIST_OF_STRING, 0),
+        (lambda: schemas.LIST_OF_STRING, 0),
+        (lambda: schemas.NULLABLE_INTEGER, 0),
+        (lambda: schemas.API_KEY_SOURCE_TYPE, 0),
+        (lambda: schemas.ENDPOINT_CONFIGURATION, 0),
+        (lambda: schemas.STRING, 0),
+        (lambda: schemas.MAP_OF_STRING_TO_STRING, 0),
+        (lambda: schemas.BOOLEAN, {_s: False}),
+        (lambda: schemas.STRING, 0),
+        (lambda: schemas.SECURITY_POLICY, 0),
+        (lambda: schemas.ENDPOINT_ACCESS_MODE, 0),
+        (lambda: schemas.API_STATUS, 0),
+        (lambda: schemas.STRING, 0),
+    ),
+)
+
+CREATE_REST_API: StaticOperationSchema = (
+    23,
+    n0,
+    _CRA,
+    {_smithy: MappingProxyType({"method": "POST", "uri": "/restapis", "code": 201})},
+    CREATE_REST_API_INPUT,
+    CREATE_REST_API_OUTPUT,
+    (
+        lambda: schemas.BAD_REQUEST_EXCEPTION,
+        lambda: schemas.CONFLICT_EXCEPTION,
+        lambda: schemas.LIMIT_EXCEEDED_EXCEPTION,
+        lambda: schemas.TOO_MANY_REQUESTS_EXCEPTION,
+        lambda: schemas.UNAUTHORIZED_EXCEPTION,
+    ),
+)
 
 CANARY_SETTINGS: StaticSchema = (
     18,
@@ -298,7 +678,7 @@ CREATE_STAGE_INPUT: StaticSchema = (
     18,
     n0,
     _CSI,
-    {_sSI: _cCSR, _smi: None},
+    {_sSI: _cCSR, _smit: None},
     (_rAI, _sN, _dI, _d, _cCE, _cCS, _va, _dV, _cS, _tE, _t),
     (
         (lambda: schemas.STRING, 9),
@@ -319,7 +699,7 @@ CREATE_STAGE_OUTPUT: StaticSchema = (
     18,
     n0,
     _CSO,
-    {_sSI: _cSo, _smit: None},
+    {_sSI: _cSo, _smith: None},
     (
         _dI,
         _cCI,
@@ -365,7 +745,7 @@ CREATE_STAGE: StaticOperationSchema = (
     n0,
     _CSr,
     {
-        _smith: MappingProxyType(
+        _smithy: MappingProxyType(
             {"method": "POST", "uri": "/restapis/{restApiId}/stages", "code": 201}
         )
     },
@@ -469,7 +849,7 @@ CREATE_USAGE_PLAN_INPUT: StaticSchema = (
     18,
     n0,
     _CUPI,
-    {_sSI: _cCUPR, _smi: None},
+    {_sSI: _cCUPR, _smit: None},
     (_n, _d, _aSpi, _th, _q, _t),
     (
         (lambda: schemas.STRING, 1),
@@ -485,7 +865,7 @@ CREATE_USAGE_PLAN_OUTPUT: StaticSchema = (
     18,
     n0,
     _CUPO,
-    {_sSI: _cUP, _smit: None},
+    {_sSI: _cUP, _smith: None},
     (_i, _n, _d, _aSpi, _th, _q, _pC, _t),
     (
         (lambda: schemas.STRING, 0),
@@ -503,7 +883,7 @@ CREATE_USAGE_PLAN: StaticOperationSchema = (
     23,
     n0,
     _CUPr,
-    {_smith: MappingProxyType({"method": "POST", "uri": "/usageplans", "code": 201})},
+    {_smithy: MappingProxyType({"method": "POST", "uri": "/usageplans", "code": 201})},
     CREATE_USAGE_PLAN_INPUT,
     CREATE_USAGE_PLAN_OUTPUT,
     (
@@ -520,7 +900,7 @@ CREATE_USAGE_PLAN_KEY_INPUT: StaticSchema = (
     18,
     n0,
     _CUPKI,
-    {_sSI: _cCUPKR, _smi: None},
+    {_sSI: _cCUPKR, _smit: None},
     (_uPI, _kI, _kT),
     (
         (lambda: schemas.STRING, 9),
@@ -533,7 +913,7 @@ CREATE_USAGE_PLAN_KEY_OUTPUT: StaticSchema = (
     18,
     n0,
     _CUPKO,
-    {_sSI: _cUPK, _smit: None},
+    {_sSI: _cUPK, _smith: None},
     (_i, _ty, _v, _n),
     (
         (lambda: schemas.STRING, 0),
@@ -548,7 +928,7 @@ CREATE_USAGE_PLAN_KEY: StaticOperationSchema = (
     n0,
     _CUPK,
     {
-        _smith: MappingProxyType(
+        _smithy: MappingProxyType(
             {"method": "POST", "uri": "/usageplans/{usagePlanId}/keys", "code": 201}
         )
     },
@@ -568,7 +948,7 @@ CREATE_VPC_LINK_INPUT: StaticSchema = (
     18,
     n0,
     _CVLI,
-    {_sSI: _cCVLR, _smi: None},
+    {_sSI: _cCVLR, _smit: None},
     (_n, _d, _tA, _t),
     (
         (lambda: schemas.STRING, 1),
@@ -582,7 +962,7 @@ CREATE_VPC_LINK_OUTPUT: StaticSchema = (
     18,
     n0,
     _CVLO,
-    {_sSI: _cVL, _smit: None},
+    {_sSI: _cVL, _smith: None},
     (_i, _n, _d, _tA, _sta, _sM, _t),
     (
         (lambda: schemas.STRING, 0),
@@ -599,7 +979,7 @@ CREATE_VPC_LINK: StaticOperationSchema = (
     23,
     n0,
     _CVL,
-    {_smith: MappingProxyType({"method": "POST", "uri": "/vpclinks", "code": 202})},
+    {_smithy: MappingProxyType({"method": "POST", "uri": "/vpclinks", "code": 202})},
     CREATE_VPC_LINK_INPUT,
     CREATE_VPC_LINK_OUTPUT,
     (
@@ -615,19 +995,19 @@ DELETE_API_KEY_INPUT: StaticSchema = (
     18,
     n0,
     _DAKI,
-    {_sSI: _cDAKR, _smi: None},
+    {_sSI: _cDAKR, _smit: None},
     (_aK,),
     ((lambda: schemas.STRING, 9),),
 )
 
-DELETE_API_KEY_OUTPUT: StaticSchema = (18, n0, _DAKO, {_sSI: _sU, _smit: None})
+DELETE_API_KEY_OUTPUT: StaticSchema = (18, n0, _DAKO, {_sSI: _sU, _smith: None})
 
 DELETE_API_KEY: StaticOperationSchema = (
     23,
     n0,
     _DAK,
     {
-        _smith: MappingProxyType(
+        _smithy: MappingProxyType(
             {"method": "DELETE", "uri": "/apikeys/{apiKey}", "code": 202}
         )
     },
@@ -646,19 +1026,19 @@ DELETE_AUTHORIZER_INPUT: StaticSchema = (
     18,
     n0,
     _DAI,
-    {_sSI: _cDAR, _smi: None},
+    {_sSI: _cDAR, _smit: None},
     (_rAI, _aIu),
     ((lambda: schemas.STRING, 9), (lambda: schemas.STRING, 9)),
 )
 
-DELETE_AUTHORIZER_OUTPUT: StaticSchema = (18, n0, _DAO, {_sSI: _sU, _smit: None})
+DELETE_AUTHORIZER_OUTPUT: StaticSchema = (18, n0, _DAO, {_sSI: _sU, _smith: None})
 
 DELETE_AUTHORIZER: StaticOperationSchema = (
     23,
     n0,
     _DA,
     {
-        _smith: MappingProxyType(
+        _smithy: MappingProxyType(
             {
                 "method": "DELETE",
                 "uri": "/restapis/{restApiId}/authorizers/{authorizerId}",
@@ -681,7 +1061,7 @@ DELETE_BASE_PATH_MAPPING_INPUT: StaticSchema = (
     18,
     n0,
     _DBPMI,
-    {_sSI: _cDBPMR, _smi: None},
+    {_sSI: _cDBPMR, _smit: None},
     (_dN, _dNI, _bP),
     (
         (lambda: schemas.STRING, 9),
@@ -694,7 +1074,7 @@ DELETE_BASE_PATH_MAPPING_OUTPUT: StaticSchema = (
     18,
     n0,
     _DBPMO,
-    {_sSI: _sU, _smit: None},
+    {_sSI: _sU, _smith: None},
 )
 
 DELETE_BASE_PATH_MAPPING: StaticOperationSchema = (
@@ -702,7 +1082,7 @@ DELETE_BASE_PATH_MAPPING: StaticOperationSchema = (
     n0,
     _DBPM,
     {
-        _smith: MappingProxyType(
+        _smithy: MappingProxyType(
             {
                 "method": "DELETE",
                 "uri": "/domainnames/{domainName}/basepathmappings/{basePath}",
@@ -725,7 +1105,7 @@ DELETE_CLIENT_CERTIFICATE_INPUT: StaticSchema = (
     18,
     n0,
     _DCCI,
-    {_sSI: _cDCCR, _smi: None},
+    {_sSI: _cDCCR, _smit: None},
     (_cCI,),
     ((lambda: schemas.STRING, 9),),
 )
@@ -734,7 +1114,7 @@ DELETE_CLIENT_CERTIFICATE_OUTPUT: StaticSchema = (
     18,
     n0,
     _DCCO,
-    {_sSI: _sU, _smit: None},
+    {_sSI: _sU, _smith: None},
 )
 
 DELETE_CLIENT_CERTIFICATE: StaticOperationSchema = (
@@ -742,7 +1122,7 @@ DELETE_CLIENT_CERTIFICATE: StaticOperationSchema = (
     n0,
     _DCC,
     {
-        _smith: MappingProxyType(
+        _smithy: MappingProxyType(
             {
                 "method": "DELETE",
                 "uri": "/clientcertificates/{clientCertificateId}",
@@ -765,19 +1145,19 @@ DELETE_DEPLOYMENT_INPUT: StaticSchema = (
     18,
     n0,
     _DDI,
-    {_sSI: _cDDR, _smi: None},
+    {_sSI: _cDDR, _smit: None},
     (_rAI, _dI),
     ((lambda: schemas.STRING, 9), (lambda: schemas.STRING, 9)),
 )
 
-DELETE_DEPLOYMENT_OUTPUT: StaticSchema = (18, n0, _DDO, {_sSI: _sU, _smit: None})
+DELETE_DEPLOYMENT_OUTPUT: StaticSchema = (18, n0, _DDO, {_sSI: _sU, _smith: None})
 
 DELETE_DEPLOYMENT: StaticOperationSchema = (
     23,
     n0,
     _DD,
     {
-        _smith: MappingProxyType(
+        _smithy: MappingProxyType(
             {
                 "method": "DELETE",
                 "uri": "/restapis/{restApiId}/deployments/{deploymentId}",
@@ -801,7 +1181,7 @@ DELETE_DOCUMENTATION_PART_INPUT: StaticSchema = (
     18,
     n0,
     _DDPI,
-    {_sSI: _cDDPR, _smi: None},
+    {_sSI: _cDDPR, _smit: None},
     (_rAI, _dPI),
     ((lambda: schemas.STRING, 9), (lambda: schemas.STRING, 9)),
 )
@@ -810,7 +1190,7 @@ DELETE_DOCUMENTATION_PART_OUTPUT: StaticSchema = (
     18,
     n0,
     _DDPO,
-    {_sSI: _sU, _smit: None},
+    {_sSI: _sU, _smith: None},
 )
 
 DELETE_DOCUMENTATION_PART: StaticOperationSchema = (
@@ -818,7 +1198,7 @@ DELETE_DOCUMENTATION_PART: StaticOperationSchema = (
     n0,
     _DDP,
     {
-        _smith: MappingProxyType(
+        _smithy: MappingProxyType(
             {
                 "method": "DELETE",
                 "uri": "/restapis/{restApiId}/documentation/parts/{documentationPartId}",
@@ -841,7 +1221,7 @@ DELETE_DOCUMENTATION_VERSION_INPUT: StaticSchema = (
     18,
     n0,
     _DDVI,
-    {_sSI: _cDDVR, _smi: None},
+    {_sSI: _cDDVR, _smit: None},
     (_rAI, _dV),
     ((lambda: schemas.STRING, 9), (lambda: schemas.STRING, 9)),
 )
@@ -850,7 +1230,7 @@ DELETE_DOCUMENTATION_VERSION_OUTPUT: StaticSchema = (
     18,
     n0,
     _DDVO,
-    {_sSI: _sU, _smit: None},
+    {_sSI: _sU, _smith: None},
 )
 
 DELETE_DOCUMENTATION_VERSION: StaticOperationSchema = (
@@ -858,7 +1238,7 @@ DELETE_DOCUMENTATION_VERSION: StaticOperationSchema = (
     n0,
     _DDV,
     {
-        _smith: MappingProxyType(
+        _smithy: MappingProxyType(
             {
                 "method": "DELETE",
                 "uri": "/restapis/{restApiId}/documentation/versions/{documentationVersion}",
@@ -881,19 +1261,19 @@ DELETE_DOMAIN_NAME_INPUT: StaticSchema = (
     18,
     n0,
     _DDNI,
-    {_sSI: _cDDNR, _smi: None},
+    {_sSI: _cDDNR, _smit: None},
     (_dN, _dNI),
     ((lambda: schemas.STRING, 9), (lambda: schemas.STRING, {_sQ: _dNI})),
 )
 
-DELETE_DOMAIN_NAME_OUTPUT: StaticSchema = (18, n0, _DDNO, {_sSI: _sU, _smit: None})
+DELETE_DOMAIN_NAME_OUTPUT: StaticSchema = (18, n0, _DDNO, {_sSI: _sU, _smith: None})
 
 DELETE_DOMAIN_NAME: StaticOperationSchema = (
     23,
     n0,
     _DDN,
     {
-        _smith: MappingProxyType(
+        _smithy: MappingProxyType(
             {"method": "DELETE", "uri": "/domainnames/{domainName}", "code": 202}
         )
     },
@@ -912,7 +1292,7 @@ DELETE_DOMAIN_NAME_ACCESS_ASSOCIATION_INPUT: StaticSchema = (
     18,
     n0,
     _DDNAAI,
-    {_sSI: _cDDNAAR, _smi: None},
+    {_sSI: _cDDNAAR, _smit: None},
     (_dNAAA,),
     ((lambda: schemas.STRING, 9),),
 )
@@ -921,7 +1301,7 @@ DELETE_DOMAIN_NAME_ACCESS_ASSOCIATION_OUTPUT: StaticSchema = (
     18,
     n0,
     _DDNAAO,
-    {_sSI: _sU, _smit: None},
+    {_sSI: _sU, _smith: None},
 )
 
 DELETE_DOMAIN_NAME_ACCESS_ASSOCIATION: StaticOperationSchema = (
@@ -929,7 +1309,7 @@ DELETE_DOMAIN_NAME_ACCESS_ASSOCIATION: StaticOperationSchema = (
     n0,
     _DDNAA,
     {
-        _smith: MappingProxyType(
+        _smithy: MappingProxyType(
             {
                 "method": "DELETE",
                 "uri": "/domainnameaccessassociations/{domainNameAccessAssociationArn}",
@@ -948,23 +1328,81 @@ DELETE_DOMAIN_NAME_ACCESS_ASSOCIATION: StaticOperationSchema = (
     ),
 )
 
+GATEWAY_RESPONSE_TYPE: StaticSchema = (
+    14,
+    n0,
+    _GRT,
+    0,
+    (
+        _D_,
+        _D__,
+        _RNF,
+        _UNAUTHORIZED,
+        _IAK,
+        _AD,
+        _AF,
+        _ACE,
+        _IS,
+        _ET_,
+        _MAT,
+        _IF,
+        _IT_,
+        _ACE_,
+        _UMT,
+        _BRP,
+        _BRB,
+        _RTL,
+        _THROTTLED,
+        _QE,
+        _WF,
+    ),
+    (
+        (-1, {_sV: _D_}),
+        (-1, {_sV: _D__}),
+        (-1, {_sV: _RNF}),
+        (-1, {_sV: _UNAUTHORIZED}),
+        (-1, {_sV: _IAK}),
+        (-1, {_sV: _AD}),
+        (-1, {_sV: _AF}),
+        (-1, {_sV: _ACE}),
+        (-1, {_sV: _IS}),
+        (-1, {_sV: _ET_}),
+        (-1, {_sV: _MAT}),
+        (-1, {_sV: _IF}),
+        (-1, {_sV: _IT_}),
+        (-1, {_sV: _ACE_}),
+        (-1, {_sV: _UMT}),
+        (-1, {_sV: _BRP}),
+        (-1, {_sV: _BRB}),
+        (-1, {_sV: _RTL}),
+        (-1, {_sV: _THROTTLED}),
+        (-1, {_sV: _QE}),
+        (-1, {_sV: _WF}),
+    ),
+)
+
 DELETE_GATEWAY_RESPONSE_INPUT: StaticSchema = (
     18,
     n0,
     _DGRI,
-    {_sSI: _cDGRR, _smi: None},
+    {_sSI: _cDGRR, _smit: None},
     (_rAI, _rTes),
-    ((lambda: schemas.STRING, 9), (lambda: schemas.GATEWAY_RESPONSE_TYPE, 9)),
+    ((lambda: schemas.STRING, 9), (GATEWAY_RESPONSE_TYPE, 9)),
 )
 
-DELETE_GATEWAY_RESPONSE_OUTPUT: StaticSchema = (18, n0, _DGRO, {_sSI: _sU, _smit: None})
+DELETE_GATEWAY_RESPONSE_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DGRO,
+    {_sSI: _sU, _smith: None},
+)
 
 DELETE_GATEWAY_RESPONSE: StaticOperationSchema = (
     23,
     n0,
     _DGR,
     {
-        _smith: MappingProxyType(
+        _smithy: MappingProxyType(
             {
                 "method": "DELETE",
                 "uri": "/restapis/{restApiId}/gatewayresponses/{responseType}",
@@ -987,7 +1425,7 @@ DELETE_INTEGRATION_INPUT: StaticSchema = (
     18,
     n0,
     _DII,
-    {_sSI: _cDIR, _smi: None},
+    {_sSI: _cDIR, _smit: None},
     (_rAI, _rI, _hM),
     (
         (lambda: schemas.STRING, 9),
@@ -996,14 +1434,14 @@ DELETE_INTEGRATION_INPUT: StaticSchema = (
     ),
 )
 
-DELETE_INTEGRATION_OUTPUT: StaticSchema = (18, n0, _DIO, {_sSI: _sU, _smit: None})
+DELETE_INTEGRATION_OUTPUT: StaticSchema = (18, n0, _DIO, {_sSI: _sU, _smith: None})
 
 DELETE_INTEGRATION: StaticOperationSchema = (
     23,
     n0,
     _DI,
     {
-        _smith: MappingProxyType(
+        _smithy: MappingProxyType(
             {
                 "method": "DELETE",
                 "uri": "/restapis/{restApiId}/resources/{resourceId}/methods/{httpMethod}/integration",
@@ -1026,13 +1464,13 @@ DELETE_INTEGRATION_RESPONSE_INPUT: StaticSchema = (
     18,
     n0,
     _DIRI,
-    {_sSI: _cDIRR, _smi: None},
+    {_sSI: _cDIRR, _smit: None},
     (_rAI, _rI, _hM, _sC),
     (
         (lambda: schemas.STRING, 9),
         (lambda: schemas.STRING, 9),
         (lambda: schemas.STRING, 9),
-        (lambda: schemas.STATUS_CODE, 9),
+        (STATUS_CODE, 9),
     ),
 )
 
@@ -1040,7 +1478,7 @@ DELETE_INTEGRATION_RESPONSE_OUTPUT: StaticSchema = (
     18,
     n0,
     _DIRO,
-    {_sSI: _sU, _smit: None},
+    {_sSI: _sU, _smith: None},
 )
 
 DELETE_INTEGRATION_RESPONSE: StaticOperationSchema = (
@@ -1048,7 +1486,7 @@ DELETE_INTEGRATION_RESPONSE: StaticOperationSchema = (
     n0,
     _DIR,
     {
-        _smith: MappingProxyType(
+        _smithy: MappingProxyType(
             {
                 "method": "DELETE",
                 "uri": "/restapis/{restApiId}/resources/{resourceId}/methods/{httpMethod}/integration/responses/{statusCode}",
@@ -1071,7 +1509,7 @@ DELETE_METHOD_INPUT: StaticSchema = (
     18,
     n0,
     _DMI,
-    {_sSI: _cDMR, _smi: None},
+    {_sSI: _cDMR, _smit: None},
     (_rAI, _rI, _hM),
     (
         (lambda: schemas.STRING, 9),
@@ -1080,14 +1518,14 @@ DELETE_METHOD_INPUT: StaticSchema = (
     ),
 )
 
-DELETE_METHOD_OUTPUT: StaticSchema = (18, n0, _DMO, {_sSI: _sU, _smit: None})
+DELETE_METHOD_OUTPUT: StaticSchema = (18, n0, _DMO, {_sSI: _sU, _smith: None})
 
 DELETE_METHOD: StaticOperationSchema = (
     23,
     n0,
     _DM,
     {
-        _smith: MappingProxyType(
+        _smithy: MappingProxyType(
             {
                 "method": "DELETE",
                 "uri": "/restapis/{restApiId}/resources/{resourceId}/methods/{httpMethod}",
@@ -1109,24 +1547,24 @@ DELETE_METHOD_RESPONSE_INPUT: StaticSchema = (
     18,
     n0,
     _DMRI,
-    {_sSI: _cDMRR, _smi: None},
+    {_sSI: _cDMRR, _smit: None},
     (_rAI, _rI, _hM, _sC),
     (
         (lambda: schemas.STRING, 9),
         (lambda: schemas.STRING, 9),
         (lambda: schemas.STRING, 9),
-        (lambda: schemas.STATUS_CODE, 9),
+        (STATUS_CODE, 9),
     ),
 )
 
-DELETE_METHOD_RESPONSE_OUTPUT: StaticSchema = (18, n0, _DMRO, {_sSI: _sU, _smit: None})
+DELETE_METHOD_RESPONSE_OUTPUT: StaticSchema = (18, n0, _DMRO, {_sSI: _sU, _smith: None})
 
 DELETE_METHOD_RESPONSE: StaticOperationSchema = (
     23,
     n0,
     _DMR,
     {
-        _smith: MappingProxyType(
+        _smithy: MappingProxyType(
             {
                 "method": "DELETE",
                 "uri": "/restapis/{restApiId}/resources/{resourceId}/methods/{httpMethod}/responses/{statusCode}",
@@ -1139,684 +1577,6 @@ DELETE_METHOD_RESPONSE: StaticOperationSchema = (
     (
         lambda: schemas.BAD_REQUEST_EXCEPTION,
         lambda: schemas.CONFLICT_EXCEPTION,
-        lambda: schemas.NOT_FOUND_EXCEPTION,
-        lambda: schemas.TOO_MANY_REQUESTS_EXCEPTION,
-        lambda: schemas.UNAUTHORIZED_EXCEPTION,
-    ),
-)
-
-DELETE_MODEL_INPUT: StaticSchema = (
-    18,
-    n0,
-    _DMIe,
-    {_sSI: _cDMRo, _smi: None},
-    (_rAI, _mN),
-    ((lambda: schemas.STRING, 9), (lambda: schemas.STRING, 9)),
-)
-
-DELETE_MODEL_OUTPUT: StaticSchema = (18, n0, _DMOe, {_sSI: _sU, _smit: None})
-
-DELETE_MODEL: StaticOperationSchema = (
-    23,
-    n0,
-    _DMe,
-    {
-        _smith: MappingProxyType(
-            {
-                "method": "DELETE",
-                "uri": "/restapis/{restApiId}/models/{modelName}",
-                "code": 202,
-            }
-        )
-    },
-    DELETE_MODEL_INPUT,
-    DELETE_MODEL_OUTPUT,
-    (
-        lambda: schemas.BAD_REQUEST_EXCEPTION,
-        lambda: schemas.CONFLICT_EXCEPTION,
-        lambda: schemas.NOT_FOUND_EXCEPTION,
-        lambda: schemas.TOO_MANY_REQUESTS_EXCEPTION,
-        lambda: schemas.UNAUTHORIZED_EXCEPTION,
-    ),
-)
-
-DELETE_REQUEST_VALIDATOR_INPUT: StaticSchema = (
-    18,
-    n0,
-    _DRVI,
-    {_sSI: _cDRVR, _smi: None},
-    (_rAI, _rVI),
-    ((lambda: schemas.STRING, 9), (lambda: schemas.STRING, 9)),
-)
-
-DELETE_REQUEST_VALIDATOR_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _DRVO,
-    {_sSI: _sU, _smit: None},
-)
-
-DELETE_REQUEST_VALIDATOR: StaticOperationSchema = (
-    23,
-    n0,
-    _DRV,
-    {
-        _smith: MappingProxyType(
-            {
-                "method": "DELETE",
-                "uri": "/restapis/{restApiId}/requestvalidators/{requestValidatorId}",
-                "code": 202,
-            }
-        )
-    },
-    DELETE_REQUEST_VALIDATOR_INPUT,
-    DELETE_REQUEST_VALIDATOR_OUTPUT,
-    (
-        lambda: schemas.BAD_REQUEST_EXCEPTION,
-        lambda: schemas.CONFLICT_EXCEPTION,
-        lambda: schemas.NOT_FOUND_EXCEPTION,
-        lambda: schemas.TOO_MANY_REQUESTS_EXCEPTION,
-        lambda: schemas.UNAUTHORIZED_EXCEPTION,
-    ),
-)
-
-DELETE_RESOURCE_INPUT: StaticSchema = (
-    18,
-    n0,
-    _DRI,
-    {_sSI: _cDRR, _smi: None},
-    (_rAI, _rI),
-    ((lambda: schemas.STRING, 9), (lambda: schemas.STRING, 9)),
-)
-
-DELETE_RESOURCE_OUTPUT: StaticSchema = (18, n0, _DRO, {_sSI: _sU, _smit: None})
-
-DELETE_RESOURCE: StaticOperationSchema = (
-    23,
-    n0,
-    _DR,
-    {
-        _smith: MappingProxyType(
-            {
-                "method": "DELETE",
-                "uri": "/restapis/{restApiId}/resources/{resourceId}",
-                "code": 202,
-            }
-        )
-    },
-    DELETE_RESOURCE_INPUT,
-    DELETE_RESOURCE_OUTPUT,
-    (
-        lambda: schemas.BAD_REQUEST_EXCEPTION,
-        lambda: schemas.CONFLICT_EXCEPTION,
-        lambda: schemas.NOT_FOUND_EXCEPTION,
-        lambda: schemas.TOO_MANY_REQUESTS_EXCEPTION,
-        lambda: schemas.UNAUTHORIZED_EXCEPTION,
-    ),
-)
-
-DELETE_REST_API_INPUT: StaticSchema = (
-    18,
-    n0,
-    _DRAI,
-    {_sSI: _cDRAR, _smi: None},
-    (_rAI,),
-    ((lambda: schemas.STRING, 9),),
-)
-
-DELETE_REST_API_OUTPUT: StaticSchema = (18, n0, _DRAO, {_sSI: _sU, _smit: None})
-
-DELETE_REST_API: StaticOperationSchema = (
-    23,
-    n0,
-    _DRA,
-    {
-        _smith: MappingProxyType(
-            {"method": "DELETE", "uri": "/restapis/{restApiId}", "code": 202}
-        )
-    },
-    DELETE_REST_API_INPUT,
-    DELETE_REST_API_OUTPUT,
-    (
-        lambda: schemas.BAD_REQUEST_EXCEPTION,
-        lambda: schemas.CONFLICT_EXCEPTION,
-        lambda: schemas.NOT_FOUND_EXCEPTION,
-        lambda: schemas.TOO_MANY_REQUESTS_EXCEPTION,
-        lambda: schemas.UNAUTHORIZED_EXCEPTION,
-    ),
-)
-
-DELETE_STAGE_INPUT: StaticSchema = (
-    18,
-    n0,
-    _DSI,
-    {_sSI: _cDSR, _smi: None},
-    (_rAI, _sN),
-    ((lambda: schemas.STRING, 9), (lambda: schemas.STRING, 9)),
-)
-
-DELETE_STAGE_OUTPUT: StaticSchema = (18, n0, _DSO, {_sSI: _sU, _smit: None})
-
-DELETE_STAGE: StaticOperationSchema = (
-    23,
-    n0,
-    _DS,
-    {
-        _smith: MappingProxyType(
-            {
-                "method": "DELETE",
-                "uri": "/restapis/{restApiId}/stages/{stageName}",
-                "code": 202,
-            }
-        )
-    },
-    DELETE_STAGE_INPUT,
-    DELETE_STAGE_OUTPUT,
-    (
-        lambda: schemas.BAD_REQUEST_EXCEPTION,
-        lambda: schemas.CONFLICT_EXCEPTION,
-        lambda: schemas.LIMIT_EXCEEDED_EXCEPTION,
-        lambda: schemas.NOT_FOUND_EXCEPTION,
-        lambda: schemas.TOO_MANY_REQUESTS_EXCEPTION,
-        lambda: schemas.UNAUTHORIZED_EXCEPTION,
-    ),
-)
-
-DELETE_USAGE_PLAN_INPUT: StaticSchema = (
-    18,
-    n0,
-    _DUPI,
-    {_sSI: _cDUPR, _smi: None},
-    (_uPI,),
-    ((lambda: schemas.STRING, 9),),
-)
-
-DELETE_USAGE_PLAN_OUTPUT: StaticSchema = (18, n0, _DUPO, {_sSI: _sU, _smit: None})
-
-DELETE_USAGE_PLAN: StaticOperationSchema = (
-    23,
-    n0,
-    _DUP,
-    {
-        _smith: MappingProxyType(
-            {"method": "DELETE", "uri": "/usageplans/{usagePlanId}", "code": 202}
-        )
-    },
-    DELETE_USAGE_PLAN_INPUT,
-    DELETE_USAGE_PLAN_OUTPUT,
-    (
-        lambda: schemas.BAD_REQUEST_EXCEPTION,
-        lambda: schemas.CONFLICT_EXCEPTION,
-        lambda: schemas.NOT_FOUND_EXCEPTION,
-        lambda: schemas.TOO_MANY_REQUESTS_EXCEPTION,
-        lambda: schemas.UNAUTHORIZED_EXCEPTION,
-    ),
-)
-
-DELETE_USAGE_PLAN_KEY_INPUT: StaticSchema = (
-    18,
-    n0,
-    _DUPKI,
-    {_sSI: _cDUPKR, _smi: None},
-    (_uPI, _kI),
-    ((lambda: schemas.STRING, 9), (lambda: schemas.STRING, 9)),
-)
-
-DELETE_USAGE_PLAN_KEY_OUTPUT: StaticSchema = (18, n0, _DUPKO, {_sSI: _sU, _smit: None})
-
-DELETE_USAGE_PLAN_KEY: StaticOperationSchema = (
-    23,
-    n0,
-    _DUPK,
-    {
-        _smith: MappingProxyType(
-            {
-                "method": "DELETE",
-                "uri": "/usageplans/{usagePlanId}/keys/{keyId}",
-                "code": 202,
-            }
-        )
-    },
-    DELETE_USAGE_PLAN_KEY_INPUT,
-    DELETE_USAGE_PLAN_KEY_OUTPUT,
-    (
-        lambda: schemas.BAD_REQUEST_EXCEPTION,
-        lambda: schemas.CONFLICT_EXCEPTION,
-        lambda: schemas.NOT_FOUND_EXCEPTION,
-        lambda: schemas.TOO_MANY_REQUESTS_EXCEPTION,
-        lambda: schemas.UNAUTHORIZED_EXCEPTION,
-    ),
-)
-
-DELETE_VPC_LINK_INPUT: StaticSchema = (
-    18,
-    n0,
-    _DVLI,
-    {_sSI: _cDVLR, _smi: None},
-    (_vLI,),
-    ((lambda: schemas.STRING, 9),),
-)
-
-DELETE_VPC_LINK_OUTPUT: StaticSchema = (18, n0, _DVLO, {_sSI: _sU, _smit: None})
-
-DELETE_VPC_LINK: StaticOperationSchema = (
-    23,
-    n0,
-    _DVL,
-    {
-        _smith: MappingProxyType(
-            {"method": "DELETE", "uri": "/vpclinks/{vpcLinkId}", "code": 202}
-        )
-    },
-    DELETE_VPC_LINK_INPUT,
-    DELETE_VPC_LINK_OUTPUT,
-    (
-        lambda: schemas.BAD_REQUEST_EXCEPTION,
-        lambda: schemas.CONFLICT_EXCEPTION,
-        lambda: schemas.NOT_FOUND_EXCEPTION,
-        lambda: schemas.TOO_MANY_REQUESTS_EXCEPTION,
-        lambda: schemas.UNAUTHORIZED_EXCEPTION,
-    ),
-)
-
-FLUSH_STAGE_AUTHORIZERS_CACHE_INPUT: StaticSchema = (
-    18,
-    n0,
-    _FSACI,
-    {_sSI: _cFSACR, _smi: None},
-    (_rAI, _sN),
-    ((lambda: schemas.STRING, 9), (lambda: schemas.STRING, 9)),
-)
-
-FLUSH_STAGE_AUTHORIZERS_CACHE_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _FSACO,
-    {_sSI: _sU, _smit: None},
-)
-
-FLUSH_STAGE_AUTHORIZERS_CACHE: StaticOperationSchema = (
-    23,
-    n0,
-    _FSAC,
-    {
-        _smith: MappingProxyType(
-            {
-                "method": "DELETE",
-                "uri": "/restapis/{restApiId}/stages/{stageName}/cache/authorizers",
-                "code": 202,
-            }
-        )
-    },
-    FLUSH_STAGE_AUTHORIZERS_CACHE_INPUT,
-    FLUSH_STAGE_AUTHORIZERS_CACHE_OUTPUT,
-    (
-        lambda: schemas.BAD_REQUEST_EXCEPTION,
-        lambda: schemas.CONFLICT_EXCEPTION,
-        lambda: schemas.LIMIT_EXCEEDED_EXCEPTION,
-        lambda: schemas.NOT_FOUND_EXCEPTION,
-        lambda: schemas.TOO_MANY_REQUESTS_EXCEPTION,
-        lambda: schemas.UNAUTHORIZED_EXCEPTION,
-    ),
-)
-
-FLUSH_STAGE_CACHE_INPUT: StaticSchema = (
-    18,
-    n0,
-    _FSCI,
-    {_sSI: _cFSCR, _smi: None},
-    (_rAI, _sN),
-    ((lambda: schemas.STRING, 9), (lambda: schemas.STRING, 9)),
-)
-
-FLUSH_STAGE_CACHE_OUTPUT: StaticSchema = (18, n0, _FSCO, {_sSI: _sU, _smit: None})
-
-FLUSH_STAGE_CACHE: StaticOperationSchema = (
-    23,
-    n0,
-    _FSC,
-    {
-        _smith: MappingProxyType(
-            {
-                "method": "DELETE",
-                "uri": "/restapis/{restApiId}/stages/{stageName}/cache/data",
-                "code": 202,
-            }
-        )
-    },
-    FLUSH_STAGE_CACHE_INPUT,
-    FLUSH_STAGE_CACHE_OUTPUT,
-    (
-        lambda: schemas.BAD_REQUEST_EXCEPTION,
-        lambda: schemas.CONFLICT_EXCEPTION,
-        lambda: schemas.LIMIT_EXCEEDED_EXCEPTION,
-        lambda: schemas.NOT_FOUND_EXCEPTION,
-        lambda: schemas.TOO_MANY_REQUESTS_EXCEPTION,
-        lambda: schemas.UNAUTHORIZED_EXCEPTION,
-    ),
-)
-
-GENERATE_CLIENT_CERTIFICATE_INPUT: StaticSchema = (
-    18,
-    n0,
-    _GCCI,
-    {_sSI: _cGCCR, _smi: None},
-    (_d, _t),
-    ((lambda: schemas.STRING, 0), (lambda: schemas.MAP_OF_STRING_TO_STRING, 0)),
-)
-
-GENERATE_CLIENT_CERTIFICATE_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _GCCO,
-    {_sSI: _cCC, _smit: None},
-    (_cCI, _d, _pEC, _cD, _eD, _t),
-    (
-        (lambda: schemas.STRING, 0),
-        (lambda: schemas.STRING, 0),
-        (lambda: schemas.STRING, 0),
-        (lambda: schemas.TIMESTAMP, 0),
-        (lambda: schemas.TIMESTAMP, 0),
-        (lambda: schemas.MAP_OF_STRING_TO_STRING, 0),
-    ),
-)
-
-GENERATE_CLIENT_CERTIFICATE: StaticOperationSchema = (
-    23,
-    n0,
-    _GCC,
-    {
-        _smith: MappingProxyType(
-            {"method": "POST", "uri": "/clientcertificates", "code": 201}
-        )
-    },
-    GENERATE_CLIENT_CERTIFICATE_INPUT,
-    GENERATE_CLIENT_CERTIFICATE_OUTPUT,
-    (
-        lambda: schemas.BAD_REQUEST_EXCEPTION,
-        lambda: schemas.CONFLICT_EXCEPTION,
-        lambda: schemas.LIMIT_EXCEEDED_EXCEPTION,
-        lambda: schemas.TOO_MANY_REQUESTS_EXCEPTION,
-        lambda: schemas.UNAUTHORIZED_EXCEPTION,
-    ),
-)
-
-GET_ACCOUNT_INPUT: StaticSchema = (18, n0, _GAI, {_sSI: _cGAR, _smi: None})
-
-GET_ACCOUNT_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _GAO,
-    {_sSI: _cAo, _smit: None},
-    (_cRAl, _tS, _fe, _aKV),
-    (
-        (lambda: schemas.STRING, 0),
-        (lambda: schemas.THROTTLE_SETTINGS, 0),
-        (lambda: schemas.LIST_OF_STRING, 0),
-        (lambda: schemas.STRING, 0),
-    ),
-)
-
-GET_ACCOUNT: StaticOperationSchema = (
-    23,
-    n0,
-    _GA,
-    {_smith: MappingProxyType({"method": "GET", "uri": "/account", "code": 200})},
-    GET_ACCOUNT_INPUT,
-    GET_ACCOUNT_OUTPUT,
-    (
-        lambda: schemas.BAD_REQUEST_EXCEPTION,
-        lambda: schemas.NOT_FOUND_EXCEPTION,
-        lambda: schemas.TOO_MANY_REQUESTS_EXCEPTION,
-        lambda: schemas.UNAUTHORIZED_EXCEPTION,
-    ),
-)
-
-GET_API_KEY_INPUT: StaticSchema = (
-    18,
-    n0,
-    _GAKI,
-    {_sSI: _cGAKR, _smi: None},
-    (_aK, _iV),
-    ((lambda: schemas.STRING, 9), (lambda: schemas.NULLABLE_BOOLEAN, {_sQ: _iV})),
-)
-
-GET_API_KEY_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _GAKO,
-    {_sSI: _cAK, _smit: None},
-    (_i, _v, _n, _cI, _d, _e, _cD, _lUD, _sK, _t),
-    (
-        (lambda: schemas.STRING, 0),
-        (lambda: schemas.STRING, 0),
-        (lambda: schemas.STRING, 0),
-        (lambda: schemas.STRING, 0),
-        (lambda: schemas.STRING, 0),
-        (lambda: schemas.BOOLEAN, {_s: False}),
-        (lambda: schemas.TIMESTAMP, 0),
-        (lambda: schemas.TIMESTAMP, 0),
-        (lambda: schemas.LIST_OF_STRING, 0),
-        (lambda: schemas.MAP_OF_STRING_TO_STRING, 0),
-    ),
-)
-
-GET_API_KEY: StaticOperationSchema = (
-    23,
-    n0,
-    _GAK,
-    {
-        _smith: MappingProxyType(
-            {"method": "GET", "uri": "/apikeys/{apiKey}", "code": 200}
-        )
-    },
-    GET_API_KEY_INPUT,
-    GET_API_KEY_OUTPUT,
-    (
-        lambda: schemas.BAD_REQUEST_EXCEPTION,
-        lambda: schemas.NOT_FOUND_EXCEPTION,
-        lambda: schemas.TOO_MANY_REQUESTS_EXCEPTION,
-        lambda: schemas.UNAUTHORIZED_EXCEPTION,
-    ),
-)
-
-GET_API_KEYS_INPUT: StaticSchema = (
-    18,
-    n0,
-    _GAKIe,
-    {_sSI: _cGAKRo, _smi: None},
-    (_pos, _li, _nQ, _cI, _iVn),
-    (
-        (lambda: schemas.STRING, {_sQ: _pos}),
-        (lambda: schemas.NULLABLE_INTEGER, {_sQ: _li}),
-        (lambda: schemas.STRING, {_sQ: _n}),
-        (lambda: schemas.STRING, {_sQ: _cI}),
-        (lambda: schemas.NULLABLE_BOOLEAN, {_sQ: _iVn}),
-    ),
-)
-
-GET_API_KEYS_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _GAKOe,
-    {_sSI: _cAKo, _smit: None},
-    (_w, _it, _pos),
-    (
-        (lambda: schemas.LIST_OF_STRING, 0),
-        (lambda: LIST_OF_API_KEY, {_sNm: _ite}),
-        (lambda: schemas.STRING, {_sQ: _pos}),
-    ),
-)
-
-GET_API_KEYS: StaticOperationSchema = (
-    23,
-    n0,
-    _GAKe,
-    {_smith: MappingProxyType({"method": "GET", "uri": "/apikeys", "code": 200})},
-    GET_API_KEYS_INPUT,
-    GET_API_KEYS_OUTPUT,
-    (
-        lambda: schemas.BAD_REQUEST_EXCEPTION,
-        lambda: schemas.NOT_FOUND_EXCEPTION,
-        lambda: schemas.TOO_MANY_REQUESTS_EXCEPTION,
-        lambda: schemas.UNAUTHORIZED_EXCEPTION,
-    ),
-)
-
-LIST_OF_API_KEY: StaticSchema = (
-    16,
-    n0,
-    _LOAK,
-    0,
-    (_m,),
-    ((lambda: schemas.API_KEY, 0),),
-)
-
-GET_AUTHORIZER_INPUT: StaticSchema = (
-    18,
-    n0,
-    _GAIe,
-    {_sSI: _cGARo, _smi: None},
-    (_rAI, _aIu),
-    ((lambda: schemas.STRING, 9), (lambda: schemas.STRING, 9)),
-)
-
-GET_AUTHORIZER_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _GAOe,
-    {_sSI: _cA, _smit: None},
-    (_i, _n, _ty, _pARN, _aT, _aU, _aC, _iS, _iVE, _aRTIS),
-    (
-        (lambda: schemas.STRING, 0),
-        (lambda: schemas.STRING, 0),
-        (lambda: schemas.AUTHORIZER_TYPE, 0),
-        (lambda: schemas.LIST_OF_AR_NS, 0),
-        (lambda: schemas.STRING, 0),
-        (lambda: schemas.STRING, 0),
-        (lambda: schemas.STRING, 0),
-        (lambda: schemas.STRING, 0),
-        (lambda: schemas.STRING, 0),
-        (lambda: schemas.NULLABLE_INTEGER, 0),
-    ),
-)
-
-GET_AUTHORIZER: StaticOperationSchema = (
-    23,
-    n0,
-    _GAe,
-    {
-        _smith: MappingProxyType(
-            {
-                "method": "GET",
-                "uri": "/restapis/{restApiId}/authorizers/{authorizerId}",
-                "code": 200,
-            }
-        )
-    },
-    GET_AUTHORIZER_INPUT,
-    GET_AUTHORIZER_OUTPUT,
-    (
-        lambda: schemas.BAD_REQUEST_EXCEPTION,
-        lambda: schemas.NOT_FOUND_EXCEPTION,
-        lambda: schemas.TOO_MANY_REQUESTS_EXCEPTION,
-        lambda: schemas.UNAUTHORIZED_EXCEPTION,
-    ),
-)
-
-GET_AUTHORIZERS_INPUT: StaticSchema = (
-    18,
-    n0,
-    _GAIet,
-    {_sSI: _cGARom, _smi: None},
-    (_rAI, _pos, _li),
-    (
-        (lambda: schemas.STRING, 9),
-        (lambda: schemas.STRING, {_sQ: _pos}),
-        (lambda: schemas.NULLABLE_INTEGER, {_sQ: _li}),
-    ),
-)
-
-GET_AUTHORIZERS_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _GAOet,
-    {_sSI: _cAom, _smit: None},
-    (_it, _pos),
-    ((lambda: LIST_OF_AUTHORIZER, {_sNm: _ite}), (lambda: schemas.STRING, {_sQ: _pos})),
-)
-
-GET_AUTHORIZERS: StaticOperationSchema = (
-    23,
-    n0,
-    _GAet,
-    {
-        _smith: MappingProxyType(
-            {"method": "GET", "uri": "/restapis/{restApiId}/authorizers", "code": 200}
-        )
-    },
-    GET_AUTHORIZERS_INPUT,
-    GET_AUTHORIZERS_OUTPUT,
-    (
-        lambda: schemas.BAD_REQUEST_EXCEPTION,
-        lambda: schemas.NOT_FOUND_EXCEPTION,
-        lambda: schemas.TOO_MANY_REQUESTS_EXCEPTION,
-        lambda: schemas.UNAUTHORIZED_EXCEPTION,
-    ),
-)
-
-LIST_OF_AUTHORIZER: StaticSchema = (
-    16,
-    n0,
-    _LOA,
-    0,
-    (_m,),
-    ((lambda: schemas.AUTHORIZER, 0),),
-)
-
-GET_BASE_PATH_MAPPING_INPUT: StaticSchema = (
-    18,
-    n0,
-    _GBPMI,
-    {_sSI: _cGBPMR, _smi: None},
-    (_dN, _dNI, _bP),
-    (
-        (lambda: schemas.STRING, 9),
-        (lambda: schemas.STRING, {_sQ: _dNI}),
-        (lambda: schemas.STRING, 9),
-    ),
-)
-
-GET_BASE_PATH_MAPPING_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _GBPMO,
-    {_sSI: _cBPM, _smit: None},
-    (_bP, _rAI, _st),
-    (
-        (lambda: schemas.STRING, 0),
-        (lambda: schemas.STRING, 0),
-        (lambda: schemas.STRING, 0),
-    ),
-)
-
-GET_BASE_PATH_MAPPING: StaticOperationSchema = (
-    23,
-    n0,
-    _GBPM,
-    {
-        _smith: MappingProxyType(
-            {
-                "method": "GET",
-                "uri": "/domainnames/{domainName}/basepathmappings/{basePath}",
-                "code": 200,
-            }
-        )
-    },
-    GET_BASE_PATH_MAPPING_INPUT,
-    GET_BASE_PATH_MAPPING_OUTPUT,
-    (
-        lambda: schemas.BAD_REQUEST_EXCEPTION,
         lambda: schemas.NOT_FOUND_EXCEPTION,
         lambda: schemas.TOO_MANY_REQUESTS_EXCEPTION,
         lambda: schemas.UNAUTHORIZED_EXCEPTION,

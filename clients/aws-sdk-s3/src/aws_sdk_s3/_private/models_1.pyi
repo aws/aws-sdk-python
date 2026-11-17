@@ -2851,6 +2851,16 @@ class ListPartsOutput(_SerdeShape):
     object integrity in the Amazon S3 User
     Guide](https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html).
     """
+    version_id: str | None = ...
+    """
+    Version ID of the object.
+
+    Returns the Version ID of the object for the listed parts, if bucket
+    versioning is enabled.
+
+    Note:
+        This functionality is not supported for directory buckets.
+    """
     response_metadata: ResponseMetadata = ...
     """
     Metadata about the response that produced this output. Use this to
@@ -3402,6 +3412,16 @@ class MultipartUpload(_SerdeShape):
     For more information, see [Checking object
     integrity](https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html)
     in the *Amazon S3 User Guide*.
+    """
+    version_id: str | None = ...
+    """
+    Version ID of the object.
+
+    Returns the Version ID of the object for the multipart upload, if bucket
+    versioning is enabled.
+
+    Note:
+        This functionality is not supported for directory buckets.
     """
 
 @dataclass(kw_only=True)
@@ -13848,6 +13868,16 @@ class UploadPartCopyOutput(_SerdeShape):
     Note:
         This functionality is not supported for directory buckets.
     """
+    version_id: str | None = ...
+    """
+    Version ID of the object.
+
+    Returns the Version ID of the object for the copied part, if bucket
+    versioning is enabled.
+
+    Note:
+        This functionality is not supported for directory buckets.
+    """
     response_metadata: ResponseMetadata = ...
     """
     Metadata about the response that produced this output. Use this to
@@ -14682,6 +14712,16 @@ class UploadPartOutput(_SerdeShape):
     storage transfers and
     usage](https://docs.aws.amazon.com/AmazonS3/latest/userguide/RequesterPaysBuckets.html)
     in the *Amazon Simple Storage Service user guide*.
+
+    Note:
+        This functionality is not supported for directory buckets.
+    """
+    version_id: str | None = ...
+    """
+    Version ID of the object.
+
+    Returns the Version ID of the object for the uploaded part, if bucket
+    versioning is enabled.
 
     Note:
         This functionality is not supported for directory buckets.

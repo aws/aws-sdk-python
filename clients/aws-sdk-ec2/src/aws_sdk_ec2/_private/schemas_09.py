@@ -43,11 +43,14 @@ _SIu = "SubnetId"
 _sI = "subnetId"
 _OIw = "OwnerId"
 _oI = "ownerId"
+_en = "enabled"
 _TSag = "TagSet"
 _tS = "tagSet"
 _VI = "VpcId"
 _vI = "vpcId"
 _dRr = "dryRun"
+_ENABLED = "ENABLED"
+_DISABLED = "DISABLED"
 _Ar = "Arn"
 _N = "Name"
 _Pr = "Priority"
@@ -61,15 +64,12 @@ _eOIGI = "egressOnlyInternetGatewayId"
 _II = "InstanceId"
 _iI = "instanceId"
 _IG = "InternetGateway"
-_NI = "NetworkInterface"
-_Sub = "Subnet"
-_TGr = "TransitGateway"
-_TGA = "TransitGatewayAttachment"
-_ena = "enabled"
 _EOIG = "EgressOnlyInternetGateway"
 _eOIG = "egressOnlyInternetGateway"
 _IT = "InstanceType"
 _iT = "instanceType"
+_req = "required"
+_op = "optional"
 _Af = "Affinity"
 _IF = "InstanceFamily"
 _CTl = "ClientToken"
@@ -86,7 +86,8 @@ _AITS = "AllowedInstanceTypeSet"
 _IIn = "InstanceIds"
 _DOI = "DhcpOptionsId"
 _IIP = "IamInstanceProfile"
-_VPC_ = "VPC"
+_KKI = "KmsKeyId"
+_SIn = "SnapshotId"
 _GIr = "GroupId"
 _gIr = "groupId"
 _IIm = "ImageId"
@@ -99,12 +100,10 @@ _GN = "GroupName"
 _gN = "groupName"
 _ST = "StartTime"
 _sTt = "startTime"
-_KKI = "KmsKeyId"
 _En = "Encrypted"
 _enc = "encrypted"
 _kKI = "kmsKeyId"
 _iIm = "imageId"
-_SIn = "SnapshotId"
 _sIn = "snapshotId"
 _VT = "VolumeType"
 _Io = "Iops"
@@ -122,7 +121,6 @@ _ten = "tenancy"
 _RTes = "ReservationType"
 _BM = "BareMetal"
 _REQUIRED = "REQUIRED"
-_requ = "required"
 _Ref = "References"
 _Cp = "Cpu"
 _BP = "BurstablePerformance"
@@ -223,11 +221,8 @@ _FBDMRL = "FleetBlockDeviceMappingRequestList"
 _BDM = "BlockDeviceMapping"
 _FIIPSR = "FleetIamInstanceProfileSpecificationRequest"
 _FIMES = "FleetInstanceMetadataEndpointState"
-_DISABLED = "DISABLED"
-_ENABLED = "ENABLED"
 _FHTS = "FleetHttpTokensState"
 _OPTIONAL = "OPTIONAL"
-_opt = "optional"
 _FIMOR = "FleetInstanceMetadataOptionsRequest"
 _HTt = "HttpTokens"
 _HPRHL = "HttpPutResponseHopLimit"
@@ -327,7 +322,7 @@ _ODTC = "OnDemandTargetCapacity"
 _STC = "SpotTargetCapacity"
 _FTl = "FleetType"
 _REQUEST = "REQUEST"
-_reque = "request"
+_reques = "request"
 _MAINTAIN = "MAINTAIN"
 _mai = "maintain"
 _INSTANT = "INSTANT"
@@ -444,29 +439,7 @@ _kdf = "kinesis_data_firehose"
 _kdf_ = "kinesis-data-firehose"
 _FLRI = "FlowLogResourceId"
 _FLRIl = "FlowLogResourceIds"
-_FLRT = "FlowLogsResourceType"
-_RNG = "RegionalNatGateway"
-_CN = "CoreNetwork"
-_CNE = "CoreNetworkEdge"
-_CNAo = "CoreNetworkAttachment"
 _VSLe = "VersionStringList"
-_pCr = "productCodes"
-_BDML = "BlockDeviceMappingList"
-_AVr = "ArchitectureValues"
-_i__________________________________________________________________________ = "i386"
-_x______________________________________________________ = "x86_64"
-_arm = "arm64"
-_xm____________ = "x86_64_mac"
-_am______ = "arm64_mac"
-_SLe = "SeverityLabel"
-_inform = "informational"
-_low = "low"
-_medi = "medium"
-_hig = "high"
-_cri = "critical"
-_SISL = "SnapshotIdStringList"
-_SAN = "SnapshotAttributeName"
-_cVP = "createVolumePermission"
 
 MAC_MODIFICATION_TASK_STATE: StaticSchema = (
     14,
@@ -660,6 +633,8 @@ INTERNET_GATEWAY_ATTACHMENT_LIST: StaticSchema = (
     ((INTERNET_GATEWAY_ATTACHMENT, {_sN: _i}),),
 )
 
+EGRESS_ONLY_INTERNET_GATEWAY_ID: StaticSchema = (3, n0, _EOIGI, 0)
+
 EGRESS_ONLY_INTERNET_GATEWAY: StaticSchema = (
     18,
     n0,
@@ -668,7 +643,7 @@ EGRESS_ONLY_INTERNET_GATEWAY: StaticSchema = (
     (_Att, _EOIGI, _Tag),
     (
         (INTERNET_GATEWAY_ATTACHMENT_LIST, {_aQN: _AStt, _sN: _aSt}),
-        (lambda: schemas.EGRESS_ONLY_INTERNET_GATEWAY_ID, {_aQN: _EOIGI, _sN: _eOIGI}),
+        (EGRESS_ONLY_INTERNET_GATEWAY_ID, {_aQN: _EOIGI, _sN: _eOIGI}),
         (lambda: schemas.TAG_LIST, {_aQN: _TSag, _sN: _tS}),
     ),
 )
@@ -702,8 +677,6 @@ FLEET_LAUNCH_TEMPLATE_SPECIFICATION_REQUEST: StaticSchema = (
     ),
 )
 
-SNAPSHOT_ID: StaticSchema = (3, n0, _SIn, 0)
-
 FLEET_EBS_BLOCK_DEVICE_REQUEST: StaticSchema = (
     18,
     n0,
@@ -716,7 +689,7 @@ FLEET_EBS_BLOCK_DEVICE_REQUEST: StaticSchema = (
         (lambda: schemas.INTEGER, 0),
         (lambda: schemas.INTEGER, 0),
         (lambda: schemas.KMS_KEY_ID, 0),
-        (SNAPSHOT_ID, 0),
+        (lambda: schemas.SNAPSHOT_ID, 0),
         (lambda: schemas.INTEGER, 0),
         (lambda: schemas.VOLUME_TYPE, 0),
     ),
@@ -760,7 +733,7 @@ FLEET_INSTANCE_METADATA_ENDPOINT_STATE: StaticSchema = (
     _FIMES,
     0,
     (_DISABLED, _ENABLED),
-    ((-1, {_sV: _d}), (-1, {_sV: _ena})),
+    ((-1, {_sV: _d}), (-1, {_sV: _en})),
 )
 
 FLEET_HTTP_TOKENS_STATE: StaticSchema = (
@@ -769,7 +742,7 @@ FLEET_HTTP_TOKENS_STATE: StaticSchema = (
     _FHTS,
     0,
     (_OPTIONAL, _REQUIRED),
-    ((-1, {_sV: _opt}), (-1, {_sV: _requ})),
+    ((-1, {_sV: _op}), (-1, {_sV: _req})),
 )
 
 FLEET_INSTANCE_METADATA_OPTIONS_REQUEST: StaticSchema = (
@@ -1096,7 +1069,7 @@ FLEET_TYPE: StaticSchema = (
     _FTl,
     0,
     (_REQUEST, _MAINTAIN, _INSTANT),
-    ((-1, {_sV: _reque}), (-1, {_sV: _mai}), (-1, {_sV: _inst})),
+    ((-1, {_sV: _reques}), (-1, {_sV: _mai}), (-1, {_sV: _inst})),
 )
 
 CREATE_FLEET_INPUT: StaticSchema = (
@@ -1188,7 +1161,7 @@ EBS_BLOCK_DEVICE_RESPONSE: StaticSchema = (
         (lambda: schemas.INTEGER, {_aQN: _Io, _sN: _iop}),
         (lambda: schemas.INTEGER, {_aQN: _Th, _sN: _thr}),
         (lambda: schemas.KMS_KEY_ID, {_aQN: _KKI, _sN: _kKI}),
-        (SNAPSHOT_ID, {_aQN: _SIn, _sN: _sIn}),
+        (lambda: schemas.SNAPSHOT_ID, {_aQN: _SIn, _sN: _sIn}),
         (lambda: schemas.INTEGER, {_aQN: _VSol, _sN: _vSo}),
         (lambda: schemas.VOLUME_TYPE, {_aQN: _VT, _sN: _vT}),
     ),
@@ -1554,25 +1527,6 @@ FLOW_LOG_RESOURCE_IDS: StaticSchema = (
     ((FLOW_LOG_RESOURCE_ID, {_sN: _i}),),
 )
 
-FLOW_LOGS_RESOURCE_TYPE: StaticSchema = (
-    14,
-    n0,
-    _FLRT,
-    0,
-    (_VPC_, _Sub, _NI, _TGr, _TGA, _RNG, _CN, _CNE, _CNAo),
-    (
-        (-1, {_sV: _VPC_}),
-        (-1, {_sV: _Sub}),
-        (-1, {_sV: _NI}),
-        (-1, {_sV: _TGr}),
-        (-1, {_sV: _TGA}),
-        (-1, {_sV: _RNG}),
-        (-1, {_sV: _CN}),
-        (-1, {_sV: _CNE}),
-        (-1, {_sV: _CNAo}),
-    ),
-)
-
 INTERNET_GATEWAY: StaticSchema = (
     18,
     n0,
@@ -1594,72 +1548,4 @@ VERSION_STRING_LIST: StaticSchema = (
     0,
     (_me,),
     ((lambda: schemas.STRING, {_sN: _i}),),
-)
-
-BLOCK_DEVICE_MAPPING_LIST: StaticSchema = (
-    16,
-    n0,
-    _BDML,
-    0,
-    (_me,),
-    ((lambda: schemas.BLOCK_DEVICE_MAPPING, {_sN: _i}),),
-)
-
-ARCHITECTURE_VALUES: StaticSchema = (
-    14,
-    n0,
-    _AVr,
-    0,
-    (
-        _i__________________________________________________________________________,
-        _x______________________________________________________,
-        _arm,
-        _xm____________,
-        _am______,
-    ),
-    (
-        (
-            -1,
-            {
-                _sV: _i__________________________________________________________________________
-            },
-        ),
-        (-1, {_sV: _x______________________________________________________}),
-        (-1, {_sV: _arm}),
-        (-1, {_sV: _xm____________}),
-        (-1, {_sV: _am______}),
-    ),
-)
-
-SEVERITY_LABEL: StaticSchema = (
-    14,
-    n0,
-    _SLe,
-    0,
-    (_inform, _low, _medi, _hig, _cri),
-    (
-        (-1, {_sV: _inform}),
-        (-1, {_sV: _low}),
-        (-1, {_sV: _medi}),
-        (-1, {_sV: _hig}),
-        (-1, {_sV: _cri}),
-    ),
-)
-
-SNAPSHOT_ID_STRING_LIST: StaticSchema = (
-    16,
-    n0,
-    _SISL,
-    0,
-    (_me,),
-    ((SNAPSHOT_ID, {_sN: _SIn}),),
-)
-
-SNAPSHOT_ATTRIBUTE_NAME: StaticSchema = (
-    14,
-    n0,
-    _SAN,
-    0,
-    (_pCr, _cVP),
-    ((-1, {_sV: _pCr}), (-1, {_sV: _cVP})),
 )

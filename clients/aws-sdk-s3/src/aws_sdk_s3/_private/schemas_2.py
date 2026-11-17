@@ -30,8 +30,11 @@ _xarp = "x-amz-request-payer"
 _EBO = "ExpectedBucketOwner"
 _xaebo = "x-amz-expected-bucket-owner"
 _RC = "RequestCharged"
+_OVI = "ObjectVersionId"
 _smi = "smithy.api#output"
 _xarc = "x-amz-request-charged"
+_VI = "VersionId"
+_xavi = "x-amz-version-id"
 _smit = "smithy.api#error"
 _c = "client"
 _sE = "smithy.api#httpError"
@@ -58,9 +61,6 @@ _sFm = "smithy.api#xmlFlattened"
 _sPm = "smithy.api#httpPayload"
 _IM_ = "If-Match"
 _BKE = "BucketKeyEnabled"
-_OVI = "ObjectVersionId"
-_VI = "VersionId"
-_xavi = "x-amz-version-id"
 _CA = "ChecksumAlgorithm"
 _OLLHS = "ObjectLockLegalHoldStatus"
 _OLM = "ObjectLockMode"
@@ -280,6 +280,7 @@ _REPLICA = "REPLICA"
 _COMPLETED = "COMPLETED"
 _ITs = "IsTruncated"
 _Ini = "Initiator"
+_IR = "InvalidRequest"
 
 NO_SUCH_BUCKET: StaticSchema = (18, n0, _NSB, {_smit: _c, _sE: 404})
 
@@ -1483,3 +1484,5 @@ INITIATOR: StaticSchema = (
     (_ID, _DN),
     ((lambda: schemas.ID, 0), (lambda: schemas.DISPLAY_NAME, 0)),
 )
+
+INVALID_REQUEST: StaticSchema = (18, n0, _IR, {_smit: _c, _sE: 400})

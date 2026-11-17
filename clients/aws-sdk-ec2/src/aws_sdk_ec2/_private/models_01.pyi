@@ -63,8 +63,6 @@ from ..models import (
     InstanceEventWindowTimeRangeRequestDict,
     InstanceFlexCostAllocationPolicyDocument,
     InstanceFlexCostAllocationPolicyDocumentDict,
-    InstanceIpv6Address,
-    InstanceIpv6AddressDict,
     InstanceRequirementsRequest,
     InstanceRequirementsRequestDict,
     InternetGateway,
@@ -84,10 +82,6 @@ from ..models import (
     IpamResourceDiscovery,
     IpamRoutingPolicyRegistrationDelta,
     IpamScope,
-    Ipv4PrefixSpecificationRequest,
-    Ipv4PrefixSpecificationRequestDict,
-    Ipv6PrefixSpecificationRequest,
-    Ipv6PrefixSpecificationRequestDict,
     LaunchTemplate,
     LaunchTemplateAndOverridesResponse,
     LaunchTemplateVersion,
@@ -108,30 +102,20 @@ from ..models import (
     NatFlexCostAllocationPolicyDocumentDict,
     NatGateway,
     NetworkAcl,
-    NetworkInsightsAccessScope,
-    NetworkInsightsAccessScopeContent,
-    NetworkInsightsPath,
-    NetworkInterface,
-    NetworkInterfacePermission,
     NewDhcpConfiguration,
     NewDhcpConfigurationDict,
     OnDemandOptionsRequest,
     OnDemandOptionsRequestDict,
     OperatorRequest,
     OperatorRequestDict,
-    PathRequestFilter,
-    PathRequestFilterDict,
     PcxFlexCostAllocationPolicyDocument,
     PcxFlexCostAllocationPolicyDocumentDict,
     PerformanceFactorReference,
     PerformanceFactorReferenceDict,
     PerformanceFactorReferenceRequest,
     PerformanceFactorReferenceRequestDict,
-    PlacementGroup,
     PortRange,
     PortRangeDict,
-    PrivateIpAddressSpecification,
-    PrivateIpAddressSpecificationDict,
     RequestIpamResourceTag,
     RequestIpamResourceTagDict,
     RequestLaunchTemplateData,
@@ -140,6 +124,7 @@ from ..models import (
     ReservationFleetInstanceSpecificationDict,
     ReservedCapacityOptionsRequest,
     ReservedCapacityOptionsRequestDict,
+    ReservedInstancesListing,
     SpotOptionsRequest,
     SpotOptionsRequestDict,
     StorageLocation,
@@ -161,6 +146,149 @@ from ..models import (
     Vpc,
     _SerdeShape,
 )
+
+@dataclass(kw_only=True)
+class CancelReservedInstancesListingOutput(_SerdeShape):
+    """Contains the output of CancelReservedInstancesListing."""
+
+    reserved_instances_listings: list[ReservedInstancesListing] | None = ...
+    """The Reserved Instance listing."""
+    response_metadata: ResponseMetadata = ...
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+@dataclass(kw_only=True)
+class CancelSpotFleetRequestsError(_SerdeShape):
+    """Describes a Spot Fleet error."""
+
+    code: str | None = ...
+    """The error code."""
+    message: str | None = ...
+    """The description for the error code."""
+
+@dataclass(kw_only=True)
+class CancelSpotFleetRequestsErrorItem(_SerdeShape):
+    """Describes a Spot Fleet request that was not successfully canceled."""
+
+    error: CancelSpotFleetRequestsError | None = ...
+    """The error."""
+    spot_fleet_request_id: str | None = ...
+    """The ID of the Spot Fleet request."""
+
+@dataclass(kw_only=True)
+class CancelSpotFleetRequestsInput(_SerdeShape):
+    """Contains the parameters for CancelSpotFleetRequests."""
+
+    dry_run: bool | None = ...
+    """
+    Checks whether you have the required permissions for the action, without
+    actually making the request, and provides an error response. If you have
+    the required permissions, the error response is `DryRunOperation`.
+    Otherwise, it is `UnauthorizedOperation`.
+    """
+    spot_fleet_request_ids: list[str] | None = ...
+    """
+    The IDs of the Spot Fleet requests.
+
+    Constraint: You can specify up to 100 IDs in a single request.
+    """
+    terminate_instances: bool | None = ...
+    """
+    Indicates whether to terminate the associated instances when the Spot
+    Fleet request is canceled. The default is to terminate the instances.
+
+    To let the instances continue to run after the Spot Fleet request is
+    canceled, specify `no-terminate-instances`.
+    """
+
+class CancelSpotFleetRequestsInputDict(TypedDict, total=False):
+    """Dictionary form of `CancelSpotFleetRequestsInput`."""
+
+    dry_run: bool | None
+    """
+    Checks whether you have the required permissions for the action, without
+    actually making the request, and provides an error response. If you have
+    the required permissions, the error response is `DryRunOperation`.
+    Otherwise, it is `UnauthorizedOperation`.
+    """
+    spot_fleet_request_ids: Required[Sequence[str]]
+    """
+    The IDs of the Spot Fleet requests.
+
+    Constraint: You can specify up to 100 IDs in a single request.
+    """
+    terminate_instances: Required[bool]
+    """
+    Indicates whether to terminate the associated instances when the Spot
+    Fleet request is canceled. The default is to terminate the instances.
+
+    To let the instances continue to run after the Spot Fleet request is
+    canceled, specify `no-terminate-instances`.
+    """
+
+@dataclass(kw_only=True)
+class CancelSpotFleetRequestsOutput(_SerdeShape):
+    """Contains the output of CancelSpotFleetRequests."""
+
+    successful_fleet_requests: list[CancelSpotFleetRequestsSuccessItem] | None = ...
+    """
+    Information about the Spot Fleet requests that are successfully
+    canceled.
+    """
+    unsuccessful_fleet_requests: list[CancelSpotFleetRequestsErrorItem] | None = ...
+    """
+    Information about the Spot Fleet requests that are not successfully
+    canceled.
+    """
+    response_metadata: ResponseMetadata = ...
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+@dataclass(kw_only=True)
+class CancelSpotFleetRequestsSuccessItem(_SerdeShape):
+    """Describes a Spot Fleet request that was successfully canceled."""
+
+    current_spot_fleet_request_state: str | None = ...
+    """The current state of the Spot Fleet request."""
+    previous_spot_fleet_request_state: str | None = ...
+    """The previous state of the Spot Fleet request."""
+    spot_fleet_request_id: str | None = ...
+    """The ID of the Spot Fleet request."""
+
+@dataclass(kw_only=True)
+class CancelSpotInstanceRequestsInput(_SerdeShape):
+    """Contains the parameters for CancelSpotInstanceRequests."""
+
+    dry_run: bool | None = ...
+    """
+    Checks whether you have the required permissions for the action, without
+    actually making the request, and provides an error response. If you have
+    the required permissions, the error response is `DryRunOperation`.
+    Otherwise, it is `UnauthorizedOperation`.
+    """
+    spot_instance_request_ids: list[str] | None = ...
+    """The IDs of the Spot Instance requests."""
+
+class CancelSpotInstanceRequestsInputDict(TypedDict, total=False):
+    """Dictionary form of `CancelSpotInstanceRequestsInput`."""
+
+    dry_run: bool | None
+    """
+    Checks whether you have the required permissions for the action, without
+    actually making the request, and provides an error response. If you have
+    the required permissions, the error response is `DryRunOperation`.
+    Otherwise, it is `UnauthorizedOperation`.
+    """
+    spot_instance_request_ids: Required[Sequence[str]]
+    """The IDs of the Spot Instance requests."""
 
 @dataclass(kw_only=True)
 class CancelSpotInstanceRequestsOutput(_SerdeShape):
@@ -370,6 +498,23 @@ class CapacityBlockExtensionStatus(UnknownEnumMixin, StrEnum):
     PAYMENT_FAILED = "payment-failed"
     PAYMENT_SUCCEEDED = "payment-succeeded"
 
+@dataclass(kw_only=True)
+class CapacityBlockInstanceTypePreference(_SerdeShape):
+    """
+    Instance type preference for a Capacity Block search. Specifies one or
+    more instance types to evaluate when searching for available Capacity
+    Blocks.
+    """
+
+    instance_type: str | None = ...
+    """The instance type to consider in the Capacity Block search."""
+
+class CapacityBlockInstanceTypePreferenceDict(TypedDict, total=False):
+    """Dictionary form of `CapacityBlockInstanceTypePreference`."""
+
+    instance_type: str | None
+    """The instance type to consider in the Capacity Block search."""
+
 class CapacityBlockInterconnectStatus(UnknownEnumMixin, StrEnum):
     OK = "ok"
     IMPAIRED = "impaired"
@@ -417,6 +562,52 @@ class CapacityBlockOffering(_SerdeShape):
     """
     zone_type: str | None = ...
     """The type of zone where the Capacity Block offering is available."""
+    capacity_block_offering_segments: list[CapacityBlockOfferingSegment] | None = ...
+    """
+    The individual segments that compose the Capacity Block offering. Each
+    segment describes a distinct block of capacity with its own Availability
+    Zone, instance type, schedule, and pricing.
+    """
+
+@dataclass(kw_only=True)
+class CapacityBlockOfferingSegment(_SerdeShape):
+    """
+    Describes an individual segment within a Capacity Block offering. Each
+    segment represents a distinct block of capacity with its own
+    Availability Zone, instance type, duration, pricing, and schedule.
+    """
+
+    instance_type: str | None = ...
+    """The instance type of the Capacity Block offering segment."""
+    availability_zone: str | None = ...
+    """The Availability Zone of the Capacity Block offering segment."""
+    availability_zone_id: str | None = ...
+    """The ID of the Availability Zone for the Capacity Block offering segment."""
+    instance_count: int | None = ...
+    """The number of instances in the Capacity Block offering segment."""
+    start_date: datetime | None = ...
+    """The start date of the Capacity Block offering segment."""
+    end_date: datetime | None = ...
+    """The end date of the Capacity Block offering segment."""
+    capacity_block_duration_hours: int | None = ...
+    """
+    The number of hours for the duration of the Capacity Block offering
+    segment.
+    """
+    capacity_block_duration_minutes: int | None = ...
+    """
+    The number of minutes for the duration of the Capacity Block offering
+    segment.
+    """
+    upfront_fee: str | None = ...
+    """
+    The total price to be paid up front for the Capacity Block offering
+    segment.
+    """
+    currency_code: str | None = ...
+    """The currency of the payment for the Capacity Block offering segment."""
+    zone_type: str | None = ...
+    """The type of zone where the Capacity Block offering segment is available."""
 
 class CapacityBlockResourceState(UnknownEnumMixin, StrEnum):
     ACTIVE = "active"
@@ -10724,612 +10915,4 @@ class CreateNetworkInsightsAccessScopeInputDict(TypedDict, total=False):
     actually making the request, and provides an error response. If you have
     the required permissions, the error response is `DryRunOperation`.
     Otherwise, it is `UnauthorizedOperation`.
-    """
-
-@dataclass(kw_only=True)
-class CreateNetworkInsightsAccessScopeOutput(_SerdeShape):
-    """Dataclass for CreateNetworkInsightsAccessScopeOutput structure."""
-
-    network_insights_access_scope: NetworkInsightsAccessScope | None = ...
-    """The Network Access Scope."""
-    network_insights_access_scope_content: (
-        NetworkInsightsAccessScopeContent | None
-    ) = ...
-    """The Network Access Scope content."""
-    response_metadata: ResponseMetadata = ...
-    """
-    Metadata about the response that produced this output. Use this to
-    recover the request identifiers a service's support team needs in order
-    to investigate a call. Members of the metadata are individually
-    optional.
-    """
-
-@dataclass(kw_only=True)
-class CreateNetworkInsightsPathInput(_SerdeShape):
-    """Dataclass for CreateNetworkInsightsPathInput structure."""
-
-    source_ip: str | None = ...
-    """The IP address of the source."""
-    destination_ip: str | None = ...
-    """The IP address of the destination."""
-    source: str | None = ...
-    """
-    The ID or ARN of the source. If the resource is in another account, you
-    must specify an ARN.
-    """
-    destination: str | None = ...
-    """
-    The ID or ARN of the destination. If the resource is in another account,
-    you must specify an ARN.
-    """
-    protocol: str | None = ...
-    """The protocol."""
-    destination_port: int | None = ...
-    """The destination port."""
-    tag_specifications: list[TagSpecification] | None = ...
-    """The tags to add to the path."""
-    dry_run: bool | None = ...
-    """
-    Checks whether you have the required permissions for the action, without
-    actually making the request, and provides an error response. If you have
-    the required permissions, the error response is `DryRunOperation`.
-    Otherwise, it is `UnauthorizedOperation`.
-    """
-    client_token: str | None = ...
-    """
-    Unique, case-sensitive identifier that you provide to ensure the
-    idempotency of the request. For more information, see [How to ensure
-    idempotency](https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html).
-
-    This field is autopopulated if not provided.
-    """
-    filter_at_source: PathRequestFilter | None = ...
-    """
-    Scopes the analysis to network paths that match specific filters at the
-    source. If you specify this parameter, you can't specify the parameters
-    for the source IP address or the destination port.
-    """
-    filter_at_destination: PathRequestFilter | None = ...
-    """
-    Scopes the analysis to network paths that match specific filters at the
-    destination. If you specify this parameter, you can't specify the
-    parameter for the destination IP address.
-    """
-
-class CreateNetworkInsightsPathInputDict(TypedDict, total=False):
-    """Dictionary form of `CreateNetworkInsightsPathInput`."""
-
-    source_ip: str | None
-    """The IP address of the source."""
-    destination_ip: str | None
-    """The IP address of the destination."""
-    source: Required[str]
-    """
-    The ID or ARN of the source. If the resource is in another account, you
-    must specify an ARN.
-    """
-    destination: str | None
-    """
-    The ID or ARN of the destination. If the resource is in another account,
-    you must specify an ARN.
-    """
-    protocol: Required[str]
-    """The protocol."""
-    destination_port: int | None
-    """The destination port."""
-    tag_specifications: Sequence[TagSpecification | TagSpecificationDict] | None
-    """The tags to add to the path."""
-    dry_run: bool | None
-    """
-    Checks whether you have the required permissions for the action, without
-    actually making the request, and provides an error response. If you have
-    the required permissions, the error response is `DryRunOperation`.
-    Otherwise, it is `UnauthorizedOperation`.
-    """
-    client_token: str | None
-    """
-    Unique, case-sensitive identifier that you provide to ensure the
-    idempotency of the request. For more information, see [How to ensure
-    idempotency](https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html).
-
-    This field is autopopulated if not provided.
-    """
-    filter_at_source: PathRequestFilter | PathRequestFilterDict | None
-    """
-    Scopes the analysis to network paths that match specific filters at the
-    source. If you specify this parameter, you can't specify the parameters
-    for the source IP address or the destination port.
-    """
-    filter_at_destination: PathRequestFilter | PathRequestFilterDict | None
-    """
-    Scopes the analysis to network paths that match specific filters at the
-    destination. If you specify this parameter, you can't specify the
-    parameter for the destination IP address.
-    """
-
-@dataclass(kw_only=True)
-class CreateNetworkInsightsPathOutput(_SerdeShape):
-    """Dataclass for CreateNetworkInsightsPathOutput structure."""
-
-    network_insights_path: NetworkInsightsPath | None = ...
-    """Information about the path."""
-    response_metadata: ResponseMetadata = ...
-    """
-    Metadata about the response that produced this output. Use this to
-    recover the request identifiers a service's support team needs in order
-    to investigate a call. Members of the metadata are individually
-    optional.
-    """
-
-@dataclass(kw_only=True)
-class CreateNetworkInterfaceInput(_SerdeShape):
-    """Dataclass for CreateNetworkInterfaceInput structure."""
-
-    ipv4_prefixes: list[Ipv4PrefixSpecificationRequest] | None = ...
-    """
-    The IPv4 prefixes assigned to the network interface.
-
-    You can't specify IPv4 prefixes if you've specified one of the
-    following: a count of IPv4 prefixes, specific private IPv4 addresses, or
-    a count of private IPv4 addresses.
-    """
-    ipv4_prefix_count: int | None = ...
-    """
-    The number of IPv4 prefixes that Amazon Web Services automatically
-    assigns to the network interface.
-
-    You can't specify a count of IPv4 prefixes if you've specified one of
-    the following: specific IPv4 prefixes, specific private IPv4 addresses,
-    or a count of private IPv4 addresses.
-    """
-    ipv6_prefixes: list[Ipv6PrefixSpecificationRequest] | None = ...
-    """
-    The IPv6 prefixes assigned to the network interface.
-
-    You can't specify IPv6 prefixes if you've specified one of the
-    following: a count of IPv6 prefixes, specific IPv6 addresses, or a count
-    of IPv6 addresses.
-    """
-    ipv6_prefix_count: int | None = ...
-    """
-    The number of IPv6 prefixes that Amazon Web Services automatically
-    assigns to the network interface.
-
-    You can't specify a count of IPv6 prefixes if you've specified one of
-    the following: specific IPv6 prefixes, specific IPv6 addresses, or a
-    count of IPv6 addresses.
-    """
-    interface_type: str | None = ...
-    """
-    The type of network interface. The default is `interface`.
-
-    If you specify `efa-only`, do not assign any IP addresses to the network
-    interface. EFA-only network interfaces do not support IP addresses.
-
-    The only supported values are `interface`, `efa`, `efa-only`, and
-    `trunk`.
-    """
-    tag_specifications: list[TagSpecification] | None = ...
-    """The tags to apply to the new network interface."""
-    client_token: str | None = ...
-    """
-    Unique, case-sensitive identifier that you provide to ensure the
-    idempotency of the request. For more information, see [Ensuring
-    idempotency](https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html).
-
-    This field is autopopulated if not provided.
-    """
-    enable_primary_ipv6: bool | None = ...
-    """
-    If you're creating a network interface in a dual-stack or IPv6-only
-    subnet, you have the option to assign a primary IPv6 IP address. A
-    primary IPv6 address is an IPv6 GUA address associated with an ENI that
-    you have enabled to use a primary IPv6 address. Use this option if the
-    instance that this ENI will be attached to relies on its IPv6 address
-    not changing. Amazon Web Services will automatically assign an IPv6
-    address associated with the ENI attached to your instance to be the
-    primary IPv6 address. Once you enable an IPv6 GUA address to be a
-    primary IPv6, you cannot disable it. When you enable an IPv6 GUA address
-    to be a primary IPv6, the first IPv6 GUA will be made the primary IPv6
-    address until the instance is terminated or the network interface is
-    detached. If you have multiple IPv6 addresses associated with an ENI
-    attached to your instance and you enable a primary IPv6 address, the
-    first IPv6 GUA address associated with the ENI becomes the primary IPv6
-    address.
-    """
-    connection_tracking_specification: (
-        ConnectionTrackingSpecificationRequest | None
-    ) = ...
-    """A connection tracking specification for the network interface."""
-    operator: OperatorRequest | None = ...
-    """Reserved for internal use."""
-    subnet_id: str | None = ...
-    """The ID of the subnet to associate with the network interface."""
-    description: str | None = ...
-    """A description for the network interface."""
-    private_ip_address: str | None = ...
-    """
-    The primary private IPv4 address of the network interface. If you don't
-    specify an IPv4 address, Amazon EC2 selects one for you from the
-    subnet's IPv4 CIDR range. If you specify an IP address, you cannot
-    indicate any IP addresses specified in `privateIpAddresses` as primary
-    (only one IP address can be designated as primary).
-    """
-    groups: list[str] | None = ...
-    """The IDs of the security groups."""
-    private_ip_addresses: list[PrivateIpAddressSpecification] | None = ...
-    """
-    The private IPv4 addresses.
-
-    You can't specify private IPv4 addresses if you've specified one of
-    the following: a count of private IPv4 addresses, specific IPv4
-    prefixes, or a count of IPv4 prefixes.
-    """
-    secondary_private_ip_address_count: int | None = ...
-    """
-    The number of secondary private IPv4 addresses to assign to a network
-    interface. When you specify a number of secondary IPv4 addresses, Amazon
-    EC2 selects these IP addresses within the subnet's IPv4 CIDR range. You
-    can't specify this option and specify more than one private IP address
-    using `privateIpAddresses`.
-
-    You can't specify a count of private IPv4 addresses if you've
-    specified one of the following: specific private IPv4 addresses,
-    specific IPv4 prefixes, or a count of IPv4 prefixes.
-    """
-    ipv6_addresses: list[InstanceIpv6Address] | None = ...
-    """
-    The IPv6 addresses from the IPv6 CIDR block range of your subnet.
-
-    You can't specify IPv6 addresses using this parameter if you've
-    specified one of the following: a count of IPv6 addresses, specific IPv6
-    prefixes, or a count of IPv6 prefixes.
-    """
-    ipv6_address_count: int | None = ...
-    """
-    The number of IPv6 addresses to assign to a network interface. Amazon
-    EC2 automatically selects the IPv6 addresses from the subnet range.
-
-    You can't specify a count of IPv6 addresses using this parameter if
-    you've specified one of the following: specific IPv6 addresses,
-    specific IPv6 prefixes, or a count of IPv6 prefixes.
-
-    If your subnet has the `AssignIpv6AddressOnCreation` attribute set, you
-    can override that setting by specifying 0 as the IPv6 address count.
-    """
-    dry_run: bool | None = ...
-    """
-    Checks whether you have the required permissions for the action, without
-    actually making the request, and provides an error response. If you have
-    the required permissions, the error response is `DryRunOperation`.
-    Otherwise, it is `UnauthorizedOperation`.
-    """
-
-class CreateNetworkInterfaceInputDict(TypedDict, total=False):
-    """Dictionary form of `CreateNetworkInterfaceInput`."""
-
-    ipv4_prefixes: (
-        Sequence[Ipv4PrefixSpecificationRequest | Ipv4PrefixSpecificationRequestDict]
-        | None
-    )
-    """
-    The IPv4 prefixes assigned to the network interface.
-
-    You can't specify IPv4 prefixes if you've specified one of the
-    following: a count of IPv4 prefixes, specific private IPv4 addresses, or
-    a count of private IPv4 addresses.
-    """
-    ipv4_prefix_count: int | None
-    """
-    The number of IPv4 prefixes that Amazon Web Services automatically
-    assigns to the network interface.
-
-    You can't specify a count of IPv4 prefixes if you've specified one of
-    the following: specific IPv4 prefixes, specific private IPv4 addresses,
-    or a count of private IPv4 addresses.
-    """
-    ipv6_prefixes: (
-        Sequence[Ipv6PrefixSpecificationRequest | Ipv6PrefixSpecificationRequestDict]
-        | None
-    )
-    """
-    The IPv6 prefixes assigned to the network interface.
-
-    You can't specify IPv6 prefixes if you've specified one of the
-    following: a count of IPv6 prefixes, specific IPv6 addresses, or a count
-    of IPv6 addresses.
-    """
-    ipv6_prefix_count: int | None
-    """
-    The number of IPv6 prefixes that Amazon Web Services automatically
-    assigns to the network interface.
-
-    You can't specify a count of IPv6 prefixes if you've specified one of
-    the following: specific IPv6 prefixes, specific IPv6 addresses, or a
-    count of IPv6 addresses.
-    """
-    interface_type: str | None
-    """
-    The type of network interface. The default is `interface`.
-
-    If you specify `efa-only`, do not assign any IP addresses to the network
-    interface. EFA-only network interfaces do not support IP addresses.
-
-    The only supported values are `interface`, `efa`, `efa-only`, and
-    `trunk`.
-    """
-    tag_specifications: Sequence[TagSpecification | TagSpecificationDict] | None
-    """The tags to apply to the new network interface."""
-    client_token: str | None
-    """
-    Unique, case-sensitive identifier that you provide to ensure the
-    idempotency of the request. For more information, see [Ensuring
-    idempotency](https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html).
-
-    This field is autopopulated if not provided.
-    """
-    enable_primary_ipv6: bool | None
-    """
-    If you're creating a network interface in a dual-stack or IPv6-only
-    subnet, you have the option to assign a primary IPv6 IP address. A
-    primary IPv6 address is an IPv6 GUA address associated with an ENI that
-    you have enabled to use a primary IPv6 address. Use this option if the
-    instance that this ENI will be attached to relies on its IPv6 address
-    not changing. Amazon Web Services will automatically assign an IPv6
-    address associated with the ENI attached to your instance to be the
-    primary IPv6 address. Once you enable an IPv6 GUA address to be a
-    primary IPv6, you cannot disable it. When you enable an IPv6 GUA address
-    to be a primary IPv6, the first IPv6 GUA will be made the primary IPv6
-    address until the instance is terminated or the network interface is
-    detached. If you have multiple IPv6 addresses associated with an ENI
-    attached to your instance and you enable a primary IPv6 address, the
-    first IPv6 GUA address associated with the ENI becomes the primary IPv6
-    address.
-    """
-    connection_tracking_specification: (
-        ConnectionTrackingSpecificationRequest
-        | ConnectionTrackingSpecificationRequestDict
-        | None
-    )
-    """A connection tracking specification for the network interface."""
-    operator: OperatorRequest | OperatorRequestDict | None
-    """Reserved for internal use."""
-    subnet_id: Required[str]
-    """The ID of the subnet to associate with the network interface."""
-    description: str | None
-    """A description for the network interface."""
-    private_ip_address: str | None
-    """
-    The primary private IPv4 address of the network interface. If you don't
-    specify an IPv4 address, Amazon EC2 selects one for you from the
-    subnet's IPv4 CIDR range. If you specify an IP address, you cannot
-    indicate any IP addresses specified in `privateIpAddresses` as primary
-    (only one IP address can be designated as primary).
-    """
-    groups: Sequence[str] | None
-    """The IDs of the security groups."""
-    private_ip_addresses: (
-        Sequence[PrivateIpAddressSpecification | PrivateIpAddressSpecificationDict]
-        | None
-    )
-    """
-    The private IPv4 addresses.
-
-    You can't specify private IPv4 addresses if you've specified one of
-    the following: a count of private IPv4 addresses, specific IPv4
-    prefixes, or a count of IPv4 prefixes.
-    """
-    secondary_private_ip_address_count: int | None
-    """
-    The number of secondary private IPv4 addresses to assign to a network
-    interface. When you specify a number of secondary IPv4 addresses, Amazon
-    EC2 selects these IP addresses within the subnet's IPv4 CIDR range. You
-    can't specify this option and specify more than one private IP address
-    using `privateIpAddresses`.
-
-    You can't specify a count of private IPv4 addresses if you've
-    specified one of the following: specific private IPv4 addresses,
-    specific IPv4 prefixes, or a count of IPv4 prefixes.
-    """
-    ipv6_addresses: Sequence[InstanceIpv6Address | InstanceIpv6AddressDict] | None
-    """
-    The IPv6 addresses from the IPv6 CIDR block range of your subnet.
-
-    You can't specify IPv6 addresses using this parameter if you've
-    specified one of the following: a count of IPv6 addresses, specific IPv6
-    prefixes, or a count of IPv6 prefixes.
-    """
-    ipv6_address_count: int | None
-    """
-    The number of IPv6 addresses to assign to a network interface. Amazon
-    EC2 automatically selects the IPv6 addresses from the subnet range.
-
-    You can't specify a count of IPv6 addresses using this parameter if
-    you've specified one of the following: specific IPv6 addresses,
-    specific IPv6 prefixes, or a count of IPv6 prefixes.
-
-    If your subnet has the `AssignIpv6AddressOnCreation` attribute set, you
-    can override that setting by specifying 0 as the IPv6 address count.
-    """
-    dry_run: bool | None
-    """
-    Checks whether you have the required permissions for the action, without
-    actually making the request, and provides an error response. If you have
-    the required permissions, the error response is `DryRunOperation`.
-    Otherwise, it is `UnauthorizedOperation`.
-    """
-
-@dataclass(kw_only=True)
-class CreateNetworkInterfaceOutput(_SerdeShape):
-    """Dataclass for CreateNetworkInterfaceOutput structure."""
-
-    network_interface: NetworkInterface | None = ...
-    """Information about the network interface."""
-    client_token: str | None = ...
-    """
-    The token to use to retrieve the next page of results. This value is
-    `null` when there are no more results to return.
-    """
-    response_metadata: ResponseMetadata = ...
-    """
-    Metadata about the response that produced this output. Use this to
-    recover the request identifiers a service's support team needs in order
-    to investigate a call. Members of the metadata are individually
-    optional.
-    """
-
-@dataclass(kw_only=True)
-class CreateNetworkInterfacePermissionInput(_SerdeShape):
-    """Contains the parameters for CreateNetworkInterfacePermission."""
-
-    network_interface_id: str | None = ...
-    """The ID of the network interface."""
-    aws_account_id: str | None = ...
-    """The Amazon Web Services account ID."""
-    aws_service: str | None = ...
-    """The Amazon Web Services service. Currently not supported."""
-    permission: str | None = ...
-    """The type of permission to grant."""
-    dry_run: bool | None = ...
-    """
-    Checks whether you have the required permissions for the action, without
-    actually making the request, and provides an error response. If you have
-    the required permissions, the error response is `DryRunOperation`.
-    Otherwise, it is `UnauthorizedOperation`.
-    """
-
-class CreateNetworkInterfacePermissionInputDict(TypedDict, total=False):
-    """Dictionary form of `CreateNetworkInterfacePermissionInput`."""
-
-    network_interface_id: Required[str]
-    """The ID of the network interface."""
-    aws_account_id: str | None
-    """The Amazon Web Services account ID."""
-    aws_service: str | None
-    """The Amazon Web Services service. Currently not supported."""
-    permission: Required[str]
-    """The type of permission to grant."""
-    dry_run: bool | None
-    """
-    Checks whether you have the required permissions for the action, without
-    actually making the request, and provides an error response. If you have
-    the required permissions, the error response is `DryRunOperation`.
-    Otherwise, it is `UnauthorizedOperation`.
-    """
-
-@dataclass(kw_only=True)
-class CreateNetworkInterfacePermissionOutput(_SerdeShape):
-    """Contains the output of CreateNetworkInterfacePermission."""
-
-    interface_permission: NetworkInterfacePermission | None = ...
-    """Information about the permission for the network interface."""
-    response_metadata: ResponseMetadata = ...
-    """
-    Metadata about the response that produced this output. Use this to
-    recover the request identifiers a service's support team needs in order
-    to investigate a call. Members of the metadata are individually
-    optional.
-    """
-
-@dataclass(kw_only=True)
-class CreatePlacementGroupInput(_SerdeShape):
-    """Dataclass for CreatePlacementGroupInput structure."""
-
-    partition_count: int | None = ...
-    """
-    The number of partitions. Valid only when **Strategy** is set to
-    `partition`.
-    """
-    tag_specifications: list[TagSpecification] | None = ...
-    """The tags to apply to the new placement group."""
-    spread_level: str | None = ...
-    """
-    Determines how placement groups spread instances.
-
-    - Host -- You can use `host` only with Outpost placement groups.
-
-    - Rack -- No usage restrictions.
-    """
-    linked_group_id: str | None = ...
-    """Reserved for future use."""
-    operator: OperatorRequest | None = ...
-    """Reserved for internal use."""
-    parent_group_id: str | None = ...
-    """
-    The ID of a parent placement group. Valid only when **Strategy** is set
-    to `cluster`.
-    """
-    dry_run: bool | None = ...
-    """
-    Checks whether you have the required permissions for the operation,
-    without actually making the request, and provides an error response. If
-    you have the required permissions, the error response is
-    `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    """
-    group_name: str | None = ...
-    """
-    A name for the placement group. Must be unique within the scope of your
-    account for the Region.
-
-    Constraints: Up to 255 ASCII characters
-    """
-    strategy: str | None = ...
-    """The placement strategy."""
-
-class CreatePlacementGroupInputDict(TypedDict, total=False):
-    """Dictionary form of `CreatePlacementGroupInput`."""
-
-    partition_count: int | None
-    """
-    The number of partitions. Valid only when **Strategy** is set to
-    `partition`.
-    """
-    tag_specifications: Sequence[TagSpecification | TagSpecificationDict] | None
-    """The tags to apply to the new placement group."""
-    spread_level: str | None
-    """
-    Determines how placement groups spread instances.
-
-    - Host -- You can use `host` only with Outpost placement groups.
-
-    - Rack -- No usage restrictions.
-    """
-    linked_group_id: str | None
-    """Reserved for future use."""
-    operator: OperatorRequest | OperatorRequestDict | None
-    """Reserved for internal use."""
-    parent_group_id: str | None
-    """
-    The ID of a parent placement group. Valid only when **Strategy** is set
-    to `cluster`.
-    """
-    dry_run: bool | None
-    """
-    Checks whether you have the required permissions for the operation,
-    without actually making the request, and provides an error response. If
-    you have the required permissions, the error response is
-    `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    """
-    group_name: str | None
-    """
-    A name for the placement group. Must be unique within the scope of your
-    account for the Region.
-
-    Constraints: Up to 255 ASCII characters
-    """
-    strategy: str | None
-    """The placement strategy."""
-
-@dataclass(kw_only=True)
-class CreatePlacementGroupOutput(_SerdeShape):
-    """Dataclass for CreatePlacementGroupOutput structure."""
-
-    placement_group: PlacementGroup | None = ...
-    """Information about the placement group."""
-    response_metadata: ResponseMetadata = ...
-    """
-    Metadata about the response that produced this output. Use this to
-    recover the request identifiers a service's support team needs in order
-    to investigate a call. Members of the metadata are individually
-    optional.
     """

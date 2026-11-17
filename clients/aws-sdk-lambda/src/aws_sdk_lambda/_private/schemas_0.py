@@ -6,8 +6,19 @@ from smithy_core._schema_compact import StaticOperationSchema, StaticSchema
 
 
 n0 = "com.amazonaws.lambda"
+_AMGB = "AcceleratorMemoryGB"
+_M = "MEMORY_3"
+_sV = "smithy.api#enumValue"
+_M_ = "MEMORY_6"
+_M__ = "MEMORY_12"
+_M___ = "MEMORY_16"
+_M____ = "MEMORY_24"
+_M_____ = "MEMORY_48"
+_AC = "AcceleratorConfig"
+_AMS = "AcceleratorMemorySize"
+_s = "smithy.api#required"
 _L = "Long"
-_s = "smithy.api#default"
+_sm = "smithy.api#default"
 _I = "Integer"
 _UCE = "UnreservedConcurrentExecutions"
 _AL = "AccountLimit"
@@ -33,9 +44,8 @@ _LVN = "LayerVersionNumber"
 _ALVPI = "AddLayerVersionPermissionInput"
 _sSI = "smithy.synthetic#originalShapeId"
 _cALVPR = "com.amazonaws.lambda#AddLayerVersionPermissionRequest"
-_sm = "smithy.api#input"
+_smi = "smithy.api#input"
 _LN = "LayerName"
-_smi = "smithy.api#required"
 _sL = "smithy.api#httpLabel"
 _VN = "VersionNumber"
 _P = "Principal"
@@ -55,12 +65,11 @@ _PLEE = "PolicyLengthExceededException"
 _PFE = "PreconditionFailedException"
 _RCE = "ResourceConflictException"
 _RNFE = "ResourceNotFoundException"
-_M = "Message"
+_Me = "Message"
 _SE = "ServiceException"
 _se = "server"
 _TR = "ThrottleReason"
 _CILE = "ConcurrentInvocationLimitExceeded"
-_sV = "smithy.api#enumValue"
 _FIRLE = "FunctionInvocationRateLimitExceeded"
 _RFCILE = "ReservedFunctionConcurrentInvocationLimitExceeded"
 _RFIRLE = "ReservedFunctionInvocationRateLimitExceeded"
@@ -98,7 +107,7 @@ _FA = "FunctionArn"
 _D = "Description"
 _V = "Version"
 _ARC = "AliasRoutingConfiguration"
-_AC = "AliasConfiguration"
+_ACl = "AliasConfiguration"
 _AA = "AliasArn"
 _N = "Name"
 _FV = "FunctionVersion"
@@ -106,10 +115,10 @@ _RC = "RoutingConfig"
 _ALEE = "AliasLimitExceededException"
 _ALl = "AliasList"
 _me = "member"
-_ACl = "AllowCredentials"
+_ACll = "AllowCredentials"
 _SPVA = "SigningProfileVersionArns"
 _APl = "AllowedPublishers"
-_Me = "Method"
+_Met = "Method"
 _AML = "AllowMethodsList"
 _O = "Origin"
 _AOL = "AllowOriginsList"
@@ -165,6 +174,7 @@ _Au = "Auto"
 _Ma = "Manual"
 _CPPMT = "CapacityProviderPredefinedMetricType"
 _LCPACPUU = "LambdaCapacityProviderAverageCPUUtilization"
+_LCPAGPUU = "LambdaCapacityProviderAverageGPUUtilization"
 _MTV = "MetricTargetValue"
 _TTSP = "TargetTrackingScalingPolicy"
 _PMT = "PredefinedMetricType"
@@ -260,9 +270,34 @@ _cLFVBCPRo = "com.amazonaws.lambda#ListFunctionVersionsByCapacityProviderRespons
 _FVu = "FunctionVersions"
 _LFVBCP = "ListFunctionVersionsByCapacityProvider"
 
-LONG: StaticSchema = (8, n0, _L, {_s: 0})
+ACCELERATOR_MEMORY_GB: StaticSchema = (
+    15,
+    n0,
+    _AMGB,
+    0,
+    (_M, _M_, _M__, _M___, _M____, _M_____),
+    (
+        (-1, {_sV: 3}),
+        (-1, {_sV: 6}),
+        (-1, {_sV: 12}),
+        (-1, {_sV: 16}),
+        (-1, {_sV: 24}),
+        (-1, {_sV: 48}),
+    ),
+)
 
-INTEGER: StaticSchema = (7, n0, _I, {_s: 0})
+ACCELERATOR_CONFIG: StaticSchema = (
+    18,
+    n0,
+    _AC,
+    0,
+    (_AMS,),
+    ((ACCELERATOR_MEMORY_GB, 1),),
+)
+
+LONG: StaticSchema = (8, n0, _L, {_sm: 0})
+
+INTEGER: StaticSchema = (7, n0, _I, {_sm: 0})
 
 UNRESERVED_CONCURRENT_EXECUTIONS: StaticSchema = (7, n0, _UCE, 0)
 
@@ -273,10 +308,10 @@ ACCOUNT_LIMIT: StaticSchema = (
     0,
     (_TCS, _CSU, _CSZ, _CE, _UCE),
     (
-        (LONG, {_s: 0}),
-        (LONG, {_s: 0}),
-        (LONG, {_s: 0}),
-        (INTEGER, {_s: 0}),
+        (LONG, {_sm: 0}),
+        (LONG, {_sm: 0}),
+        (LONG, {_sm: 0}),
+        (INTEGER, {_sm: 0}),
         (UNRESERVED_CONCURRENT_EXECUTIONS, 0),
     ),
 )
@@ -287,14 +322,14 @@ ACCOUNT_USAGE: StaticSchema = (
     _AU,
     0,
     (_TCS, _FC),
-    ((LONG, {_s: 0}), (LONG, {_s: 0})),
+    ((LONG, {_sm: 0}), (LONG, {_sm: 0})),
 )
 
 ACTION: StaticSchema = (3, n0, _A, 0)
 
 ADDITIONAL_VERSION: StaticSchema = (3, n0, _AV, 0)
 
-WEIGHT: StaticSchema = (10, n0, _W, {_s: 0})
+WEIGHT: StaticSchema = (10, n0, _W, {_sm: 0})
 
 ADDITIONAL_VERSION_WEIGHTS: StaticSchema = (
     17,
@@ -317,17 +352,17 @@ STRING: StaticSchema = (3, n0, _S, 0)
 
 STATEMENT_ID: StaticSchema = (3, n0, _SI, 0)
 
-LAYER_VERSION_NUMBER: StaticSchema = (8, n0, _LVN, {_s: 0})
+LAYER_VERSION_NUMBER: StaticSchema = (8, n0, _LVN, {_sm: 0})
 
 ADD_LAYER_VERSION_PERMISSION_INPUT: StaticSchema = (
     18,
     n0,
     _ALVPI,
-    {_sSI: _cALVPR, _sm: None},
+    {_sSI: _cALVPR, _smi: None},
     (_LN, _VN, _SI, _A, _P, _OI, _RI),
     (
         (LAYER_NAME_OR_ARN, 9),
-        (LAYER_VERSION_NUMBER, {_s: None, _smi: None, _sL: None}),
+        (LAYER_VERSION_NUMBER, {_sm: None, _s: None, _sL: None}),
         (STATEMENT_ID, 1),
         (LAYER_PERMISSION_ALLOWED_ACTION, 1),
         (LAYER_PERMISSION_ALLOWED_PRINCIPAL, 1),
@@ -412,7 +447,7 @@ RESOURCE_NOT_FOUND_EXCEPTION: StaticSchema = (
     n0,
     _RNFE,
     {_smith: _c, _sE: 404},
-    (_T, _M),
+    (_T, _Me),
     ((STRING, 0), (STRING, 0)),
 )
 
@@ -421,7 +456,7 @@ SERVICE_EXCEPTION: StaticSchema = (
     n0,
     _SE,
     {_smith: _se, _sE: 500},
-    (_T, _M),
+    (_T, _Me),
     ((STRING, 0), (STRING, 0)),
 )
 
@@ -479,7 +514,7 @@ ADD_PERMISSION_INPUT: StaticSchema = (
     18,
     n0,
     _API,
-    {_sSI: _cAPR, _sm: None},
+    {_sSI: _cAPR, _smi: None},
     (_FN, _SI, _A, _P, _SA, _FUAT, _IVFU, _SAo, _EST, _Q, _RI, _POID),
     (
         (NAMESPACED_FUNCTION_NAME, 9),
@@ -538,7 +573,7 @@ PUBLIC_POLICY_EXCEPTION: StaticSchema = (
     n0,
     _PPE,
     {_smith: _c, _sE: 400},
-    (_T, _M),
+    (_T, _Me),
     ((STRING, 0), (STRING, 0)),
 )
 
@@ -562,7 +597,7 @@ ALIAS_ROUTING_CONFIGURATION: StaticSchema = (
 ALIAS_CONFIGURATION: StaticSchema = (
     18,
     n0,
-    _AC,
+    _ACl,
     0,
     (_AA, _N, _FV, _D, _RC, _RI),
     (
@@ -586,7 +621,7 @@ ALIAS_LIMIT_EXCEEDED_EXCEPTION: StaticSchema = (
 
 ALIAS_LIST: StaticSchema = (16, n0, _ALl, 0, (_me,), ((ALIAS_CONFIGURATION, 0),))
 
-ALLOW_CREDENTIALS: StaticSchema = (2, n0, _ACl, 0)
+ALLOW_CREDENTIALS: StaticSchema = (2, n0, _ACll, 0)
 
 SIGNING_PROFILE_VERSION_ARNS: StaticSchema = (16, n0, _SPVA, 0, (_me,), ((ARN, 0),))
 
@@ -599,7 +634,7 @@ ALLOWED_PUBLISHERS: StaticSchema = (
     ((SIGNING_PROFILE_VERSION_ARNS, 1),),
 )
 
-METHOD: StaticSchema = (3, n0, _Me, 0)
+METHOD: StaticSchema = (3, n0, _Met, 0)
 
 ALLOW_METHODS_LIST: StaticSchema = (16, n0, _AML, 0, (_me,), ((METHOD, 0),))
 
@@ -724,7 +759,7 @@ ARCHITECTURE: StaticSchema = (
 
 ARCHITECTURES_LIST: StaticSchema = (16, n0, _ALr, 0, (_me,), ((ARCHITECTURE, 0),))
 
-ATTEMPT_COUNT: StaticSchema = (7, n0, _ACt, {_s: 0})
+ATTEMPT_COUNT: StaticSchema = (7, n0, _ACt, {_sm: 0})
 
 CAPACITY_PROVIDER_NAME: StaticSchema = (3, n0, _CPN, 0)
 
@@ -753,8 +788,8 @@ CAPACITY_PROVIDER_PREDEFINED_METRIC_TYPE: StaticSchema = (
     n0,
     _CPPMT,
     0,
-    (_LCPACPUU,),
-    ((-1, {_sV: _LCPACPUU}),),
+    (_LCPACPUU, _LCPAGPUU),
+    ((-1, {_sV: _LCPACPUU}), (-1, {_sV: _LCPAGPUU})),
 )
 
 METRIC_TARGET_VALUE: StaticSchema = (10, n0, _MTV, 0)
@@ -904,7 +939,7 @@ CREATE_CAPACITY_PROVIDER_INPUT: StaticSchema = (
     18,
     n0,
     _CCPI,
-    {_sSI: _cCCPR, _sm: None},
+    {_sSI: _cCCPR, _smi: None},
     (_CPN, _VC, _PC, _IR, _CPSC, _KKA, _Ta, _PT, _TC),
     (
         (CAPACITY_PROVIDER_NAME, 1),
@@ -987,7 +1022,7 @@ DELETE_CAPACITY_PROVIDER_INPUT: StaticSchema = (
     18,
     n0,
     _DCPI,
-    {_sSI: _cDCPR, _sm: None},
+    {_sSI: _cDCPR, _smi: None},
     (_CPN,),
     ((CAPACITY_PROVIDER_NAME, 9),),
 )
@@ -1029,7 +1064,7 @@ GET_CAPACITY_PROVIDER_INPUT: StaticSchema = (
     18,
     n0,
     _GCPI,
-    {_sSI: _cGCPR, _sm: None},
+    {_sSI: _cGCPR, _smi: None},
     (_CPN,),
     ((CAPACITY_PROVIDER_NAME, 9),),
 )
@@ -1072,7 +1107,7 @@ LIST_CAPACITY_PROVIDERS_INPUT: StaticSchema = (
     18,
     n0,
     _LCPI,
-    {_sSI: _cLCPR, _sm: None},
+    {_sSI: _cLCPR, _smi: None},
     (_Sta, _Mar, _MI),
     (
         (CAPACITY_PROVIDER_STATE, {_sQ: _Sta}),
@@ -1117,7 +1152,7 @@ LIST_FUNCTION_VERSIONS_BY_CAPACITY_PROVIDER_INPUT: StaticSchema = (
     18,
     n0,
     _LFVBCPI,
-    {_sSI: _cLFVBCPR, _sm: None},
+    {_sSI: _cLFVBCPR, _smi: None},
     (_CPN, _Mar, _MI),
     (
         (CAPACITY_PROVIDER_NAME, 9),

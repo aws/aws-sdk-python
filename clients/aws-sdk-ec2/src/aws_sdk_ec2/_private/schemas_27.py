@@ -20,21 +20,25 @@ _sO = "smithy.api#clientOptional"
 _smi = "smithy.api#required"
 _DR = "DryRun"
 _p = "pending"
-_d = "disabled"
 _smit = "smithy.api#output"
 _OI = "OfferingId"
 _av = "available"
 _St = "State"
 _st = "state"
+_CT = "CreationTime"
+_cT = "creationTime"
 _fa = "failed"
+_RIe = "ResourceId"
+_rI = "resourceId"
 _OIw = "OwnerId"
 _oI = "ownerId"
+_C = "Code"
+_co = "code"
+_Me = "Message"
+_mes = "message"
 _TSag = "TagSet"
 _tS = "tagSet"
-_er = "error"
 _dRr = "dryRun"
-_Ar = "Arn"
-_ar = "arn"
 _N = "Name"
 _nam = "name"
 _AZ = "AvailabilityZone"
@@ -43,10 +47,10 @@ _AZI = "AvailabilityZoneId"
 _aZI = "availabilityZoneId"
 _II = "InstanceId"
 _iI = "instanceId"
-_RTe = "ResourceTypes"
 _Reso = "Resource"
 _IT = "InstanceType"
 _iT = "instanceType"
+_ASc = "ActivityStatus"
 _Des = "Description"
 _AIs = "AssociationId"
 _desc = "description"
@@ -64,46 +68,104 @@ _cTl = "clientToken"
 _HI = "HostIds"
 _HIS = "HostIdSet"
 _hIS = "hostIdSet"
+_ASll = "AllocationStrategy"
 _AMIT = "AllowsMultipleInstanceTypes"
+_pu = "public"
 _IIm = "ImageId"
-_WK = "WatermarkKey"
-_wK = "watermarkKey"
 _UIs = "UserId"
 _uI = "userId"
-_RIep = "ReportId"
+_UT = "UpdateTime"
+_uT = "updateTime"
 _CC = "CurrencyCode"
 _cC = "currencyCode"
-_SII = "SourceImageId"
+_PCr = "ProductCode"
+_FII = "FpgaImageId"
+_fII = "fpgaImageId"
 _iIm = "imageId"
 _oAu = "outpostArn"
+_CTr = "CreateTime"
+_cTr = "createTime"
 _Cou = "Count"
 _cou = "count"
-_ITSn = "InstanceTypeSpecification"
+_unav = "unavailable"
+_TTC = "TotalTargetCapacity"
+_FCu = "FulfilledCapacity"
+_fCu = "fulfilledCapacity"
+_tTC = "totalTargetCapacity"
+_aSl = "allocationStrategy"
+_Ty = "Type"
+_ty = "type"
 _BDM = "BlockDeviceMapping"
 _HIo = "HostId"
 _hI = "hostId"
 _BDMl = "BlockDeviceMappings"
-_eb = "ebs"
+_CRO = "CapacityReservationOptions"
+_SIT = "SingleInstanceType"
+_SAZ = "SingleAvailabilityZone"
+_MTC = "MinTargetCapacity"
+_MTP = "MaxTotalPrice"
+_MTa = "MarketTypes"
+_RTese = "ReservationTypes"
+_RCFO = "ReservedCapacityFallbackOptions"
+_RSep = "ReplacementStrategy"
+_TD = "TerminationDelay"
+_CRapa = "CapacityRebalance"
+_MS = "MaintenanceStrategies"
+_IIB = "InstanceInterruptionBehavior"
+_IPTUC = "InstancePoolsToUseCount"
+_DTCT = "DefaultTargetCapacityType"
+_TCUT = "TargetCapacityUnitType"
+_ODTC = "OnDemandTargetCapacity"
+_STC = "SpotTargetCapacity"
+_SO = "SpotOptions"
+_ODO = "OnDemandOptions"
+_RCO = "ReservedCapacityOptions"
+_ECTP = "ExcessCapacityTerminationPolicy"
+_LTC = "LaunchTemplateConfigs"
+_TCS = "TargetCapacitySpecification"
+_TIWE = "TerminateInstancesWithExpiration"
+_VF = "ValidFrom"
+_VU = "ValidUntil"
+_RUI = "ReplaceUnhealthyInstances"
+_Con = "Context"
 _iF = "instanceFamily"
-_Pla = "Platform"
-_plat = "platform"
+_FIl = "FleetId"
+_fIl = "fleetId"
+_Er = "Errors"
+_ESr = "ErrorSet"
+_eSr = "errorSet"
 _Ins = "Instances"
+_FIS = "FleetInstanceSet"
+_fIS = "fleetInstanceSet"
+_FF = "FileFormat"
+_HCPi = "HiveCompatiblePartitions"
+_PHP = "PerHourPartition"
+_LDT = "LogDestinationType"
+_TKa = "TagKeys"
+_TTr = "TrafficType"
+_DLPA = "DeliverLogsPermissionArn"
+_DCAR = "DeliverCrossAccountRole"
+_LGN = "LogGroupName"
+_LD = "LogDestination"
+_LF = "LogFormat"
+_MAI = "MaxAggregationInterval"
+_DOe = "DestinationOptions"
+_TFS = "TagFieldSpecifications"
+_FLI = "FlowLogIds"
+_FIGI = "FpgaImageGlobalId"
+_fIGI = "fpgaImageGlobalId"
 _bDM = "blockDeviceMapping"
-_ON = "OptionName"
-_OV = "OptionValues"
-_OVp = "OptionValue"
-_RTO = "ResourceTypeOptions"
-_RTOe = "ResourceTypeOption"
-_AIcco = "AccountId"
-_rIe = "reportId"
 _KI = "KernelId"
 _RIa = "RamdiskId"
 _aSS = "amdSevSnp"
-_kI = "kernelId"
+_vU = "validUntil"
+_iIB = "instanceInterruptionBehavior"
+_sOp = "spotOptions"
 _cOp = "cpuOptions"
-_SRt = "StateReason"
-_sRt = "stateReason"
+_OAwn = "OwnerAlias"
+_oAw = "ownerAlias"
 _Ow = "Owner"
+_FLIl = "FlowLogId"
 _Fi = "Filter"
 _Fil = "Filters"
 _NTex = "NextToken"
@@ -118,16 +180,136 @@ _TCo = "TotalCapacity"
 _tC = "totalCapacity"
 _mR = "maxResults"
 _AIsso = "AssociationIds"
-_Im = "Image"
-_RIepo = "ReportIds"
-_IIma = "ImageIds"
+_cRO = "capacityReservationOptions"
+_sITi = "singleInstanceType"
+_sAZ = "singleAvailabilityZone"
+_mTC = "minTargetCapacity"
+_mTP = "maxTotalPrice"
+_RTL = "ReservationTypeList"
+_MTS = "MarketTypeSet"
+_mTS = "marketTypeSet"
+_RTSe = "ReservationTypeSet"
+_rTSe = "reservationTypeSet"
+_rCFO = "reservedCapacityFallbackOptions"
+_FSCR = "FleetSpotCapacityRebalance"
+_rSepl = "replacementStrategy"
+_tDe = "terminationDelay"
+_FSMS = "FleetSpotMaintenanceStrategies"
+_cRap = "capacityRebalance"
+_mSa = "maintenanceStrategies"
+_iPTUC = "instancePoolsToUseCount"
+_oDTC = "onDemandTargetCapacity"
+_sTC = "spotTargetCapacity"
+_dTCT = "defaultTargetCapacityType"
+_tCUT = "targetCapacityUnitType"
+_FDl = "FleetData"
+_aSc = "activityStatus"
+_FS = "FleetState"
+_fS = "fleetState"
+_eCTP = "excessCapacityTerminationPolicy"
+_FODC = "FulfilledOnDemandCapacity"
+_fODC = "fulfilledOnDemandCapacity"
+_lTC = "launchTemplateConfigs"
+_tCS = "targetCapacitySpecification"
+_tIWE = "terminateInstancesWithExpiration"
+_vF = "validFrom"
+_rUI = "replaceUnhealthyInstances"
+_oDO = "onDemandOptions"
+_rCO = "reservedCapacityOptions"
+_cont = "context"
+_FSl = "FleetSet"
+_DFLIes = "DescribeFlowLogsInput"
+_cDFLRom = "com.amazonaws.ec2#DescribeFlowLogsRequest"
+_DORe = "DestinationOptionsResponse"
+_fF = "fileFormat"
+_hCP = "hiveCompatiblePartitions"
+_pHP = "perHourPartition"
+_TFSRa = "TagFieldSpecificationResponse"
+_TKS = "TagKeySet"
+_tKS = "tagKeySet"
+_TFSLRa = "TagFieldSpecificationListResponse"
+_FLl = "FlowLog"
+_DLEM = "DeliverLogsErrorMessage"
+_dLEM = "deliverLogsErrorMessage"
+_dLPA = "deliverLogsPermissionArn"
+_dCAR = "deliverCrossAccountRole"
+_DLS = "DeliverLogsStatus"
+_dLS = "deliverLogsStatus"
+_fLI = "flowLogId"
+_FLS = "FlowLogStatus"
+_fLS = "flowLogStatus"
+_lGN = "logGroupName"
+_tTra = "trafficType"
+_lDTo = "logDestinationType"
+_lD = "logDestination"
+_lF = "logFormat"
+_mAI = "maxAggregationInterval"
+_dOe = "destinationOptions"
+_TFSS = "TagFieldSpecificationSet"
+_tFSS = "tagFieldSpecificationSet"
+_FLSl = "FlowLogSet"
+_DFLOe = "DescribeFlowLogsOutput"
+_cDFLRoma = "com.amazonaws.ec2#DescribeFlowLogsResult"
+_FLlo = "FlowLogs"
+_fLSl = "flowLogSet"
+_DFLe = "DescribeFlowLogs"
+_FIAN = "FpgaImageAttributeName"
+_lPo = "loadPermission"
 _pCr = "productCodes"
+_DFIAI = "DescribeFpgaImageAttributeInput"
+_cDFIAR = "com.amazonaws.ec2#DescribeFpgaImageAttributeRequest"
+_PGe = "PermissionGroup"
+_all_ = "all"
+_LPo = "LoadPermission"
 _Gr = "Group"
 _gro = "group"
+_LPL = "LoadPermissionList"
+_PCV = "ProductCodeValues"
+_devp = "devpay"
+_mar = "marketplace"
+_PCIr = "ProductCodeId"
+_pCro = "productCode"
+_PCT = "ProductCodeType"
+_PCLr = "ProductCodeList"
+_FIA = "FpgaImageAttribute"
+_LPoa = "LoadPermissions"
+_lPoa = "loadPermissions"
 _PCro = "ProductCodes"
+_DFIAO = "DescribeFpgaImageAttributeOutput"
+_cDFIARo = "com.amazonaws.ec2#DescribeFpgaImageAttributeResult"
+_fIA = "fpgaImageAttribute"
+_DFIA = "DescribeFpgaImageAttribute"
+_FIIL = "FpgaImageIdList"
+_DFIMR = "DescribeFpgaImagesMaxResults"
+_DFIIes = "DescribeFpgaImagesInput"
+_cDFIRomam = "com.amazonaws.ec2#DescribeFpgaImagesRequest"
+_FIIp = "FpgaImageIds"
 _Own = "Owners"
+_ITL = "InstanceTypesList"
+_PIc = "PciId"
+_DIev = "DeviceId"
+_VIe = "VendorId"
+_SIub = "SubsystemId"
+_SVIu = "SubsystemVendorId"
+_FISC = "FpgaImageStateCode"
+_FISp = "FpgaImageState"
+_FIp = "FpgaImage"
+_SVh = "ShellVersion"
+_sVh = "shellVersion"
+_pIc = "pciId"
+_tags = "tags"
 _Pu = "Public"
+_DRSa = "DataRetentionSupport"
+_dRS = "dataRetentionSupport"
+_ITnsta = "InstanceTypes"
+_iTnst = "instanceTypes"
 _FIL = "FpgaImageList"
+_DFIOes = "DescribeFpgaImagesOutput"
+_cDFIRomama = "com.amazonaws.ec2#DescribeFpgaImagesResult"
+_FIpg = "FpgaImages"
+_FISpg = "FpgaImageSet"
+_fISp = "fpgaImageSet"
+_DFIescri = "DescribeFpgaImages"
 _DHRMR = "DescribeHostReservationsMaxResults"
 _DHROI = "DescribeHostReservationOfferingsInput"
 _cDHROR = "com.amazonaws.ec2#DescribeHostReservationOfferingsRequest"
@@ -212,7 +394,6 @@ _Host = "Hosts"
 _HSo = "HostSet"
 _hS = "hostSet"
 _DH = "DescribeHosts"
-_IIPAI = "IamInstanceProfileAssociationId"
 _AILs = "AssociationIdList"
 _DIIPAMR = "DescribeIamInstanceProfileAssociationsMaxResults"
 _DIIPAI = "DescribeIamInstanceProfileAssociationsInput"
@@ -268,172 +449,542 @@ _DPer = "DeregistrationProtection"
 _LPau = "LaunchPermissions"
 _DIA = "DescribeImageAttribute"
 _DIRIISL = "DescribeImageReferencesImageIdStringList"
-_DIRMR = "DescribeImageReferencesMaxResults"
-_IRRT = "ImageReferenceResourceType"
-_EI_ = "EC2_INSTANCE"
-_eIc = "ec2:Instance"
-_ELT = "EC2_LAUNCH_TEMPLATE"
-_eLT = "ec2:LaunchTemplate"
-_SP_ = "SSM_PARAMETER"
-_sPs = "ssm:Parameter"
-_IBIR = "IMAGE_BUILDER_IMAGE_RECIPE"
-_iIR = "imagebuilder:ImageRecipe"
-_IBCR = "IMAGE_BUILDER_CONTAINER_RECIPE"
-_iCR = "imagebuilder:ContainerRecipe"
-_IRON = "ImageReferenceOptionName"
-_SN_ = "STATE_NAME"
-_sn__ = "state-name"
-_VD_ = "VERSION_DEPTH"
-_vd = "version-depth"
-_RTOV = "ResourceTypeOptionValue"
-_RTOVL = "ResourceTypeOptionValuesList"
-_RTOL = "ResourceTypeOptionList"
-_RTRe = "ResourceTypeRequest"
-_RTRL = "ResourceTypeRequestList"
-_DIRI = "DescribeImageReferencesInput"
-_cDIRR = "com.amazonaws.ec2#DescribeImageReferencesRequest"
-_IART = "IncludeAllResourceTypes"
-_IRm = "ImageReference"
-_IRLm = "ImageReferenceList"
-_DIRO = "DescribeImageReferencesOutput"
-_cDIRRo = "com.amazonaws.ec2#DescribeImageReferencesResult"
-_IRma = "ImageReferences"
-_IRS = "ImageReferenceSet"
-_iRS = "imageReferenceSet"
-_DIR = "DescribeImageReferences"
-_EBSL = "ExecutableByStringList"
-_EBx = "ExecutableBy"
-_DIIes = "DescribeImagesInput"
-_cDIRomam = "com.amazonaws.ec2#DescribeImagesRequest"
-_EU = "ExecutableUsers"
-_IDn = "IncludeDeprecated"
-_IDnc = "IncludeDisabled"
-_HTy = "HypervisorType"
-_ovm = "ovm"
-_xen = "xen"
-_ITV = "ImageTypeValues"
-_mach = "machine"
-_IW = "ImageWatermark"
-_SIR = "SourceImageRegion"
-_sIR = "sourceImageRegion"
-_sII = "sourceImageId"
-_SICT = "SourceImageCreationTime"
-_sICT = "sourceImageCreationTime"
-_WCT = "WatermarkCreationTime"
-_wCT = "watermarkCreationTime"
-_IWL = "ImageWatermarkList"
-_ISVm = "ImdsSupportValues"
-_v______ = "v2_0"
-_v_______ = "v2.0"
-_ITIn = "InstanceTypeItem"
-_SITS = "SupportedInstanceTypeSet"
-_UITS = "UnsupportedInstanceTypeSet"
-_SITu = "SupportedInstanceTypes"
-_sITS = "supportedInstanceTypeSet"
-_UIT = "UnsupportedInstanceTypes"
-_uITS = "unsupportedInstanceTypeSet"
-_DTev = "DeviceType"
-_is__ = "instance_store"
-_is___ = "instance-store"
-_SRc = "ScanResults"
-_HFSL = "HighestFindingSeverityLabel"
-_hFSL = "highestFindingSeverityLabel"
-_FSD = "FindingScanDate"
-_fSD = "findingScanDate"
-_IFAS = "InformationalFixAvailableSince"
-_iFAS = "informationalFixAvailableSince"
-_LFAS = "LowFixAvailableSince"
-_lFAS = "lowFixAvailableSince"
-_MFAS = "MediumFixAvailableSince"
-_mFAS = "mediumFixAvailableSince"
-_HFAS = "HighFixAvailableSince"
-_hFAS = "highFixAvailableSince"
-_CFAS = "CriticalFixAvailableSince"
-_cFAS = "criticalFixAvailableSince"
-_ISma = "ImageState"
-_inv = "invalid"
-_der = "deregistered"
-_tran = "transient"
-_TSV = "TpmSupportValues"
-_VTi = "VirtualizationType"
-_PDl = "PlatformDetails"
-_pDl = "platformDetails"
-_UO = "UsageOperation"
-_uO = "usageOperation"
-_ESna = "EnaSupport"
-_eSna = "enaSupport"
-_Hy = "Hypervisor"
-_hy = "hypervisor"
-_IOA = "ImageOwnerAlias"
-_iOA = "imageOwnerAlias"
-_RDN = "RootDeviceName"
-_rDN = "rootDeviceName"
-_RDT = "RootDeviceType"
-_rDT = "rootDeviceType"
-_vTi = "virtualizationType"
-_DTep = "DeprecationTime"
-_dTep = "deprecationTime"
-_SIIo = "SourceInstanceId"
-_sIIo = "sourceInstanceId"
-_IAm = "ImageAllowed"
-_iAm = "imageAllowed"
-_FTE = "FreeTierEligible"
-_fTE = "freeTierEligible"
-_PSPN = "PublicSsmParameterName"
-_pSPN = "publicSsmParameterName"
-_IWm = "ImageWatermarks"
-_IWS = "ImageWatermarkSet"
-_iWS = "imageWatermarkSet"
-_sRc = "scanResults"
-_iTS = "instanceTypeSpecification"
-_ILm = "ImageLocation"
-_iL = "imageLocation"
-_iSma = "imageState"
-_IOIm = "ImageOwnerId"
-_iOIm = "imageOwnerId"
-_CDre = "CreationDate"
-_cDre = "creationDate"
-_IPsu = "IsPublic"
-_iPsu = "isPublic"
-_Arc = "Architecture"
-_arch = "architecture"
-_ITm = "ImageType"
-_iTm = "imageType"
-_rIa = "ramdiskId"
-_ILma = "ImageList"
-_DIOes = "DescribeImagesOutput"
-_cDIRomama = "com.amazonaws.ec2#DescribeImagesResult"
-_Ima = "Images"
-_ISmag = "ImagesSet"
-_iSmag = "imagesSet"
-_DIesc = "DescribeImages"
-_DIURIISL = "DescribeImageUsageReportsImageIdStringList"
-_DIUREMR = "DescribeImageUsageReportEntriesMaxResults"
-_IURISL = "ImageUsageReportIdStringList"
-_DIUREI = "DescribeImageUsageReportEntriesInput"
-_cDIURER = "com.amazonaws.ec2#DescribeImageUsageReportEntriesRequest"
-_IURE = "ImageUsageReportEntry"
-_UCs = "UsageCount"
-_uCs = "usageCount"
-_aIc = "accountId"
-_RCT = "ReportCreationTime"
-_rCT = "reportCreationTime"
-_IUREL = "ImageUsageReportEntryList"
-_DIUREO = "DescribeImageUsageReportEntriesOutput"
-_cDIURERo = "com.amazonaws.ec2#DescribeImageUsageReportEntriesResult"
-_IUREm = "ImageUsageReportEntries"
-_IURES = "ImageUsageReportEntrySet"
-_iURES = "imageUsageReportEntrySet"
-_DIURE = "DescribeImageUsageReportEntries"
 
-FPGA_IMAGE_LIST: StaticSchema = (
+FPGA_IMAGE_ID: StaticSchema = (3, n0, _FII, 0)
+
+ON_DEMAND_OPTIONS: StaticSchema = (
+    18,
+    n0,
+    _ODO,
+    0,
+    (_ASll, _CRO, _SIT, _SAZ, _MTC, _MTP),
+    (
+        (lambda: schemas.FLEET_ON_DEMAND_ALLOCATION_STRATEGY, {_aQN: _ASll, _sN: _aSl}),
+        (lambda: schemas.CAPACITY_RESERVATION_OPTIONS, {_aQN: _CRO, _sN: _cRO}),
+        (lambda: schemas.BOOLEAN, {_aQN: _SIT, _sN: _sITi}),
+        (lambda: schemas.BOOLEAN, {_aQN: _SAZ, _sN: _sAZ}),
+        (lambda: schemas.INTEGER, {_aQN: _MTC, _sN: _mTC}),
+        (lambda: schemas.STRING, {_aQN: _MTP, _sN: _mTP}),
+    ),
+)
+
+RESERVATION_TYPE_LIST: StaticSchema = (
     16,
     n0,
-    _FIL,
+    _RTL,
     0,
     (_me,),
-    ((lambda: schemas.FPGA_IMAGE, {_sN: _i}),),
+    ((lambda: schemas.FLEET_RESERVATION_TYPE, {_sN: _i}),),
 )
+
+RESERVED_CAPACITY_FALLBACK_OPTIONS: StaticSchema = (
+    18,
+    n0,
+    _RCFO,
+    0,
+    (_MTa,),
+    (
+        (
+            lambda: schemas.RESERVED_CAPACITY_FALLBACK_MARKET_TYPE_LIST,
+            {_aQN: _MTS, _sN: _mTS},
+        ),
+    ),
+)
+
+RESERVED_CAPACITY_OPTIONS: StaticSchema = (
+    18,
+    n0,
+    _RCO,
+    0,
+    (_ASll, _RTese, _RCFO),
+    (
+        (
+            lambda: schemas.RESERVED_CAPACITY_ALLOCATION_STRATEGY,
+            {_aQN: _ASll, _sN: _aSl},
+        ),
+        (RESERVATION_TYPE_LIST, {_aQN: _RTSe, _sN: _rTSe}),
+        (RESERVED_CAPACITY_FALLBACK_OPTIONS, {_aQN: _RCFO, _sN: _rCFO}),
+    ),
+)
+
+FLEET_SPOT_CAPACITY_REBALANCE: StaticSchema = (
+    18,
+    n0,
+    _FSCR,
+    0,
+    (_RSep, _TD),
+    (
+        (lambda: schemas.FLEET_REPLACEMENT_STRATEGY, {_aQN: _RSep, _sN: _rSepl}),
+        (lambda: schemas.INTEGER, {_aQN: _TD, _sN: _tDe}),
+    ),
+)
+
+FLEET_SPOT_MAINTENANCE_STRATEGIES: StaticSchema = (
+    18,
+    n0,
+    _FSMS,
+    0,
+    (_CRapa,),
+    ((FLEET_SPOT_CAPACITY_REBALANCE, {_aQN: _CRapa, _sN: _cRap}),),
+)
+
+SPOT_OPTIONS: StaticSchema = (
+    18,
+    n0,
+    _SO,
+    0,
+    (_ASll, _MS, _IIB, _IPTUC, _SIT, _SAZ, _MTC, _MTP),
+    (
+        (lambda: schemas.SPOT_ALLOCATION_STRATEGY, {_aQN: _ASll, _sN: _aSl}),
+        (FLEET_SPOT_MAINTENANCE_STRATEGIES, {_aQN: _MS, _sN: _mSa}),
+        (lambda: schemas.SPOT_INSTANCE_INTERRUPTION_BEHAVIOR, {_aQN: _IIB, _sN: _iIB}),
+        (lambda: schemas.INTEGER, {_aQN: _IPTUC, _sN: _iPTUC}),
+        (lambda: schemas.BOOLEAN, {_aQN: _SIT, _sN: _sITi}),
+        (lambda: schemas.BOOLEAN, {_aQN: _SAZ, _sN: _sAZ}),
+        (lambda: schemas.INTEGER, {_aQN: _MTC, _sN: _mTC}),
+        (lambda: schemas.STRING, {_aQN: _MTP, _sN: _mTP}),
+    ),
+)
+
+TARGET_CAPACITY_SPECIFICATION: StaticSchema = (
+    18,
+    n0,
+    _TCS,
+    0,
+    (_TTC, _ODTC, _STC, _DTCT, _TCUT),
+    (
+        (lambda: schemas.INTEGER, {_aQN: _TTC, _sN: _tTC}),
+        (lambda: schemas.INTEGER, {_aQN: _ODTC, _sN: _oDTC}),
+        (lambda: schemas.INTEGER, {_aQN: _STC, _sN: _sTC}),
+        (lambda: schemas.DEFAULT_TARGET_CAPACITY_TYPE, {_aQN: _DTCT, _sN: _dTCT}),
+        (lambda: schemas.TARGET_CAPACITY_UNIT_TYPE, {_aQN: _TCUT, _sN: _tCUT}),
+    ),
+)
+
+FLEET_DATA: StaticSchema = (
+    18,
+    n0,
+    _FDl,
+    0,
+    (
+        _ASc,
+        _CTr,
+        _FIl,
+        _FS,
+        _CTl,
+        _ECTP,
+        _FCu,
+        _FODC,
+        _LTC,
+        _TCS,
+        _TIWE,
+        _Ty,
+        _VF,
+        _VU,
+        _RUI,
+        _SO,
+        _ODO,
+        _RCO,
+        _Tag,
+        _Er,
+        _Ins,
+        _Con,
+    ),
+    (
+        (lambda: schemas.FLEET_ACTIVITY_STATUS, {_aQN: _ASc, _sN: _aSc}),
+        (lambda: schemas.DATE_TIME, {_aQN: _CTr, _sN: _cTr}),
+        (lambda: schemas.FLEET_ID, {_aQN: _FIl, _sN: _fIl}),
+        (lambda: schemas.FLEET_STATE_CODE, {_aQN: _FS, _sN: _fS}),
+        (lambda: schemas.STRING, {_aQN: _CTl, _sN: _cTl}),
+        (
+            lambda: schemas.FLEET_EXCESS_CAPACITY_TERMINATION_POLICY,
+            {_aQN: _ECTP, _sN: _eCTP},
+        ),
+        (lambda: schemas.DOUBLE, {_aQN: _FCu, _sN: _fCu}),
+        (lambda: schemas.DOUBLE, {_aQN: _FODC, _sN: _fODC}),
+        (lambda: schemas.FLEET_LAUNCH_TEMPLATE_CONFIG_LIST, {_aQN: _LTC, _sN: _lTC}),
+        (TARGET_CAPACITY_SPECIFICATION, {_aQN: _TCS, _sN: _tCS}),
+        (lambda: schemas.BOOLEAN, {_aQN: _TIWE, _sN: _tIWE}),
+        (lambda: schemas.FLEET_TYPE, {_aQN: _Ty, _sN: _ty}),
+        (lambda: schemas.DATE_TIME, {_aQN: _VF, _sN: _vF}),
+        (lambda: schemas.DATE_TIME, {_aQN: _VU, _sN: _vU}),
+        (lambda: schemas.BOOLEAN, {_aQN: _RUI, _sN: _rUI}),
+        (SPOT_OPTIONS, {_aQN: _SO, _sN: _sOp}),
+        (ON_DEMAND_OPTIONS, {_aQN: _ODO, _sN: _oDO}),
+        (RESERVED_CAPACITY_OPTIONS, {_aQN: _RCO, _sN: _rCO}),
+        (lambda: schemas.TAG_LIST, {_aQN: _TSag, _sN: _tS}),
+        (lambda: schemas.DESCRIBE_FLEETS_ERROR_SET, {_aQN: _ESr, _sN: _eSr}),
+        (lambda: schemas.DESCRIBE_FLEETS_INSTANCES_SET, {_aQN: _FIS, _sN: _fIS}),
+        (lambda: schemas.STRING, {_aQN: _Con, _sN: _cont}),
+    ),
+)
+
+FLEET_SET: StaticSchema = (16, n0, _FSl, 0, (_me,), ((FLEET_DATA, {_sN: _i}),))
+
+DESCRIBE_FLOW_LOGS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DFLIes,
+    {_sSI: _cDFLRom, _sm: None},
+    (_DR, _Fi, _FLI, _MR, _NTex),
+    (
+        (lambda: schemas.BOOLEAN, 0),
+        (lambda: schemas.FILTER_LIST, 0),
+        (lambda: schemas.FLOW_LOG_ID_LIST, {_sN: _FLIl}),
+        (lambda: schemas.INTEGER, 0),
+        (lambda: schemas.STRING, 0),
+    ),
+)
+
+DESCRIBE_FLOW_LOGS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DFLOe,
+    {_sSI: _cDFLRoma, _smit: None},
+    (_FLlo, _NTex),
+    (
+        (lambda: FLOW_LOG_SET, {_aQN: _FLSl, _sN: _fLSl}),
+        (lambda: schemas.STRING, {_aQN: _NTex, _sN: _nT}),
+    ),
+)
+
+DESCRIBE_FLOW_LOGS: StaticOperationSchema = (
+    23,
+    n0,
+    _DFLe,
+    0,
+    DESCRIBE_FLOW_LOGS_INPUT,
+    DESCRIBE_FLOW_LOGS_OUTPUT,
+    (),
+)
+
+DESTINATION_OPTIONS_RESPONSE: StaticSchema = (
+    18,
+    n0,
+    _DORe,
+    0,
+    (_FF, _HCPi, _PHP),
+    (
+        (lambda: schemas.DESTINATION_FILE_FORMAT, {_aQN: _FF, _sN: _fF}),
+        (lambda: schemas.BOOLEAN, {_aQN: _HCPi, _sN: _hCP}),
+        (lambda: schemas.BOOLEAN, {_aQN: _PHP, _sN: _pHP}),
+    ),
+)
+
+TAG_FIELD_SPECIFICATION_RESPONSE: StaticSchema = (
+    18,
+    n0,
+    _TFSRa,
+    0,
+    (_RT, _TKa),
+    (
+        (lambda: schemas.TAGGABLE_RESOURCE_TYPE, {_aQN: _RT, _sN: _rT}),
+        (lambda: schemas.TAG_KEY_LIST, {_aQN: _TKS, _sN: _tKS}),
+    ),
+)
+
+TAG_FIELD_SPECIFICATION_LIST_RESPONSE: StaticSchema = (
+    16,
+    n0,
+    _TFSLRa,
+    0,
+    (_me,),
+    ((TAG_FIELD_SPECIFICATION_RESPONSE, {_sN: _i}),),
+)
+
+FLOW_LOG: StaticSchema = (
+    18,
+    n0,
+    _FLl,
+    0,
+    (
+        _CT,
+        _DLEM,
+        _DLPA,
+        _DCAR,
+        _DLS,
+        _FLIl,
+        _FLS,
+        _LGN,
+        _RIe,
+        _TTr,
+        _LDT,
+        _LD,
+        _LF,
+        _Tag,
+        _MAI,
+        _DOe,
+        _TFS,
+    ),
+    (
+        (lambda: schemas.MILLISECOND_DATE_TIME, {_aQN: _CT, _sN: _cT}),
+        (lambda: schemas.STRING, {_aQN: _DLEM, _sN: _dLEM}),
+        (lambda: schemas.STRING, {_aQN: _DLPA, _sN: _dLPA}),
+        (lambda: schemas.STRING, {_aQN: _DCAR, _sN: _dCAR}),
+        (lambda: schemas.STRING, {_aQN: _DLS, _sN: _dLS}),
+        (lambda: schemas.STRING, {_aQN: _FLIl, _sN: _fLI}),
+        (lambda: schemas.STRING, {_aQN: _FLS, _sN: _fLS}),
+        (lambda: schemas.STRING, {_aQN: _LGN, _sN: _lGN}),
+        (lambda: schemas.STRING, {_aQN: _RIe, _sN: _rI}),
+        (lambda: schemas.TRAFFIC_TYPE, {_aQN: _TTr, _sN: _tTra}),
+        (lambda: schemas.LOG_DESTINATION_TYPE, {_aQN: _LDT, _sN: _lDTo}),
+        (lambda: schemas.STRING, {_aQN: _LD, _sN: _lD}),
+        (lambda: schemas.STRING, {_aQN: _LF, _sN: _lF}),
+        (lambda: schemas.TAG_LIST, {_aQN: _TSag, _sN: _tS}),
+        (lambda: schemas.INTEGER, {_aQN: _MAI, _sN: _mAI}),
+        (DESTINATION_OPTIONS_RESPONSE, {_aQN: _DOe, _sN: _dOe}),
+        (TAG_FIELD_SPECIFICATION_LIST_RESPONSE, {_aQN: _TFSS, _sN: _tFSS}),
+    ),
+)
+
+FLOW_LOG_SET: StaticSchema = (16, n0, _FLSl, 0, (_me,), ((FLOW_LOG, {_sN: _i}),))
+
+FPGA_IMAGE_ATTRIBUTE_NAME: StaticSchema = (
+    14,
+    n0,
+    _FIAN,
+    0,
+    (_desc, _nam, _lPo, _pCr),
+    ((-1, {_sV: _desc}), (-1, {_sV: _nam}), (-1, {_sV: _lPo}), (-1, {_sV: _pCr})),
+)
+
+DESCRIBE_FPGA_IMAGE_ATTRIBUTE_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DFIAI,
+    {_sSI: _cDFIAR, _sm: None},
+    (_DR, _FII, _Attr),
+    (
+        (lambda: schemas.BOOLEAN, 0),
+        (FPGA_IMAGE_ID, {_sO: None, _smi: None}),
+        (FPGA_IMAGE_ATTRIBUTE_NAME, {_sO: None, _smi: None}),
+    ),
+)
+
+DESCRIBE_FPGA_IMAGE_ATTRIBUTE_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DFIAO,
+    {_sSI: _cDFIARo, _smit: None},
+    (_FIA,),
+    ((lambda: FPGA_IMAGE_ATTRIBUTE, {_aQN: _FIA, _sN: _fIA}),),
+)
+
+DESCRIBE_FPGA_IMAGE_ATTRIBUTE: StaticOperationSchema = (
+    23,
+    n0,
+    _DFIA,
+    0,
+    DESCRIBE_FPGA_IMAGE_ATTRIBUTE_INPUT,
+    DESCRIBE_FPGA_IMAGE_ATTRIBUTE_OUTPUT,
+    (),
+)
+
+PERMISSION_GROUP: StaticSchema = (14, n0, _PGe, 0, (_all_,), ((-1, {_sV: _all_}),))
+
+LOAD_PERMISSION: StaticSchema = (
+    18,
+    n0,
+    _LPo,
+    0,
+    (_UIs, _Gr),
+    (
+        (lambda: schemas.STRING, {_aQN: _UIs, _sN: _uI}),
+        (PERMISSION_GROUP, {_aQN: _Gr, _sN: _gro}),
+    ),
+)
+
+LOAD_PERMISSION_LIST: StaticSchema = (
+    16,
+    n0,
+    _LPL,
+    0,
+    (_me,),
+    ((LOAD_PERMISSION, {_sN: _i}),),
+)
+
+PRODUCT_CODE_VALUES: StaticSchema = (
+    14,
+    n0,
+    _PCV,
+    0,
+    (_devp, _mar),
+    ((-1, {_sV: _devp}), (-1, {_sV: _mar})),
+)
+
+PRODUCT_CODE: StaticSchema = (
+    18,
+    n0,
+    _PCr,
+    0,
+    (_PCIr, _PCT),
+    (
+        (lambda: schemas.STRING, {_aQN: _PCr, _sN: _pCro}),
+        (PRODUCT_CODE_VALUES, {_aQN: _Ty, _sN: _ty}),
+    ),
+)
+
+PRODUCT_CODE_LIST: StaticSchema = (
+    16,
+    n0,
+    _PCLr,
+    0,
+    (_me,),
+    ((PRODUCT_CODE, {_sN: _i}),),
+)
+
+FPGA_IMAGE_ATTRIBUTE: StaticSchema = (
+    18,
+    n0,
+    _FIA,
+    0,
+    (_FII, _N, _Des, _LPoa, _PCro),
+    (
+        (lambda: schemas.STRING, {_aQN: _FII, _sN: _fII}),
+        (lambda: schemas.STRING, {_aQN: _N, _sN: _nam}),
+        (lambda: schemas.STRING, {_aQN: _Des, _sN: _desc}),
+        (LOAD_PERMISSION_LIST, {_aQN: _LPoa, _sN: _lPoa}),
+        (PRODUCT_CODE_LIST, {_aQN: _PCro, _sN: _pCr}),
+    ),
+)
+
+FPGA_IMAGE_ID_LIST: StaticSchema = (
+    16,
+    n0,
+    _FIIL,
+    0,
+    (_me,),
+    ((FPGA_IMAGE_ID, {_sN: _i}),),
+)
+
+DESCRIBE_FPGA_IMAGES_MAX_RESULTS: StaticSchema = (7, n0, _DFIMR, 0)
+
+DESCRIBE_FPGA_IMAGES_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DFIIes,
+    {_sSI: _cDFIRomam, _sm: None},
+    (_DR, _FIIp, _Own, _Fil, _NTex, _MR),
+    (
+        (lambda: schemas.BOOLEAN, 0),
+        (FPGA_IMAGE_ID_LIST, {_sN: _FII}),
+        (lambda: schemas.OWNER_STRING_LIST, {_sN: _Ow}),
+        (lambda: schemas.FILTER_LIST, {_sN: _Fi}),
+        (lambda: schemas.NEXT_TOKEN, 0),
+        (DESCRIBE_FPGA_IMAGES_MAX_RESULTS, 0),
+    ),
+)
+
+DESCRIBE_FPGA_IMAGES_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DFIOes,
+    {_sSI: _cDFIRomama, _smit: None},
+    (_FIpg, _NTex),
+    (
+        (lambda: FPGA_IMAGE_LIST, {_aQN: _FISpg, _sN: _fISp}),
+        (lambda: schemas.NEXT_TOKEN, {_aQN: _NTex, _sN: _nT}),
+    ),
+)
+
+DESCRIBE_FPGA_IMAGES: StaticOperationSchema = (
+    23,
+    n0,
+    _DFIescri,
+    0,
+    DESCRIBE_FPGA_IMAGES_INPUT,
+    DESCRIBE_FPGA_IMAGES_OUTPUT,
+    (),
+)
+
+INSTANCE_TYPES_LIST: StaticSchema = (
+    16,
+    n0,
+    _ITL,
+    0,
+    (_me,),
+    ((lambda: schemas.STRING, {_sN: _i}),),
+)
+
+PCI_ID: StaticSchema = (
+    18,
+    n0,
+    _PIc,
+    0,
+    (_DIev, _VIe, _SIub, _SVIu),
+    (
+        (lambda: schemas.STRING, 0),
+        (lambda: schemas.STRING, 0),
+        (lambda: schemas.STRING, 0),
+        (lambda: schemas.STRING, 0),
+    ),
+)
+
+FPGA_IMAGE_STATE_CODE: StaticSchema = (
+    14,
+    n0,
+    _FISC,
+    0,
+    (_p, _fa, _av, _unav),
+    ((-1, {_sV: _p}), (-1, {_sV: _fa}), (-1, {_sV: _av}), (-1, {_sV: _unav})),
+)
+
+FPGA_IMAGE_STATE: StaticSchema = (
+    18,
+    n0,
+    _FISp,
+    0,
+    (_C, _Me),
+    (
+        (FPGA_IMAGE_STATE_CODE, {_aQN: _C, _sN: _co}),
+        (lambda: schemas.STRING, {_aQN: _Me, _sN: _mes}),
+    ),
+)
+
+FPGA_IMAGE: StaticSchema = (
+    18,
+    n0,
+    _FIp,
+    0,
+    (
+        _FII,
+        _FIGI,
+        _N,
+        _Des,
+        _SVh,
+        _PIc,
+        _St,
+        _CTr,
+        _UT,
+        _OIw,
+        _OAwn,
+        _PCro,
+        _Tag,
+        _Pu,
+        _DRSa,
+        _ITnsta,
+    ),
+    (
+        (lambda: schemas.STRING, {_aQN: _FII, _sN: _fII}),
+        (lambda: schemas.STRING, {_aQN: _FIGI, _sN: _fIGI}),
+        (lambda: schemas.STRING, {_aQN: _N, _sN: _nam}),
+        (lambda: schemas.STRING, {_aQN: _Des, _sN: _desc}),
+        (lambda: schemas.STRING, {_aQN: _SVh, _sN: _sVh}),
+        (PCI_ID, {_aQN: _PIc, _sN: _pIc}),
+        (FPGA_IMAGE_STATE, {_aQN: _St, _sN: _st}),
+        (lambda: schemas.DATE_TIME, {_aQN: _CTr, _sN: _cTr}),
+        (lambda: schemas.DATE_TIME, {_aQN: _UT, _sN: _uT}),
+        (lambda: schemas.STRING, {_aQN: _OIw, _sN: _oI}),
+        (lambda: schemas.STRING, {_aQN: _OAwn, _sN: _oAw}),
+        (PRODUCT_CODE_LIST, {_aQN: _PCro, _sN: _pCr}),
+        (lambda: schemas.TAG_LIST, {_aQN: _Tag, _sN: _tags}),
+        (lambda: schemas.BOOLEAN, {_aQN: _Pu, _sN: _pu}),
+        (lambda: schemas.BOOLEAN, {_aQN: _DRSa, _sN: _dRS}),
+        (INSTANCE_TYPES_LIST, {_aQN: _ITnsta, _sN: _iTnst}),
+    ),
+)
+
+FPGA_IMAGE_LIST: StaticSchema = (16, n0, _FIL, 0, (_me,), ((FPGA_IMAGE, {_sN: _i}),))
 
 DESCRIBE_HOST_RESERVATIONS_MAX_RESULTS: StaticSchema = (7, n0, _DHRMR, 0)
 
@@ -770,15 +1321,13 @@ HOST: StaticSchema = (
 
 HOST_LIST: StaticSchema = (16, n0, _HL, 0, (_me,), ((HOST, {_sN: _i}),))
 
-IAM_INSTANCE_PROFILE_ASSOCIATION_ID: StaticSchema = (3, n0, _IIPAI, 0)
-
 ASSOCIATION_ID_LIST: StaticSchema = (
     16,
     n0,
     _AILs,
     0,
     (_me,),
-    ((IAM_INSTANCE_PROFILE_ASSOCIATION_ID, {_sN: _AIs}),),
+    ((lambda: schemas.IAM_INSTANCE_PROFILE_ASSOCIATION_ID, {_sN: _AIs}),),
 )
 
 DESCRIBE_IAM_INSTANCE_PROFILE_ASSOCIATIONS_MAX_RESULTS: StaticSchema = (
@@ -962,7 +1511,7 @@ DESCRIBE_IMAGE_ATTRIBUTE_OUTPUT: StaticSchema = (
         (lambda: schemas.ATTRIBUTE_VALUE, {_aQN: _DPer, _sN: _dPer}),
         (lambda: schemas.STRING, {_aQN: _IIm, _sN: _iIm}),
         (lambda: LAUNCH_PERMISSION_LIST, {_aQN: _LPa, _sN: _lPa}),
-        (lambda: schemas.PRODUCT_CODE_LIST, {_aQN: _PCro, _sN: _pCr}),
+        (PRODUCT_CODE_LIST, {_aQN: _PCro, _sN: _pCr}),
         (lambda: schemas.BLOCK_DEVICE_MAPPING_LIST, {_aQN: _BDM, _sN: _bDM}),
     ),
 )
@@ -987,7 +1536,7 @@ LAUNCH_PERMISSION: StaticSchema = (
         (lambda: schemas.STRING, {_aQN: _OAr, _sN: _oAr}),
         (lambda: schemas.STRING, {_aQN: _OUA, _sN: _oUA}),
         (lambda: schemas.STRING, {_aQN: _UIs, _sN: _uI}),
-        (lambda: schemas.PERMISSION_GROUP, {_aQN: _Gr, _sN: _gro}),
+        (PERMISSION_GROUP, {_aQN: _Gr, _sN: _gro}),
     ),
 )
 
@@ -1007,511 +1556,4 @@ DESCRIBE_IMAGE_REFERENCES_IMAGE_ID_STRING_LIST: StaticSchema = (
     0,
     (_me,),
     ((lambda: schemas.IMAGE_ID, 0),),
-)
-
-DESCRIBE_IMAGE_REFERENCES_MAX_RESULTS: StaticSchema = (7, n0, _DIRMR, 0)
-
-IMAGE_REFERENCE_RESOURCE_TYPE: StaticSchema = (
-    14,
-    n0,
-    _IRRT,
-    0,
-    (_EI_, _ELT, _SP_, _IBIR, _IBCR),
-    (
-        (-1, {_sV: _eIc}),
-        (-1, {_sV: _eLT}),
-        (-1, {_sV: _sPs}),
-        (-1, {_sV: _iIR}),
-        (-1, {_sV: _iCR}),
-    ),
-)
-
-IMAGE_REFERENCE_OPTION_NAME: StaticSchema = (
-    14,
-    n0,
-    _IRON,
-    0,
-    (_SN_, _VD_),
-    ((-1, {_sV: _sn__}), (-1, {_sV: _vd})),
-)
-
-RESOURCE_TYPE_OPTION_VALUE: StaticSchema = (3, n0, _RTOV, 0)
-
-RESOURCE_TYPE_OPTION_VALUES_LIST: StaticSchema = (
-    16,
-    n0,
-    _RTOVL,
-    0,
-    (_me,),
-    ((RESOURCE_TYPE_OPTION_VALUE, 0),),
-)
-
-RESOURCE_TYPE_OPTION: StaticSchema = (
-    18,
-    n0,
-    _RTOe,
-    0,
-    (_ON, _OV),
-    ((IMAGE_REFERENCE_OPTION_NAME, 0), (RESOURCE_TYPE_OPTION_VALUES_LIST, {_sN: _OVp})),
-)
-
-RESOURCE_TYPE_OPTION_LIST: StaticSchema = (
-    16,
-    n0,
-    _RTOL,
-    0,
-    (_me,),
-    ((RESOURCE_TYPE_OPTION, 0),),
-)
-
-RESOURCE_TYPE_REQUEST: StaticSchema = (
-    18,
-    n0,
-    _RTRe,
-    0,
-    (_RT, _RTO),
-    ((IMAGE_REFERENCE_RESOURCE_TYPE, 0), (RESOURCE_TYPE_OPTION_LIST, {_sN: _RTOe})),
-)
-
-RESOURCE_TYPE_REQUEST_LIST: StaticSchema = (
-    16,
-    n0,
-    _RTRL,
-    0,
-    (_me,),
-    ((RESOURCE_TYPE_REQUEST, 0),),
-)
-
-DESCRIBE_IMAGE_REFERENCES_INPUT: StaticSchema = (
-    18,
-    n0,
-    _DIRI,
-    {_sSI: _cDIRR, _sm: None},
-    (_IIma, _IART, _RTe, _NTex, _DR, _MR),
-    (
-        (
-            DESCRIBE_IMAGE_REFERENCES_IMAGE_ID_STRING_LIST,
-            {_sN: _IIm, _sO: None, _smi: None},
-        ),
-        (lambda: schemas.BOOLEAN, 0),
-        (RESOURCE_TYPE_REQUEST_LIST, {_sN: _RT}),
-        (lambda: schemas.STRING, 0),
-        (lambda: schemas.BOOLEAN, 0),
-        (DESCRIBE_IMAGE_REFERENCES_MAX_RESULTS, 0),
-    ),
-)
-
-DESCRIBE_IMAGE_REFERENCES_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _DIRO,
-    {_sSI: _cDIRRo, _smit: None},
-    (_NTex, _IRma),
-    (
-        (lambda: schemas.STRING, {_aQN: _NTex, _sN: _nT}),
-        (lambda: IMAGE_REFERENCE_LIST, {_aQN: _IRS, _sN: _iRS}),
-    ),
-)
-
-DESCRIBE_IMAGE_REFERENCES: StaticOperationSchema = (
-    23,
-    n0,
-    _DIR,
-    0,
-    DESCRIBE_IMAGE_REFERENCES_INPUT,
-    DESCRIBE_IMAGE_REFERENCES_OUTPUT,
-    (),
-)
-
-IMAGE_REFERENCE: StaticSchema = (
-    18,
-    n0,
-    _IRm,
-    0,
-    (_IIm, _RT, _Ar),
-    (
-        (lambda: schemas.IMAGE_ID, {_aQN: _IIm, _sN: _iIm}),
-        (IMAGE_REFERENCE_RESOURCE_TYPE, {_aQN: _RT, _sN: _rT}),
-        (lambda: schemas.STRING, {_aQN: _Ar, _sN: _ar}),
-    ),
-)
-
-IMAGE_REFERENCE_LIST: StaticSchema = (
-    16,
-    n0,
-    _IRLm,
-    0,
-    (_me,),
-    ((IMAGE_REFERENCE, {_sN: _i}),),
-)
-
-EXECUTABLE_BY_STRING_LIST: StaticSchema = (
-    16,
-    n0,
-    _EBSL,
-    0,
-    (_me,),
-    ((lambda: schemas.STRING, {_sN: _EBx}),),
-)
-
-DESCRIBE_IMAGES_INPUT: StaticSchema = (
-    18,
-    n0,
-    _DIIes,
-    {_sSI: _cDIRomam, _sm: None},
-    (_EU, _IIma, _Own, _IDn, _IDnc, _MR, _NTex, _DR, _Fil),
-    (
-        (EXECUTABLE_BY_STRING_LIST, {_sN: _EBx}),
-        (lambda: schemas.IMAGE_ID_STRING_LIST, {_sN: _IIm}),
-        (lambda: schemas.OWNER_STRING_LIST, {_sN: _Ow}),
-        (lambda: schemas.BOOLEAN, 0),
-        (lambda: schemas.BOOLEAN, 0),
-        (lambda: schemas.INTEGER, 0),
-        (lambda: schemas.STRING, 0),
-        (lambda: schemas.BOOLEAN, {_aQN: _DR, _sN: _dRr}),
-        (lambda: schemas.FILTER_LIST, {_sN: _Fi}),
-    ),
-)
-
-DESCRIBE_IMAGES_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _DIOes,
-    {_sSI: _cDIRomama, _smit: None},
-    (_NTex, _Ima),
-    (
-        (lambda: schemas.STRING, {_aQN: _NTex, _sN: _nT}),
-        (lambda: IMAGE_LIST, {_aQN: _ISmag, _sN: _iSmag}),
-    ),
-)
-
-DESCRIBE_IMAGES: StaticOperationSchema = (
-    23,
-    n0,
-    _DIesc,
-    0,
-    DESCRIBE_IMAGES_INPUT,
-    DESCRIBE_IMAGES_OUTPUT,
-    (),
-)
-
-HYPERVISOR_TYPE: StaticSchema = (
-    14,
-    n0,
-    _HTy,
-    0,
-    (_ovm, _xen),
-    ((-1, {_sV: _ovm}), (-1, {_sV: _xen})),
-)
-
-IMAGE_TYPE_VALUES: StaticSchema = (
-    14,
-    n0,
-    _ITV,
-    0,
-    (_mach, _ker, _ramd),
-    ((-1, {_sV: _mach}), (-1, {_sV: _ker}), (-1, {_sV: _ramd})),
-)
-
-IMAGE_WATERMARK: StaticSchema = (
-    18,
-    n0,
-    _IW,
-    0,
-    (_WK, _SIR, _SII, _SICT, _WCT),
-    (
-        (lambda: schemas.STRING, {_aQN: _WK, _sN: _wK}),
-        (lambda: schemas.STRING, {_aQN: _SIR, _sN: _sIR}),
-        (lambda: schemas.STRING, {_aQN: _SII, _sN: _sII}),
-        (lambda: schemas.MILLISECOND_DATE_TIME, {_aQN: _SICT, _sN: _sICT}),
-        (lambda: schemas.MILLISECOND_DATE_TIME, {_aQN: _WCT, _sN: _wCT}),
-    ),
-)
-
-IMAGE_WATERMARK_LIST: StaticSchema = (
-    16,
-    n0,
-    _IWL,
-    0,
-    (_me,),
-    ((IMAGE_WATERMARK, {_sN: _i}),),
-)
-
-IMDS_SUPPORT_VALUES: StaticSchema = (
-    14,
-    n0,
-    _ISVm,
-    0,
-    (_v______,),
-    ((-1, {_sV: _v_______}),),
-)
-
-INSTANCE_TYPE_ITEM: StaticSchema = (
-    18,
-    n0,
-    _ITIn,
-    0,
-    (_IT,),
-    ((lambda: schemas.STRING, {_aQN: _IT, _sN: _iT}),),
-)
-
-SUPPORTED_INSTANCE_TYPE_SET: StaticSchema = (
-    16,
-    n0,
-    _SITS,
-    0,
-    (_me,),
-    ((INSTANCE_TYPE_ITEM, {_sN: _i}),),
-)
-
-UNSUPPORTED_INSTANCE_TYPE_SET: StaticSchema = (
-    16,
-    n0,
-    _UITS,
-    0,
-    (_me,),
-    ((INSTANCE_TYPE_ITEM, {_sN: _i}),),
-)
-
-INSTANCE_TYPE_SPECIFICATION: StaticSchema = (
-    18,
-    n0,
-    _ITSn,
-    0,
-    (_SITu, _UIT),
-    (
-        (SUPPORTED_INSTANCE_TYPE_SET, {_aQN: _SITS, _sN: _sITS}),
-        (UNSUPPORTED_INSTANCE_TYPE_SET, {_aQN: _UITS, _sN: _uITS}),
-    ),
-)
-
-DEVICE_TYPE: StaticSchema = (
-    14,
-    n0,
-    _DTev,
-    0,
-    (_eb, _is__),
-    ((-1, {_sV: _eb}), (-1, {_sV: _is___})),
-)
-
-SCAN_RESULTS: StaticSchema = (
-    18,
-    n0,
-    _SRc,
-    0,
-    (_HFSL, _FSD, _IFAS, _LFAS, _MFAS, _HFAS, _CFAS),
-    (
-        (lambda: schemas.SEVERITY_LABEL, {_aQN: _HFSL, _sN: _hFSL}),
-        (lambda: schemas.MILLISECOND_DATE_TIME, {_aQN: _FSD, _sN: _fSD}),
-        (lambda: schemas.MILLISECOND_DATE_TIME, {_aQN: _IFAS, _sN: _iFAS}),
-        (lambda: schemas.MILLISECOND_DATE_TIME, {_aQN: _LFAS, _sN: _lFAS}),
-        (lambda: schemas.MILLISECOND_DATE_TIME, {_aQN: _MFAS, _sN: _mFAS}),
-        (lambda: schemas.MILLISECOND_DATE_TIME, {_aQN: _HFAS, _sN: _hFAS}),
-        (lambda: schemas.MILLISECOND_DATE_TIME, {_aQN: _CFAS, _sN: _cFAS}),
-    ),
-)
-
-IMAGE_STATE: StaticSchema = (
-    14,
-    n0,
-    _ISma,
-    0,
-    (_p, _av, _inv, _der, _tran, _fa, _er, _d),
-    (
-        (-1, {_sV: _p}),
-        (-1, {_sV: _av}),
-        (-1, {_sV: _inv}),
-        (-1, {_sV: _der}),
-        (-1, {_sV: _tran}),
-        (-1, {_sV: _fa}),
-        (-1, {_sV: _er}),
-        (-1, {_sV: _d}),
-    ),
-)
-
-TPM_SUPPORT_VALUES: StaticSchema = (
-    14,
-    n0,
-    _TSV,
-    0,
-    (_v______,),
-    ((-1, {_sV: _v_______}),),
-)
-
-IMAGE: StaticSchema = (
-    18,
-    n0,
-    _Im,
-    0,
-    (
-        _PDl,
-        _UO,
-        _BDMl,
-        _Des,
-        _ESna,
-        _Hy,
-        _IOA,
-        _N,
-        _RDN,
-        _RDT,
-        _SNSr,
-        _SRt,
-        _Tag,
-        _VTi,
-        _BMo,
-        _TSp,
-        _DTep,
-        _ISm,
-        _SIIo,
-        _DPer,
-        _LLT,
-        _IAm,
-        _SII,
-        _SIR,
-        _FTE,
-        _PSPN,
-        _IWm,
-        _SRc,
-        _ITSn,
-        _IIm,
-        _ILm,
-        _St,
-        _OIw,
-        _CDre,
-        _Pu,
-        _PCro,
-        _Arc,
-        _ITm,
-        _KI,
-        _RIa,
-        _Pla,
-    ),
-    (
-        (lambda: schemas.STRING, {_aQN: _PDl, _sN: _pDl}),
-        (lambda: schemas.STRING, {_aQN: _UO, _sN: _uO}),
-        (lambda: schemas.BLOCK_DEVICE_MAPPING_LIST, {_aQN: _BDM, _sN: _bDM}),
-        (lambda: schemas.STRING, {_aQN: _Des, _sN: _desc}),
-        (lambda: schemas.BOOLEAN, {_aQN: _ESna, _sN: _eSna}),
-        (HYPERVISOR_TYPE, {_aQN: _Hy, _sN: _hy}),
-        (lambda: schemas.STRING, {_aQN: _IOA, _sN: _iOA}),
-        (lambda: schemas.STRING, {_aQN: _N, _sN: _nam}),
-        (lambda: schemas.STRING, {_aQN: _RDN, _sN: _rDN}),
-        (DEVICE_TYPE, {_aQN: _RDT, _sN: _rDT}),
-        (lambda: schemas.STRING, {_aQN: _SNSr, _sN: _sNS}),
-        (lambda: schemas.STATE_REASON, {_aQN: _SRt, _sN: _sRt}),
-        (lambda: schemas.TAG_LIST, {_aQN: _TSag, _sN: _tS}),
-        (lambda: schemas.VIRTUALIZATION_TYPE, {_aQN: _VTi, _sN: _vTi}),
-        (lambda: schemas.BOOT_MODE_VALUES, {_aQN: _BMo, _sN: _bMo}),
-        (TPM_SUPPORT_VALUES, {_aQN: _TSp, _sN: _tSp}),
-        (lambda: schemas.STRING, {_aQN: _DTep, _sN: _dTep}),
-        (IMDS_SUPPORT_VALUES, {_aQN: _ISm, _sN: _iSm}),
-        (lambda: schemas.STRING, {_aQN: _SIIo, _sN: _sIIo}),
-        (lambda: schemas.STRING, {_aQN: _DPer, _sN: _dPer}),
-        (lambda: schemas.STRING, {_aQN: _LLT, _sN: _lLT}),
-        (lambda: schemas.BOOLEAN, {_aQN: _IAm, _sN: _iAm}),
-        (lambda: schemas.STRING, {_aQN: _SII, _sN: _sII}),
-        (lambda: schemas.STRING, {_aQN: _SIR, _sN: _sIR}),
-        (lambda: schemas.BOOLEAN, {_aQN: _FTE, _sN: _fTE}),
-        (lambda: schemas.STRING, {_aQN: _PSPN, _sN: _pSPN}),
-        (IMAGE_WATERMARK_LIST, {_aQN: _IWS, _sN: _iWS}),
-        (SCAN_RESULTS, {_aQN: _SRc, _sN: _sRc}),
-        (INSTANCE_TYPE_SPECIFICATION, {_aQN: _ITSn, _sN: _iTS}),
-        (lambda: schemas.STRING, {_aQN: _IIm, _sN: _iIm}),
-        (lambda: schemas.STRING, {_aQN: _ILm, _sN: _iL}),
-        (IMAGE_STATE, {_aQN: _ISma, _sN: _iSma}),
-        (lambda: schemas.STRING, {_aQN: _IOIm, _sN: _iOIm}),
-        (lambda: schemas.STRING, {_aQN: _CDre, _sN: _cDre}),
-        (lambda: schemas.BOOLEAN, {_aQN: _IPsu, _sN: _iPsu}),
-        (lambda: schemas.PRODUCT_CODE_LIST, {_aQN: _PCro, _sN: _pCr}),
-        (lambda: schemas.ARCHITECTURE_VALUES, {_aQN: _Arc, _sN: _arch}),
-        (IMAGE_TYPE_VALUES, {_aQN: _ITm, _sN: _iTm}),
-        (lambda: schemas.STRING, {_aQN: _KI, _sN: _kI}),
-        (lambda: schemas.STRING, {_aQN: _RIa, _sN: _rIa}),
-        (lambda: schemas.PLATFORM_VALUES, {_aQN: _Pla, _sN: _plat}),
-    ),
-)
-
-IMAGE_LIST: StaticSchema = (16, n0, _ILma, 0, (_me,), ((IMAGE, {_sN: _i}),))
-
-DESCRIBE_IMAGE_USAGE_REPORTS_IMAGE_ID_STRING_LIST: StaticSchema = (
-    16,
-    n0,
-    _DIURIISL,
-    0,
-    (_me,),
-    ((lambda: schemas.IMAGE_ID, 0),),
-)
-
-DESCRIBE_IMAGE_USAGE_REPORT_ENTRIES_MAX_RESULTS: StaticSchema = (7, n0, _DIUREMR, 0)
-
-IMAGE_USAGE_REPORT_ID_STRING_LIST: StaticSchema = (
-    16,
-    n0,
-    _IURISL,
-    0,
-    (_me,),
-    ((lambda: schemas.IMAGE_USAGE_REPORT_ID, 0),),
-)
-
-DESCRIBE_IMAGE_USAGE_REPORT_ENTRIES_INPUT: StaticSchema = (
-    18,
-    n0,
-    _DIUREI,
-    {_sSI: _cDIURER, _sm: None},
-    (_IIma, _RIepo, _NTex, _Fil, _DR, _MR),
-    (
-        (DESCRIBE_IMAGE_USAGE_REPORTS_IMAGE_ID_STRING_LIST, {_sN: _IIm}),
-        (IMAGE_USAGE_REPORT_ID_STRING_LIST, {_sN: _RIep}),
-        (lambda: schemas.STRING, 0),
-        (lambda: schemas.FILTER_LIST, {_sN: _Fi}),
-        (lambda: schemas.BOOLEAN, 0),
-        (DESCRIBE_IMAGE_USAGE_REPORT_ENTRIES_MAX_RESULTS, 0),
-    ),
-)
-
-DESCRIBE_IMAGE_USAGE_REPORT_ENTRIES_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _DIUREO,
-    {_sSI: _cDIURERo, _smit: None},
-    (_NTex, _IUREm),
-    (
-        (lambda: schemas.STRING, {_aQN: _NTex, _sN: _nT}),
-        (lambda: IMAGE_USAGE_REPORT_ENTRY_LIST, {_aQN: _IURES, _sN: _iURES}),
-    ),
-)
-
-DESCRIBE_IMAGE_USAGE_REPORT_ENTRIES: StaticOperationSchema = (
-    23,
-    n0,
-    _DIURE,
-    0,
-    DESCRIBE_IMAGE_USAGE_REPORT_ENTRIES_INPUT,
-    DESCRIBE_IMAGE_USAGE_REPORT_ENTRIES_OUTPUT,
-    (),
-)
-
-IMAGE_USAGE_REPORT_ENTRY: StaticSchema = (
-    18,
-    n0,
-    _IURE,
-    0,
-    (_RT, _RIep, _UCs, _AIcco, _IIm, _RCT),
-    (
-        (lambda: schemas.IMAGE_USAGE_RESOURCE_TYPE_NAME, {_aQN: _RT, _sN: _rT}),
-        (lambda: schemas.IMAGE_USAGE_REPORT_ID, {_aQN: _RIep, _sN: _rIe}),
-        (lambda: schemas.LONG, {_aQN: _UCs, _sN: _uCs}),
-        (lambda: schemas.STRING, {_aQN: _AIcco, _sN: _aIc}),
-        (lambda: schemas.IMAGE_ID, {_aQN: _IIm, _sN: _iIm}),
-        (lambda: schemas.MILLISECOND_DATE_TIME, {_aQN: _RCT, _sN: _rCT}),
-    ),
-)
-
-IMAGE_USAGE_REPORT_ENTRY_LIST: StaticSchema = (
-    16,
-    n0,
-    _IUREL,
-    0,
-    (_me,),
-    ((IMAGE_USAGE_REPORT_ENTRY, {_sN: _i}),),
 )

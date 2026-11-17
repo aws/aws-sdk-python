@@ -28,8 +28,11 @@ _xarp = "x-amz-request-payer"
 _EBO = "ExpectedBucketOwner"
 _xaebo = "x-amz-expected-bucket-owner"
 _RC = "RequestCharged"
+_OVI = "ObjectVersionId"
 _smi = "smithy.api#output"
 _xarc = "x-amz-request-charged"
+_VI = "VersionId"
+_xavi = "x-amz-version-id"
 _smit = "smithy.api#error"
 _c = "client"
 _sE = "smithy.api#httpError"
@@ -86,11 +89,8 @@ _BKE = "BucketKeyEnabled"
 _Ex = "Expiration"
 _SSE = "ServerSideEncryption"
 _SSEKMSKI = "SSEKMSKeyId"
-_OVI = "ObjectVersionId"
 _xae = "x-amz-expiration"
 _xasse = "x-amz-server-side-encryption"
-_VI = "VersionId"
-_xavi = "x-amz-version-id"
 _xasseakki = "x-amz-server-side-encryption-aws-kms-key-id"
 _xassebke = "x-amz-server-side-encryption-bucket-key-enabled"
 _CC = "CacheControl"
@@ -300,12 +300,11 @@ _OLRM = "ObjectLockRetentionMode"
 _DRef = "DefaultRetention"
 _Mo = "Mode"
 _DEH = "DefaultEventHold"
+_OLR = "ObjectLockRule"
 _OLC = "ObjectLockConfiguration"
 _GOLCO = "GetObjectLockConfigurationOutput"
 _GOLC = "GetObjectLockConfiguration"
-_OLRb = "ObjectLockRetention"
-_RUD = "RetainUntilDate"
-_EHv = "EventHold"
+_OLT = "ObjectLockToken"
 
 REPLICATION_RULE_FILTER: StaticSchema = (
     18,
@@ -1319,7 +1318,7 @@ GET_OBJECT_LOCK_CONFIGURATION_OUTPUT: StaticSchema = (
     _GOLCO,
     {_smi: None},
     (_OLC,),
-    ((lambda: schemas.OBJECT_LOCK_CONFIGURATION, 16),),
+    ((lambda: OBJECT_LOCK_CONFIGURATION, 16),),
 )
 
 GET_OBJECT_LOCK_CONFIGURATION: StaticOperationSchema = (
@@ -1368,16 +1367,15 @@ DEFAULT_RETENTION: StaticSchema = (
     ),
 )
 
-OBJECT_LOCK_RETENTION: StaticSchema = (
+OBJECT_LOCK_RULE: StaticSchema = (18, n0, _OLR, 0, (_DRef,), ((DEFAULT_RETENTION, 0),))
+
+OBJECT_LOCK_CONFIGURATION: StaticSchema = (
     18,
     n0,
-    _OLRb,
+    _OLC,
     0,
-    (_Mo, _RUD, _EHv, _EHD),
-    (
-        (OBJECT_LOCK_RETENTION_MODE, 0),
-        (lambda: schemas.DATE, 0),
-        (lambda: schemas.OBJECT_LOCK_EVENT_HOLD, 0),
-        (EVENT_HOLD_DURATION, 0),
-    ),
+    (_OLE, _Rul),
+    ((OBJECT_LOCK_ENABLED, 0), (OBJECT_LOCK_RULE, 0)),
 )
+
+OBJECT_LOCK_TOKEN: StaticSchema = (3, n0, _OLT, 0)

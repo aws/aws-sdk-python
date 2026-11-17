@@ -20,17 +20,22 @@ from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
     from .models import (
+        AcknowledgeDeadLetterQueueRecordsOutput,
+        AcknowledgeQueueRecordsOutput,
         AddTagsToStreamOutput,
         CreateChannelOutput,
+        CreateQueueOutput,
         CreateStreamOutput,
         DecreaseStreamRetentionPeriodOutput,
         DeleteChannelOutput,
+        DeleteQueueOutput,
         DeleteResourcePolicyOutput,
         DeleteStreamOutput,
         DeregisterStreamConsumerOutput,
         DescribeAccountSettingsOutput,
         DescribeChannelOutput,
         DescribeLimitsOutput,
+        DescribeQueueOutput,
         DescribeStreamConsumerOutput,
         DescribeStreamOutput,
         DescribeStreamSummaryOutput,
@@ -41,6 +46,7 @@ if TYPE_CHECKING:
         GetShardIteratorOutput,
         IncreaseStreamRetentionPeriodOutput,
         ListChannelsOutput,
+        ListQueuesOutput,
         ListShardsOutput,
         ListStreamConsumersOutput,
         ListStreamsOutput,
@@ -50,8 +56,11 @@ if TYPE_CHECKING:
         PutRecordOutput,
         PutRecordsOutput,
         PutResourcePolicyOutput,
+        ReceiveDeadLetterQueueRecordsOutput,
+        ReceiveQueueRecordsOutput,
         RegisterStreamConsumerOutput,
         RemoveTagsFromStreamOutput,
+        RestoreDeadLetterQueueRecordsOutput,
         SplitShardOutput,
         StartStreamEncryptionOutput,
         StopStreamEncryptionOutput,
@@ -59,7 +68,10 @@ if TYPE_CHECKING:
         UntagResourceOutput,
         UpdateAccountSettingsOutput,
         UpdateChannelOutput,
+        UpdateDeadLetterQueueRecordsVisibilityOutput,
         UpdateMaxRecordSizeOutput,
+        UpdateQueueOutput,
+        UpdateQueueRecordsVisibilityOutput,
         UpdateShardCountOutput,
         UpdateStreamModeOutput,
         UpdateStreamRecordDistributionStrategyOutput,
@@ -72,11 +84,122 @@ logger = logging.getLogger(__name__)
 
 class KinesisClient(Client[KinesisConfig]):
     """
-    Amazon Kinesis Data Streams is a managed service that scales elastically
-    for real-time processing of streaming big data.
+    Amazon Kinesis Data Streams is a serverless data streaming service that
+    ingests data once and fans it out to multiple consumer applications for
+    real-time processing.
     """
 
     _client_plugins = (aws_user_agent_plugin, user_agent_plugin)
+
+    @_overload
+    def acknowledge_dead_letter_queue_records(
+        self,
+        request: _models.AcknowledgeDeadLetterQueueRecordsInput
+        | _models.AcknowledgeDeadLetterQueueRecordsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> AcknowledgeDeadLetterQueueRecordsOutput: ...
+
+    @_overload
+    def acknowledge_dead_letter_queue_records(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.AcknowledgeDeadLetterQueueRecordsInputDict],
+    ) -> AcknowledgeDeadLetterQueueRecordsOutput:
+        """
+        Acknowledges up to 10 dead-letter records in the specified queue, so the
+        queue doesn't return them again. The result for each entry is reported
+        individually in the response.
+
+        Acknowledging a record does not affect the record in the data stream.
+        That record remains available to stream consumers and to other queues on
+        the same stream for the rest of its retention period.
+
+        Because the request can result in a combination of successful and
+        unsuccessful entries, check the `Failed` list even when the call returns
+        an HTTP status code of `200`.
+
+        Args:
+            plugins:
+                A list of callables that modify the configuration dynamically.
+                Changes made by these plugins only apply for the duration of the
+                operation execution and will not affect any other operation
+                invocations.
+
+        Returns:
+            An instance of `AcknowledgeDeadLetterQueueRecordsOutput`.
+        """
+
+    def acknowledge_dead_letter_queue_records(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> AcknowledgeDeadLetterQueueRecordsOutput:
+        return self._invoke(
+            self._select_input(
+                _models.ACKNOWLEDGE_DEAD_LETTER_QUEUE_RECORDS, args, kwargs
+            ),
+            _models.ACKNOWLEDGE_DEAD_LETTER_QUEUE_RECORDS,
+            [],
+            plugins,
+        )
+
+    @_overload
+    def acknowledge_queue_records(
+        self,
+        request: _models.AcknowledgeQueueRecordsInput
+        | _models.AcknowledgeQueueRecordsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> AcknowledgeQueueRecordsOutput: ...
+
+    @_overload
+    def acknowledge_queue_records(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.AcknowledgeQueueRecordsInputDict],
+    ) -> AcknowledgeQueueRecordsOutput:
+        """
+        Acknowledges up to 10 records from the specified queue. After a record
+        is acknowledged, the queue does not deliver it again. The result for
+        each entry is reported individually in the response.
+
+        Acknowledging a record does not affect the record in the data stream.
+        That record remains available to stream consumers and to other queues on
+        the same stream for the rest of its retention period.
+
+        Because the request can result in a combination of successful and
+        unsuccessful entries, check the `Failed` list even when the call returns
+        an HTTP status code of `200`.
+
+        On rare occasions, you can receive a record again after you acknowledge
+        it. Design your queue consumer to be idempotent, so that processing the
+        same record more than once is safe.
+
+        Args:
+            plugins:
+                A list of callables that modify the configuration dynamically.
+                Changes made by these plugins only apply for the duration of the
+                operation execution and will not affect any other operation
+                invocations.
+
+        Returns:
+            An instance of `AcknowledgeQueueRecordsOutput`.
+        """
+
+    def acknowledge_queue_records(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> AcknowledgeQueueRecordsOutput:
+        return self._invoke(
+            self._select_input(_models.ACKNOWLEDGE_QUEUE_RECORDS, args, kwargs),
+            _models.ACKNOWLEDGE_QUEUE_RECORDS,
+            [],
+            plugins,
+        )
 
     @_overload
     def add_tags_to_stream(
@@ -190,6 +313,89 @@ class KinesisClient(Client[KinesisConfig]):
         return self._invoke(
             self._select_input(_models.CREATE_CHANNEL, args, kwargs),
             _models.CREATE_CHANNEL,
+            [],
+            plugins,
+        )
+
+    @_overload
+    def create_queue(
+        self,
+        request: _models.CreateQueueInput | _models.CreateQueueInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CreateQueueOutput: ...
+
+    @_overload
+    def create_queue(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateQueueInputDict],
+    ) -> CreateQueueOutput:
+        """
+        Creates a queue on the specified data stream. A queue delivers records
+        from the stream to a queue consumer, tracks the delivery state of each
+        record, and redelivers any record that is not acknowledged before its
+        visibility timeout expires.
+
+        A queue does not extend how long the stream keeps a record. When a
+        record reaches the end of the data stream's retention period, the queue
+        stops delivering it.
+
+        Your queue consumer calls ReceiveQueueRecords to receive up to 10
+        records at a time. After it processes records, it calls
+        AcknowledgeQueueRecords so the queue does not deliver them again.
+
+        Queues are supported only on data streams in on-demand capacity mode.
+
+        Creating a queue does not change how producers write to the stream, and
+        it does not change how existing stream consumers read from it. A queue
+        counts as a registered consumer on the stream and shares the stream's
+        registered consumer limit with enhanced fan-out consumers: 20 on
+        On-demand Standard and 50 on On-demand Advantage.
+
+        Use `StartingPosition` to set the position in the stream where delivery
+        begins. The default is `LATEST`.
+
+        `CreateQueue` is an asynchronous operation. Upon receiving a
+        `CreateQueue` request, Amazon Kinesis Data Streams immediately returns a
+        queue description with a `QueueStatus` of `CREATING`. After the queue is
+        created, Kinesis Data Streams sets the `QueueStatus` to `ACTIVE`. You
+        can begin receiving records after the queue is `ACTIVE`. Use
+        DescribeQueue to check the status of the queue.
+
+        Each queue has built-in dead-letter handling. When a record has been
+        received `MaxReceiveCount` times without being acknowledged, it becomes
+        a dead-letter record, and ReceiveQueueRecords no longer returns it. You
+        work with dead-letter records through a separate set of operations that
+        use the same queue ARN: ReceiveDeadLetterQueueRecords,
+        AcknowledgeDeadLetterQueueRecords,
+        UpdateDeadLetterQueueRecordsVisibility, and
+        RestoreDeadLetterQueueRecords.
+
+        Dead-letter handling is enabled by default, with a `MaxReceiveCount` of
+        6. To use a different value, or to turn dead-letter handling off,
+        specify `DeadLetterConfiguration` in `QueueAttributes`.
+
+        Args:
+            plugins:
+                A list of callables that modify the configuration dynamically.
+                Changes made by these plugins only apply for the duration of the
+                operation execution and will not affect any other operation
+                invocations.
+
+        Returns:
+            An instance of `CreateQueueOutput`.
+        """
+
+    def create_queue(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateQueueOutput:
+        return self._invoke(
+            self._select_input(_models.CREATE_QUEUE, args, kwargs),
+            _models.CREATE_QUEUE,
             [],
             plugins,
         )
@@ -407,6 +613,62 @@ class KinesisClient(Client[KinesisConfig]):
         )
 
     @_overload
+    def delete_queue(
+        self,
+        request: _models.DeleteQueueInput | _models.DeleteQueueInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteQueueOutput: ...
+
+    @_overload
+    def delete_queue(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteQueueInputDict],
+    ) -> DeleteQueueOutput:
+        """
+        Deletes the specified queue. Records that are in flight when you delete
+        the queue are not delivered again, and receipt handles issued by the
+        queue stop being valid.
+
+        Deleting a queue does not delete the data stream the queue was created
+        on, and does not delete any records in that stream. Those records remain
+        available to stream consumers and to other queues on the same stream for
+        the rest of their retention period.
+
+        `DeleteQueue` is an asynchronous operation. Upon receiving a
+        `DeleteQueue` request, Amazon Kinesis Data Streams sets the
+        `QueueStatus` to `DELETING`. The queue is deleted when the operation
+        completes. A queue in the `DELETING` state does not deliver records.
+
+        You must delete every queue on a data stream before you can delete the
+        stream, or switch it from on-demand to provisioned capacity mode.
+
+        Args:
+            plugins:
+                A list of callables that modify the configuration dynamically.
+                Changes made by these plugins only apply for the duration of the
+                operation execution and will not affect any other operation
+                invocations.
+
+        Returns:
+            An instance of `DeleteQueueOutput`.
+        """
+
+    def delete_queue(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteQueueOutput:
+        return self._invoke(
+            self._select_input(_models.DELETE_QUEUE, args, kwargs),
+            _models.DELETE_QUEUE,
+            [],
+            plugins,
+        )
+
+    @_overload
     def delete_resource_policy(
         self,
         request: _models.DeleteResourcePolicyInput
@@ -425,13 +687,15 @@ class KinesisClient(Client[KinesisConfig]):
         **kwargs: _Unpack[_models.DeleteResourcePolicyInputDict],
     ) -> DeleteResourcePolicyOutput:
         """
-        Delete a policy for the specified data stream or consumer. Request
-        patterns can be one of the following:
+        Delete a policy for the specified data stream, consumer, or queue.
+        Request patterns can be one of the following:
 
         - Data stream pattern: `arn:aws.*:kinesis:.*:\\d{12}:.*stream/\\S+`
 
         - Consumer pattern:
           `^(arn):aws.*:kinesis:.*:\\d{12}:.*stream\\/[a-zA-Z0-9_.-]+\\/consumer\\/[a-zA-Z0-9_.-]+:[0-9]+`
+
+        - Queue pattern: `arn:aws.*:kinesis:.*:\\d{12}:queue/\\S+`
 
         Args:
             plugins:
@@ -492,6 +756,9 @@ class KinesisClient(Client[KinesisConfig]):
 
         When you delete a stream, any shards in that stream are also deleted,
         and any tags are dissociated from the stream.
+
+        Before you can delete a data stream that has queues, you must delete
+        every queue on the stream with DeleteQueue.
 
         You can use the DescribeStreamSummary operation to check the state of
         the stream, which is returned in `StreamStatus`.
@@ -710,6 +977,48 @@ class KinesisClient(Client[KinesisConfig]):
         return self._invoke(
             self._select_input(_models.DESCRIBE_LIMITS, args, kwargs),
             _models.DESCRIBE_LIMITS,
+            [],
+            plugins,
+        )
+
+    @_overload
+    def describe_queue(
+        self,
+        request: _models.DescribeQueueInput | _models.DescribeQueueInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DescribeQueueOutput: ...
+
+    @_overload
+    def describe_queue(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DescribeQueueInputDict],
+    ) -> DescribeQueueOutput:
+        """
+        Returns a description of the specified queue, including its status, the
+        data stream it delivers records from, and its configuration attributes.
+
+        Args:
+            plugins:
+                A list of callables that modify the configuration dynamically.
+                Changes made by these plugins only apply for the duration of the
+                operation execution and will not affect any other operation
+                invocations.
+
+        Returns:
+            An instance of `DescribeQueueOutput`.
+        """
+
+    def describe_queue(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DescribeQueueOutput:
+        return self._invoke(
+            self._select_input(_models.DESCRIBE_QUEUE, args, kwargs),
+            _models.DESCRIBE_QUEUE,
             [],
             plugins,
         )
@@ -1122,13 +1431,15 @@ class KinesisClient(Client[KinesisConfig]):
         **kwargs: _Unpack[_models.GetResourcePolicyInputDict],
     ) -> GetResourcePolicyOutput:
         """
-        Returns a policy attached to the specified data stream or consumer.
-        Request patterns can be one of the following:
+        Returns a policy attached to the specified data stream, consumer, or
+        queue. Request patterns can be one of the following:
 
         - Data stream pattern: `arn:aws.*:kinesis:.*:\\d{12}:.*stream/\\S+`
 
         - Consumer pattern:
           `^(arn):aws.*:kinesis:.*:\\d{12}:.*stream\\/[a-zA-Z0-9_.-]+\\/consumer\\/[a-zA-Z0-9_.-]+:[0-9]+`
+
+        - Queue pattern: `arn:aws.*:kinesis:.*:\\d{12}:queue/\\S+`
 
         Args:
             plugins:
@@ -1347,6 +1658,52 @@ class KinesisClient(Client[KinesisConfig]):
         )
 
     @_overload
+    def list_queues(
+        self,
+        request: _models.ListQueuesInput | _models.ListQueuesInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListQueuesOutput: ...
+
+    @_overload
+    def list_queues(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListQueuesInputDict],
+    ) -> ListQueuesOutput:
+        """
+        Returns a summary of each queue in the Amazon Web Services account and
+        Region used by the request. Use `StreamFilter` to list only the queues
+        on a particular data stream.
+
+        If the response contains a `NextToken`, more queues are available. Call
+        `ListQueues` again with that value to retrieve the next page.
+
+        Args:
+            plugins:
+                A list of callables that modify the configuration dynamically.
+                Changes made by these plugins only apply for the duration of the
+                operation execution and will not affect any other operation
+                invocations.
+
+        Returns:
+            An instance of `ListQueuesOutput`.
+        """
+
+    def list_queues(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListQueuesOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_QUEUES, args, kwargs),
+            _models.LIST_QUEUES,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_shards(
         self,
         request: _models.ListShardsInput | _models.ListShardsInputDict,
@@ -1531,6 +1888,9 @@ class KinesisClient(Client[KinesisConfig]):
         List all tags added to the specified Kinesis resource. Each tag is a
         label consisting of a user-defined key and value. Tags can help you
         manage, identify, organize, search for, and filter resources.
+
+        The Kinesis resource can be a data stream, a queue, or an enhanced
+        fan-out consumer.
 
         For more information about tagging Kinesis resources, see [Tag your
         Amazon Kinesis Data Streams
@@ -1923,15 +2283,15 @@ class KinesisClient(Client[KinesisConfig]):
         **kwargs: _Unpack[_models.PutResourcePolicyInputDict],
     ) -> PutResourcePolicyOutput:
         """
-        Attaches a resource-based policy to a data stream or registered
-        consumer. If you are using an identity other than the root user of the
-        Amazon Web Services account that owns the resource, the calling identity
-        must have the `PutResourcePolicy` permissions on the specified Kinesis
-        Data Streams resource and belong to the owner's account in order to use
-        this operation. If you don't have `PutResourcePolicy` permissions,
-        Amazon Kinesis Data Streams returns a `403 Access Denied error`. If you
-        receive a `ResourceNotFoundException`, check to see if you passed a
-        valid stream or consumer resource.
+        Attaches a resource-based policy to a data stream, a queue, or an
+        enhanced fan-out consumer. If you are using an identity other than the
+        root user of the Amazon Web Services account that owns the resource, the
+        calling identity must have the `PutResourcePolicy` permissions on the
+        specified Kinesis Data Streams resource and belong to the owner's
+        account in order to use this operation. If you don't have
+        `PutResourcePolicy` permissions, Amazon Kinesis Data Streams returns a
+        `403 Access Denied error`. If you receive a `ResourceNotFoundException`,
+        check to see if you passed a valid stream or consumer resource.
 
         Request patterns can be one of the following:
 
@@ -1939,6 +2299,8 @@ class KinesisClient(Client[KinesisConfig]):
 
         - Consumer pattern:
           `^(arn):aws.*:kinesis:.*:\\d{12}:.*stream\\/[a-zA-Z0-9_.-]+\\/consumer\\/[a-zA-Z0-9_.-]+:[0-9]+`
+
+        - Queue pattern: `arn:aws.*:kinesis:.*:\\d{12}:queue/\\S+`
 
         For more information, see [Controlling Access to Amazon Kinesis Data
         Streams Resources Using
@@ -1961,6 +2323,133 @@ class KinesisClient(Client[KinesisConfig]):
         return self._invoke(
             self._select_input(_models.PUT_RESOURCE_POLICY, args, kwargs),
             _models.PUT_RESOURCE_POLICY,
+            [],
+            plugins,
+        )
+
+    @_overload
+    def receive_dead_letter_queue_records(
+        self,
+        request: _models.ReceiveDeadLetterQueueRecordsInput
+        | _models.ReceiveDeadLetterQueueRecordsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ReceiveDeadLetterQueueRecordsOutput: ...
+
+    @_overload
+    def receive_dead_letter_queue_records(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ReceiveDeadLetterQueueRecordsInputDict],
+    ) -> ReceiveDeadLetterQueueRecordsOutput:
+        """
+        Receives up to 10 dead-letter records from the specified queue. Each
+        queue has built-in dead-letter handling: when a record has been received
+        `MaxReceiveCount` times without being acknowledged, it becomes a
+        dead-letter record, which usually means your queue consumer could not
+        process it. The dead-letter record stays in the same queue, and
+        ReceiveQueueRecords no longer returns it.
+
+        Dead-letter records carry the same data and partition key as when they
+        were first delivered, and are returned with a receipt handle. Use the
+        receipt handle to acknowledge the record with
+        AcknowledgeDeadLetterQueueRecords, which discards it, to change its
+        visibility with UpdateDeadLetterQueueRecordsVisibility, or to restore it
+        with RestoreDeadLetterQueueRecords, which returns it to the normal
+        receive path so that ReceiveQueueRecords can return it again.
+
+        Use this operation to inspect the records your queue consumer could not
+        process, so you can correct the cause and then either acknowledge or
+        restore them.
+
+        A queue delivers dead-letter records while it is in the `ACTIVE` state.
+
+        Args:
+            plugins:
+                A list of callables that modify the configuration dynamically.
+                Changes made by these plugins only apply for the duration of the
+                operation execution and will not affect any other operation
+                invocations.
+
+        Returns:
+            An instance of `ReceiveDeadLetterQueueRecordsOutput`.
+        """
+
+    def receive_dead_letter_queue_records(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ReceiveDeadLetterQueueRecordsOutput:
+        return self._invoke(
+            self._select_input(_models.RECEIVE_DEAD_LETTER_QUEUE_RECORDS, args, kwargs),
+            _models.RECEIVE_DEAD_LETTER_QUEUE_RECORDS,
+            [],
+            plugins,
+        )
+
+    @_overload
+    def receive_queue_records(
+        self,
+        request: _models.ReceiveQueueRecordsInput
+        | _models.ReceiveQueueRecordsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ReceiveQueueRecordsOutput: ...
+
+    @_overload
+    def receive_queue_records(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ReceiveQueueRecordsInputDict],
+    ) -> ReceiveQueueRecordsOutput:
+        """
+        Receives up to 10 records from the specified queue. Each record is
+        returned with a receipt handle, which is the identifier you use to
+        acknowledge the record or change its visibility.
+
+        A record returned by `ReceiveQueueRecords` becomes in flight: it is not
+        visible to any consumer instance for the duration of its visibility
+        timeout, so subsequent receive requests do not return it while your
+        queue consumer processes it. Acknowledge the record with
+        AcknowledgeQueueRecords when you finish processing it. A record that is
+        not acknowledged before its visibility timeout expires becomes visible
+        in the queue again and can be received by any consumer instance.
+
+        Use `WaitTimeSeconds` to control how long the call waits for a record to
+        become visible before returning. If a record becomes visible sooner, the
+        call returns sooner. If the wait time expires and no records are
+        visible, the call returns an empty list of records.
+
+        Records are not necessarily received in the order they were written to
+        the data stream.
+
+        A queue delivers records while it is in the `ACTIVE` state.
+
+        On rare occasions, a queue can deliver a record more than once. Design
+        your queue consumer to be idempotent, so that processing the same record
+        more than once is safe.
+
+        Args:
+            plugins:
+                A list of callables that modify the configuration dynamically.
+                Changes made by these plugins only apply for the duration of the
+                operation execution and will not affect any other operation
+                invocations.
+
+        Returns:
+            An instance of `ReceiveQueueRecordsOutput`.
+        """
+
+    def receive_queue_records(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ReceiveQueueRecordsOutput:
+        return self._invoke(
+            self._select_input(_models.RECEIVE_QUEUE_RECORDS, args, kwargs),
+            _models.RECEIVE_QUEUE_RECORDS,
             [],
             plugins,
         )
@@ -2000,14 +2489,15 @@ class KinesisClient(Client[KinesisConfig]):
         consumer.
 
         With On-demand Advantage streams, you can register up to 50 consumers
-        per stream to use Enhanced Fan-out. With On-demand Standard and
+        per stream to use enhanced fan-out. With On-demand Standard and
         Provisioned streams, you can register up to 20 consumers per stream to
-        use Enhanced Fan-out. A given consumer can only be registered with one
-        stream at a time.
+        use enhanced fan-out. Queues share this limit with enhanced fan-out
+        consumers: both count as registered consumers on the stream. A given
+        consumer can only be registered with one stream at a time.
 
-        For an example of how to use this operation, see [Enhanced Fan-Out Using
-        the Kinesis Data Streams
-        API](https://docs.aws.amazon.com/streams/latest/dev/building-enhanced-consumers-api.html).
+        For an example of how to use this operation, see [Develop enhanced
+        fan-out consumers with the Amazon Web Services SDK for
+        Java](https://docs.aws.amazon.com/streams/latest/dev/building-enhanced-consumers-api.html).
 
         The use of this operation has a limit of five transactions per second
         per account. Also, only 5 consumers can be created simultaneously. In
@@ -2086,6 +2576,59 @@ class KinesisClient(Client[KinesisConfig]):
         return self._invoke(
             self._select_input(_models.REMOVE_TAGS_FROM_STREAM, args, kwargs),
             _models.REMOVE_TAGS_FROM_STREAM,
+            [],
+            plugins,
+        )
+
+    @_overload
+    def restore_dead_letter_queue_records(
+        self,
+        request: _models.RestoreDeadLetterQueueRecordsInput
+        | _models.RestoreDeadLetterQueueRecordsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> RestoreDeadLetterQueueRecordsOutput: ...
+
+    @_overload
+    def restore_dead_letter_queue_records(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.RestoreDeadLetterQueueRecordsInputDict],
+    ) -> RestoreDeadLetterQueueRecordsOutput:
+        """
+        Restores up to 10 dead-letter records in the specified queue. Restoring
+        a record clears its dead-letter state and resets its receive count, so
+        ReceiveQueueRecords can return it again, up to `MaxReceiveCount` times
+        before it becomes a dead-letter record again. The result for each entry
+        is reported individually in the response.
+
+        Restore records after you have corrected the condition that prevented
+        your queue consumer from processing them.
+
+        Because the request can result in a combination of successful and
+        unsuccessful entries, check the `Failed` list even when the call returns
+        an HTTP status code of `200`.
+
+        Args:
+            plugins:
+                A list of callables that modify the configuration dynamically.
+                Changes made by these plugins only apply for the duration of the
+                operation execution and will not affect any other operation
+                invocations.
+
+        Returns:
+            An instance of `RestoreDeadLetterQueueRecordsOutput`.
+        """
+
+    def restore_dead_letter_queue_records(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> RestoreDeadLetterQueueRecordsOutput:
+        return self._invoke(
+            self._select_input(_models.RESTORE_DEAD_LETTER_QUEUE_RECORDS, args, kwargs),
+            _models.RESTORE_DEAD_LETTER_QUEUE_RECORDS,
             [],
             plugins,
         )
@@ -2342,6 +2885,9 @@ class KinesisClient(Client[KinesisConfig]):
         manage, identify, organize, search for, and filter resources. You can
         assign up to 50 tags to a Kinesis resource.
 
+        The Kinesis resource can be a data stream, a queue, or an enhanced
+        fan-out consumer.
+
         Args:
             plugins:
                 A list of callables that modify the configuration dynamically.
@@ -2384,6 +2930,9 @@ class KinesisClient(Client[KinesisConfig]):
         Removes tags from the specified Kinesis resource. Removed tags are
         deleted and can't be recovered after this operation completes
         successfully.
+
+        The Kinesis resource can be a data stream, a queue, or an enhanced
+        fan-out consumer.
 
         Args:
             plugins:
@@ -2517,6 +3066,56 @@ class KinesisClient(Client[KinesisConfig]):
         )
 
     @_overload
+    def update_dead_letter_queue_records_visibility(
+        self,
+        request: _models.UpdateDeadLetterQueueRecordsVisibilityInput
+        | _models.UpdateDeadLetterQueueRecordsVisibilityInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UpdateDeadLetterQueueRecordsVisibilityOutput: ...
+
+    @_overload
+    def update_dead_letter_queue_records_visibility(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateDeadLetterQueueRecordsVisibilityInputDict],
+    ) -> UpdateDeadLetterQueueRecordsVisibilityOutput:
+        """
+        Changes the visibility timeout of up to 10 dead-letter records that you
+        have received from the specified queue but not yet acknowledged. The
+        result for each entry is reported individually in the response.
+
+        Because the request can result in a combination of successful and
+        unsuccessful entries, check the `Failed` list even when the call returns
+        an HTTP status code of `200`.
+
+        Args:
+            plugins:
+                A list of callables that modify the configuration dynamically.
+                Changes made by these plugins only apply for the duration of the
+                operation execution and will not affect any other operation
+                invocations.
+
+        Returns:
+            An instance of `UpdateDeadLetterQueueRecordsVisibilityOutput`.
+        """
+
+    def update_dead_letter_queue_records_visibility(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateDeadLetterQueueRecordsVisibilityOutput:
+        return self._invoke(
+            self._select_input(
+                _models.UPDATE_DEAD_LETTER_QUEUE_RECORDS_VISIBILITY, args, kwargs
+            ),
+            _models.UPDATE_DEAD_LETTER_QUEUE_RECORDS_VISIBILITY,
+            [],
+            plugins,
+        )
+
+    @_overload
     def update_max_record_size(
         self,
         request: _models.UpdateMaxRecordSizeInput
@@ -2556,6 +3155,119 @@ class KinesisClient(Client[KinesisConfig]):
         return self._invoke(
             self._select_input(_models.UPDATE_MAX_RECORD_SIZE, args, kwargs),
             _models.UPDATE_MAX_RECORD_SIZE,
+            [],
+            plugins,
+        )
+
+    @_overload
+    def update_queue(
+        self,
+        request: _models.UpdateQueueInput | _models.UpdateQueueInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UpdateQueueOutput: ...
+
+    @_overload
+    def update_queue(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateQueueInputDict],
+    ) -> UpdateQueueOutput:
+        """
+        Updates the configuration attributes of the specified queue. You can
+        change the queue's visibility timeout, its dead-letter handling
+        configuration, or both.
+
+        A new visibility timeout applies to records received after the update
+        completes. Records that are already in flight keep the visibility
+        timeout they were received with. To change the visibility timeout of a
+        record that is already in flight, use UpdateQueueRecordsVisibility.
+
+        `UpdateQueue` is an asynchronous operation. Upon receiving an
+        `UpdateQueue` request, Amazon Kinesis Data Streams sets the
+        `QueueStatus` to `UPDATING`, and sets it back to `ACTIVE` when the
+        update is complete. You can continue to receive and acknowledge records
+        while the queue is `UPDATING`.
+
+        You can't change the data stream or the starting position of a queue
+        after you create it. To read from a different stream or position, create
+        a new queue.
+
+        Args:
+            plugins:
+                A list of callables that modify the configuration dynamically.
+                Changes made by these plugins only apply for the duration of the
+                operation execution and will not affect any other operation
+                invocations.
+
+        Returns:
+            An instance of `UpdateQueueOutput`.
+        """
+
+    def update_queue(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateQueueOutput:
+        return self._invoke(
+            self._select_input(_models.UPDATE_QUEUE, args, kwargs),
+            _models.UPDATE_QUEUE,
+            [],
+            plugins,
+        )
+
+    @_overload
+    def update_queue_records_visibility(
+        self,
+        request: _models.UpdateQueueRecordsVisibilityInput
+        | _models.UpdateQueueRecordsVisibilityInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UpdateQueueRecordsVisibilityOutput: ...
+
+    @_overload
+    def update_queue_records_visibility(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateQueueRecordsVisibilityInputDict],
+    ) -> UpdateQueueRecordsVisibilityOutput:
+        """
+        Changes the visibility timeout of up to 10 records that you have
+        received from the specified queue but not yet acknowledged. The result
+        for each entry is reported individually in the response.
+
+        Extend the visibility timeout of a record when your queue consumer needs
+        more time to finish processing it, so the record does not become visible
+        and get redelivered while it is still being processed. Set the
+        visibility timeout to `0` to make a record visible in the queue
+        immediately, so that it can be received again without waiting for its
+        current timeout to expire.
+
+        Because the request can result in a combination of successful and
+        unsuccessful entries, check the `Failed` list even when the call returns
+        an HTTP status code of `200`.
+
+        Args:
+            plugins:
+                A list of callables that modify the configuration dynamically.
+                Changes made by these plugins only apply for the duration of the
+                operation execution and will not affect any other operation
+                invocations.
+
+        Returns:
+            An instance of `UpdateQueueRecordsVisibilityOutput`.
+        """
+
+    def update_queue_records_visibility(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateQueueRecordsVisibilityOutput:
+        return self._invoke(
+            self._select_input(_models.UPDATE_QUEUE_RECORDS_VISIBILITY, args, kwargs),
+            _models.UPDATE_QUEUE_RECORDS_VISIBILITY,
             [],
             plugins,
         )
@@ -2680,6 +3392,10 @@ class KinesisClient(Client[KinesisConfig]):
         account. Once your account has `MinimumThroughputBillingCommitment`
         enabled, you can specify the warm throughput in MiB per second that your
         stream can support in writes.
+
+        You can't switch a data stream from on-demand to provisioned capacity
+        mode while the stream has one or more queues. Delete the queues with
+        DeleteQueue before you change the capacity mode.
 
         Args:
             plugins:

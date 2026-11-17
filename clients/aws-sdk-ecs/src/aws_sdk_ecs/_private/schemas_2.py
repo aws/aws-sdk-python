@@ -258,6 +258,7 @@ _cDDRRo = "com.amazonaws.ecs#DescribeDaemonRevisionsResponse"
 _dR = "daemonRevisions"
 _DDR = "DescribeDaemonRevisions"
 _IAMRA = "IAMRoleArn"
+_SNAE = "ServiceNotActiveException"
 _TSNFE = "TaskSetNotFoundException"
 
 DELETE_ATTRIBUTES_INPUT: StaticSchema = (
@@ -1413,6 +1414,15 @@ DAEMON_REVISION: StaticSchema = (
 )
 
 IAM_ROLE_ARN: StaticSchema = (3, n0, _IAMRA, 0)
+
+SERVICE_NOT_ACTIVE_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _SNAE,
+    {_s: _c},
+    (_mes,),
+    ((lambda: schemas.STRING, 0),),
+)
 
 TASK_SET_NOT_FOUND_EXCEPTION: StaticSchema = (
     18,

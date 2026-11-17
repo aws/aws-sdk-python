@@ -276,6 +276,8 @@ from aws_sdk_ecs.models import (
     GatewayConnection,
     GatewayConnectionAlbResources,
     GatewayConnector,
+    GatewayConnectorDeregistrationDelay,
+    GatewayConnectorDeregistrationDelayDict,
     GatewayConnectorDict,
     GatewayConnectorFilters,
     GatewayConnectorFiltersDict,
@@ -830,6 +832,7 @@ GatewayClusterAssociationSummary()
 GatewayConnection()
 GatewayConnectionAlbResources()
 GatewayConnector(port_name=_)
+GatewayConnectorDeregistrationDelay()
 GatewayConnectorFilters()
 GatewayConnectorHealthCheck()
 GatewayConnectorHealthCheckMatcher()
@@ -1182,175 +1185,176 @@ _params_93: FSxWindowsFileServerVolumeConfigurationDict = {
 _params_94: GatewayAlbTestTrafficRulesDict = {}
 _params_95: GatewayConfigurationDict = {"host_shared_alb": _}
 _params_96: GatewayConnectorDict = {"port_name": _}
-_params_97: GatewayConnectorFiltersDict = {}
-_params_98: GatewayConnectorHealthCheckDict = {}
-_params_99: GatewayConnectorHealthCheckMatcherDict = {}
-_params_100: GatewayElbAccessLogConfigurationDict = {}
-_params_101: GatewayElbAccessLogDestinationDict = {"s3": _}
-_params_102: GatewayElbAccessLogS3DestinationDict = {"bucket": _}
-_params_103: GatewayElbNetworkConfigurationDict = {}
-_params_104: GatewayTestTrafficHeaderDict = {"name": _, "values": _}
-_params_105: GetTaskProtectionInputDict = {"cluster": _}
-_params_106: HealthCheckDict = {"command": _}
-_params_107: HostEntryDict = {"hostname": _, "ip_address": _}
-_params_108: HostSharedAlbConfigurationDict = {}
-_params_109: HostVolumePropertiesDict = {}
-_params_110: InferenceAcceleratorDict = {"device_name": _, "device_type": _}
-_params_111: InferenceAcceleratorOverrideDict = {}
-_params_112: InfrastructureOptimizationDict = {}
-_params_113: InstanceLaunchTemplateDict = {
+_params_97: GatewayConnectorDeregistrationDelayDict = {}
+_params_98: GatewayConnectorFiltersDict = {}
+_params_99: GatewayConnectorHealthCheckDict = {}
+_params_100: GatewayConnectorHealthCheckMatcherDict = {}
+_params_101: GatewayElbAccessLogConfigurationDict = {}
+_params_102: GatewayElbAccessLogDestinationDict = {"s3": _}
+_params_103: GatewayElbAccessLogS3DestinationDict = {"bucket": _}
+_params_104: GatewayElbNetworkConfigurationDict = {}
+_params_105: GatewayTestTrafficHeaderDict = {"name": _, "values": _}
+_params_106: GetTaskProtectionInputDict = {"cluster": _}
+_params_107: HealthCheckDict = {"command": _}
+_params_108: HostEntryDict = {"hostname": _, "ip_address": _}
+_params_109: HostSharedAlbConfigurationDict = {}
+_params_110: HostVolumePropertiesDict = {}
+_params_111: InferenceAcceleratorDict = {"device_name": _, "device_type": _}
+_params_112: InferenceAcceleratorOverrideDict = {}
+_params_113: InfrastructureOptimizationDict = {}
+_params_114: InstanceLaunchTemplateDict = {
     "ec2_instance_profile_arn": _,
     "network_configuration": _,
 }
-_params_114: InstanceLaunchTemplateUpdateDict = {}
-_params_115: InstanceRequirementsRequestDict = {"v_cpu_count": _, "memory_mi_b": _}
-_params_116: KernelCapabilitiesDict = {}
-_params_117: KeyValuePairDict = {}
-_params_118: LinearConfigurationDict = {}
-_params_119: LinuxParametersDict = {}
-_params_120: ListAccountSettingsInputDict = {}
-_params_121: ListAttributesInputDict = {"target_type": _}
-_params_122: ListClustersInputDict = {}
-_params_123: ListContainerInstancesInputDict = {}
-_params_124: ListDaemonDeploymentsInputDict = {"daemon_arn": _}
-_params_125: ListDaemonsInputDict = {}
-_params_126: ListDaemonTaskDefinitionsInputDict = {}
-_params_127: ListGatewayClusterAssociationsInputDict = {}
-_params_128: ListGatewayRoutesInputDict = {}
-_params_129: ListGatewaysInputDict = {}
-_params_130: ListServiceDeploymentsInputDict = {"service": _}
-_params_131: ListServicesByNamespaceInputDict = {"namespace": _}
-_params_132: ListServicesInputDict = {}
-_params_133: ListTagsForResourceInputDict = {"resource_arn": _}
-_params_134: ListTaskDefinitionFamiliesInputDict = {}
-_params_135: ListTaskDefinitionsInputDict = {}
-_params_136: ListTasksInputDict = {}
-_params_137: LoadBalancerDict = {}
-_params_138: LogConfigurationDict = {"log_driver": _}
-_params_139: LogDriverVolumeConfigurationDict = {"driver": _}
-_params_140: ManagedAgentStateChangeDict = {
+_params_115: InstanceLaunchTemplateUpdateDict = {}
+_params_116: InstanceRequirementsRequestDict = {"v_cpu_count": _, "memory_mi_b": _}
+_params_117: KernelCapabilitiesDict = {}
+_params_118: KeyValuePairDict = {}
+_params_119: LinearConfigurationDict = {}
+_params_120: LinuxParametersDict = {}
+_params_121: ListAccountSettingsInputDict = {}
+_params_122: ListAttributesInputDict = {"target_type": _}
+_params_123: ListClustersInputDict = {}
+_params_124: ListContainerInstancesInputDict = {}
+_params_125: ListDaemonDeploymentsInputDict = {"daemon_arn": _}
+_params_126: ListDaemonsInputDict = {}
+_params_127: ListDaemonTaskDefinitionsInputDict = {}
+_params_128: ListGatewayClusterAssociationsInputDict = {}
+_params_129: ListGatewayRoutesInputDict = {}
+_params_130: ListGatewaysInputDict = {}
+_params_131: ListServiceDeploymentsInputDict = {"service": _}
+_params_132: ListServicesByNamespaceInputDict = {"namespace": _}
+_params_133: ListServicesInputDict = {}
+_params_134: ListTagsForResourceInputDict = {"resource_arn": _}
+_params_135: ListTaskDefinitionFamiliesInputDict = {}
+_params_136: ListTaskDefinitionsInputDict = {}
+_params_137: ListTasksInputDict = {}
+_params_138: LoadBalancerDict = {}
+_params_139: LogConfigurationDict = {"log_driver": _}
+_params_140: LogDriverVolumeConfigurationDict = {"driver": _}
+_params_141: ManagedAgentStateChangeDict = {
     "container_name": _,
     "managed_agent_name": _,
     "status": _,
 }
-_params_141: ManagedInstancesLocalStorageConfigurationDict = {}
-_params_142: ManagedInstancesNetworkConfigurationDict = {}
-_params_143: ManagedInstancesStorageConfigurationDict = {}
-_params_144: ManagedScalingDict = {}
-_params_145: ManagedStorageConfigurationDict = {}
-_params_146: MemoryGiBPerVCpuRequestDict = {}
-_params_147: MemoryMiBRequestDict = {"min": _}
-_params_148: MetricConfigurationDict = {"metric_names": _, "resolution_seconds": _}
-_params_149: MonitoringConfigurationDict = {}
-_params_150: MountPointDict = {}
-_params_151: NetworkBandwidthGbpsRequestDict = {}
-_params_152: NetworkBindingDict = {}
-_params_153: NetworkConfigurationDict = {}
-_params_154: NetworkInterfaceCountRequestDict = {}
-_params_155: NvidiaMpsAllocationDict = {"memory": _}
-_params_156: PlacementConstraintDict = {}
-_params_157: PlacementStrategyDict = {}
-_params_158: PlatformDeviceDict = {"id": _, "type": _}
-_params_159: PortMappingDict = {}
-_params_160: ProxyConfigurationDict = {"container_name": _}
-_params_161: PutAccountSettingDefaultInputDict = {"name": _, "value": _}
-_params_162: PutAccountSettingInputDict = {"name": _, "value": _}
-_params_163: PutAttributesInputDict = {"attributes": _}
-_params_164: PutClusterCapacityProvidersInputDict = {
+_params_142: ManagedInstancesLocalStorageConfigurationDict = {}
+_params_143: ManagedInstancesNetworkConfigurationDict = {}
+_params_144: ManagedInstancesStorageConfigurationDict = {}
+_params_145: ManagedScalingDict = {}
+_params_146: ManagedStorageConfigurationDict = {}
+_params_147: MemoryGiBPerVCpuRequestDict = {}
+_params_148: MemoryMiBRequestDict = {"min": _}
+_params_149: MetricConfigurationDict = {"metric_names": _, "resolution_seconds": _}
+_params_150: MonitoringConfigurationDict = {}
+_params_151: MountPointDict = {}
+_params_152: NetworkBandwidthGbpsRequestDict = {}
+_params_153: NetworkBindingDict = {}
+_params_154: NetworkConfigurationDict = {}
+_params_155: NetworkInterfaceCountRequestDict = {}
+_params_156: NvidiaMpsAllocationDict = {"memory": _}
+_params_157: PlacementConstraintDict = {}
+_params_158: PlacementStrategyDict = {}
+_params_159: PlatformDeviceDict = {"id": _, "type": _}
+_params_160: PortMappingDict = {}
+_params_161: ProxyConfigurationDict = {"container_name": _}
+_params_162: PutAccountSettingDefaultInputDict = {"name": _, "value": _}
+_params_163: PutAccountSettingInputDict = {"name": _, "value": _}
+_params_164: PutAttributesInputDict = {"attributes": _}
+_params_165: PutClusterCapacityProvidersInputDict = {
     "cluster": _,
     "capacity_providers": _,
     "default_capacity_provider_strategy": _,
 }
-_params_165: RegisterContainerInstanceInputDict = {}
-_params_166: RegisterDaemonTaskDefinitionInputDict = {
+_params_166: RegisterContainerInstanceInputDict = {}
+_params_167: RegisterDaemonTaskDefinitionInputDict = {
     "family": _,
     "container_definitions": _,
 }
-_params_167: RegisterTaskDefinitionInputDict = {"family": _, "container_definitions": _}
-_params_168: RepositoryCredentialsDict = {"credentials_parameter": _}
-_params_169: ResourceDict = {}
-_params_170: ResourceRequirementDict = {"type": _}
-_params_171: RunTaskInputDict = {"task_definition": _}
-_params_172: RuntimePlatformDict = {}
-_params_173: S3FilesVolumeConfigurationDict = {"file_system_arn": _}
-_params_174: ScaleDict = {}
-_params_175: SecretDict = {"name": _, "value_from": _}
-_params_176: ServiceConnectAccessLogConfigurationDict = {"format": _}
-_params_177: ServiceConnectClientAliasDict = {"port": _}
-_params_178: ServiceConnectConfigurationDict = {}
-_params_179: ServiceConnectContainerConfigurationDict = {"log_level": _}
-_params_180: ServiceConnectServiceDict = {"port_name": _}
-_params_181: ServiceConnectTestTrafficHeaderMatchRulesDict = {"exact": _}
-_params_182: ServiceConnectTestTrafficHeaderRulesDict = {"name": _}
-_params_183: ServiceConnectTestTrafficRulesDict = {"header": _}
-_params_184: ServiceConnectTlsCertificateAuthorityDict = {}
-_params_185: ServiceConnectTlsConfigurationDict = {"issuer_certificate_authority": _}
-_params_186: ServiceManagedEBSVolumeConfigurationDict = {"role_arn": _}
-_params_187: ServiceRegistryDict = {}
-_params_188: ServiceVolumeConfigurationDict = {"name": _}
-_params_189: SharingStrategyDict = {"nvidia_mps": _}
-_params_190: StartTaskInputDict = {"container_instances": _, "task_definition": _}
-_params_191: StopServiceDeploymentInputDict = {"service_deployment_arn": _}
-_params_192: StopTaskInputDict = {"task": _}
-_params_193: SubmitAttachmentStateChangesInputDict = {"attachments": _}
-_params_194: SubmitContainerStateChangeInputDict = {}
-_params_195: SubmitTaskStateChangeInputDict = {}
-_params_196: SystemControlDict = {}
-_params_197: TagDict = {}
-_params_198: TagResourceInputDict = {"resource_arn": _, "tags": _}
-_params_199: TaskDefinitionPlacementConstraintDict = {}
-_params_200: TaskManagedEBSVolumeConfigurationDict = {"role_arn": _}
-_params_201: TaskManagedEBSVolumeTerminationPolicyDict = {"delete_on_termination": _}
-_params_202: TaskOverrideDict = {}
-_params_203: TaskVolumeConfigurationDict = {"name": _}
-_params_204: ThresholdConfigurationDict = {"type": _}
-_params_205: TimeoutConfigurationDict = {}
-_params_206: TmpfsDict = {"container_path": _}
-_params_207: TotalLocalStorageGBRequestDict = {}
-_params_208: TrustedExecutionConfigurationDict = {"isolation_mode": _}
-_params_209: UlimitDict = {"name": _}
-_params_210: UntagResourceInputDict = {"resource_arn": _, "tag_keys": _}
-_params_211: UpdateCapacityProviderInputDict = {"name": _}
-_params_212: UpdateClusterInputDict = {"cluster": _}
-_params_213: UpdateClusterSettingsInputDict = {"cluster": _, "settings": _}
-_params_214: UpdateContainerAgentInputDict = {"container_instance": _}
-_params_215: UpdateContainerInstancesStateInputDict = {
+_params_168: RegisterTaskDefinitionInputDict = {"family": _, "container_definitions": _}
+_params_169: RepositoryCredentialsDict = {"credentials_parameter": _}
+_params_170: ResourceDict = {}
+_params_171: ResourceRequirementDict = {"type": _}
+_params_172: RunTaskInputDict = {"task_definition": _}
+_params_173: RuntimePlatformDict = {}
+_params_174: S3FilesVolumeConfigurationDict = {"file_system_arn": _}
+_params_175: ScaleDict = {}
+_params_176: SecretDict = {"name": _, "value_from": _}
+_params_177: ServiceConnectAccessLogConfigurationDict = {"format": _}
+_params_178: ServiceConnectClientAliasDict = {"port": _}
+_params_179: ServiceConnectConfigurationDict = {}
+_params_180: ServiceConnectContainerConfigurationDict = {"log_level": _}
+_params_181: ServiceConnectServiceDict = {"port_name": _}
+_params_182: ServiceConnectTestTrafficHeaderMatchRulesDict = {"exact": _}
+_params_183: ServiceConnectTestTrafficHeaderRulesDict = {"name": _}
+_params_184: ServiceConnectTestTrafficRulesDict = {"header": _}
+_params_185: ServiceConnectTlsCertificateAuthorityDict = {}
+_params_186: ServiceConnectTlsConfigurationDict = {"issuer_certificate_authority": _}
+_params_187: ServiceManagedEBSVolumeConfigurationDict = {"role_arn": _}
+_params_188: ServiceRegistryDict = {}
+_params_189: ServiceVolumeConfigurationDict = {"name": _}
+_params_190: SharingStrategyDict = {"nvidia_mps": _}
+_params_191: StartTaskInputDict = {"container_instances": _, "task_definition": _}
+_params_192: StopServiceDeploymentInputDict = {"service_deployment_arn": _}
+_params_193: StopTaskInputDict = {"task": _}
+_params_194: SubmitAttachmentStateChangesInputDict = {"attachments": _}
+_params_195: SubmitContainerStateChangeInputDict = {}
+_params_196: SubmitTaskStateChangeInputDict = {}
+_params_197: SystemControlDict = {}
+_params_198: TagDict = {}
+_params_199: TagResourceInputDict = {"resource_arn": _, "tags": _}
+_params_200: TaskDefinitionPlacementConstraintDict = {}
+_params_201: TaskManagedEBSVolumeConfigurationDict = {"role_arn": _}
+_params_202: TaskManagedEBSVolumeTerminationPolicyDict = {"delete_on_termination": _}
+_params_203: TaskOverrideDict = {}
+_params_204: TaskVolumeConfigurationDict = {"name": _}
+_params_205: ThresholdConfigurationDict = {"type": _}
+_params_206: TimeoutConfigurationDict = {}
+_params_207: TmpfsDict = {"container_path": _}
+_params_208: TotalLocalStorageGBRequestDict = {}
+_params_209: TrustedExecutionConfigurationDict = {"isolation_mode": _}
+_params_210: UlimitDict = {"name": _}
+_params_211: UntagResourceInputDict = {"resource_arn": _, "tag_keys": _}
+_params_212: UpdateCapacityProviderInputDict = {"name": _}
+_params_213: UpdateClusterInputDict = {"cluster": _}
+_params_214: UpdateClusterSettingsInputDict = {"cluster": _, "settings": _}
+_params_215: UpdateContainerAgentInputDict = {"container_instance": _}
+_params_216: UpdateContainerInstancesStateInputDict = {
     "container_instances": _,
     "status": _,
 }
-_params_216: UpdateDaemonInputDict = {
+_params_217: UpdateDaemonInputDict = {
     "daemon_arn": _,
     "daemon_task_definition_arn": _,
     "capacity_provider_arns": _,
 }
-_params_217: UpdateExpressGatewayServiceInputDict = {"service_arn": _}
-_params_218: UpdateGatewayAlbConfigurationDict = {}
-_params_219: UpdateGatewayConfigurationDict = {"host_shared_alb": _}
-_params_220: UpdateGatewayInputDict = {"gateway": _}
-_params_221: UpdateGatewayNetworkConfigurationDict = {}
-_params_222: UpdateManagedInstancesProviderConfigurationDict = {
+_params_218: UpdateExpressGatewayServiceInputDict = {"service_arn": _}
+_params_219: UpdateGatewayAlbConfigurationDict = {}
+_params_220: UpdateGatewayConfigurationDict = {"host_shared_alb": _}
+_params_221: UpdateGatewayInputDict = {"gateway": _}
+_params_222: UpdateGatewayNetworkConfigurationDict = {}
+_params_223: UpdateManagedInstancesProviderConfigurationDict = {
     "infrastructure_role_arn": _,
     "instance_launch_template": _,
 }
-_params_223: UpdateServiceInputDict = {"service": _}
-_params_224: UpdateServicePrimaryTaskSetInputDict = {
+_params_224: UpdateServiceInputDict = {"service": _}
+_params_225: UpdateServicePrimaryTaskSetInputDict = {
     "cluster": _,
     "service": _,
     "primary_task_set": _,
 }
-_params_225: UpdateTaskProtectionInputDict = {"cluster": _, "tasks": _}
-_params_226: UpdateTaskSetInputDict = {
+_params_226: UpdateTaskProtectionInputDict = {"cluster": _, "tasks": _}
+_params_227: UpdateTaskSetInputDict = {
     "cluster": _,
     "service": _,
     "task_set": _,
     "scale": _,
 }
-_params_227: VCpuCountRangeRequestDict = {"min": _}
-_params_228: VersionInfoDict = {}
-_params_229: VolumeDict = {}
-_params_230: VolumeFromDict = {}
-_params_231: VpcLatticeAdvancedConfigurationDict = {}
-_params_232: VpcLatticeConfigurationDict = {
+_params_228: VCpuCountRangeRequestDict = {"min": _}
+_params_229: VersionInfoDict = {}
+_params_230: VolumeDict = {}
+_params_231: VolumeFromDict = {}
+_params_232: VpcLatticeAdvancedConfigurationDict = {}
+_params_233: VpcLatticeConfigurationDict = {
     "role_arn": _,
     "target_group_arn": _,
     "port_name": _,

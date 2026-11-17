@@ -363,13 +363,15 @@ from ._private.models_0 import (
     _GatewayConnectionResourcesDeserializer as _GatewayConnectionResourcesDeserializer,
     GatewayConnector as GatewayConnector,
     GatewayConnectorDict as GatewayConnectorDict,
+    GatewayConnectorDeregistrationDelay as GatewayConnectorDeregistrationDelay,
+    GatewayConnectorDeregistrationDelayDict as GatewayConnectorDeregistrationDelayDict,
     GatewayConnectorFilters as GatewayConnectorFilters,
     GatewayConnectorFiltersDict as GatewayConnectorFiltersDict,
-    GatewayConnectorHealthCheck as GatewayConnectorHealthCheck,
-    GatewayConnectorHealthCheckDict as GatewayConnectorHealthCheckDict,
 )
 
 from ._private.models_1 import (
+    GatewayConnectorHealthCheck as GatewayConnectorHealthCheck,
+    GatewayConnectorHealthCheckDict as GatewayConnectorHealthCheckDict,
     GatewayConnectorHealthCheckMatcher as GatewayConnectorHealthCheckMatcher,
     GatewayConnectorHealthCheckMatcherDict as GatewayConnectorHealthCheckMatcherDict,
     GatewayConnectorHealthCheckProtocol as GatewayConnectorHealthCheckProtocol,
@@ -737,10 +739,10 @@ from ._private.models_1 import (
     TargetType as TargetType,
     Task as Task,
     TaskDefinition as TaskDefinition,
-    TaskDefinitionFamilyStatus as TaskDefinitionFamilyStatus,
 )
 
 from ._private.models_2 import (
+    TaskDefinitionFamilyStatus as TaskDefinitionFamilyStatus,
     TaskDefinitionField as TaskDefinitionField,
     TaskDefinitionPlacementConstraint as TaskDefinitionPlacementConstraint,
     TaskDefinitionPlacementConstraintDict as TaskDefinitionPlacementConstraintDict,

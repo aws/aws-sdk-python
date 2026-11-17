@@ -8,8 +8,6 @@ from . import schemas
 
 
 n0 = "com.amazonaws.bedrockagentcorecontrol"
-_sV = "schemaVersion"
-_iC = "inlineContent"
 _sm = "smithy.api#required"
 _k = "key"
 _v = "value"
@@ -22,19 +20,12 @@ _smith = "smithy.api#input"
 _sL = "smithy.api#httpLabel"
 _cT = "clientToken"
 _sT = "smithy.api#idempotencyToken"
-_CREATING = "CREATING"
-_UPDATING = "UPDATING"
-_DELETING = "DELETING"
-_CF = "CREATE_FAILED"
-_UF = "UPDATE_FAILED"
-_DF = "DELETE_FAILED"
 _smithy = "smithy.api#output"
 _st = "status"
 _smithya = "smithy.api#http"
 _aRI = "agentRuntimeId"
 _aRV = "agentRuntimeVersion"
 _t = "tags"
-_READY = "READY"
 _aRA = "agentRuntimeArn"
 _cA = "createdAt"
 _sQ = "smithy.api#httpQuery"
@@ -42,8 +33,59 @@ _lUA = "lastUpdatedAt"
 _fR = "failureReason"
 _mR = "maxResults"
 _nT = "nextToken"
+_AMRT = "AgentManagedRuntimeType"
+_P = "PYTHON_3_10"
+_P_ = "PYTHON_3_11"
+_P__ = "PYTHON_3_12"
+_P___ = "PYTHON_3_13"
+_P____ = "PYTHON_3_14"
+_N = "NODE_22"
+_SL = "S3Location"
+_b = "bucket"
+_p = "prefix"
+_vI = "versionId"
+_C = "Code"
 _s_ = "s3"
+_eP = "entryPoint"
+_EP = "EntryPoints"
+_CC = "CodeConfiguration"
+_co = "code"
+_ru = "runtime"
+_RCU = "RuntimeContainerUri"
+_CCo = "ContainerConfiguration"
+_cU = "containerUri"
+_ARAg = "AgentRuntimeArtifact"
+_cC = "containerConfiguration"
+_cCo = "codeConfiguration"
+_ARN = "AgentRuntimeName"
+_Po = "Port"
+_PR = "PortRange"
+_fr = "from"
+_to = "to"
+_AP = "AllowedPort"
 _po = "port"
+_pR = "portRange"
+_APl = "AllowedPorts"
+_AA = "AllowedAudience"
+_AAL = "AllowedAudienceList"
+_ACl = "AllowedClient"
+_ACL = "AllowedClientsList"
+_ASTl = "AllowedScopesType"
+_BARA = "BedrockAgentcoreResourceArn"
+_HE = "HostingEnvironment"
+_a = "arn"
+_HELT = "HostingEnvironmentListType"
+_WINT = "WorkloadIdentityNameType"
+_WINLT = "WorkloadIdentityNameListType"
+_AWC = "AllowedWorkloadConfiguration"
+_hE = "hostingEnvironments"
+_wI = "workloadIdentities"
+_CBOAI = "CertificateBucketOwnerAccountId"
+_CSU = "CertificateS3Uri"
+_SCC = "S3CertificateConfiguration"
+_u = "uri"
+_bOAI = "bucketOwnerAccountId"
+_CSA = "CertificateSecretArn"
 _SMCC = "SecretsManagerCertificateConfiguration"
 _sA = "secretArn"
 _CCe = "CertificateConfiguration"
@@ -109,7 +151,6 @@ _cCe = "certificateConfigurations"
 _aWC = "allowedWorkloadConfiguration"
 _ACu = "AuthorizerConfiguration"
 _cJWTA = "customJWTAuthorizer"
-_CPA = "CapacityProviderArn"
 _CPC = "CapacityProviderConfiguration"
 _cPA = "capacityProviderArn"
 _sOm = "smithy.api#clientOptional"
@@ -196,7 +237,6 @@ _cPC = "capacityProviderConfiguration"
 _pV = "platformVersion"
 _aP = "allowedPorts"
 _rC = "resourceConfigurations"
-_ARS = "AgentRuntimeStatus"
 _WIA = "WorkloadIdentityArn"
 _WID = "WorkloadIdentityDetails"
 _wIA = "workloadIdentityArn"
@@ -231,30 +271,152 @@ _cLARVR = "com.amazonaws.bedrockagentcorecontrol#ListAgentRuntimeVersionsRequest
 _LARVO = "ListAgentRuntimeVersionsOutput"
 _cLARVRo = "com.amazonaws.bedrockagentcorecontrol#ListAgentRuntimeVersionsResponse"
 _LARV = "ListAgentRuntimeVersions"
-_UARI = "UpdateAgentRuntimeInput"
-_cUARR = "com.amazonaws.bedrockagentcorecontrol#UpdateAgentRuntimeRequest"
-_UARO = "UpdateAgentRuntimeOutput"
-_cUARRo = "com.amazonaws.bedrockagentcorecontrol#UpdateAgentRuntimeResponse"
-_UAR = "UpdateAgentRuntime"
-_ARVS = "AgentRuntimeVersionSummary"
-_ARVSL = "AgentRuntimeVersionSummaryList"
-_SD = "SkillDefinition"
-_SMD = "SkillMdDefinition"
-_ASD = "AgentSkillsDescriptor"
-_sMk = "skillMd"
-_sD = "skillDefinition"
-_HQPN = "HttpQueryParameterName"
-_AQP = "AllowedQueryParameters"
-_HHN = "HttpHeaderName"
-_ARH = "AllowedRequestHeaders"
-_ARHl = "AllowedResponseHeaders"
-_ASLV = "AllowedStringListValue"
-_ASLVL = "AllowedStringListValuesList"
-_ASV = "AllowedStringValue"
-_ASVL = "AllowedStringValuesList"
 _UD = "UpdatedDescription"
 _oV = "optionalValue"
+_RPB = "ResourcePolicyBody"
 _UAC = "UpdatedAuthorizerConfiguration"
+
+AGENT_MANAGED_RUNTIME_TYPE: StaticSchema = (
+    14,
+    n0,
+    _AMRT,
+    0,
+    (_P, _P_, _P__, _P___, _P____, _N),
+    (
+        (-1, {_sVm: _P}),
+        (-1, {_sVm: _P_}),
+        (-1, {_sVm: _P__}),
+        (-1, {_sVm: _P___}),
+        (-1, {_sVm: _P____}),
+        (-1, {_sVm: _N}),
+    ),
+)
+
+S3_LOCATION: StaticSchema = (18, n0, _SL, 0, (_b, _p, _vI), ((3, 1), (3, 1), (3, 0)))
+
+CODE: StaticSchema = (19, n0, _C, 0, (_s_,), ((S3_LOCATION, 0),))
+
+ENTRY_POINT: StaticSchema = (3, n0, _eP, 0)
+
+ENTRY_POINTS: StaticSchema = (16, n0, _EP, 0, (_mem,), ((ENTRY_POINT, 0),))
+
+CODE_CONFIGURATION: StaticSchema = (
+    18,
+    n0,
+    _CC,
+    0,
+    (_co, _ru, _eP),
+    ((CODE, 1), (AGENT_MANAGED_RUNTIME_TYPE, 1), (ENTRY_POINTS, 1)),
+)
+
+RUNTIME_CONTAINER_URI: StaticSchema = (3, n0, _RCU, 0)
+
+CONTAINER_CONFIGURATION: StaticSchema = (
+    18,
+    n0,
+    _CCo,
+    0,
+    (_cU,),
+    ((RUNTIME_CONTAINER_URI, 1),),
+)
+
+AGENT_RUNTIME_ARTIFACT: StaticSchema = (
+    19,
+    n0,
+    _ARAg,
+    0,
+    (_cC, _cCo),
+    ((CONTAINER_CONFIGURATION, 0), (CODE_CONFIGURATION, 0)),
+)
+
+AGENT_RUNTIME_NAME: StaticSchema = (3, n0, _ARN, 0)
+
+PORT: StaticSchema = (7, n0, _Po, 0)
+
+PORT_RANGE: StaticSchema = (18, n0, _PR, 0, (_fr, _to), ((PORT, 1), (PORT, 1)))
+
+ALLOWED_PORT: StaticSchema = (19, n0, _AP, 0, (_po, _pR), ((PORT, 0), (PORT_RANGE, 0)))
+
+ALLOWED_PORTS: StaticSchema = (16, n0, _APl, 0, (_mem,), ((ALLOWED_PORT, 0),))
+
+ALLOWED_AUDIENCE: StaticSchema = (3, n0, _AA, 0)
+
+ALLOWED_AUDIENCE_LIST: StaticSchema = (
+    16,
+    n0,
+    _AAL,
+    0,
+    (_mem,),
+    ((ALLOWED_AUDIENCE, 0),),
+)
+
+ALLOWED_CLIENT: StaticSchema = (3, n0, _ACl, 0)
+
+ALLOWED_CLIENTS_LIST: StaticSchema = (16, n0, _ACL, 0, (_mem,), ((ALLOWED_CLIENT, 0),))
+
+ALLOWED_SCOPES_TYPE: StaticSchema = (
+    16,
+    n0,
+    _ASTl,
+    0,
+    (_mem,),
+    ((lambda: schemas.ALLOWED_SCOPE_TYPE, 0),),
+)
+
+BEDROCK_AGENTCORE_RESOURCE_ARN: StaticSchema = (3, n0, _BARA, 0)
+
+HOSTING_ENVIRONMENT: StaticSchema = (
+    18,
+    n0,
+    _HE,
+    0,
+    (_a,),
+    ((BEDROCK_AGENTCORE_RESOURCE_ARN, 1),),
+)
+
+HOSTING_ENVIRONMENT_LIST_TYPE: StaticSchema = (
+    16,
+    n0,
+    _HELT,
+    0,
+    (_mem,),
+    ((HOSTING_ENVIRONMENT, 0),),
+)
+
+WORKLOAD_IDENTITY_NAME_TYPE: StaticSchema = (3, n0, _WINT, 0)
+
+WORKLOAD_IDENTITY_NAME_LIST_TYPE: StaticSchema = (
+    16,
+    n0,
+    _WINLT,
+    0,
+    (_mem,),
+    ((WORKLOAD_IDENTITY_NAME_TYPE, 0),),
+)
+
+ALLOWED_WORKLOAD_CONFIGURATION: StaticSchema = (
+    18,
+    n0,
+    _AWC,
+    0,
+    (_hE, _wI),
+    ((HOSTING_ENVIRONMENT_LIST_TYPE, 0), (WORKLOAD_IDENTITY_NAME_LIST_TYPE, 0)),
+)
+
+CERTIFICATE_BUCKET_OWNER_ACCOUNT_ID: StaticSchema = (3, n0, _CBOAI, 0)
+
+CERTIFICATE_S3_URI: StaticSchema = (3, n0, _CSU, 0)
+
+S3_CERTIFICATE_CONFIGURATION: StaticSchema = (
+    18,
+    n0,
+    _SCC,
+    0,
+    (_u, _bOAI),
+    ((CERTIFICATE_S3_URI, 1), (CERTIFICATE_BUCKET_OWNER_ACCOUNT_ID, 0)),
+)
+
+CERTIFICATE_SECRET_ARN: StaticSchema = (3, n0, _CSA, 0)
 
 SECRETS_MANAGER_CERTIFICATE_CONFIGURATION: StaticSchema = (
     18,
@@ -262,7 +424,7 @@ SECRETS_MANAGER_CERTIFICATE_CONFIGURATION: StaticSchema = (
     _SMCC,
     0,
     (_sA,),
-    ((lambda: schemas.CERTIFICATE_SECRET_ARN, 1),),
+    ((CERTIFICATE_SECRET_ARN, 1),),
 )
 
 CERTIFICATE_CONFIGURATION: StaticSchema = (
@@ -271,10 +433,7 @@ CERTIFICATE_CONFIGURATION: StaticSchema = (
     _CCe,
     0,
     (_s_, _sM),
-    (
-        (lambda: schemas.S3_CERTIFICATE_CONFIGURATION, 0),
-        (SECRETS_MANAGER_CERTIFICATE_CONFIGURATION, 0),
-    ),
+    ((S3_CERTIFICATE_CONFIGURATION, 0), (SECRETS_MANAGER_CERTIFICATE_CONFIGURATION, 0)),
 )
 
 CERTIFICATE_CONFIGURATION_LIST: StaticSchema = (
@@ -451,15 +610,15 @@ CUSTOM_JWT_AUTHORIZER_CONFIGURATION: StaticSchema = (
     (_dU, _aA, _aCl, _aS, _aSM, _cCu, _pE, _pEO, _cCe, _aWC),
     (
         (DISCOVERY_URL, 1),
-        (lambda: schemas.ALLOWED_AUDIENCE_LIST, 0),
-        (lambda: schemas.ALLOWED_CLIENTS_LIST, 0),
-        (lambda: schemas.ALLOWED_SCOPES_TYPE, 0),
+        (ALLOWED_AUDIENCE_LIST, 0),
+        (ALLOWED_CLIENTS_LIST, 0),
+        (ALLOWED_SCOPES_TYPE, 0),
         (lambda: schemas.ADVERTISED_SCOPE_MAPPING_TYPE, 0),
         (CUSTOM_CLAIM_VALIDATIONS_TYPE, 0),
         (PRIVATE_ENDPOINT, 0),
         (PRIVATE_ENDPOINT_OVERRIDES, 0),
         (CERTIFICATE_CONFIGURATION_LIST, 0),
-        (lambda: schemas.ALLOWED_WORKLOAD_CONFIGURATION, 0),
+        (ALLOWED_WORKLOAD_CONFIGURATION, 0),
     ),
 )
 
@@ -472,15 +631,13 @@ AUTHORIZER_CONFIGURATION: StaticSchema = (
     ((CUSTOM_JWT_AUTHORIZER_CONFIGURATION, 0),),
 )
 
-CAPACITY_PROVIDER_ARN: StaticSchema = (3, n0, _CPA, 0)
-
 CAPACITY_PROVIDER_CONFIGURATION: StaticSchema = (
     18,
     n0,
     _CPC,
     0,
     (_cPA,),
-    ((CAPACITY_PROVIDER_ARN, {_sOm: None, _sm: None}),),
+    ((lambda: schemas.CAPACITY_PROVIDER_ARN, {_sOm: None, _sm: None}),),
 )
 
 DESCRIPTION: StaticSchema = (3, n0, _D, 4)
@@ -709,8 +866,8 @@ CREATE_AGENT_RUNTIME_INPUT: StaticSchema = (
         _rC,
     ),
     (
-        (lambda: schemas.AGENT_RUNTIME_NAME, 1),
-        (lambda: schemas.AGENT_RUNTIME_ARTIFACT, 1),
+        (AGENT_RUNTIME_NAME, 1),
+        (AGENT_RUNTIME_ARTIFACT, 1),
         (ROLE_ARN, 1),
         (NETWORK_CONFIGURATION, 0),
         (lambda: schemas.CLIENT_TOKEN, 2),
@@ -725,7 +882,7 @@ CREATE_AGENT_RUNTIME_INPUT: StaticSchema = (
         (CAPACITY_PROVIDER_CONFIGURATION, 0),
         (lambda: schemas.TAGS_MAP, 0),
         (PLATFORM_VERSION, 0),
-        (lambda: schemas.ALLOWED_PORTS, 0),
+        (ALLOWED_PORTS, 0),
         (RESOURCE_CONFIGURATIONS, 0),
     ),
 )
@@ -742,7 +899,7 @@ CREATE_AGENT_RUNTIME_OUTPUT: StaticSchema = (
         (lambda: schemas.AGENT_RUNTIME_ID, 1),
         (lambda: schemas.AGENT_RUNTIME_VERSION, 1),
         (lambda: schemas.DATE_TIMESTAMP, 1),
-        (lambda: AGENT_RUNTIME_STATUS, 1),
+        (lambda: schemas.AGENT_RUNTIME_STATUS, 1),
     ),
 )
 
@@ -760,23 +917,6 @@ CREATE_AGENT_RUNTIME: StaticOperationSchema = (
         lambda: schemas.SERVICE_QUOTA_EXCEEDED_EXCEPTION,
         lambda: schemas.THROTTLING_EXCEPTION,
         lambda: schemas.VALIDATION_EXCEPTION,
-    ),
-)
-
-AGENT_RUNTIME_STATUS: StaticSchema = (
-    14,
-    n0,
-    _ARS,
-    0,
-    (_CREATING, _CF, _UPDATING, _UF, _READY, _DELETING, _DF),
-    (
-        (-1, {_sVm: _CREATING}),
-        (-1, {_sVm: _CF}),
-        (-1, {_sVm: _UPDATING}),
-        (-1, {_sVm: _UF}),
-        (-1, {_sVm: _READY}),
-        (-1, {_sVm: _DELETING}),
-        (-1, {_sVm: _DF}),
     ),
 )
 
@@ -811,7 +951,7 @@ DELETE_AGENT_RUNTIME_OUTPUT: StaticSchema = (
     {_sSI: _cDARRo, _smithy: None},
     (_st, _aRI, _aRV),
     (
-        (AGENT_RUNTIME_STATUS, 1),
+        (lambda: schemas.AGENT_RUNTIME_STATUS, 1),
         (lambda: schemas.AGENT_RUNTIME_ID, 0),
         (lambda: schemas.AGENT_RUNTIME_VERSION, 0),
     ),
@@ -883,20 +1023,20 @@ GET_AGENT_RUNTIME_OUTPUT: StaticSchema = (
     ),
     (
         (lambda: schemas.AGENT_RUNTIME_ARN, 1),
-        (lambda: schemas.AGENT_RUNTIME_NAME, 1),
+        (AGENT_RUNTIME_NAME, 1),
         (lambda: schemas.AGENT_RUNTIME_ID, 1),
         (lambda: schemas.AGENT_RUNTIME_VERSION, 1),
         (lambda: schemas.DATE_TIMESTAMP, 1),
         (lambda: schemas.DATE_TIMESTAMP, 1),
         (ROLE_ARN, 1),
         (NETWORK_CONFIGURATION, 0),
-        (AGENT_RUNTIME_STATUS, 1),
+        (lambda: schemas.AGENT_RUNTIME_STATUS, 1),
         (LIFECYCLE_CONFIGURATION, 1),
         (RUNTIME_HOOKS_CONFIGURATION, 0),
         (3, 0),
         (DESCRIPTION, 0),
         (WORKLOAD_IDENTITY_DETAILS, 0),
-        (lambda: schemas.AGENT_RUNTIME_ARTIFACT, 0),
+        (AGENT_RUNTIME_ARTIFACT, 0),
         (PROTOCOL_CONFIGURATION, 0),
         (ENVIRONMENT_VARIABLES_MAP, 0),
         (AUTHORIZER_CONFIGURATION, 0),
@@ -905,7 +1045,7 @@ GET_AGENT_RUNTIME_OUTPUT: StaticSchema = (
         (FILESYSTEM_CONFIGURATIONS, 0),
         (CAPACITY_PROVIDER_CONFIGURATION, 0),
         (PLATFORM_VERSION, 0),
-        (lambda: schemas.ALLOWED_PORTS, 0),
+        (ALLOWED_PORTS, 0),
         (RESOURCE_CONFIGURATIONS, 0),
     ),
 )
@@ -978,10 +1118,10 @@ AGENT_RUNTIME: StaticSchema = (
         (lambda: schemas.AGENT_RUNTIME_ARN, 1),
         (lambda: schemas.AGENT_RUNTIME_ID, 1),
         (lambda: schemas.AGENT_RUNTIME_VERSION, 1),
-        (lambda: schemas.AGENT_RUNTIME_NAME, 1),
+        (AGENT_RUNTIME_NAME, 1),
         (DESCRIPTION, 1),
         (lambda: schemas.DATE_TIMESTAMP, 1),
-        (AGENT_RUNTIME_STATUS, 1),
+        (lambda: schemas.AGENT_RUNTIME_STATUS, 1),
     ),
 )
 
@@ -1033,195 +1173,9 @@ LIST_AGENT_RUNTIME_VERSIONS: StaticOperationSchema = (
     ),
 )
 
-UPDATE_AGENT_RUNTIME_INPUT: StaticSchema = (
-    18,
-    n0,
-    _UARI,
-    {_sSI: _cUARR, _smith: None},
-    (
-        _aRI,
-        _aRAg,
-        _rA,
-        _nC,
-        _d,
-        _aCu,
-        _rHC,
-        _pC,
-        _lC,
-        _hC,
-        _mC,
-        _eV,
-        _fC,
-        _cPC,
-        _pV,
-        _aP,
-        _rC,
-        _cT,
-    ),
-    (
-        (lambda: schemas.AGENT_RUNTIME_ID, 9),
-        (lambda: schemas.AGENT_RUNTIME_ARTIFACT, 1),
-        (ROLE_ARN, 1),
-        (NETWORK_CONFIGURATION, 0),
-        (DESCRIPTION, 0),
-        (AUTHORIZER_CONFIGURATION, 0),
-        (REQUEST_HEADER_CONFIGURATION, 0),
-        (PROTOCOL_CONFIGURATION, 0),
-        (LIFECYCLE_CONFIGURATION, 0),
-        (RUNTIME_HOOKS_CONFIGURATION, 0),
-        (RUNTIME_METADATA_CONFIGURATION, 0),
-        (ENVIRONMENT_VARIABLES_MAP, 0),
-        (FILESYSTEM_CONFIGURATIONS, 0),
-        (CAPACITY_PROVIDER_CONFIGURATION, 0),
-        (PLATFORM_VERSION, 0),
-        (lambda: schemas.ALLOWED_PORTS, 0),
-        (RESOURCE_CONFIGURATIONS, 0),
-        (lambda: schemas.CLIENT_TOKEN, 2),
-    ),
-)
-
-UPDATE_AGENT_RUNTIME_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _UARO,
-    {_sSI: _cUARRo, _smithy: None},
-    (_aRA, _aRI, _wID, _aRV, _cA, _lUA, _st),
-    (
-        (lambda: schemas.AGENT_RUNTIME_ARN, 1),
-        (lambda: schemas.AGENT_RUNTIME_ID, 1),
-        (WORKLOAD_IDENTITY_DETAILS, 0),
-        (lambda: schemas.AGENT_RUNTIME_VERSION, 1),
-        (lambda: schemas.DATE_TIMESTAMP, 1),
-        (lambda: schemas.DATE_TIMESTAMP, 1),
-        (AGENT_RUNTIME_STATUS, 1),
-    ),
-)
-
-UPDATE_AGENT_RUNTIME: StaticOperationSchema = (
-    23,
-    n0,
-    _UAR,
-    {
-        _smithya: MappingProxyType(
-            {"code": 202, "method": "PUT", "uri": "/runtimes/{agentRuntimeId}/"}
-        )
-    },
-    UPDATE_AGENT_RUNTIME_INPUT,
-    UPDATE_AGENT_RUNTIME_OUTPUT,
-    (
-        lambda: schemas.ACCESS_DENIED_EXCEPTION,
-        lambda: schemas.CONFLICT_EXCEPTION,
-        lambda: schemas.INTERNAL_SERVER_EXCEPTION,
-        lambda: schemas.RESOURCE_NOT_FOUND_EXCEPTION,
-        lambda: schemas.SERVICE_QUOTA_EXCEEDED_EXCEPTION,
-        lambda: schemas.THROTTLING_EXCEPTION,
-        lambda: schemas.VALIDATION_EXCEPTION,
-    ),
-)
-
-AGENT_RUNTIME_VERSION_SUMMARY: StaticSchema = (
-    18,
-    n0,
-    _ARVS,
-    0,
-    (_aRA, _aRV, _st),
-    (
-        (lambda: schemas.AGENT_RUNTIME_ARN, 1),
-        (lambda: schemas.AGENT_RUNTIME_VERSION, 1),
-        (AGENT_RUNTIME_STATUS, 1),
-    ),
-)
-
-AGENT_RUNTIME_VERSION_SUMMARY_LIST: StaticSchema = (
-    16,
-    n0,
-    _ARVSL,
-    0,
-    (_mem,),
-    ((AGENT_RUNTIME_VERSION_SUMMARY, 0),),
-)
-
-SKILL_DEFINITION: StaticSchema = (
-    18,
-    n0,
-    _SD,
-    0,
-    (_sV, _iC),
-    ((lambda: schemas.SCHEMA_VERSION, 0), (lambda: schemas.INLINE_CONTENT, 0)),
-)
-
-SKILL_MD_DEFINITION: StaticSchema = (
-    18,
-    n0,
-    _SMD,
-    0,
-    (_iC,),
-    ((lambda: schemas.INLINE_CONTENT, 0),),
-)
-
-AGENT_SKILLS_DESCRIPTOR: StaticSchema = (
-    18,
-    n0,
-    _ASD,
-    0,
-    (_sMk, _sD),
-    ((SKILL_MD_DEFINITION, 0), (SKILL_DEFINITION, 0)),
-)
-
-HTTP_QUERY_PARAMETER_NAME: StaticSchema = (3, n0, _HQPN, 0)
-
-ALLOWED_QUERY_PARAMETERS: StaticSchema = (
-    16,
-    n0,
-    _AQP,
-    0,
-    (_mem,),
-    ((HTTP_QUERY_PARAMETER_NAME, 0),),
-)
-
-HTTP_HEADER_NAME: StaticSchema = (3, n0, _HHN, 0)
-
-ALLOWED_REQUEST_HEADERS: StaticSchema = (
-    16,
-    n0,
-    _ARH,
-    0,
-    (_mem,),
-    ((HTTP_HEADER_NAME, 0),),
-)
-
-ALLOWED_RESPONSE_HEADERS: StaticSchema = (
-    16,
-    n0,
-    _ARHl,
-    0,
-    (_mem,),
-    ((HTTP_HEADER_NAME, 0),),
-)
-
-ALLOWED_STRING_LIST_VALUE: StaticSchema = (3, n0, _ASLV, 0)
-
-ALLOWED_STRING_LIST_VALUES_LIST: StaticSchema = (
-    16,
-    n0,
-    _ASLVL,
-    0,
-    (_mem,),
-    ((ALLOWED_STRING_LIST_VALUE, 0),),
-)
-
-ALLOWED_STRING_VALUE: StaticSchema = (3, n0, _ASV, 0)
-
-ALLOWED_STRING_VALUES_LIST: StaticSchema = (
-    16,
-    n0,
-    _ASVL,
-    0,
-    (_mem,),
-    ((ALLOWED_STRING_VALUE, 0),),
-)
-
 UPDATED_DESCRIPTION: StaticSchema = (18, n0, _UD, 0, (_oV,), ((DESCRIPTION, 0),))
+
+RESOURCE_POLICY_BODY: StaticSchema = (3, n0, _RPB, 0)
 
 UPDATED_AUTHORIZER_CONFIGURATION: StaticSchema = (
     18,

@@ -33,6 +33,7 @@ from ..models import (
     EvaluatorConfigDict,
     EvaluatorReference,
     EvaluatorReferenceDict,
+    ExampleCountByField,
     FilesystemConfiguration,
     FilesystemConfigurationDict,
     GatewayApiKeyCredentialProvider,
@@ -396,6 +397,121 @@ class AgentCardDefinitionDict(TypedDict, total=False):
     The JSON content containing the A2A agent card definition, conforming to
     the A2A protocol specification.
     """
+
+class AgentInsightStoreEnablementStatus(UnknownEnumMixin, StrEnum):
+    ENABLED = "ENABLED"
+    DISABLED = "DISABLED"
+
+@dataclass(kw_only=True)
+class AgentInsightStoreEncryptionConfiguration(_SerdeShape):
+    """
+    Contains the encryption mode and key configuration used to encrypt new
+    Agent Insights in an Agent Insight Store.
+    """
+
+    mode: str
+    """Specifies the encryption mode used to protect new Agent Insights."""
+    kms_key_arn: str | None = ...
+    """
+    Specifies the Amazon Resource Name (ARN) of the customer managed AWS KMS
+    key that you use to encrypt new Agent Insights. This field is required
+    when `mode` is `CUSTOMER_MANAGED_KMS` and cannot be specified when
+    `mode` is `AWS_OWNED_KMS_KEY`.
+    """
+
+class AgentInsightStoreEncryptionConfigurationDict(TypedDict, total=False):
+    """Dictionary form of `AgentInsightStoreEncryptionConfiguration`."""
+
+    mode: Required[str]
+    """Specifies the encryption mode used to protect new Agent Insights."""
+    kms_key_arn: str | None
+    """
+    Specifies the Amazon Resource Name (ARN) of the customer managed AWS KMS
+    key that you use to encrypt new Agent Insights. This field is required
+    when `mode` is `CUSTOMER_MANAGED_KMS` and cannot be specified when
+    `mode` is `AWS_OWNED_KMS_KEY`.
+    """
+
+class AgentInsightStoreEncryptionMode(UnknownEnumMixin, StrEnum):
+    """
+    Specifies the encryption mode used to protect new Agent Insights. Valid
+    values:
+
+    AWS_OWNED_KMS_KEY
+
+    :   Uses an AWS owned key.
+
+    CUSTOMER_MANAGED_KMS
+
+    :   Uses a customer managed AWS Key Management Service (AWS KMS) key.
+    """
+
+    AWS_OWNED_KMS_KEY = "AWS_OWNED_KMS_KEY"
+    CUSTOMER_MANAGED_KMS = "CUSTOMER_MANAGED_KMS"
+
+class AgentInsightStoreStatus(UnknownEnumMixin, StrEnum):
+    ACTIVE = "ACTIVE"
+    UPDATING = "UPDATING"
+    """
+    The Store is applying a requested change asynchronously. After an
+    encryption update, its existing Insights are being re-encrypted under
+    its key, and they stay readable.
+    """
+    INACTIVE = "INACTIVE"
+    """
+    The Store is retained but accepts no eligible output, and Insight
+    cleanup is complete.
+    """
+    ERROR = "ERROR"
+    """
+    The Store requires customer intervention, and `failureReason` says
+    what failed. After a failed encryption update, another encryption update
+    retries it and a disable is also accepted; after a failed disable, a
+    disable retries it.
+    """
+
+@dataclass(kw_only=True)
+class AgentInsightStoreSummary(_SerdeShape):
+    """Contains summary information about an Agent Insight Store."""
+
+    agent_insight_store_arn: str
+    """The Amazon Resource Name (ARN) of the Agent Insight Store."""
+    agent_insight_store_id: str
+    """The unique identifier of the Agent Insight Store."""
+    status: str
+    """
+    The current lifecycle status of the Agent Insight Store. Valid values:
+
+    ACTIVE
+
+    :   The store is available.
+
+    UPDATING
+
+    :   The service is applying a requested change.
+
+    INACTIVE
+
+    :   The store does not accept new Agent Insights.
+
+    ERROR
+
+    :   The store requires intervention.
+    """
+    enablement_status: str
+    """
+    Specifies whether the Agent Insight Store accepts new Agent Insights.
+    The default value is enabled.
+    """
+    encryption_configuration: AgentInsightStoreEncryptionConfiguration
+    """
+    Specifies the encryption mode and key configuration that encrypts new
+    Agent Insights and protects the data at rest.
+    """
+    created_at: datetime
+    """The date and time when the Agent Insight Store was created."""
+    updated_at: datetime
+    """The date and time when the Agent Insight Store was last updated."""
 
 class AgentManagedRuntimeType(UnknownEnumMixin, StrEnum):
     PYTHON_3_10 = "PYTHON_3_10"
@@ -4084,12 +4200,12 @@ class CreateDatasetInputDict(TypedDict, total=False):
     """
     description: str | None
     """A description of the dataset."""
-    source: Required[DataSourceType | DataSourceTypeDict]
+    source: DataSourceType | DataSourceTypeDict | None
     """
     Source of initial examples. Provide either inline examples or an S3 URI
     pointing to a JSONL file.
     """
-    schema_type: Required[str]
+    schema_type: str | None
     """
     Versioned schema type governing the structure of examples. Immutable
     after creation.
@@ -7850,10 +7966,15 @@ class DatasetSummary(_SerdeShape):
     """The current status of the dataset."""
     draft_status: str | None = ...
     """Publish synchronization state. Only authoritative when status is ACTIVE."""
-    schema_type: str
+    schema_type: str | None = ...
     """The schema type of the dataset."""
     example_count: int
     """The number of examples in the dataset."""
+    example_count_by_field: ExampleCountByField | None = ...
+    """
+    The number of examples that have each field, for the DRAFT. Absent when
+    the counts are unknown.
+    """
     created_at: datetime
     """The timestamp when the dataset was created."""
     updated_at: datetime
@@ -7867,6 +7988,11 @@ class DatasetVersionSummary(_SerdeShape):
     """The version number of this published snapshot."""
     example_count: int
     """The number of examples in this version."""
+    example_count_by_field: ExampleCountByField | None = ...
+    """
+    The number of examples that have each field, for this version. Absent
+    when the counts are unknown.
+    """
     created_at: datetime
     """The timestamp when this version was published."""
 
@@ -9216,72 +9342,4 @@ class DeleteRegistryRecordInputDict(TypedDict, total=False):
     """
     The identifier of the registry record to delete. You can specify either
     the Amazon Resource Name (ARN) or the ID of the record.
-    """
-
-@dataclass(kw_only=True)
-class DeleteRegistryRecordOutput(_SerdeShape):
-    """Dataclass for DeleteRegistryRecordOutput structure."""
-
-    response_metadata: ResponseMetadata = ...
-    """
-    Metadata about the response that produced this output. Use this to
-    recover the request identifiers a service's support team needs in order
-    to investigate a call. Members of the metadata are individually
-    optional.
-    """
-
-@dataclass(kw_only=True)
-class DeleteResourcePolicyInput(_SerdeShape):
-    """Dataclass for DeleteResourcePolicyInput structure."""
-
-    resource_arn: str | None = ...
-    """
-    The Amazon Resource Name (ARN) of the resource for which to delete the
-    resource policy.
-    """
-
-class DeleteResourcePolicyInputDict(TypedDict, total=False):
-    """Dictionary form of `DeleteResourcePolicyInput`."""
-
-    resource_arn: Required[str]
-    """
-    The Amazon Resource Name (ARN) of the resource for which to delete the
-    resource policy.
-    """
-
-@dataclass(kw_only=True)
-class DeleteResourcePolicyOutput(_SerdeShape):
-    """Dataclass for DeleteResourcePolicyOutput structure."""
-
-    response_metadata: ResponseMetadata = ...
-    """
-    Metadata about the response that produced this output. Use this to
-    recover the request identifiers a service's support team needs in order
-    to investigate a call. Members of the metadata are individually
-    optional.
-    """
-
-@dataclass(kw_only=True)
-class DeleteWorkloadIdentityInput(_SerdeShape):
-    """Dataclass for DeleteWorkloadIdentityInput structure."""
-
-    name: str | None = ...
-    """The name of the workload identity to delete."""
-
-class DeleteWorkloadIdentityInputDict(TypedDict, total=False):
-    """Dictionary form of `DeleteWorkloadIdentityInput`."""
-
-    name: Required[str]
-    """The name of the workload identity to delete."""
-
-@dataclass(kw_only=True)
-class DeleteWorkloadIdentityOutput(_SerdeShape):
-    """Dataclass for DeleteWorkloadIdentityOutput structure."""
-
-    response_metadata: ResponseMetadata = ...
-    """
-    Metadata about the response that produced this output. Use this to
-    recover the request identifiers a service's support team needs in order
-    to investigate a call. Members of the metadata are individually
-    optional.
     """

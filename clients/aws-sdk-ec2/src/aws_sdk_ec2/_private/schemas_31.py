@@ -11,72 +11,266 @@ _sN = "smithy.api#xmlName"
 _sV = "smithy.api#enumValue"
 _me = "member"
 _i = "item"
+_cb = "capacity_block"
+_cb_ = "capacity-block"
 _Tag = "Tags"
 _sSI = "smithy.synthetic#originalShapeId"
 _sm = "smithy.api#input"
 _DR = "DryRun"
 _smit = "smithy.api#output"
-_St = "State"
-_st = "state"
-_OIw = "OwnerId"
-_oI = "ownerId"
 _TSag = "TagSet"
 _tS = "tagSet"
 _dRr = "dryRun"
-_ex = "expired"
 _Ci = "Cidr"
-_LGI = "LocalGatewayId"
-_lGI = "localGatewayId"
+_N = "Name"
+_nam = "name"
+_IT = "InstanceType"
+_iT = "instanceType"
 _Des = "Description"
 _IPI = "IpamPoolId"
 _desc = "description"
 _PIo = "PoolId"
 _pIo = "poolId"
-_OA = "OutpostArn"
 _IPAI = "IpamPoolAllocationId"
 _IIp = "IpamId"
 _IRDI = "IpamResourceDiscoveryId"
 _IRDAI = "IpamResourceDiscoveryAssociationId"
 _IPpvo = "Ipv6Pool"
+_IGI = "InternetGatewayId"
+_iGI = "internetGatewayId"
 _IIRAI = "IpamInternetRegistryAssociationId"
-_SIn = "SnapshotId"
-_sIn = "snapshotId"
-_oAu = "outpostArn"
-_CTr = "CreateTime"
-_cTr = "createTime"
-_LGRTI = "LocalGatewayRouteTableId"
-_LTI = "LaunchTemplateId"
-_LTN = "LaunchTemplateName"
+_Cou = "Count"
+_cou = "count"
+_uns = "unsupported"
+_BM = "BareMetal"
+_VCC = "VCpuCount"
+_Ve = "Version"
 _KN = "KeyName"
+_od = "on-demand"
+_spo = "spot"
+_ver = "version"
+_eb = "ebs"
+_bM = "bareMetal"
+_ue = "uefi"
 _ISI = "IpamScopeId"
 _IERVTI = "IpamExternalResourceVerificationTokenId"
 _IPIp = "IpamPolicyId"
 _IPLRI = "IpamPrefixListResolverId"
 _IPLRTI = "IpamPrefixListResolverTargetId"
-_KT = "KeyType"
 _KPI = "KeyPairId"
-_kPI = "keyPairId"
-_kN = "keyName"
-_KFe = "KeyFingerprint"
-_kF = "keyFingerprint"
-_RAes = "ResolveAlias"
-_LTV = "LaunchTemplateVersion"
-_LGVIGI = "LocalGatewayVirtualInterfaceGroupId"
-_LGRTVIGAI = "LocalGatewayRouteTableVirtualInterfaceGroupAssociationId"
-_LGRTVAI = "LocalGatewayRouteTableVpcAssociationId"
-_LGVII = "LocalGatewayVirtualInterfaceId"
-_LGVIIo = "LocalGatewayVirtualInterfaceIds"
-_SSna = "SnapshotSet"
-_Sn = "Snapshots"
-_sSn = "snapshotSet"
-_Vers = "Versions"
+_CCor = "CoreCount"
+_TPC = "ThreadsPerCore"
+_od_ = "on_demand"
+_CTC = "ConnectionTrackingConfiguration"
+_cTC = "connectionTrackingConfiguration"
+_clu = "cluster"
+_spr = "spread"
+_part = "partition"
 _Fi = "Filter"
 _Fil = "Filters"
 _NTex = "NextToken"
 _MR = "MaxResults"
 _nT = "nextToken"
 _PIoo = "PoolIds"
-_IMR = "IncludeManagedResources"
+_UNSUPPORTED = "UNSUPPORTED"
+_i__________________________________________________________________________ = "i386"
+_x______________________________________________________ = "x86_64"
+_arm = "arm64"
+_xm____________ = "x86_64_mac"
+_am______ = "arm64_mac"
+_lb__ = "legacy_bios"
+_lb___ = "legacy-bios"
+_is__ = "instance_store"
+_is___ = "instance-store"
+_VTi = "VirtualizationType"
+_hv = "hvm"
+_para = "paravirtual"
+_ESna = "EnaSupport"
+_eSna = "enaSupport"
+_Hy = "Hypervisor"
+_hy = "hypervisor"
+_RDT = "RootDeviceType"
+_FTE = "FreeTierEligible"
+_fTE = "freeTierEligible"
+_supp = "supported"
+_SUPPORTED = "SUPPORTED"
+_EIb = "EbsInfo"
+_SIMB = "SizeInMiB"
+_sIMB = "sizeInMiB"
+_Manu = "Manufacturer"
+_manu = "manufacturer"
+_MIe = "MemoryInfo"
+_mIe = "memoryInfo"
+_FIpga = "FpgaInfo"
+_GIp = "GpuInfo"
+_IAIn = "InferenceAcceleratorInfo"
+_ISIns = "InstanceStorageInfo"
+_MAIe = "MediaAcceleratorInfo"
+_DNCI = "DefaultNetworkCardIndex"
+_EIf = "EfaInfo"
+_ESSn = "EnaSrdSupported"
+_EITSn = "EncryptionInTransitSupported"
+_FEQS = "FlexibleEnaQueuesSupport"
+_IAPSI = "Ipv4AddressesPerSecondaryInterface"
+_MNC = "MaximumNetworkCards"
+_MSNI = "MaximumSecondaryNetworkInterfaces"
+_NPe = "NetworkPerformance"
+_nPe = "networkPerformance"
+_MNIa = "MaximumNetworkInterfaces"
+_mNI = "maximumNetworkInterfaces"
+_NCIL = "NetworkCardInfoList"
+_SNSF = "SecondaryNetworkSupportedFlag"
+_NIetw = "NetworkInfo"
+_mNC = "maximumNetworkCards"
+_dNCI = "defaultNetworkCardIndex"
+_NC = "NetworkCards"
+_nC = "networkCards"
+_IAPI = "Ipv4AddressesPerInterface"
+_iAPI = "ipv4AddressesPerInterface"
+_IAPIp = "Ipv6AddressesPerInterface"
+_iAPIp = "ipv6AddressesPerInterface"
+_ISpv = "Ipv6Supported"
+_iSpv = "ipv6Supported"
+_ESf = "EfaSupported"
+_eSf = "efaSupported"
+_eIf = "efaInfo"
+_eITSn = "encryptionInTransitSupported"
+_eSSn = "enaSrdSupported"
+_BWa = "BandwidthWeightings"
+_bWa = "bandwidthWeightings"
+_fEQS = "flexibleEnaQueuesSupport"
+_SNSe = "SecondaryNetworkSupported"
+_sNSe = "secondaryNetworkSupported"
+_mSNI = "maximumSecondaryNetworkInterfaces"
+_iAPSI = "ipv4AddressesPerSecondaryInterface"
+_NDCC = "NeuronDeviceCoreCount"
+_NDCV = "NeuronDeviceCoreVersion"
+_NDCI = "NeuronDeviceCoreInfo"
+_NDCe = "NeuronDeviceCount"
+_NDMS = "NeuronDeviceMemorySize"
+_NDMI = "NeuronDeviceMemoryInfo"
+_NDN = "NeuronDeviceName"
+_NDI = "NeuronDeviceInfo"
+_CIor = "CoreInfo"
+_cIor = "coreInfo"
+_NDIL = "NeuronDeviceInfoList"
+_TNM = "TotalNeuronMemory"
+_NIeu = "NeuronInfo"
+_NDe = "NeuronDevices"
+_nDe = "neuronDevices"
+_TNDMIMB = "TotalNeuronDeviceMemoryInMiB"
+_tNDMIMB = "totalNeuronDeviceMemoryInMiB"
+_NES = "NitroEnclavesSupport"
+_NTSVT = "NitroTpmSupportedVersionType"
+_NTSVL = "NitroTpmSupportedVersionsList"
+_NTI = "NitroTpmInfo"
+_SVu = "SupportedVersions"
+_sVu = "supportedVersions"
+_NTS = "NitroTpmSupport"
+_PSh = "PhcSupport"
+_PGSl = "PlacementGroupStrategy"
+_PGSL = "PlacementGroupStrategyList"
+_PGIl = "PlacementGroupInfo"
+_SSup = "SupportedStrategies"
+_sSup = "supportedStrategies"
+_CMN = "CpuManufacturerName"
+_ATr = "ArchitectureType"
+_ATLr = "ArchitectureTypeList"
+_SAPF = "SupportedAdditionalProcessorFeature"
+_ASS_ = "AMD_SEV_SNP"
+_ass_ = "amd-sev-snp"
+_NV_ = "NESTED_VIRTUALIZATION"
+_nv = "nested-virtualization"
+_SAPFL = "SupportedAdditionalProcessorFeatureList"
+_PSCS = "ProcessorSustainedClockSpeed"
+_PIro = "ProcessorInfo"
+_SAup = "SupportedArchitectures"
+_sAu = "supportedArchitectures"
+_SCSIG = "SustainedClockSpeedInGhz"
+_sCSIG = "sustainedClockSpeedInGhz"
+_SF = "SupportedFeatures"
+_sF = "supportedFeatures"
+_RMS = "RebootMigrationSupport"
+_BMT = "BootModeType"
+_BMTL = "BootModeTypeList"
+_SIRu = "SupportedInRegion"
+_RDTL = "RootDeviceTypeList"
+_UCT = "UsageClassType"
+_UCTL = "UsageClassTypeList"
+_VTLi = "VirtualizationTypeList"
+_CCL = "CoreCountList"
+_TPCL = "ThreadsPerCoreList"
+_VCIpu = "VCpuInfo"
+_DVCef = "DefaultVCpus"
+_dVC = "defaultVCpus"
+_DCe = "DefaultCores"
+_dCe = "defaultCores"
+_DTPC = "DefaultThreadsPerCore"
+_dTPC = "defaultThreadsPerCore"
+_VCa = "ValidCores"
+_vCa = "validCores"
+_VTPC = "ValidThreadsPerCore"
+_vTPC = "validThreadsPerCore"
+_ITIns = "InstanceTypeInfo"
+_CGur = "CurrentGeneration"
+_cGu = "currentGeneration"
+_SUC = "SupportedUsageClasses"
+_sUC = "supportedUsageClasses"
+_SRDT = "SupportedRootDeviceTypes"
+_sRDT = "supportedRootDeviceTypes"
+_SVT = "SupportedVirtualizationTypes"
+_sVT = "supportedVirtualizationTypes"
+_pIro = "processorInfo"
+_vCIpu = "vCpuInfo"
+_ISSnst = "InstanceStorageSupported"
+_iSSn = "instanceStorageSupported"
+_iSIn = "instanceStorageInfo"
+_eIb = "ebsInfo"
+_nIet = "networkInfo"
+_gIp = "gpuInfo"
+_fIp = "fpgaInfo"
+_pGIl = "placementGroupInfo"
+_iAIn = "inferenceAcceleratorInfo"
+_HSi = "HibernationSupported"
+_hSi = "hibernationSupported"
+_BPS = "BurstablePerformanceSupported"
+_bPS = "burstablePerformanceSupported"
+_DHS = "DedicatedHostsSupported"
+_dHS = "dedicatedHostsSupported"
+_ARSut = "AutoRecoverySupported"
+_aRS = "autoRecoverySupported"
+_SBM = "SupportedBootModes"
+_sBM = "supportedBootModes"
+_nES = "nitroEnclavesSupport"
+_nTS = "nitroTpmSupport"
+_nTI = "nitroTpmInfo"
+_mAIe = "mediaAcceleratorInfo"
+_nIeu = "neuronInfo"
+_pSh = "phcSupport"
+_rMS = "rebootMigrationSupport"
+_sIRu = "supportedInRegion"
+_ITILn = "InstanceTypeInfoList"
+_IGIL = "InternetGatewayIdList"
+_DIGMR = "DescribeInternetGatewaysMaxResults"
+_DIGIe = "DescribeInternetGatewaysInput"
+_cDIGRo = "com.amazonaws.ec2#DescribeInternetGatewaysRequest"
+_IGIn = "InternetGatewayIds"
+_IGL = "InternetGatewayList"
+_DIGOe = "DescribeInternetGatewaysOutput"
+_cDIGRom = "com.amazonaws.ec2#DescribeInternetGatewaysResult"
+_IGnt = "InternetGateways"
+_IGSn = "InternetGatewaySet"
+_iGSn = "internetGatewaySet"
+_DIGe = "DescribeInternetGateways"
+_DIBMR = "DescribeIpamByoasnMaxResults"
+_DIBIe = "DescribeIpamByoasnInput"
+_cDIBRom = "com.amazonaws.ec2#DescribeIpamByoasnRequest"
+_BSy = "ByoasnSet"
+_DIBOe = "DescribeIpamByoasnOutput"
+_cDIBRoma = "com.amazonaws.ec2#DescribeIpamByoasnResult"
+_Byo = "Byoasns"
+_bSy = "byoasnSet"
+_DIBe = "DescribeIpamByoasn"
 _DIERVTIe = "DescribeIpamExternalResourceVerificationTokensInput"
 _cDIERVTRom = "com.amazonaws.ec2#DescribeIpamExternalResourceVerificationTokensRequest"
 _IERVTIp = "IpamExternalResourceVerificationTokenIds"
@@ -177,6 +371,7 @@ _cDISRomama = "com.amazonaws.ec2#DescribeIpamScopesResult"
 _ISpamc = "IpamScopes"
 _iSSp = "ipamScopeSet"
 _DISes = "DescribeIpamScopes"
+_IPMR = "Ipv6PoolMaxResults"
 _IPIL = "Ipv6PoolIdList"
 _DIPIescr = "DescribeIpv6PoolsInput"
 _cDIPRomamazon = "com.amazonaws.ec2#DescribeIpv6PoolsRequest"
@@ -194,133 +389,590 @@ _iPSpv = "ipv6PoolSet"
 _DIPescr = "DescribeIpv6Pools"
 _KNSL = "KeyNameStringList"
 _KPISL = "KeyPairIdStringList"
-_DKPIe = "DescribeKeyPairsInput"
-_cDKPRom = "com.amazonaws.ec2#DescribeKeyPairsRequest"
-_KNe = "KeyNames"
-_KPIe = "KeyPairIds"
-_IPK = "IncludePublicKey"
-_KPIey = "KeyPairInfo"
-_kT = "keyType"
-_PK = "PublicKey"
-_pK = "publicKey"
-_KPL = "KeyPairList"
-_DKPOe = "DescribeKeyPairsOutput"
-_cDKPRoma = "com.amazonaws.ec2#DescribeKeyPairsResult"
-_KP = "KeyPairs"
-_KSe = "KeySet"
-_kSe = "keySet"
-_DKPe = "DescribeKeyPairs"
-_LTISL = "LaunchTemplateIdStringList"
-_LTNSL = "LaunchTemplateNameStringList"
-_DLTMR = "DescribeLaunchTemplatesMaxResults"
-_DLTIe = "DescribeLaunchTemplatesInput"
-_cDLTRom = "com.amazonaws.ec2#DescribeLaunchTemplatesRequest"
-_LTIa = "LaunchTemplateIds"
-_LTNa = "LaunchTemplateNames"
-_LTSa = "LaunchTemplateSet"
-_DLTOe = "DescribeLaunchTemplatesOutput"
-_cDLTRoma = "com.amazonaws.ec2#DescribeLaunchTemplatesResult"
-_LTau = "LaunchTemplates"
-_lTau = "launchTemplates"
-_DLTe = "DescribeLaunchTemplates"
-_DLTVIe = "DescribeLaunchTemplateVersionsInput"
-_cDLTVRom = "com.amazonaws.ec2#DescribeLaunchTemplateVersionsRequest"
-_MV = "MinVersion"
-_MVa = "MaxVersion"
-_LTVS = "LaunchTemplateVersionSet"
-_DLTVOe = "DescribeLaunchTemplateVersionsOutput"
-_cDLTVRoma = "com.amazonaws.ec2#DescribeLaunchTemplateVersionsResult"
-_LTVa = "LaunchTemplateVersions"
-_lTVS = "launchTemplateVersionSet"
-_DLTVe = "DescribeLaunchTemplateVersions"
-_LGRTIS = "LocalGatewayRouteTableIdSet"
-_LGMR = "LocalGatewayMaxResults"
-_DLGRTIe = "DescribeLocalGatewayRouteTablesInput"
-_cDLGRTRom = "com.amazonaws.ec2#DescribeLocalGatewayRouteTablesRequest"
-_LGRTIo = "LocalGatewayRouteTableIds"
-_LGRTS = "LocalGatewayRouteTableSet"
-_DLGRTOe = "DescribeLocalGatewayRouteTablesOutput"
-_cDLGRTRoma = "com.amazonaws.ec2#DescribeLocalGatewayRouteTablesResult"
-_LGRToc = "LocalGatewayRouteTables"
-_lGRTS = "localGatewayRouteTableSet"
-_DLGRTe = "DescribeLocalGatewayRouteTables"
-_LGRTVIGAIS = "LocalGatewayRouteTableVirtualInterfaceGroupAssociationIdSet"
-_DLGRTVIGAIe = "DescribeLocalGatewayRouteTableVirtualInterfaceGroupAssociationsInput"
-_cDLGRTVIGARom = "com.amazonaws.ec2#DescribeLocalGatewayRouteTableVirtualInterfaceGroupAssociationsRequest"
-_LGRTVIGAIo = "LocalGatewayRouteTableVirtualInterfaceGroupAssociationIds"
-_LGRTVIGAS = "LocalGatewayRouteTableVirtualInterfaceGroupAssociationSet"
-_DLGRTVIGAOe = "DescribeLocalGatewayRouteTableVirtualInterfaceGroupAssociationsOutput"
-_cDLGRTVIGARoma = "com.amazonaws.ec2#DescribeLocalGatewayRouteTableVirtualInterfaceGroupAssociationsResult"
-_LGRTVIGAo = "LocalGatewayRouteTableVirtualInterfaceGroupAssociations"
-_lGRTVIGAS = "localGatewayRouteTableVirtualInterfaceGroupAssociationSet"
-_DLGRTVIGAe = "DescribeLocalGatewayRouteTableVirtualInterfaceGroupAssociations"
-_LGRTVAIS = "LocalGatewayRouteTableVpcAssociationIdSet"
-_DLGRTVAIe = "DescribeLocalGatewayRouteTableVpcAssociationsInput"
-_cDLGRTVARom = "com.amazonaws.ec2#DescribeLocalGatewayRouteTableVpcAssociationsRequest"
-_LGRTVAIo = "LocalGatewayRouteTableVpcAssociationIds"
-_LGRTVAS = "LocalGatewayRouteTableVpcAssociationSet"
-_DLGRTVAOe = "DescribeLocalGatewayRouteTableVpcAssociationsOutput"
-_cDLGRTVARoma = "com.amazonaws.ec2#DescribeLocalGatewayRouteTableVpcAssociationsResult"
-_LGRTVAo = "LocalGatewayRouteTableVpcAssociations"
-_lGRTVAS = "localGatewayRouteTableVpcAssociationSet"
-_DLGRTVAe = "DescribeLocalGatewayRouteTableVpcAssociations"
-_LGIS = "LocalGatewayIdSet"
-_DLGI = "DescribeLocalGatewaysInput"
-_cDLGR = "com.amazonaws.ec2#DescribeLocalGatewaysRequest"
-_LGIo = "LocalGatewayIds"
-_LG = "LocalGateway"
-_LGS = "LocalGatewaySet"
-_DLGO = "DescribeLocalGatewaysOutput"
-_cDLGRo = "com.amazonaws.ec2#DescribeLocalGatewaysResult"
-_LGo = "LocalGateways"
-_lGS = "localGatewaySet"
-_DLG = "DescribeLocalGateways"
-_LGVIGIS = "LocalGatewayVirtualInterfaceGroupIdSet"
-_DLGVIGIe = "DescribeLocalGatewayVirtualInterfaceGroupsInput"
-_cDLGVIGRom = "com.amazonaws.ec2#DescribeLocalGatewayVirtualInterfaceGroupsRequest"
-_LGVIGIo = "LocalGatewayVirtualInterfaceGroupIds"
-_LGVIGS = "LocalGatewayVirtualInterfaceGroupSet"
-_DLGVIGOe = "DescribeLocalGatewayVirtualInterfaceGroupsOutput"
-_cDLGVIGRoma = "com.amazonaws.ec2#DescribeLocalGatewayVirtualInterfaceGroupsResult"
-_LGVIGo = "LocalGatewayVirtualInterfaceGroups"
-_lGVIGS = "localGatewayVirtualInterfaceGroupSet"
-_DLGVIGe = "DescribeLocalGatewayVirtualInterfaceGroups"
-_DLGVIIe = "DescribeLocalGatewayVirtualInterfacesInput"
-_cDLGVIRom = "com.amazonaws.ec2#DescribeLocalGatewayVirtualInterfacesRequest"
-_LGVIS = "LocalGatewayVirtualInterfaceSet"
-_DLGVIOe = "DescribeLocalGatewayVirtualInterfacesOutput"
-_cDLGVIRoma = "com.amazonaws.ec2#DescribeLocalGatewayVirtualInterfacesResult"
-_LGVIo = "LocalGatewayVirtualInterfaces"
-_lGVIS = "localGatewayVirtualInterfaceSet"
-_DLGVIe = "DescribeLocalGatewayVirtualInterfaces"
-_DLSMR = "DescribeLockedSnapshotsMaxResults"
-_DLSI = "DescribeLockedSnapshotsInput"
-_cDLSR = "com.amazonaws.ec2#DescribeLockedSnapshotsRequest"
-_SInap = "SnapshotIds"
-_COPRH = "CoolOffPeriodResponseHours"
-_RPRD = "RetentionPeriodResponseDays"
-_LSoc = "LockState"
-_compli = "compliance"
-_go = "governance"
-_cc___ = "compliance_cooloff"
-_cc____ = "compliance-cooloff"
-_LSI = "LockedSnapshotsInfo"
-_lSoc = "lockState"
-_LDo = "LockDuration"
-_lDo = "lockDuration"
-_COPo = "CoolOffPeriod"
-_cOPo = "coolOffPeriod"
-_COPEO = "CoolOffPeriodExpiresOn"
-_cOPEO = "coolOffPeriodExpiresOn"
-_LCO = "LockCreatedOn"
-_lCO = "lockCreatedOn"
-_LDST = "LockDurationStartTime"
-_lDST = "lockDurationStartTime"
-_LEO = "LockExpiresOn"
-_lEO = "lockExpiresOn"
-_DLSO = "DescribeLockedSnapshotsOutput"
-_cDLSRo = "com.amazonaws.ec2#DescribeLockedSnapshotsResult"
-_DLSe = "DescribeLockedSnapshots"
+
+VIRTUALIZATION_TYPE: StaticSchema = (
+    14,
+    n0,
+    _VTi,
+    0,
+    (_hv, _para),
+    ((-1, {_sV: _hv}), (-1, {_sV: _para})),
+)
+
+NETWORK_CARD_INFO_LIST: StaticSchema = (
+    16,
+    n0,
+    _NCIL,
+    0,
+    (_me,),
+    ((lambda: schemas.NETWORK_CARD_INFO, {_sN: _i}),),
+)
+
+SECONDARY_NETWORK_SUPPORTED_FLAG: StaticSchema = (2, n0, _SNSF, 0)
+
+NETWORK_INFO: StaticSchema = (
+    18,
+    n0,
+    _NIetw,
+    0,
+    (
+        _NPe,
+        _MNIa,
+        _MNC,
+        _DNCI,
+        _NC,
+        _IAPI,
+        _IAPIp,
+        _ISpv,
+        _ESna,
+        _ESf,
+        _EIf,
+        _EITSn,
+        _ESSn,
+        _BWa,
+        _FEQS,
+        _CTC,
+        _SNSe,
+        _MSNI,
+        _IAPSI,
+    ),
+    (
+        (lambda: schemas.NETWORK_PERFORMANCE, {_aQN: _NPe, _sN: _nPe}),
+        (lambda: schemas.MAX_NETWORK_INTERFACES, {_aQN: _MNIa, _sN: _mNI}),
+        (lambda: schemas.MAXIMUM_NETWORK_CARDS, {_aQN: _MNC, _sN: _mNC}),
+        (lambda: schemas.DEFAULT_NETWORK_CARD_INDEX, {_aQN: _DNCI, _sN: _dNCI}),
+        (NETWORK_CARD_INFO_LIST, {_aQN: _NC, _sN: _nC}),
+        (lambda: schemas.MAX_IPV4_ADDR_PER_INTERFACE, {_aQN: _IAPI, _sN: _iAPI}),
+        (lambda: schemas.MAX_IPV6_ADDR_PER_INTERFACE, {_aQN: _IAPIp, _sN: _iAPIp}),
+        (lambda: schemas.IPV6_FLAG, {_aQN: _ISpv, _sN: _iSpv}),
+        (lambda: schemas.ENA_SUPPORT, {_aQN: _ESna, _sN: _eSna}),
+        (lambda: schemas.EFA_SUPPORTED_FLAG, {_aQN: _ESf, _sN: _eSf}),
+        (lambda: schemas.EFA_INFO, {_aQN: _EIf, _sN: _eIf}),
+        (lambda: schemas.ENCRYPTION_IN_TRANSIT_SUPPORTED, {_aQN: _EITSn, _sN: _eITSn}),
+        (lambda: schemas.ENA_SRD_SUPPORTED, {_aQN: _ESSn, _sN: _eSSn}),
+        (lambda: schemas.BANDWIDTH_WEIGHTING_TYPE_LIST, {_aQN: _BWa, _sN: _bWa}),
+        (lambda: schemas.FLEXIBLE_ENA_QUEUES_SUPPORT, {_aQN: _FEQS, _sN: _fEQS}),
+        (
+            lambda: schemas.DEFAULT_CONNECTION_TRACKING_CONFIGURATION,
+            {_aQN: _CTC, _sN: _cTC},
+        ),
+        (SECONDARY_NETWORK_SUPPORTED_FLAG, {_aQN: _SNSe, _sN: _sNSe}),
+        (
+            lambda: schemas.MAXIMUM_SECONDARY_NETWORK_INTERFACES,
+            {_aQN: _MSNI, _sN: _mSNI},
+        ),
+        (
+            lambda: schemas.IPV4_ADDRESSES_PER_SECONDARY_INTERFACE,
+            {_aQN: _IAPSI, _sN: _iAPSI},
+        ),
+    ),
+)
+
+NEURON_DEVICE_CORE_COUNT: StaticSchema = (7, n0, _NDCC, 0)
+
+NEURON_DEVICE_CORE_VERSION: StaticSchema = (7, n0, _NDCV, 0)
+
+NEURON_DEVICE_CORE_INFO: StaticSchema = (
+    18,
+    n0,
+    _NDCI,
+    0,
+    (_Cou, _Ve),
+    (
+        (NEURON_DEVICE_CORE_COUNT, {_aQN: _Cou, _sN: _cou}),
+        (NEURON_DEVICE_CORE_VERSION, {_aQN: _Ve, _sN: _ver}),
+    ),
+)
+
+NEURON_DEVICE_COUNT: StaticSchema = (7, n0, _NDCe, 0)
+
+NEURON_DEVICE_MEMORY_SIZE: StaticSchema = (7, n0, _NDMS, 0)
+
+NEURON_DEVICE_MEMORY_INFO: StaticSchema = (
+    18,
+    n0,
+    _NDMI,
+    0,
+    (_SIMB,),
+    ((NEURON_DEVICE_MEMORY_SIZE, {_aQN: _SIMB, _sN: _sIMB}),),
+)
+
+NEURON_DEVICE_NAME: StaticSchema = (3, n0, _NDN, 0)
+
+NEURON_DEVICE_INFO: StaticSchema = (
+    18,
+    n0,
+    _NDI,
+    0,
+    (_Cou, _N, _CIor, _MIe),
+    (
+        (NEURON_DEVICE_COUNT, {_aQN: _Cou, _sN: _cou}),
+        (NEURON_DEVICE_NAME, {_aQN: _N, _sN: _nam}),
+        (NEURON_DEVICE_CORE_INFO, {_aQN: _CIor, _sN: _cIor}),
+        (NEURON_DEVICE_MEMORY_INFO, {_aQN: _MIe, _sN: _mIe}),
+    ),
+)
+
+NEURON_DEVICE_INFO_LIST: StaticSchema = (
+    16,
+    n0,
+    _NDIL,
+    0,
+    (_me,),
+    ((NEURON_DEVICE_INFO, {_sN: _i}),),
+)
+
+TOTAL_NEURON_MEMORY: StaticSchema = (7, n0, _TNM, 0)
+
+NEURON_INFO: StaticSchema = (
+    18,
+    n0,
+    _NIeu,
+    0,
+    (_NDe, _TNDMIMB),
+    (
+        (NEURON_DEVICE_INFO_LIST, {_aQN: _NDe, _sN: _nDe}),
+        (TOTAL_NEURON_MEMORY, {_aQN: _TNDMIMB, _sN: _tNDMIMB}),
+    ),
+)
+
+NITRO_ENCLAVES_SUPPORT: StaticSchema = (
+    14,
+    n0,
+    _NES,
+    0,
+    (_UNSUPPORTED, _SUPPORTED),
+    ((-1, {_sV: _uns}), (-1, {_sV: _supp})),
+)
+
+NITRO_TPM_SUPPORTED_VERSION_TYPE: StaticSchema = (3, n0, _NTSVT, 0)
+
+NITRO_TPM_SUPPORTED_VERSIONS_LIST: StaticSchema = (
+    16,
+    n0,
+    _NTSVL,
+    0,
+    (_me,),
+    ((NITRO_TPM_SUPPORTED_VERSION_TYPE, {_sN: _i}),),
+)
+
+NITRO_TPM_INFO: StaticSchema = (
+    18,
+    n0,
+    _NTI,
+    0,
+    (_SVu,),
+    ((NITRO_TPM_SUPPORTED_VERSIONS_LIST, {_aQN: _SVu, _sN: _sVu}),),
+)
+
+NITRO_TPM_SUPPORT: StaticSchema = (
+    14,
+    n0,
+    _NTS,
+    0,
+    (_UNSUPPORTED, _SUPPORTED),
+    ((-1, {_sV: _uns}), (-1, {_sV: _supp})),
+)
+
+PHC_SUPPORT: StaticSchema = (
+    14,
+    n0,
+    _PSh,
+    0,
+    (_UNSUPPORTED, _SUPPORTED),
+    ((-1, {_sV: _uns}), (-1, {_sV: _supp})),
+)
+
+PLACEMENT_GROUP_STRATEGY: StaticSchema = (
+    14,
+    n0,
+    _PGSl,
+    0,
+    (_clu, _part, _spr),
+    ((-1, {_sV: _clu}), (-1, {_sV: _part}), (-1, {_sV: _spr})),
+)
+
+PLACEMENT_GROUP_STRATEGY_LIST: StaticSchema = (
+    16,
+    n0,
+    _PGSL,
+    0,
+    (_me,),
+    ((PLACEMENT_GROUP_STRATEGY, {_sN: _i}),),
+)
+
+PLACEMENT_GROUP_INFO: StaticSchema = (
+    18,
+    n0,
+    _PGIl,
+    0,
+    (_SSup,),
+    ((PLACEMENT_GROUP_STRATEGY_LIST, {_aQN: _SSup, _sN: _sSup}),),
+)
+
+CPU_MANUFACTURER_NAME: StaticSchema = (3, n0, _CMN, 0)
+
+ARCHITECTURE_TYPE: StaticSchema = (
+    14,
+    n0,
+    _ATr,
+    0,
+    (
+        _i__________________________________________________________________________,
+        _x______________________________________________________,
+        _arm,
+        _xm____________,
+        _am______,
+    ),
+    (
+        (
+            -1,
+            {
+                _sV: _i__________________________________________________________________________
+            },
+        ),
+        (-1, {_sV: _x______________________________________________________}),
+        (-1, {_sV: _arm}),
+        (-1, {_sV: _xm____________}),
+        (-1, {_sV: _am______}),
+    ),
+)
+
+ARCHITECTURE_TYPE_LIST: StaticSchema = (
+    16,
+    n0,
+    _ATLr,
+    0,
+    (_me,),
+    ((ARCHITECTURE_TYPE, {_sN: _i}),),
+)
+
+SUPPORTED_ADDITIONAL_PROCESSOR_FEATURE: StaticSchema = (
+    14,
+    n0,
+    _SAPF,
+    0,
+    (_ASS_, _NV_),
+    ((-1, {_sV: _ass_}), (-1, {_sV: _nv})),
+)
+
+SUPPORTED_ADDITIONAL_PROCESSOR_FEATURE_LIST: StaticSchema = (
+    16,
+    n0,
+    _SAPFL,
+    0,
+    (_me,),
+    ((SUPPORTED_ADDITIONAL_PROCESSOR_FEATURE, {_sN: _i}),),
+)
+
+PROCESSOR_SUSTAINED_CLOCK_SPEED: StaticSchema = (10, n0, _PSCS, 0)
+
+PROCESSOR_INFO: StaticSchema = (
+    18,
+    n0,
+    _PIro,
+    0,
+    (_SAup, _SCSIG, _SF, _Manu),
+    (
+        (ARCHITECTURE_TYPE_LIST, {_aQN: _SAup, _sN: _sAu}),
+        (PROCESSOR_SUSTAINED_CLOCK_SPEED, {_aQN: _SCSIG, _sN: _sCSIG}),
+        (SUPPORTED_ADDITIONAL_PROCESSOR_FEATURE_LIST, {_aQN: _SF, _sN: _sF}),
+        (CPU_MANUFACTURER_NAME, {_aQN: _Manu, _sN: _manu}),
+    ),
+)
+
+REBOOT_MIGRATION_SUPPORT: StaticSchema = (
+    14,
+    n0,
+    _RMS,
+    0,
+    (_UNSUPPORTED, _SUPPORTED),
+    ((-1, {_sV: _uns}), (-1, {_sV: _supp})),
+)
+
+BOOT_MODE_TYPE: StaticSchema = (
+    14,
+    n0,
+    _BMT,
+    0,
+    (_lb__, _ue),
+    ((-1, {_sV: _lb___}), (-1, {_sV: _ue})),
+)
+
+BOOT_MODE_TYPE_LIST: StaticSchema = (
+    16,
+    n0,
+    _BMTL,
+    0,
+    (_me,),
+    ((BOOT_MODE_TYPE, {_sN: _i}),),
+)
+
+SUPPORTED_IN_REGION: StaticSchema = (2, n0, _SIRu, 0)
+
+ROOT_DEVICE_TYPE: StaticSchema = (
+    14,
+    n0,
+    _RDT,
+    0,
+    (_eb, _is__),
+    ((-1, {_sV: _eb}), (-1, {_sV: _is___})),
+)
+
+ROOT_DEVICE_TYPE_LIST: StaticSchema = (
+    16,
+    n0,
+    _RDTL,
+    0,
+    (_me,),
+    ((ROOT_DEVICE_TYPE, {_sN: _i}),),
+)
+
+USAGE_CLASS_TYPE: StaticSchema = (
+    14,
+    n0,
+    _UCT,
+    0,
+    (_spo, _od_, _cb),
+    ((-1, {_sV: _spo}), (-1, {_sV: _od}), (-1, {_sV: _cb_})),
+)
+
+USAGE_CLASS_TYPE_LIST: StaticSchema = (
+    16,
+    n0,
+    _UCTL,
+    0,
+    (_me,),
+    ((USAGE_CLASS_TYPE, {_sN: _i}),),
+)
+
+VIRTUALIZATION_TYPE_LIST: StaticSchema = (
+    16,
+    n0,
+    _VTLi,
+    0,
+    (_me,),
+    ((VIRTUALIZATION_TYPE, {_sN: _i}),),
+)
+
+CORE_COUNT: StaticSchema = (7, n0, _CCor, 0)
+
+THREADS_PER_CORE: StaticSchema = (7, n0, _TPC, 0)
+
+V_CPU_COUNT: StaticSchema = (7, n0, _VCC, 0)
+
+CORE_COUNT_LIST: StaticSchema = (16, n0, _CCL, 0, (_me,), ((CORE_COUNT, {_sN: _i}),))
+
+THREADS_PER_CORE_LIST: StaticSchema = (
+    16,
+    n0,
+    _TPCL,
+    0,
+    (_me,),
+    ((THREADS_PER_CORE, {_sN: _i}),),
+)
+
+V_CPU_INFO: StaticSchema = (
+    18,
+    n0,
+    _VCIpu,
+    0,
+    (_DVCef, _DCe, _DTPC, _VCa, _VTPC),
+    (
+        (V_CPU_COUNT, {_aQN: _DVCef, _sN: _dVC}),
+        (CORE_COUNT, {_aQN: _DCe, _sN: _dCe}),
+        (THREADS_PER_CORE, {_aQN: _DTPC, _sN: _dTPC}),
+        (CORE_COUNT_LIST, {_aQN: _VCa, _sN: _vCa}),
+        (THREADS_PER_CORE_LIST, {_aQN: _VTPC, _sN: _vTPC}),
+    ),
+)
+
+INSTANCE_TYPE_INFO: StaticSchema = (
+    18,
+    n0,
+    _ITIns,
+    0,
+    (
+        _IT,
+        _CGur,
+        _FTE,
+        _SUC,
+        _SRDT,
+        _SVT,
+        _BM,
+        _Hy,
+        _PIro,
+        _VCIpu,
+        _MIe,
+        _ISSnst,
+        _ISIns,
+        _EIb,
+        _NIetw,
+        _GIp,
+        _FIpga,
+        _PGIl,
+        _IAIn,
+        _HSi,
+        _BPS,
+        _DHS,
+        _ARSut,
+        _SBM,
+        _NES,
+        _NTS,
+        _NTI,
+        _MAIe,
+        _NIeu,
+        _PSh,
+        _RMS,
+        _SIRu,
+    ),
+    (
+        (lambda: schemas.INSTANCE_TYPE, {_aQN: _IT, _sN: _iT}),
+        (lambda: schemas.CURRENT_GENERATION_FLAG, {_aQN: _CGur, _sN: _cGu}),
+        (lambda: schemas.FREE_TIER_ELIGIBLE_FLAG, {_aQN: _FTE, _sN: _fTE}),
+        (USAGE_CLASS_TYPE_LIST, {_aQN: _SUC, _sN: _sUC}),
+        (ROOT_DEVICE_TYPE_LIST, {_aQN: _SRDT, _sN: _sRDT}),
+        (VIRTUALIZATION_TYPE_LIST, {_aQN: _SVT, _sN: _sVT}),
+        (lambda: schemas.BARE_METAL_FLAG, {_aQN: _BM, _sN: _bM}),
+        (lambda: schemas.INSTANCE_TYPE_HYPERVISOR, {_aQN: _Hy, _sN: _hy}),
+        (PROCESSOR_INFO, {_aQN: _PIro, _sN: _pIro}),
+        (V_CPU_INFO, {_aQN: _VCIpu, _sN: _vCIpu}),
+        (lambda: schemas.MEMORY_INFO, {_aQN: _MIe, _sN: _mIe}),
+        (lambda: schemas.INSTANCE_STORAGE_FLAG, {_aQN: _ISSnst, _sN: _iSSn}),
+        (lambda: schemas.INSTANCE_STORAGE_INFO, {_aQN: _ISIns, _sN: _iSIn}),
+        (lambda: schemas.EBS_INFO, {_aQN: _EIb, _sN: _eIb}),
+        (NETWORK_INFO, {_aQN: _NIetw, _sN: _nIet}),
+        (lambda: schemas.GPU_INFO, {_aQN: _GIp, _sN: _gIp}),
+        (lambda: schemas.FPGA_INFO, {_aQN: _FIpga, _sN: _fIp}),
+        (PLACEMENT_GROUP_INFO, {_aQN: _PGIl, _sN: _pGIl}),
+        (lambda: schemas.INFERENCE_ACCELERATOR_INFO, {_aQN: _IAIn, _sN: _iAIn}),
+        (lambda: schemas.HIBERNATION_FLAG, {_aQN: _HSi, _sN: _hSi}),
+        (lambda: schemas.BURSTABLE_PERFORMANCE_FLAG, {_aQN: _BPS, _sN: _bPS}),
+        (lambda: schemas.DEDICATED_HOST_FLAG, {_aQN: _DHS, _sN: _dHS}),
+        (lambda: schemas.AUTO_RECOVERY_FLAG, {_aQN: _ARSut, _sN: _aRS}),
+        (BOOT_MODE_TYPE_LIST, {_aQN: _SBM, _sN: _sBM}),
+        (NITRO_ENCLAVES_SUPPORT, {_aQN: _NES, _sN: _nES}),
+        (NITRO_TPM_SUPPORT, {_aQN: _NTS, _sN: _nTS}),
+        (NITRO_TPM_INFO, {_aQN: _NTI, _sN: _nTI}),
+        (lambda: schemas.MEDIA_ACCELERATOR_INFO, {_aQN: _MAIe, _sN: _mAIe}),
+        (NEURON_INFO, {_aQN: _NIeu, _sN: _nIeu}),
+        (PHC_SUPPORT, {_aQN: _PSh, _sN: _pSh}),
+        (REBOOT_MIGRATION_SUPPORT, {_aQN: _RMS, _sN: _rMS}),
+        (SUPPORTED_IN_REGION, {_aQN: _SIRu, _sN: _sIRu}),
+    ),
+)
+
+INSTANCE_TYPE_INFO_LIST: StaticSchema = (
+    16,
+    n0,
+    _ITILn,
+    0,
+    (_me,),
+    ((INSTANCE_TYPE_INFO, {_sN: _i}),),
+)
+
+INTERNET_GATEWAY_ID_LIST: StaticSchema = (
+    16,
+    n0,
+    _IGIL,
+    0,
+    (_me,),
+    ((lambda: schemas.INTERNET_GATEWAY_ID, {_sN: _i}),),
+)
+
+DESCRIBE_INTERNET_GATEWAYS_MAX_RESULTS: StaticSchema = (7, n0, _DIGMR, 0)
+
+DESCRIBE_INTERNET_GATEWAYS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DIGIe,
+    {_sSI: _cDIGRo, _sm: None},
+    (_NTex, _MR, _DR, _IGIn, _Fil),
+    (
+        (lambda: schemas.STRING, 0),
+        (DESCRIBE_INTERNET_GATEWAYS_MAX_RESULTS, 0),
+        (lambda: schemas.BOOLEAN, {_aQN: _DR, _sN: _dRr}),
+        (INTERNET_GATEWAY_ID_LIST, {_aQN: _IGI, _sN: _iGI}),
+        (lambda: schemas.FILTER_LIST, {_sN: _Fi}),
+    ),
+)
+
+DESCRIBE_INTERNET_GATEWAYS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DIGOe,
+    {_sSI: _cDIGRom, _smit: None},
+    (_IGnt, _NTex),
+    (
+        (lambda: INTERNET_GATEWAY_LIST, {_aQN: _IGSn, _sN: _iGSn}),
+        (lambda: schemas.STRING, {_aQN: _NTex, _sN: _nT}),
+    ),
+)
+
+DESCRIBE_INTERNET_GATEWAYS: StaticOperationSchema = (
+    23,
+    n0,
+    _DIGe,
+    0,
+    DESCRIBE_INTERNET_GATEWAYS_INPUT,
+    DESCRIBE_INTERNET_GATEWAYS_OUTPUT,
+    (),
+)
+
+INTERNET_GATEWAY_LIST: StaticSchema = (
+    16,
+    n0,
+    _IGL,
+    0,
+    (_me,),
+    ((lambda: schemas.INTERNET_GATEWAY, {_sN: _i}),),
+)
+
+DESCRIBE_IPAM_BYOASN_MAX_RESULTS: StaticSchema = (7, n0, _DIBMR, 0)
+
+DESCRIBE_IPAM_BYOASN_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DIBIe,
+    {_sSI: _cDIBRom, _sm: None},
+    (_DR, _MR, _NTex),
+    (
+        (lambda: schemas.BOOLEAN, 0),
+        (DESCRIBE_IPAM_BYOASN_MAX_RESULTS, 0),
+        (lambda: schemas.NEXT_TOKEN, 0),
+    ),
+)
+
+DESCRIBE_IPAM_BYOASN_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DIBOe,
+    {_sSI: _cDIBRoma, _smit: None},
+    (_Byo, _NTex),
+    (
+        (lambda: BYOASN_SET, {_aQN: _BSy, _sN: _bSy}),
+        (lambda: schemas.STRING, {_aQN: _NTex, _sN: _nT}),
+    ),
+)
+
+DESCRIBE_IPAM_BYOASN: StaticOperationSchema = (
+    23,
+    n0,
+    _DIBe,
+    0,
+    DESCRIBE_IPAM_BYOASN_INPUT,
+    DESCRIBE_IPAM_BYOASN_OUTPUT,
+    (),
+)
+
+BYOASN_SET: StaticSchema = (
+    16,
+    n0,
+    _BSy,
+    0,
+    (_me,),
+    ((lambda: schemas.BYOASN, {_sN: _i}),),
+)
 
 DESCRIBE_IPAM_EXTERNAL_RESOURCE_VERIFICATION_TOKENS_INPUT: StaticSchema = (
     18,
@@ -825,6 +1477,8 @@ IPAM_SCOPE_SET: StaticSchema = (
     ((lambda: schemas.IPAM_SCOPE, {_sN: _i}),),
 )
 
+IPV6_POOL_MAX_RESULTS: StaticSchema = (7, n0, _IPMR, 0)
+
 IPV6_POOL_ID_LIST: StaticSchema = (
     16,
     n0,
@@ -843,7 +1497,7 @@ DESCRIBE_IPV6_POOLS_INPUT: StaticSchema = (
     (
         (IPV6_POOL_ID_LIST, {_sN: _PIo}),
         (lambda: schemas.NEXT_TOKEN, 0),
-        (lambda: schemas.IPV6_POOL_MAX_RESULTS, 0),
+        (IPV6_POOL_MAX_RESULTS, 0),
         (lambda: schemas.BOOLEAN, 0),
         (lambda: schemas.FILTER_LIST, {_sN: _Fi}),
     ),
@@ -921,612 +1575,4 @@ KEY_PAIR_ID_STRING_LIST: StaticSchema = (
     0,
     (_me,),
     ((lambda: schemas.KEY_PAIR_ID, {_sN: _KPI}),),
-)
-
-DESCRIBE_KEY_PAIRS_INPUT: StaticSchema = (
-    18,
-    n0,
-    _DKPIe,
-    {_sSI: _cDKPRom, _sm: None},
-    (_KNe, _KPIe, _IPK, _DR, _Fil),
-    (
-        (KEY_NAME_STRING_LIST, {_sN: _KN}),
-        (KEY_PAIR_ID_STRING_LIST, {_sN: _KPI}),
-        (lambda: schemas.BOOLEAN, 0),
-        (lambda: schemas.BOOLEAN, {_aQN: _DR, _sN: _dRr}),
-        (lambda: schemas.FILTER_LIST, {_sN: _Fi}),
-    ),
-)
-
-DESCRIBE_KEY_PAIRS_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _DKPOe,
-    {_sSI: _cDKPRoma, _smit: None},
-    (_KP,),
-    ((lambda: KEY_PAIR_LIST, {_aQN: _KSe, _sN: _kSe}),),
-)
-
-DESCRIBE_KEY_PAIRS: StaticOperationSchema = (
-    23,
-    n0,
-    _DKPe,
-    0,
-    DESCRIBE_KEY_PAIRS_INPUT,
-    DESCRIBE_KEY_PAIRS_OUTPUT,
-    (),
-)
-
-KEY_PAIR_INFO: StaticSchema = (
-    18,
-    n0,
-    _KPIey,
-    0,
-    (_KPI, _KT, _Tag, _PK, _CTr, _KN, _KFe),
-    (
-        (lambda: schemas.STRING, {_aQN: _KPI, _sN: _kPI}),
-        (lambda: schemas.KEY_TYPE, {_aQN: _KT, _sN: _kT}),
-        (lambda: schemas.TAG_LIST, {_aQN: _TSag, _sN: _tS}),
-        (lambda: schemas.STRING, {_aQN: _PK, _sN: _pK}),
-        (lambda: schemas.MILLISECOND_DATE_TIME, {_aQN: _CTr, _sN: _cTr}),
-        (lambda: schemas.STRING, {_aQN: _KN, _sN: _kN}),
-        (lambda: schemas.STRING, {_aQN: _KFe, _sN: _kF}),
-    ),
-)
-
-KEY_PAIR_LIST: StaticSchema = (16, n0, _KPL, 0, (_me,), ((KEY_PAIR_INFO, {_sN: _i}),))
-
-LAUNCH_TEMPLATE_ID_STRING_LIST: StaticSchema = (
-    16,
-    n0,
-    _LTISL,
-    0,
-    (_me,),
-    ((lambda: schemas.LAUNCH_TEMPLATE_ID, {_sN: _i}),),
-)
-
-LAUNCH_TEMPLATE_NAME_STRING_LIST: StaticSchema = (
-    16,
-    n0,
-    _LTNSL,
-    0,
-    (_me,),
-    ((lambda: schemas.LAUNCH_TEMPLATE_NAME, {_sN: _i}),),
-)
-
-DESCRIBE_LAUNCH_TEMPLATES_MAX_RESULTS: StaticSchema = (7, n0, _DLTMR, 0)
-
-DESCRIBE_LAUNCH_TEMPLATES_INPUT: StaticSchema = (
-    18,
-    n0,
-    _DLTIe,
-    {_sSI: _cDLTRom, _sm: None},
-    (_DR, _LTIa, _LTNa, _Fil, _NTex, _MR, _IMR),
-    (
-        (lambda: schemas.BOOLEAN, 0),
-        (LAUNCH_TEMPLATE_ID_STRING_LIST, {_sN: _LTI}),
-        (LAUNCH_TEMPLATE_NAME_STRING_LIST, {_sN: _LTN}),
-        (lambda: schemas.FILTER_LIST, {_sN: _Fi}),
-        (lambda: schemas.STRING, 0),
-        (DESCRIBE_LAUNCH_TEMPLATES_MAX_RESULTS, 0),
-        (lambda: schemas.BOOLEAN, 0),
-    ),
-)
-
-DESCRIBE_LAUNCH_TEMPLATES_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _DLTOe,
-    {_sSI: _cDLTRoma, _smit: None},
-    (_LTau, _NTex),
-    (
-        (lambda: LAUNCH_TEMPLATE_SET, {_aQN: _LTau, _sN: _lTau}),
-        (lambda: schemas.STRING, {_aQN: _NTex, _sN: _nT}),
-    ),
-)
-
-DESCRIBE_LAUNCH_TEMPLATES: StaticOperationSchema = (
-    23,
-    n0,
-    _DLTe,
-    0,
-    DESCRIBE_LAUNCH_TEMPLATES_INPUT,
-    DESCRIBE_LAUNCH_TEMPLATES_OUTPUT,
-    (),
-)
-
-LAUNCH_TEMPLATE_SET: StaticSchema = (
-    16,
-    n0,
-    _LTSa,
-    0,
-    (_me,),
-    ((lambda: schemas.LAUNCH_TEMPLATE, {_sN: _i}),),
-)
-
-DESCRIBE_LAUNCH_TEMPLATE_VERSIONS_INPUT: StaticSchema = (
-    18,
-    n0,
-    _DLTVIe,
-    {_sSI: _cDLTVRom, _sm: None},
-    (_DR, _LTI, _LTN, _Vers, _MV, _MVa, _NTex, _MR, _Fil, _RAes, _IMR),
-    (
-        (lambda: schemas.BOOLEAN, 0),
-        (lambda: schemas.LAUNCH_TEMPLATE_ID, 0),
-        (lambda: schemas.LAUNCH_TEMPLATE_NAME, 0),
-        (lambda: schemas.VERSION_STRING_LIST, {_sN: _LTV}),
-        (lambda: schemas.STRING, 0),
-        (lambda: schemas.STRING, 0),
-        (lambda: schemas.STRING, 0),
-        (lambda: schemas.INTEGER, 0),
-        (lambda: schemas.FILTER_LIST, {_sN: _Fi}),
-        (lambda: schemas.BOOLEAN, 0),
-        (lambda: schemas.BOOLEAN, 0),
-    ),
-)
-
-DESCRIBE_LAUNCH_TEMPLATE_VERSIONS_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _DLTVOe,
-    {_sSI: _cDLTVRoma, _smit: None},
-    (_LTVa, _NTex),
-    (
-        (lambda: LAUNCH_TEMPLATE_VERSION_SET, {_aQN: _LTVS, _sN: _lTVS}),
-        (lambda: schemas.STRING, {_aQN: _NTex, _sN: _nT}),
-    ),
-)
-
-DESCRIBE_LAUNCH_TEMPLATE_VERSIONS: StaticOperationSchema = (
-    23,
-    n0,
-    _DLTVe,
-    0,
-    DESCRIBE_LAUNCH_TEMPLATE_VERSIONS_INPUT,
-    DESCRIBE_LAUNCH_TEMPLATE_VERSIONS_OUTPUT,
-    (),
-)
-
-LAUNCH_TEMPLATE_VERSION_SET: StaticSchema = (
-    16,
-    n0,
-    _LTVS,
-    0,
-    (_me,),
-    ((lambda: schemas.LAUNCH_TEMPLATE_VERSION, {_sN: _i}),),
-)
-
-LOCAL_GATEWAY_ROUTE_TABLE_ID_SET: StaticSchema = (
-    16,
-    n0,
-    _LGRTIS,
-    0,
-    (_me,),
-    ((lambda: schemas.LOCAL_GATEWAY_ROUTETABLE_ID, {_sN: _i}),),
-)
-
-LOCAL_GATEWAY_MAX_RESULTS: StaticSchema = (7, n0, _LGMR, 0)
-
-DESCRIBE_LOCAL_GATEWAY_ROUTE_TABLES_INPUT: StaticSchema = (
-    18,
-    n0,
-    _DLGRTIe,
-    {_sSI: _cDLGRTRom, _sm: None},
-    (_LGRTIo, _Fil, _MR, _NTex, _DR),
-    (
-        (LOCAL_GATEWAY_ROUTE_TABLE_ID_SET, {_sN: _LGRTI}),
-        (lambda: schemas.FILTER_LIST, {_sN: _Fi}),
-        (LOCAL_GATEWAY_MAX_RESULTS, 0),
-        (lambda: schemas.STRING, 0),
-        (lambda: schemas.BOOLEAN, 0),
-    ),
-)
-
-DESCRIBE_LOCAL_GATEWAY_ROUTE_TABLES_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _DLGRTOe,
-    {_sSI: _cDLGRTRoma, _smit: None},
-    (_LGRToc, _NTex),
-    (
-        (lambda: LOCAL_GATEWAY_ROUTE_TABLE_SET, {_aQN: _LGRTS, _sN: _lGRTS}),
-        (lambda: schemas.STRING, {_aQN: _NTex, _sN: _nT}),
-    ),
-)
-
-DESCRIBE_LOCAL_GATEWAY_ROUTE_TABLES: StaticOperationSchema = (
-    23,
-    n0,
-    _DLGRTe,
-    0,
-    DESCRIBE_LOCAL_GATEWAY_ROUTE_TABLES_INPUT,
-    DESCRIBE_LOCAL_GATEWAY_ROUTE_TABLES_OUTPUT,
-    (),
-)
-
-LOCAL_GATEWAY_ROUTE_TABLE_SET: StaticSchema = (
-    16,
-    n0,
-    _LGRTS,
-    0,
-    (_me,),
-    ((lambda: schemas.LOCAL_GATEWAY_ROUTE_TABLE, {_sN: _i}),),
-)
-
-LOCAL_GATEWAY_ROUTE_TABLE_VIRTUAL_INTERFACE_GROUP_ASSOCIATION_ID_SET: StaticSchema = (
-    16,
-    n0,
-    _LGRTVIGAIS,
-    0,
-    (_me,),
-    (
-        (
-            lambda: (
-                schemas.LOCAL_GATEWAY_ROUTE_TABLE_VIRTUAL_INTERFACE_GROUP_ASSOCIATION_ID
-            ),
-            {_sN: _i},
-        ),
-    ),
-)
-
-DESCRIBE_LOCAL_GATEWAY_ROUTE_TABLE_VIRTUAL_INTERFACE_GROUP_ASSOCIATIONS_INPUT: StaticSchema = (
-    18,
-    n0,
-    _DLGRTVIGAIe,
-    {_sSI: _cDLGRTVIGARom, _sm: None},
-    (_LGRTVIGAIo, _Fil, _MR, _NTex, _DR),
-    (
-        (
-            LOCAL_GATEWAY_ROUTE_TABLE_VIRTUAL_INTERFACE_GROUP_ASSOCIATION_ID_SET,
-            {_sN: _LGRTVIGAI},
-        ),
-        (lambda: schemas.FILTER_LIST, {_sN: _Fi}),
-        (LOCAL_GATEWAY_MAX_RESULTS, 0),
-        (lambda: schemas.STRING, 0),
-        (lambda: schemas.BOOLEAN, 0),
-    ),
-)
-
-DESCRIBE_LOCAL_GATEWAY_ROUTE_TABLE_VIRTUAL_INTERFACE_GROUP_ASSOCIATIONS_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _DLGRTVIGAOe,
-    {_sSI: _cDLGRTVIGARoma, _smit: None},
-    (_LGRTVIGAo, _NTex),
-    (
-        (
-            lambda: LOCAL_GATEWAY_ROUTE_TABLE_VIRTUAL_INTERFACE_GROUP_ASSOCIATION_SET,
-            {_aQN: _LGRTVIGAS, _sN: _lGRTVIGAS},
-        ),
-        (lambda: schemas.STRING, {_aQN: _NTex, _sN: _nT}),
-    ),
-)
-
-DESCRIBE_LOCAL_GATEWAY_ROUTE_TABLE_VIRTUAL_INTERFACE_GROUP_ASSOCIATIONS: StaticOperationSchema = (
-    23,
-    n0,
-    _DLGRTVIGAe,
-    0,
-    DESCRIBE_LOCAL_GATEWAY_ROUTE_TABLE_VIRTUAL_INTERFACE_GROUP_ASSOCIATIONS_INPUT,
-    DESCRIBE_LOCAL_GATEWAY_ROUTE_TABLE_VIRTUAL_INTERFACE_GROUP_ASSOCIATIONS_OUTPUT,
-    (),
-)
-
-LOCAL_GATEWAY_ROUTE_TABLE_VIRTUAL_INTERFACE_GROUP_ASSOCIATION_SET: StaticSchema = (
-    16,
-    n0,
-    _LGRTVIGAS,
-    0,
-    (_me,),
-    (
-        (
-            lambda: (
-                schemas.LOCAL_GATEWAY_ROUTE_TABLE_VIRTUAL_INTERFACE_GROUP_ASSOCIATION
-            ),
-            {_sN: _i},
-        ),
-    ),
-)
-
-LOCAL_GATEWAY_ROUTE_TABLE_VPC_ASSOCIATION_ID_SET: StaticSchema = (
-    16,
-    n0,
-    _LGRTVAIS,
-    0,
-    (_me,),
-    ((lambda: schemas.LOCAL_GATEWAY_ROUTE_TABLE_VPC_ASSOCIATION_ID, {_sN: _i}),),
-)
-
-DESCRIBE_LOCAL_GATEWAY_ROUTE_TABLE_VPC_ASSOCIATIONS_INPUT: StaticSchema = (
-    18,
-    n0,
-    _DLGRTVAIe,
-    {_sSI: _cDLGRTVARom, _sm: None},
-    (_LGRTVAIo, _Fil, _MR, _NTex, _DR),
-    (
-        (LOCAL_GATEWAY_ROUTE_TABLE_VPC_ASSOCIATION_ID_SET, {_sN: _LGRTVAI}),
-        (lambda: schemas.FILTER_LIST, {_sN: _Fi}),
-        (LOCAL_GATEWAY_MAX_RESULTS, 0),
-        (lambda: schemas.STRING, 0),
-        (lambda: schemas.BOOLEAN, 0),
-    ),
-)
-
-DESCRIBE_LOCAL_GATEWAY_ROUTE_TABLE_VPC_ASSOCIATIONS_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _DLGRTVAOe,
-    {_sSI: _cDLGRTVARoma, _smit: None},
-    (_LGRTVAo, _NTex),
-    (
-        (
-            lambda: LOCAL_GATEWAY_ROUTE_TABLE_VPC_ASSOCIATION_SET,
-            {_aQN: _LGRTVAS, _sN: _lGRTVAS},
-        ),
-        (lambda: schemas.STRING, {_aQN: _NTex, _sN: _nT}),
-    ),
-)
-
-DESCRIBE_LOCAL_GATEWAY_ROUTE_TABLE_VPC_ASSOCIATIONS: StaticOperationSchema = (
-    23,
-    n0,
-    _DLGRTVAe,
-    0,
-    DESCRIBE_LOCAL_GATEWAY_ROUTE_TABLE_VPC_ASSOCIATIONS_INPUT,
-    DESCRIBE_LOCAL_GATEWAY_ROUTE_TABLE_VPC_ASSOCIATIONS_OUTPUT,
-    (),
-)
-
-LOCAL_GATEWAY_ROUTE_TABLE_VPC_ASSOCIATION_SET: StaticSchema = (
-    16,
-    n0,
-    _LGRTVAS,
-    0,
-    (_me,),
-    ((lambda: schemas.LOCAL_GATEWAY_ROUTE_TABLE_VPC_ASSOCIATION, {_sN: _i}),),
-)
-
-LOCAL_GATEWAY_ID_SET: StaticSchema = (
-    16,
-    n0,
-    _LGIS,
-    0,
-    (_me,),
-    ((lambda: schemas.LOCAL_GATEWAY_ID, {_sN: _i}),),
-)
-
-DESCRIBE_LOCAL_GATEWAYS_INPUT: StaticSchema = (
-    18,
-    n0,
-    _DLGI,
-    {_sSI: _cDLGR, _sm: None},
-    (_LGIo, _Fil, _MR, _NTex, _DR),
-    (
-        (LOCAL_GATEWAY_ID_SET, {_sN: _LGI}),
-        (lambda: schemas.FILTER_LIST, {_sN: _Fi}),
-        (LOCAL_GATEWAY_MAX_RESULTS, 0),
-        (lambda: schemas.STRING, 0),
-        (lambda: schemas.BOOLEAN, 0),
-    ),
-)
-
-DESCRIBE_LOCAL_GATEWAYS_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _DLGO,
-    {_sSI: _cDLGRo, _smit: None},
-    (_LGo, _NTex),
-    (
-        (lambda: LOCAL_GATEWAY_SET, {_aQN: _LGS, _sN: _lGS}),
-        (lambda: schemas.STRING, {_aQN: _NTex, _sN: _nT}),
-    ),
-)
-
-DESCRIBE_LOCAL_GATEWAYS: StaticOperationSchema = (
-    23,
-    n0,
-    _DLG,
-    0,
-    DESCRIBE_LOCAL_GATEWAYS_INPUT,
-    DESCRIBE_LOCAL_GATEWAYS_OUTPUT,
-    (),
-)
-
-LOCAL_GATEWAY: StaticSchema = (
-    18,
-    n0,
-    _LG,
-    0,
-    (_LGI, _OA, _OIw, _St, _Tag),
-    (
-        (lambda: schemas.LOCAL_GATEWAY_ID, {_aQN: _LGI, _sN: _lGI}),
-        (lambda: schemas.STRING, {_aQN: _OA, _sN: _oAu}),
-        (lambda: schemas.STRING, {_aQN: _OIw, _sN: _oI}),
-        (lambda: schemas.STRING, {_aQN: _St, _sN: _st}),
-        (lambda: schemas.TAG_LIST, {_aQN: _TSag, _sN: _tS}),
-    ),
-)
-
-LOCAL_GATEWAY_SET: StaticSchema = (
-    16,
-    n0,
-    _LGS,
-    0,
-    (_me,),
-    ((LOCAL_GATEWAY, {_sN: _i}),),
-)
-
-LOCAL_GATEWAY_VIRTUAL_INTERFACE_GROUP_ID_SET: StaticSchema = (
-    16,
-    n0,
-    _LGVIGIS,
-    0,
-    (_me,),
-    ((lambda: schemas.LOCAL_GATEWAY_VIRTUAL_INTERFACE_GROUP_ID, {_sN: _i}),),
-)
-
-DESCRIBE_LOCAL_GATEWAY_VIRTUAL_INTERFACE_GROUPS_INPUT: StaticSchema = (
-    18,
-    n0,
-    _DLGVIGIe,
-    {_sSI: _cDLGVIGRom, _sm: None},
-    (_LGVIGIo, _Fil, _MR, _NTex, _DR),
-    (
-        (LOCAL_GATEWAY_VIRTUAL_INTERFACE_GROUP_ID_SET, {_sN: _LGVIGI}),
-        (lambda: schemas.FILTER_LIST, {_sN: _Fi}),
-        (LOCAL_GATEWAY_MAX_RESULTS, 0),
-        (lambda: schemas.STRING, 0),
-        (lambda: schemas.BOOLEAN, 0),
-    ),
-)
-
-DESCRIBE_LOCAL_GATEWAY_VIRTUAL_INTERFACE_GROUPS_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _DLGVIGOe,
-    {_sSI: _cDLGVIGRoma, _smit: None},
-    (_LGVIGo, _NTex),
-    (
-        (
-            lambda: LOCAL_GATEWAY_VIRTUAL_INTERFACE_GROUP_SET,
-            {_aQN: _LGVIGS, _sN: _lGVIGS},
-        ),
-        (lambda: schemas.STRING, {_aQN: _NTex, _sN: _nT}),
-    ),
-)
-
-DESCRIBE_LOCAL_GATEWAY_VIRTUAL_INTERFACE_GROUPS: StaticOperationSchema = (
-    23,
-    n0,
-    _DLGVIGe,
-    0,
-    DESCRIBE_LOCAL_GATEWAY_VIRTUAL_INTERFACE_GROUPS_INPUT,
-    DESCRIBE_LOCAL_GATEWAY_VIRTUAL_INTERFACE_GROUPS_OUTPUT,
-    (),
-)
-
-LOCAL_GATEWAY_VIRTUAL_INTERFACE_GROUP_SET: StaticSchema = (
-    16,
-    n0,
-    _LGVIGS,
-    0,
-    (_me,),
-    ((lambda: schemas.LOCAL_GATEWAY_VIRTUAL_INTERFACE_GROUP, {_sN: _i}),),
-)
-
-DESCRIBE_LOCAL_GATEWAY_VIRTUAL_INTERFACES_INPUT: StaticSchema = (
-    18,
-    n0,
-    _DLGVIIe,
-    {_sSI: _cDLGVIRom, _sm: None},
-    (_LGVIIo, _Fil, _MR, _NTex, _DR),
-    (
-        (lambda: schemas.LOCAL_GATEWAY_VIRTUAL_INTERFACE_ID_SET, {_sN: _LGVII}),
-        (lambda: schemas.FILTER_LIST, {_sN: _Fi}),
-        (LOCAL_GATEWAY_MAX_RESULTS, 0),
-        (lambda: schemas.STRING, 0),
-        (lambda: schemas.BOOLEAN, 0),
-    ),
-)
-
-DESCRIBE_LOCAL_GATEWAY_VIRTUAL_INTERFACES_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _DLGVIOe,
-    {_sSI: _cDLGVIRoma, _smit: None},
-    (_LGVIo, _NTex),
-    (
-        (lambda: LOCAL_GATEWAY_VIRTUAL_INTERFACE_SET, {_aQN: _LGVIS, _sN: _lGVIS}),
-        (lambda: schemas.STRING, {_aQN: _NTex, _sN: _nT}),
-    ),
-)
-
-DESCRIBE_LOCAL_GATEWAY_VIRTUAL_INTERFACES: StaticOperationSchema = (
-    23,
-    n0,
-    _DLGVIe,
-    0,
-    DESCRIBE_LOCAL_GATEWAY_VIRTUAL_INTERFACES_INPUT,
-    DESCRIBE_LOCAL_GATEWAY_VIRTUAL_INTERFACES_OUTPUT,
-    (),
-)
-
-LOCAL_GATEWAY_VIRTUAL_INTERFACE_SET: StaticSchema = (
-    16,
-    n0,
-    _LGVIS,
-    0,
-    (_me,),
-    ((lambda: schemas.LOCAL_GATEWAY_VIRTUAL_INTERFACE, {_sN: _i}),),
-)
-
-DESCRIBE_LOCKED_SNAPSHOTS_MAX_RESULTS: StaticSchema = (7, n0, _DLSMR, 0)
-
-DESCRIBE_LOCKED_SNAPSHOTS_INPUT: StaticSchema = (
-    18,
-    n0,
-    _DLSI,
-    {_sSI: _cDLSR, _sm: None},
-    (_Fil, _MR, _NTex, _SInap, _DR),
-    (
-        (lambda: schemas.FILTER_LIST, {_sN: _Fi}),
-        (DESCRIBE_LOCKED_SNAPSHOTS_MAX_RESULTS, 0),
-        (lambda: schemas.STRING, 0),
-        (lambda: schemas.SNAPSHOT_ID_STRING_LIST, {_sN: _SIn}),
-        (lambda: schemas.BOOLEAN, 0),
-    ),
-)
-
-DESCRIBE_LOCKED_SNAPSHOTS_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _DLSO,
-    {_sSI: _cDLSRo, _smit: None},
-    (_Sn, _NTex),
-    (
-        (lambda: schemas.LOCKED_SNAPSHOTS_INFO_LIST, {_aQN: _SSna, _sN: _sSn}),
-        (lambda: schemas.STRING, {_aQN: _NTex, _sN: _nT}),
-    ),
-)
-
-DESCRIBE_LOCKED_SNAPSHOTS: StaticOperationSchema = (
-    23,
-    n0,
-    _DLSe,
-    0,
-    DESCRIBE_LOCKED_SNAPSHOTS_INPUT,
-    DESCRIBE_LOCKED_SNAPSHOTS_OUTPUT,
-    (),
-)
-
-COOL_OFF_PERIOD_RESPONSE_HOURS: StaticSchema = (7, n0, _COPRH, 0)
-
-RETENTION_PERIOD_RESPONSE_DAYS: StaticSchema = (7, n0, _RPRD, 0)
-
-LOCK_STATE: StaticSchema = (
-    14,
-    n0,
-    _LSoc,
-    0,
-    (_compli, _go, _cc___, _ex),
-    ((-1, {_sV: _compli}), (-1, {_sV: _go}), (-1, {_sV: _cc____}), (-1, {_sV: _ex})),
-)
-
-LOCKED_SNAPSHOTS_INFO: StaticSchema = (
-    18,
-    n0,
-    _LSI,
-    0,
-    (_OIw, _SIn, _LSoc, _LDo, _COPo, _COPEO, _LCO, _LDST, _LEO),
-    (
-        (lambda: schemas.STRING, {_aQN: _OIw, _sN: _oI}),
-        (lambda: schemas.STRING, {_aQN: _SIn, _sN: _sIn}),
-        (LOCK_STATE, {_aQN: _LSoc, _sN: _lSoc}),
-        (RETENTION_PERIOD_RESPONSE_DAYS, {_aQN: _LDo, _sN: _lDo}),
-        (COOL_OFF_PERIOD_RESPONSE_HOURS, {_aQN: _COPo, _sN: _cOPo}),
-        (lambda: schemas.MILLISECOND_DATE_TIME, {_aQN: _COPEO, _sN: _cOPEO}),
-        (lambda: schemas.MILLISECOND_DATE_TIME, {_aQN: _LCO, _sN: _lCO}),
-        (lambda: schemas.MILLISECOND_DATE_TIME, {_aQN: _LDST, _sN: _lDST}),
-        (lambda: schemas.MILLISECOND_DATE_TIME, {_aQN: _LEO, _sN: _lEO}),
-    ),
 )

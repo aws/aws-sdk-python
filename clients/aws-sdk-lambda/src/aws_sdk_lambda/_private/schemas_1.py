@@ -8,11 +8,12 @@ from . import schemas
 
 
 n0 = "com.amazonaws.lambda"
-_s = "smithy.api#default"
+_sV = "smithy.api#enumValue"
+_s = "smithy.api#required"
+_sm = "smithy.api#default"
 _A = "Action"
 _sSI = "smithy.synthetic#originalShapeId"
-_sm = "smithy.api#input"
-_smi = "smithy.api#required"
+_smi = "smithy.api#input"
 _sL = "smithy.api#httpLabel"
 _RI = "RevisionId"
 _sQ = "smithy.api#httpQuery"
@@ -20,9 +21,9 @@ _smit = "smithy.api#output"
 _smith = "smithy.api#error"
 _sE = "smithy.api#httpError"
 _T = "Type"
-_M = "Message"
+_Me = "Message"
 _se = "server"
-_sV = "smithy.api#enumValue"
+_R = "Reason"
 _smithy = "smithy.api#http"
 _FN = "FunctionName"
 _Q = "Qualifier"
@@ -197,6 +198,12 @@ _KMSDE = "KMSDisabledException"
 _KMSISE = "KMSInvalidStateException"
 _KMSNFE = "KMSNotFoundException"
 _CDE = "CheckpointDurableExecution"
+_DDEI = "DeleteDurableExecutionInput"
+_cDDER = "com.amazonaws.lambda#DeleteDurableExecutionRequest"
+_DDEO = "DeleteDurableExecutionOutput"
+_cDDERo = "com.amazonaws.lambda#DeleteDurableExecutionResponse"
+_DRT = "DeletionRequestTimestamp"
+_DDE = "DeleteDurableExecution"
 _IED = "IncludeExecutionData"
 _GDEI = "GetDurableExecutionInput"
 _cGDER = "com.amazonaws.lambda#GetDurableExecutionRequest"
@@ -205,13 +212,21 @@ _RPID = "RetentionPeriodInDays"
 _DC = "DurableConfig"
 _DEN = "DurableExecutionName"
 _EDI = "ExecutionDataIncluded"
+_ETP = "ExecutionTimeoutPaused"
+_PR = "PauseReason"
+_PD = "PauseDetails"
+_PRT = "PauseRequestTimestamp"
 _OPu = "OutputPayload"
 _ES = "ExecutionStatus"
 _RUNNING = "RUNNING"
+_DELETING = "DELETING"
+_PAUSING = "PAUSING"
+_PAUSED = "PAUSED"
 _TH = "TraceHeader"
 _VWLP = "VersionWithLatestPublished"
 _GDEO = "GetDurableExecutionOutput"
 _cGDERo = "com.amazonaws.lambda#GetDurableExecutionResponse"
+_EETT = "ExpectedExecutionTimeoutTimestamp"
 _GDE = "GetDurableExecution"
 _IC = "ItemCount"
 _RO = "ReverseOrder"
@@ -227,24 +242,18 @@ _ER = "EventResult"
 _CSDa = "CallbackSucceededDetails"
 _CTOD = "CallbackTimedOutDetails"
 _CIFD = "ChainedInvokeFailedDetails"
-_EI = "EventInput"
-_CISD = "ChainedInvokeStartedDetails"
-_Inp = "Input"
-_EV = "ExecutedVersion"
-_CISDh = "ChainedInvokeStoppedDetails"
 _Eve = "Events"
 _GDEHO = "GetDurableExecutionHistoryOutput"
 _cGDEHRo = "com.amazonaws.lambda#GetDurableExecutionHistoryResponse"
 _GDEH = "GetDurableExecutionHistory"
 _B = "Blob"
 _FLu = "FunctionList"
-_RP = "ResourcePolicy"
 
 UPDATE_CAPACITY_PROVIDER_INPUT: StaticSchema = (
     18,
     n0,
     _UCPI,
-    {_sSI: _cUCPR, _sm: None},
+    {_sSI: _cUCPR, _smi: None},
     (_CPN, _CPSC, _PT, _TC),
     (
         (lambda: schemas.CAPACITY_PROVIDER_NAME, 9),
@@ -311,7 +320,7 @@ CREATE_CODE_SIGNING_CONFIG_INPUT: StaticSchema = (
     18,
     n0,
     _CCSCI,
-    {_sSI: _cCCSCR, _sm: None},
+    {_sSI: _cCCSCR, _smi: None},
     (_D, _APl, _CSPo, _Ta),
     (
         (lambda: schemas.DESCRIPTION, 0),
@@ -369,7 +378,7 @@ DELETE_CODE_SIGNING_CONFIG_INPUT: StaticSchema = (
     18,
     n0,
     _DCSCI,
-    {_sSI: _cDCSCR, _sm: None},
+    {_sSI: _cDCSCR, _smi: None},
     (_CSCA,),
     ((CODE_SIGNING_CONFIG_ARN, 9),),
 )
@@ -408,7 +417,7 @@ GET_CODE_SIGNING_CONFIG_INPUT: StaticSchema = (
     18,
     n0,
     _GCSCI,
-    {_sSI: _cGCSCR, _sm: None},
+    {_sSI: _cGCSCR, _smi: None},
     (_CSCA,),
     ((CODE_SIGNING_CONFIG_ARN, 9),),
 )
@@ -450,7 +459,7 @@ LIST_CODE_SIGNING_CONFIGS_INPUT: StaticSchema = (
     18,
     n0,
     _LCSCI,
-    {_sSI: _cLCSCR, _sm: None},
+    {_sSI: _cLCSCR, _smi: None},
     (_Mar, _MI),
     ((lambda: schemas.STRING, {_sQ: _Mar}), (MAX_LIST_ITEMS, {_sQ: _MI})),
 )
@@ -494,7 +503,7 @@ LIST_FUNCTIONS_BY_CODE_SIGNING_CONFIG_INPUT: StaticSchema = (
     18,
     n0,
     _LFBCSCI,
-    {_sSI: _cLFBCSCR, _sm: None},
+    {_sSI: _cLFBCSCR, _smi: None},
     (_CSCA, _Mar, _MI),
     (
         (CODE_SIGNING_CONFIG_ARN, 9),
@@ -547,7 +556,7 @@ UPDATE_CODE_SIGNING_CONFIG_INPUT: StaticSchema = (
     18,
     n0,
     _UCSCI,
-    {_sSI: _cUCSCR, _sm: None},
+    {_sSI: _cUCSCR, _smi: None},
     (_CSCA, _D, _APl, _CSPo),
     (
         (CODE_SIGNING_CONFIG_ARN, 9),
@@ -592,7 +601,7 @@ DELETE_FUNCTION_INPUT: StaticSchema = (
     18,
     n0,
     _DFI,
-    {_sSI: _cDFR, _sm: None},
+    {_sSI: _cDFR, _smi: None},
     (_FN, _Q),
     (
         (lambda: schemas.NAMESPACED_FUNCTION_NAME, 9),
@@ -606,7 +615,7 @@ DELETE_FUNCTION_OUTPUT: StaticSchema = (
     _DFO,
     {_sSI: _cDFRo, _smit: None},
     (_SC,),
-    ((lambda: schemas.INTEGER, {_s: 0, _sRC: None}),),
+    ((lambda: schemas.INTEGER, {_sm: 0, _sRC: None}),),
 )
 
 DELETE_FUNCTION: StaticOperationSchema = (
@@ -633,7 +642,7 @@ DELETE_FUNCTION_EVENT_INVOKE_CONFIG_INPUT: StaticSchema = (
     18,
     n0,
     _DFEICI,
-    {_sSI: _cDFEICR, _sm: None},
+    {_sSI: _cDFEICR, _smi: None},
     (_FN, _Q),
     (
         (lambda: schemas.NAMESPACED_FUNCTION_NAME, 9),
@@ -680,7 +689,7 @@ DELETE_RESOURCE_POLICY_INPUT: StaticSchema = (
     18,
     n0,
     _DRPI,
-    {_sSI: _cDRPR, _sm: None},
+    {_sSI: _cDRPR, _smi: None},
     (_RAe, _RI),
     ((POLICY_RESOURCE_ARN, 9), (REVISION_ID, {_sQ: _RI})),
 )
@@ -741,7 +750,7 @@ CALLBACK_OPTIONS: StaticSchema = (
     _CO,
     0,
     (_TS, _HTS),
-    ((DURATION_SECONDS, {_s: 0}), (DURATION_SECONDS, {_s: 0})),
+    ((DURATION_SECONDS, {_sm: 0}), (DURATION_SECONDS, {_sm: 0})),
 )
 
 TENANT_ID: StaticSchema = (3, n0, _TI, 0)
@@ -848,7 +857,7 @@ CHECKPOINT_DURABLE_EXECUTION_INPUT: StaticSchema = (
     18,
     n0,
     _CDEI,
-    {_sSI: _cCDER, _sm: None},
+    {_sSI: _cCDER, _smi: None},
     (_DEA, _CT, _U, _CTl),
     (
         (DURABLE_EXECUTION_ARN, 9),
@@ -953,7 +962,7 @@ STEP_DETAILS: StaticSchema = (
     0,
     (_Att, _NAT, _Re, _E),
     (
-        (lambda: schemas.ATTEMPT_COUNT, {_s: 0}),
+        (lambda: schemas.ATTEMPT_COUNT, {_sm: 0}),
         (EXECUTION_TIMESTAMP, 0),
         (OPERATION_PAYLOAD, 0),
         (ERROR_OBJECT, 0),
@@ -1002,7 +1011,7 @@ KMS_ACCESS_DENIED_EXCEPTION: StaticSchema = (
     n0,
     _KMSADE,
     {_smith: _se, _sE: 502},
-    (_T, _M),
+    (_T, _Me),
     ((lambda: schemas.STRING, 0), (lambda: schemas.STRING, 0)),
 )
 
@@ -1011,7 +1020,7 @@ KMS_DISABLED_EXCEPTION: StaticSchema = (
     n0,
     _KMSDE,
     {_smith: _se, _sE: 502},
-    (_T, _M),
+    (_T, _Me),
     ((lambda: schemas.STRING, 0), (lambda: schemas.STRING, 0)),
 )
 
@@ -1020,7 +1029,7 @@ KMS_INVALID_STATE_EXCEPTION: StaticSchema = (
     n0,
     _KMSISE,
     {_smith: _se, _sE: 502},
-    (_T, _M),
+    (_T, _Me),
     ((lambda: schemas.STRING, 0), (lambda: schemas.STRING, 0)),
 )
 
@@ -1029,8 +1038,50 @@ KMS_NOT_FOUND_EXCEPTION: StaticSchema = (
     n0,
     _KMSNFE,
     {_smith: _se, _sE: 502},
-    (_T, _M),
+    (_T, _Me),
     ((lambda: schemas.STRING, 0), (lambda: schemas.STRING, 0)),
+)
+
+DELETE_DURABLE_EXECUTION_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DDEI,
+    {_sSI: _cDDER, _smi: None},
+    (_DEA,),
+    ((DURABLE_EXECUTION_ARN, 9),),
+)
+
+DELETE_DURABLE_EXECUTION_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DDEO,
+    {_sSI: _cDDERo, _smit: None},
+    (_DRT,),
+    ((EXECUTION_TIMESTAMP, 1),),
+)
+
+DELETE_DURABLE_EXECUTION: StaticOperationSchema = (
+    23,
+    n0,
+    _DDE,
+    {
+        _smithy: MappingProxyType(
+            {
+                "method": "DELETE",
+                "uri": "/2025-12-01/durable-executions/{DurableExecutionArn}",
+                "code": 202,
+            }
+        )
+    },
+    DELETE_DURABLE_EXECUTION_INPUT,
+    DELETE_DURABLE_EXECUTION_OUTPUT,
+    (
+        lambda: schemas.INVALID_PARAMETER_VALUE_EXCEPTION,
+        lambda: schemas.RESOURCE_CONFLICT_EXCEPTION,
+        lambda: schemas.RESOURCE_NOT_FOUND_EXCEPTION,
+        lambda: schemas.SERVICE_EXCEPTION,
+        lambda: schemas.TOO_MANY_REQUESTS_EXCEPTION,
+    ),
 )
 
 INCLUDE_EXECUTION_DATA: StaticSchema = (2, n0, _IED, 0)
@@ -1039,9 +1090,9 @@ GET_DURABLE_EXECUTION_INPUT: StaticSchema = (
     18,
     n0,
     _GDEI,
-    {_sSI: _cGDER, _sm: None},
+    {_sSI: _cGDER, _smi: None},
     (_DEA, _IED),
-    ((DURABLE_EXECUTION_ARN, 9), (INCLUDE_EXECUTION_DATA, {_s: True, _sQ: _IED})),
+    ((DURABLE_EXECUTION_ARN, 9), (INCLUDE_EXECUTION_DATA, {_sm: True, _sQ: _IED})),
 )
 
 GET_DURABLE_EXECUTION_OUTPUT: StaticSchema = (
@@ -1049,7 +1100,7 @@ GET_DURABLE_EXECUTION_OUTPUT: StaticSchema = (
     n0,
     _GDEO,
     {_sSI: _cGDERo, _smit: None},
-    (_DEA, _DEN, _FA, _IP, _Re, _E, _STt, _Stat, _ETn, _V, _TH, _EDI, _DC),
+    (_DEA, _DEN, _FA, _IP, _Re, _E, _STt, _Stat, _ETn, _V, _TH, _EDI, _DC, _PD, _EETT),
     (
         (DURABLE_EXECUTION_ARN, 1),
         (lambda: DURABLE_EXECUTION_NAME, 1),
@@ -1064,6 +1115,8 @@ GET_DURABLE_EXECUTION_OUTPUT: StaticSchema = (
         (lambda: TRACE_HEADER, 0),
         (lambda: EXECUTION_DATA_INCLUDED, 0),
         (lambda: DURABLE_CONFIG, 0),
+        (lambda: PAUSE_DETAILS, 0),
+        (EXECUTION_TIMESTAMP, 0),
     ),
 )
 
@@ -1115,6 +1168,19 @@ DURABLE_EXECUTION_NAME: StaticSchema = (3, n0, _DEN, 0)
 
 EXECUTION_DATA_INCLUDED: StaticSchema = (2, n0, _EDI, 0)
 
+EXECUTION_TIMEOUT_PAUSED: StaticSchema = (2, n0, _ETP, 0)
+
+PAUSE_REASON: StaticSchema = (3, n0, _PR, 4)
+
+PAUSE_DETAILS: StaticSchema = (
+    18,
+    n0,
+    _PD,
+    0,
+    (_PRT, _R, _ETP),
+    ((EXECUTION_TIMESTAMP, 1), (PAUSE_REASON, 0), (EXECUTION_TIMEOUT_PAUSED, 1)),
+)
+
 OUTPUT_PAYLOAD: StaticSchema = (3, n0, _OPu, 4)
 
 EXECUTION_STATUS: StaticSchema = (
@@ -1122,13 +1188,16 @@ EXECUTION_STATUS: StaticSchema = (
     n0,
     _ES,
     0,
-    (_RUNNING, _SUCCEEDED, _FAILED, _TO, _STOPPED),
+    (_RUNNING, _SUCCEEDED, _FAILED, _TO, _STOPPED, _DELETING, _PAUSING, _PAUSED),
     (
         (-1, {_sV: _RUNNING}),
         (-1, {_sV: _SUCCEEDED}),
         (-1, {_sV: _FAILED}),
         (-1, {_sV: _TO}),
         (-1, {_sV: _STOPPED}),
+        (-1, {_sV: _DELETING}),
+        (-1, {_sV: _PAUSING}),
+        (-1, {_sV: _PAUSED}),
     ),
 )
 
@@ -1136,7 +1205,7 @@ TRACE_HEADER: StaticSchema = (18, n0, _TH, 0, (_XATI,), ((X_AMZN_TRACE_ID, 0),))
 
 VERSION_WITH_LATEST_PUBLISHED: StaticSchema = (3, n0, _VWLP, 0)
 
-ITEM_COUNT: StaticSchema = (7, n0, _IC, {_s: 0})
+ITEM_COUNT: StaticSchema = (7, n0, _IC, {_sm: 0})
 
 REVERSE_ORDER: StaticSchema = (2, n0, _RO, 0)
 
@@ -1144,12 +1213,12 @@ GET_DURABLE_EXECUTION_HISTORY_INPUT: StaticSchema = (
     18,
     n0,
     _GDEHI,
-    {_sSI: _cGDEHR, _sm: None},
+    {_sSI: _cGDEHR, _smi: None},
     (_DEA, _IED, _MI, _Mar, _RO),
     (
         (DURABLE_EXECUTION_ARN, 9),
         (INCLUDE_EXECUTION_DATA, {_sQ: _IED}),
-        (ITEM_COUNT, {_s: 0, _sQ: _MI}),
+        (ITEM_COUNT, {_sm: 0, _sQ: _MI}),
         (lambda: schemas.STRING, {_sQ: _Mar}),
         (REVERSE_ORDER, {_sQ: _RO}),
     ),
@@ -1249,39 +1318,6 @@ CHAINED_INVOKE_FAILED_DETAILS: StaticSchema = (
     ((EVENT_ERROR, 1),),
 )
 
-EVENT_INPUT: StaticSchema = (
-    18,
-    n0,
-    _EI,
-    0,
-    (_Pa, _Tru),
-    ((INPUT_PAYLOAD, 0), (TRUNCATED, 0)),
-)
-
-CHAINED_INVOKE_STARTED_DETAILS: StaticSchema = (
-    18,
-    n0,
-    _CISD,
-    0,
-    (_FN, _TI, _Inp, _EV, _DEA),
-    (
-        (lambda: schemas.NAMESPACED_FUNCTION_NAME, 1),
-        (TENANT_ID, 0),
-        (EVENT_INPUT, 0),
-        (VERSION_WITH_LATEST_PUBLISHED, 0),
-        (DURABLE_EXECUTION_ARN, 0),
-    ),
-)
-
-CHAINED_INVOKE_STOPPED_DETAILS: StaticSchema = (
-    18,
-    n0,
-    _CISDh,
-    0,
-    (_E,),
-    ((EVENT_ERROR, 1),),
-)
-
 BLOB: StaticSchema = (1, n0, _B, 4)
 
 FUNCTION_LIST: StaticSchema = (
@@ -1292,5 +1328,3 @@ FUNCTION_LIST: StaticSchema = (
     (_me,),
     ((lambda: schemas.FUNCTION_CONFIGURATION, 0),),
 )
-
-RESOURCE_POLICY: StaticSchema = (3, n0, _RP, 0)

@@ -32,6 +32,7 @@ if TYPE_CHECKING:
         DeleteAliasOutput,
         DeleteCapacityProviderOutput,
         DeleteCodeSigningConfigOutput,
+        DeleteDurableExecutionOutput,
         DeleteEventSourceMappingOutput,
         DeleteFunctionCodeSigningConfigOutput,
         DeleteFunctionConcurrencyOutput,
@@ -81,6 +82,7 @@ if TYPE_CHECKING:
         ListProvisionedConcurrencyConfigsOutput,
         ListTagsOutput,
         ListVersionsByFunctionOutput,
+        PauseDurableExecutionOutput,
         PublishLayerVersionOutput,
         PublishVersionOutput,
         PutFunctionCodeSigningConfigOutput,
@@ -93,6 +95,7 @@ if TYPE_CHECKING:
         PutRuntimeManagementConfigOutput,
         RemoveLayerVersionPermissionOutput,
         RemovePermissionOutput,
+        ResumeDurableExecutionOutput,
         SendDurableExecutionCallbackFailureOutput,
         SendDurableExecutionCallbackHeartbeatOutput,
         SendDurableExecutionCallbackSuccessOutput,
@@ -894,6 +897,56 @@ class LambdaClient(Client[LambdaConfig]):
         return self._invoke(
             self._select_input(_models.DELETE_CODE_SIGNING_CONFIG, args, kwargs),
             _models.DELETE_CODE_SIGNING_CONFIG,
+            [],
+            plugins,
+        )
+
+    @_overload
+    def delete_durable_execution(
+        self,
+        request: _models.DeleteDurableExecutionInput
+        | _models.DeleteDurableExecutionInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteDurableExecutionOutput: ...
+
+    @_overload
+    def delete_durable_execution(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteDurableExecutionInputDict],
+    ) -> DeleteDurableExecutionOutput:
+        """
+        Deletes a completed Lambda [durable
+        execution](https://docs.aws.amazon.com/lambda/latest/dg/durable-functions.html)
+        and its data. The execution must be in a terminal state (`SUCCEEDED`,
+        `FAILED`, `STOPPED`, or `TIMED_OUT`). Otherwise, this operation returns
+        a `ResourceConflictException`.
+
+        The execution has `DELETING` status until the deletion finishes. For
+        more information, see [Deleting durable
+        executions](https://docs.aws.amazon.com/lambda/latest/dg/durable-delete.html).
+
+        Args:
+            plugins:
+                A list of callables that modify the configuration dynamically.
+                Changes made by these plugins only apply for the duration of the
+                operation execution and will not affect any other operation
+                invocations.
+
+        Returns:
+            An instance of `DeleteDurableExecutionOutput`.
+        """
+
+    def delete_durable_execution(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteDurableExecutionOutput:
+        return self._invoke(
+            self._select_input(_models.DELETE_DURABLE_EXECUTION, args, kwargs),
+            _models.DELETE_DURABLE_EXECUTION,
             [],
             plugins,
         )
@@ -3167,6 +3220,59 @@ class LambdaClient(Client[LambdaConfig]):
         )
 
     @_overload
+    def pause_durable_execution(
+        self,
+        request: _models.PauseDurableExecutionInput
+        | _models.PauseDurableExecutionInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> PauseDurableExecutionOutput: ...
+
+    @_overload
+    def pause_durable_execution(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.PauseDurableExecutionInputDict],
+    ) -> PauseDurableExecutionOutput:
+        """
+        Pauses a running [durable
+        execution](https://docs.aws.amazon.com/lambda/latest/dg/durable-functions.html).
+        While an execution is paused, Lambda doesn't invoke your function, but
+        pending operations such as waits and callbacks continue to complete.
+
+        If an invocation is in progress, the execution status changes to
+        `PAUSING` until the invocation reaches its next checkpoint, and then
+        changes to `PAUSED`. This operation returns a successful response while
+        the execution status is still `RUNNING`, and the status changes when
+        Lambda processes the request. For more information about pausing
+        executions, see [Pausing and resuming durable
+        executions](https://docs.aws.amazon.com/lambda/latest/dg/durable-pause-resume.html).
+
+        Args:
+            plugins:
+                A list of callables that modify the configuration dynamically.
+                Changes made by these plugins only apply for the duration of the
+                operation execution and will not affect any other operation
+                invocations.
+
+        Returns:
+            An instance of `PauseDurableExecutionOutput`.
+        """
+
+    def pause_durable_execution(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> PauseDurableExecutionOutput:
+        return self._invoke(
+            self._select_input(_models.PAUSE_DURABLE_EXECUTION, args, kwargs),
+            _models.PAUSE_DURABLE_EXECUTION,
+            [],
+            plugins,
+        )
+
+    @_overload
     def publish_layer_version(
         self,
         request: _models.PublishLayerVersionInput
@@ -3768,6 +3874,60 @@ class LambdaClient(Client[LambdaConfig]):
         )
 
     @_overload
+    def resume_durable_execution(
+        self,
+        request: _models.ResumeDurableExecutionInput
+        | _models.ResumeDurableExecutionInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ResumeDurableExecutionOutput: ...
+
+    @_overload
+    def resume_durable_execution(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ResumeDurableExecutionInputDict],
+    ) -> ResumeDurableExecutionOutput:
+        """
+        Resumes a paused [durable
+        execution](https://docs.aws.amazon.com/lambda/latest/dg/durable-functions.html).
+        If the pause interrupted an invocation, or an operation completed while
+        the execution was paused, Lambda invokes your function. Otherwise, the
+        execution continues to wait for its pending operations.
+
+        If the execution status is `PAUSING`, this operation cancels the pause,
+        and the in-progress invocation continues. This operation returns a
+        successful response while the execution status is still `PAUSED` or
+        `PAUSING`, and the status changes to `RUNNING` when Lambda processes the
+        request. For more information about resuming executions, see [Pausing
+        and resuming durable
+        executions](https://docs.aws.amazon.com/lambda/latest/dg/durable-pause-resume.html).
+
+        Args:
+            plugins:
+                A list of callables that modify the configuration dynamically.
+                Changes made by these plugins only apply for the duration of the
+                operation execution and will not affect any other operation
+                invocations.
+
+        Returns:
+            An instance of `ResumeDurableExecutionOutput`.
+        """
+
+    def resume_durable_execution(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ResumeDurableExecutionOutput:
+        return self._invoke(
+            self._select_input(_models.RESUME_DURABLE_EXECUTION, args, kwargs),
+            _models.RESUME_DURABLE_EXECUTION,
+            [],
+            plugins,
+        )
+
+    @_overload
     def send_durable_execution_callback_failure(
         self,
         request: _models.SendDurableExecutionCallbackFailureInput
@@ -3924,7 +4084,7 @@ class LambdaClient(Client[LambdaConfig]):
         **kwargs: _Unpack[_models.StopDurableExecutionInputDict],
     ) -> StopDurableExecutionOutput:
         """
-        Stops a running [durable
+        Stops a running or paused [durable
         execution](https://docs.aws.amazon.com/lambda/latest/dg/durable-functions.html).
         The execution transitions to STOPPED status and cannot be resumed. Any
         in-progress operations are terminated.

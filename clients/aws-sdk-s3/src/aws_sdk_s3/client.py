@@ -170,10 +170,9 @@ class S3Client(Client[S3Config]):
     Amazon S3 supports the REST API.
 
     Note:
-        Support for SOAP over HTTP is deprecated, but it is still available over
-        HTTPS. However, new Amazon S3 features will not be supported for SOAP.
-        We recommend that you use either this REST API or the Amazon Web
-        Services SDKs.
+        As announced on May 5, 2025, SOAP API support is discontinued. Requests
+        that use the SOAP API return an HTTP `400 Bad Request` error. Use this
+        REST API or the Amazon Web Services SDKs instead.
     """
 
     _client_plugins = (
@@ -1198,11 +1197,21 @@ class S3Client(Client[S3Config]):
         in the *Amazon S3 User Guide*.
 
         Note:
-            After you initiate a multipart upload and upload one or more parts, to
+            - After you initiate a multipart upload and upload one or more parts, to
             stop being charged for storing the uploaded parts, you must either
             complete or abort the multipart upload. Amazon S3 frees up the space
             used to store the parts and stops charging you for storing them only
             after you either complete or abort a multipart upload.
+
+            - When you initiate a multipart upload, Amazon S3 records the bucket
+            configuration in place at that time and uses it for the rest of the
+            upload. Changes that you make to the bucket configuration after you
+            initiate the upload don't apply to that upload. To apply new bucket
+            configuration to uploads in progress, use
+            [ListMultipartUploads](https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListMultipartUploads.html)
+            to find them and
+            [AbortMultipartUpload](https://docs.aws.amazon.com/AmazonS3/latest/API/API_AbortMultipartUpload.html)
+            to stop them. Then start the uploads again.
 
         If you have configured a lifecycle rule to abort incomplete multipart
         uploads, the created multipart upload must be completed within the
@@ -2421,7 +2430,7 @@ class S3Client(Client[S3Config]):
         Warning:
             We recommend that you delete your S3 Metadata configurations by using
             the V2
-            [DeleteBucketMetadataTableConfiguration](https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketMetadataTableConfiguration.html)
+            [DeleteBucketMetadataConfiguration](https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketMetadataConfiguration.html)
             API operation. We no longer recommend using the V1
             `DeleteBucketMetadataTableConfiguration` API operation.
 
@@ -4256,8 +4265,6 @@ class S3Client(Client[S3Config]):
 
           - HTTP Status Code: 404 Not Found
 
-          - SOAP Fault Code Prefix: Client
-
         The following operations are related to
         `GetBucketLifecycleConfiguration`:
 
@@ -4539,7 +4546,7 @@ class S3Client(Client[S3Config]):
         Warning:
             We recommend that you retrieve your S3 Metadata configurations by using
             the V2
-            [GetBucketMetadataTableConfiguration](https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketMetadataTableConfiguration.html)
+            [GetBucketMetadataConfiguration](https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketMetadataConfiguration.html)
             API operation. We no longer recommend using the V1
             `GetBucketMetadataTableConfiguration` API operation.
 
@@ -11216,8 +11223,6 @@ class S3Client(Client[S3Config]):
 
               - *HTTP Status Code: 409 Conflict*
 
-              - *SOAP Fault Code Prefix: Client*
-
             - - *Code: GlacierExpeditedRetrievalNotAvailable*
 
               - *Cause: expedited retrievals are currently not available. Try
@@ -11227,8 +11232,6 @@ class S3Client(Client[S3Config]):
                 retrievals.)*
 
               - *HTTP Status Code: 503*
-
-              - *SOAP Fault Code Prefix: N/A*
 
         The following operations are related to `RestoreObject`:
 
@@ -11880,8 +11883,6 @@ class S3Client(Client[S3Config]):
                 been aborted or completed.
 
               - HTTP Status Code: 404 Not Found
-
-              - SOAP Fault Code Prefix: Client
 
         HTTP Host header syntax
 

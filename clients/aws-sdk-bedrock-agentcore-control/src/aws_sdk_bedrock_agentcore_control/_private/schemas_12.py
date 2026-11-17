@@ -32,14 +32,17 @@ _UF = "UPDATE_FAILED"
 _DF = "DELETE_FAILED"
 _smithy = "smithy.api#output"
 _st = "status"
+_uA = "updatedAt"
 _smithya = "smithy.api#http"
 _t = "tags"
 _READY = "READY"
 _cA = "createdAt"
 _sQ = "smithy.api#httpQuery"
 _lUA = "lastUpdatedAt"
+_fR = "failureReason"
 _mR = "maxResults"
 _nT = "nextToken"
+_kKA = "kmsKeyArn"
 _rA = "roleArn"
 _aCu = "authorizerConfiguration"
 _wID = "workloadIdentityDetails"
@@ -53,13 +56,29 @@ _cTr = "createdTime"
 _lUT = "lastUpdatedTime"
 _cP = "credentialProviders"
 _ty = "type"
-_kKA = "kmsKeyArn"
+_ev = "evaluators"
 _CJ = "CUSTOM_JWT"
 _AI = "AWS_IAM"
 _aT = "authorizerType"
-_AK = "API_KEY"
 _aU = "authorizationUrl"
 _cPVr = "credentialProviderVendor"
+_oECN = "onlineEvaluationConfigName"
+_rul = "rule"
+_dSC = "dataSourceConfig"
+_insi = "insights"
+_cCl = "clusteringConfig"
+_oC = "outputConfig"
+_eERA = "evaluationExecutionRoleArn"
+_oECA = "onlineEvaluationConfigArn"
+_oECI = "onlineEvaluationConfigId"
+_eSx = "executionStatus"
+_OECSn = "OnlineEvaluationConfigSummary"
+_OECSL = "OnlineEvaluationConfigSummaryList"
+_UOECI = "UpdateOnlineEvaluationConfigInput"
+_cUOECR = "com.amazonaws.bedrockagentcorecontrol#UpdateOnlineEvaluationConfigRequest"
+_UOECO = "UpdateOnlineEvaluationConfigOutput"
+_cUOECRo = "com.amazonaws.bedrockagentcorecontrol#UpdateOnlineEvaluationConfigResponse"
+_UOEC = "UpdateOnlineEvaluationConfig"
 _PCPVT = "PaymentCredentialProviderVendorType"
 _CCDP = "CoinbaseCDP"
 _SPt = "StripePrivy"
@@ -211,18 +230,103 @@ _cUA = "credentialsUpdatedAt"
 _GPCe = "GetPaymentConnector"
 _LPCI = "ListPaymentConnectorsInput"
 _cLPCR = "com.amazonaws.bedrockagentcorecontrol#ListPaymentConnectorsRequest"
-_PCSa = "PaymentConnectorSummary"
-_PCSay = "PaymentConnectorSummaries"
 _LPCO = "ListPaymentConnectorsOutput"
 _cLPCRo = "com.amazonaws.bedrockagentcorecontrol#ListPaymentConnectorsResponse"
 _pCa = "paymentConnectors"
 _LPC = "ListPaymentConnectors"
-_CCS = "CoinbaseCdpSecret"
-_WS = "WALLET_SECRET"
-_CCSo = "CoinbaseCdpSecrets"
-_CCRT = "CoinbaseCdpRotationTargets"
-_secr = "secrets"
-_CRCr = "CredentialRotationConfig"
+
+ONLINE_EVALUATION_CONFIG_SUMMARY: StaticSchema = (
+    18,
+    n0,
+    _OECSn,
+    0,
+    (_oECA, _oECI, _oECN, _d, _st, _eSx, _cA, _uA, _fR, _insi, _cCl),
+    (
+        (lambda: schemas.ONLINE_EVALUATION_CONFIG_ARN, 1),
+        (lambda: schemas.ONLINE_EVALUATION_CONFIG_ID, 1),
+        (lambda: schemas.EVALUATION_CONFIG_NAME, 1),
+        (lambda: schemas.EVALUATION_CONFIG_DESCRIPTION, 0),
+        (lambda: schemas.ONLINE_EVALUATION_CONFIG_STATUS, 1),
+        (lambda: schemas.ONLINE_EVALUATION_EXECUTION_STATUS, 1),
+        (4, 1),
+        (4, 1),
+        (3, 0),
+        (lambda: schemas.INSIGHT_LIST, 0),
+        (lambda: schemas.CLUSTERING_CONFIG, 0),
+    ),
+)
+
+ONLINE_EVALUATION_CONFIG_SUMMARY_LIST: StaticSchema = (
+    16,
+    n0,
+    _OECSL,
+    0,
+    (_mem,),
+    ((ONLINE_EVALUATION_CONFIG_SUMMARY, 0),),
+)
+
+UPDATE_ONLINE_EVALUATION_CONFIG_INPUT: StaticSchema = (
+    18,
+    n0,
+    _UOECI,
+    {_sSI: _cUOECR, _smith: None},
+    (_cT, _oECI, _d, _rul, _dSC, _ev, _insi, _cCl, _oC, _eERA, _eSx),
+    (
+        (lambda: schemas.CLIENT_TOKEN, 2),
+        (lambda: schemas.ONLINE_EVALUATION_CONFIG_ID, 9),
+        (lambda: schemas.EVALUATION_CONFIG_DESCRIPTION, 0),
+        (lambda: schemas.RULE, 0),
+        (lambda: schemas.DATA_SOURCE_CONFIG, 0),
+        (lambda: schemas.EVALUATOR_LIST, 0),
+        (lambda: schemas.INSIGHT_LIST, 0),
+        (lambda: schemas.CLUSTERING_CONFIG, 0),
+        (lambda: schemas.OUTPUT_CONFIG, 0),
+        (lambda: schemas.ROLE_ARN, 0),
+        (lambda: schemas.ONLINE_EVALUATION_EXECUTION_STATUS, 0),
+    ),
+)
+
+UPDATE_ONLINE_EVALUATION_CONFIG_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _UOECO,
+    {_sSI: _cUOECRo, _smithy: None},
+    (_oECA, _oECI, _uA, _st, _eSx, _fR),
+    (
+        (lambda: schemas.ONLINE_EVALUATION_CONFIG_ARN, 1),
+        (lambda: schemas.ONLINE_EVALUATION_CONFIG_ID, 1),
+        (4, 1),
+        (lambda: schemas.ONLINE_EVALUATION_CONFIG_STATUS, 1),
+        (lambda: schemas.ONLINE_EVALUATION_EXECUTION_STATUS, 1),
+        (3, 0),
+    ),
+)
+
+UPDATE_ONLINE_EVALUATION_CONFIG: StaticOperationSchema = (
+    23,
+    n0,
+    _UOEC,
+    {
+        _smithya: MappingProxyType(
+            {
+                "method": "PUT",
+                "uri": "/online-evaluation-configs/{onlineEvaluationConfigId}",
+                "code": 202,
+            }
+        )
+    },
+    UPDATE_ONLINE_EVALUATION_CONFIG_INPUT,
+    UPDATE_ONLINE_EVALUATION_CONFIG_OUTPUT,
+    (
+        lambda: schemas.ACCESS_DENIED_EXCEPTION,
+        lambda: schemas.CONFLICT_EXCEPTION,
+        lambda: schemas.INTERNAL_SERVER_EXCEPTION,
+        lambda: schemas.RESOURCE_NOT_FOUND_EXCEPTION,
+        lambda: schemas.SERVICE_QUOTA_EXCEEDED_EXCEPTION,
+        lambda: schemas.THROTTLING_EXCEPTION,
+        lambda: schemas.VALIDATION_EXCEPTION,
+    ),
+)
 
 PAYMENT_CREDENTIAL_PROVIDER_VENDOR_TYPE: StaticSchema = (
     14,
@@ -1143,7 +1247,7 @@ LIST_PAYMENT_CONNECTORS_OUTPUT: StaticSchema = (
     _LPCO,
     {_sSI: _cLPCRo, _smithy: None},
     (_pCa, _nT),
-    ((lambda: PAYMENT_CONNECTOR_SUMMARIES, 1), (lambda: schemas.NEXT_TOKEN, 0)),
+    ((lambda: schemas.PAYMENT_CONNECTOR_SUMMARIES, 1), (lambda: schemas.NEXT_TOKEN, 0)),
 )
 
 LIST_PAYMENT_CONNECTORS: StaticOperationSchema = (
@@ -1167,65 +1271,4 @@ LIST_PAYMENT_CONNECTORS: StaticOperationSchema = (
         lambda: schemas.THROTTLING_EXCEPTION,
         lambda: schemas.VALIDATION_EXCEPTION,
     ),
-)
-
-PAYMENT_CONNECTOR_SUMMARY: StaticSchema = (
-    18,
-    n0,
-    _PCSa,
-    0,
-    (_pCIa, _n, _ty, _pMr, _st, _lUA),
-    (
-        (PAYMENT_CONNECTOR_ID, 1),
-        (PAYMENT_CONNECTOR_NAME, 1),
-        (PAYMENT_CONNECTOR_TYPE, 1),
-        (PAYMENT_CONNECTOR_PROVISION_MODE, 0),
-        (PAYMENT_CONNECTOR_STATUS, 1),
-        (lambda: schemas.DATE_TIMESTAMP, 1),
-    ),
-)
-
-PAYMENT_CONNECTOR_SUMMARIES: StaticSchema = (
-    16,
-    n0,
-    _PCSay,
-    0,
-    (_mem,),
-    ((PAYMENT_CONNECTOR_SUMMARY, 0),),
-)
-
-COINBASE_CDP_SECRET: StaticSchema = (
-    14,
-    n0,
-    _CCS,
-    0,
-    (_AK, _WS),
-    ((-1, {_sVm: _AK}), (-1, {_sVm: _WS})),
-)
-
-COINBASE_CDP_SECRETS: StaticSchema = (
-    16,
-    n0,
-    _CCSo,
-    0,
-    (_mem,),
-    ((COINBASE_CDP_SECRET, 0),),
-)
-
-COINBASE_CDP_ROTATION_TARGETS: StaticSchema = (
-    18,
-    n0,
-    _CCRT,
-    0,
-    (_secr,),
-    ((COINBASE_CDP_SECRETS, 1),),
-)
-
-CREDENTIAL_ROTATION_CONFIG: StaticSchema = (
-    19,
-    n0,
-    _CRCr,
-    0,
-    (_cCDP,),
-    ((COINBASE_CDP_ROTATION_TARGETS, 0),),
 )

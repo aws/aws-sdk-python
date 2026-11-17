@@ -18,42 +18,44 @@ _sO = "smithy.api#clientOptional"
 _smi = "smithy.api#required"
 _DR = "DryRun"
 _p = "pending"
-_ac = "accepted"
 _smit = "smithy.api#output"
 _CRI = "CapacityReservationId"
 _IC = "InstanceCount"
-_re = "rejected"
+_OI = "OfferingId"
+_av = "available"
 _St = "State"
 _st = "state"
 _fa = "failed"
-_Sta = "Status"
-_sta = "status"
+_Me = "Message"
+_mes = "message"
 _TSag = "TagSet"
 _tS = "tagSet"
 _dRr = "dryRun"
+_PENDING = "PENDING"
 _act = "active"
 _ex = "expired"
+_N = "Name"
+_nam = "name"
 _AZ = "AvailabilityZone"
 _aZ = "availabilityZone"
 _AZI = "AvailabilityZoneId"
 _aZI = "availabilityZoneId"
-_II = "InstanceId"
-_CGI = "CarrierGatewayId"
+_AZv = "AvailabilityZones"
+_De = "Destination"
+_des = "destination"
+_Sou = "Source"
+_so = "source"
 _IT = "InstanceType"
 _iT = "instanceType"
 _Ro = "Role"
-_SMt = "StatusMessage"
-_sMt = "statusMessage"
-_ASll = "AllocationStrategy"
+_RNe = "RegionName"
+_NBG = "NetworkBorderGroup"
+_nBG = "networkBorderGroup"
 _FAILED = "FAILED"
-_IIn = "InstanceIds"
-_URBOI = "UnusedReservationBillingOwnerId"
+_ASCI = "ApplicationStatusCheckId"
 _GN = "GroupName"
 _gN = "groupName"
-_CRCQI = "CapacityReservationCancellationQuoteId"
-_CRFI = "CapacityReservationFleetId"
-_CRFIa = "CapacityReservationFleetIds"
-_cRFI = "capacityReservationFleetId"
+_BIu = "BundleId"
 _can = "cancelled"
 _iC = "instanceCount"
 _CC = "CurrencyCode"
@@ -68,7 +70,6 @@ _SBN = "S3BucketName"
 _SBP = "S3BucketPrefix"
 _CMDEI = "CapacityManagerDataExportId"
 _cMDEI = "capacityManagerDataExportId"
-_IMC = "InstanceMatchCriteria"
 _Ten = "Tenancy"
 _ED = "EndDate"
 _SDt = "StartDate"
@@ -83,24 +84,12 @@ _pf_____ = "payment-failed"
 _unav = "unavailable"
 _cRI = "capacityReservationId"
 _ten = "tenancy"
-_iMC = "instanceMatchCriteria"
-_uRBOI = "unusedReservationBillingOwnerId"
 _cBI = "capacityBlockId"
-_CRMQI = "CapacityReservationModificationQuoteId"
-_ITS = "InstanceTypeSpecifications"
-_IRn = "InstanceRequirements"
-_TTC = "TotalTargetCapacity"
-_tTC = "totalTargetCapacity"
-_TFC = "TotalFulfilledCapacity"
-_tFC = "totalFulfilledCapacity"
-_aSl = "allocationStrategy"
 _ip_____ = "in-progress"
 _CRIS = "CapacityReservationIdSet"
 _CRIa = "CapacityReservationIds"
-_iRn = "instanceRequirements"
-_Ins = "Instances"
-_PENDING = "PENDING"
-_revo = "revoked"
+_rNe = "regionName"
+_Metr = "Metric"
 _Fi = "Filter"
 _Fil = "Filters"
 _NTex = "NextToken"
@@ -109,10 +98,134 @@ _nT = "nextToken"
 _id_ = "insufficient-data"
 _ok = "ok"
 _imp = "impaired"
+_ASCIp = "ApplicationStatusCheckIds"
+_DASCMR = "DescribeApplicationStatusChecksMaxResults"
+_DASCIe = "DescribeApplicationStatusChecksInput"
+_cDASCRom = "com.amazonaws.ec2#DescribeApplicationStatusChecksRequest"
+_IAnc = "IncludeAll"
+_ASCRS = "ApplicationStatusCheckResponseSet"
+_DASCOe = "DescribeApplicationStatusChecksOutput"
+_cDASCRoma = "com.amazonaws.ec2#DescribeApplicationStatusChecksResult"
+_ASCpp = "ApplicationStatusChecks"
+_ASCS = "ApplicationStatusCheckSet"
+_aSCS = "applicationStatusCheckSet"
+_DASCe = "DescribeApplicationStatusChecks"
+_ZISL = "ZoneIdStringList"
+_ZI = "ZoneId"
+_ZNSL = "ZoneNameStringList"
+_ZN = "ZoneName"
+_DAZIe = "DescribeAvailabilityZonesInput"
+_cDAZR = "com.amazonaws.ec2#DescribeAvailabilityZonesRequest"
+_ZNo = "ZoneNames"
+_ZIo = "ZoneIds"
 _AAZ = "AllAvailabilityZones"
+_AZG = "AvailabilityZoneGeography"
+_AZGL = "AvailabilityZoneGeographyList"
+_AZM = "AvailabilityZoneMessage"
+_AZML = "AvailabilityZoneMessageList"
+_AZOIS = "AvailabilityZoneOptInStatus"
+_oinr = "opt_in_not_required"
+_oinr_ = "opt-in-not-required"
+_oi_ = "opted_in"
+_oi__ = "opted-in"
+_noi = "not_opted_in"
+_noi_ = "not-opted-in"
+_AZSv = "AvailabilityZoneState"
+_infor = "information"
+_cons = "constrained"
+_AZSG = "AvailabilityZoneSubGeography"
+_AZSGL = "AvailabilityZoneSubGeographyList"
+_OIS = "OptInStatus"
+_oIS = "optInStatus"
+_Mes = "Messages"
+_MSes = "MessageSet"
+_mSe = "messageSet"
+_zN = "zoneName"
+_zI = "zoneId"
 _ZT = "ZoneType"
 _zT = "zoneType"
+_PZN = "ParentZoneName"
+_pZN = "parentZoneName"
+_PZI = "ParentZoneId"
+_pZI = "parentZoneId"
+_GLN = "GroupLongName"
+_gLN = "groupLongName"
+_Ge = "Geography"
+_GSe = "GeographySet"
+_gSe = "geographySet"
+_SGu = "SubGeography"
+_SGSu = "SubGeographySet"
+_sGSu = "subGeographySet"
+_ZS = "ZoneState"
+_zS = "zoneState"
+_AZL = "AvailabilityZoneList"
+_DAZO = "DescribeAvailabilityZonesOutput"
+_cDAZRo = "com.amazonaws.ec2#DescribeAvailabilityZonesResult"
+_AZIva = "AvailabilityZoneInfo"
+_aZIv = "availabilityZoneInfo"
+_DAZe = "DescribeAvailabilityZones"
+_MRP = "MaxResultsParam"
+_DANPMSI = "DescribeAwsNetworkPerformanceMetricSubscriptionsInput"
+_cDANPMSR = "com.amazonaws.ec2#DescribeAwsNetworkPerformanceMetricSubscriptionsRequest"
+_MTe = "MetricType"
+_al__ = "aggregate_latency"
+_al___ = "aggregate-latency"
+_PTer = "PeriodType"
+_fm = "five_minutes"
+_fm_ = "five-minutes"
+_fm__ = "fifteen_minutes"
+_fm___ = "fifteen-minutes"
+_oh = "one_hour"
+_oh_ = "one-hour"
+_th_ = "three_hours"
+_th__ = "three-hours"
+_od__ = "one_day"
+_od___ = "one-day"
+_ow_ = "one_week"
+_ow__ = "one-week"
+_STta = "StatisticType"
+_p_____________ = "p50"
+_Subs = "Subscription"
+_met = "metric"
+_Stati = "Statistic"
+_stati = "statistic"
+_Per = "Period"
+_peri = "period"
+_SLu = "SubscriptionList"
+_DANPMSO = "DescribeAwsNetworkPerformanceMetricSubscriptionsOutput"
+_cDANPMSRo = "com.amazonaws.ec2#DescribeAwsNetworkPerformanceMetricSubscriptionsResult"
+_Subsc = "Subscriptions"
+_SSub = "SubscriptionSet"
+_sSu = "subscriptionSet"
+_DANPMS = "DescribeAwsNetworkPerformanceMetricSubscriptions"
+_BISL = "BundleIdStringList"
+_DBTI = "DescribeBundleTasksInput"
+_cDBTR = "com.amazonaws.ec2#DescribeBundleTasksRequest"
+_BIund = "BundleIds"
+_BTL = "BundleTaskList"
+_DBTO = "DescribeBundleTasksOutput"
+_cDBTRo = "com.amazonaws.ec2#DescribeBundleTasksResult"
+_BTu = "BundleTasks"
+_BITS = "BundleInstanceTasksSet"
+_bITS = "bundleInstanceTasksSet"
+_DBT = "DescribeBundleTasks"
+_DBCMR = "DescribeByoipCidrsMaxResults"
+_DBCIe = "DescribeByoipCidrsInput"
+_cDBCRom = "com.amazonaws.ec2#DescribeByoipCidrsRequest"
+_BCSy = "ByoipCidrSet"
+_DBCOe = "DescribeByoipCidrsOutput"
+_cDBCRoma = "com.amazonaws.ec2#DescribeByoipCidrsResult"
+_BCy = "ByoipCidrs"
+_bCS = "byoipCidrSet"
+_DBCe = "DescribeByoipCidrs"
+_DFCMR = "DescribeFutureCapacityMaxResults"
+_DCBEHI = "DescribeCapacityBlockExtensionHistoryInput"
+_cDCBEHR = "com.amazonaws.ec2#DescribeCapacityBlockExtensionHistoryRequest"
 _CBES = "CapacityBlockExtensionStatus"
+_PP = "PAYMENT_PENDING"
+_PF___ = "PAYMENT_FAILED"
+_PS_ = "PAYMENT_SUCCEEDED"
+_ps = "payment-succeeded"
 _CBE = "CapacityBlockExtension"
 _CBEOI = "CapacityBlockExtensionOfferingId"
 _cBEOI = "capacityBlockExtensionOfferingId"
@@ -128,6 +241,11 @@ _cBEED = "capacityBlockExtensionEndDate"
 _UF = "UpfrontFee"
 _uF = "upfrontFee"
 _CBESa = "CapacityBlockExtensionSet"
+_DCBEHO = "DescribeCapacityBlockExtensionHistoryOutput"
+_cDCBEHRo = "com.amazonaws.ec2#DescribeCapacityBlockExtensionHistoryResult"
+_CBEa = "CapacityBlockExtensions"
+_cBESa = "capacityBlockExtensionSet"
+_DCBEH = "DescribeCapacityBlockExtensionHistory"
 _DCBEOMR = "DescribeCapacityBlockExtensionOfferingsMaxResults"
 _DCBEOI = "DescribeCapacityBlockExtensionOfferingsInput"
 _cDCBEOR = "com.amazonaws.ec2#DescribeCapacityBlockExtensionOfferingsRequest"
@@ -138,6 +256,8 @@ _cDCBEORo = "com.amazonaws.ec2#DescribeCapacityBlockExtensionOfferingsResult"
 _CBEOa = "CapacityBlockExtensionOfferings"
 _cBEOS = "capacityBlockExtensionOfferingSet"
 _DCBEO = "DescribeCapacityBlockExtensionOfferings"
+_CBITP = "CapacityBlockInstanceTypePreference"
+_CBITPS = "CapacityBlockInstanceTypePreferenceSet"
 _DCBOMR = "DescribeCapacityBlockOfferingsMaxResults"
 _DCBOI = "DescribeCapacityBlockOfferingsInput"
 _cDCBOR = "com.amazonaws.ec2#DescribeCapacityBlockOfferingsRequest"
@@ -146,16 +266,22 @@ _EDR = "EndDateRange"
 _CDH = "CapacityDurationHours"
 _UTl = "UltraserverType"
 _UC = "UltraserverCount"
+_ITP = "InstanceTypePreferences"
+_ITPn = "InstanceTypePreference"
+_CBOS = "CapacityBlockOfferingSegment"
+_CBDH = "CapacityBlockDurationHours"
+_cBDH = "capacityBlockDurationHours"
+_CBDM = "CapacityBlockDurationMinutes"
+_cBDM = "capacityBlockDurationMinutes"
+_CBOSS = "CapacityBlockOfferingSegmentSet"
 _CBO = "CapacityBlockOffering"
 _CBOI = "CapacityBlockOfferingId"
 _cBOI = "capacityBlockOfferingId"
-_CBDH = "CapacityBlockDurationHours"
-_cBDH = "capacityBlockDurationHours"
 _uTl = "ultraserverType"
 _uC = "ultraserverCount"
-_CBDM = "CapacityBlockDurationMinutes"
-_cBDM = "capacityBlockDurationMinutes"
-_CBOS = "CapacityBlockOfferingSet"
+_CBOSa = "CapacityBlockOfferingSegments"
+_cBOSS = "capacityBlockOfferingSegmentSet"
+_CBOSap = "CapacityBlockOfferingSet"
 _DCBOO = "DescribeCapacityBlockOfferingsOutput"
 _cDCBORo = "com.amazonaws.ec2#DescribeCapacityBlockOfferingsResult"
 _CBOa = "CapacityBlockOfferings"
@@ -236,97 +362,459 @@ _urbo_ = "unused-reservation-billing-owner"
 _DCRBRI = "DescribeCapacityReservationBillingRequestsInput"
 _cDCRBRR = "com.amazonaws.ec2#DescribeCapacityReservationBillingRequestsRequest"
 _CRIap = "CapacityReservationInfo"
-_CRBRS = "CapacityReservationBillingRequestStatus"
-_CRBR = "CapacityReservationBillingRequest"
-_RB = "RequestedBy"
-_rBe = "requestedBy"
-_LUTas = "LastUpdateTime"
-_lUTas = "lastUpdateTime"
-_cRIa = "capacityReservationInfo"
 _CRBRSa = "CapacityReservationBillingRequestSet"
 _DCRBRO = "DescribeCapacityReservationBillingRequestsOutput"
 _cDCRBRRo = "com.amazonaws.ec2#DescribeCapacityReservationBillingRequestsResult"
 _CRBRa = "CapacityReservationBillingRequests"
 _cRBRS = "capacityReservationBillingRequestSet"
 _DCRBR = "DescribeCapacityReservationBillingRequests"
-_CRCQIS = "CapacityReservationCancellationQuoteIdSet"
-_DCRCQRMR = "DescribeCapacityReservationCancellationQuotesRequestMaxResults"
-_DCRCQI = "DescribeCapacityReservationCancellationQuotesInput"
-_cDCRCQR = "com.amazonaws.ec2#DescribeCapacityReservationCancellationQuotesRequest"
-_CRCQIa = "CapacityReservationCancellationQuoteIds"
-_CRCQRS = "CapacityReservationCancellationQuoteResponseSet"
-_DCRCQO = "DescribeCapacityReservationCancellationQuotesOutput"
-_cDCRCQRo = "com.amazonaws.ec2#DescribeCapacityReservationCancellationQuotesResult"
-_CRCQa = "CapacityReservationCancellationQuotes"
-_CRCQSa = "CapacityReservationCancellationQuoteSet"
-_cRCQS = "capacityReservationCancellationQuoteSet"
-_DCRCQ = "DescribeCapacityReservationCancellationQuotes"
-_CRMQIS = "CapacityReservationModificationQuoteIdSet"
-_DCRDCQRMR = "DescribeCapacityReservationDateChangeQuotesRequestMaxResults"
-_DCRDCQI = "DescribeCapacityReservationDateChangeQuotesInput"
-_cDCRDCQR = "com.amazonaws.ec2#DescribeCapacityReservationDateChangeQuotesRequest"
-_CRMQIa = "CapacityReservationModificationQuoteIds"
-_CRMQRS = "CapacityReservationModificationQuoteResponseSet"
-_DCRDCQO = "DescribeCapacityReservationDateChangeQuotesOutput"
-_cDCRDCQRo = "com.amazonaws.ec2#DescribeCapacityReservationDateChangeQuotesResult"
-_CRMQa = "CapacityReservationModificationQuotes"
-_CRMQSa = "CapacityReservationModificationQuoteSet"
-_cRMQS = "capacityReservationModificationQuoteSet"
-_DCRDCQ = "DescribeCapacityReservationDateChangeQuotes"
-_DCRFMR = "DescribeCapacityReservationFleetsMaxResults"
-_DCRFI = "DescribeCapacityReservationFleetsInput"
-_cDCRFR = "com.amazonaws.ec2#DescribeCapacityReservationFleetsRequest"
-_CRF = "CapacityReservationFleet"
-_CRFA = "CapacityReservationFleetArn"
-_cRFA = "capacityReservationFleetArn"
-_ITSS = "InstanceTypeSpecificationSet"
-_iTSS = "instanceTypeSpecificationSet"
-_CRFSa = "CapacityReservationFleetSet"
-_DCRFO = "DescribeCapacityReservationFleetsOutput"
-_cDCRFRo = "com.amazonaws.ec2#DescribeCapacityReservationFleetsResult"
-_CRFa = "CapacityReservationFleets"
-_cRFS = "capacityReservationFleetSet"
-_DCRF = "DescribeCapacityReservationFleets"
-_DCRMR = "DescribeCapacityReservationsMaxResults"
-_DCRI = "DescribeCapacityReservationsInput"
-_cDCRR = "com.amazonaws.ec2#DescribeCapacityReservationsRequest"
-_CRSapac = "CapacityReservationSet"
-_DCRO = "DescribeCapacityReservationsOutput"
-_cDCRRo = "com.amazonaws.ec2#DescribeCapacityReservationsResult"
-_CRapac = "CapacityReservations"
-_cRSa = "capacityReservationSet"
-_DCRe = "DescribeCapacityReservations"
-_DCRTMR = "DescribeCapacityReservationTopologyMaxResults"
-_DCRTI = "DescribeCapacityReservationTopologyInput"
-_cDCRTR = "com.amazonaws.ec2#DescribeCapacityReservationTopologyRequest"
-_NNS = "NetworkNodeSet"
-_CRTapa = "CapacityReservationTopology"
-_NN = "NetworkNodes"
-_nNS = "networkNodeSet"
-_CRTS = "CapacityReservationTopologySet"
-_DCRTO = "DescribeCapacityReservationTopologyOutput"
-_cDCRTRo = "com.amazonaws.ec2#DescribeCapacityReservationTopologyResult"
-_DCRT = "DescribeCapacityReservationTopology"
-_CGIS = "CarrierGatewayIdSet"
-_CGMR = "CarrierGatewayMaxResults"
-_DCGIes = "DescribeCarrierGatewaysInput"
-_cDCGRoma = "com.amazonaws.ec2#DescribeCarrierGatewaysRequest"
-_CGIa = "CarrierGatewayIds"
-_CGSa = "CarrierGatewaySet"
-_DCGOes = "DescribeCarrierGatewaysOutput"
-_cDCGRomam = "com.amazonaws.ec2#DescribeCarrierGatewaysResult"
-_CGar = "CarrierGateways"
-_cGS = "carrierGatewaySet"
-_DCGes = "DescribeCarrierGateways"
-_DCLIMR = "DescribeClassicLinkInstancesMaxResults"
-_DCLII = "DescribeClassicLinkInstancesInput"
-_cDCLIR = "com.amazonaws.ec2#DescribeClassicLinkInstancesRequest"
-_mR = "maxResults"
-_DCLIO = "DescribeClassicLinkInstancesOutput"
-_cDCLIRo = "com.amazonaws.ec2#DescribeClassicLinkInstancesResult"
-_ISnst = "InstancesSet"
-_iSns = "instancesSet"
-_DCLI = "DescribeClassicLinkInstances"
+
+DESCRIBE_APPLICATION_STATUS_CHECKS_MAX_RESULTS: StaticSchema = (7, n0, _DASCMR, 0)
+
+DESCRIBE_APPLICATION_STATUS_CHECKS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DASCIe,
+    {_sSI: _cDASCRom, _sm: None},
+    (_ASCIp, _Fil, _MR, _NTex, _IAnc, _DR),
+    (
+        (lambda: schemas.APPLICATION_STATUS_CHECK_ID_LIST, {_sN: _ASCI}),
+        (lambda: schemas.FILTER_LIST, {_sN: _Fi}),
+        (DESCRIBE_APPLICATION_STATUS_CHECKS_MAX_RESULTS, 0),
+        (lambda: schemas.STRING, 0),
+        (lambda: schemas.BOOLEAN, 0),
+        (lambda: schemas.BOOLEAN, 0),
+    ),
+)
+
+DESCRIBE_APPLICATION_STATUS_CHECKS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DASCOe,
+    {_sSI: _cDASCRoma, _smit: None},
+    (_ASCpp, _NTex),
+    (
+        (lambda: APPLICATION_STATUS_CHECK_RESPONSE_SET, {_aQN: _ASCS, _sN: _aSCS}),
+        (lambda: schemas.STRING, {_aQN: _NTex, _sN: _nT}),
+    ),
+)
+
+DESCRIBE_APPLICATION_STATUS_CHECKS: StaticOperationSchema = (
+    23,
+    n0,
+    _DASCe,
+    0,
+    DESCRIBE_APPLICATION_STATUS_CHECKS_INPUT,
+    DESCRIBE_APPLICATION_STATUS_CHECKS_OUTPUT,
+    (),
+)
+
+APPLICATION_STATUS_CHECK_RESPONSE_SET: StaticSchema = (
+    16,
+    n0,
+    _ASCRS,
+    0,
+    (_me,),
+    ((lambda: schemas.APPLICATION_STATUS_CHECK_RESPONSE_OBJECT, {_sN: _i}),),
+)
+
+ZONE_ID_STRING_LIST: StaticSchema = (
+    16,
+    n0,
+    _ZISL,
+    0,
+    (_me,),
+    ((lambda: schemas.STRING, {_sN: _ZI}),),
+)
+
+ZONE_NAME_STRING_LIST: StaticSchema = (
+    16,
+    n0,
+    _ZNSL,
+    0,
+    (_me,),
+    ((lambda: schemas.STRING, {_sN: _ZN}),),
+)
+
+DESCRIBE_AVAILABILITY_ZONES_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DAZIe,
+    {_sSI: _cDAZR, _sm: None},
+    (_ZNo, _ZIo, _AAZ, _DR, _Fil),
+    (
+        (ZONE_NAME_STRING_LIST, {_sN: _ZN}),
+        (ZONE_ID_STRING_LIST, {_sN: _ZI}),
+        (lambda: schemas.BOOLEAN, 0),
+        (lambda: schemas.BOOLEAN, {_aQN: _DR, _sN: _dRr}),
+        (lambda: schemas.FILTER_LIST, {_sN: _Fi}),
+    ),
+)
+
+DESCRIBE_AVAILABILITY_ZONES_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DAZO,
+    {_sSI: _cDAZRo, _smit: None},
+    (_AZv,),
+    ((lambda: AVAILABILITY_ZONE_LIST, {_aQN: _AZIva, _sN: _aZIv}),),
+)
+
+DESCRIBE_AVAILABILITY_ZONES: StaticOperationSchema = (
+    23,
+    n0,
+    _DAZe,
+    0,
+    DESCRIBE_AVAILABILITY_ZONES_INPUT,
+    DESCRIBE_AVAILABILITY_ZONES_OUTPUT,
+    (),
+)
+
+AVAILABILITY_ZONE_GEOGRAPHY: StaticSchema = (
+    18,
+    n0,
+    _AZG,
+    0,
+    (_N,),
+    ((lambda: schemas.STRING, {_aQN: _N, _sN: _nam}),),
+)
+
+AVAILABILITY_ZONE_GEOGRAPHY_LIST: StaticSchema = (
+    16,
+    n0,
+    _AZGL,
+    0,
+    (_me,),
+    ((AVAILABILITY_ZONE_GEOGRAPHY, {_sN: _i}),),
+)
+
+AVAILABILITY_ZONE_MESSAGE: StaticSchema = (
+    18,
+    n0,
+    _AZM,
+    0,
+    (_Me,),
+    ((lambda: schemas.STRING, {_aQN: _Me, _sN: _mes}),),
+)
+
+AVAILABILITY_ZONE_MESSAGE_LIST: StaticSchema = (
+    16,
+    n0,
+    _AZML,
+    0,
+    (_me,),
+    ((AVAILABILITY_ZONE_MESSAGE, {_sN: _i}),),
+)
+
+AVAILABILITY_ZONE_OPT_IN_STATUS: StaticSchema = (
+    14,
+    n0,
+    _AZOIS,
+    0,
+    (_oinr, _oi_, _noi),
+    ((-1, {_sV: _oinr_}), (-1, {_sV: _oi__}), (-1, {_sV: _noi_})),
+)
+
+AVAILABILITY_ZONE_STATE: StaticSchema = (
+    14,
+    n0,
+    _AZSv,
+    0,
+    (_av, _infor, _imp, _unav, _cons),
+    (
+        (-1, {_sV: _av}),
+        (-1, {_sV: _infor}),
+        (-1, {_sV: _imp}),
+        (-1, {_sV: _unav}),
+        (-1, {_sV: _cons}),
+    ),
+)
+
+AVAILABILITY_ZONE_SUB_GEOGRAPHY: StaticSchema = (
+    18,
+    n0,
+    _AZSG,
+    0,
+    (_N,),
+    ((lambda: schemas.STRING, {_aQN: _N, _sN: _nam}),),
+)
+
+AVAILABILITY_ZONE_SUB_GEOGRAPHY_LIST: StaticSchema = (
+    16,
+    n0,
+    _AZSGL,
+    0,
+    (_me,),
+    ((AVAILABILITY_ZONE_SUB_GEOGRAPHY, {_sN: _i}),),
+)
+
+AVAILABILITY_ZONE: StaticSchema = (
+    18,
+    n0,
+    _AZ,
+    0,
+    (_OIS, _Mes, _RNe, _ZN, _ZI, _GN, _NBG, _ZT, _PZN, _PZI, _GLN, _Ge, _SGu, _St),
+    (
+        (AVAILABILITY_ZONE_OPT_IN_STATUS, {_aQN: _OIS, _sN: _oIS}),
+        (AVAILABILITY_ZONE_MESSAGE_LIST, {_aQN: _MSes, _sN: _mSe}),
+        (lambda: schemas.STRING, {_aQN: _RNe, _sN: _rNe}),
+        (lambda: schemas.STRING, {_aQN: _ZN, _sN: _zN}),
+        (lambda: schemas.STRING, {_aQN: _ZI, _sN: _zI}),
+        (lambda: schemas.STRING, {_aQN: _GN, _sN: _gN}),
+        (lambda: schemas.STRING, {_aQN: _NBG, _sN: _nBG}),
+        (lambda: schemas.STRING, {_aQN: _ZT, _sN: _zT}),
+        (lambda: schemas.STRING, {_aQN: _PZN, _sN: _pZN}),
+        (lambda: schemas.STRING, {_aQN: _PZI, _sN: _pZI}),
+        (lambda: schemas.STRING, {_aQN: _GLN, _sN: _gLN}),
+        (AVAILABILITY_ZONE_GEOGRAPHY_LIST, {_aQN: _GSe, _sN: _gSe}),
+        (AVAILABILITY_ZONE_SUB_GEOGRAPHY_LIST, {_aQN: _SGSu, _sN: _sGSu}),
+        (AVAILABILITY_ZONE_STATE, {_aQN: _ZS, _sN: _zS}),
+    ),
+)
+
+AVAILABILITY_ZONE_LIST: StaticSchema = (
+    16,
+    n0,
+    _AZL,
+    0,
+    (_me,),
+    ((AVAILABILITY_ZONE, {_sN: _i}),),
+)
+
+MAX_RESULTS_PARAM: StaticSchema = (7, n0, _MRP, 0)
+
+DESCRIBE_AWS_NETWORK_PERFORMANCE_METRIC_SUBSCRIPTIONS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DANPMSI,
+    {_sSI: _cDANPMSR, _sm: None},
+    (_MR, _NTex, _Fil, _DR),
+    (
+        (MAX_RESULTS_PARAM, 0),
+        (lambda: schemas.STRING, 0),
+        (lambda: schemas.FILTER_LIST, {_sN: _Fi}),
+        (lambda: schemas.BOOLEAN, 0),
+    ),
+)
+
+DESCRIBE_AWS_NETWORK_PERFORMANCE_METRIC_SUBSCRIPTIONS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DANPMSO,
+    {_sSI: _cDANPMSRo, _smit: None},
+    (_NTex, _Subsc),
+    (
+        (lambda: schemas.STRING, {_aQN: _NTex, _sN: _nT}),
+        (lambda: SUBSCRIPTION_LIST, {_aQN: _SSub, _sN: _sSu}),
+    ),
+)
+
+DESCRIBE_AWS_NETWORK_PERFORMANCE_METRIC_SUBSCRIPTIONS: StaticOperationSchema = (
+    23,
+    n0,
+    _DANPMS,
+    0,
+    DESCRIBE_AWS_NETWORK_PERFORMANCE_METRIC_SUBSCRIPTIONS_INPUT,
+    DESCRIBE_AWS_NETWORK_PERFORMANCE_METRIC_SUBSCRIPTIONS_OUTPUT,
+    (),
+)
+
+METRIC_TYPE: StaticSchema = (14, n0, _MTe, 0, (_al__,), ((-1, {_sV: _al___}),))
+
+PERIOD_TYPE: StaticSchema = (
+    14,
+    n0,
+    _PTer,
+    0,
+    (_fm, _fm__, _oh, _th_, _od__, _ow_),
+    (
+        (-1, {_sV: _fm_}),
+        (-1, {_sV: _fm___}),
+        (-1, {_sV: _oh_}),
+        (-1, {_sV: _th__}),
+        (-1, {_sV: _od___}),
+        (-1, {_sV: _ow__}),
+    ),
+)
+
+STATISTIC_TYPE: StaticSchema = (
+    14,
+    n0,
+    _STta,
+    0,
+    (_p_____________,),
+    ((-1, {_sV: _p_____________}),),
+)
+
+SUBSCRIPTION: StaticSchema = (
+    18,
+    n0,
+    _Subs,
+    0,
+    (_Sou, _De, _Metr, _Stati, _Per),
+    (
+        (lambda: schemas.STRING, {_aQN: _Sou, _sN: _so}),
+        (lambda: schemas.STRING, {_aQN: _De, _sN: _des}),
+        (METRIC_TYPE, {_aQN: _Metr, _sN: _met}),
+        (STATISTIC_TYPE, {_aQN: _Stati, _sN: _stati}),
+        (PERIOD_TYPE, {_aQN: _Per, _sN: _peri}),
+    ),
+)
+
+SUBSCRIPTION_LIST: StaticSchema = (
+    16,
+    n0,
+    _SLu,
+    0,
+    (_me,),
+    ((SUBSCRIPTION, {_sN: _i}),),
+)
+
+BUNDLE_ID_STRING_LIST: StaticSchema = (
+    16,
+    n0,
+    _BISL,
+    0,
+    (_me,),
+    ((lambda: schemas.BUNDLE_ID, {_sN: _BIu}),),
+)
+
+DESCRIBE_BUNDLE_TASKS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DBTI,
+    {_sSI: _cDBTR, _sm: None},
+    (_BIund, _DR, _Fil),
+    (
+        (BUNDLE_ID_STRING_LIST, {_sN: _BIu}),
+        (lambda: schemas.BOOLEAN, {_aQN: _DR, _sN: _dRr}),
+        (lambda: schemas.FILTER_LIST, {_sN: _Fi}),
+    ),
+)
+
+DESCRIBE_BUNDLE_TASKS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DBTO,
+    {_sSI: _cDBTRo, _smit: None},
+    (_BTu,),
+    ((lambda: BUNDLE_TASK_LIST, {_aQN: _BITS, _sN: _bITS}),),
+)
+
+DESCRIBE_BUNDLE_TASKS: StaticOperationSchema = (
+    23,
+    n0,
+    _DBT,
+    0,
+    DESCRIBE_BUNDLE_TASKS_INPUT,
+    DESCRIBE_BUNDLE_TASKS_OUTPUT,
+    (),
+)
+
+BUNDLE_TASK_LIST: StaticSchema = (
+    16,
+    n0,
+    _BTL,
+    0,
+    (_me,),
+    ((lambda: schemas.BUNDLE_TASK, {_sN: _i}),),
+)
+
+DESCRIBE_BYOIP_CIDRS_MAX_RESULTS: StaticSchema = (7, n0, _DBCMR, 0)
+
+DESCRIBE_BYOIP_CIDRS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DBCIe,
+    {_sSI: _cDBCRom, _sm: None},
+    (_DR, _MR, _NTex),
+    (
+        (lambda: schemas.BOOLEAN, 0),
+        (DESCRIBE_BYOIP_CIDRS_MAX_RESULTS, {_sO: None, _smi: None}),
+        (lambda: schemas.NEXT_TOKEN, 0),
+    ),
+)
+
+DESCRIBE_BYOIP_CIDRS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DBCOe,
+    {_sSI: _cDBCRoma, _smit: None},
+    (_BCy, _NTex),
+    (
+        (lambda: BYOIP_CIDR_SET, {_aQN: _BCSy, _sN: _bCS}),
+        (lambda: schemas.STRING, {_aQN: _NTex, _sN: _nT}),
+    ),
+)
+
+DESCRIBE_BYOIP_CIDRS: StaticOperationSchema = (
+    23,
+    n0,
+    _DBCe,
+    0,
+    DESCRIBE_BYOIP_CIDRS_INPUT,
+    DESCRIBE_BYOIP_CIDRS_OUTPUT,
+    (),
+)
+
+BYOIP_CIDR_SET: StaticSchema = (
+    16,
+    n0,
+    _BCSy,
+    0,
+    (_me,),
+    ((lambda: schemas.BYOIP_CIDR, {_sN: _i}),),
+)
+
+DESCRIBE_FUTURE_CAPACITY_MAX_RESULTS: StaticSchema = (7, n0, _DFCMR, 0)
+
+DESCRIBE_CAPACITY_BLOCK_EXTENSION_HISTORY_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DCBEHI,
+    {_sSI: _cDCBEHR, _sm: None},
+    (_CRIa, _NTex, _MR, _Fil, _DR),
+    (
+        (lambda: schemas.CAPACITY_RESERVATION_ID_SET, {_sN: _CRI}),
+        (lambda: schemas.STRING, 0),
+        (DESCRIBE_FUTURE_CAPACITY_MAX_RESULTS, 0),
+        (lambda: schemas.FILTER_LIST, {_sN: _Fi}),
+        (lambda: schemas.BOOLEAN, 0),
+    ),
+)
+
+DESCRIBE_CAPACITY_BLOCK_EXTENSION_HISTORY_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DCBEHO,
+    {_sSI: _cDCBEHRo, _smit: None},
+    (_CBEa, _NTex),
+    (
+        (lambda: CAPACITY_BLOCK_EXTENSION_SET, {_aQN: _CBESa, _sN: _cBESa}),
+        (lambda: schemas.STRING, {_aQN: _NTex, _sN: _nT}),
+    ),
+)
+
+DESCRIBE_CAPACITY_BLOCK_EXTENSION_HISTORY: StaticOperationSchema = (
+    23,
+    n0,
+    _DCBEH,
+    0,
+    DESCRIBE_CAPACITY_BLOCK_EXTENSION_HISTORY_INPUT,
+    DESCRIBE_CAPACITY_BLOCK_EXTENSION_HISTORY_OUTPUT,
+    (),
+)
+
+OFFERING_ID: StaticSchema = (3, n0, _OI, 0)
+
+CAPACITY_BLOCK_EXTENSION_STATUS: StaticSchema = (
+    14,
+    n0,
+    _CBES,
+    0,
+    (_PP, _PF___, _PS_),
+    ((-1, {_sV: _pp___}), (-1, {_sV: _pf_____}), (-1, {_sV: _ps})),
+)
 
 CAPACITY_BLOCK_EXTENSION: StaticSchema = (
     18,
@@ -355,9 +843,9 @@ CAPACITY_BLOCK_EXTENSION: StaticSchema = (
         (lambda: schemas.INTEGER, {_aQN: _IC, _sN: _iC}),
         (lambda: schemas.AVAILABILITY_ZONE_NAME, {_aQN: _AZ, _sN: _aZ}),
         (lambda: schemas.AVAILABILITY_ZONE_ID, {_aQN: _AZI, _sN: _aZI}),
-        (lambda: schemas.OFFERING_ID, {_aQN: _CBEOI, _sN: _cBEOI}),
+        (OFFERING_ID, {_aQN: _CBEOI, _sN: _cBEOI}),
         (lambda: schemas.INTEGER, {_aQN: _CBEDH, _sN: _cBEDH}),
-        (lambda: schemas.CAPACITY_BLOCK_EXTENSION_STATUS, {_aQN: _CBES, _sN: _cBES}),
+        (CAPACITY_BLOCK_EXTENSION_STATUS, {_aQN: _CBES, _sN: _cBES}),
         (lambda: schemas.MILLISECOND_DATE_TIME, {_aQN: _CBEPD, _sN: _cBEPD}),
         (lambda: schemas.MILLISECOND_DATE_TIME, {_aQN: _CBESD, _sN: _cBESD}),
         (lambda: schemas.MILLISECOND_DATE_TIME, {_aQN: _CBEED, _sN: _cBEED}),
@@ -427,7 +915,7 @@ CAPACITY_BLOCK_EXTENSION_OFFERING: StaticSchema = (
     0,
     (_CBEOI, _IT, _IC, _AZ, _AZI, _SDt, _CBESD, _CBEED, _CBEDH, _UF, _CC, _Ten, _ZT),
     (
-        (lambda: schemas.OFFERING_ID, {_aQN: _CBEOI, _sN: _cBEOI}),
+        (OFFERING_ID, {_aQN: _CBEOI, _sN: _cBEOI}),
         (lambda: schemas.STRING, {_aQN: _IT, _sN: _iT}),
         (lambda: schemas.INTEGER, {_aQN: _IC, _sN: _iC}),
         (lambda: schemas.AVAILABILITY_ZONE_NAME, {_aQN: _AZ, _sN: _aZ}),
@@ -452,6 +940,24 @@ CAPACITY_BLOCK_EXTENSION_OFFERING_SET: StaticSchema = (
     ((CAPACITY_BLOCK_EXTENSION_OFFERING, {_sN: _i}),),
 )
 
+CAPACITY_BLOCK_INSTANCE_TYPE_PREFERENCE: StaticSchema = (
+    18,
+    n0,
+    _CBITP,
+    0,
+    (_IT,),
+    ((lambda: schemas.STRING, 0),),
+)
+
+CAPACITY_BLOCK_INSTANCE_TYPE_PREFERENCE_SET: StaticSchema = (
+    16,
+    n0,
+    _CBITPS,
+    0,
+    (_me,),
+    ((CAPACITY_BLOCK_INSTANCE_TYPE_PREFERENCE, {_sN: _i}),),
+)
+
 DESCRIBE_CAPACITY_BLOCK_OFFERINGS_MAX_RESULTS: StaticSchema = (7, n0, _DCBOMR, 0)
 
 DESCRIBE_CAPACITY_BLOCK_OFFERINGS_INPUT: StaticSchema = (
@@ -459,7 +965,7 @@ DESCRIBE_CAPACITY_BLOCK_OFFERINGS_INPUT: StaticSchema = (
     n0,
     _DCBOI,
     {_sSI: _cDCBOR, _sm: None},
-    (_DR, _IT, _IC, _SDR, _EDR, _CDH, _NTex, _MR, _UTl, _UC, _AAZ),
+    (_DR, _IT, _IC, _SDR, _EDR, _CDH, _NTex, _MR, _UTl, _UC, _AAZ, _ITP),
     (
         (lambda: schemas.BOOLEAN, 0),
         (lambda: schemas.STRING, 0),
@@ -472,6 +978,7 @@ DESCRIBE_CAPACITY_BLOCK_OFFERINGS_INPUT: StaticSchema = (
         (lambda: schemas.STRING, 0),
         (lambda: schemas.INTEGER, 0),
         (lambda: schemas.BOOLEAN, 0),
+        (CAPACITY_BLOCK_INSTANCE_TYPE_PREFERENCE_SET, {_sN: _ITPn}),
     ),
 )
 
@@ -482,7 +989,7 @@ DESCRIBE_CAPACITY_BLOCK_OFFERINGS_OUTPUT: StaticSchema = (
     {_sSI: _cDCBORo, _smit: None},
     (_CBOa, _NTex),
     (
-        (lambda: CAPACITY_BLOCK_OFFERING_SET, {_aQN: _CBOS, _sN: _cBOS}),
+        (lambda: CAPACITY_BLOCK_OFFERING_SET, {_aQN: _CBOSap, _sN: _cBOS}),
         (lambda: schemas.STRING, {_aQN: _NTex, _sN: _nT}),
     ),
 )
@@ -497,14 +1004,60 @@ DESCRIBE_CAPACITY_BLOCK_OFFERINGS: StaticOperationSchema = (
     (),
 )
 
+CAPACITY_BLOCK_OFFERING_SEGMENT: StaticSchema = (
+    18,
+    n0,
+    _CBOS,
+    0,
+    (_IT, _AZ, _AZI, _IC, _SDt, _ED, _CBDH, _CBDM, _UF, _CC, _ZT),
+    (
+        (lambda: schemas.STRING, {_aQN: _IT, _sN: _iT}),
+        (lambda: schemas.STRING, {_aQN: _AZ, _sN: _aZ}),
+        (lambda: schemas.STRING, {_aQN: _AZI, _sN: _aZI}),
+        (lambda: schemas.INTEGER, {_aQN: _IC, _sN: _iC}),
+        (lambda: schemas.MILLISECOND_DATE_TIME, {_aQN: _SDt, _sN: _sDt}),
+        (lambda: schemas.MILLISECOND_DATE_TIME, {_aQN: _ED, _sN: _eD}),
+        (lambda: schemas.INTEGER, {_aQN: _CBDH, _sN: _cBDH}),
+        (lambda: schemas.INTEGER, {_aQN: _CBDM, _sN: _cBDM}),
+        (lambda: schemas.STRING, {_aQN: _UF, _sN: _uF}),
+        (lambda: schemas.STRING, {_aQN: _CC, _sN: _cC}),
+        (lambda: schemas.STRING, {_aQN: _ZT, _sN: _zT}),
+    ),
+)
+
+CAPACITY_BLOCK_OFFERING_SEGMENT_SET: StaticSchema = (
+    16,
+    n0,
+    _CBOSS,
+    0,
+    (_me,),
+    ((CAPACITY_BLOCK_OFFERING_SEGMENT, {_sN: _i}),),
+)
+
 CAPACITY_BLOCK_OFFERING: StaticSchema = (
     18,
     n0,
     _CBO,
     0,
-    (_CBOI, _IT, _AZ, _IC, _SDt, _ED, _CBDH, _UF, _CC, _Ten, _UTl, _UC, _CBDM, _ZT),
     (
-        (lambda: schemas.OFFERING_ID, {_aQN: _CBOI, _sN: _cBOI}),
+        _CBOI,
+        _IT,
+        _AZ,
+        _IC,
+        _SDt,
+        _ED,
+        _CBDH,
+        _UF,
+        _CC,
+        _Ten,
+        _UTl,
+        _UC,
+        _CBDM,
+        _ZT,
+        _CBOSa,
+    ),
+    (
+        (OFFERING_ID, {_aQN: _CBOI, _sN: _cBOI}),
         (lambda: schemas.STRING, {_aQN: _IT, _sN: _iT}),
         (lambda: schemas.STRING, {_aQN: _AZ, _sN: _aZ}),
         (lambda: schemas.INTEGER, {_aQN: _IC, _sN: _iC}),
@@ -518,13 +1071,14 @@ CAPACITY_BLOCK_OFFERING: StaticSchema = (
         (lambda: schemas.BOXED_INTEGER, {_aQN: _UC, _sN: _uC}),
         (lambda: schemas.INTEGER, {_aQN: _CBDM, _sN: _cBDM}),
         (lambda: schemas.STRING, {_aQN: _ZT, _sN: _zT}),
+        (CAPACITY_BLOCK_OFFERING_SEGMENT_SET, {_aQN: _CBOSS, _sN: _cBOSS}),
     ),
 )
 
 CAPACITY_BLOCK_OFFERING_SET: StaticSchema = (
     16,
     n0,
-    _CBOS,
+    _CBOSap,
     0,
     (_me,),
     ((CAPACITY_BLOCK_OFFERING, {_sN: _i}),),
@@ -857,7 +1411,7 @@ DESCRIBE_CAPACITY_RESERVATION_BILLING_REQUESTS_OUTPUT: StaticSchema = (
     (
         (lambda: schemas.STRING, {_aQN: _NTex, _sN: _nT}),
         (
-            lambda: CAPACITY_RESERVATION_BILLING_REQUEST_SET,
+            lambda: schemas.CAPACITY_RESERVATION_BILLING_REQUEST_SET,
             {_aQN: _CRBRSa, _sN: _cRBRS},
         ),
     ),
@@ -885,484 +1439,4 @@ CAPACITY_RESERVATION_INFO: StaticSchema = (
         (lambda: schemas.CAPACITY_RESERVATION_TENANCY, {_aQN: _Ten, _sN: _ten}),
         (lambda: schemas.AVAILABILITY_ZONE_ID, {_aQN: _AZI, _sN: _aZI}),
     ),
-)
-
-CAPACITY_RESERVATION_BILLING_REQUEST_STATUS: StaticSchema = (
-    14,
-    n0,
-    _CRBRS,
-    0,
-    (_p, _ac, _re, _can, _revo, _ex),
-    (
-        (-1, {_sV: _p}),
-        (-1, {_sV: _ac}),
-        (-1, {_sV: _re}),
-        (-1, {_sV: _can}),
-        (-1, {_sV: _revo}),
-        (-1, {_sV: _ex}),
-    ),
-)
-
-CAPACITY_RESERVATION_BILLING_REQUEST: StaticSchema = (
-    18,
-    n0,
-    _CRBR,
-    0,
-    (_CRI, _RB, _URBOI, _LUTas, _Sta, _SMt, _CRIap),
-    (
-        (lambda: schemas.STRING, {_aQN: _CRI, _sN: _cRI}),
-        (lambda: schemas.STRING, {_aQN: _RB, _sN: _rBe}),
-        (lambda: schemas.ACCOUNT_ID, {_aQN: _URBOI, _sN: _uRBOI}),
-        (lambda: schemas.MILLISECOND_DATE_TIME, {_aQN: _LUTas, _sN: _lUTas}),
-        (CAPACITY_RESERVATION_BILLING_REQUEST_STATUS, {_aQN: _Sta, _sN: _sta}),
-        (lambda: schemas.STRING, {_aQN: _SMt, _sN: _sMt}),
-        (CAPACITY_RESERVATION_INFO, {_aQN: _CRIap, _sN: _cRIa}),
-    ),
-)
-
-CAPACITY_RESERVATION_BILLING_REQUEST_SET: StaticSchema = (
-    16,
-    n0,
-    _CRBRSa,
-    0,
-    (_me,),
-    ((CAPACITY_RESERVATION_BILLING_REQUEST, {_sN: _i}),),
-)
-
-CAPACITY_RESERVATION_CANCELLATION_QUOTE_ID_SET: StaticSchema = (
-    16,
-    n0,
-    _CRCQIS,
-    0,
-    (_me,),
-    ((lambda: schemas.CAPACITY_RESERVATION_CANCELLATION_QUOTE_ID, {_sN: _i}),),
-)
-
-DESCRIBE_CAPACITY_RESERVATION_CANCELLATION_QUOTES_REQUEST_MAX_RESULTS: StaticSchema = (
-    7,
-    n0,
-    _DCRCQRMR,
-    0,
-)
-
-DESCRIBE_CAPACITY_RESERVATION_CANCELLATION_QUOTES_INPUT: StaticSchema = (
-    18,
-    n0,
-    _DCRCQI,
-    {_sSI: _cDCRCQR, _sm: None},
-    (_CRCQIa, _MR, _NTex, _DR, _Fil),
-    (
-        (CAPACITY_RESERVATION_CANCELLATION_QUOTE_ID_SET, {_sN: _CRCQI}),
-        (DESCRIBE_CAPACITY_RESERVATION_CANCELLATION_QUOTES_REQUEST_MAX_RESULTS, 0),
-        (lambda: schemas.STRING, 0),
-        (lambda: schemas.BOOLEAN, 0),
-        (lambda: schemas.FILTER_LIST, {_sN: _Fi}),
-    ),
-)
-
-DESCRIBE_CAPACITY_RESERVATION_CANCELLATION_QUOTES_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _DCRCQO,
-    {_sSI: _cDCRCQRo, _smit: None},
-    (_CRCQa, _NTex),
-    (
-        (
-            lambda: CAPACITY_RESERVATION_CANCELLATION_QUOTE_RESPONSE_SET,
-            {_aQN: _CRCQSa, _sN: _cRCQS},
-        ),
-        (lambda: schemas.STRING, {_aQN: _NTex, _sN: _nT}),
-    ),
-)
-
-DESCRIBE_CAPACITY_RESERVATION_CANCELLATION_QUOTES: StaticOperationSchema = (
-    23,
-    n0,
-    _DCRCQ,
-    0,
-    DESCRIBE_CAPACITY_RESERVATION_CANCELLATION_QUOTES_INPUT,
-    DESCRIBE_CAPACITY_RESERVATION_CANCELLATION_QUOTES_OUTPUT,
-    (),
-)
-
-CAPACITY_RESERVATION_CANCELLATION_QUOTE_RESPONSE_SET: StaticSchema = (
-    16,
-    n0,
-    _CRCQRS,
-    0,
-    (_me,),
-    ((lambda: schemas.CAPACITY_RESERVATION_CANCELLATION_QUOTE, {_sN: _i}),),
-)
-
-CAPACITY_RESERVATION_MODIFICATION_QUOTE_ID_SET: StaticSchema = (
-    16,
-    n0,
-    _CRMQIS,
-    0,
-    (_me,),
-    ((lambda: schemas.CAPACITY_RESERVATION_MODIFICATION_QUOTE_ID, {_sN: _i}),),
-)
-
-DESCRIBE_CAPACITY_RESERVATION_DATE_CHANGE_QUOTES_REQUEST_MAX_RESULTS: StaticSchema = (
-    7,
-    n0,
-    _DCRDCQRMR,
-    0,
-)
-
-DESCRIBE_CAPACITY_RESERVATION_DATE_CHANGE_QUOTES_INPUT: StaticSchema = (
-    18,
-    n0,
-    _DCRDCQI,
-    {_sSI: _cDCRDCQR, _sm: None},
-    (_CRMQIa, _MR, _NTex, _DR, _Fil),
-    (
-        (CAPACITY_RESERVATION_MODIFICATION_QUOTE_ID_SET, {_sN: _CRMQI}),
-        (DESCRIBE_CAPACITY_RESERVATION_DATE_CHANGE_QUOTES_REQUEST_MAX_RESULTS, 0),
-        (lambda: schemas.STRING, 0),
-        (lambda: schemas.BOOLEAN, 0),
-        (lambda: schemas.FILTER_LIST, {_sN: _Fi}),
-    ),
-)
-
-DESCRIBE_CAPACITY_RESERVATION_DATE_CHANGE_QUOTES_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _DCRDCQO,
-    {_sSI: _cDCRDCQRo, _smit: None},
-    (_CRMQa, _NTex),
-    (
-        (
-            lambda: CAPACITY_RESERVATION_MODIFICATION_QUOTE_RESPONSE_SET,
-            {_aQN: _CRMQSa, _sN: _cRMQS},
-        ),
-        (lambda: schemas.STRING, {_aQN: _NTex, _sN: _nT}),
-    ),
-)
-
-DESCRIBE_CAPACITY_RESERVATION_DATE_CHANGE_QUOTES: StaticOperationSchema = (
-    23,
-    n0,
-    _DCRDCQ,
-    0,
-    DESCRIBE_CAPACITY_RESERVATION_DATE_CHANGE_QUOTES_INPUT,
-    DESCRIBE_CAPACITY_RESERVATION_DATE_CHANGE_QUOTES_OUTPUT,
-    (),
-)
-
-CAPACITY_RESERVATION_MODIFICATION_QUOTE_RESPONSE_SET: StaticSchema = (
-    16,
-    n0,
-    _CRMQRS,
-    0,
-    (_me,),
-    ((lambda: schemas.CAPACITY_RESERVATION_MODIFICATION_QUOTE, {_sN: _i}),),
-)
-
-DESCRIBE_CAPACITY_RESERVATION_FLEETS_MAX_RESULTS: StaticSchema = (7, n0, _DCRFMR, 0)
-
-DESCRIBE_CAPACITY_RESERVATION_FLEETS_INPUT: StaticSchema = (
-    18,
-    n0,
-    _DCRFI,
-    {_sSI: _cDCRFR, _sm: None},
-    (_CRFIa, _NTex, _MR, _Fil, _DR),
-    (
-        (lambda: schemas.CAPACITY_RESERVATION_FLEET_ID_SET, {_sN: _CRFI}),
-        (lambda: schemas.STRING, 0),
-        (DESCRIBE_CAPACITY_RESERVATION_FLEETS_MAX_RESULTS, 0),
-        (lambda: schemas.FILTER_LIST, {_sN: _Fi}),
-        (lambda: schemas.BOOLEAN, 0),
-    ),
-)
-
-DESCRIBE_CAPACITY_RESERVATION_FLEETS_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _DCRFO,
-    {_sSI: _cDCRFRo, _smit: None},
-    (_CRFa, _NTex),
-    (
-        (lambda: CAPACITY_RESERVATION_FLEET_SET, {_aQN: _CRFSa, _sN: _cRFS}),
-        (lambda: schemas.STRING, {_aQN: _NTex, _sN: _nT}),
-    ),
-)
-
-DESCRIBE_CAPACITY_RESERVATION_FLEETS: StaticOperationSchema = (
-    23,
-    n0,
-    _DCRF,
-    0,
-    DESCRIBE_CAPACITY_RESERVATION_FLEETS_INPUT,
-    DESCRIBE_CAPACITY_RESERVATION_FLEETS_OUTPUT,
-    (),
-)
-
-CAPACITY_RESERVATION_FLEET: StaticSchema = (
-    18,
-    n0,
-    _CRF,
-    0,
-    (
-        _CRFI,
-        _CRFA,
-        _St,
-        _TTC,
-        _TFC,
-        _Ten,
-        _ED,
-        _CTr,
-        _IMC,
-        _ASll,
-        _ITS,
-        _IRn,
-        _AZ,
-        _AZI,
-        _Tag,
-    ),
-    (
-        (lambda: schemas.CAPACITY_RESERVATION_FLEET_ID, {_aQN: _CRFI, _sN: _cRFI}),
-        (lambda: schemas.STRING, {_aQN: _CRFA, _sN: _cRFA}),
-        (lambda: schemas.CAPACITY_RESERVATION_FLEET_STATE, {_aQN: _St, _sN: _st}),
-        (lambda: schemas.INTEGER, {_aQN: _TTC, _sN: _tTC}),
-        (lambda: schemas.DOUBLE, {_aQN: _TFC, _sN: _tFC}),
-        (lambda: schemas.FLEET_CAPACITY_RESERVATION_TENANCY, {_aQN: _Ten, _sN: _ten}),
-        (lambda: schemas.MILLISECOND_DATE_TIME, {_aQN: _ED, _sN: _eD}),
-        (lambda: schemas.MILLISECOND_DATE_TIME, {_aQN: _CTr, _sN: _cTr}),
-        (lambda: schemas.FLEET_INSTANCE_MATCH_CRITERIA, {_aQN: _IMC, _sN: _iMC}),
-        (lambda: schemas.STRING, {_aQN: _ASll, _sN: _aSl}),
-        (lambda: schemas.FLEET_CAPACITY_RESERVATION_SET, {_aQN: _ITSS, _sN: _iTSS}),
-        (lambda: schemas.INSTANCE_REQUIREMENTS_REQUEST, {_aQN: _IRn, _sN: _iRn}),
-        (lambda: schemas.STRING, {_aQN: _AZ, _sN: _aZ}),
-        (lambda: schemas.STRING, {_aQN: _AZI, _sN: _aZI}),
-        (lambda: schemas.TAG_LIST, {_aQN: _TSag, _sN: _tS}),
-    ),
-)
-
-CAPACITY_RESERVATION_FLEET_SET: StaticSchema = (
-    16,
-    n0,
-    _CRFSa,
-    0,
-    (_me,),
-    ((CAPACITY_RESERVATION_FLEET, {_sN: _i}),),
-)
-
-DESCRIBE_CAPACITY_RESERVATIONS_MAX_RESULTS: StaticSchema = (7, n0, _DCRMR, 0)
-
-DESCRIBE_CAPACITY_RESERVATIONS_INPUT: StaticSchema = (
-    18,
-    n0,
-    _DCRI,
-    {_sSI: _cDCRR, _sm: None},
-    (_CRIa, _NTex, _MR, _Fil, _DR),
-    (
-        (lambda: schemas.CAPACITY_RESERVATION_ID_SET, {_sN: _CRI}),
-        (lambda: schemas.STRING, 0),
-        (DESCRIBE_CAPACITY_RESERVATIONS_MAX_RESULTS, 0),
-        (lambda: schemas.FILTER_LIST, {_sN: _Fi}),
-        (lambda: schemas.BOOLEAN, 0),
-    ),
-)
-
-DESCRIBE_CAPACITY_RESERVATIONS_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _DCRO,
-    {_sSI: _cDCRRo, _smit: None},
-    (_NTex, _CRapac),
-    (
-        (lambda: schemas.STRING, {_aQN: _NTex, _sN: _nT}),
-        (lambda: CAPACITY_RESERVATION_SET, {_aQN: _CRSapac, _sN: _cRSa}),
-    ),
-)
-
-DESCRIBE_CAPACITY_RESERVATIONS: StaticOperationSchema = (
-    23,
-    n0,
-    _DCRe,
-    0,
-    DESCRIBE_CAPACITY_RESERVATIONS_INPUT,
-    DESCRIBE_CAPACITY_RESERVATIONS_OUTPUT,
-    (),
-)
-
-CAPACITY_RESERVATION_SET: StaticSchema = (
-    16,
-    n0,
-    _CRSapac,
-    0,
-    (_me,),
-    ((lambda: schemas.CAPACITY_RESERVATION, {_sN: _i}),),
-)
-
-DESCRIBE_CAPACITY_RESERVATION_TOPOLOGY_MAX_RESULTS: StaticSchema = (7, n0, _DCRTMR, 0)
-
-DESCRIBE_CAPACITY_RESERVATION_TOPOLOGY_INPUT: StaticSchema = (
-    18,
-    n0,
-    _DCRTI,
-    {_sSI: _cDCRTR, _sm: None},
-    (_DR, _NTex, _MR, _CRIa, _Fil),
-    (
-        (lambda: schemas.BOOLEAN, 0),
-        (lambda: schemas.STRING, 0),
-        (DESCRIBE_CAPACITY_RESERVATION_TOPOLOGY_MAX_RESULTS, 0),
-        (lambda: schemas.CAPACITY_RESERVATION_ID_SET, {_sN: _CRI}),
-        (lambda: schemas.FILTER_LIST, {_sN: _Fi}),
-    ),
-)
-
-DESCRIBE_CAPACITY_RESERVATION_TOPOLOGY_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _DCRTO,
-    {_sSI: _cDCRTRo, _smit: None},
-    (_NTex, _CRapac),
-    (
-        (lambda: schemas.STRING, {_aQN: _NTex, _sN: _nT}),
-        (lambda: CAPACITY_RESERVATION_TOPOLOGY_SET, {_aQN: _CRSapac, _sN: _cRSa}),
-    ),
-)
-
-DESCRIBE_CAPACITY_RESERVATION_TOPOLOGY: StaticOperationSchema = (
-    23,
-    n0,
-    _DCRT,
-    0,
-    DESCRIBE_CAPACITY_RESERVATION_TOPOLOGY_INPUT,
-    DESCRIBE_CAPACITY_RESERVATION_TOPOLOGY_OUTPUT,
-    (),
-)
-
-NETWORK_NODE_SET: StaticSchema = (
-    16,
-    n0,
-    _NNS,
-    0,
-    (_me,),
-    ((lambda: schemas.STRING, {_sN: _i}),),
-)
-
-CAPACITY_RESERVATION_TOPOLOGY: StaticSchema = (
-    18,
-    n0,
-    _CRTapa,
-    0,
-    (_CRI, _CBI, _St, _IT, _GN, _NN, _AZI, _AZ),
-    (
-        (lambda: schemas.STRING, {_aQN: _CRI, _sN: _cRI}),
-        (lambda: schemas.STRING, {_aQN: _CBI, _sN: _cBI}),
-        (lambda: schemas.STRING, {_aQN: _St, _sN: _st}),
-        (lambda: schemas.STRING, {_aQN: _IT, _sN: _iT}),
-        (lambda: schemas.STRING, {_aQN: _GN, _sN: _gN}),
-        (NETWORK_NODE_SET, {_aQN: _NNS, _sN: _nNS}),
-        (lambda: schemas.STRING, {_aQN: _AZI, _sN: _aZI}),
-        (lambda: schemas.STRING, {_aQN: _AZ, _sN: _aZ}),
-    ),
-)
-
-CAPACITY_RESERVATION_TOPOLOGY_SET: StaticSchema = (
-    16,
-    n0,
-    _CRTS,
-    0,
-    (_me,),
-    ((CAPACITY_RESERVATION_TOPOLOGY, {_sN: _i}),),
-)
-
-CARRIER_GATEWAY_ID_SET: StaticSchema = (
-    16,
-    n0,
-    _CGIS,
-    0,
-    (_me,),
-    ((lambda: schemas.CARRIER_GATEWAY_ID, 0),),
-)
-
-CARRIER_GATEWAY_MAX_RESULTS: StaticSchema = (7, n0, _CGMR, 0)
-
-DESCRIBE_CARRIER_GATEWAYS_INPUT: StaticSchema = (
-    18,
-    n0,
-    _DCGIes,
-    {_sSI: _cDCGRoma, _sm: None},
-    (_CGIa, _Fil, _MR, _NTex, _DR),
-    (
-        (CARRIER_GATEWAY_ID_SET, {_sN: _CGI}),
-        (lambda: schemas.FILTER_LIST, {_sN: _Fi}),
-        (CARRIER_GATEWAY_MAX_RESULTS, 0),
-        (lambda: schemas.STRING, 0),
-        (lambda: schemas.BOOLEAN, 0),
-    ),
-)
-
-DESCRIBE_CARRIER_GATEWAYS_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _DCGOes,
-    {_sSI: _cDCGRomam, _smit: None},
-    (_CGar, _NTex),
-    (
-        (lambda: CARRIER_GATEWAY_SET, {_aQN: _CGSa, _sN: _cGS}),
-        (lambda: schemas.STRING, {_aQN: _NTex, _sN: _nT}),
-    ),
-)
-
-DESCRIBE_CARRIER_GATEWAYS: StaticOperationSchema = (
-    23,
-    n0,
-    _DCGes,
-    0,
-    DESCRIBE_CARRIER_GATEWAYS_INPUT,
-    DESCRIBE_CARRIER_GATEWAYS_OUTPUT,
-    (),
-)
-
-CARRIER_GATEWAY_SET: StaticSchema = (
-    16,
-    n0,
-    _CGSa,
-    0,
-    (_me,),
-    ((lambda: schemas.CARRIER_GATEWAY, {_sN: _i}),),
-)
-
-DESCRIBE_CLASSIC_LINK_INSTANCES_MAX_RESULTS: StaticSchema = (7, n0, _DCLIMR, 0)
-
-DESCRIBE_CLASSIC_LINK_INSTANCES_INPUT: StaticSchema = (
-    18,
-    n0,
-    _DCLII,
-    {_sSI: _cDCLIR, _sm: None},
-    (_DR, _IIn, _Fil, _NTex, _MR),
-    (
-        (lambda: schemas.BOOLEAN, {_aQN: _DR, _sN: _dRr}),
-        (lambda: schemas.INSTANCE_ID_STRING_LIST, {_sN: _II}),
-        (lambda: schemas.FILTER_LIST, {_sN: _Fi}),
-        (lambda: schemas.STRING, {_aQN: _NTex, _sN: _nT}),
-        (DESCRIBE_CLASSIC_LINK_INSTANCES_MAX_RESULTS, {_aQN: _MR, _sN: _mR}),
-    ),
-)
-
-DESCRIBE_CLASSIC_LINK_INSTANCES_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _DCLIO,
-    {_sSI: _cDCLIRo, _smit: None},
-    (_Ins, _NTex),
-    (
-        (lambda: schemas.CLASSIC_LINK_INSTANCE_LIST, {_aQN: _ISnst, _sN: _iSns}),
-        (lambda: schemas.STRING, {_aQN: _NTex, _sN: _nT}),
-    ),
-)
-
-DESCRIBE_CLASSIC_LINK_INSTANCES: StaticOperationSchema = (
-    23,
-    n0,
-    _DCLI,
-    0,
-    DESCRIBE_CLASSIC_LINK_INSTANCES_INPUT,
-    DESCRIBE_CLASSIC_LINK_INSTANCES_OUTPUT,
-    (),
 )

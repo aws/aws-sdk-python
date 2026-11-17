@@ -5,6 +5,20 @@ from typing import Any
 from aws_sdk_kinesis.aio.client import AsyncKinesisClient
 from aws_sdk_kinesis.client import KinesisClient
 from aws_sdk_kinesis.models import (
+    AcknowledgeDeadLetterQueueRecordsErrorEntry,
+    AcknowledgeDeadLetterQueueRecordsInput,
+    AcknowledgeDeadLetterQueueRecordsInputDict,
+    AcknowledgeDeadLetterQueueRecordsOutput,
+    AcknowledgeDeadLetterQueueRecordsRequestEntry,
+    AcknowledgeDeadLetterQueueRecordsRequestEntryDict,
+    AcknowledgeDeadLetterQueueRecordsResultEntry,
+    AcknowledgeQueueRecordsErrorEntry,
+    AcknowledgeQueueRecordsInput,
+    AcknowledgeQueueRecordsInputDict,
+    AcknowledgeQueueRecordsOutput,
+    AcknowledgeQueueRecordsRequestEntry,
+    AcknowledgeQueueRecordsRequestEntryDict,
+    AcknowledgeQueueRecordsResultEntry,
     AddTagsToStreamInput,
     AddTagsToStreamInputDict,
     AddTagsToStreamOutput,
@@ -30,9 +44,14 @@ from aws_sdk_kinesis.models import (
     CreateChannelInput,
     CreateChannelInputDict,
     CreateChannelOutput,
+    CreateQueueInput,
+    CreateQueueInputDict,
+    CreateQueueOutput,
     CreateStreamInput,
     CreateStreamInputDict,
     CreateStreamOutput,
+    DeadLetterConfiguration,
+    DeadLetterConfigurationDict,
     DeadLetterQueueS3Configuration,
     DeadLetterQueueS3ConfigurationDict,
     DecreaseStreamRetentionPeriodInput,
@@ -41,6 +60,9 @@ from aws_sdk_kinesis.models import (
     DeleteChannelInput,
     DeleteChannelInputDict,
     DeleteChannelOutput,
+    DeleteQueueInput,
+    DeleteQueueInputDict,
+    DeleteQueueOutput,
     DeleteResourcePolicyInput,
     DeleteResourcePolicyInputDict,
     DeleteResourcePolicyOutput,
@@ -59,6 +81,9 @@ from aws_sdk_kinesis.models import (
     DescribeLimitsInput,
     DescribeLimitsInputDict,
     DescribeLimitsOutput,
+    DescribeQueueInput,
+    DescribeQueueInputDict,
+    DescribeQueueOutput,
     DescribeStreamConsumerInput,
     DescribeStreamConsumerInputDict,
     DescribeStreamConsumerOutput,
@@ -91,6 +116,9 @@ from aws_sdk_kinesis.models import (
     ListChannelsInput,
     ListChannelsInputDict,
     ListChannelsOutput,
+    ListQueuesInput,
+    ListQueuesInputDict,
+    ListQueuesOutput,
     ListShardsInput,
     ListShardsInputDict,
     ListShardsOutput,
@@ -128,6 +156,24 @@ from aws_sdk_kinesis.models import (
     PutResourcePolicyInput,
     PutResourcePolicyInputDict,
     PutResourcePolicyOutput,
+    QueueAttributes,
+    QueueAttributesDict,
+    QueueDescription,
+    QueueRecord,
+    QueueStartingPosition,
+    QueueStartingPositionDict,
+    QueueStreamConfiguration,
+    QueueStreamConfigurationDict,
+    QueueStreamFilter,
+    QueueStreamFilterDict,
+    QueueStreamIdentifier,
+    QueueSummary,
+    ReceiveDeadLetterQueueRecordsInput,
+    ReceiveDeadLetterQueueRecordsInputDict,
+    ReceiveDeadLetterQueueRecordsOutput,
+    ReceiveQueueRecordsInput,
+    ReceiveQueueRecordsInputDict,
+    ReceiveQueueRecordsOutput,
     Record,
     RecordConfiguration,
     RecordConfigurationDict,
@@ -137,6 +183,13 @@ from aws_sdk_kinesis.models import (
     RemoveTagsFromStreamInput,
     RemoveTagsFromStreamInputDict,
     RemoveTagsFromStreamOutput,
+    RestoreDeadLetterQueueRecordsErrorEntry,
+    RestoreDeadLetterQueueRecordsInput,
+    RestoreDeadLetterQueueRecordsInputDict,
+    RestoreDeadLetterQueueRecordsOutput,
+    RestoreDeadLetterQueueRecordsRequestEntry,
+    RestoreDeadLetterQueueRecordsRequestEntryDict,
+    RestoreDeadLetterQueueRecordsResultEntry,
     S3DestinationConfiguration,
     S3DestinationConfigurationDict,
     S3DestinationDescription,
@@ -190,9 +243,26 @@ from aws_sdk_kinesis.models import (
     UpdateChannelInput,
     UpdateChannelInputDict,
     UpdateChannelOutput,
+    UpdateDeadLetterQueueRecordsVisibilityErrorEntry,
+    UpdateDeadLetterQueueRecordsVisibilityInput,
+    UpdateDeadLetterQueueRecordsVisibilityInputDict,
+    UpdateDeadLetterQueueRecordsVisibilityOutput,
+    UpdateDeadLetterQueueRecordsVisibilityRequestEntry,
+    UpdateDeadLetterQueueRecordsVisibilityRequestEntryDict,
+    UpdateDeadLetterQueueRecordsVisibilityResultEntry,
     UpdateMaxRecordSizeInput,
     UpdateMaxRecordSizeInputDict,
     UpdateMaxRecordSizeOutput,
+    UpdateQueueInput,
+    UpdateQueueInputDict,
+    UpdateQueueOutput,
+    UpdateQueueRecordsVisibilityErrorEntry,
+    UpdateQueueRecordsVisibilityInput,
+    UpdateQueueRecordsVisibilityInputDict,
+    UpdateQueueRecordsVisibilityOutput,
+    UpdateQueueRecordsVisibilityRequestEntry,
+    UpdateQueueRecordsVisibilityRequestEntryDict,
+    UpdateQueueRecordsVisibilityResultEntry,
     UpdateShardCountInput,
     UpdateShardCountInputDict,
     UpdateShardCountOutput,
@@ -215,6 +285,16 @@ from aws_sdk_kinesis.models import (
 
 _: Any = ...
 
+AcknowledgeDeadLetterQueueRecordsErrorEntry(receipt_handle=_, error_code=_)
+AcknowledgeDeadLetterQueueRecordsInput()
+AcknowledgeDeadLetterQueueRecordsOutput(successful=_, failed=_)
+AcknowledgeDeadLetterQueueRecordsRequestEntry(receipt_handle=_)
+AcknowledgeDeadLetterQueueRecordsResultEntry(receipt_handle=_)
+AcknowledgeQueueRecordsErrorEntry(receipt_handle=_, error_code=_)
+AcknowledgeQueueRecordsInput()
+AcknowledgeQueueRecordsOutput(successful=_, failed=_)
+AcknowledgeQueueRecordsRequestEntry(receipt_handle=_)
+AcknowledgeQueueRecordsResultEntry(receipt_handle=_)
 AddTagsToStreamInput()
 AddTagsToStreamOutput()
 ChannelDescription(
@@ -259,13 +339,18 @@ ConsumerDescription(
 )
 CreateChannelInput()
 CreateChannelOutput(channel_description=_)
+CreateQueueInput()
+CreateQueueOutput(queue_description=_)
 CreateStreamInput()
 CreateStreamOutput()
+DeadLetterConfiguration(target_type=_)
 DeadLetterQueueS3Configuration(bucket_arn=_, expected_bucket_owner=_)
 DecreaseStreamRetentionPeriodInput()
 DecreaseStreamRetentionPeriodOutput()
 DeleteChannelInput()
 DeleteChannelOutput()
+DeleteQueueInput()
+DeleteQueueOutput()
 DeleteResourcePolicyInput()
 DeleteResourcePolicyOutput()
 DeleteStreamInput()
@@ -283,6 +368,8 @@ DescribeLimitsOutput(
     on_demand_stream_count=_,
     on_demand_stream_count_limit=_,
 )
+DescribeQueueInput()
+DescribeQueueOutput(queue_description=_)
 DescribeStreamConsumerInput()
 DescribeStreamConsumerOutput(consumer_description=_)
 DescribeStreamInput()
@@ -305,6 +392,8 @@ IncreaseStreamRetentionPeriodInput()
 IncreaseStreamRetentionPeriodOutput()
 ListChannelsInput()
 ListChannelsOutput(channel_summaries=_)
+ListQueuesInput()
+ListQueuesOutput(queue_summaries=_)
 ListShardsInput()
 ListShardsOutput()
 ListStreamConsumersInput()
@@ -329,12 +418,44 @@ PutRecordsRequestEntry(data=_)
 PutRecordsResultEntry()
 PutResourcePolicyInput()
 PutResourcePolicyOutput()
+QueueAttributes()
+QueueDescription(
+    queue_name=_,
+    queue_arn=_,
+    queue_status=_,
+    queue_creation_timestamp=_,
+    stream_configuration_list=_,
+)
+QueueRecord(
+    receipt_handle=_,
+    record_id=_,
+    data=_,
+    approximate_arrival_timestamp=_,
+    first_receive_timestamp=_,
+    receive_count=_,
+)
+QueueStartingPosition(type=_)
+QueueStreamConfiguration(stream_arn=_)
+QueueStreamFilter(stream_arn=_)
+QueueStreamIdentifier(stream_arn=_, stream_creation_timestamp=_)
+QueueSummary(
+    queue_name=_, queue_arn=_, queue_status=_, queue_creation_timestamp=_, streams=_
+)
+ReceiveDeadLetterQueueRecordsInput()
+ReceiveDeadLetterQueueRecordsOutput(queue_records=_)
+ReceiveQueueRecordsInput()
+ReceiveQueueRecordsOutput(queue_records=_)
 Record(sequence_number=_, data=_)
 RecordConfiguration(record_format_type=_)
 RegisterStreamConsumerInput()
 RegisterStreamConsumerOutput(consumer=_)
 RemoveTagsFromStreamInput()
 RemoveTagsFromStreamOutput()
+RestoreDeadLetterQueueRecordsErrorEntry(receipt_handle=_, error_code=_)
+RestoreDeadLetterQueueRecordsInput()
+RestoreDeadLetterQueueRecordsOutput(successful=_, failed=_)
+RestoreDeadLetterQueueRecordsRequestEntry(receipt_handle=_)
+RestoreDeadLetterQueueRecordsResultEntry(receipt_handle=_)
 S3DestinationConfiguration(storage_configuration=_)
 S3DestinationDescription(
     data_freshness_in_seconds=_,
@@ -397,8 +518,22 @@ UpdateAccountSettingsInput()
 UpdateAccountSettingsOutput()
 UpdateChannelInput()
 UpdateChannelOutput(channel_description=_)
+UpdateDeadLetterQueueRecordsVisibilityErrorEntry(receipt_handle=_, error_code=_)
+UpdateDeadLetterQueueRecordsVisibilityInput()
+UpdateDeadLetterQueueRecordsVisibilityOutput(successful=_, failed=_)
+UpdateDeadLetterQueueRecordsVisibilityRequestEntry(
+    receipt_handle=_, visibility_timeout_seconds=_
+)
+UpdateDeadLetterQueueRecordsVisibilityResultEntry(receipt_handle=_)
 UpdateMaxRecordSizeInput()
 UpdateMaxRecordSizeOutput()
+UpdateQueueInput()
+UpdateQueueOutput(queue_description=_)
+UpdateQueueRecordsVisibilityErrorEntry(receipt_handle=_, error_code=_)
+UpdateQueueRecordsVisibilityInput()
+UpdateQueueRecordsVisibilityOutput(successful=_, failed=_)
+UpdateQueueRecordsVisibilityRequestEntry(receipt_handle=_, visibility_timeout_seconds=_)
+UpdateQueueRecordsVisibilityResultEntry(receipt_handle=_)
 UpdateShardCountInput()
 UpdateShardCountOutput()
 UpdateStreamModeInput()
@@ -408,101 +543,132 @@ UpdateStreamRecordDistributionStrategyOutput()
 UpdateStreamWarmThroughputInput()
 UpdateStreamWarmThroughputOutput()
 WarmThroughputObject()
-_params_0: AddTagsToStreamInputDict = {"tags": _}
-_params_1: ChannelEncryptionConfigurationDict = {"encryption_type": _, "key_id": _}
-_params_2: ChannelLoggingConfigurationDict = {"cloud_watch_logs": _}
-_params_3: ChannelLoggingUpdateInputDict = {"cloud_watch_logs": _}
-_params_4: ChannelStreamConfigurationDict = {"stream_arn": _, "record_configuration": _}
-_params_5: CloudWatchLogsDict = {"enabled": _}
-_params_6: CloudWatchLogsUpdateInputDict = {"enabled": _}
-_params_7: CreateChannelInputDict = {
+_params_0: AcknowledgeDeadLetterQueueRecordsInputDict = {"queue_arn": _, "entries": _}
+_params_1: AcknowledgeDeadLetterQueueRecordsRequestEntryDict = {"receipt_handle": _}
+_params_2: AcknowledgeQueueRecordsInputDict = {"queue_arn": _, "entries": _}
+_params_3: AcknowledgeQueueRecordsRequestEntryDict = {"receipt_handle": _}
+_params_4: AddTagsToStreamInputDict = {"tags": _}
+_params_5: ChannelEncryptionConfigurationDict = {"encryption_type": _, "key_id": _}
+_params_6: ChannelLoggingConfigurationDict = {"cloud_watch_logs": _}
+_params_7: ChannelLoggingUpdateInputDict = {"cloud_watch_logs": _}
+_params_8: ChannelStreamConfigurationDict = {"stream_arn": _, "record_configuration": _}
+_params_9: CloudWatchLogsDict = {"enabled": _}
+_params_10: CloudWatchLogsUpdateInputDict = {"enabled": _}
+_params_11: CreateChannelInputDict = {
     "channel_name": _,
     "service_execution_role_arn": _,
     "stream_configuration_list": _,
 }
-_params_8: CreateStreamInputDict = {"stream_name": _}
-_params_9: DeadLetterQueueS3ConfigurationDict = {
+_params_12: CreateQueueInputDict = {"queue_name": _, "stream_configuration_list": _}
+_params_13: CreateStreamInputDict = {"stream_name": _}
+_params_14: DeadLetterConfigurationDict = {"target_type": _}
+_params_15: DeadLetterQueueS3ConfigurationDict = {
     "bucket_arn": _,
     "expected_bucket_owner": _,
 }
-_params_10: DecreaseStreamRetentionPeriodInputDict = {"retention_period_hours": _}
-_params_11: DeleteChannelInputDict = {"channel_arn": _}
-_params_12: DeleteResourcePolicyInputDict = {"resource_arn": _}
-_params_13: DeleteStreamInputDict = {}
-_params_14: DeregisterStreamConsumerInputDict = {}
-_params_15: DescribeAccountSettingsInputDict = {}
-_params_16: DescribeChannelInputDict = {"channel_arn": _}
-_params_17: DescribeLimitsInputDict = {}
-_params_18: DescribeStreamConsumerInputDict = {}
-_params_19: DescribeStreamInputDict = {}
-_params_20: DescribeStreamSummaryInputDict = {}
-_params_21: DisableEnhancedMonitoringInputDict = {"shard_level_metrics": _}
-_params_22: EnableEnhancedMonitoringInputDict = {"shard_level_metrics": _}
-_params_23: GetRecordsInputDict = {"shard_iterator": _}
-_params_24: GetResourcePolicyInputDict = {"resource_arn": _}
-_params_25: GetShardIteratorInputDict = {"shard_id": _, "shard_iterator_type": _}
-_params_26: IncreaseStreamRetentionPeriodInputDict = {"retention_period_hours": _}
-_params_27: ListChannelsInputDict = {}
-_params_28: ListShardsInputDict = {}
-_params_29: ListStreamConsumersInputDict = {"stream_arn": _}
-_params_30: ListStreamsInputDict = {}
-_params_31: ListTagsForResourceInputDict = {"resource_arn": _}
-_params_32: ListTagsForStreamInputDict = {}
-_params_33: MergeShardsInputDict = {"shard_to_merge": _, "adjacent_shard_to_merge": _}
-_params_34: MinimumThroughputBillingCommitmentInputDict = {"status": _}
-_params_35: PartitionFieldDict = {"transform": _, "source_name": _}
-_params_36: PartitionSpecDict = {"partition_fields": _}
-_params_37: PutRecordInputDict = {"data": _}
-_params_38: PutRecordsInputDict = {"records": _}
-_params_39: PutRecordsRequestEntryDict = {"data": _}
-_params_40: PutResourcePolicyInputDict = {"resource_arn": _, "policy": _}
-_params_41: RecordConfigurationDict = {"record_format_type": _}
-_params_42: RegisterStreamConsumerInputDict = {"stream_arn": _, "consumer_name": _}
-_params_43: RemoveTagsFromStreamInputDict = {"tag_keys": _}
-_params_44: S3DestinationConfigurationDict = {"storage_configuration": _}
-_params_45: S3DestinationUpdateInputDict = {"data_freshness_in_seconds": _}
-_params_46: S3StorageConfigurationDict = {
+_params_16: DecreaseStreamRetentionPeriodInputDict = {"retention_period_hours": _}
+_params_17: DeleteChannelInputDict = {"channel_arn": _}
+_params_18: DeleteQueueInputDict = {"queue_arn": _}
+_params_19: DeleteResourcePolicyInputDict = {"resource_arn": _}
+_params_20: DeleteStreamInputDict = {}
+_params_21: DeregisterStreamConsumerInputDict = {}
+_params_22: DescribeAccountSettingsInputDict = {}
+_params_23: DescribeChannelInputDict = {"channel_arn": _}
+_params_24: DescribeLimitsInputDict = {}
+_params_25: DescribeQueueInputDict = {"queue_arn": _}
+_params_26: DescribeStreamConsumerInputDict = {}
+_params_27: DescribeStreamInputDict = {}
+_params_28: DescribeStreamSummaryInputDict = {}
+_params_29: DisableEnhancedMonitoringInputDict = {"shard_level_metrics": _}
+_params_30: EnableEnhancedMonitoringInputDict = {"shard_level_metrics": _}
+_params_31: GetRecordsInputDict = {"shard_iterator": _}
+_params_32: GetResourcePolicyInputDict = {"resource_arn": _}
+_params_33: GetShardIteratorInputDict = {"shard_id": _, "shard_iterator_type": _}
+_params_34: IncreaseStreamRetentionPeriodInputDict = {"retention_period_hours": _}
+_params_35: ListChannelsInputDict = {}
+_params_36: ListQueuesInputDict = {}
+_params_37: ListShardsInputDict = {}
+_params_38: ListStreamConsumersInputDict = {"stream_arn": _}
+_params_39: ListStreamsInputDict = {}
+_params_40: ListTagsForResourceInputDict = {"resource_arn": _}
+_params_41: ListTagsForStreamInputDict = {}
+_params_42: MergeShardsInputDict = {"shard_to_merge": _, "adjacent_shard_to_merge": _}
+_params_43: MinimumThroughputBillingCommitmentInputDict = {"status": _}
+_params_44: PartitionFieldDict = {"transform": _, "source_name": _}
+_params_45: PartitionSpecDict = {"partition_fields": _}
+_params_46: PutRecordInputDict = {"data": _}
+_params_47: PutRecordsInputDict = {"records": _}
+_params_48: PutRecordsRequestEntryDict = {"data": _}
+_params_49: PutResourcePolicyInputDict = {"resource_arn": _, "policy": _}
+_params_50: QueueAttributesDict = {}
+_params_51: QueueStartingPositionDict = {"type": _}
+_params_52: QueueStreamConfigurationDict = {"stream_arn": _}
+_params_53: QueueStreamFilterDict = {"stream_arn": _}
+_params_54: ReceiveDeadLetterQueueRecordsInputDict = {"queue_arn": _}
+_params_55: ReceiveQueueRecordsInputDict = {"queue_arn": _}
+_params_56: RecordConfigurationDict = {"record_format_type": _}
+_params_57: RegisterStreamConsumerInputDict = {"stream_arn": _, "consumer_name": _}
+_params_58: RemoveTagsFromStreamInputDict = {"tag_keys": _}
+_params_59: RestoreDeadLetterQueueRecordsInputDict = {"queue_arn": _, "entries": _}
+_params_60: RestoreDeadLetterQueueRecordsRequestEntryDict = {"receipt_handle": _}
+_params_61: S3DestinationConfigurationDict = {"storage_configuration": _}
+_params_62: S3DestinationUpdateInputDict = {"data_freshness_in_seconds": _}
+_params_63: S3StorageConfigurationDict = {
     "bucket_arn": _,
     "expected_bucket_owner": _,
     "compression_type": _,
 }
-_params_47: S3TablesConfigurationDict = {
+_params_64: S3TablesConfigurationDict = {
     "table_bucket_arn": _,
     "namespace": _,
     "table_name": _,
     "compression_type": _,
 }
-_params_48: S3TablesDestinationConfigurationDict = {
+_params_65: S3TablesDestinationConfigurationDict = {
     "dead_letter_queue_s3_configuration": _,
     "s3_tables_configuration_list": _,
 }
-_params_49: S3TablesDestinationUpdateInputDict = {"data_freshness_in_seconds": _}
-_params_50: ShardFilterDict = {"type": _}
-_params_51: SplitShardInputDict = {"shard_to_split": _, "new_starting_hash_key": _}
-_params_52: StartingPositionDict = {"type": _}
-_params_53: StartStreamEncryptionInputDict = {"encryption_type": _, "key_id": _}
-_params_54: StopStreamEncryptionInputDict = {"encryption_type": _, "key_id": _}
-_params_55: StreamFilterDict = {"stream_arn": _}
-_params_56: StreamModeDetailsDict = {"stream_mode": _}
-_params_57: SubscribeToShardInputDict = {
+_params_66: S3TablesDestinationUpdateInputDict = {"data_freshness_in_seconds": _}
+_params_67: ShardFilterDict = {"type": _}
+_params_68: SplitShardInputDict = {"shard_to_split": _, "new_starting_hash_key": _}
+_params_69: StartingPositionDict = {"type": _}
+_params_70: StartStreamEncryptionInputDict = {"encryption_type": _, "key_id": _}
+_params_71: StopStreamEncryptionInputDict = {"encryption_type": _, "key_id": _}
+_params_72: StreamFilterDict = {"stream_arn": _}
+_params_73: StreamModeDetailsDict = {"stream_mode": _}
+_params_74: SubscribeToShardInputDict = {
     "consumer_arn": _,
     "shard_id": _,
     "starting_position": _,
 }
-_params_58: TagResourceInputDict = {"tags": _, "resource_arn": _}
-_params_59: UntagResourceInputDict = {"tag_keys": _, "resource_arn": _}
-_params_60: UpdateAccountSettingsInputDict = {
+_params_75: TagResourceInputDict = {"tags": _, "resource_arn": _}
+_params_76: UntagResourceInputDict = {"tag_keys": _, "resource_arn": _}
+_params_77: UpdateAccountSettingsInputDict = {
     "minimum_throughput_billing_commitment": _
 }
-_params_61: UpdateChannelInputDict = {"channel_arn": _}
-_params_62: UpdateMaxRecordSizeInputDict = {"max_record_size_in_ki_b": _}
-_params_63: UpdateShardCountInputDict = {"target_shard_count": _, "scaling_type": _}
-_params_64: UpdateStreamModeInputDict = {"stream_arn": _, "stream_mode_details": _}
-_params_65: UpdateStreamRecordDistributionStrategyInputDict = {
+_params_78: UpdateChannelInputDict = {"channel_arn": _}
+_params_79: UpdateDeadLetterQueueRecordsVisibilityInputDict = {
+    "queue_arn": _,
+    "entries": _,
+}
+_params_80: UpdateDeadLetterQueueRecordsVisibilityRequestEntryDict = {
+    "receipt_handle": _,
+    "visibility_timeout_seconds": _,
+}
+_params_81: UpdateMaxRecordSizeInputDict = {"max_record_size_in_ki_b": _}
+_params_82: UpdateQueueInputDict = {"queue_arn": _, "queue_attributes": _}
+_params_83: UpdateQueueRecordsVisibilityInputDict = {"queue_arn": _, "entries": _}
+_params_84: UpdateQueueRecordsVisibilityRequestEntryDict = {
+    "receipt_handle": _,
+    "visibility_timeout_seconds": _,
+}
+_params_85: UpdateShardCountInputDict = {"target_shard_count": _, "scaling_type": _}
+_params_86: UpdateStreamModeInputDict = {"stream_arn": _, "stream_mode_details": _}
+_params_87: UpdateStreamRecordDistributionStrategyInputDict = {
     "stream_arn": _,
     "record_distribution_strategy": _,
 }
-_params_66: UpdateStreamWarmThroughputInputDict = {"warm_throughput_mi_bps": _}
+_params_88: UpdateStreamWarmThroughputInputDict = {"warm_throughput_mi_bps": _}
 
 
 def _request[T](form: type[T]) -> T:
@@ -511,6 +677,20 @@ def _request[T](form: type[T]) -> T:
 
 async def check_async_calls(client: AsyncKinesisClient) -> None:
     pass
+    await client.acknowledge_dead_letter_queue_records(queue_arn=_, entries=_)
+    await client.acknowledge_dead_letter_queue_records(
+        **_request(AcknowledgeDeadLetterQueueRecordsInputDict)
+    )
+    await client.acknowledge_dead_letter_queue_records(
+        _request(AcknowledgeDeadLetterQueueRecordsInput)
+    )
+    await client.acknowledge_dead_letter_queue_records(
+        _request(AcknowledgeDeadLetterQueueRecordsInputDict)
+    )
+    await client.acknowledge_queue_records(queue_arn=_, entries=_)
+    await client.acknowledge_queue_records(**_request(AcknowledgeQueueRecordsInputDict))
+    await client.acknowledge_queue_records(_request(AcknowledgeQueueRecordsInput))
+    await client.acknowledge_queue_records(_request(AcknowledgeQueueRecordsInputDict))
     await client.add_tags_to_stream(tags=_)
     await client.add_tags_to_stream(**_request(AddTagsToStreamInputDict))
     await client.add_tags_to_stream(_request(AddTagsToStreamInput))
@@ -521,6 +701,10 @@ async def check_async_calls(client: AsyncKinesisClient) -> None:
     await client.create_channel(**_request(CreateChannelInputDict))
     await client.create_channel(_request(CreateChannelInput))
     await client.create_channel(_request(CreateChannelInputDict))
+    await client.create_queue(queue_name=_, stream_configuration_list=_)
+    await client.create_queue(**_request(CreateQueueInputDict))
+    await client.create_queue(_request(CreateQueueInput))
+    await client.create_queue(_request(CreateQueueInputDict))
     await client.create_stream(stream_name=_)
     await client.create_stream(**_request(CreateStreamInputDict))
     await client.create_stream(_request(CreateStreamInput))
@@ -539,6 +723,10 @@ async def check_async_calls(client: AsyncKinesisClient) -> None:
     await client.delete_channel(**_request(DeleteChannelInputDict))
     await client.delete_channel(_request(DeleteChannelInput))
     await client.delete_channel(_request(DeleteChannelInputDict))
+    await client.delete_queue(queue_arn=_)
+    await client.delete_queue(**_request(DeleteQueueInputDict))
+    await client.delete_queue(_request(DeleteQueueInput))
+    await client.delete_queue(_request(DeleteQueueInputDict))
     await client.delete_resource_policy(resource_arn=_)
     await client.delete_resource_policy(**_request(DeleteResourcePolicyInputDict))
     await client.delete_resource_policy(_request(DeleteResourcePolicyInput))
@@ -565,6 +753,10 @@ async def check_async_calls(client: AsyncKinesisClient) -> None:
     await client.describe_limits(**_request(DescribeLimitsInputDict))
     await client.describe_limits(_request(DescribeLimitsInput))
     await client.describe_limits(_request(DescribeLimitsInputDict))
+    await client.describe_queue(queue_arn=_)
+    await client.describe_queue(**_request(DescribeQueueInputDict))
+    await client.describe_queue(_request(DescribeQueueInput))
+    await client.describe_queue(_request(DescribeQueueInputDict))
     await client.describe_stream()
     await client.describe_stream(**_request(DescribeStreamInputDict))
     await client.describe_stream(_request(DescribeStreamInput))
@@ -617,6 +809,10 @@ async def check_async_calls(client: AsyncKinesisClient) -> None:
     await client.list_channels(**_request(ListChannelsInputDict))
     await client.list_channels(_request(ListChannelsInput))
     await client.list_channels(_request(ListChannelsInputDict))
+    await client.list_queues()
+    await client.list_queues(**_request(ListQueuesInputDict))
+    await client.list_queues(_request(ListQueuesInput))
+    await client.list_queues(_request(ListQueuesInputDict))
     await client.list_shards()
     await client.list_shards(**_request(ListShardsInputDict))
     await client.list_shards(_request(ListShardsInput))
@@ -653,6 +849,20 @@ async def check_async_calls(client: AsyncKinesisClient) -> None:
     await client.put_resource_policy(**_request(PutResourcePolicyInputDict))
     await client.put_resource_policy(_request(PutResourcePolicyInput))
     await client.put_resource_policy(_request(PutResourcePolicyInputDict))
+    await client.receive_dead_letter_queue_records(queue_arn=_)
+    await client.receive_dead_letter_queue_records(
+        **_request(ReceiveDeadLetterQueueRecordsInputDict)
+    )
+    await client.receive_dead_letter_queue_records(
+        _request(ReceiveDeadLetterQueueRecordsInput)
+    )
+    await client.receive_dead_letter_queue_records(
+        _request(ReceiveDeadLetterQueueRecordsInputDict)
+    )
+    await client.receive_queue_records(queue_arn=_)
+    await client.receive_queue_records(**_request(ReceiveQueueRecordsInputDict))
+    await client.receive_queue_records(_request(ReceiveQueueRecordsInput))
+    await client.receive_queue_records(_request(ReceiveQueueRecordsInputDict))
     await client.register_stream_consumer(stream_arn=_, consumer_name=_)
     await client.register_stream_consumer(**_request(RegisterStreamConsumerInputDict))
     await client.register_stream_consumer(_request(RegisterStreamConsumerInput))
@@ -661,6 +871,16 @@ async def check_async_calls(client: AsyncKinesisClient) -> None:
     await client.remove_tags_from_stream(**_request(RemoveTagsFromStreamInputDict))
     await client.remove_tags_from_stream(_request(RemoveTagsFromStreamInput))
     await client.remove_tags_from_stream(_request(RemoveTagsFromStreamInputDict))
+    await client.restore_dead_letter_queue_records(queue_arn=_, entries=_)
+    await client.restore_dead_letter_queue_records(
+        **_request(RestoreDeadLetterQueueRecordsInputDict)
+    )
+    await client.restore_dead_letter_queue_records(
+        _request(RestoreDeadLetterQueueRecordsInput)
+    )
+    await client.restore_dead_letter_queue_records(
+        _request(RestoreDeadLetterQueueRecordsInputDict)
+    )
     await client.split_shard(shard_to_split=_, new_starting_hash_key=_)
     await client.split_shard(**_request(SplitShardInputDict))
     await client.split_shard(_request(SplitShardInput))
@@ -693,10 +913,34 @@ async def check_async_calls(client: AsyncKinesisClient) -> None:
     await client.update_channel(**_request(UpdateChannelInputDict))
     await client.update_channel(_request(UpdateChannelInput))
     await client.update_channel(_request(UpdateChannelInputDict))
+    await client.update_dead_letter_queue_records_visibility(queue_arn=_, entries=_)
+    await client.update_dead_letter_queue_records_visibility(
+        **_request(UpdateDeadLetterQueueRecordsVisibilityInputDict)
+    )
+    await client.update_dead_letter_queue_records_visibility(
+        _request(UpdateDeadLetterQueueRecordsVisibilityInput)
+    )
+    await client.update_dead_letter_queue_records_visibility(
+        _request(UpdateDeadLetterQueueRecordsVisibilityInputDict)
+    )
     await client.update_max_record_size(max_record_size_in_ki_b=_)
     await client.update_max_record_size(**_request(UpdateMaxRecordSizeInputDict))
     await client.update_max_record_size(_request(UpdateMaxRecordSizeInput))
     await client.update_max_record_size(_request(UpdateMaxRecordSizeInputDict))
+    await client.update_queue(queue_arn=_, queue_attributes=_)
+    await client.update_queue(**_request(UpdateQueueInputDict))
+    await client.update_queue(_request(UpdateQueueInput))
+    await client.update_queue(_request(UpdateQueueInputDict))
+    await client.update_queue_records_visibility(queue_arn=_, entries=_)
+    await client.update_queue_records_visibility(
+        **_request(UpdateQueueRecordsVisibilityInputDict)
+    )
+    await client.update_queue_records_visibility(
+        _request(UpdateQueueRecordsVisibilityInput)
+    )
+    await client.update_queue_records_visibility(
+        _request(UpdateQueueRecordsVisibilityInputDict)
+    )
     await client.update_shard_count(target_shard_count=_, scaling_type=_)
     await client.update_shard_count(**_request(UpdateShardCountInputDict))
     await client.update_shard_count(_request(UpdateShardCountInput))
@@ -731,6 +975,20 @@ async def check_async_calls(client: AsyncKinesisClient) -> None:
 
 def check_sync_calls(client: KinesisClient) -> None:
     pass
+    client.acknowledge_dead_letter_queue_records(queue_arn=_, entries=_)
+    client.acknowledge_dead_letter_queue_records(
+        **_request(AcknowledgeDeadLetterQueueRecordsInputDict)
+    )
+    client.acknowledge_dead_letter_queue_records(
+        _request(AcknowledgeDeadLetterQueueRecordsInput)
+    )
+    client.acknowledge_dead_letter_queue_records(
+        _request(AcknowledgeDeadLetterQueueRecordsInputDict)
+    )
+    client.acknowledge_queue_records(queue_arn=_, entries=_)
+    client.acknowledge_queue_records(**_request(AcknowledgeQueueRecordsInputDict))
+    client.acknowledge_queue_records(_request(AcknowledgeQueueRecordsInput))
+    client.acknowledge_queue_records(_request(AcknowledgeQueueRecordsInputDict))
     client.add_tags_to_stream(tags=_)
     client.add_tags_to_stream(**_request(AddTagsToStreamInputDict))
     client.add_tags_to_stream(_request(AddTagsToStreamInput))
@@ -741,6 +999,10 @@ def check_sync_calls(client: KinesisClient) -> None:
     client.create_channel(**_request(CreateChannelInputDict))
     client.create_channel(_request(CreateChannelInput))
     client.create_channel(_request(CreateChannelInputDict))
+    client.create_queue(queue_name=_, stream_configuration_list=_)
+    client.create_queue(**_request(CreateQueueInputDict))
+    client.create_queue(_request(CreateQueueInput))
+    client.create_queue(_request(CreateQueueInputDict))
     client.create_stream(stream_name=_)
     client.create_stream(**_request(CreateStreamInputDict))
     client.create_stream(_request(CreateStreamInput))
@@ -759,6 +1021,10 @@ def check_sync_calls(client: KinesisClient) -> None:
     client.delete_channel(**_request(DeleteChannelInputDict))
     client.delete_channel(_request(DeleteChannelInput))
     client.delete_channel(_request(DeleteChannelInputDict))
+    client.delete_queue(queue_arn=_)
+    client.delete_queue(**_request(DeleteQueueInputDict))
+    client.delete_queue(_request(DeleteQueueInput))
+    client.delete_queue(_request(DeleteQueueInputDict))
     client.delete_resource_policy(resource_arn=_)
     client.delete_resource_policy(**_request(DeleteResourcePolicyInputDict))
     client.delete_resource_policy(_request(DeleteResourcePolicyInput))
@@ -783,6 +1049,10 @@ def check_sync_calls(client: KinesisClient) -> None:
     client.describe_limits(**_request(DescribeLimitsInputDict))
     client.describe_limits(_request(DescribeLimitsInput))
     client.describe_limits(_request(DescribeLimitsInputDict))
+    client.describe_queue(queue_arn=_)
+    client.describe_queue(**_request(DescribeQueueInputDict))
+    client.describe_queue(_request(DescribeQueueInput))
+    client.describe_queue(_request(DescribeQueueInputDict))
     client.describe_stream()
     client.describe_stream(**_request(DescribeStreamInputDict))
     client.describe_stream(_request(DescribeStreamInput))
@@ -829,6 +1099,10 @@ def check_sync_calls(client: KinesisClient) -> None:
     client.list_channels(**_request(ListChannelsInputDict))
     client.list_channels(_request(ListChannelsInput))
     client.list_channels(_request(ListChannelsInputDict))
+    client.list_queues()
+    client.list_queues(**_request(ListQueuesInputDict))
+    client.list_queues(_request(ListQueuesInput))
+    client.list_queues(_request(ListQueuesInputDict))
     client.list_shards()
     client.list_shards(**_request(ListShardsInputDict))
     client.list_shards(_request(ListShardsInput))
@@ -865,6 +1139,20 @@ def check_sync_calls(client: KinesisClient) -> None:
     client.put_resource_policy(**_request(PutResourcePolicyInputDict))
     client.put_resource_policy(_request(PutResourcePolicyInput))
     client.put_resource_policy(_request(PutResourcePolicyInputDict))
+    client.receive_dead_letter_queue_records(queue_arn=_)
+    client.receive_dead_letter_queue_records(
+        **_request(ReceiveDeadLetterQueueRecordsInputDict)
+    )
+    client.receive_dead_letter_queue_records(
+        _request(ReceiveDeadLetterQueueRecordsInput)
+    )
+    client.receive_dead_letter_queue_records(
+        _request(ReceiveDeadLetterQueueRecordsInputDict)
+    )
+    client.receive_queue_records(queue_arn=_)
+    client.receive_queue_records(**_request(ReceiveQueueRecordsInputDict))
+    client.receive_queue_records(_request(ReceiveQueueRecordsInput))
+    client.receive_queue_records(_request(ReceiveQueueRecordsInputDict))
     client.register_stream_consumer(stream_arn=_, consumer_name=_)
     client.register_stream_consumer(**_request(RegisterStreamConsumerInputDict))
     client.register_stream_consumer(_request(RegisterStreamConsumerInput))
@@ -873,6 +1161,16 @@ def check_sync_calls(client: KinesisClient) -> None:
     client.remove_tags_from_stream(**_request(RemoveTagsFromStreamInputDict))
     client.remove_tags_from_stream(_request(RemoveTagsFromStreamInput))
     client.remove_tags_from_stream(_request(RemoveTagsFromStreamInputDict))
+    client.restore_dead_letter_queue_records(queue_arn=_, entries=_)
+    client.restore_dead_letter_queue_records(
+        **_request(RestoreDeadLetterQueueRecordsInputDict)
+    )
+    client.restore_dead_letter_queue_records(
+        _request(RestoreDeadLetterQueueRecordsInput)
+    )
+    client.restore_dead_letter_queue_records(
+        _request(RestoreDeadLetterQueueRecordsInputDict)
+    )
     client.split_shard(shard_to_split=_, new_starting_hash_key=_)
     client.split_shard(**_request(SplitShardInputDict))
     client.split_shard(_request(SplitShardInput))
@@ -901,10 +1199,32 @@ def check_sync_calls(client: KinesisClient) -> None:
     client.update_channel(**_request(UpdateChannelInputDict))
     client.update_channel(_request(UpdateChannelInput))
     client.update_channel(_request(UpdateChannelInputDict))
+    client.update_dead_letter_queue_records_visibility(queue_arn=_, entries=_)
+    client.update_dead_letter_queue_records_visibility(
+        **_request(UpdateDeadLetterQueueRecordsVisibilityInputDict)
+    )
+    client.update_dead_letter_queue_records_visibility(
+        _request(UpdateDeadLetterQueueRecordsVisibilityInput)
+    )
+    client.update_dead_letter_queue_records_visibility(
+        _request(UpdateDeadLetterQueueRecordsVisibilityInputDict)
+    )
     client.update_max_record_size(max_record_size_in_ki_b=_)
     client.update_max_record_size(**_request(UpdateMaxRecordSizeInputDict))
     client.update_max_record_size(_request(UpdateMaxRecordSizeInput))
     client.update_max_record_size(_request(UpdateMaxRecordSizeInputDict))
+    client.update_queue(queue_arn=_, queue_attributes=_)
+    client.update_queue(**_request(UpdateQueueInputDict))
+    client.update_queue(_request(UpdateQueueInput))
+    client.update_queue(_request(UpdateQueueInputDict))
+    client.update_queue_records_visibility(queue_arn=_, entries=_)
+    client.update_queue_records_visibility(
+        **_request(UpdateQueueRecordsVisibilityInputDict)
+    )
+    client.update_queue_records_visibility(_request(UpdateQueueRecordsVisibilityInput))
+    client.update_queue_records_visibility(
+        _request(UpdateQueueRecordsVisibilityInputDict)
+    )
     client.update_shard_count(target_shard_count=_, scaling_type=_)
     client.update_shard_count(**_request(UpdateShardCountInputDict))
     client.update_shard_count(_request(UpdateShardCountInput))

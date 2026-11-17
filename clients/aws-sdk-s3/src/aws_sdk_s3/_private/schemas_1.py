@@ -28,9 +28,8 @@ _xaebo = "x-amz-expected-bucket-owner"
 _RC = "RequestCharged"
 _smi = "smithy.api#output"
 _xarc = "x-amz-request-charged"
-_smit = "smithy.api#error"
-_c = "client"
-_sE = "smithy.api#httpError"
+_VI = "VersionId"
+_xavi = "x-amz-version-id"
 _smith = "smithy.api#http"
 _ARI = "AbortRuleId"
 _sN = "smithy.api#xmlName"
@@ -322,8 +321,11 @@ _cDBRR = "com.amazonaws.s3#DeleteBucketReplicationRequest"
 _DBRO = "DeleteBucketReplicationOutput"
 _DBR = "DeleteBucketReplication"
 _Dat = "Date"
-_OLT = "ObjectLockToken"
-_IR = "InvalidRequest"
+_EHD = "EventHoldDuration"
+_Mo = "Mode"
+_OLRb = "ObjectLockRetention"
+_RUD = "RetainUntilDate"
+_EHv = "EventHold"
 
 BUCKET_LOCATION_CONSTRAINT: StaticSchema = (
     14,
@@ -838,6 +840,7 @@ CREATE_MULTIPART_UPLOAD_OUTPUT: StaticSchema = (
         _RC,
         _CA,
         _CT,
+        _VI,
     ),
     (
         (lambda: schemas.ABORT_DATE, {_sH: _xaad}),
@@ -854,6 +857,7 @@ CREATE_MULTIPART_UPLOAD_OUTPUT: StaticSchema = (
         (lambda: schemas.REQUEST_CHARGED, {_sH: _xarc}),
         (lambda: schemas.CHECKSUM_ALGORITHM, {_sH: _xaca}),
         (lambda: schemas.CHECKSUM_TYPE, {_sH: _xact}),
+        (lambda: schemas.OBJECT_VERSION_ID, {_sH: _xavi}),
     ),
 )
 
@@ -1435,6 +1439,16 @@ DATE: StaticSchema = (4, n0, _Dat, {_sF: _dt})
 
 DAYS: StaticSchema = (7, n0, _Da, 0)
 
-OBJECT_LOCK_TOKEN: StaticSchema = (3, n0, _OLT, 0)
-
-INVALID_REQUEST: StaticSchema = (18, n0, _IR, {_smit: _c, _sE: 400})
+OBJECT_LOCK_RETENTION: StaticSchema = (
+    18,
+    n0,
+    _OLRb,
+    0,
+    (_Mo, _RUD, _EHv, _EHD),
+    (
+        (lambda: schemas.OBJECT_LOCK_RETENTION_MODE, 0),
+        (DATE, 0),
+        (lambda: schemas.OBJECT_LOCK_EVENT_HOLD, 0),
+        (lambda: schemas.EVENT_HOLD_DURATION, 0),
+    ),
+)

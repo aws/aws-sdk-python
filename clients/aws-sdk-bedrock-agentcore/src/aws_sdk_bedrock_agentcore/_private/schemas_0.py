@@ -173,7 +173,16 @@ _fT = "fixType"
 _r = "recommendation"
 _fS = "failureSpans"
 _ASLf = "AffectedSessionList"
+_AAN = "AgentApplicationName"
 _AC = "AgentCard"
+_AREA = "AgentRuntimeEndpointArn"
+_RT = "RequestTemplate"
+_ACRI = "AgentCoreRuntimeInvocation"
+_aREA = "agentRuntimeEndpointArn"
+_rT = "requestTemplate"
+_ARV = "AgentRuntimeVersion"
+_ACRID = "AgentCoreRuntimeInvocationDetails"
+_aRV = "agentRuntimeVersion"
 _ST = "SessionType"
 _GACI = "GetAgentCardInput"
 _sSI = "smithy.synthetic#originalShapeId"
@@ -298,7 +307,6 @@ _SRSO = "StopRuntimeSessionOutput"
 _cSRSRo = "com.amazonaws.bedrockagentcore#StopRuntimeSessionResponse"
 _UE = "UnauthorizedException"
 _SRS = "StopRuntimeSession"
-_SD = "SkillDefinition"
 _MR = "MaxResults"
 _NT = "NextToken"
 _CISI = "CodeInterpreterSessionId"
@@ -619,7 +627,37 @@ AFFECTED_SESSION_LIST: StaticSchema = (
     ((AFFECTED_SESSION, 0),),
 )
 
+AGENT_APPLICATION_NAME: StaticSchema = (3, n0, _AAN, 0)
+
 AGENT_CARD: StaticSchema = (13, n0, _AC, 0)
+
+AGENT_RUNTIME_ENDPOINT_ARN: StaticSchema = (3, n0, _AREA, 0)
+
+REQUEST_TEMPLATE: StaticSchema = (3, n0, _RT, 0)
+
+AGENT_CORE_RUNTIME_INVOCATION: StaticSchema = (
+    18,
+    n0,
+    _ACRI,
+    0,
+    (_aREA, _rT),
+    ((AGENT_RUNTIME_ENDPOINT_ARN, 1), (REQUEST_TEMPLATE, 0)),
+)
+
+AGENT_RUNTIME_VERSION: StaticSchema = (3, n0, _ARV, 0)
+
+AGENT_CORE_RUNTIME_INVOCATION_DETAILS: StaticSchema = (
+    18,
+    n0,
+    _ACRID,
+    0,
+    (_aREA, _aRV, _rT),
+    (
+        (AGENT_RUNTIME_ENDPOINT_ARN, 1),
+        (AGENT_RUNTIME_VERSION, 1),
+        (REQUEST_TEMPLATE, 0),
+    ),
+)
 
 SESSION_TYPE: StaticSchema = (3, n0, _ST, 0)
 
@@ -1048,15 +1086,6 @@ UNAUTHORIZED_EXCEPTION: StaticSchema = (
     {_sm: _c, _sE: 401},
     (_mes,),
     ((NON_BLANK_STRING, 0),),
-)
-
-SKILL_DEFINITION: StaticSchema = (
-    18,
-    n0,
-    _SD,
-    0,
-    (_sV, _iC),
-    ((SCHEMA_VERSION, 0), (INLINE_CONTENT, 0)),
 )
 
 MAX_RESULTS: StaticSchema = (7, n0, _MR, 0)

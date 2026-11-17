@@ -27,7 +27,9 @@ _CREATING = "CREATING"
 _UPDATING = "UPDATING"
 _DELETING = "DELETING"
 _ACTIVE = "ACTIVE"
+_CF = "CREATE_FAILED"
 _UF = "UPDATE_FAILED"
+_DF = "DELETE_FAILED"
 _smithy = "smithy.api#output"
 _dA = "datasetArn"
 _st = "status"
@@ -40,8 +42,9 @@ _sQ = "smithy.api#httpQuery"
 _fR = "failureReason"
 _mR = "maxResults"
 _nT = "nextToken"
+_kKA = "kmsKeyArn"
 _vI = "versionId"
-_AAT = "AllowedAudienceType"
+_sOm = "smithy.api#clientOptional"
 _cPAr = "credentialProviderArn"
 _ty = "type"
 _eRA = "executionRoleArn"
@@ -51,11 +54,28 @@ _com = "components"
 _bNr = "branchName"
 _cM = "commitMessage"
 _cBr = "createdBy"
-_kKA = "kmsKeyArn"
 _bIu = "bundleId"
+_DCBI = "DeleteConfigurationBundleInput"
+_cDCBR = "com.amazonaws.bedrockagentcorecontrol#DeleteConfigurationBundleRequest"
+_CBS = "ConfigurationBundleStatus"
+_DCBO = "DeleteConfigurationBundleOutput"
+_cDCBRo = "com.amazonaws.bedrockagentcorecontrol#DeleteConfigurationBundleResponse"
+_DCB = "DeleteConfigurationBundle"
+_GCBI = "GetConfigurationBundleInput"
+_cGCBR = "com.amazonaws.bedrockagentcorecontrol#GetConfigurationBundleRequest"
+_CBVL = "ConfigurationBundleVersionList"
+_VLM = "VersionLineageMetadata"
 _pVI = "parentVersionIds"
+_GCBO = "GetConfigurationBundleOutput"
+_cGCBRo = "com.amazonaws.bedrockagentcorecontrol#GetConfigurationBundleResponse"
 _lM = "lineageMetadata"
+_GCB = "GetConfigurationBundle"
+_GCBVI = "GetConfigurationBundleVersionInput"
+_cGCBVR = "com.amazonaws.bedrockagentcorecontrol#GetConfigurationBundleVersionRequest"
+_GCBVO = "GetConfigurationBundleVersionOutput"
+_cGCBVRo = "com.amazonaws.bedrockagentcorecontrol#GetConfigurationBundleVersionResponse"
 _vCA = "versionCreatedAt"
+_GCBV = "GetConfigurationBundleVersion"
 _LCBI = "ListConfigurationBundlesInput"
 _cLCBR = "com.amazonaws.bedrockagentcorecontrol#ListConfigurationBundlesRequest"
 _CBSo = "ConfigurationBundleSummary"
@@ -174,52 +194,230 @@ _DUo = "DownloadUrl"
 _DSr = "DraftStatus"
 _MODIFIED = "MODIFIED"
 _UNMODIFIED = "UNMODIFIED"
+_ECBF = "ExampleCountByField"
+_tu = "turns"
+_in = "input"
+_aPc = "actorProfile"
 _GDO = "GetDatasetOutput"
 _cGDRo = "com.amazonaws.bedrockagentcorecontrol#GetDatasetResponse"
 _dS = "draftStatus"
 _eCx = "exampleCount"
+_eCBF = "exampleCountByField"
 _dUo = "downloadUrl"
 _dUEA = "downloadUrlExpiresAt"
 _GD = "GetDataset"
+_EFx = "ExampleField"
+_TURNS = "TURNS"
+_INPUT = "INPUT"
+_AP_ = "ACTOR_PROFILE"
+_EFL = "ExampleFieldList"
+_EFC = "ExampleFieldCondition"
+_aO = "anyOf"
+_EFCL = "ExampleFieldConditionList"
+_DGI = "DatasetGenerationId"
+_DGIL = "DatasetGenerationIdList"
+_LDEF = "ListDatasetExamplesFilter"
+_gI = "generationIds"
+_eF = "exampleFields"
 _LDEI = "ListDatasetExamplesInput"
 _cLDER = "com.amazonaws.bedrockagentcorecontrol#ListDatasetExamplesRequest"
 _LDEO = "ListDatasetExamplesOutput"
 _cLDERo = "com.amazonaws.bedrockagentcorecontrol#ListDatasetExamplesResponse"
 _LDE = "ListDatasetExamples"
-_LDI = "ListDatasetsInput"
-_cLDR = "com.amazonaws.bedrockagentcorecontrol#ListDatasetsRequest"
-_DSa = "DatasetSummary"
-_DSL = "DatasetSummaryList"
-_LDO = "ListDatasetsOutput"
-_cLDRo = "com.amazonaws.bedrockagentcorecontrol#ListDatasetsResponse"
-_da = "datasets"
-_LD = "ListDatasets"
-_LDVI = "ListDatasetVersionsInput"
-_cLDVR = "com.amazonaws.bedrockagentcorecontrol#ListDatasetVersionsRequest"
-_DVS = "DatasetVersionSummary"
-_DVSL = "DatasetVersionSummaryList"
-_LDVO = "ListDatasetVersionsOutput"
-_cLDVRo = "com.amazonaws.bedrockagentcorecontrol#ListDatasetVersionsResponse"
-_LDV = "ListDatasetVersions"
-_UDI = "UpdateDatasetInput"
-_cUDR = "com.amazonaws.bedrockagentcorecontrol#UpdateDatasetRequest"
-_UDO = "UpdateDatasetOutput"
-_cUDRo = "com.amazonaws.bedrockagentcorecontrol#UpdateDatasetResponse"
-_UDp = "UpdateDataset"
-_UDEI = "UpdateDatasetExamplesInput"
-_cUDER = "com.amazonaws.bedrockagentcorecontrol#UpdateDatasetExamplesRequest"
-_UDEO = "UpdateDatasetExamplesOutput"
-_cUDERo = "com.amazonaws.bedrockagentcorecontrol#UpdateDatasetExamplesResponse"
-_uC = "updatedCount"
-_UDE = "UpdateDatasetExamples"
-_DRPI = "DeleteResourcePolicyInput"
-_cDRPR = "com.amazonaws.bedrockagentcorecontrol#DeleteResourcePolicyRequest"
-_rAe = "resourceArn"
-_DRPO = "DeleteResourcePolicyOutput"
-_cDRPRo = "com.amazonaws.bedrockagentcorecontrol#DeleteResourcePolicyResponse"
-_DRP = "DeleteResourcePolicy"
 
-ALLOWED_AUDIENCE_TYPE: StaticSchema = (3, n0, _AAT, 0)
+DELETE_CONFIGURATION_BUNDLE_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DCBI,
+    {_sSI: _cDCBR, _smith: None},
+    (_bIu,),
+    ((lambda: schemas.CONFIGURATION_BUNDLE_ID, 9),),
+)
+
+DELETE_CONFIGURATION_BUNDLE_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DCBO,
+    {_sSI: _cDCBRo, _smithy: None},
+    (_bA, _bIu, _st),
+    (
+        (lambda: schemas.CONFIGURATION_BUNDLE_ARN, {_sOm: None, _sm: None}),
+        (lambda: schemas.CONFIGURATION_BUNDLE_ID, 1),
+        (lambda: CONFIGURATION_BUNDLE_STATUS, 1),
+    ),
+)
+
+DELETE_CONFIGURATION_BUNDLE: StaticOperationSchema = (
+    23,
+    n0,
+    _DCB,
+    {
+        _smithya: MappingProxyType(
+            {
+                "method": "DELETE",
+                "uri": "/configuration-bundles/{bundleId}",
+                "code": 202,
+            }
+        )
+    },
+    DELETE_CONFIGURATION_BUNDLE_INPUT,
+    DELETE_CONFIGURATION_BUNDLE_OUTPUT,
+    (
+        lambda: schemas.ACCESS_DENIED_EXCEPTION,
+        lambda: schemas.CONFLICT_EXCEPTION,
+        lambda: schemas.INTERNAL_SERVER_EXCEPTION,
+        lambda: schemas.RESOURCE_NOT_FOUND_EXCEPTION,
+        lambda: schemas.THROTTLING_EXCEPTION,
+        lambda: schemas.VALIDATION_EXCEPTION,
+    ),
+)
+
+CONFIGURATION_BUNDLE_STATUS: StaticSchema = (
+    14,
+    n0,
+    _CBS,
+    0,
+    (_ACTIVE, _CREATING, _CF, _UPDATING, _UF, _DELETING, _DF),
+    (
+        (-1, {_sVm: _ACTIVE}),
+        (-1, {_sVm: _CREATING}),
+        (-1, {_sVm: _CF}),
+        (-1, {_sVm: _UPDATING}),
+        (-1, {_sVm: _UF}),
+        (-1, {_sVm: _DELETING}),
+        (-1, {_sVm: _DF}),
+    ),
+)
+
+GET_CONFIGURATION_BUNDLE_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GCBI,
+    {_sSI: _cGCBR, _smith: None},
+    (_bIu, _bNr),
+    (
+        (lambda: schemas.CONFIGURATION_BUNDLE_ID, 9),
+        (lambda: schemas.BRANCH_NAME, {_sQ: _bNr}),
+    ),
+)
+
+GET_CONFIGURATION_BUNDLE_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GCBO,
+    {_sSI: _cGCBRo, _smithy: None},
+    (_bA, _bIu, _bN, _d, _vI, _com, _lM, _cA, _uA, _kKA),
+    (
+        (lambda: schemas.CONFIGURATION_BUNDLE_ARN, 1),
+        (lambda: schemas.CONFIGURATION_BUNDLE_ID, 1),
+        (lambda: schemas.CONFIGURATION_BUNDLE_NAME, 1),
+        (lambda: schemas.CONFIGURATION_BUNDLE_DESCRIPTION, 0),
+        (lambda: schemas.CONFIGURATION_BUNDLE_VERSION, 1),
+        (lambda: schemas.COMPONENT_CONFIGURATION_MAP, 1),
+        (lambda: VERSION_LINEAGE_METADATA, 0),
+        (4, 1),
+        (4, 1),
+        (lambda: schemas.KMS_KEY_ARN, 0),
+    ),
+)
+
+GET_CONFIGURATION_BUNDLE: StaticOperationSchema = (
+    23,
+    n0,
+    _GCB,
+    {
+        _smithya: MappingProxyType(
+            {"method": "GET", "uri": "/configuration-bundles/{bundleId}"}
+        )
+    },
+    GET_CONFIGURATION_BUNDLE_INPUT,
+    GET_CONFIGURATION_BUNDLE_OUTPUT,
+    (
+        lambda: schemas.ACCESS_DENIED_EXCEPTION,
+        lambda: schemas.INTERNAL_SERVER_EXCEPTION,
+        lambda: schemas.RESOURCE_NOT_FOUND_EXCEPTION,
+        lambda: schemas.THROTTLING_EXCEPTION,
+        lambda: schemas.VALIDATION_EXCEPTION,
+    ),
+)
+
+CONFIGURATION_BUNDLE_VERSION_LIST: StaticSchema = (
+    16,
+    n0,
+    _CBVL,
+    0,
+    (_mem,),
+    ((lambda: schemas.CONFIGURATION_BUNDLE_VERSION, 0),),
+)
+
+VERSION_LINEAGE_METADATA: StaticSchema = (
+    18,
+    n0,
+    _VLM,
+    0,
+    (_pVI, _bNr, _cBr, _cM),
+    (
+        (CONFIGURATION_BUNDLE_VERSION_LIST, 0),
+        (lambda: schemas.BRANCH_NAME, 0),
+        (lambda: schemas.VERSION_CREATED_BY_SOURCE, 0),
+        (3, 0),
+    ),
+)
+
+GET_CONFIGURATION_BUNDLE_VERSION_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GCBVI,
+    {_sSI: _cGCBVR, _smith: None},
+    (_bIu, _vI),
+    (
+        (lambda: schemas.CONFIGURATION_BUNDLE_ID, 9),
+        (lambda: schemas.CONFIGURATION_BUNDLE_VERSION, 9),
+    ),
+)
+
+GET_CONFIGURATION_BUNDLE_VERSION_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GCBVO,
+    {_sSI: _cGCBVRo, _smithy: None},
+    (_bA, _bIu, _bN, _d, _vI, _com, _lM, _cA, _vCA, _kKA),
+    (
+        (lambda: schemas.CONFIGURATION_BUNDLE_ARN, 1),
+        (lambda: schemas.CONFIGURATION_BUNDLE_ID, 1),
+        (lambda: schemas.CONFIGURATION_BUNDLE_NAME, 1),
+        (lambda: schemas.CONFIGURATION_BUNDLE_DESCRIPTION, 0),
+        (lambda: schemas.CONFIGURATION_BUNDLE_VERSION, 1),
+        (lambda: schemas.COMPONENT_CONFIGURATION_MAP, 1),
+        (VERSION_LINEAGE_METADATA, 0),
+        (4, 1),
+        (4, 1),
+        (lambda: schemas.KMS_KEY_ARN, 0),
+    ),
+)
+
+GET_CONFIGURATION_BUNDLE_VERSION: StaticOperationSchema = (
+    23,
+    n0,
+    _GCBV,
+    {
+        _smithya: MappingProxyType(
+            {
+                "method": "GET",
+                "uri": "/configuration-bundles/{bundleId}/versions/{versionId}",
+            }
+        )
+    },
+    GET_CONFIGURATION_BUNDLE_VERSION_INPUT,
+    GET_CONFIGURATION_BUNDLE_VERSION_OUTPUT,
+    (
+        lambda: schemas.ACCESS_DENIED_EXCEPTION,
+        lambda: schemas.INTERNAL_SERVER_EXCEPTION,
+        lambda: schemas.RESOURCE_NOT_FOUND_EXCEPTION,
+        lambda: schemas.THROTTLING_EXCEPTION,
+        lambda: schemas.VALIDATION_EXCEPTION,
+    ),
+)
 
 LIST_CONFIGURATION_BUNDLES_INPUT: StaticSchema = (
     18,
@@ -340,7 +538,7 @@ CONFIGURATION_BUNDLE_VERSION_SUMMARY: StaticSchema = (
         (lambda: schemas.CONFIGURATION_BUNDLE_ARN, 1),
         (lambda: schemas.CONFIGURATION_BUNDLE_ID, 1),
         (lambda: schemas.CONFIGURATION_BUNDLE_VERSION, 1),
-        (lambda: schemas.VERSION_LINEAGE_METADATA, 0),
+        (VERSION_LINEAGE_METADATA, 0),
         (4, 1),
     ),
 )
@@ -366,7 +564,7 @@ UPDATE_CONFIGURATION_BUNDLE_INPUT: StaticSchema = (
         (lambda: schemas.CONFIGURATION_BUNDLE_NAME, 0),
         (lambda: schemas.CONFIGURATION_BUNDLE_DESCRIPTION, 0),
         (lambda: schemas.COMPONENT_CONFIGURATION_MAP, 0),
-        (lambda: schemas.CONFIGURATION_BUNDLE_VERSION_LIST, 1),
+        (CONFIGURATION_BUNDLE_VERSION_LIST, 1),
         (lambda: schemas.BRANCH_NAME, 0),
         (3, 1),
         (lambda: schemas.VERSION_CREATED_BY_SOURCE, 0),
@@ -426,7 +624,7 @@ CONSENT_PORTAL_IDP_CONFIG: StaticSchema = (
     (
         (O_AUTH2_CREDENTIAL_PROVIDER_ARN, 1),
         (lambda: schemas.ALLOWED_SCOPES_TYPE, 1),
-        (ALLOWED_AUDIENCE_TYPE, 0),
+        (lambda: schemas.ALLOWED_AUDIENCE_TYPE, 0),
     ),
 )
 
@@ -781,8 +979,8 @@ CREATE_DATASET_INPUT: StaticSchema = (
         (lambda: schemas.CLIENT_TOKEN, 2),
         (DATASET_NAME, 1),
         (3, 0),
-        (lambda: schemas.DATA_SOURCE_TYPE, 1),
-        (DATASET_SCHEMA_TYPE, 1),
+        (lambda: schemas.DATA_SOURCE_TYPE, 0),
+        (DATASET_SCHEMA_TYPE, 0),
         (lambda: schemas.KMS_KEY_ARN, 0),
         (lambda: schemas.TAGS_MAP, 0),
     ),
@@ -991,6 +1189,7 @@ GET_DATASET_OUTPUT: StaticSchema = (
         _sTc,
         _kKA,
         _eCx,
+        _eCBF,
         _dUo,
         _dUEA,
         _cA,
@@ -1006,9 +1205,10 @@ GET_DATASET_OUTPUT: StaticSchema = (
         (lambda: schemas.DATASET_STATUS, 1),
         (lambda: DRAFT_STATUS, 0),
         (3, 0),
-        (DATASET_SCHEMA_TYPE, 1),
+        (DATASET_SCHEMA_TYPE, 0),
         (lambda: schemas.KMS_KEY_ARN, 0),
         (8, 1),
+        (lambda: EXAMPLE_COUNT_BY_FIELD, 0),
         (lambda: DOWNLOAD_URL, 0),
         (4, 0),
         (4, 1),
@@ -1045,17 +1245,76 @@ DRAFT_STATUS: StaticSchema = (
     ((-1, {_sVm: _MODIFIED}), (-1, {_sVm: _UNMODIFIED})),
 )
 
+EXAMPLE_COUNT_BY_FIELD: StaticSchema = (
+    18,
+    n0,
+    _ECBF,
+    0,
+    (_tu, _in, _aPc),
+    ((8, 1), (8, 1), (8, 1)),
+)
+
+EXAMPLE_FIELD: StaticSchema = (
+    14,
+    n0,
+    _EFx,
+    0,
+    (_TURNS, _INPUT, _AP_),
+    ((-1, {_sVm: _TURNS}), (-1, {_sVm: _INPUT}), (-1, {_sVm: _AP_})),
+)
+
+EXAMPLE_FIELD_LIST: StaticSchema = (16, n0, _EFL, 0, (_mem,), ((EXAMPLE_FIELD, 0),))
+
+EXAMPLE_FIELD_CONDITION: StaticSchema = (
+    18,
+    n0,
+    _EFC,
+    0,
+    (_aO,),
+    ((EXAMPLE_FIELD_LIST, 0),),
+)
+
+EXAMPLE_FIELD_CONDITION_LIST: StaticSchema = (
+    16,
+    n0,
+    _EFCL,
+    0,
+    (_mem,),
+    ((EXAMPLE_FIELD_CONDITION, 0),),
+)
+
+DATASET_GENERATION_ID: StaticSchema = (3, n0, _DGI, 0)
+
+DATASET_GENERATION_ID_LIST: StaticSchema = (
+    16,
+    n0,
+    _DGIL,
+    0,
+    (_mem,),
+    ((DATASET_GENERATION_ID, 0),),
+)
+
+LIST_DATASET_EXAMPLES_FILTER: StaticSchema = (
+    18,
+    n0,
+    _LDEF,
+    0,
+    (_gI, _eF),
+    ((DATASET_GENERATION_ID_LIST, 0), (EXAMPLE_FIELD_CONDITION_LIST, 0)),
+)
+
 LIST_DATASET_EXAMPLES_INPUT: StaticSchema = (
     18,
     n0,
     _LDEI,
     {_sSI: _cLDER, _smith: None},
-    (_dI, _dV, _mR, _nT),
+    (_dI, _dV, _fi, _mR, _nT),
     (
         (lambda: schemas.DATASET_ID, 9),
-        (DATASET_VERSION, {_sQ: _dV}),
-        (7, {_sQ: _mR}),
-        (3, {_sQ: _nT}),
+        (DATASET_VERSION, 0),
+        (LIST_DATASET_EXAMPLES_FILTER, 0),
+        (7, 0),
+        (3, 0),
     ),
 )
 
@@ -1080,7 +1339,11 @@ LIST_DATASET_EXAMPLES: StaticOperationSchema = (
     _LDE,
     {
         _smithya: MappingProxyType(
-            {"method": "GET", "uri": "/datasets/{datasetId}/examples"}
+            {
+                "method": "POST",
+                "uri": "/datasets/{datasetId}/examples/list",
+                "code": 200,
+            }
         )
     },
     LIST_DATASET_EXAMPLES_INPUT,
@@ -1088,246 +1351,6 @@ LIST_DATASET_EXAMPLES: StaticOperationSchema = (
     (
         lambda: schemas.ACCESS_DENIED_EXCEPTION,
         lambda: schemas.CONFLICT_EXCEPTION,
-        lambda: schemas.INTERNAL_SERVER_EXCEPTION,
-        lambda: schemas.RESOURCE_NOT_FOUND_EXCEPTION,
-        lambda: schemas.THROTTLING_EXCEPTION,
-        lambda: schemas.VALIDATION_EXCEPTION,
-    ),
-)
-
-LIST_DATASETS_INPUT: StaticSchema = (
-    18,
-    n0,
-    _LDI,
-    {_sSI: _cLDR, _smith: None},
-    (_nT, _mR),
-    ((3, {_sQ: _nT}), (7, {_sQ: _mR})),
-)
-
-LIST_DATASETS_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _LDO,
-    {_sSI: _cLDRo, _smithy: None},
-    (_da, _nT),
-    ((lambda: DATASET_SUMMARY_LIST, 1), (3, 0)),
-)
-
-LIST_DATASETS: StaticOperationSchema = (
-    23,
-    n0,
-    _LD,
-    {_smithya: MappingProxyType({"method": "GET", "uri": "/datasets"})},
-    LIST_DATASETS_INPUT,
-    LIST_DATASETS_OUTPUT,
-    (
-        lambda: schemas.ACCESS_DENIED_EXCEPTION,
-        lambda: schemas.INTERNAL_SERVER_EXCEPTION,
-        lambda: schemas.THROTTLING_EXCEPTION,
-        lambda: schemas.VALIDATION_EXCEPTION,
-    ),
-)
-
-DATASET_SUMMARY: StaticSchema = (
-    18,
-    n0,
-    _DSa,
-    0,
-    (_dA, _dI, _dNa, _d, _st, _dS, _sTc, _eCx, _cA, _uA),
-    (
-        (lambda: schemas.DATASET_ARN, 1),
-        (lambda: schemas.DATASET_ID, 1),
-        (DATASET_NAME, 1),
-        (3, 0),
-        (lambda: schemas.DATASET_STATUS, 1),
-        (DRAFT_STATUS, 0),
-        (DATASET_SCHEMA_TYPE, 1),
-        (8, 1),
-        (4, 1),
-        (4, 1),
-    ),
-)
-
-DATASET_SUMMARY_LIST: StaticSchema = (16, n0, _DSL, 0, (_mem,), ((DATASET_SUMMARY, 0),))
-
-LIST_DATASET_VERSIONS_INPUT: StaticSchema = (
-    18,
-    n0,
-    _LDVI,
-    {_sSI: _cLDVR, _smith: None},
-    (_dI, _nT, _mR),
-    ((lambda: schemas.DATASET_ID, 9), (3, {_sQ: _nT}), (7, {_sQ: _mR})),
-)
-
-LIST_DATASET_VERSIONS_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _LDVO,
-    {_sSI: _cLDVRo, _smithy: None},
-    (_ver, _nT),
-    ((lambda: DATASET_VERSION_SUMMARY_LIST, 1), (3, 0)),
-)
-
-LIST_DATASET_VERSIONS: StaticOperationSchema = (
-    23,
-    n0,
-    _LDV,
-    {
-        _smithya: MappingProxyType(
-            {"method": "GET", "uri": "/datasets/{datasetId}/versions"}
-        )
-    },
-    LIST_DATASET_VERSIONS_INPUT,
-    LIST_DATASET_VERSIONS_OUTPUT,
-    (
-        lambda: schemas.ACCESS_DENIED_EXCEPTION,
-        lambda: schemas.INTERNAL_SERVER_EXCEPTION,
-        lambda: schemas.RESOURCE_NOT_FOUND_EXCEPTION,
-        lambda: schemas.THROTTLING_EXCEPTION,
-        lambda: schemas.VALIDATION_EXCEPTION,
-    ),
-)
-
-DATASET_VERSION_SUMMARY: StaticSchema = (
-    18,
-    n0,
-    _DVS,
-    0,
-    (_dV, _eCx, _cA),
-    ((DATASET_VERSION, 1), (8, 1), (4, 1)),
-)
-
-DATASET_VERSION_SUMMARY_LIST: StaticSchema = (
-    16,
-    n0,
-    _DVSL,
-    0,
-    (_mem,),
-    ((DATASET_VERSION_SUMMARY, 0),),
-)
-
-UPDATE_DATASET_INPUT: StaticSchema = (
-    18,
-    n0,
-    _UDI,
-    {_sSI: _cUDR, _smith: None},
-    (_dI, _cT, _d),
-    ((lambda: schemas.DATASET_ID, 9), (lambda: schemas.CLIENT_TOKEN, 2), (3, 0)),
-)
-
-UPDATE_DATASET_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _UDO,
-    {_sSI: _cUDRo, _smithy: None},
-    (_dA, _dI, _uA),
-    ((lambda: schemas.DATASET_ARN, 1), (lambda: schemas.DATASET_ID, 1), (4, 1)),
-)
-
-UPDATE_DATASET: StaticOperationSchema = (
-    23,
-    n0,
-    _UDp,
-    {
-        _smithya: MappingProxyType(
-            {"method": "PUT", "uri": "/datasets/{datasetId}", "code": 200}
-        )
-    },
-    UPDATE_DATASET_INPUT,
-    UPDATE_DATASET_OUTPUT,
-    (
-        lambda: schemas.ACCESS_DENIED_EXCEPTION,
-        lambda: schemas.CONFLICT_EXCEPTION,
-        lambda: schemas.INTERNAL_SERVER_EXCEPTION,
-        lambda: schemas.RESOURCE_NOT_FOUND_EXCEPTION,
-        lambda: schemas.THROTTLING_EXCEPTION,
-        lambda: schemas.VALIDATION_EXCEPTION,
-    ),
-)
-
-UPDATE_DATASET_EXAMPLES_INPUT: StaticSchema = (
-    18,
-    n0,
-    _UDEI,
-    {_sSI: _cUDER, _smith: None},
-    (_dI, _cT, _ex),
-    (
-        (lambda: schemas.DATASET_ID, 9),
-        (lambda: schemas.CLIENT_TOKEN, 2),
-        (lambda: schemas.DATASET_EXAMPLE_LIST, 1),
-    ),
-)
-
-UPDATE_DATASET_EXAMPLES_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _UDEO,
-    {_sSI: _cUDERo, _smithy: None},
-    (_dA, _dI, _st, _uC, _uA),
-    (
-        (lambda: schemas.DATASET_ARN, 1),
-        (lambda: schemas.DATASET_ID, 1),
-        (lambda: schemas.DATASET_STATUS, 1),
-        (8, 1),
-        (4, 1),
-    ),
-)
-
-UPDATE_DATASET_EXAMPLES: StaticOperationSchema = (
-    23,
-    n0,
-    _UDE,
-    {
-        _smithya: MappingProxyType(
-            {
-                "method": "POST",
-                "uri": "/datasets/{datasetId}/examples/update",
-                "code": 202,
-            }
-        )
-    },
-    UPDATE_DATASET_EXAMPLES_INPUT,
-    UPDATE_DATASET_EXAMPLES_OUTPUT,
-    (
-        lambda: schemas.ACCESS_DENIED_EXCEPTION,
-        lambda: schemas.CONFLICT_EXCEPTION,
-        lambda: schemas.INTERNAL_SERVER_EXCEPTION,
-        lambda: schemas.RESOURCE_NOT_FOUND_EXCEPTION,
-        lambda: schemas.SERVICE_QUOTA_EXCEEDED_EXCEPTION,
-        lambda: schemas.THROTTLING_EXCEPTION,
-        lambda: schemas.VALIDATION_EXCEPTION,
-    ),
-)
-
-DELETE_RESOURCE_POLICY_INPUT: StaticSchema = (
-    18,
-    n0,
-    _DRPI,
-    {_sSI: _cDRPR, _smith: None},
-    (_rAe,),
-    ((lambda: schemas.BEDROCK_AGENTCORE_RESOURCE_ARN, 9),),
-)
-
-DELETE_RESOURCE_POLICY_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _DRPO,
-    {_sSI: _cDRPRo, _smithy: None},
-)
-
-DELETE_RESOURCE_POLICY: StaticOperationSchema = (
-    23,
-    n0,
-    _DRP,
-    {
-        _smithya: MappingProxyType(
-            {"code": 204, "method": "DELETE", "uri": "/resourcepolicy/{resourceArn}"}
-        )
-    },
-    DELETE_RESOURCE_POLICY_INPUT,
-    DELETE_RESOURCE_POLICY_OUTPUT,
-    (
-        lambda: schemas.ACCESS_DENIED_EXCEPTION,
         lambda: schemas.INTERNAL_SERVER_EXCEPTION,
         lambda: schemas.RESOURCE_NOT_FOUND_EXCEPTION,
         lambda: schemas.THROTTLING_EXCEPTION,

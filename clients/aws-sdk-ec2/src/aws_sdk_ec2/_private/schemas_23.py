@@ -25,12 +25,10 @@ _p = "pending"
 _PI = "PublicIp"
 _AI = "AllocationId"
 _smit = "smithy.api#output"
-_CRI = "CapacityReservationId"
 _R = "Return"
 _r = "return"
-_OI = "OfferingId"
-_av = "available"
 _St = "State"
+_st = "state"
 _TGMDI = "TransitGatewayMulticastDomainId"
 _fa = "failed"
 _tGMDI = "transitGatewayMulticastDomainId"
@@ -43,14 +41,22 @@ _Sta = "Status"
 _sta = "status"
 _TSag = "TagSet"
 _tS = "tagSet"
+_VEI = "VpcEndpointId"
+_SIe = "ServiceId"
+_VEIp = "VpcEndpointIds"
+_Un = "Unsuccessful"
+_un = "unsuccessful"
 _dRr = "dryRun"
+_VPCI = "VpcPeeringConnectionId"
+_vPCI = "vpcPeeringConnectionId"
+_PENDING = "PENDING"
 _act = "active"
 _ex = "expired"
 _Ci = "Cidr"
+_ci = "cidr"
 _P = "Protocol"
 _pro = "protocol"
 _N = "Name"
-_nam = "name"
 _AZ = "AvailabilityZone"
 _aZ = "availabilityZone"
 _AZI = "AvailabilityZoneId"
@@ -60,22 +66,32 @@ _iI = "instanceId"
 _Add = "Addresses"
 _AS = "AddressSet"
 _aS = "addressSet"
-_AZv = "AvailabilityZones"
-_De = "Destination"
-_des = "destination"
-_Sou = "Source"
-_so = "source"
 _Reso = "Resource"
 _ANt = "AttributeName"
 _aN = "attributeName"
 _AVECc = "AccountVpcEncryptionControl"
-_RNe = "RegionName"
-_NBG = "NetworkBorderGroup"
-_nBG = "networkBorderGroup"
 _Rea = "Reason"
 _rea = "reason"
+_Asn = "Asn"
+_asn = "asn"
+_SMt = "StatusMessage"
+_sMt = "statusMessage"
+_IPI = "IpamPoolId"
+_dep = "deprovisioned"
+_fd__ = "failed_deprovision"
+_fd___ = "failed-deprovision"
+_fp__ = "failed_provision"
+_fp___ = "failed-provision"
+_pd__ = "pending_deprovision"
+_pd___ = "pending-deprovision"
+_pp = "pending_provision"
+_pp_ = "pending-provision"
+_prov = "provisioned"
+_BC = "ByoipCidr"
 _PIo = "PoolId"
 _pIo = "poolId"
+_bC = "byoipCidr"
+_NL = "NetmaskLength"
 _AIl = "AllocationIds"
 _FAILED = "FAILED"
 _ASCI = "ApplicationStatusCheckId"
@@ -83,17 +99,18 @@ _IIn = "InstanceIds"
 _aSCI = "applicationStatusCheckId"
 _ATs = "AssociationType"
 _aTs = "associationType"
+_sU = "smithy.api#Unit"
+_IIp = "IpamId"
 _ACTIVE = "ACTIVE"
+_iIp = "ipamId"
+_SIn = "SnapshotId"
+_FR = "FailureReason"
+_fR = "failureReason"
 _IIm = "ImageId"
-_GN = "GroupName"
-_gN = "groupName"
-_BIu = "BundleId"
+_VGI = "VpnGatewayId"
 _EXPIRED = "EXPIRED"
 _CANCELLED = "CANCELLED"
 _can = "cancelled"
-_CCV = "CurrencyCodeValues"
-_USD = "USD"
-_SIn = "SnapshotId"
 _sIn = "snapshotId"
 _Ag = "Aggregation"
 _agg = "aggregation"
@@ -102,23 +119,105 @@ _pp___ = "payment-pending"
 _pf_____ = "payment-failed"
 _dela = "delayed"
 _uns = "unsupported"
-_unav = "unavailable"
 _RSes = "ReservationState"
+_DCB = "DestinationCidrBlock"
+_VECI = "VpcEncryptionControlId"
+_VEC = "VpcEncryptionControl"
 _Val = "Values"
 _CRIS = "CapacityReservationIdSet"
-_CRIa = "CapacityReservationIds"
 _Ins = "Instances"
 _NIIe = "NetworkInterfaceIds"
-_rNe = "regionName"
 _succe = "success"
-_Metr = "Metric"
-_PENDING = "PENDING"
 _ASsso = "AssociationSet"
 _aSss = "associationSet"
 _Ow = "Owner"
+_vEC = "vpcEncryptionControl"
+_CNIo = "ConnectionNotificationId"
+_VCI = "VpnConcentratorId"
+_VCIp = "VpnConnectionId"
 _RCe = "ReturnCode"
 _rC = "returnCode"
 _tag = "tag"
+_DVECI = "DeleteVpcEncryptionControlInput"
+_cDVECR = "com.amazonaws.ec2#DeleteVpcEncryptionControlRequest"
+_DVECO = "DeleteVpcEncryptionControlOutput"
+_cDVECRo = "com.amazonaws.ec2#DeleteVpcEncryptionControlResult"
+_DVEC = "DeleteVpcEncryptionControl"
+_CNIL = "ConnectionNotificationIdsList"
+_DVECNI = "DeleteVpcEndpointConnectionNotificationsInput"
+_cDVECNR = "com.amazonaws.ec2#DeleteVpcEndpointConnectionNotificationsRequest"
+_CNIon = "ConnectionNotificationIds"
+_DVECNO = "DeleteVpcEndpointConnectionNotificationsOutput"
+_cDVECNRo = "com.amazonaws.ec2#DeleteVpcEndpointConnectionNotificationsResult"
+_DVECN = "DeleteVpcEndpointConnectionNotifications"
+_DVEI = "DeleteVpcEndpointsInput"
+_cDVER = "com.amazonaws.ec2#DeleteVpcEndpointsRequest"
+_DVEO = "DeleteVpcEndpointsOutput"
+_cDVERo = "com.amazonaws.ec2#DeleteVpcEndpointsResult"
+_DVE = "DeleteVpcEndpoints"
+_VESILp = "VpcEndpointServiceIdList"
+_DVESCI = "DeleteVpcEndpointServiceConfigurationsInput"
+_cDVESCR = "com.amazonaws.ec2#DeleteVpcEndpointServiceConfigurationsRequest"
+_SIer = "ServiceIds"
+_DVESCO = "DeleteVpcEndpointServiceConfigurationsOutput"
+_cDVESCRo = "com.amazonaws.ec2#DeleteVpcEndpointServiceConfigurationsResult"
+_DVESC = "DeleteVpcEndpointServiceConfigurations"
+_DVPCI = "DeleteVpcPeeringConnectionInput"
+_cDVPCR = "com.amazonaws.ec2#DeleteVpcPeeringConnectionRequest"
+_DVPCO = "DeleteVpcPeeringConnectionOutput"
+_cDVPCRo = "com.amazonaws.ec2#DeleteVpcPeeringConnectionResult"
+_DVPC = "DeleteVpcPeeringConnection"
+_DVCI = "DeleteVpnConcentratorInput"
+_cDVCR = "com.amazonaws.ec2#DeleteVpnConcentratorRequest"
+_DVCO = "DeleteVpnConcentratorOutput"
+_cDVCRo = "com.amazonaws.ec2#DeleteVpnConcentratorResult"
+_DVC = "DeleteVpnConcentrator"
+_DVCIe = "DeleteVpnConnectionInput"
+_cDVCRom = "com.amazonaws.ec2#DeleteVpnConnectionRequest"
+_DVCOe = "DeleteVpnConnectionOutput"
+_DVCe = "DeleteVpnConnection"
+_DVCRI = "DeleteVpnConnectionRouteInput"
+_cDVCRR = "com.amazonaws.ec2#DeleteVpnConnectionRouteRequest"
+_DVCRO = "DeleteVpnConnectionRouteOutput"
+_DVCR = "DeleteVpnConnectionRoute"
+_DVGI = "DeleteVpnGatewayInput"
+_cDVGR = "com.amazonaws.ec2#DeleteVpnGatewayRequest"
+_DVGO = "DeleteVpnGatewayOutput"
+_DVG = "DeleteVpnGateway"
+_DBCI = "DeprovisionByoipCidrInput"
+_cDBCR = "com.amazonaws.ec2#DeprovisionByoipCidrRequest"
+_DBCO = "DeprovisionByoipCidrOutput"
+_cDBCRo = "com.amazonaws.ec2#DeprovisionByoipCidrResult"
+_DBC = "DeprovisionByoipCidr"
+_DIBI = "DeprovisionIpamByoasnInput"
+_cDIBR = "com.amazonaws.ec2#DeprovisionIpamByoasnRequest"
+_ASsn = "AsnState"
+_By = "Byoasn"
+_DIBO = "DeprovisionIpamByoasnOutput"
+_cDIBRo = "com.amazonaws.ec2#DeprovisionIpamByoasnResult"
+_by = "byoasn"
+_DIB = "DeprovisionIpamByoasn"
+_DIPCI = "DeprovisionIpamPoolCidrInput"
+_cDIPCR = "com.amazonaws.ec2#DeprovisionIpamPoolCidrRequest"
+_IPCFC = "IpamPoolCidrFailureCode"
+_cna = "cidr_not_available"
+_cna_ = "cidr-not-available"
+_le = "limit_exceeded"
+_le_ = "limit-exceeded"
+_IPCFR = "IpamPoolCidrFailureReason"
+_IPCIp = "IpamPoolCidrId"
+_IPCS = "IpamPoolCidrState"
+_pi_ = "pending_import"
+_pi__ = "pending-import"
+_fi__ = "failed_import"
+_fi___ = "failed-import"
+_IPCpa = "IpamPoolCidr"
+_iPCI = "ipamPoolCidrId"
+_nL = "netmaskLength"
+_DIPCO = "DeprovisionIpamPoolCidrOutput"
+_cDIPCRo = "com.amazonaws.ec2#DeprovisionIpamPoolCidrResult"
+_iPCpa = "ipamPoolCidr"
+_DIPC = "DeprovisionIpamPoolCidr"
 _DPIPCI = "DeprovisionPublicIpv4PoolCidrInput"
 _cDPIPCR = "com.amazonaws.ec2#DeprovisionPublicIpv4PoolCidrRequest"
 _DASe = "DeprovisionedAddressSet"
@@ -306,140 +405,10 @@ _ASCAS = "ApplicationStatusCheckAssociationSet"
 _DASCAO = "DescribeApplicationStatusCheckAssociationsOutput"
 _cDASCARo = "com.amazonaws.ec2#DescribeApplicationStatusCheckAssociationsResult"
 _DASCA = "DescribeApplicationStatusCheckAssociations"
-_DASCMR = "DescribeApplicationStatusChecksMaxResults"
-_DASCIe = "DescribeApplicationStatusChecksInput"
-_cDASCRom = "com.amazonaws.ec2#DescribeApplicationStatusChecksRequest"
-_IAnc = "IncludeAll"
-_ASCRS = "ApplicationStatusCheckResponseSet"
-_DASCOe = "DescribeApplicationStatusChecksOutput"
-_cDASCRoma = "com.amazonaws.ec2#DescribeApplicationStatusChecksResult"
-_ASCpp = "ApplicationStatusChecks"
-_ASCS = "ApplicationStatusCheckSet"
-_aSCS = "applicationStatusCheckSet"
-_DASCe = "DescribeApplicationStatusChecks"
-_ZISL = "ZoneIdStringList"
-_ZI = "ZoneId"
-_ZNSL = "ZoneNameStringList"
-_ZN = "ZoneName"
-_DAZIe = "DescribeAvailabilityZonesInput"
-_cDAZR = "com.amazonaws.ec2#DescribeAvailabilityZonesRequest"
-_ZNo = "ZoneNames"
-_ZIo = "ZoneIds"
-_AAZ = "AllAvailabilityZones"
-_AZG = "AvailabilityZoneGeography"
-_AZGL = "AvailabilityZoneGeographyList"
-_AZM = "AvailabilityZoneMessage"
-_AZML = "AvailabilityZoneMessageList"
-_AZOIS = "AvailabilityZoneOptInStatus"
-_oinr = "opt_in_not_required"
-_oinr_ = "opt-in-not-required"
-_oi_ = "opted_in"
-_oi__ = "opted-in"
-_noi = "not_opted_in"
-_noi_ = "not-opted-in"
-_AZSv = "AvailabilityZoneState"
-_infor = "information"
-_cons = "constrained"
-_AZSG = "AvailabilityZoneSubGeography"
-_AZSGL = "AvailabilityZoneSubGeographyList"
-_OIS = "OptInStatus"
-_oIS = "optInStatus"
-_Mes = "Messages"
-_MSes = "MessageSet"
-_mSe = "messageSet"
-_zN = "zoneName"
-_zI = "zoneId"
-_ZT = "ZoneType"
-_zT = "zoneType"
-_PZN = "ParentZoneName"
-_pZN = "parentZoneName"
-_PZI = "ParentZoneId"
-_pZI = "parentZoneId"
-_GLN = "GroupLongName"
-_gLN = "groupLongName"
-_Ge = "Geography"
-_GSe = "GeographySet"
-_gSe = "geographySet"
-_SGu = "SubGeography"
-_SGSu = "SubGeographySet"
-_sGSu = "subGeographySet"
-_ZS = "ZoneState"
-_zS = "zoneState"
-_AZL = "AvailabilityZoneList"
-_DAZO = "DescribeAvailabilityZonesOutput"
-_cDAZRo = "com.amazonaws.ec2#DescribeAvailabilityZonesResult"
-_AZIva = "AvailabilityZoneInfo"
-_aZIv = "availabilityZoneInfo"
-_DAZe = "DescribeAvailabilityZones"
-_MRP = "MaxResultsParam"
-_DANPMSI = "DescribeAwsNetworkPerformanceMetricSubscriptionsInput"
-_cDANPMSR = "com.amazonaws.ec2#DescribeAwsNetworkPerformanceMetricSubscriptionsRequest"
-_MTe = "MetricType"
-_al__ = "aggregate_latency"
-_al___ = "aggregate-latency"
-_PTe = "PeriodType"
-_fm = "five_minutes"
-_fm_ = "five-minutes"
-_fm__ = "fifteen_minutes"
-_fm___ = "fifteen-minutes"
-_oh = "one_hour"
-_oh_ = "one-hour"
-_th_ = "three_hours"
-_th__ = "three-hours"
-_od__ = "one_day"
-_od___ = "one-day"
-_ow_ = "one_week"
-_ow__ = "one-week"
-_STta = "StatisticType"
-_p_____________ = "p50"
-_Subs = "Subscription"
-_met = "metric"
-_Stati = "Statistic"
-_stati = "statistic"
-_Per = "Period"
-_peri = "period"
-_SLu = "SubscriptionList"
-_DANPMSO = "DescribeAwsNetworkPerformanceMetricSubscriptionsOutput"
-_cDANPMSRo = "com.amazonaws.ec2#DescribeAwsNetworkPerformanceMetricSubscriptionsResult"
-_Subsc = "Subscriptions"
-_SSub = "SubscriptionSet"
-_sSu = "subscriptionSet"
-_DANPMS = "DescribeAwsNetworkPerformanceMetricSubscriptions"
-_BISL = "BundleIdStringList"
-_DBTI = "DescribeBundleTasksInput"
-_cDBTR = "com.amazonaws.ec2#DescribeBundleTasksRequest"
-_BIund = "BundleIds"
-_BTL = "BundleTaskList"
-_DBTO = "DescribeBundleTasksOutput"
-_cDBTRo = "com.amazonaws.ec2#DescribeBundleTasksResult"
-_BTu = "BundleTasks"
-_BITS = "BundleInstanceTasksSet"
-_bITS = "bundleInstanceTasksSet"
-_DBT = "DescribeBundleTasks"
-_DBCMR = "DescribeByoipCidrsMaxResults"
-_DBCIe = "DescribeByoipCidrsInput"
-_cDBCRom = "com.amazonaws.ec2#DescribeByoipCidrsRequest"
-_BCSy = "ByoipCidrSet"
-_DBCOe = "DescribeByoipCidrsOutput"
-_cDBCRoma = "com.amazonaws.ec2#DescribeByoipCidrsResult"
-_BCy = "ByoipCidrs"
-_bCS = "byoipCidrSet"
-_DBCe = "DescribeByoipCidrs"
-_DFCMR = "DescribeFutureCapacityMaxResults"
-_DCBEHI = "DescribeCapacityBlockExtensionHistoryInput"
-_cDCBEHR = "com.amazonaws.ec2#DescribeCapacityBlockExtensionHistoryRequest"
-_CBES = "CapacityBlockExtensionStatus"
 _PP = "PAYMENT_PENDING"
 _PF___ = "PAYMENT_FAILED"
-_PS_ = "PAYMENT_SUCCEEDED"
-_ps = "payment-succeeded"
-_CBESa = "CapacityBlockExtensionSet"
-_DCBEHO = "DescribeCapacityBlockExtensionHistoryOutput"
-_cDCBEHRo = "com.amazonaws.ec2#DescribeCapacityBlockExtensionHistoryResult"
-_CBEa = "CapacityBlockExtensions"
-_cBESa = "capacityBlockExtensionSet"
-_DCBEH = "DescribeCapacityBlockExtensionHistory"
 _CPMR = "CoipPoolMaxResults"
+_EGI = "ElasticGpuId"
 _OSL = "OwnerStringList"
 _SCHEDULED = "SCHEDULED"
 _DELAYED = "DELAYED"
@@ -447,11 +416,7 @@ _UNSUPPORTED = "UNSUPPORTED"
 _RETIRED = "RETIRED"
 _reti = "retired"
 _RHILe = "RequestHostIdList"
-_IMRp = "IpamMaxResults"
 _IPASp = "IpamPoolAllocationSet"
-_IPMR = "Ipv6PoolMaxResults"
-
-CURRENCY_CODE_VALUES: StaticSchema = (14, n0, _CCV, 0, (_USD,), ((-1, {_sV: _USD}),))
 
 CAPACITY_RESERVATION_ID_SET: StaticSchema = (
     16,
@@ -460,6 +425,469 @@ CAPACITY_RESERVATION_ID_SET: StaticSchema = (
     0,
     (_me,),
     ((lambda: schemas.CAPACITY_RESERVATION_ID, {_sN: _i}),),
+)
+
+VPN_CONCENTRATOR_ID: StaticSchema = (3, n0, _VCI, 0)
+
+DELETE_VPC_ENCRYPTION_CONTROL_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DVECI,
+    {_sSI: _cDVECR, _sm: None},
+    (_DR, _VECI),
+    (
+        (lambda: schemas.BOOLEAN, 0),
+        (lambda: schemas.VPC_ENCRYPTION_CONTROL_ID, {_sO: None, _smi: None}),
+    ),
+)
+
+DELETE_VPC_ENCRYPTION_CONTROL_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DVECO,
+    {_sSI: _cDVECRo, _smit: None},
+    (_VEC,),
+    ((lambda: schemas.VPC_ENCRYPTION_CONTROL, {_aQN: _VEC, _sN: _vEC}),),
+)
+
+DELETE_VPC_ENCRYPTION_CONTROL: StaticOperationSchema = (
+    23,
+    n0,
+    _DVEC,
+    0,
+    DELETE_VPC_ENCRYPTION_CONTROL_INPUT,
+    DELETE_VPC_ENCRYPTION_CONTROL_OUTPUT,
+    (),
+)
+
+CONNECTION_NOTIFICATION_ID: StaticSchema = (3, n0, _CNIo, 0)
+
+CONNECTION_NOTIFICATION_IDS_LIST: StaticSchema = (
+    16,
+    n0,
+    _CNIL,
+    0,
+    (_me,),
+    ((CONNECTION_NOTIFICATION_ID, {_sN: _i}),),
+)
+
+DELETE_VPC_ENDPOINT_CONNECTION_NOTIFICATIONS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DVECNI,
+    {_sSI: _cDVECNR, _sm: None},
+    (_DR, _CNIon),
+    (
+        (lambda: schemas.BOOLEAN, 0),
+        (CONNECTION_NOTIFICATION_IDS_LIST, {_sN: _CNIo, _sO: None, _smi: None}),
+    ),
+)
+
+DELETE_VPC_ENDPOINT_CONNECTION_NOTIFICATIONS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DVECNO,
+    {_sSI: _cDVECNRo, _smit: None},
+    (_Un,),
+    ((lambda: schemas.UNSUCCESSFUL_ITEM_SET, {_aQN: _Un, _sN: _un}),),
+)
+
+DELETE_VPC_ENDPOINT_CONNECTION_NOTIFICATIONS: StaticOperationSchema = (
+    23,
+    n0,
+    _DVECN,
+    0,
+    DELETE_VPC_ENDPOINT_CONNECTION_NOTIFICATIONS_INPUT,
+    DELETE_VPC_ENDPOINT_CONNECTION_NOTIFICATIONS_OUTPUT,
+    (),
+)
+
+DELETE_VPC_ENDPOINTS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DVEI,
+    {_sSI: _cDVER, _sm: None},
+    (_DR, _VEIp),
+    (
+        (lambda: schemas.BOOLEAN, 0),
+        (lambda: schemas.VPC_ENDPOINT_ID_LIST, {_sN: _VEI, _sO: None, _smi: None}),
+    ),
+)
+
+DELETE_VPC_ENDPOINTS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DVEO,
+    {_sSI: _cDVERo, _smit: None},
+    (_Un,),
+    ((lambda: schemas.UNSUCCESSFUL_ITEM_SET, {_aQN: _Un, _sN: _un}),),
+)
+
+DELETE_VPC_ENDPOINTS: StaticOperationSchema = (
+    23,
+    n0,
+    _DVE,
+    0,
+    DELETE_VPC_ENDPOINTS_INPUT,
+    DELETE_VPC_ENDPOINTS_OUTPUT,
+    (),
+)
+
+VPC_ENDPOINT_SERVICE_ID_LIST: StaticSchema = (
+    16,
+    n0,
+    _VESILp,
+    0,
+    (_me,),
+    ((lambda: schemas.VPC_ENDPOINT_SERVICE_ID, {_sN: _i}),),
+)
+
+DELETE_VPC_ENDPOINT_SERVICE_CONFIGURATIONS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DVESCI,
+    {_sSI: _cDVESCR, _sm: None},
+    (_DR, _SIer),
+    (
+        (lambda: schemas.BOOLEAN, 0),
+        (VPC_ENDPOINT_SERVICE_ID_LIST, {_sN: _SIe, _sO: None, _smi: None}),
+    ),
+)
+
+DELETE_VPC_ENDPOINT_SERVICE_CONFIGURATIONS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DVESCO,
+    {_sSI: _cDVESCRo, _smit: None},
+    (_Un,),
+    ((lambda: schemas.UNSUCCESSFUL_ITEM_SET, {_aQN: _Un, _sN: _un}),),
+)
+
+DELETE_VPC_ENDPOINT_SERVICE_CONFIGURATIONS: StaticOperationSchema = (
+    23,
+    n0,
+    _DVESC,
+    0,
+    DELETE_VPC_ENDPOINT_SERVICE_CONFIGURATIONS_INPUT,
+    DELETE_VPC_ENDPOINT_SERVICE_CONFIGURATIONS_OUTPUT,
+    (),
+)
+
+DELETE_VPC_PEERING_CONNECTION_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DVPCI,
+    {_sSI: _cDVPCR, _sm: None},
+    (_DR, _VPCI),
+    (
+        (lambda: schemas.BOOLEAN, {_aQN: _DR, _sN: _dRr}),
+        (
+            lambda: schemas.VPC_PEERING_CONNECTION_ID,
+            {_aQN: _VPCI, _sN: _vPCI, _sO: None, _smi: None},
+        ),
+    ),
+)
+
+DELETE_VPC_PEERING_CONNECTION_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DVPCO,
+    {_sSI: _cDVPCRo, _smit: None},
+    (_R,),
+    ((lambda: schemas.BOOLEAN, {_aQN: _R, _sN: _r}),),
+)
+
+DELETE_VPC_PEERING_CONNECTION: StaticOperationSchema = (
+    23,
+    n0,
+    _DVPC,
+    0,
+    DELETE_VPC_PEERING_CONNECTION_INPUT,
+    DELETE_VPC_PEERING_CONNECTION_OUTPUT,
+    (),
+)
+
+DELETE_VPN_CONCENTRATOR_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DVCI,
+    {_sSI: _cDVCR, _sm: None},
+    (_VCI, _DR),
+    ((VPN_CONCENTRATOR_ID, {_sO: None, _smi: None}), (lambda: schemas.BOOLEAN, 0)),
+)
+
+DELETE_VPN_CONCENTRATOR_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DVCO,
+    {_sSI: _cDVCRo, _smit: None},
+    (_R,),
+    ((lambda: schemas.BOOLEAN, {_aQN: _R, _sN: _r}),),
+)
+
+DELETE_VPN_CONCENTRATOR: StaticOperationSchema = (
+    23,
+    n0,
+    _DVC,
+    0,
+    DELETE_VPN_CONCENTRATOR_INPUT,
+    DELETE_VPN_CONCENTRATOR_OUTPUT,
+    (),
+)
+
+DELETE_VPN_CONNECTION_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DVCIe,
+    {_sSI: _cDVCRom, _sm: None},
+    (_VCIp, _DR),
+    (
+        (lambda: schemas.VPN_CONNECTION_ID, {_sO: None, _smi: None}),
+        (lambda: schemas.BOOLEAN, {_aQN: _DR, _sN: _dRr}),
+    ),
+)
+
+DELETE_VPN_CONNECTION_OUTPUT: StaticSchema = (18, n0, _DVCOe, {_sSI: _sU, _smit: None})
+
+DELETE_VPN_CONNECTION: StaticOperationSchema = (
+    23,
+    n0,
+    _DVCe,
+    0,
+    DELETE_VPN_CONNECTION_INPUT,
+    DELETE_VPN_CONNECTION_OUTPUT,
+    (),
+)
+
+DELETE_VPN_CONNECTION_ROUTE_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DVCRI,
+    {_sSI: _cDVCRR, _sm: None},
+    (_DCB, _VCIp),
+    (
+        (lambda: schemas.STRING, {_sO: None, _smi: None}),
+        (lambda: schemas.VPN_CONNECTION_ID, {_sO: None, _smi: None}),
+    ),
+)
+
+DELETE_VPN_CONNECTION_ROUTE_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DVCRO,
+    {_sSI: _sU, _smit: None},
+)
+
+DELETE_VPN_CONNECTION_ROUTE: StaticOperationSchema = (
+    23,
+    n0,
+    _DVCR,
+    0,
+    DELETE_VPN_CONNECTION_ROUTE_INPUT,
+    DELETE_VPN_CONNECTION_ROUTE_OUTPUT,
+    (),
+)
+
+DELETE_VPN_GATEWAY_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DVGI,
+    {_sSI: _cDVGR, _sm: None},
+    (_VGI, _DR),
+    (
+        (lambda: schemas.VPN_GATEWAY_ID, {_sO: None, _smi: None}),
+        (lambda: schemas.BOOLEAN, {_aQN: _DR, _sN: _dRr}),
+    ),
+)
+
+DELETE_VPN_GATEWAY_OUTPUT: StaticSchema = (18, n0, _DVGO, {_sSI: _sU, _smit: None})
+
+DELETE_VPN_GATEWAY: StaticOperationSchema = (
+    23,
+    n0,
+    _DVG,
+    0,
+    DELETE_VPN_GATEWAY_INPUT,
+    DELETE_VPN_GATEWAY_OUTPUT,
+    (),
+)
+
+DEPROVISION_BYOIP_CIDR_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DBCI,
+    {_sSI: _cDBCR, _sm: None},
+    (_Ci, _DR),
+    ((lambda: schemas.STRING, {_sO: None, _smi: None}), (lambda: schemas.BOOLEAN, 0)),
+)
+
+DEPROVISION_BYOIP_CIDR_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DBCO,
+    {_sSI: _cDBCRo, _smit: None},
+    (_BC,),
+    ((lambda: schemas.BYOIP_CIDR, {_aQN: _BC, _sN: _bC}),),
+)
+
+DEPROVISION_BYOIP_CIDR: StaticOperationSchema = (
+    23,
+    n0,
+    _DBC,
+    0,
+    DEPROVISION_BYOIP_CIDR_INPUT,
+    DEPROVISION_BYOIP_CIDR_OUTPUT,
+    (),
+)
+
+DEPROVISION_IPAM_BYOASN_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DIBI,
+    {_sSI: _cDIBR, _sm: None},
+    (_DR, _IIp, _Asn),
+    (
+        (lambda: schemas.BOOLEAN, 0),
+        (lambda: schemas.IPAM_ID, {_sO: None, _smi: None}),
+        (lambda: schemas.STRING, {_sO: None, _smi: None}),
+    ),
+)
+
+DEPROVISION_IPAM_BYOASN_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DIBO,
+    {_sSI: _cDIBRo, _smit: None},
+    (_By,),
+    ((lambda: BYOASN, {_aQN: _By, _sN: _by}),),
+)
+
+DEPROVISION_IPAM_BYOASN: StaticOperationSchema = (
+    23,
+    n0,
+    _DIB,
+    0,
+    DEPROVISION_IPAM_BYOASN_INPUT,
+    DEPROVISION_IPAM_BYOASN_OUTPUT,
+    (),
+)
+
+ASN_STATE: StaticSchema = (
+    14,
+    n0,
+    _ASsn,
+    0,
+    (_dep, _fd__, _fp__, _pd__, _pp, _prov),
+    (
+        (-1, {_sV: _dep}),
+        (-1, {_sV: _fd___}),
+        (-1, {_sV: _fp___}),
+        (-1, {_sV: _pd___}),
+        (-1, {_sV: _pp_}),
+        (-1, {_sV: _prov}),
+    ),
+)
+
+BYOASN: StaticSchema = (
+    18,
+    n0,
+    _By,
+    0,
+    (_Asn, _IIp, _SMt, _St),
+    (
+        (lambda: schemas.STRING, {_aQN: _Asn, _sN: _asn}),
+        (lambda: schemas.IPAM_ID, {_aQN: _IIp, _sN: _iIp}),
+        (lambda: schemas.STRING, {_aQN: _SMt, _sN: _sMt}),
+        (ASN_STATE, {_aQN: _St, _sN: _st}),
+    ),
+)
+
+DEPROVISION_IPAM_POOL_CIDR_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DIPCI,
+    {_sSI: _cDIPCR, _sm: None},
+    (_DR, _IPI, _Ci),
+    (
+        (lambda: schemas.BOOLEAN, 0),
+        (lambda: schemas.IPAM_POOL_ID, {_sO: None, _smi: None}),
+        (lambda: schemas.STRING, 0),
+    ),
+)
+
+DEPROVISION_IPAM_POOL_CIDR_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DIPCO,
+    {_sSI: _cDIPCRo, _smit: None},
+    (_IPCpa,),
+    ((lambda: IPAM_POOL_CIDR, {_aQN: _IPCpa, _sN: _iPCpa}),),
+)
+
+DEPROVISION_IPAM_POOL_CIDR: StaticOperationSchema = (
+    23,
+    n0,
+    _DIPC,
+    0,
+    DEPROVISION_IPAM_POOL_CIDR_INPUT,
+    DEPROVISION_IPAM_POOL_CIDR_OUTPUT,
+    (),
+)
+
+IPAM_POOL_CIDR_FAILURE_CODE: StaticSchema = (
+    14,
+    n0,
+    _IPCFC,
+    0,
+    (_cna, _le),
+    ((-1, {_sV: _cna_}), (-1, {_sV: _le_})),
+)
+
+IPAM_POOL_CIDR_FAILURE_REASON: StaticSchema = (
+    18,
+    n0,
+    _IPCFR,
+    0,
+    (_C, _Me),
+    (
+        (IPAM_POOL_CIDR_FAILURE_CODE, {_aQN: _C, _sN: _co}),
+        (lambda: schemas.STRING, {_aQN: _Me, _sN: _mes}),
+    ),
+)
+
+IPAM_POOL_CIDR_ID: StaticSchema = (3, n0, _IPCIp, 0)
+
+IPAM_POOL_CIDR_STATE: StaticSchema = (
+    14,
+    n0,
+    _IPCS,
+    0,
+    (_pp, _prov, _fp__, _pd__, _dep, _fd__, _pi_, _fi__),
+    (
+        (-1, {_sV: _pp_}),
+        (-1, {_sV: _prov}),
+        (-1, {_sV: _fp___}),
+        (-1, {_sV: _pd___}),
+        (-1, {_sV: _dep}),
+        (-1, {_sV: _fd___}),
+        (-1, {_sV: _pi__}),
+        (-1, {_sV: _fi___}),
+    ),
+)
+
+IPAM_POOL_CIDR: StaticSchema = (
+    18,
+    n0,
+    _IPCpa,
+    0,
+    (_Ci, _St, _FR, _IPCIp, _NL),
+    (
+        (lambda: schemas.STRING, {_aQN: _Ci, _sN: _ci}),
+        (IPAM_POOL_CIDR_STATE, {_aQN: _St, _sN: _st}),
+        (IPAM_POOL_CIDR_FAILURE_REASON, {_aQN: _FR, _sN: _fR}),
+        (IPAM_POOL_CIDR_ID, {_aQN: _IPCIp, _sN: _iPCI}),
+        (lambda: schemas.INTEGER, {_aQN: _NL, _sN: _nL}),
+    ),
 )
 
 DEPROVISION_PUBLIC_IPV4_POOL_CIDR_INPUT: StaticSchema = (
@@ -1227,454 +1655,9 @@ APPLICATION_STATUS_CHECK_ASSOCIATION_SET: StaticSchema = (
     ((APPLICATION_STATUS_CHECK_ASSOCIATION_OBJECT, {_sN: _i}),),
 )
 
-DESCRIBE_APPLICATION_STATUS_CHECKS_MAX_RESULTS: StaticSchema = (7, n0, _DASCMR, 0)
-
-DESCRIBE_APPLICATION_STATUS_CHECKS_INPUT: StaticSchema = (
-    18,
-    n0,
-    _DASCIe,
-    {_sSI: _cDASCRom, _sm: None},
-    (_ASCIp, _Fil, _MR, _NTex, _IAnc, _DR),
-    (
-        (APPLICATION_STATUS_CHECK_ID_LIST, {_sN: _ASCI}),
-        (FILTER_LIST, {_sN: _Fi}),
-        (DESCRIBE_APPLICATION_STATUS_CHECKS_MAX_RESULTS, 0),
-        (lambda: schemas.STRING, 0),
-        (lambda: schemas.BOOLEAN, 0),
-        (lambda: schemas.BOOLEAN, 0),
-    ),
-)
-
-DESCRIBE_APPLICATION_STATUS_CHECKS_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _DASCOe,
-    {_sSI: _cDASCRoma, _smit: None},
-    (_ASCpp, _NTex),
-    (
-        (lambda: APPLICATION_STATUS_CHECK_RESPONSE_SET, {_aQN: _ASCS, _sN: _aSCS}),
-        (lambda: schemas.STRING, {_aQN: _NTex, _sN: _nT}),
-    ),
-)
-
-DESCRIBE_APPLICATION_STATUS_CHECKS: StaticOperationSchema = (
-    23,
-    n0,
-    _DASCe,
-    0,
-    DESCRIBE_APPLICATION_STATUS_CHECKS_INPUT,
-    DESCRIBE_APPLICATION_STATUS_CHECKS_OUTPUT,
-    (),
-)
-
-APPLICATION_STATUS_CHECK_RESPONSE_SET: StaticSchema = (
-    16,
-    n0,
-    _ASCRS,
-    0,
-    (_me,),
-    ((lambda: schemas.APPLICATION_STATUS_CHECK_RESPONSE_OBJECT, {_sN: _i}),),
-)
-
-ZONE_ID_STRING_LIST: StaticSchema = (
-    16,
-    n0,
-    _ZISL,
-    0,
-    (_me,),
-    ((lambda: schemas.STRING, {_sN: _ZI}),),
-)
-
-ZONE_NAME_STRING_LIST: StaticSchema = (
-    16,
-    n0,
-    _ZNSL,
-    0,
-    (_me,),
-    ((lambda: schemas.STRING, {_sN: _ZN}),),
-)
-
-DESCRIBE_AVAILABILITY_ZONES_INPUT: StaticSchema = (
-    18,
-    n0,
-    _DAZIe,
-    {_sSI: _cDAZR, _sm: None},
-    (_ZNo, _ZIo, _AAZ, _DR, _Fil),
-    (
-        (ZONE_NAME_STRING_LIST, {_sN: _ZN}),
-        (ZONE_ID_STRING_LIST, {_sN: _ZI}),
-        (lambda: schemas.BOOLEAN, 0),
-        (lambda: schemas.BOOLEAN, {_aQN: _DR, _sN: _dRr}),
-        (FILTER_LIST, {_sN: _Fi}),
-    ),
-)
-
-DESCRIBE_AVAILABILITY_ZONES_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _DAZO,
-    {_sSI: _cDAZRo, _smit: None},
-    (_AZv,),
-    ((lambda: AVAILABILITY_ZONE_LIST, {_aQN: _AZIva, _sN: _aZIv}),),
-)
-
-DESCRIBE_AVAILABILITY_ZONES: StaticOperationSchema = (
-    23,
-    n0,
-    _DAZe,
-    0,
-    DESCRIBE_AVAILABILITY_ZONES_INPUT,
-    DESCRIBE_AVAILABILITY_ZONES_OUTPUT,
-    (),
-)
-
-AVAILABILITY_ZONE_GEOGRAPHY: StaticSchema = (
-    18,
-    n0,
-    _AZG,
-    0,
-    (_N,),
-    ((lambda: schemas.STRING, {_aQN: _N, _sN: _nam}),),
-)
-
-AVAILABILITY_ZONE_GEOGRAPHY_LIST: StaticSchema = (
-    16,
-    n0,
-    _AZGL,
-    0,
-    (_me,),
-    ((AVAILABILITY_ZONE_GEOGRAPHY, {_sN: _i}),),
-)
-
-AVAILABILITY_ZONE_MESSAGE: StaticSchema = (
-    18,
-    n0,
-    _AZM,
-    0,
-    (_Me,),
-    ((lambda: schemas.STRING, {_aQN: _Me, _sN: _mes}),),
-)
-
-AVAILABILITY_ZONE_MESSAGE_LIST: StaticSchema = (
-    16,
-    n0,
-    _AZML,
-    0,
-    (_me,),
-    ((AVAILABILITY_ZONE_MESSAGE, {_sN: _i}),),
-)
-
-AVAILABILITY_ZONE_OPT_IN_STATUS: StaticSchema = (
-    14,
-    n0,
-    _AZOIS,
-    0,
-    (_oinr, _oi_, _noi),
-    ((-1, {_sV: _oinr_}), (-1, {_sV: _oi__}), (-1, {_sV: _noi_})),
-)
-
-AVAILABILITY_ZONE_STATE: StaticSchema = (
-    14,
-    n0,
-    _AZSv,
-    0,
-    (_av, _infor, _imp, _unav, _cons),
-    (
-        (-1, {_sV: _av}),
-        (-1, {_sV: _infor}),
-        (-1, {_sV: _imp}),
-        (-1, {_sV: _unav}),
-        (-1, {_sV: _cons}),
-    ),
-)
-
-AVAILABILITY_ZONE_SUB_GEOGRAPHY: StaticSchema = (
-    18,
-    n0,
-    _AZSG,
-    0,
-    (_N,),
-    ((lambda: schemas.STRING, {_aQN: _N, _sN: _nam}),),
-)
-
-AVAILABILITY_ZONE_SUB_GEOGRAPHY_LIST: StaticSchema = (
-    16,
-    n0,
-    _AZSGL,
-    0,
-    (_me,),
-    ((AVAILABILITY_ZONE_SUB_GEOGRAPHY, {_sN: _i}),),
-)
-
-AVAILABILITY_ZONE: StaticSchema = (
-    18,
-    n0,
-    _AZ,
-    0,
-    (_OIS, _Mes, _RNe, _ZN, _ZI, _GN, _NBG, _ZT, _PZN, _PZI, _GLN, _Ge, _SGu, _St),
-    (
-        (AVAILABILITY_ZONE_OPT_IN_STATUS, {_aQN: _OIS, _sN: _oIS}),
-        (AVAILABILITY_ZONE_MESSAGE_LIST, {_aQN: _MSes, _sN: _mSe}),
-        (lambda: schemas.STRING, {_aQN: _RNe, _sN: _rNe}),
-        (lambda: schemas.STRING, {_aQN: _ZN, _sN: _zN}),
-        (lambda: schemas.STRING, {_aQN: _ZI, _sN: _zI}),
-        (lambda: schemas.STRING, {_aQN: _GN, _sN: _gN}),
-        (lambda: schemas.STRING, {_aQN: _NBG, _sN: _nBG}),
-        (lambda: schemas.STRING, {_aQN: _ZT, _sN: _zT}),
-        (lambda: schemas.STRING, {_aQN: _PZN, _sN: _pZN}),
-        (lambda: schemas.STRING, {_aQN: _PZI, _sN: _pZI}),
-        (lambda: schemas.STRING, {_aQN: _GLN, _sN: _gLN}),
-        (AVAILABILITY_ZONE_GEOGRAPHY_LIST, {_aQN: _GSe, _sN: _gSe}),
-        (AVAILABILITY_ZONE_SUB_GEOGRAPHY_LIST, {_aQN: _SGSu, _sN: _sGSu}),
-        (AVAILABILITY_ZONE_STATE, {_aQN: _ZS, _sN: _zS}),
-    ),
-)
-
-AVAILABILITY_ZONE_LIST: StaticSchema = (
-    16,
-    n0,
-    _AZL,
-    0,
-    (_me,),
-    ((AVAILABILITY_ZONE, {_sN: _i}),),
-)
-
-MAX_RESULTS_PARAM: StaticSchema = (7, n0, _MRP, 0)
-
-DESCRIBE_AWS_NETWORK_PERFORMANCE_METRIC_SUBSCRIPTIONS_INPUT: StaticSchema = (
-    18,
-    n0,
-    _DANPMSI,
-    {_sSI: _cDANPMSR, _sm: None},
-    (_MR, _NTex, _Fil, _DR),
-    (
-        (MAX_RESULTS_PARAM, 0),
-        (lambda: schemas.STRING, 0),
-        (FILTER_LIST, {_sN: _Fi}),
-        (lambda: schemas.BOOLEAN, 0),
-    ),
-)
-
-DESCRIBE_AWS_NETWORK_PERFORMANCE_METRIC_SUBSCRIPTIONS_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _DANPMSO,
-    {_sSI: _cDANPMSRo, _smit: None},
-    (_NTex, _Subsc),
-    (
-        (lambda: schemas.STRING, {_aQN: _NTex, _sN: _nT}),
-        (lambda: SUBSCRIPTION_LIST, {_aQN: _SSub, _sN: _sSu}),
-    ),
-)
-
-DESCRIBE_AWS_NETWORK_PERFORMANCE_METRIC_SUBSCRIPTIONS: StaticOperationSchema = (
-    23,
-    n0,
-    _DANPMS,
-    0,
-    DESCRIBE_AWS_NETWORK_PERFORMANCE_METRIC_SUBSCRIPTIONS_INPUT,
-    DESCRIBE_AWS_NETWORK_PERFORMANCE_METRIC_SUBSCRIPTIONS_OUTPUT,
-    (),
-)
-
-METRIC_TYPE: StaticSchema = (14, n0, _MTe, 0, (_al__,), ((-1, {_sV: _al___}),))
-
-PERIOD_TYPE: StaticSchema = (
-    14,
-    n0,
-    _PTe,
-    0,
-    (_fm, _fm__, _oh, _th_, _od__, _ow_),
-    (
-        (-1, {_sV: _fm_}),
-        (-1, {_sV: _fm___}),
-        (-1, {_sV: _oh_}),
-        (-1, {_sV: _th__}),
-        (-1, {_sV: _od___}),
-        (-1, {_sV: _ow__}),
-    ),
-)
-
-STATISTIC_TYPE: StaticSchema = (
-    14,
-    n0,
-    _STta,
-    0,
-    (_p_____________,),
-    ((-1, {_sV: _p_____________}),),
-)
-
-SUBSCRIPTION: StaticSchema = (
-    18,
-    n0,
-    _Subs,
-    0,
-    (_Sou, _De, _Metr, _Stati, _Per),
-    (
-        (lambda: schemas.STRING, {_aQN: _Sou, _sN: _so}),
-        (lambda: schemas.STRING, {_aQN: _De, _sN: _des}),
-        (METRIC_TYPE, {_aQN: _Metr, _sN: _met}),
-        (STATISTIC_TYPE, {_aQN: _Stati, _sN: _stati}),
-        (PERIOD_TYPE, {_aQN: _Per, _sN: _peri}),
-    ),
-)
-
-SUBSCRIPTION_LIST: StaticSchema = (
-    16,
-    n0,
-    _SLu,
-    0,
-    (_me,),
-    ((SUBSCRIPTION, {_sN: _i}),),
-)
-
-BUNDLE_ID_STRING_LIST: StaticSchema = (
-    16,
-    n0,
-    _BISL,
-    0,
-    (_me,),
-    ((lambda: schemas.BUNDLE_ID, {_sN: _BIu}),),
-)
-
-DESCRIBE_BUNDLE_TASKS_INPUT: StaticSchema = (
-    18,
-    n0,
-    _DBTI,
-    {_sSI: _cDBTR, _sm: None},
-    (_BIund, _DR, _Fil),
-    (
-        (BUNDLE_ID_STRING_LIST, {_sN: _BIu}),
-        (lambda: schemas.BOOLEAN, {_aQN: _DR, _sN: _dRr}),
-        (FILTER_LIST, {_sN: _Fi}),
-    ),
-)
-
-DESCRIBE_BUNDLE_TASKS_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _DBTO,
-    {_sSI: _cDBTRo, _smit: None},
-    (_BTu,),
-    ((lambda: BUNDLE_TASK_LIST, {_aQN: _BITS, _sN: _bITS}),),
-)
-
-DESCRIBE_BUNDLE_TASKS: StaticOperationSchema = (
-    23,
-    n0,
-    _DBT,
-    0,
-    DESCRIBE_BUNDLE_TASKS_INPUT,
-    DESCRIBE_BUNDLE_TASKS_OUTPUT,
-    (),
-)
-
-BUNDLE_TASK_LIST: StaticSchema = (
-    16,
-    n0,
-    _BTL,
-    0,
-    (_me,),
-    ((lambda: schemas.BUNDLE_TASK, {_sN: _i}),),
-)
-
-DESCRIBE_BYOIP_CIDRS_MAX_RESULTS: StaticSchema = (7, n0, _DBCMR, 0)
-
-DESCRIBE_BYOIP_CIDRS_INPUT: StaticSchema = (
-    18,
-    n0,
-    _DBCIe,
-    {_sSI: _cDBCRom, _sm: None},
-    (_DR, _MR, _NTex),
-    (
-        (lambda: schemas.BOOLEAN, 0),
-        (DESCRIBE_BYOIP_CIDRS_MAX_RESULTS, {_sO: None, _smi: None}),
-        (NEXT_TOKEN, 0),
-    ),
-)
-
-DESCRIBE_BYOIP_CIDRS_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _DBCOe,
-    {_sSI: _cDBCRoma, _smit: None},
-    (_BCy, _NTex),
-    (
-        (lambda: BYOIP_CIDR_SET, {_aQN: _BCSy, _sN: _bCS}),
-        (lambda: schemas.STRING, {_aQN: _NTex, _sN: _nT}),
-    ),
-)
-
-DESCRIBE_BYOIP_CIDRS: StaticOperationSchema = (
-    23,
-    n0,
-    _DBCe,
-    0,
-    DESCRIBE_BYOIP_CIDRS_INPUT,
-    DESCRIBE_BYOIP_CIDRS_OUTPUT,
-    (),
-)
-
-BYOIP_CIDR_SET: StaticSchema = (
-    16,
-    n0,
-    _BCSy,
-    0,
-    (_me,),
-    ((lambda: schemas.BYOIP_CIDR, {_sN: _i}),),
-)
-
-DESCRIBE_FUTURE_CAPACITY_MAX_RESULTS: StaticSchema = (7, n0, _DFCMR, 0)
-
-DESCRIBE_CAPACITY_BLOCK_EXTENSION_HISTORY_INPUT: StaticSchema = (
-    18,
-    n0,
-    _DCBEHI,
-    {_sSI: _cDCBEHR, _sm: None},
-    (_CRIa, _NTex, _MR, _Fil, _DR),
-    (
-        (CAPACITY_RESERVATION_ID_SET, {_sN: _CRI}),
-        (lambda: schemas.STRING, 0),
-        (DESCRIBE_FUTURE_CAPACITY_MAX_RESULTS, 0),
-        (FILTER_LIST, {_sN: _Fi}),
-        (lambda: schemas.BOOLEAN, 0),
-    ),
-)
-
-DESCRIBE_CAPACITY_BLOCK_EXTENSION_HISTORY_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _DCBEHO,
-    {_sSI: _cDCBEHRo, _smit: None},
-    (_CBEa, _NTex),
-    (
-        (lambda: schemas.CAPACITY_BLOCK_EXTENSION_SET, {_aQN: _CBESa, _sN: _cBESa}),
-        (lambda: schemas.STRING, {_aQN: _NTex, _sN: _nT}),
-    ),
-)
-
-DESCRIBE_CAPACITY_BLOCK_EXTENSION_HISTORY: StaticOperationSchema = (
-    23,
-    n0,
-    _DCBEH,
-    0,
-    DESCRIBE_CAPACITY_BLOCK_EXTENSION_HISTORY_INPUT,
-    DESCRIBE_CAPACITY_BLOCK_EXTENSION_HISTORY_OUTPUT,
-    (),
-)
-
-OFFERING_ID: StaticSchema = (3, n0, _OI, 0)
-
-CAPACITY_BLOCK_EXTENSION_STATUS: StaticSchema = (
-    14,
-    n0,
-    _CBES,
-    0,
-    (_PP, _PF___, _PS_),
-    ((-1, {_sV: _pp___}), (-1, {_sV: _pf_____}), (-1, {_sV: _ps})),
-)
-
 COIP_POOL_MAX_RESULTS: StaticSchema = (7, n0, _CPMR, 0)
+
+ELASTIC_GPU_ID: StaticSchema = (3, n0, _EGI, 0)
 
 OWNER_STRING_LIST: StaticSchema = (
     16,
@@ -1727,8 +1710,6 @@ REQUEST_HOST_ID_LIST: StaticSchema = (
     ((lambda: schemas.DEDICATED_HOST_ID, {_sN: _i}),),
 )
 
-IPAM_MAX_RESULTS: StaticSchema = (7, n0, _IMRp, 0)
-
 IPAM_POOL_ALLOCATION_SET: StaticSchema = (
     16,
     n0,
@@ -1737,5 +1718,3 @@ IPAM_POOL_ALLOCATION_SET: StaticSchema = (
     (_me,),
     ((lambda: schemas.IPAM_POOL_ALLOCATION, {_sN: _i}),),
 )
-
-IPV6_POOL_MAX_RESULTS: StaticSchema = (7, n0, _IPMR, 0)

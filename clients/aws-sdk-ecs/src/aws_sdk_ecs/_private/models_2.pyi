@@ -95,6 +95,11 @@ from ..models import (
     _SerdeShape,
 )
 
+class TaskDefinitionFamilyStatus(UnknownEnumMixin, StrEnum):
+    ACTIVE = "ACTIVE"
+    INACTIVE = "INACTIVE"
+    ALL = "ALL"
+
 class TaskDefinitionField(UnknownEnumMixin, StrEnum):
     TAGS = "TAGS"
 

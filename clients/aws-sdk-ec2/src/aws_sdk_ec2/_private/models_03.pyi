@@ -3,9 +3,11 @@
 from collections.abc import Sequence
 from dataclasses import dataclass
 from datetime import datetime
+from enum import StrEnum
 from typing import Required, TypedDict
 
 from smithy_core.response import ResponseMetadata
+from smithy_core.types import UnknownEnumMixin
 
 from ..models import (
     AccountAttribute,
@@ -17,7 +19,6 @@ from ..models import (
     ApplicationStatusCheckAssociationObject,
     ApplicationStatusCheckResponseObject,
     ApplicationStatusesResponseType,
-    AttributeBooleanValue,
     AttributeValue,
     AuthorizationRule,
     AvailabilityZone,
@@ -28,6 +29,8 @@ from ..models import (
     CapacityBlock,
     CapacityBlockExtension,
     CapacityBlockExtensionOffering,
+    CapacityBlockInstanceTypePreference,
+    CapacityBlockInstanceTypePreferenceDict,
     CapacityBlockOffering,
     CapacityBlockStatus,
     CapacityManagerDataExportResponse,
@@ -47,10 +50,8 @@ from ..models import (
     CustomerGateway,
     DeclarativePoliciesReport,
     DhcpOptions,
-    Ec2InstanceConnectEndpoint,
     EgressOnlyInternetGateway,
     ElasticGpus,
-    EnclaveOptions,
     ExportImageTask,
     ExportTask,
     FailedQueuedPurchaseDeletion,
@@ -62,20 +63,13 @@ from ..models import (
     FlowLog,
     FpgaImage,
     FpgaImageAttribute,
-    GroupIdentifier,
     HistoryRecordEntry,
     Host,
     HostOffering,
     HostReservation,
     IamInstanceProfileAssociation,
     IdFormat,
-    Image,
     ImageReference,
-    ImageUsageReport,
-    ImageUsageReportEntry,
-    ImportImageTask,
-    ImportSnapshotTask,
-    InstanceBlockDeviceMapping,
     InstanceTagNotificationAttribute,
     IpamPoolCidr,
     LaunchPermission,
@@ -103,6 +97,7 @@ from ..models import (
     TransitGatewayMulticastDeregisteredGroupMembers,
     TransitGatewayMulticastDeregisteredGroupSources,
     TransitGatewayMulticastDomain,
+    TransitGatewayNetworkFunctionAttachment,
     TransitGatewayPeeringAttachment,
     TransitGatewayPolicyTable,
     TransitGatewayPolicyTableEntry,
@@ -120,6 +115,252 @@ from ..models import (
     VpcEncryptionControl,
     _SerdeShape,
 )
+
+@dataclass(kw_only=True)
+class DeleteNetworkInsightsPathOutput(_SerdeShape):
+    """Dataclass for DeleteNetworkInsightsPathOutput structure."""
+
+    network_insights_path_id: str | None = ...
+    """The ID of the path."""
+    response_metadata: ResponseMetadata = ...
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+@dataclass(kw_only=True)
+class DeleteNetworkInterfaceInput(_SerdeShape):
+    """Contains the parameters for DeleteNetworkInterface."""
+
+    dry_run: bool | None = ...
+    """
+    Checks whether you have the required permissions for the action, without
+    actually making the request, and provides an error response. If you have
+    the required permissions, the error response is `DryRunOperation`.
+    Otherwise, it is `UnauthorizedOperation`.
+    """
+    network_interface_id: str | None = ...
+    """The ID of the network interface."""
+
+class DeleteNetworkInterfaceInputDict(TypedDict, total=False):
+    """Dictionary form of `DeleteNetworkInterfaceInput`."""
+
+    dry_run: bool | None
+    """
+    Checks whether you have the required permissions for the action, without
+    actually making the request, and provides an error response. If you have
+    the required permissions, the error response is `DryRunOperation`.
+    Otherwise, it is `UnauthorizedOperation`.
+    """
+    network_interface_id: Required[str]
+    """The ID of the network interface."""
+
+@dataclass(kw_only=True)
+class DeleteNetworkInterfaceOutput(_SerdeShape):
+    """Dataclass for DeleteNetworkInterfaceOutput structure."""
+
+    response_metadata: ResponseMetadata = ...
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+@dataclass(kw_only=True)
+class DeleteNetworkInterfacePermissionInput(_SerdeShape):
+    """Contains the parameters for DeleteNetworkInterfacePermission."""
+
+    network_interface_permission_id: str | None = ...
+    """The ID of the network interface permission."""
+    force: bool | None = ...
+    """
+    Specify `true` to remove the permission even if the network interface is
+    attached to an instance.
+    """
+    dry_run: bool | None = ...
+    """
+    Checks whether you have the required permissions for the action, without
+    actually making the request, and provides an error response. If you have
+    the required permissions, the error response is `DryRunOperation`.
+    Otherwise, it is `UnauthorizedOperation`.
+    """
+
+class DeleteNetworkInterfacePermissionInputDict(TypedDict, total=False):
+    """Dictionary form of `DeleteNetworkInterfacePermissionInput`."""
+
+    network_interface_permission_id: Required[str]
+    """The ID of the network interface permission."""
+    force: bool | None
+    """
+    Specify `true` to remove the permission even if the network interface is
+    attached to an instance.
+    """
+    dry_run: bool | None
+    """
+    Checks whether you have the required permissions for the action, without
+    actually making the request, and provides an error response. If you have
+    the required permissions, the error response is `DryRunOperation`.
+    Otherwise, it is `UnauthorizedOperation`.
+    """
+
+@dataclass(kw_only=True)
+class DeleteNetworkInterfacePermissionOutput(_SerdeShape):
+    """Contains the output for DeleteNetworkInterfacePermission."""
+
+    return_: bool | None = ...
+    """Is `true` if the request succeeds and an error otherwise."""
+    response_metadata: ResponseMetadata = ...
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+@dataclass(kw_only=True)
+class DeletePlacementGroupInput(_SerdeShape):
+    """Dataclass for DeletePlacementGroupInput structure."""
+
+    dry_run: bool | None = ...
+    """
+    Checks whether you have the required permissions for the operation,
+    without actually making the request, and provides an error response. If
+    you have the required permissions, the error response is
+    `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    """
+    group_name: str | None = ...
+    """The name of the placement group."""
+
+class DeletePlacementGroupInputDict(TypedDict, total=False):
+    """Dictionary form of `DeletePlacementGroupInput`."""
+
+    dry_run: bool | None
+    """
+    Checks whether you have the required permissions for the operation,
+    without actually making the request, and provides an error response. If
+    you have the required permissions, the error response is
+    `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    """
+    group_name: Required[str]
+    """The name of the placement group."""
+
+@dataclass(kw_only=True)
+class DeletePlacementGroupOutput(_SerdeShape):
+    """Dataclass for DeletePlacementGroupOutput structure."""
+
+    response_metadata: ResponseMetadata = ...
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+@dataclass(kw_only=True)
+class DeletePublicIpv4PoolInput(_SerdeShape):
+    """Dataclass for DeletePublicIpv4PoolInput structure."""
+
+    dry_run: bool | None = ...
+    """
+    A check for whether you have the required permissions for the action
+    without actually making the request and provides an error response. If
+    you have the required permissions, the error response is
+    `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    """
+    pool_id: str | None = ...
+    """The ID of the public IPv4 pool you want to delete."""
+    network_border_group: str | None = ...
+    """
+    The Availability Zone (AZ) or Local Zone (LZ) network border group that
+    the resource that the IP address is assigned to is in. Defaults to an AZ
+    network border group. For more information on available Local Zones, see
+    [Local Zone
+    availability](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-byoip.html#byoip-zone-avail)
+    in the *Amazon EC2 User Guide*.
+    """
+
+class DeletePublicIpv4PoolInputDict(TypedDict, total=False):
+    """Dictionary form of `DeletePublicIpv4PoolInput`."""
+
+    dry_run: bool | None
+    """
+    A check for whether you have the required permissions for the action
+    without actually making the request and provides an error response. If
+    you have the required permissions, the error response is
+    `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    """
+    pool_id: Required[str]
+    """The ID of the public IPv4 pool you want to delete."""
+    network_border_group: str | None
+    """
+    The Availability Zone (AZ) or Local Zone (LZ) network border group that
+    the resource that the IP address is assigned to is in. Defaults to an AZ
+    network border group. For more information on available Local Zones, see
+    [Local Zone
+    availability](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-byoip.html#byoip-zone-avail)
+    in the *Amazon EC2 User Guide*.
+    """
+
+@dataclass(kw_only=True)
+class DeletePublicIpv4PoolOutput(_SerdeShape):
+    """Dataclass for DeletePublicIpv4PoolOutput structure."""
+
+    return_value: bool | None = ...
+    """Information about the result of deleting the public IPv4 pool."""
+    response_metadata: ResponseMetadata = ...
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+@dataclass(kw_only=True)
+class DeleteQueuedReservedInstancesError(_SerdeShape):
+    """
+    Describes the error for a Reserved Instance whose queued purchase could
+    not be deleted.
+    """
+
+    code: str | None = ...
+    """The error code."""
+    message: str | None = ...
+    """The error message."""
+
+class DeleteQueuedReservedInstancesErrorCode(UnknownEnumMixin, StrEnum):
+    RESERVED_INSTANCES_ID_INVALID = "reserved-instances-id-invalid"
+    RESERVED_INSTANCES_NOT_IN_QUEUED_STATE = "reserved-instances-not-in-queued-state"
+    UNEXPECTED_ERROR = "unexpected-error"
+
+@dataclass(kw_only=True)
+class DeleteQueuedReservedInstancesInput(_SerdeShape):
+    """Dataclass for DeleteQueuedReservedInstancesInput structure."""
+
+    dry_run: bool | None = ...
+    """
+    Checks whether you have the required permissions for the action, without
+    actually making the request, and provides an error response. If you have
+    the required permissions, the error response is `DryRunOperation`.
+    Otherwise, it is `UnauthorizedOperation`.
+    """
+    reserved_instances_ids: list[str] | None = ...
+    """The IDs of the Reserved Instances."""
+
+class DeleteQueuedReservedInstancesInputDict(TypedDict, total=False):
+    """Dictionary form of `DeleteQueuedReservedInstancesInput`."""
+
+    dry_run: bool | None
+    """
+    Checks whether you have the required permissions for the action, without
+    actually making the request, and provides an error response. If you have
+    the required permissions, the error response is `DryRunOperation`.
+    Otherwise, it is `UnauthorizedOperation`.
+    """
+    reserved_instances_ids: Required[Sequence[str]]
+    """The IDs of the Reserved Instances."""
 
 @dataclass(kw_only=True)
 class DeleteQueuedReservedInstancesOutput(_SerdeShape):
@@ -1248,6 +1489,55 @@ class DeleteTransitGatewayMulticastDomainOutput(_SerdeShape):
 
     transit_gateway_multicast_domain: TransitGatewayMulticastDomain | None = ...
     """Information about the deleted transit gateway multicast domain."""
+    response_metadata: ResponseMetadata = ...
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+@dataclass(kw_only=True)
+class DeleteTransitGatewayNetworkFunctionAttachmentInput(_SerdeShape):
+    """
+    Dataclass for DeleteTransitGatewayNetworkFunctionAttachmentInput
+    structure.
+    """
+
+    transit_gateway_attachment_id: str | None = ...
+    """The ID of the network function attachment."""
+    dry_run: bool | None = ...
+    """
+    Checks whether you have the required permissions for the action, without
+    actually making the request, and provides an error response. If you have
+    the required permissions, the error response is `DryRunOperation`.
+    Otherwise, it is `UnauthorizedOperation`.
+    """
+
+class DeleteTransitGatewayNetworkFunctionAttachmentInputDict(TypedDict, total=False):
+    """Dictionary form of `DeleteTransitGatewayNetworkFunctionAttachmentInput`."""
+
+    transit_gateway_attachment_id: Required[str]
+    """The ID of the network function attachment."""
+    dry_run: bool | None
+    """
+    Checks whether you have the required permissions for the action, without
+    actually making the request, and provides an error response. If you have
+    the required permissions, the error response is `DryRunOperation`.
+    Otherwise, it is `UnauthorizedOperation`.
+    """
+
+@dataclass(kw_only=True)
+class DeleteTransitGatewayNetworkFunctionAttachmentOutput(_SerdeShape):
+    """
+    Dataclass for DeleteTransitGatewayNetworkFunctionAttachmentOutput
+    structure.
+    """
+
+    transit_gateway_network_function_attachment: (
+        TransitGatewayNetworkFunctionAttachment | None
+    ) = ...
+    """Information about the deleted network function attachment."""
     response_metadata: ResponseMetadata = ...
     """
     Metadata about the response that produced this output. Use this to
@@ -4078,6 +4368,12 @@ class DescribeCapacityBlockOfferingsInput(_SerdeShape):
     available offerings from all Availability Zones in the Amazon Web
     Services Region and Local Zones you are opted into.
     """
+    instance_type_preferences: list[CapacityBlockInstanceTypePreference] | None = ...
+    """
+    List of instance type preferences for the Capacity Block offering
+    search. Accepts one or more instance type names. Either this or the
+    legacy `InstanceType` parameter is required.
+    """
 
 class DescribeCapacityBlockOfferingsInputDict(TypedDict, total=False):
     """Dictionary form of `DescribeCapacityBlockOfferingsInput`."""
@@ -4129,6 +4425,18 @@ class DescribeCapacityBlockOfferingsInputDict(TypedDict, total=False):
     opt-in status. If you do not use this parameter, the results include
     available offerings from all Availability Zones in the Amazon Web
     Services Region and Local Zones you are opted into.
+    """
+    instance_type_preferences: (
+        Sequence[
+            CapacityBlockInstanceTypePreference
+            | CapacityBlockInstanceTypePreferenceDict
+        ]
+        | None
+    )
+    """
+    List of instance type preferences for the Capacity Block offering
+    search. Accepts one or more instance type names. Either this or the
+    legacy `InstanceType` parameter is required.
     """
 
 @dataclass(kw_only=True)
@@ -8740,705 +9048,4 @@ class DescribeImagesInputDict(TypedDict, total=False):
 
     - `virtualization-type` - The virtualization type (`paravirtual` |
       `hvm`).
-    """
-
-@dataclass(kw_only=True)
-class DescribeImagesOutput(_SerdeShape):
-    """Dataclass for DescribeImagesOutput structure."""
-
-    next_token: str | None = ...
-    """
-    The token to include in another request to get the next page of items.
-    This value is `null` when there are no more items to return.
-    """
-    images: list[Image] | None = ...
-    """Information about the images."""
-    response_metadata: ResponseMetadata = ...
-    """
-    Metadata about the response that produced this output. Use this to
-    recover the request identifiers a service's support team needs in order
-    to investigate a call. Members of the metadata are individually
-    optional.
-    """
-
-@dataclass(kw_only=True)
-class DescribeImageUsageReportEntriesInput(_SerdeShape):
-    """Dataclass for DescribeImageUsageReportEntriesInput structure."""
-
-    image_ids: list[str] | None = ...
-    """
-    The IDs of the images for filtering the report entries. If specified,
-    only report entries containing these images are returned.
-    """
-    report_ids: list[str] | None = ...
-    """The IDs of the usage reports."""
-    next_token: str | None = ...
-    """
-    The token returned from a previous paginated request. Pagination
-    continues from the end of the items returned by the previous request.
-    """
-    filters: list[Filter] | None = ...
-    """
-    The filters.
-
-    - `account-id` - A 12-digit Amazon Web Services account ID.
-
-    - `creation-time` - The time when the report was created, in the ISO
-      8601 format in the UTC time zone (YYYY-MM-DDThh:mm:ss.sssZ), for
-      example, `2025-11-29T11:04:43.305Z`. You can use a wildcard (`*`), for
-      example, `2025-11-29T*`, which matches an entire day.
-
-    - `resource-type` - The resource type (`ec2:Instance` |
-      `ec2:LaunchTemplate` | `imagebuilder:ImageRecipe` |
-      `imagebuilder:ContainerRecipe`).
-    """
-    dry_run: bool | None = ...
-    """
-    Checks whether you have the required permissions for the action, without
-    actually making the request, and provides an error response. If you have
-    the required permissions, the error response is `DryRunOperation`.
-    Otherwise, it is `UnauthorizedOperation`.
-    """
-    max_results: int | None = ...
-    """
-    The maximum number of items to return for this request. To get the next
-    page of items, make another request with the token returned in the
-    output. For more information, see
-    [Pagination](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination).
-    """
-
-class DescribeImageUsageReportEntriesInputDict(TypedDict, total=False):
-    """Dictionary form of `DescribeImageUsageReportEntriesInput`."""
-
-    image_ids: Sequence[str] | None
-    """
-    The IDs of the images for filtering the report entries. If specified,
-    only report entries containing these images are returned.
-    """
-    report_ids: Sequence[str] | None
-    """The IDs of the usage reports."""
-    next_token: str | None
-    """
-    The token returned from a previous paginated request. Pagination
-    continues from the end of the items returned by the previous request.
-    """
-    filters: Sequence[Filter | FilterDict] | None
-    """
-    The filters.
-
-    - `account-id` - A 12-digit Amazon Web Services account ID.
-
-    - `creation-time` - The time when the report was created, in the ISO
-      8601 format in the UTC time zone (YYYY-MM-DDThh:mm:ss.sssZ), for
-      example, `2025-11-29T11:04:43.305Z`. You can use a wildcard (`*`), for
-      example, `2025-11-29T*`, which matches an entire day.
-
-    - `resource-type` - The resource type (`ec2:Instance` |
-      `ec2:LaunchTemplate` | `imagebuilder:ImageRecipe` |
-      `imagebuilder:ContainerRecipe`).
-    """
-    dry_run: bool | None
-    """
-    Checks whether you have the required permissions for the action, without
-    actually making the request, and provides an error response. If you have
-    the required permissions, the error response is `DryRunOperation`.
-    Otherwise, it is `UnauthorizedOperation`.
-    """
-    max_results: int | None
-    """
-    The maximum number of items to return for this request. To get the next
-    page of items, make another request with the token returned in the
-    output. For more information, see
-    [Pagination](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination).
-    """
-
-@dataclass(kw_only=True)
-class DescribeImageUsageReportEntriesOutput(_SerdeShape):
-    """Dataclass for DescribeImageUsageReportEntriesOutput structure."""
-
-    next_token: str | None = ...
-    """
-    The token to include in another request to get the next page of items.
-    This value is `null` when there are no more items to return.
-    """
-    image_usage_report_entries: list[ImageUsageReportEntry] | None = ...
-    """The content of the usage reports."""
-    response_metadata: ResponseMetadata = ...
-    """
-    Metadata about the response that produced this output. Use this to
-    recover the request identifiers a service's support team needs in order
-    to investigate a call. Members of the metadata are individually
-    optional.
-    """
-
-@dataclass(kw_only=True)
-class DescribeImageUsageReportsInput(_SerdeShape):
-    """Dataclass for DescribeImageUsageReportsInput structure."""
-
-    image_ids: list[str] | None = ...
-    """
-    The IDs of the images for filtering the reports. If specified, only
-    reports containing these images are returned.
-    """
-    report_ids: list[str] | None = ...
-    """The IDs of the image usage reports."""
-    next_token: str | None = ...
-    """
-    The token returned from a previous paginated request. Pagination
-    continues from the end of the items returned by the previous request.
-    """
-    filters: list[Filter] | None = ...
-    """
-    The filters.
-
-    - `creation-time` - The time when the report was created, in the ISO
-      8601 format in the UTC time zone (YYYY-MM-DDThh:mm:ss.sssZ), for
-      example, `2025-11-29T11:04:43.305Z`. You can use a wildcard (`*`), for
-      example, `2025-11-29T*`, which matches an entire day.
-
-    - `state` - The state of the report (`available` | `pending` |
-      `error`).
-
-    - `tag:``<key>`{=html} - The key/value combination of a tag assigned to
-      the resource. Use the tag key in the filter name and the tag value as
-      the filter value. For example, to find all resources that have a tag
-      with the key `Owner` and the value `TeamA`, specify `tag:Owner` for
-      the filter name and `TeamA` for the filter value.
-
-    - `tag-key` - The key of a tag assigned to the resource. Use this filter
-      to find all resources assigned a tag with a specific key, regardless
-      of the tag value.
-    """
-    dry_run: bool | None = ...
-    """
-    Checks whether you have the required permissions for the action, without
-    actually making the request, and provides an error response. If you have
-    the required permissions, the error response is `DryRunOperation`.
-    Otherwise, it is `UnauthorizedOperation`.
-    """
-    max_results: int | None = ...
-    """
-    The maximum number of items to return for this request. To get the next
-    page of items, make another request with the token returned in the
-    output. For more information, see
-    [Pagination](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination).
-    """
-
-class DescribeImageUsageReportsInputDict(TypedDict, total=False):
-    """Dictionary form of `DescribeImageUsageReportsInput`."""
-
-    image_ids: Sequence[str] | None
-    """
-    The IDs of the images for filtering the reports. If specified, only
-    reports containing these images are returned.
-    """
-    report_ids: Sequence[str] | None
-    """The IDs of the image usage reports."""
-    next_token: str | None
-    """
-    The token returned from a previous paginated request. Pagination
-    continues from the end of the items returned by the previous request.
-    """
-    filters: Sequence[Filter | FilterDict] | None
-    """
-    The filters.
-
-    - `creation-time` - The time when the report was created, in the ISO
-      8601 format in the UTC time zone (YYYY-MM-DDThh:mm:ss.sssZ), for
-      example, `2025-11-29T11:04:43.305Z`. You can use a wildcard (`*`), for
-      example, `2025-11-29T*`, which matches an entire day.
-
-    - `state` - The state of the report (`available` | `pending` |
-      `error`).
-
-    - `tag:``<key>`{=html} - The key/value combination of a tag assigned to
-      the resource. Use the tag key in the filter name and the tag value as
-      the filter value. For example, to find all resources that have a tag
-      with the key `Owner` and the value `TeamA`, specify `tag:Owner` for
-      the filter name and `TeamA` for the filter value.
-
-    - `tag-key` - The key of a tag assigned to the resource. Use this filter
-      to find all resources assigned a tag with a specific key, regardless
-      of the tag value.
-    """
-    dry_run: bool | None
-    """
-    Checks whether you have the required permissions for the action, without
-    actually making the request, and provides an error response. If you have
-    the required permissions, the error response is `DryRunOperation`.
-    Otherwise, it is `UnauthorizedOperation`.
-    """
-    max_results: int | None
-    """
-    The maximum number of items to return for this request. To get the next
-    page of items, make another request with the token returned in the
-    output. For more information, see
-    [Pagination](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination).
-    """
-
-@dataclass(kw_only=True)
-class DescribeImageUsageReportsOutput(_SerdeShape):
-    """Dataclass for DescribeImageUsageReportsOutput structure."""
-
-    next_token: str | None = ...
-    """
-    The token to include in another request to get the next page of items.
-    This value is `null` when there are no more items to return.
-    """
-    image_usage_reports: list[ImageUsageReport] | None = ...
-    """The image usage reports."""
-    response_metadata: ResponseMetadata = ...
-    """
-    Metadata about the response that produced this output. Use this to
-    recover the request identifiers a service's support team needs in order
-    to investigate a call. Members of the metadata are individually
-    optional.
-    """
-
-@dataclass(kw_only=True)
-class DescribeImportImageTasksInput(_SerdeShape):
-    """Dataclass for DescribeImportImageTasksInput structure."""
-
-    dry_run: bool | None = ...
-    """
-    Checks whether you have the required permissions for the action, without
-    actually making the request, and provides an error response. If you have
-    the required permissions, the error response is `DryRunOperation`.
-    Otherwise, it is `UnauthorizedOperation`.
-    """
-    filters: list[Filter] | None = ...
-    """
-    Filter tasks using the `task-state` filter and one of the following
-    values: `active`, `completed`, `deleting`, or `deleted`.
-    """
-    import_task_ids: list[str] | None = ...
-    """The IDs of the import image tasks."""
-    max_results: int | None = ...
-    """The maximum number of results to return in a single call."""
-    next_token: str | None = ...
-    """A token that indicates the next page of results."""
-
-class DescribeImportImageTasksInputDict(TypedDict, total=False):
-    """Dictionary form of `DescribeImportImageTasksInput`."""
-
-    dry_run: bool | None
-    """
-    Checks whether you have the required permissions for the action, without
-    actually making the request, and provides an error response. If you have
-    the required permissions, the error response is `DryRunOperation`.
-    Otherwise, it is `UnauthorizedOperation`.
-    """
-    filters: Sequence[Filter | FilterDict] | None
-    """
-    Filter tasks using the `task-state` filter and one of the following
-    values: `active`, `completed`, `deleting`, or `deleted`.
-    """
-    import_task_ids: Sequence[str] | None
-    """The IDs of the import image tasks."""
-    max_results: int | None
-    """The maximum number of results to return in a single call."""
-    next_token: str | None
-    """A token that indicates the next page of results."""
-
-@dataclass(kw_only=True)
-class DescribeImportImageTasksOutput(_SerdeShape):
-    """Dataclass for DescribeImportImageTasksOutput structure."""
-
-    import_image_tasks: list[ImportImageTask] | None = ...
-    """
-    A list of zero or more import image tasks that are currently active or
-    were completed or canceled in the previous 7 days.
-    """
-    next_token: str | None = ...
-    """
-    The token to use to get the next page of results. This value is `null`
-    when there are no more results to return.
-    """
-    response_metadata: ResponseMetadata = ...
-    """
-    Metadata about the response that produced this output. Use this to
-    recover the request identifiers a service's support team needs in order
-    to investigate a call. Members of the metadata are individually
-    optional.
-    """
-
-@dataclass(kw_only=True)
-class DescribeImportSnapshotTasksInput(_SerdeShape):
-    """Dataclass for DescribeImportSnapshotTasksInput structure."""
-
-    dry_run: bool | None = ...
-    """
-    Checks whether you have the required permissions for the action, without
-    actually making the request, and provides an error response. If you have
-    the required permissions, the error response is `DryRunOperation`.
-    Otherwise, it is `UnauthorizedOperation`.
-    """
-    filters: list[Filter] | None = ...
-    """The filters."""
-    import_task_ids: list[str] | None = ...
-    """A list of import snapshot task IDs."""
-    max_results: int | None = ...
-    """
-    The maximum number of results to return in a single call. To retrieve
-    the remaining results, make another call with the returned `NextToken`
-    value.
-    """
-    next_token: str | None = ...
-    """A token that indicates the next page of results."""
-
-class DescribeImportSnapshotTasksInputDict(TypedDict, total=False):
-    """Dictionary form of `DescribeImportSnapshotTasksInput`."""
-
-    dry_run: bool | None
-    """
-    Checks whether you have the required permissions for the action, without
-    actually making the request, and provides an error response. If you have
-    the required permissions, the error response is `DryRunOperation`.
-    Otherwise, it is `UnauthorizedOperation`.
-    """
-    filters: Sequence[Filter | FilterDict] | None
-    """The filters."""
-    import_task_ids: Sequence[str] | None
-    """A list of import snapshot task IDs."""
-    max_results: int | None
-    """
-    The maximum number of results to return in a single call. To retrieve
-    the remaining results, make another call with the returned `NextToken`
-    value.
-    """
-    next_token: str | None
-    """A token that indicates the next page of results."""
-
-@dataclass(kw_only=True)
-class DescribeImportSnapshotTasksOutput(_SerdeShape):
-    """Dataclass for DescribeImportSnapshotTasksOutput structure."""
-
-    import_snapshot_tasks: list[ImportSnapshotTask] | None = ...
-    """
-    A list of zero or more import snapshot tasks that are currently active
-    or were completed or canceled in the previous 7 days.
-    """
-    next_token: str | None = ...
-    """
-    The token to use to get the next page of results. This value is `null`
-    when there are no more results to return.
-    """
-    response_metadata: ResponseMetadata = ...
-    """
-    Metadata about the response that produced this output. Use this to
-    recover the request identifiers a service's support team needs in order
-    to investigate a call. Members of the metadata are individually
-    optional.
-    """
-
-@dataclass(kw_only=True)
-class DescribeInstanceAttributeInput(_SerdeShape):
-    """Dataclass for DescribeInstanceAttributeInput structure."""
-
-    dry_run: bool | None = ...
-    """
-    Checks whether you have the required permissions for the operation,
-    without actually making the request, and provides an error response. If
-    you have the required permissions, the error response is
-    `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    """
-    instance_id: str | None = ...
-    """The ID of the instance."""
-    attribute: str | None = ...
-    """
-    The instance attribute.
-
-    Note that the `enaSupport` attribute is not supported.
-    """
-
-class DescribeInstanceAttributeInputDict(TypedDict, total=False):
-    """Dictionary form of `DescribeInstanceAttributeInput`."""
-
-    dry_run: bool | None
-    """
-    Checks whether you have the required permissions for the operation,
-    without actually making the request, and provides an error response. If
-    you have the required permissions, the error response is
-    `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    """
-    instance_id: Required[str]
-    """The ID of the instance."""
-    attribute: Required[str]
-    """
-    The instance attribute.
-
-    Note that the `enaSupport` attribute is not supported.
-    """
-
-@dataclass(kw_only=True)
-class DescribeInstanceAttributeOutput(_SerdeShape):
-    """Describes an instance attribute."""
-
-    block_device_mappings: list[InstanceBlockDeviceMapping] | None = ...
-    """The block device mapping of the instance."""
-    disable_api_termination: AttributeBooleanValue | None = ...
-    """
-    Indicates whether termination protection is enabled. If the value is
-    `true`, you can't terminate the instance using the Amazon EC2 console,
-    command line tools, or API.
-    """
-    ena_support: AttributeBooleanValue | None = ...
-    """Indicates whether enhanced networking with ENA is enabled."""
-    enclave_options: EnclaveOptions | None = ...
-    """
-    Indicates whether the instance is enabled for Amazon Web Services Nitro
-    Enclaves.
-    """
-    ebs_optimized: AttributeBooleanValue | None = ...
-    """Indicates whether the instance is optimized for Amazon EBS I/O."""
-    instance_id: str | None = ...
-    """The ID of the instance."""
-    instance_initiated_shutdown_behavior: AttributeValue | None = ...
-    """
-    Indicates whether an instance stops or terminates when you initiate
-    shutdown from the instance (using the operating system command for
-    system shutdown).
-    """
-    instance_type: AttributeValue | None = ...
-    """The instance type."""
-    kernel_id: AttributeValue | None = ...
-    """The kernel ID."""
-    product_codes: list[ProductCode] | None = ...
-    """The product codes."""
-    ramdisk_id: AttributeValue | None = ...
-    """The RAM disk ID."""
-    root_device_name: AttributeValue | None = ...
-    """The device name of the root device volume (for example, `/dev/sda1`)."""
-    source_dest_check: AttributeBooleanValue | None = ...
-    """Indicates whether source/destination checks are enabled."""
-    sriov_net_support: AttributeValue | None = ...
-    """
-    Indicates whether enhanced networking with the Intel 82599 Virtual
-    Function interface is enabled.
-    """
-    user_data: AttributeValue | None = ...
-    """The user data."""
-    disable_api_stop: AttributeBooleanValue | None = ...
-    """Indicates whether stop protection is enabled for the instance."""
-    groups: list[GroupIdentifier] | None = ...
-    """The security groups associated with the instance."""
-    response_metadata: ResponseMetadata = ...
-    """
-    Metadata about the response that produced this output. Use this to
-    recover the request identifiers a service's support team needs in order
-    to investigate a call. Members of the metadata are individually
-    optional.
-    """
-
-@dataclass(kw_only=True)
-class DescribeInstanceConnectEndpointsInput(_SerdeShape):
-    """Dataclass for DescribeInstanceConnectEndpointsInput structure."""
-
-    dry_run: bool | None = ...
-    """
-    Checks whether you have the required permissions for the action, without
-    actually making the request, and provides an error response. If you have
-    the required permissions, the error response is `DryRunOperation`.
-    Otherwise, it is `UnauthorizedOperation`.
-    """
-    max_results: int | None = ...
-    """
-    The maximum number of items to return for this request. To get the next
-    page of items, make another request with the token returned in the
-    output. For more information, see
-    [Pagination](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination).
-    """
-    next_token: str | None = ...
-    """
-    The token returned from a previous paginated request. Pagination
-    continues from the end of the items returned by the previous request.
-    """
-    filters: list[Filter] | None = ...
-    """
-    One or more filters.
-
-    - `instance-connect-endpoint-id` - The ID of the EC2 Instance Connect
-      Endpoint.
-
-    - `state` - The state of the EC2 Instance Connect Endpoint
-      (`create-in-progress` | `create-complete` | `create-failed` |
-      `delete-in-progress` | `delete-complete` | `delete-failed`).
-
-    - `subnet-id` - The ID of the subnet in which the EC2 Instance Connect
-      Endpoint was created.
-
-    - `tag`:`<key>`{=html} - The key/value combination of a tag assigned to
-      the resource. Use the tag key in the filter name and the tag value as
-      the filter value. For example, to find all resources that have a tag
-      with the key `Owner` and the value `TeamA`, specify `tag:Owner` for
-      the filter name and `TeamA` for the filter value.
-
-    - `tag-key` - The key of a tag assigned to the resource. Use this filter
-      to find all resources assigned a tag with a specific key, regardless
-      of the tag value.
-
-    - `tag-value` - The value of a tag assigned to the resource. Use this
-      filter to find all resources that have a tag with a specific value,
-      regardless of tag key.
-
-    - `vpc-id` - The ID of the VPC in which the EC2 Instance Connect
-      Endpoint was created.
-    """
-    instance_connect_endpoint_ids: list[str] | None = ...
-    """One or more EC2 Instance Connect Endpoint IDs."""
-
-class DescribeInstanceConnectEndpointsInputDict(TypedDict, total=False):
-    """Dictionary form of `DescribeInstanceConnectEndpointsInput`."""
-
-    dry_run: bool | None
-    """
-    Checks whether you have the required permissions for the action, without
-    actually making the request, and provides an error response. If you have
-    the required permissions, the error response is `DryRunOperation`.
-    Otherwise, it is `UnauthorizedOperation`.
-    """
-    max_results: int | None
-    """
-    The maximum number of items to return for this request. To get the next
-    page of items, make another request with the token returned in the
-    output. For more information, see
-    [Pagination](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination).
-    """
-    next_token: str | None
-    """
-    The token returned from a previous paginated request. Pagination
-    continues from the end of the items returned by the previous request.
-    """
-    filters: Sequence[Filter | FilterDict] | None
-    """
-    One or more filters.
-
-    - `instance-connect-endpoint-id` - The ID of the EC2 Instance Connect
-      Endpoint.
-
-    - `state` - The state of the EC2 Instance Connect Endpoint
-      (`create-in-progress` | `create-complete` | `create-failed` |
-      `delete-in-progress` | `delete-complete` | `delete-failed`).
-
-    - `subnet-id` - The ID of the subnet in which the EC2 Instance Connect
-      Endpoint was created.
-
-    - `tag`:`<key>`{=html} - The key/value combination of a tag assigned to
-      the resource. Use the tag key in the filter name and the tag value as
-      the filter value. For example, to find all resources that have a tag
-      with the key `Owner` and the value `TeamA`, specify `tag:Owner` for
-      the filter name and `TeamA` for the filter value.
-
-    - `tag-key` - The key of a tag assigned to the resource. Use this filter
-      to find all resources assigned a tag with a specific key, regardless
-      of the tag value.
-
-    - `tag-value` - The value of a tag assigned to the resource. Use this
-      filter to find all resources that have a tag with a specific value,
-      regardless of tag key.
-
-    - `vpc-id` - The ID of the VPC in which the EC2 Instance Connect
-      Endpoint was created.
-    """
-    instance_connect_endpoint_ids: Sequence[str] | None
-    """One or more EC2 Instance Connect Endpoint IDs."""
-
-@dataclass(kw_only=True)
-class DescribeInstanceConnectEndpointsOutput(_SerdeShape):
-    """Dataclass for DescribeInstanceConnectEndpointsOutput structure."""
-
-    instance_connect_endpoints: list[Ec2InstanceConnectEndpoint] | None = ...
-    """Information about the EC2 Instance Connect Endpoints."""
-    next_token: str | None = ...
-    """
-    The token to include in another request to get the next page of items.
-    This value is `null` when there are no more items to return.
-    """
-    response_metadata: ResponseMetadata = ...
-    """
-    Metadata about the response that produced this output. Use this to
-    recover the request identifiers a service's support team needs in order
-    to investigate a call. Members of the metadata are individually
-    optional.
-    """
-
-@dataclass(kw_only=True)
-class DescribeInstanceCreditSpecificationsInput(_SerdeShape):
-    """Dataclass for DescribeInstanceCreditSpecificationsInput structure."""
-
-    dry_run: bool | None = ...
-    """
-    Checks whether you have the required permissions for the operation,
-    without actually making the request, and provides an error response. If
-    you have the required permissions, the error response is
-    `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    """
-    filters: list[Filter] | None = ...
-    """
-    The filters.
-
-    - `instance-id` - The ID of the instance.
-    """
-    instance_ids: list[str] | None = ...
-    """
-    The instance IDs.
-
-    Default: Describes all your instances.
-
-    Constraints: Maximum 1000 explicitly specified instance IDs.
-    """
-    max_results: int | None = ...
-    """
-    The maximum number of items to return for this request. To get the next
-    page of items, make another request with the token returned in the
-    output. For more information, see
-    [Pagination](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination).
-
-    You cannot specify this parameter and the instance IDs parameter in the
-    same call.
-    """
-    next_token: str | None = ...
-    """
-    The token returned from a previous paginated request. Pagination
-    continues from the end of the items returned by the previous request.
-    """
-
-class DescribeInstanceCreditSpecificationsInputDict(TypedDict, total=False):
-    """Dictionary form of `DescribeInstanceCreditSpecificationsInput`."""
-
-    dry_run: bool | None
-    """
-    Checks whether you have the required permissions for the operation,
-    without actually making the request, and provides an error response. If
-    you have the required permissions, the error response is
-    `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    """
-    filters: Sequence[Filter | FilterDict] | None
-    """
-    The filters.
-
-    - `instance-id` - The ID of the instance.
-    """
-    instance_ids: Sequence[str] | None
-    """
-    The instance IDs.
-
-    Default: Describes all your instances.
-
-    Constraints: Maximum 1000 explicitly specified instance IDs.
-    """
-    max_results: int | None
-    """
-    The maximum number of items to return for this request. To get the next
-    page of items, make another request with the token returned in the
-    output. For more information, see
-    [Pagination](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination).
-
-    You cannot specify this parameter and the instance IDs parameter in the
-    same call.
-    """
-    next_token: str | None
-    """
-    The token returned from a previous paginated request. Pagination
-    continues from the end of the items returned by the previous request.
     """

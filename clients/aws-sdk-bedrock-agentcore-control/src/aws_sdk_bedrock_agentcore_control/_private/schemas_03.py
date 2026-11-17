@@ -22,6 +22,7 @@ _mem = "member"
 _sVm = "smithy.api#enumValue"
 _smi = "smithy.api#default"
 _smit = "smithy.api#sensitive"
+_NONE = "NONE"
 _sSI = "smithy.synthetic#originalShapeId"
 _smith = "smithy.api#input"
 _sL = "smithy.api#httpLabel"
@@ -30,13 +31,11 @@ _sT = "smithy.api#idempotencyToken"
 _CREATING = "CREATING"
 _UPDATING = "UPDATING"
 _DELETING = "DELETING"
-_ACTIVE = "ACTIVE"
 _CF = "CREATE_FAILED"
 _UF = "UPDATE_FAILED"
 _DF = "DELETE_FAILED"
 _smithy = "smithy.api#output"
 _st = "status"
-_uA = "updatedAt"
 _smithya = "smithy.api#http"
 _t = "tags"
 _READY = "READY"
@@ -46,10 +45,10 @@ _lUA = "lastUpdatedAt"
 _fR = "failureReason"
 _mR = "maxResults"
 _nT = "nextToken"
+_kKA = "kmsKeyArn"
 _vI = "versionId"
 _a = "arn"
 _cPA = "capacityProviderArn"
-_sOm = "smithy.api#clientOptional"
 _mL = "maxLifetime"
 _PUBLIC = "PUBLIC"
 _VPC = "VPC"
@@ -65,14 +64,69 @@ _ty = "type"
 _vC = "vpcConfig"
 _eRA = "executionRoleArn"
 _ce = "certificates"
+_bI = "browserId"
+_bAr = "browserArn"
+_LBI = "ListBrowsersInput"
+_cLBR = "com.amazonaws.bedrockagentcorecontrol#ListBrowsersRequest"
+_BSr = "BrowserSummary"
+_BSro = "BrowserSummaries"
+_LBO = "ListBrowsersOutput"
+_cLBRo = "com.amazonaws.bedrockagentcorecontrol#ListBrowsersResponse"
+_bSr = "browserSummaries"
+_LB = "ListBrowsers"
 _CPI = "CapacityProviderId"
+_CRP = "CapacityReservationPreference"
+_CRO = "CAPACITY_RESERVATIONS_ONLY"
+_cro = "capacity-reservations-only"
+_OPEN = "OPEN"
+_o = "open"
+_no = "none"
+_CRI = "CapacityReservationId"
+_CRRGA = "CapacityReservationResourceGroupArn"
+_CRT = "CapacityReservationTarget"
+_cRI = "capacityReservationId"
+_cRRGA = "capacityReservationResourceGroupArn"
+_CRS = "CapacityReservationSpecification"
+_cRP = "capacityReservationPreference"
+_cRT = "capacityReservationTarget"
+_DN = "DeviceName"
+_ECI = "EbsCardIndex"
+_VIo = "VolumeIops"
+_KKI = "KmsKeyId"
+_ESI = "EbsSnapshotId"
+_VT = "VolumeThroughput"
+_EVIR = "EbsVolumeInitializationRate"
+_VSGB = "VolumeSizeGiB"
+_EVT = "EbsVolumeType"
+_STANDARD = "STANDARD"
+_sta = "standard"
+_IO = "IO1"
+_io = "io1"
+_IO_ = "IO2"
+_io_ = "io2"
+_GP = "GP2"
+_g = "gp2"
+_SC = "SC1"
+_sc = "sc1"
+_ST = "ST1"
+_st_ = "st1"
+_GP_ = "GP3"
 _gp = "gp3"
+_EEBSVC = "EphemeralEBSVolumeConfiguration"
 _vT = "volumeType"
 _iop = "iops"
 _th = "throughput"
 _enc = "encrypted"
 _kKI = "kmsKeyId"
 _sIn = "snapshotId"
+_vS = "volumeSize"
+_vIR = "volumeInitializationRate"
+_eCI = "ebsCardIndex"
+_VDN = "VirtualDeviceName"
+_EBDM = "EphemeralBlockDeviceMapping"
+_dN = "deviceName"
+_vNi = "virtualName"
+_eb = "ebs"
 _EBDML = "EphemeralBlockDeviceMappingList"
 _IPA = "InstanceProfileArn"
 _ECIT = "EC2InstanceType"
@@ -198,7 +252,6 @@ _con = "configuration"
 _CCM = "ComponentConfigurationMap"
 _VCBS = "VersionCreatedBySource"
 _CBD = "ConfigurationBundleDescription"
-_KKA = "KmsKeyArn"
 _CCBI = "CreateConfigurationBundleInput"
 _cCCBR = "com.amazonaws.bedrockagentcorecontrol#CreateConfigurationBundleRequest"
 _bN = "bundleName"
@@ -206,37 +259,168 @@ _com = "components"
 _bNr = "branchName"
 _cM = "commitMessage"
 _cBr = "createdBy"
-_kKA = "kmsKeyArn"
 _CBAo = "ConfigurationBundleArn"
 _CBV = "ConfigurationBundleVersion"
 _CCBO = "CreateConfigurationBundleOutput"
 _cCCBRo = "com.amazonaws.bedrockagentcorecontrol#CreateConfigurationBundleResponse"
 _bIu = "bundleId"
 _CCB = "CreateConfigurationBundle"
-_DCBI = "DeleteConfigurationBundleInput"
-_cDCBR = "com.amazonaws.bedrockagentcorecontrol#DeleteConfigurationBundleRequest"
-_CBS = "ConfigurationBundleStatus"
-_DCBO = "DeleteConfigurationBundleOutput"
-_cDCBRo = "com.amazonaws.bedrockagentcorecontrol#DeleteConfigurationBundleResponse"
-_DCB = "DeleteConfigurationBundle"
-_GCBI = "GetConfigurationBundleInput"
-_cGCBR = "com.amazonaws.bedrockagentcorecontrol#GetConfigurationBundleRequest"
-_CBVL = "ConfigurationBundleVersionList"
-_VLM = "VersionLineageMetadata"
-_pVI = "parentVersionIds"
-_GCBO = "GetConfigurationBundleOutput"
-_cGCBRo = "com.amazonaws.bedrockagentcorecontrol#GetConfigurationBundleResponse"
-_lM = "lineageMetadata"
-_GCB = "GetConfigurationBundle"
-_GCBVI = "GetConfigurationBundleVersionInput"
-_cGCBVR = "com.amazonaws.bedrockagentcorecontrol#GetConfigurationBundleVersionRequest"
-_GCBVO = "GetConfigurationBundleVersionOutput"
-_cGCBVRo = "com.amazonaws.bedrockagentcorecontrol#GetConfigurationBundleVersionResponse"
-_vCA = "versionCreatedAt"
-_GCBV = "GetConfigurationBundleVersion"
-_MI = "ModelId"
+
+LIST_BROWSERS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _LBI,
+    {_sSI: _cLBR, _smith: None},
+    (_mR, _nT, _ty),
+    (
+        (lambda: schemas.MAX_RESULTS, {_sQ: _mR}),
+        (lambda: schemas.NEXT_TOKEN, {_sQ: _nT}),
+        (lambda: schemas.RESOURCE_TYPE, {_sQ: _ty}),
+    ),
+)
+
+LIST_BROWSERS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _LBO,
+    {_sSI: _cLBRo, _smithy: None},
+    (_bSr, _nT),
+    ((lambda: BROWSER_SUMMARIES, 1), (lambda: schemas.NEXT_TOKEN, 0)),
+)
+
+LIST_BROWSERS: StaticOperationSchema = (
+    23,
+    n0,
+    _LB,
+    {_smithya: MappingProxyType({"code": 200, "method": "POST", "uri": "/browsers"})},
+    LIST_BROWSERS_INPUT,
+    LIST_BROWSERS_OUTPUT,
+    (
+        lambda: schemas.ACCESS_DENIED_EXCEPTION,
+        lambda: schemas.INTERNAL_SERVER_EXCEPTION,
+        lambda: schemas.THROTTLING_EXCEPTION,
+        lambda: schemas.VALIDATION_EXCEPTION,
+    ),
+)
+
+BROWSER_SUMMARY: StaticSchema = (
+    18,
+    n0,
+    _BSr,
+    0,
+    (_bI, _bAr, _n, _d, _st, _cA, _lUA),
+    (
+        (lambda: schemas.BROWSER_ID, 1),
+        (lambda: schemas.BROWSER_ARN, 1),
+        (lambda: schemas.SANDBOX_NAME, 0),
+        (lambda: schemas.DESCRIPTION, 0),
+        (lambda: schemas.BROWSER_STATUS, 1),
+        (lambda: schemas.DATE_TIMESTAMP, 1),
+        (lambda: schemas.DATE_TIMESTAMP, 0),
+    ),
+)
+
+BROWSER_SUMMARIES: StaticSchema = (16, n0, _BSro, 0, (_mem,), ((BROWSER_SUMMARY, 0),))
 
 CAPACITY_PROVIDER_ID: StaticSchema = (3, n0, _CPI, 0)
+
+CAPACITY_RESERVATION_PREFERENCE: StaticSchema = (
+    14,
+    n0,
+    _CRP,
+    0,
+    (_CRO, _OPEN, _NONE),
+    ((-1, {_sVm: _cro}), (-1, {_sVm: _o}), (-1, {_sVm: _no})),
+)
+
+CAPACITY_RESERVATION_ID: StaticSchema = (3, n0, _CRI, 0)
+
+CAPACITY_RESERVATION_RESOURCE_GROUP_ARN: StaticSchema = (3, n0, _CRRGA, 0)
+
+CAPACITY_RESERVATION_TARGET: StaticSchema = (
+    18,
+    n0,
+    _CRT,
+    0,
+    (_cRI, _cRRGA),
+    ((CAPACITY_RESERVATION_ID, 0), (CAPACITY_RESERVATION_RESOURCE_GROUP_ARN, 0)),
+)
+
+CAPACITY_RESERVATION_SPECIFICATION: StaticSchema = (
+    18,
+    n0,
+    _CRS,
+    0,
+    (_cRP, _cRT),
+    ((CAPACITY_RESERVATION_PREFERENCE, 0), (CAPACITY_RESERVATION_TARGET, 0)),
+)
+
+DEVICE_NAME: StaticSchema = (3, n0, _DN, 0)
+
+EBS_CARD_INDEX: StaticSchema = (7, n0, _ECI, 0)
+
+VOLUME_IOPS: StaticSchema = (7, n0, _VIo, 0)
+
+KMS_KEY_ID: StaticSchema = (3, n0, _KKI, 0)
+
+EBS_SNAPSHOT_ID: StaticSchema = (3, n0, _ESI, 0)
+
+VOLUME_THROUGHPUT: StaticSchema = (7, n0, _VT, 0)
+
+EBS_VOLUME_INITIALIZATION_RATE: StaticSchema = (7, n0, _EVIR, 0)
+
+VOLUME_SIZE_GI_B: StaticSchema = (7, n0, _VSGB, 0)
+
+EBS_VOLUME_TYPE: StaticSchema = (
+    14,
+    n0,
+    _EVT,
+    0,
+    (_STANDARD, _IO, _IO_, _GP, _SC, _ST, _GP_),
+    (
+        (-1, {_sVm: _sta}),
+        (-1, {_sVm: _io}),
+        (-1, {_sVm: _io_}),
+        (-1, {_sVm: _g}),
+        (-1, {_sVm: _sc}),
+        (-1, {_sVm: _st_}),
+        (-1, {_sVm: _gp}),
+    ),
+)
+
+EPHEMERAL_EBS_VOLUME_CONFIGURATION: StaticSchema = (
+    18,
+    n0,
+    _EEBSVC,
+    0,
+    (_vT, _iop, _th, _enc, _kKI, _sIn, _vS, _vIR, _eCI),
+    (
+        (EBS_VOLUME_TYPE, {_smi: _gp}),
+        (VOLUME_IOPS, 0),
+        (VOLUME_THROUGHPUT, 0),
+        (2, 0),
+        (KMS_KEY_ID, 0),
+        (EBS_SNAPSHOT_ID, 0),
+        (VOLUME_SIZE_GI_B, 0),
+        (EBS_VOLUME_INITIALIZATION_RATE, 0),
+        (EBS_CARD_INDEX, 0),
+    ),
+)
+
+VIRTUAL_DEVICE_NAME: StaticSchema = (3, n0, _VDN, 0)
+
+EPHEMERAL_BLOCK_DEVICE_MAPPING: StaticSchema = (
+    18,
+    n0,
+    _EBDM,
+    0,
+    (_dN, _vNi, _eb),
+    (
+        (DEVICE_NAME, 0),
+        (VIRTUAL_DEVICE_NAME, 0),
+        (EPHEMERAL_EBS_VOLUME_CONFIGURATION, 0),
+    ),
+)
 
 EPHEMERAL_BLOCK_DEVICE_MAPPING_LIST: StaticSchema = (
     16,
@@ -244,7 +428,7 @@ EPHEMERAL_BLOCK_DEVICE_MAPPING_LIST: StaticSchema = (
     _EBDML,
     0,
     (_mem,),
-    ((lambda: schemas.EPHEMERAL_BLOCK_DEVICE_MAPPING, 0),),
+    ((EPHEMERAL_BLOCK_DEVICE_MAPPING, 0),),
 )
 
 INSTANCE_PROFILE_ARN: StaticSchema = (3, n0, _IPA, 0)
@@ -314,7 +498,7 @@ LAUNCH_PARAMETERS: StaticSchema = (
         (EPHEMERAL_BLOCK_DEVICE_MAPPING_LIST, 0),
         (MONITORING, 0),
         (LICENSE_SPECIFICATION_LIST, 0),
-        (lambda: schemas.CAPACITY_RESERVATION_SPECIFICATION, 0),
+        (CAPACITY_RESERVATION_SPECIFICATION, 0),
         (SSH_KEY_NAME, 0),
         (INSTANCE_PROFILE_ARN, 0),
         (lambda: schemas.TAGS_MAP, 0),
@@ -346,12 +530,12 @@ ROOT_VOLUME_CONFIGURATION: StaticSchema = (
     0,
     (_vT, _iop, _th, _enc, _kKI, _fSGB),
     (
-        (lambda: schemas.EBS_VOLUME_TYPE, {_smi: _gp}),
-        (lambda: schemas.VOLUME_IOPS, 0),
-        (lambda: schemas.VOLUME_THROUGHPUT, 0),
+        (EBS_VOLUME_TYPE, {_smi: _gp}),
+        (VOLUME_IOPS, 0),
+        (VOLUME_THROUGHPUT, 0),
         (2, 0),
-        (lambda: schemas.KMS_KEY_ID, 0),
-        (lambda: schemas.VOLUME_SIZE_GI_B, 0),
+        (KMS_KEY_ID, 0),
+        (VOLUME_SIZE_GI_B, 0),
     ),
 )
 
@@ -365,13 +549,13 @@ EBS_VOLUME_CONFIGURATION: StaticSchema = (
     (_n, _sGB, _vT, _iop, _th, _enc, _kKI, _sIn),
     (
         (VOLUME_NAME, 1),
-        (lambda: schemas.VOLUME_SIZE_GI_B, 1),
-        (lambda: schemas.EBS_VOLUME_TYPE, {_smi: _gp}),
-        (lambda: schemas.VOLUME_IOPS, 0),
-        (lambda: schemas.VOLUME_THROUGHPUT, 0),
+        (VOLUME_SIZE_GI_B, 1),
+        (EBS_VOLUME_TYPE, {_smi: _gp}),
+        (VOLUME_IOPS, 0),
+        (VOLUME_THROUGHPUT, 0),
         (2, 0),
-        (lambda: schemas.KMS_KEY_ID, 0),
-        (lambda: schemas.EBS_SNAPSHOT_ID, 0),
+        (KMS_KEY_ID, 0),
+        (EBS_SNAPSHOT_ID, 0),
     ),
 )
 
@@ -1097,8 +1281,6 @@ VERSION_CREATED_BY_SOURCE: StaticSchema = (18, n0, _VCBS, 0, (_n, _a), ((3, 1), 
 
 CONFIGURATION_BUNDLE_DESCRIPTION: StaticSchema = (3, n0, _CBD, 4)
 
-KMS_KEY_ARN: StaticSchema = (3, n0, _KKA, 0)
-
 CREATE_CONFIGURATION_BUNDLE_INPUT: StaticSchema = (
     18,
     n0,
@@ -1113,7 +1295,7 @@ CREATE_CONFIGURATION_BUNDLE_INPUT: StaticSchema = (
         (BRANCH_NAME, 0),
         (3, 0),
         (VERSION_CREATED_BY_SOURCE, 0),
-        (KMS_KEY_ARN, 0),
+        (lambda: schemas.KMS_KEY_ARN, 0),
         (lambda: schemas.TAGS_MAP, 0),
     ),
 )
@@ -1156,193 +1338,3 @@ CREATE_CONFIGURATION_BUNDLE: StaticOperationSchema = (
 CONFIGURATION_BUNDLE_ARN: StaticSchema = (3, n0, _CBAo, 0)
 
 CONFIGURATION_BUNDLE_VERSION: StaticSchema = (3, n0, _CBV, 0)
-
-DELETE_CONFIGURATION_BUNDLE_INPUT: StaticSchema = (
-    18,
-    n0,
-    _DCBI,
-    {_sSI: _cDCBR, _smith: None},
-    (_bIu,),
-    ((CONFIGURATION_BUNDLE_ID, 9),),
-)
-
-DELETE_CONFIGURATION_BUNDLE_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _DCBO,
-    {_sSI: _cDCBRo, _smithy: None},
-    (_bA, _bIu, _st),
-    (
-        (CONFIGURATION_BUNDLE_ARN, {_sOm: None, _sm: None}),
-        (CONFIGURATION_BUNDLE_ID, 1),
-        (lambda: CONFIGURATION_BUNDLE_STATUS, 1),
-    ),
-)
-
-DELETE_CONFIGURATION_BUNDLE: StaticOperationSchema = (
-    23,
-    n0,
-    _DCB,
-    {
-        _smithya: MappingProxyType(
-            {
-                "method": "DELETE",
-                "uri": "/configuration-bundles/{bundleId}",
-                "code": 202,
-            }
-        )
-    },
-    DELETE_CONFIGURATION_BUNDLE_INPUT,
-    DELETE_CONFIGURATION_BUNDLE_OUTPUT,
-    (
-        lambda: schemas.ACCESS_DENIED_EXCEPTION,
-        lambda: schemas.CONFLICT_EXCEPTION,
-        lambda: schemas.INTERNAL_SERVER_EXCEPTION,
-        lambda: schemas.RESOURCE_NOT_FOUND_EXCEPTION,
-        lambda: schemas.THROTTLING_EXCEPTION,
-        lambda: schemas.VALIDATION_EXCEPTION,
-    ),
-)
-
-CONFIGURATION_BUNDLE_STATUS: StaticSchema = (
-    14,
-    n0,
-    _CBS,
-    0,
-    (_ACTIVE, _CREATING, _CF, _UPDATING, _UF, _DELETING, _DF),
-    (
-        (-1, {_sVm: _ACTIVE}),
-        (-1, {_sVm: _CREATING}),
-        (-1, {_sVm: _CF}),
-        (-1, {_sVm: _UPDATING}),
-        (-1, {_sVm: _UF}),
-        (-1, {_sVm: _DELETING}),
-        (-1, {_sVm: _DF}),
-    ),
-)
-
-GET_CONFIGURATION_BUNDLE_INPUT: StaticSchema = (
-    18,
-    n0,
-    _GCBI,
-    {_sSI: _cGCBR, _smith: None},
-    (_bIu, _bNr),
-    ((CONFIGURATION_BUNDLE_ID, 9), (BRANCH_NAME, {_sQ: _bNr})),
-)
-
-GET_CONFIGURATION_BUNDLE_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _GCBO,
-    {_sSI: _cGCBRo, _smithy: None},
-    (_bA, _bIu, _bN, _d, _vI, _com, _lM, _cA, _uA, _kKA),
-    (
-        (CONFIGURATION_BUNDLE_ARN, 1),
-        (CONFIGURATION_BUNDLE_ID, 1),
-        (CONFIGURATION_BUNDLE_NAME, 1),
-        (CONFIGURATION_BUNDLE_DESCRIPTION, 0),
-        (CONFIGURATION_BUNDLE_VERSION, 1),
-        (COMPONENT_CONFIGURATION_MAP, 1),
-        (lambda: VERSION_LINEAGE_METADATA, 0),
-        (4, 1),
-        (4, 1),
-        (KMS_KEY_ARN, 0),
-    ),
-)
-
-GET_CONFIGURATION_BUNDLE: StaticOperationSchema = (
-    23,
-    n0,
-    _GCB,
-    {
-        _smithya: MappingProxyType(
-            {"method": "GET", "uri": "/configuration-bundles/{bundleId}"}
-        )
-    },
-    GET_CONFIGURATION_BUNDLE_INPUT,
-    GET_CONFIGURATION_BUNDLE_OUTPUT,
-    (
-        lambda: schemas.ACCESS_DENIED_EXCEPTION,
-        lambda: schemas.INTERNAL_SERVER_EXCEPTION,
-        lambda: schemas.RESOURCE_NOT_FOUND_EXCEPTION,
-        lambda: schemas.THROTTLING_EXCEPTION,
-        lambda: schemas.VALIDATION_EXCEPTION,
-    ),
-)
-
-CONFIGURATION_BUNDLE_VERSION_LIST: StaticSchema = (
-    16,
-    n0,
-    _CBVL,
-    0,
-    (_mem,),
-    ((CONFIGURATION_BUNDLE_VERSION, 0),),
-)
-
-VERSION_LINEAGE_METADATA: StaticSchema = (
-    18,
-    n0,
-    _VLM,
-    0,
-    (_pVI, _bNr, _cBr, _cM),
-    (
-        (CONFIGURATION_BUNDLE_VERSION_LIST, 0),
-        (BRANCH_NAME, 0),
-        (VERSION_CREATED_BY_SOURCE, 0),
-        (3, 0),
-    ),
-)
-
-GET_CONFIGURATION_BUNDLE_VERSION_INPUT: StaticSchema = (
-    18,
-    n0,
-    _GCBVI,
-    {_sSI: _cGCBVR, _smith: None},
-    (_bIu, _vI),
-    ((CONFIGURATION_BUNDLE_ID, 9), (CONFIGURATION_BUNDLE_VERSION, 9)),
-)
-
-GET_CONFIGURATION_BUNDLE_VERSION_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _GCBVO,
-    {_sSI: _cGCBVRo, _smithy: None},
-    (_bA, _bIu, _bN, _d, _vI, _com, _lM, _cA, _vCA, _kKA),
-    (
-        (CONFIGURATION_BUNDLE_ARN, 1),
-        (CONFIGURATION_BUNDLE_ID, 1),
-        (CONFIGURATION_BUNDLE_NAME, 1),
-        (CONFIGURATION_BUNDLE_DESCRIPTION, 0),
-        (CONFIGURATION_BUNDLE_VERSION, 1),
-        (COMPONENT_CONFIGURATION_MAP, 1),
-        (VERSION_LINEAGE_METADATA, 0),
-        (4, 1),
-        (4, 1),
-        (KMS_KEY_ARN, 0),
-    ),
-)
-
-GET_CONFIGURATION_BUNDLE_VERSION: StaticOperationSchema = (
-    23,
-    n0,
-    _GCBV,
-    {
-        _smithya: MappingProxyType(
-            {
-                "method": "GET",
-                "uri": "/configuration-bundles/{bundleId}/versions/{versionId}",
-            }
-        )
-    },
-    GET_CONFIGURATION_BUNDLE_VERSION_INPUT,
-    GET_CONFIGURATION_BUNDLE_VERSION_OUTPUT,
-    (
-        lambda: schemas.ACCESS_DENIED_EXCEPTION,
-        lambda: schemas.INTERNAL_SERVER_EXCEPTION,
-        lambda: schemas.RESOURCE_NOT_FOUND_EXCEPTION,
-        lambda: schemas.THROTTLING_EXCEPTION,
-        lambda: schemas.VALIDATION_EXCEPTION,
-    ),
-)
-
-MODEL_ID: StaticSchema = (3, n0, _MI, 0)

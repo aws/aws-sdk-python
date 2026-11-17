@@ -8,14 +8,14 @@ from . import schemas
 
 
 n0 = "com.amazonaws.lambda"
-_s = "smithy.api#default"
+_sV = "smithy.api#enumValue"
+_s = "smithy.api#required"
+_sm = "smithy.api#default"
 _k = "key"
 _v = "value"
 _sSI = "smithy.synthetic#originalShapeId"
-_sm = "smithy.api#input"
-_smi = "smithy.api#required"
+_smi = "smithy.api#input"
 _sL = "smithy.api#httpLabel"
-_RI = "RevisionId"
 _sQ = "smithy.api#httpQuery"
 _smit = "smithy.api#output"
 _smith = "smithy.api#error"
@@ -23,20 +23,15 @@ _c = "client"
 _sE = "smithy.api#httpError"
 _T = "Type"
 _m = "message"
-_M = "Message"
-_sV = "smithy.api#enumValue"
+_Me = "Message"
 _smithy = "smithy.api#http"
 _Ar = "Arn"
 _FN = "FunctionName"
 _FA = "FunctionArn"
-_D = "Description"
-_V = "Version"
 _me = "member"
 _JSON = "JSON"
 _AMKESC = "AmazonManagedKafkaEventSourceConfig"
 _ALL = "ApplicationLogLevel"
-_Arch = "Architectures"
-_Ta = "Tags"
 _No = "None"
 _Mo = "Mode"
 _LG = "LogGroup"
@@ -53,10 +48,8 @@ _LM = "LastModified"
 _Mar = "Marker"
 _MI = "MaxItems"
 _NM = "NextMarker"
-_CSCA = "CodeSigningConfigArn"
 _RAe = "ResourceArn"
 _smithya = "smithy.api#sensitive"
-_DC = "DurableConfig"
 _Tim = "Timeout"
 _BS = "BatchSize"
 _BBOFE = "BisectBatchOnFunctionError"
@@ -87,6 +80,11 @@ _cESMC = "com.amazonaws.lambda#EventSourceMappingConfiguration"
 _UUID = "UUID"
 _LPR = "LastProcessingResult"
 _STR = "StateTransitionReason"
+_DESMI = "DeleteEventSourceMappingInput"
+_cDESMR = "com.amazonaws.lambda#DeleteEventSourceMappingRequest"
+_DESMO = "DeleteEventSourceMappingOutput"
+_RIUE = "ResourceInUseException"
+_DESM = "DeleteEventSourceMapping"
 _GESMI = "GetEventSourceMappingInput"
 _cGESMR = "com.amazonaws.lambda#GetEventSourceMappingRequest"
 _GESMO = "GetEventSourceMappingOutput"
@@ -145,7 +143,7 @@ _H = "Handler"
 _SL = "StringList"
 _WDo = "WorkingDirectory"
 _ICm = "ImageConfig"
-_EP = "EntryPoint"
+_EPn = "EntryPoint"
 _Co = "Command"
 _LVA = "LayerVersionArn"
 _LL = "LayerList"
@@ -270,38 +268,133 @@ _PTas = "PassThrough"
 _TCr = "TracingConfig"
 _NB = "NullableBoolean"
 _IAFDS = "Ipv6AllowedForDualStack"
-_CFI = "CreateFunctionInput"
-_cCFR = "com.amazonaws.lambda#CreateFunctionRequest"
-_Ro = "Role"
-_Cod = "Code"
-_Pu = "Publish"
-_PTu = "PublishTo"
-_La = "Layers"
-_FSCi = "FileSystemConfigs"
-_RCu = "RuntimeConfig"
-_ICR = "ImageConfigResponse"
-_LUS = "LastUpdateStatus"
-_LUSR = "LastUpdateStatusReason"
-_LUSRC = "LastUpdateStatusReasonCode"
-_CSod = "CodeSize"
-_SPVAi = "SigningProfileVersionArn"
-_SJA = "SigningJobArn"
-_RVC = "RuntimeVersionConfig"
-_SR = "StateReason"
-_SRCt = "StateReasonCode"
-_CFO = "CreateFunctionOutput"
-_cFC = "com.amazonaws.lambda#FunctionConfiguration"
-_CSode = "CodeSha256"
-_MA = "MasterArn"
-_CSon = "ConfigSha256"
-_CFr = "CreateFunction"
 _RCEe = "ReservedConcurrentExecutions"
+
+DELETE_EVENT_SOURCE_MAPPING_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DESMI,
+    {_sSI: _cDESMR, _smi: None},
+    (_UUID,),
+    ((lambda: schemas.UUID_STRING, 9),),
+)
+
+DELETE_EVENT_SOURCE_MAPPING_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DESMO,
+    {_sSI: _cESMC, _smit: None},
+    (
+        _UUID,
+        _SPt,
+        _SPT,
+        _BS,
+        _MBWIS,
+        _PF,
+        _ESA,
+        _FCi,
+        _FCE,
+        _KMSKA,
+        _MCe,
+        _LC,
+        _SCc,
+        _FA,
+        _LM,
+        _LPR,
+        _Sta,
+        _STR,
+        _DCe,
+        _Top,
+        _Que,
+        _SACo,
+        _SMES,
+        _MRAIS,
+        _BBOFE,
+        _MRA,
+        _TWIS,
+        _FRTu,
+        _AMKESC,
+        _SMKESC,
+        _DDBESC,
+        _ESMA,
+        _PPC,
+    ),
+    (
+        (lambda: schemas.UUID_STRING, 0),
+        (lambda: schemas.EVENT_SOURCE_POSITION, 0),
+        (lambda: schemas.DATE, 0),
+        (lambda: schemas.BATCH_SIZE, 0),
+        (lambda: schemas.MAXIMUM_BATCHING_WINDOW_IN_SECONDS, 0),
+        (lambda: schemas.PARALLELIZATION_FACTOR, 0),
+        (lambda: schemas.ARN, 0),
+        (lambda: schemas.FILTER_CRITERIA, 0),
+        (lambda: schemas.FILTER_CRITERIA_ERROR, 0),
+        (lambda: schemas.KMS_KEY_ARN, 0),
+        (lambda: schemas.EVENT_SOURCE_MAPPING_METRICS_CONFIG, 0),
+        (lambda: schemas.EVENT_SOURCE_MAPPING_LOGGING_CONFIG, 0),
+        (lambda: schemas.SCALING_CONFIG, 0),
+        (lambda: schemas.FUNCTION_ARN, 0),
+        (lambda: schemas.DATE, 0),
+        (lambda: schemas.STRING, 0),
+        (lambda: schemas.STRING, 0),
+        (lambda: schemas.STRING, 0),
+        (lambda: schemas.DESTINATION_CONFIG, 0),
+        (lambda: schemas.TOPICS, 0),
+        (lambda: schemas.QUEUES, 0),
+        (lambda: schemas.SOURCE_ACCESS_CONFIGURATIONS, 0),
+        (lambda: schemas.SELF_MANAGED_EVENT_SOURCE, 0),
+        (lambda: schemas.MAXIMUM_RECORD_AGE_IN_SECONDS, 0),
+        (lambda: schemas.BISECT_BATCH_ON_FUNCTION_ERROR, 0),
+        (lambda: schemas.MAXIMUM_RETRY_ATTEMPTS_EVENT_SOURCE_MAPPING, 0),
+        (lambda: schemas.TUMBLING_WINDOW_IN_SECONDS, 0),
+        (lambda: schemas.FUNCTION_RESPONSE_TYPE_LIST, 0),
+        (lambda: schemas.AMAZON_MANAGED_KAFKA_EVENT_SOURCE_CONFIG, 0),
+        (lambda: schemas.SELF_MANAGED_KAFKA_EVENT_SOURCE_CONFIG, 0),
+        (lambda: schemas.DOCUMENT_DB_EVENT_SOURCE_CONFIG, 0),
+        (lambda: schemas.EVENT_SOURCE_MAPPING_ARN, 0),
+        (lambda: schemas.PROVISIONED_POLLER_CONFIG, 0),
+    ),
+)
+
+DELETE_EVENT_SOURCE_MAPPING: StaticOperationSchema = (
+    23,
+    n0,
+    _DESM,
+    {
+        _smithy: MappingProxyType(
+            {
+                "method": "DELETE",
+                "uri": "/2015-03-31/event-source-mappings/{UUID}",
+                "code": 202,
+            }
+        )
+    },
+    DELETE_EVENT_SOURCE_MAPPING_INPUT,
+    DELETE_EVENT_SOURCE_MAPPING_OUTPUT,
+    (
+        lambda: schemas.INVALID_PARAMETER_VALUE_EXCEPTION,
+        lambda: schemas.RESOURCE_CONFLICT_EXCEPTION,
+        lambda: RESOURCE_IN_USE_EXCEPTION,
+        lambda: schemas.RESOURCE_NOT_FOUND_EXCEPTION,
+        lambda: schemas.SERVICE_EXCEPTION,
+        lambda: schemas.TOO_MANY_REQUESTS_EXCEPTION,
+    ),
+)
+
+RESOURCE_IN_USE_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _RIUE,
+    {_smith: _c, _sE: 400},
+    (_T, _Me),
+    ((lambda: schemas.STRING, 0), (lambda: schemas.STRING, 0)),
+)
 
 GET_EVENT_SOURCE_MAPPING_INPUT: StaticSchema = (
     18,
     n0,
     _GESMI,
-    {_sSI: _cGESMR, _sm: None},
+    {_sSI: _cGESMR, _smi: None},
     (_UUID,),
     ((lambda: schemas.UUID_STRING, 9),),
 )
@@ -410,7 +503,7 @@ LIST_EVENT_SOURCE_MAPPINGS_INPUT: StaticSchema = (
     18,
     n0,
     _LESMI,
-    {_sSI: _cLESMR, _sm: None},
+    {_sSI: _cLESMR, _smi: None},
     (_ESA, _FN, _Mar, _MI),
     (
         (lambda: schemas.ARN, {_sQ: _ESA}),
@@ -538,7 +631,7 @@ UPDATE_EVENT_SOURCE_MAPPING_INPUT: StaticSchema = (
     18,
     n0,
     _UESMI,
-    {_sSI: _cUESMR, _sm: None},
+    {_sSI: _cUESMR, _smi: None},
     (
         _UUID,
         _FN,
@@ -684,7 +777,7 @@ UPDATE_EVENT_SOURCE_MAPPING: StaticOperationSchema = (
     (
         lambda: schemas.INVALID_PARAMETER_VALUE_EXCEPTION,
         lambda: schemas.RESOURCE_CONFLICT_EXCEPTION,
-        lambda: schemas.RESOURCE_IN_USE_EXCEPTION,
+        RESOURCE_IN_USE_EXCEPTION,
         lambda: schemas.RESOURCE_NOT_FOUND_EXCEPTION,
         lambda: schemas.SERVICE_EXCEPTION,
         lambda: schemas.TOO_MANY_REQUESTS_EXCEPTION,
@@ -696,7 +789,7 @@ CODE_SIGNING_CONFIG_NOT_FOUND_EXCEPTION: StaticSchema = (
     n0,
     _CSCNFE,
     {_smith: _c, _sE: 404},
-    (_T, _M),
+    (_T, _Me),
     ((lambda: schemas.STRING, 0), (lambda: schemas.STRING, 0)),
 )
 
@@ -714,7 +807,7 @@ CODE_VERIFICATION_FAILED_EXCEPTION: StaticSchema = (
     n0,
     _CVFE,
     {_smith: _c, _sE: 400},
-    (_T, _M),
+    (_T, _Me),
     ((lambda: schemas.STRING, 0), (lambda: schemas.STRING, 0)),
 )
 
@@ -852,7 +945,7 @@ IMAGE_CONFIG: StaticSchema = (
     n0,
     _ICm,
     0,
-    (_EP, _Co, _WDo),
+    (_EPn, _Co, _WDo),
     ((STRING_LIST, 0), (STRING_LIST, 0), (WORKING_DIRECTORY, 0)),
 )
 
@@ -894,7 +987,7 @@ PACKAGE_TYPE: StaticSchema = (
     ((-1, {_sV: _Z}), (-1, {_sV: _Im})),
 )
 
-BOOLEAN: StaticSchema = (2, n0, _Bo, {_s: False})
+BOOLEAN: StaticSchema = (2, n0, _Bo, {_sm: False})
 
 FUNCTION_VERSION_LATEST_PUBLISHED: StaticSchema = (
     14,
@@ -1081,195 +1174,6 @@ VPC_CONFIG: StaticSchema = (
     0,
     (_SIub, _SGIe, _IAFDS),
     ((SUBNET_IDS, 0), (SECURITY_GROUP_IDS, 0), (NULLABLE_BOOLEAN, 0)),
-)
-
-CREATE_FUNCTION_INPUT: StaticSchema = (
-    18,
-    n0,
-    _CFI,
-    {_sSI: _cCFR, _sm: None},
-    (
-        _FN,
-        _Ru,
-        _Ro,
-        _H,
-        _Cod,
-        _D,
-        _Tim,
-        _MS,
-        _Pu,
-        _PTu,
-        _VC,
-        _PTa,
-        _DLC,
-        _Env,
-        _KMSKA,
-        _TCr,
-        _Ta,
-        _La,
-        _FSCi,
-        _CSCA,
-        _ICm,
-        _Arch,
-        _ESp,
-        _SSn,
-        _LC,
-        _TCe,
-        _CPC,
-        _DC,
-        _RCu,
-    ),
-    (
-        (FUNCTION_NAME, 1),
-        (RUNTIME, 0),
-        (lambda: schemas.ROLE_ARN, 1),
-        (HANDLER, 0),
-        (FUNCTION_CODE, 1),
-        (lambda: schemas.DESCRIPTION, 0),
-        (TIMEOUT, 0),
-        (MEMORY_SIZE, 0),
-        (BOOLEAN, {_s: False}),
-        (FUNCTION_VERSION_LATEST_PUBLISHED, 0),
-        (VPC_CONFIG, 0),
-        (PACKAGE_TYPE, 0),
-        (DEAD_LETTER_CONFIG, 0),
-        (ENVIRONMENT, 0),
-        (lambda: schemas.KMS_KEY_ARN, 0),
-        (TRACING_CONFIG, 0),
-        (lambda: schemas.TAGS, 0),
-        (LAYER_LIST, 0),
-        (FILE_SYSTEM_CONFIG_LIST, 0),
-        (lambda: schemas.CODE_SIGNING_CONFIG_ARN, 0),
-        (IMAGE_CONFIG, 0),
-        (lambda: schemas.ARCHITECTURES_LIST, 0),
-        (EPHEMERAL_STORAGE, 0),
-        (SNAP_START, 0),
-        (LOGGING_CONFIG, 0),
-        (TENANCY_CONFIG, 0),
-        (CAPACITY_PROVIDER_CONFIG, 0),
-        (lambda: schemas.DURABLE_CONFIG, 0),
-        (FUNCTION_RUNTIME_CONFIG, 0),
-    ),
-)
-
-CREATE_FUNCTION_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _CFO,
-    {_sSI: _cFC, _smit: None},
-    (
-        _FN,
-        _FA,
-        _Ru,
-        _Ro,
-        _H,
-        _CSod,
-        _D,
-        _Tim,
-        _MS,
-        _LM,
-        _CSode,
-        _V,
-        _VC,
-        _DLC,
-        _Env,
-        _KMSKA,
-        _TCr,
-        _MA,
-        _RI,
-        _La,
-        _Sta,
-        _SR,
-        _SRCt,
-        _LUS,
-        _LUSR,
-        _LUSRC,
-        _FSCi,
-        _SPVAi,
-        _SJA,
-        _PTa,
-        _ICR,
-        _Arch,
-        _ESp,
-        _SSn,
-        _RVC,
-        _LC,
-        _TCe,
-        _CPC,
-        _CSon,
-        _DC,
-        _RCu,
-    ),
-    (
-        (lambda: schemas.NAMESPACED_FUNCTION_NAME, 0),
-        (lambda: schemas.NAME_SPACED_FUNCTION_ARN, 0),
-        (RUNTIME, 0),
-        (lambda: schemas.ROLE_ARN, 0),
-        (HANDLER, 0),
-        (lambda: schemas.LONG, {_s: 0}),
-        (lambda: schemas.DESCRIPTION, 0),
-        (TIMEOUT, 0),
-        (MEMORY_SIZE, 0),
-        (lambda: schemas.TIMESTAMP, 0),
-        (lambda: schemas.STRING, 0),
-        (lambda: schemas.VERSION, 0),
-        (lambda: schemas.VPC_CONFIG_RESPONSE, 0),
-        (DEAD_LETTER_CONFIG, 0),
-        (lambda: schemas.ENVIRONMENT_RESPONSE, 0),
-        (lambda: schemas.KMS_KEY_ARN, 0),
-        (lambda: schemas.TRACING_CONFIG_RESPONSE, 0),
-        (lambda: schemas.FUNCTION_ARN, 0),
-        (lambda: schemas.STRING, 0),
-        (lambda: schemas.LAYERS_REFERENCE_LIST, 0),
-        (lambda: schemas.STATE, 0),
-        (lambda: schemas.STATE_REASON, 0),
-        (lambda: schemas.STATE_REASON_CODE, 0),
-        (lambda: schemas.LAST_UPDATE_STATUS, 0),
-        (lambda: schemas.LAST_UPDATE_STATUS_REASON, 0),
-        (lambda: schemas.LAST_UPDATE_STATUS_REASON_CODE, 0),
-        (FILE_SYSTEM_CONFIG_LIST, 0),
-        (lambda: schemas.ARN, 0),
-        (lambda: schemas.ARN, 0),
-        (PACKAGE_TYPE, 0),
-        (lambda: schemas.IMAGE_CONFIG_RESPONSE, 0),
-        (lambda: schemas.ARCHITECTURES_LIST, 0),
-        (EPHEMERAL_STORAGE, 0),
-        (lambda: schemas.SNAP_START_RESPONSE, 0),
-        (lambda: schemas.RUNTIME_VERSION_CONFIG, 0),
-        (LOGGING_CONFIG, 0),
-        (TENANCY_CONFIG, 0),
-        (CAPACITY_PROVIDER_CONFIG, 0),
-        (lambda: schemas.STRING, 0),
-        (lambda: schemas.DURABLE_CONFIG, 0),
-        (FUNCTION_RUNTIME_CONFIG, 0),
-    ),
-)
-
-CREATE_FUNCTION: StaticOperationSchema = (
-    23,
-    n0,
-    _CFr,
-    {
-        _smithy: MappingProxyType(
-            {"method": "POST", "uri": "/2015-03-31/functions", "code": 201}
-        )
-    },
-    CREATE_FUNCTION_INPUT,
-    CREATE_FUNCTION_OUTPUT,
-    (
-        CODE_SIGNING_CONFIG_NOT_FOUND_EXCEPTION,
-        CODE_STORAGE_EXCEEDED_EXCEPTION,
-        CODE_VERIFICATION_FAILED_EXCEPTION,
-        lambda: (
-            schemas.FUNCTION_VERSIONS_PER_CAPACITY_PROVIDER_LIMIT_EXCEEDED_EXCEPTION
-        ),
-        lambda: schemas.INVALID_CODE_SIGNATURE_EXCEPTION,
-        lambda: schemas.INVALID_PARAMETER_VALUE_EXCEPTION,
-        lambda: schemas.RESOURCE_CONFLICT_EXCEPTION,
-        lambda: schemas.RESOURCE_NOT_FOUND_EXCEPTION,
-        lambda: schemas.SERVICE_EXCEPTION,
-        lambda: schemas.TOO_MANY_REQUESTS_EXCEPTION,
-    ),
 )
 
 RESERVED_CONCURRENT_EXECUTIONS: StaticSchema = (7, n0, _RCEe, 0)

@@ -31,31 +31,55 @@ _r = "recommendation"
 _sSI = "smithy.synthetic#originalShapeId"
 _smit = "smithy.api#input"
 _sL = "smithy.api#httpLabel"
+_sQ = "smithy.api#httpQuery"
 _smith = "smithy.api#output"
 _smithy = "smithy.api#http"
 _smithyap = "smithy.api#default"
 _v = ""
+_ty = "type"
+_sF = "smithy.api#timestampFormat"
+_dt = "date-time"
+_aSC = "affectedSessionCount"
+_aII = "agentInsightId"
+_aN = "applicationName"
+_bEI = "batchEvaluationId"
+_cMS = "customerMetadataStatus"
+_aS = "archiveStatus"
+_lSA = "lastSeenAt"
 _bEA = "batchEvaluationArn"
 _va = "value"
 _sN = "serviceNames"
 _sTt = "startTime"
-_sF = "smithy.api#timestampFormat"
-_dt = "date-time"
 _eT = "endTime"
-_vI = "versionId"
-_ty = "type"
-_te = "text"
-_bAu = "bundleArn"
-_cB = "configurationBundle"
 _var = "variants"
 _gF = "gatewayFilter"
 _eCv = "evaluationConfig"
 _rA = "roleArn"
-_bEI = "batchEvaluationId"
-_rI = "recommendationId"
+_dI = "datasetId"
+_gI = "generationId"
 _con = "context"
+_ET = "EvaluationTarget"
+_sIp = "spanIds"
 _tIr = "traceIds"
+_EIv = "EvaluatorId"
+_EIva = "EvaluateInput"
+_cER = "com.amazonaws.bedrockagentcore#EvaluateRequest"
 _eI = "evaluatorId"
+_eIv = "evaluationInput"
+_eTv = "evaluationTarget"
+_eRI = "evaluationReferenceInputs"
+_EEC = "EvaluationErrorCode"
+_EEM = "EvaluationErrorMessage"
+_EDN = "EvaluationDimensionName"
+_EA = "EvaluatorArn"
+_EN = "EvaluatorName"
+_EE = "EvaluationExplanation"
+_IRIF = "IgnoredReferenceInputField"
+_IRIFg = "IgnoredReferenceInputFields"
+_TU = "TokenUsage"
+_iT = "inputTokens"
+_oT = "outputTokens"
+_tT = "totalTokens"
 _ERC = "EvaluationResultContent"
 _eN = "evaluatorName"
 _eDN = "evaluationDimensionName"
@@ -65,7 +89,10 @@ _eMr = "errorMessage"
 _eCr = "errorCode"
 _iRIF = "ignoredReferenceInputFields"
 _ER = "EvaluationResults"
+_EO = "EvaluateOutput"
+_cERo = "com.amazonaws.bedrockagentcore#EvaluateResponse"
 _eRv = "evaluationResults"
+_Ev = "Evaluate"
 _GABTI = "GetABTestInput"
 _cGABTR = "com.amazonaws.bedrockagentcore#GetABTestRequest"
 _EDL = "ErrorDetailsList"
@@ -78,9 +105,41 @@ _sAto = "stoppedAt"
 _mDEA = "maxDurationExpiresAt"
 _resul = "results"
 _GABT = "GetABTest"
+_GAII = "GetAgentInsightInput"
+_cGAIR = "com.amazonaws.bedrockagentcore#GetAgentInsightRequest"
+_RCEo = "RootCauseExplanation"
+_RCN = "RootCauseName"
+_FD = "FindingDescription"
+_FTI = "FindingTargetId"
+_FTT = "FindingTargetType"
+_SI_ = "SPAN_ID"
+_TI_ = "TRACE_ID"
+_SN_ = "SPAN_NAME"
+_SFe = "SessionFinding"
+_tIa = "targetId"
+_tTa = "targetType"
+_SFL = "SessionFindingList"
+_SS = "SampleSession"
+_fi = "findings"
+_ISSL = "InsightSampleSessionList"
+_SFu = "SuggestedFix"
+_IRC = "InsightRootCause"
+_sFu = "suggestedFix"
+_sSa = "sampleSessions"
+_IRCL = "InsightRootCauseList"
+_GAIO = "GetAgentInsightOutput"
+_cGAIRo = "com.amazonaws.bedrockagentcore#GetAgentInsightResponse"
+_rC = "rootCauses"
+_GAI = "GetAgentInsight"
 _GBEI = "GetBatchEvaluationInput"
 _cGBER = "com.amazonaws.bedrockagentcore#GetBatchEvaluationRequest"
 _BEN = "BatchEvaluationName"
+_DV = "DatasetVersion"
+_DD = "DatasetDetails"
+_dVa = "datasetVersion"
+_DED = "DatasetExecutionDetails"
+_dat = "dataset"
+_aIg = "agentInvocation"
 _ESL = "EvaluationStringList"
 _TIL = "TraceIdList"
 _STI = "SessionTraceIds"
@@ -124,47 +183,20 @@ _fO = "finalOutcome"
 _ESASL = "ExecutionSummaryAffectedSessionList"
 _ESC = "ExecutionSummaryCluster"
 _cIl = "clusterId"
-_aSC = "affectedSessionCount"
 _aSf = "affectedSessions"
 _ESCL = "ExecutionSummaryClusterList"
 _ESCRC = "ExecutionSummaryClusteringResultContent"
 _eSx = "executionSummaries"
 _RCC = "RootCauseCluster"
-_rC = "rootCause"
+_rCo = "rootCause"
 _RCCL = "RootCauseClusterList"
 _FSCC = "FailureSubCategoryCluster"
-_rCo = "rootCauses"
 _FSCCL = "FailureSubCategoryClusterList"
 _FCC = "FailureCategoryCluster"
 _sCu = "subCategories"
 _FCCL = "FailureCategoryClusterList"
 _FARC = "FailureAnalysisResultContent"
 _fa = "failures"
-_ID = "InsightDescription"
-_IN = "InsightName"
-_RCEo = "RootCauseExplanation"
-_RCN = "RootCauseName"
-_FD = "FindingDescription"
-_FTI = "FindingTargetId"
-_FTT = "FindingTargetType"
-_SI_ = "SPAN_ID"
-_TI_ = "TRACE_ID"
-_SN_ = "SPAN_NAME"
-_SFe = "SessionFinding"
-_tIa = "targetId"
-_tTa = "targetType"
-_SFL = "SessionFindingList"
-_SS = "SampleSession"
-_lSA = "lastSeenAt"
-_fi = "findings"
-_ISSL = "InsightSampleSessionList"
-_SFu = "SuggestedFix"
-_IRC = "InsightRootCause"
-_sFu = "suggestedFix"
-_sSa = "sampleSessions"
-_IRCL = "InsightRootCauseList"
-_IT = "InsightType"
-_FAILURE = "FAILURE"
 _IR = "InsightResult"
 _IRL = "InsightResultList"
 _II = "InsightId"
@@ -205,45 +237,105 @@ _fAR = "failureAnalysisResult"
 _uIR = "userIntentResult"
 _eSR = "executionSummaryResult"
 _kKA = "kmsKeyArn"
+_dED = "datasetExecutionDetails"
 _GBE = "GetBatchEvaluation"
-_GRI = "GetRecommendationInput"
-_cGRR = "com.amazonaws.bedrockagentcore#GetRecommendationRequest"
-_RDe = "RecommendationDescription"
-_RN = "RecommendationName"
-_RAe = "RecommendationArn"
-_RER = "RecommendationEvaluatorReference"
-_REL = "RecommendationEvaluatorList"
-_REC = "RecommendationEvaluationConfig"
-_CBVI = "ConfigurationBundleVersionId"
-_SPCB = "SystemPromptConfigurationBundle"
-_sPJP = "systemPromptJsonPath"
-_SPT = "SystemPromptText"
-_SPC = "SystemPromptConfig"
-_SPRC = "SystemPromptRecommendationConfig"
-_sPy = "systemPrompt"
-_aTg = "agentTraces"
-_RTN = "RecommendationToolName"
-_CBTE = "ConfigurationBundleToolEntry"
-_tNo = "toolName"
-_tDJP = "toolDescriptionJsonPath"
-_CBTEL = "ConfigurationBundleToolEntryList"
-_TDCB = "ToolDescriptionConfigurationBundle"
-_to = "tools"
-_TDT = "ToolDescriptionText"
-_TDC = "ToolDescriptionConfig"
-_TDI = "ToolDescriptionInput"
-_tD = "toolDescription"
-_TDL = "ToolDescriptionList"
-_TDTI = "ToolDescriptionTextInput"
-_TDS = "ToolDescriptionSource"
-_tDT = "toolDescriptionText"
-_TDRC = "ToolDescriptionRecommendationConfig"
-_GRO = "GetRecommendationOutput"
-_cGRRo = "com.amazonaws.bedrockagentcore#GetRecommendationResponse"
-_rAe = "recommendationArn"
-_rCe = "recommendationConfig"
-_rR = "recommendationResult"
-_GR = "GetRecommendation"
+_GDGI = "GetDatasetGenerationInput"
+_cGDGR = "com.amazonaws.bedrockagentcore#GetDatasetGenerationRequest"
+_GEC = "GenerationErrorCode"
+_GEM = "GenerationErrorMessage"
+_GESIL = "GenerationErrorSessionIdList"
+_GDGO = "GetDatasetGenerationOutput"
+_cGDGRo = "com.amazonaws.bedrockagentcore#GetDatasetGenerationResponse"
+_sTc = "scenarioType"
+_fR = "failureReason"
+_cAo = "completedAt"
+_so = "source"
+_gR = "generationResults"
+_rS = "redactionSummary"
+_GDG = "GetDatasetGeneration"
+
+EVALUATION_TARGET: StaticSchema = (
+    19,
+    n0,
+    _ET,
+    0,
+    (_sIp, _tIr),
+    ((lambda: schemas.SPAN_IDS, 0), (lambda: schemas.TRACE_IDS, 0)),
+)
+
+EVALUATOR_ID: StaticSchema = (3, n0, _EIv, 0)
+
+EVALUATE_INPUT: StaticSchema = (
+    18,
+    n0,
+    _EIva,
+    {_sSI: _cER, _smit: None},
+    (_eI, _eIv, _eTv, _eRI),
+    (
+        (EVALUATOR_ID, 9),
+        (lambda: schemas.EVALUATION_INPUT, 1),
+        (EVALUATION_TARGET, 0),
+        (lambda: schemas.EVALUATION_REFERENCE_INPUTS, 0),
+    ),
+)
+
+EVALUATE_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _EO,
+    {_sSI: _cERo, _smith: None},
+    (_eRv,),
+    ((lambda: EVALUATION_RESULTS, 1),),
+)
+
+EVALUATE: StaticOperationSchema = (
+    23,
+    n0,
+    _Ev,
+    {
+        _smithy: MappingProxyType(
+            {"method": "POST", "uri": "/evaluations/evaluate/{evaluatorId}"}
+        )
+    },
+    EVALUATE_INPUT,
+    EVALUATE_OUTPUT,
+    (
+        lambda: schemas.ACCESS_DENIED_EXCEPTION,
+        lambda: schemas.CONFLICT_EXCEPTION,
+        lambda: schemas.DUPLICATE_ID_EXCEPTION,
+        lambda: schemas.INTERNAL_SERVER_EXCEPTION,
+        lambda: schemas.RESOURCE_NOT_FOUND_EXCEPTION,
+        lambda: schemas.SERVICE_QUOTA_EXCEEDED_EXCEPTION,
+        lambda: schemas.THROTTLING_EXCEPTION,
+        lambda: schemas.UNAUTHORIZED_EXCEPTION,
+        lambda: schemas.VALIDATION_EXCEPTION,
+    ),
+)
+
+EVALUATION_ERROR_CODE: StaticSchema = (3, n0, _EEC, 0)
+
+EVALUATION_ERROR_MESSAGE: StaticSchema = (3, n0, _EEM, 0)
+
+EVALUATION_DIMENSION_NAME: StaticSchema = (3, n0, _EDN, 0)
+
+EVALUATOR_ARN: StaticSchema = (3, n0, _EA, 0)
+
+EVALUATOR_NAME: StaticSchema = (3, n0, _EN, 0)
+
+EVALUATION_EXPLANATION: StaticSchema = (3, n0, _EE, 4)
+
+IGNORED_REFERENCE_INPUT_FIELD: StaticSchema = (3, n0, _IRIF, 0)
+
+IGNORED_REFERENCE_INPUT_FIELDS: StaticSchema = (
+    16,
+    n0,
+    _IRIFg,
+    0,
+    (_m,),
+    ((IGNORED_REFERENCE_INPUT_FIELD, 0),),
+)
+
+TOKEN_USAGE: StaticSchema = (18, n0, _TU, 0, (_iT, _oT, _tT), ((7, 0), (7, 0), (7, 0)))
 
 EVALUATION_RESULT_CONTENT: StaticSchema = (
     18,
@@ -252,18 +344,18 @@ EVALUATION_RESULT_CONTENT: StaticSchema = (
     0,
     (_eA, _eI, _eN, _eDN, _ex, _con, _va, _la, _tU, _eMr, _eCr, _iRIF),
     (
-        (lambda: schemas.EVALUATOR_ARN, 1),
-        (lambda: schemas.EVALUATOR_ID, 1),
-        (lambda: schemas.EVALUATOR_NAME, 1),
-        (lambda: schemas.EVALUATION_DIMENSION_NAME, 0),
-        (lambda: schemas.EVALUATION_EXPLANATION, 0),
+        (EVALUATOR_ARN, 1),
+        (EVALUATOR_ID, 1),
+        (EVALUATOR_NAME, 1),
+        (EVALUATION_DIMENSION_NAME, 0),
+        (EVALUATION_EXPLANATION, 0),
         (lambda: schemas.CONTEXT, 1),
         (10, 0),
         (3, 0),
-        (lambda: schemas.TOKEN_USAGE, 0),
-        (lambda: schemas.EVALUATION_ERROR_MESSAGE, 0),
-        (lambda: schemas.EVALUATION_ERROR_CODE, 0),
-        (lambda: schemas.IGNORED_REFERENCE_INPUT_FIELDS, 0),
+        (TOKEN_USAGE, 0),
+        (EVALUATION_ERROR_MESSAGE, 0),
+        (EVALUATION_ERROR_CODE, 0),
+        (IGNORED_REFERENCE_INPUT_FIELDS, 0),
     ),
 )
 
@@ -353,6 +445,140 @@ GET_AB_TEST: StaticOperationSchema = (
 
 ERROR_DETAILS_LIST: StaticSchema = (16, n0, _EDL, 0, (_m,), ((3, 0),))
 
+GET_AGENT_INSIGHT_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GAII,
+    {_sSI: _cGAIR, _smit: None},
+    (_aN, _aII),
+    (
+        (lambda: schemas.AGENT_APPLICATION_NAME, {_sQ: _aN, _s: None}),
+        (lambda: schemas.AGENT_INSIGHT_ID, 9),
+    ),
+)
+
+GET_AGENT_INSIGHT_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GAIO,
+    {_sSI: _cGAIRo, _smith: None},
+    (_ty, _n, _d, _cA, _aSC, _sSa, _rC, _aII, _aN, _bEI, _cMS, _uA, _aS, _lSA),
+    (
+        (lambda: schemas.INSIGHT_TYPE, 1),
+        (lambda: schemas.INSIGHT_NAME, 1),
+        (lambda: schemas.INSIGHT_DESCRIPTION, 1),
+        (4, {_sF: _dt, _s: None}),
+        (7, 0),
+        (lambda: INSIGHT_SAMPLE_SESSION_LIST, 0),
+        (lambda: INSIGHT_ROOT_CAUSE_LIST, 0),
+        (lambda: schemas.AGENT_INSIGHT_ID, 1),
+        (lambda: schemas.AGENT_APPLICATION_NAME, 1),
+        (lambda: schemas.BATCH_EVALUATION_ID, 0),
+        (lambda: schemas.AGENT_INSIGHT_CUSTOMER_METADATA_STATUS, 1),
+        (4, {_sF: _dt, _s: None}),
+        (lambda: schemas.AGENT_INSIGHT_ARCHIVE_STATUS, 1),
+        (4, {_sF: _dt}),
+    ),
+)
+
+GET_AGENT_INSIGHT: StaticOperationSchema = (
+    23,
+    n0,
+    _GAI,
+    {
+        _smithy: MappingProxyType(
+            {"method": "GET", "uri": "/agentinsights/{agentInsightId}"}
+        )
+    },
+    GET_AGENT_INSIGHT_INPUT,
+    GET_AGENT_INSIGHT_OUTPUT,
+    (
+        lambda: schemas.ACCESS_DENIED_EXCEPTION,
+        lambda: schemas.INTERNAL_SERVER_EXCEPTION,
+        lambda: schemas.RESOURCE_NOT_FOUND_EXCEPTION,
+        lambda: schemas.THROTTLING_EXCEPTION,
+        lambda: schemas.VALIDATION_EXCEPTION,
+    ),
+)
+
+ROOT_CAUSE_EXPLANATION: StaticSchema = (3, n0, _RCEo, 4)
+
+ROOT_CAUSE_NAME: StaticSchema = (3, n0, _RCN, 4)
+
+FINDING_DESCRIPTION: StaticSchema = (3, n0, _FD, 4)
+
+FINDING_TARGET_ID: StaticSchema = (3, n0, _FTI, 0)
+
+FINDING_TARGET_TYPE: StaticSchema = (
+    14,
+    n0,
+    _FTT,
+    0,
+    (_SI_, _TI_, _SN_),
+    ((-1, {_sVm: _SI_}), (-1, {_sVm: _TI_}), (-1, {_sVm: _SN_})),
+)
+
+SESSION_FINDING: StaticSchema = (
+    18,
+    n0,
+    _SFe,
+    0,
+    (_tIa, _tTa, _d, _ca, _co),
+    (
+        (FINDING_TARGET_ID, 0),
+        (FINDING_TARGET_TYPE, 0),
+        (FINDING_DESCRIPTION, 1),
+        (3, 0),
+        (10, 0),
+    ),
+)
+
+SESSION_FINDING_LIST: StaticSchema = (16, n0, _SFL, 0, (_m,), ((SESSION_FINDING, 0),))
+
+SAMPLE_SESSION: StaticSchema = (
+    18,
+    n0,
+    _SS,
+    0,
+    (_sIe, _lSA, _fi),
+    ((lambda: schemas.SESSION_ID, 1), (4, {_sF: _dt}), (SESSION_FINDING_LIST, 0)),
+)
+
+INSIGHT_SAMPLE_SESSION_LIST: StaticSchema = (
+    16,
+    n0,
+    _ISSL,
+    0,
+    (_m,),
+    ((SAMPLE_SESSION, 0),),
+)
+
+SUGGESTED_FIX: StaticSchema = (3, n0, _SFu, 4)
+
+INSIGHT_ROOT_CAUSE: StaticSchema = (
+    18,
+    n0,
+    _IRC,
+    0,
+    (_n, _ex, _aSC, _sFu, _sSa),
+    (
+        (ROOT_CAUSE_NAME, 1),
+        (ROOT_CAUSE_EXPLANATION, 1),
+        (7, 0),
+        (SUGGESTED_FIX, 0),
+        (INSIGHT_SAMPLE_SESSION_LIST, 0),
+    ),
+)
+
+INSIGHT_ROOT_CAUSE_LIST: StaticSchema = (
+    16,
+    n0,
+    _IRCL,
+    0,
+    (_m,),
+    ((INSIGHT_ROOT_CAUSE, 0),),
+)
+
 GET_BATCH_EVALUATION_INPUT: StaticSchema = (
     18,
     n0,
@@ -386,6 +612,7 @@ GET_BATCH_EVALUATION_OUTPUT: StaticSchema = (
         _d,
         _uA,
         _kKA,
+        _dED,
     ),
     (
         (lambda: schemas.BATCH_EVALUATION_ID, 1),
@@ -406,6 +633,7 @@ GET_BATCH_EVALUATION_OUTPUT: StaticSchema = (
         (lambda: schemas.BATCH_EVALUATION_DESCRIPTION, 0),
         (4, {_sF: _dt}),
         (lambda: KMS_KEY_ARN, 0),
+        (lambda: DATASET_EXECUTION_DETAILS, 0),
     ),
 )
 
@@ -431,6 +659,26 @@ GET_BATCH_EVALUATION: StaticOperationSchema = (
 )
 
 BATCH_EVALUATION_NAME: StaticSchema = (3, n0, _BEN, 0)
+
+DATASET_VERSION: StaticSchema = (3, n0, _DV, 0)
+
+DATASET_DETAILS: StaticSchema = (
+    18,
+    n0,
+    _DD,
+    0,
+    (_dI, _dVa),
+    ((lambda: schemas.DATASET_ID, 1), (DATASET_VERSION, 1)),
+)
+
+DATASET_EXECUTION_DETAILS: StaticSchema = (
+    18,
+    n0,
+    _DED,
+    0,
+    (_dat, _aIg),
+    ((DATASET_DETAILS, 1), (lambda: schemas.AGENT_INVOCATION_DETAILS, 1)),
+)
 
 EVALUATION_STRING_LIST: StaticSchema = (16, n0, _ESL, 0, (_m,), ((3, 0),))
 
@@ -552,14 +800,7 @@ EVALUATION_JOB_RESULTS: StaticSchema = (
     ((7, 0), (7, 0), (7, 0), (7, 0), (7, 0), (EVALUATOR_SUMMARY_LIST, 0)),
 )
 
-EVALUATOR: StaticSchema = (
-    18,
-    n0,
-    _Eva,
-    0,
-    (_eI,),
-    ((lambda: schemas.EVALUATOR_ID, 1),),
-)
+EVALUATOR: StaticSchema = (18, n0, _Eva, 0, (_eI,), ((EVALUATOR_ID, 1),))
 
 EVALUATOR_LIST: StaticSchema = (16, n0, _EL, 0, (_m,), ((EVALUATOR, 0),))
 
@@ -613,7 +854,7 @@ ROOT_CAUSE_CLUSTER: StaticSchema = (
     n0,
     _RCC,
     0,
-    (_cIl, _n, _rC, _r, _aSC, _aSf),
+    (_cIl, _n, _rCo, _r, _aSC, _aSf),
     (
         (7, 1),
         (3, 1),
@@ -638,7 +879,7 @@ FAILURE_SUB_CATEGORY_CLUSTER: StaticSchema = (
     n0,
     _FSCC,
     0,
-    (_cIl, _n, _d, _aSC, _rCo),
+    (_cIl, _n, _d, _aSC, _rC),
     ((7, 1), (3, 1), (3, 1), (7, 1), (ROOT_CAUSE_CLUSTER_LIST, 1)),
 )
 
@@ -678,100 +919,16 @@ FAILURE_ANALYSIS_RESULT_CONTENT: StaticSchema = (
     ((FAILURE_CATEGORY_CLUSTER_LIST, 1),),
 )
 
-INSIGHT_DESCRIPTION: StaticSchema = (3, n0, _ID, 4)
-
-INSIGHT_NAME: StaticSchema = (3, n0, _IN, 4)
-
-ROOT_CAUSE_EXPLANATION: StaticSchema = (3, n0, _RCEo, 4)
-
-ROOT_CAUSE_NAME: StaticSchema = (3, n0, _RCN, 4)
-
-FINDING_DESCRIPTION: StaticSchema = (3, n0, _FD, 4)
-
-FINDING_TARGET_ID: StaticSchema = (3, n0, _FTI, 0)
-
-FINDING_TARGET_TYPE: StaticSchema = (
-    14,
-    n0,
-    _FTT,
-    0,
-    (_SI_, _TI_, _SN_),
-    ((-1, {_sVm: _SI_}), (-1, {_sVm: _TI_}), (-1, {_sVm: _SN_})),
-)
-
-SESSION_FINDING: StaticSchema = (
-    18,
-    n0,
-    _SFe,
-    0,
-    (_tIa, _tTa, _d, _ca, _co),
-    (
-        (FINDING_TARGET_ID, 0),
-        (FINDING_TARGET_TYPE, 0),
-        (FINDING_DESCRIPTION, 1),
-        (3, 0),
-        (10, 0),
-    ),
-)
-
-SESSION_FINDING_LIST: StaticSchema = (16, n0, _SFL, 0, (_m,), ((SESSION_FINDING, 0),))
-
-SAMPLE_SESSION: StaticSchema = (
-    18,
-    n0,
-    _SS,
-    0,
-    (_sIe, _lSA, _fi),
-    ((lambda: schemas.SESSION_ID, 1), (4, {_sF: _dt}), (SESSION_FINDING_LIST, 0)),
-)
-
-INSIGHT_SAMPLE_SESSION_LIST: StaticSchema = (
-    16,
-    n0,
-    _ISSL,
-    0,
-    (_m,),
-    ((SAMPLE_SESSION, 0),),
-)
-
-SUGGESTED_FIX: StaticSchema = (3, n0, _SFu, 4)
-
-INSIGHT_ROOT_CAUSE: StaticSchema = (
-    18,
-    n0,
-    _IRC,
-    0,
-    (_n, _ex, _aSC, _sFu, _sSa),
-    (
-        (ROOT_CAUSE_NAME, 1),
-        (ROOT_CAUSE_EXPLANATION, 1),
-        (7, 0),
-        (SUGGESTED_FIX, 0),
-        (INSIGHT_SAMPLE_SESSION_LIST, 0),
-    ),
-)
-
-INSIGHT_ROOT_CAUSE_LIST: StaticSchema = (
-    16,
-    n0,
-    _IRCL,
-    0,
-    (_m,),
-    ((INSIGHT_ROOT_CAUSE, 0),),
-)
-
-INSIGHT_TYPE: StaticSchema = (14, n0, _IT, 0, (_FAILURE,), ((-1, {_sVm: _FAILURE}),))
-
 INSIGHT_RESULT: StaticSchema = (
     18,
     n0,
     _IR,
     0,
-    (_ty, _n, _d, _cA, _aSC, _sSa, _rCo),
+    (_ty, _n, _d, _cA, _aSC, _sSa, _rC),
     (
-        (INSIGHT_TYPE, 1),
-        (INSIGHT_NAME, 1),
-        (INSIGHT_DESCRIPTION, 1),
+        (lambda: schemas.INSIGHT_TYPE, 1),
+        (lambda: schemas.INSIGHT_NAME, 1),
+        (lambda: schemas.INSIGHT_DESCRIPTION, 1),
         (4, {_sF: _dt, _s: None}),
         (7, 0),
         (INSIGHT_SAMPLE_SESSION_LIST, 0),
@@ -874,213 +1031,69 @@ USER_INTENT_CLUSTERING_RESULT_CONTENT: StaticSchema = (
     ((USER_INTENT_CLUSTER_LIST, 1),),
 )
 
-GET_RECOMMENDATION_INPUT: StaticSchema = (
+GET_DATASET_GENERATION_INPUT: StaticSchema = (
     18,
     n0,
-    _GRI,
-    {_sSI: _cGRR, _smit: None},
-    (_rI,),
-    ((lambda: schemas.RECOMMENDATION_ID, 9),),
+    _GDGI,
+    {_sSI: _cGDGR, _smit: None},
+    (_dI, _gI),
+    ((lambda: schemas.DATASET_ID, 9), (lambda: schemas.DATASET_GENERATION_ID, 9)),
 )
 
-GET_RECOMMENDATION_OUTPUT: StaticSchema = (
+GET_DATASET_GENERATION_OUTPUT: StaticSchema = (
     18,
     n0,
-    _GRO,
-    {_sSI: _cGRRo, _smith: None},
-    (_rI, _rAe, _n, _d, _ty, _rCe, _st, _cA, _uA, _rR, _kKA),
+    _GDGO,
+    {_sSI: _cGDGRo, _smith: None},
+    (_gI, _n, _d, _dI, _sTc, _st, _fR, _cA, _uA, _cAo, _so, _gR, _rS, _eD),
     (
-        (lambda: schemas.RECOMMENDATION_ID, 1),
-        (lambda: RECOMMENDATION_ARN, 1),
-        (lambda: RECOMMENDATION_NAME, 1),
-        (lambda: RECOMMENDATION_DESCRIPTION, 0),
-        (lambda: schemas.RECOMMENDATION_TYPE, 1),
-        (lambda: schemas.RECOMMENDATION_CONFIG, 1),
-        (lambda: schemas.RECOMMENDATION_STATUS, 1),
+        (lambda: schemas.DATASET_GENERATION_ID, 1),
+        (lambda: schemas.DATASET_GENERATION_NAME, 1),
+        (lambda: schemas.DATASET_GENERATION_DESCRIPTION, 0),
+        (lambda: schemas.DATASET_ID, 1),
+        (lambda: schemas.SCENARIO_TYPE, 1),
+        (lambda: schemas.DATASET_GENERATION_STATUS, 1),
+        (3, 0),
         (4, {_sF: _dt, _s: None}),
-        (4, {_sF: _dt, _s: None}),
-        (lambda: schemas.RECOMMENDATION_RESULT, 0),
-        (KMS_KEY_ARN, 0),
+        (4, {_sF: _dt}),
+        (4, {_sF: _dt}),
+        (lambda: schemas.GENERATION_SOURCE_RECORD, 0),
+        (lambda: schemas.GENERATION_RESULTS, 0),
+        (lambda: schemas.REDACTION_SUMMARY, 0),
+        (lambda: schemas.GENERATION_ERROR_DETAILS_LIST, 0),
     ),
 )
 
-GET_RECOMMENDATION: StaticOperationSchema = (
+GET_DATASET_GENERATION: StaticOperationSchema = (
     23,
     n0,
-    _GR,
+    _GDG,
     {
         _smithy: MappingProxyType(
-            {"method": "GET", "uri": "/recommendations/{recommendationId}"}
+            {"method": "GET", "uri": "/datasets/{datasetId}/generations/{generationId}"}
         )
     },
-    GET_RECOMMENDATION_INPUT,
-    GET_RECOMMENDATION_OUTPUT,
+    GET_DATASET_GENERATION_INPUT,
+    GET_DATASET_GENERATION_OUTPUT,
     (
         lambda: schemas.ACCESS_DENIED_EXCEPTION,
         lambda: schemas.INTERNAL_SERVER_EXCEPTION,
         lambda: schemas.RESOURCE_NOT_FOUND_EXCEPTION,
         lambda: schemas.THROTTLING_EXCEPTION,
+        lambda: schemas.UNAUTHORIZED_EXCEPTION,
         lambda: schemas.VALIDATION_EXCEPTION,
     ),
 )
 
-RECOMMENDATION_DESCRIPTION: StaticSchema = (3, n0, _RDe, 0)
+GENERATION_ERROR_CODE: StaticSchema = (3, n0, _GEC, 0)
 
-RECOMMENDATION_NAME: StaticSchema = (3, n0, _RN, 0)
+GENERATION_ERROR_MESSAGE: StaticSchema = (3, n0, _GEM, 0)
 
-RECOMMENDATION_ARN: StaticSchema = (3, n0, _RAe, 0)
-
-RECOMMENDATION_EVALUATOR_REFERENCE: StaticSchema = (
-    18,
-    n0,
-    _RER,
-    0,
-    (_eA,),
-    ((lambda: schemas.EVALUATOR_ARN, 1),),
-)
-
-RECOMMENDATION_EVALUATOR_LIST: StaticSchema = (
+GENERATION_ERROR_SESSION_ID_LIST: StaticSchema = (
     16,
     n0,
-    _REL,
+    _GESIL,
     0,
     (_m,),
-    ((RECOMMENDATION_EVALUATOR_REFERENCE, 0),),
-)
-
-RECOMMENDATION_EVALUATION_CONFIG: StaticSchema = (
-    18,
-    n0,
-    _REC,
-    0,
-    (_ev,),
-    ((RECOMMENDATION_EVALUATOR_LIST, 1),),
-)
-
-CONFIGURATION_BUNDLE_VERSION_ID: StaticSchema = (3, n0, _CBVI, 0)
-
-SYSTEM_PROMPT_CONFIGURATION_BUNDLE: StaticSchema = (
-    18,
-    n0,
-    _SPCB,
-    0,
-    (_bAu, _vI, _sPJP),
-    (
-        (lambda: schemas.CONFIGURATION_BUNDLE_ARN, 1),
-        (CONFIGURATION_BUNDLE_VERSION_ID, 1),
-        (3, 1),
-    ),
-)
-
-SYSTEM_PROMPT_TEXT: StaticSchema = (3, n0, _SPT, 4)
-
-SYSTEM_PROMPT_CONFIG: StaticSchema = (
-    19,
-    n0,
-    _SPC,
-    0,
-    (_te, _cB),
-    ((SYSTEM_PROMPT_TEXT, 0), (SYSTEM_PROMPT_CONFIGURATION_BUNDLE, 0)),
-)
-
-SYSTEM_PROMPT_RECOMMENDATION_CONFIG: StaticSchema = (
-    18,
-    n0,
-    _SPRC,
-    0,
-    (_sPy, _aTg, _eCv),
-    (
-        (SYSTEM_PROMPT_CONFIG, 1),
-        (lambda: schemas.AGENT_TRACES_CONFIG, 1),
-        (RECOMMENDATION_EVALUATION_CONFIG, 0),
-    ),
-)
-
-RECOMMENDATION_TOOL_NAME: StaticSchema = (3, n0, _RTN, 0)
-
-CONFIGURATION_BUNDLE_TOOL_ENTRY: StaticSchema = (
-    18,
-    n0,
-    _CBTE,
-    0,
-    (_tNo, _tDJP),
-    ((RECOMMENDATION_TOOL_NAME, 1), (3, 1)),
-)
-
-CONFIGURATION_BUNDLE_TOOL_ENTRY_LIST: StaticSchema = (
-    16,
-    n0,
-    _CBTEL,
-    0,
-    (_m,),
-    ((CONFIGURATION_BUNDLE_TOOL_ENTRY, 0),),
-)
-
-TOOL_DESCRIPTION_CONFIGURATION_BUNDLE: StaticSchema = (
-    18,
-    n0,
-    _TDCB,
-    0,
-    (_bAu, _vI, _to),
-    (
-        (lambda: schemas.CONFIGURATION_BUNDLE_ARN, 1),
-        (CONFIGURATION_BUNDLE_VERSION_ID, 1),
-        (CONFIGURATION_BUNDLE_TOOL_ENTRY_LIST, 1),
-    ),
-)
-
-TOOL_DESCRIPTION_TEXT: StaticSchema = (3, n0, _TDT, 4)
-
-TOOL_DESCRIPTION_CONFIG: StaticSchema = (
-    19,
-    n0,
-    _TDC,
-    0,
-    (_te,),
-    ((TOOL_DESCRIPTION_TEXT, 0),),
-)
-
-TOOL_DESCRIPTION_INPUT: StaticSchema = (
-    18,
-    n0,
-    _TDI,
-    0,
-    (_tNo, _tD),
-    ((RECOMMENDATION_TOOL_NAME, 1), (TOOL_DESCRIPTION_CONFIG, 1)),
-)
-
-TOOL_DESCRIPTION_LIST: StaticSchema = (
-    16,
-    n0,
-    _TDL,
-    0,
-    (_m,),
-    ((TOOL_DESCRIPTION_INPUT, 0),),
-)
-
-TOOL_DESCRIPTION_TEXT_INPUT: StaticSchema = (
-    18,
-    n0,
-    _TDTI,
-    0,
-    (_to,),
-    ((TOOL_DESCRIPTION_LIST, 1),),
-)
-
-TOOL_DESCRIPTION_SOURCE: StaticSchema = (
-    19,
-    n0,
-    _TDS,
-    0,
-    (_tDT, _cB),
-    ((TOOL_DESCRIPTION_TEXT_INPUT, 0), (TOOL_DESCRIPTION_CONFIGURATION_BUNDLE, 0)),
-)
-
-TOOL_DESCRIPTION_RECOMMENDATION_CONFIG: StaticSchema = (
-    18,
-    n0,
-    _TDRC,
-    0,
-    (_tD, _aTg),
-    ((TOOL_DESCRIPTION_SOURCE, 1), (lambda: schemas.AGENT_TRACES_CONFIG, 1)),
+    ((lambda: schemas.SESSION_ID, 0),),
 )

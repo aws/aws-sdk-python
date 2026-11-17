@@ -74,6 +74,8 @@ if TYPE_CHECKING:
         DeleteBatchEvaluationOutput,
         DeleteCapacityProviderSessionInput,
         DeleteCapacityProviderSessionOutput,
+        DeleteDatasetGenerationInput,
+        DeleteDatasetGenerationOutput,
         DeleteEventInput,
         DeleteEventOutput,
         DeleteMemoryRecordInput,
@@ -90,12 +92,16 @@ if TYPE_CHECKING:
         GetABTestOutput,
         GetAgentCardInput,
         GetAgentCardOutput,
+        GetAgentInsightInput,
+        GetAgentInsightOutput,
         GetBatchEvaluationInput,
         GetBatchEvaluationOutput,
         GetBrowserSessionInput,
         GetBrowserSessionOutput,
         GetCodeInterpreterSessionInput,
         GetCodeInterpreterSessionOutput,
+        GetDatasetGenerationInput,
+        GetDatasetGenerationOutput,
         GetEventInput,
         GetEventOutput,
         GetMemoryRecordInput,
@@ -138,12 +144,16 @@ if TYPE_CHECKING:
         ListABTestsOutput,
         ListActorsInput,
         ListActorsOutput,
+        ListAgentInsightsInput,
+        ListAgentInsightsOutput,
         ListBatchEvaluationsInput,
         ListBatchEvaluationsOutput,
         ListBrowserSessionsInput,
         ListBrowserSessionsOutput,
         ListCodeInterpreterSessionsInput,
         ListCodeInterpreterSessionsOutput,
+        ListDatasetGenerationsInput,
+        ListDatasetGenerationsOutput,
         ListEventsInput,
         ListEventsOutput,
         ListMemoryExtractionJobsInput,
@@ -172,6 +182,8 @@ if TYPE_CHECKING:
         StartBrowserSessionOutput,
         StartCodeInterpreterSessionInput,
         StartCodeInterpreterSessionOutput,
+        StartDatasetGenerationInput,
+        StartDatasetGenerationOutput,
         StartMemoryExtractionJobInput,
         StartMemoryExtractionJobOutput,
         StartRecommendationInput,
@@ -186,6 +198,8 @@ if TYPE_CHECKING:
         StopRuntimeSessionOutput,
         UpdateABTestInput,
         UpdateABTestOutput,
+        UpdateAgentInsightInput,
+        UpdateAgentInsightOutput,
         UpdateBrowserStreamInput,
         UpdateBrowserStreamOutput,
     )
@@ -217,6 +231,9 @@ if TYPE_CHECKING:
             Any,
             Any,
         ],
+        Interceptor[
+            DeleteDatasetGenerationInput, DeleteDatasetGenerationOutput, Any, Any
+        ],
         Interceptor[DeleteEventInput, DeleteEventOutput, Any, Any],
         Interceptor[DeleteMemoryRecordInput, DeleteMemoryRecordOutput, Any, Any],
         Interceptor[
@@ -227,11 +244,13 @@ if TYPE_CHECKING:
         Interceptor[EvaluateInput, EvaluateOutput, Any, Any],
         Interceptor[GetABTestInput, GetABTestOutput, Any, Any],
         Interceptor[GetAgentCardInput, GetAgentCardOutput, Any, Any],
+        Interceptor[GetAgentInsightInput, GetAgentInsightOutput, Any, Any],
         Interceptor[GetBatchEvaluationInput, GetBatchEvaluationOutput, Any, Any],
         Interceptor[GetBrowserSessionInput, GetBrowserSessionOutput, Any, Any],
         Interceptor[
             GetCodeInterpreterSessionInput, GetCodeInterpreterSessionOutput, Any, Any
         ],
+        Interceptor[GetDatasetGenerationInput, GetDatasetGenerationOutput, Any, Any],
         Interceptor[GetEventInput, GetEventOutput, Any, Any],
         Interceptor[GetMemoryRecordInput, GetMemoryRecordOutput, Any, Any],
         Interceptor[GetPaymentInstrumentInput, GetPaymentInstrumentOutput, Any, Any],
@@ -276,6 +295,7 @@ if TYPE_CHECKING:
         Interceptor[InvokeWebSearchInput, InvokeWebSearchOutput, Any, Any],
         Interceptor[ListABTestsInput, ListABTestsOutput, Any, Any],
         Interceptor[ListActorsInput, ListActorsOutput, Any, Any],
+        Interceptor[ListAgentInsightsInput, ListAgentInsightsOutput, Any, Any],
         Interceptor[ListBatchEvaluationsInput, ListBatchEvaluationsOutput, Any, Any],
         Interceptor[ListBrowserSessionsInput, ListBrowserSessionsOutput, Any, Any],
         Interceptor[
@@ -283,6 +303,9 @@ if TYPE_CHECKING:
             ListCodeInterpreterSessionsOutput,
             Any,
             Any,
+        ],
+        Interceptor[
+            ListDatasetGenerationsInput, ListDatasetGenerationsOutput, Any, Any
         ],
         Interceptor[ListEventsInput, ListEventsOutput, Any, Any],
         Interceptor[
@@ -310,6 +333,9 @@ if TYPE_CHECKING:
             Any,
         ],
         Interceptor[
+            StartDatasetGenerationInput, StartDatasetGenerationOutput, Any, Any
+        ],
+        Interceptor[
             StartMemoryExtractionJobInput, StartMemoryExtractionJobOutput, Any, Any
         ],
         Interceptor[StartRecommendationInput, StartRecommendationOutput, Any, Any],
@@ -320,6 +346,7 @@ if TYPE_CHECKING:
         ],
         Interceptor[StopRuntimeSessionInput, StopRuntimeSessionOutput, Any, Any],
         Interceptor[UpdateABTestInput, UpdateABTestOutput, Any, Any],
+        Interceptor[UpdateAgentInsightInput, UpdateAgentInsightOutput, Any, Any],
         Interceptor[UpdateBrowserStreamInput, UpdateBrowserStreamOutput, Any, Any],
     ]
 else:

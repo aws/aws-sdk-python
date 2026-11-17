@@ -174,6 +174,8 @@ if TYPE_CHECKING:
         DeleteResourcePolicyOutput,
         DeleteWorkloadIdentityInput,
         DeleteWorkloadIdentityOutput,
+        GetAgentInsightStoreInput,
+        GetAgentInsightStoreOutput,
         GetAgentRuntimeEndpointInput,
         GetAgentRuntimeEndpointOutput,
         GetAgentRuntimeInput,
@@ -244,6 +246,8 @@ if TYPE_CHECKING:
         GetTokenVaultOutput,
         GetWorkloadIdentityInput,
         GetWorkloadIdentityOutput,
+        ListAgentInsightStoresInput,
+        ListAgentInsightStoresOutput,
         ListAgentRuntimeEndpointsInput,
         ListAgentRuntimeEndpointsOutput,
         ListAgentRuntimeVersionsByCapacityProviderInput,
@@ -342,6 +346,8 @@ if TYPE_CHECKING:
         TagResourceOutput,
         UntagResourceInput,
         UntagResourceOutput,
+        UpdateAgentInsightStoreInput,
+        UpdateAgentInsightStoreOutput,
         UpdateAgentRuntimeEndpointInput,
         UpdateAgentRuntimeEndpointOutput,
         UpdateAgentRuntimeInput,
@@ -526,6 +532,7 @@ if TYPE_CHECKING:
         Interceptor[
             DeleteWorkloadIdentityInput, DeleteWorkloadIdentityOutput, Any, Any
         ],
+        Interceptor[GetAgentInsightStoreInput, GetAgentInsightStoreOutput, Any, Any],
         Interceptor[GetAgentRuntimeInput, GetAgentRuntimeOutput, Any, Any],
         Interceptor[
             GetAgentRuntimeEndpointInput, GetAgentRuntimeEndpointOutput, Any, Any
@@ -591,6 +598,9 @@ if TYPE_CHECKING:
         Interceptor[GetResourcePolicyInput, GetResourcePolicyOutput, Any, Any],
         Interceptor[GetTokenVaultInput, GetTokenVaultOutput, Any, Any],
         Interceptor[GetWorkloadIdentityInput, GetWorkloadIdentityOutput, Any, Any],
+        Interceptor[
+            ListAgentInsightStoresInput, ListAgentInsightStoresOutput, Any, Any
+        ],
         Interceptor[
             ListAgentRuntimeEndpointsInput, ListAgentRuntimeEndpointsOutput, Any, Any
         ],
@@ -701,6 +711,9 @@ if TYPE_CHECKING:
         ],
         Interceptor[TagResourceInput, TagResourceOutput, Any, Any],
         Interceptor[UntagResourceInput, UntagResourceOutput, Any, Any],
+        Interceptor[
+            UpdateAgentInsightStoreInput, UpdateAgentInsightStoreOutput, Any, Any
+        ],
         Interceptor[UpdateAgentRuntimeInput, UpdateAgentRuntimeOutput, Any, Any],
         Interceptor[
             UpdateAgentRuntimeEndpointInput, UpdateAgentRuntimeEndpointOutput, Any, Any

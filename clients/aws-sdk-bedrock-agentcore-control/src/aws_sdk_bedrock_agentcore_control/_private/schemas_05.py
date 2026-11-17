@@ -15,9 +15,10 @@ _d = "description"
 _mem = "member"
 _sVm = "smithy.api#enumValue"
 _smit = "smithy.api#sensitive"
-_NONE = "NONE"
+_ex = "examples"
 _sSI = "smithy.synthetic#originalShapeId"
 _smith = "smithy.api#input"
+_dI = "datasetId"
 _sL = "smithy.api#httpLabel"
 _cT = "clientToken"
 _sT = "smithy.api#idempotencyToken"
@@ -28,6 +29,7 @@ _ACTIVE = "ACTIVE"
 _CF = "CREATE_FAILED"
 _UF = "UPDATE_FAILED"
 _smithy = "smithy.api#output"
+_dA = "datasetArn"
 _st = "status"
 _uA = "updatedAt"
 _smithya = "smithy.api#http"
@@ -36,9 +38,55 @@ _cA = "createdAt"
 _sQ = "smithy.api#httpQuery"
 _mR = "maxResults"
 _nT = "nextToken"
-_a = "arn"
-_CUSTOM = "CUSTOM"
 _kKA = "kmsKeyArn"
+_CUSTOM = "CUSTOM"
+_fi = "filter"
+_ver = "versions"
+_dNa = "datasetName"
+_sTc = "schemaType"
+_dV = "datasetVersion"
+_dS = "draftStatus"
+_eCx = "exampleCount"
+_eCBF = "exampleCountByField"
+_aO = "anyOf"
+_ECBFC = "ExampleCountByFieldCondition"
+_mi = "min"
+_ma = "max"
+_ECBFCL = "ExampleCountByFieldConditionList"
+_LDF = "ListDatasetsFilter"
+_LDI = "ListDatasetsInput"
+_cLDR = "com.amazonaws.bedrockagentcorecontrol#ListDatasetsRequest"
+_DSa = "DatasetSummary"
+_DSL = "DatasetSummaryList"
+_LDO = "ListDatasetsOutput"
+_cLDRo = "com.amazonaws.bedrockagentcorecontrol#ListDatasetsResponse"
+_da = "datasets"
+_LD = "ListDatasets"
+_LDVF = "ListDatasetVersionsFilter"
+_LDVI = "ListDatasetVersionsInput"
+_cLDVR = "com.amazonaws.bedrockagentcorecontrol#ListDatasetVersionsRequest"
+_DVS = "DatasetVersionSummary"
+_DVSL = "DatasetVersionSummaryList"
+_LDVO = "ListDatasetVersionsOutput"
+_cLDVRo = "com.amazonaws.bedrockagentcorecontrol#ListDatasetVersionsResponse"
+_LDV = "ListDatasetVersions"
+_UDI = "UpdateDatasetInput"
+_cUDR = "com.amazonaws.bedrockagentcorecontrol#UpdateDatasetRequest"
+_UDO = "UpdateDatasetOutput"
+_cUDRo = "com.amazonaws.bedrockagentcorecontrol#UpdateDatasetResponse"
+_UDp = "UpdateDataset"
+_UDEI = "UpdateDatasetExamplesInput"
+_cUDER = "com.amazonaws.bedrockagentcorecontrol#UpdateDatasetExamplesRequest"
+_UDEO = "UpdateDatasetExamplesOutput"
+_cUDERo = "com.amazonaws.bedrockagentcorecontrol#UpdateDatasetExamplesResponse"
+_uC = "updatedCount"
+_UDE = "UpdateDatasetExamples"
+_DRPI = "DeleteResourcePolicyInput"
+_cDRPR = "com.amazonaws.bedrockagentcorecontrol#DeleteResourcePolicyRequest"
+_rAe = "resourceArn"
+_DRPO = "DeleteResourcePolicyOutput"
+_cDRPRo = "com.amazonaws.bedrockagentcorecontrol#DeleteResourcePolicyResponse"
+_DRP = "DeleteResourcePolicy"
 _ED = "EvaluatorDescription"
 _LAa = "LambdaArn"
 _LEC = "LambdaEvaluatorConfig"
@@ -46,8 +94,6 @@ _lA = "lambdaArn"
 _lTIS = "lambdaTimeoutInSeconds"
 _CBEC = "CodeBasedEvaluatorConfig"
 _lCa = "lambdaConfig"
-_EIv = "EvaluatorId"
-_NES = "NonEmptyString"
 _NESL = "NonEmptyStringList"
 _ICn = "InferenceConfiguration"
 _mT = "maxTokens"
@@ -89,7 +135,7 @@ _EDva = "EvaluationDimensions"
 _RS = "RatingScale"
 _mD = "multiDimensional"
 _LAAJEC = "LlmAsAJudgeEvaluatorConfig"
-_in = "instructions"
+_ins = "instructions"
 _rS = "ratingScale"
 _ECv = "EvaluatorConfig"
 _lAAJ = "llmAsAJudge"
@@ -168,7 +214,7 @@ _Pe = "Period"
 _SECOND = "SECOND"
 _sec = "second"
 _MINUTE = "MINUTE"
-_mi = "minute"
+_min = "minute"
 _RCa = "RateConfig"
 _ra = "rate"
 _pe = "period"
@@ -189,7 +235,7 @@ _ent = "entries"
 _BPLEa = "BatchPutLimitEntries"
 _BPGRLI = "BatchPutGatewayRateLimitsInput"
 _cBPGRLR = "com.amazonaws.bedrockagentcorecontrol#BatchPutGatewayRateLimitsRequest"
-_gI = "gatewayIdentifier"
+_gIa = "gatewayIdentifier"
 _rL = "rateLimits"
 _GRLS = "GatewayRateLimitStatus"
 _GRLDa = "GatewayRateLimitDetail"
@@ -212,48 +258,301 @@ _cGGRLR = "com.amazonaws.bedrockagentcorecontrol#GetGatewayRateLimitRequest"
 _GGRLO = "GetGatewayRateLimitOutput"
 _cGGRLRo = "com.amazonaws.bedrockagentcorecontrol#GetGatewayRateLimitResponse"
 _GGRL = "GetGatewayRateLimit"
-_GRLMR = "GatewayRateLimitMaxResults"
-_GRLNT = "GatewayRateLimitNextToken"
-_LGRLI = "ListGatewayRateLimitsInput"
-_cLGRLR = "com.amazonaws.bedrockagentcorecontrol#ListGatewayRateLimitsRequest"
-_LGRLO = "ListGatewayRateLimitsOutput"
-_cLGRLRo = "com.amazonaws.bedrockagentcorecontrol#ListGatewayRateLimitsResponse"
-_LGRL = "ListGatewayRateLimits"
-_UGRLI = "UpdateGatewayRateLimitInput"
-_cUGRLR = "com.amazonaws.bedrockagentcorecontrol#UpdateGatewayRateLimitRequest"
-_UGRLO = "UpdateGatewayRateLimitOutput"
-_cUGRLRo = "com.amazonaws.bedrockagentcorecontrol#UpdateGatewayRateLimitResponse"
-_UGRL = "UpdateGatewayRateLimit"
-_AT = "AuthorizerType"
-_CJ = "CUSTOM_JWT"
-_AI = "AWS_IAM"
-_AO = "AUTHENTICATE_ONLY"
-_GDa = "GatewayDescription"
-_PDN = "PublicDomainName"
-_PDNL = "PublicDomainNameList"
-_DO = "DomainOverride"
-_dD = "defaultDomain"
-_sN = "smithy.api#jsonName"
-_def = "default"
-_aD = "alternateDomains"
-_ELx = "ExceptionLevel"
-_DEBUG = "DEBUG"
-_IPE = "InterceptorPayloadExclusion"
-_RB = "RESPONSE_BODY"
-_IPES = "InterceptorPayloadExclusionSelector"
-_fie = "field"
-_IPESL = "InterceptorPayloadExclusionSelectorList"
-_IPF = "InterceptorPayloadFilter"
-_exc = "exclude"
-_IIC = "InterceptorInputConfiguration"
-_pRH = "passRequestHeaders"
-_pF = "payloadFilter"
-_GIP = "GatewayInterceptionPoint"
-_REQUEST = "REQUEST"
-_RESPONSE = "RESPONSE"
-_GIPa = "GatewayInterceptionPoints"
-_LFA = "LambdaFunctionArn"
-_LIC = "LambdaInterceptorConfiguration"
+
+EXAMPLE_COUNT_BY_FIELD_CONDITION: StaticSchema = (
+    18,
+    n0,
+    _ECBFC,
+    0,
+    (_aO, _mi, _ma),
+    ((lambda: schemas.EXAMPLE_FIELD_LIST, 0), (8, 0), (8, 0)),
+)
+
+EXAMPLE_COUNT_BY_FIELD_CONDITION_LIST: StaticSchema = (
+    16,
+    n0,
+    _ECBFCL,
+    0,
+    (_mem,),
+    ((EXAMPLE_COUNT_BY_FIELD_CONDITION, 0),),
+)
+
+LIST_DATASETS_FILTER: StaticSchema = (
+    18,
+    n0,
+    _LDF,
+    0,
+    (_eCBF,),
+    ((EXAMPLE_COUNT_BY_FIELD_CONDITION_LIST, 0),),
+)
+
+LIST_DATASETS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _LDI,
+    {_sSI: _cLDR, _smith: None},
+    (_fi, _nT, _mR),
+    ((LIST_DATASETS_FILTER, 0), (3, 0), (7, 0)),
+)
+
+LIST_DATASETS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _LDO,
+    {_sSI: _cLDRo, _smithy: None},
+    (_da, _nT),
+    ((lambda: DATASET_SUMMARY_LIST, 1), (3, 0)),
+)
+
+LIST_DATASETS: StaticOperationSchema = (
+    23,
+    n0,
+    _LD,
+    {
+        _smithya: MappingProxyType(
+            {"method": "POST", "uri": "/datasets/list", "code": 200}
+        )
+    },
+    LIST_DATASETS_INPUT,
+    LIST_DATASETS_OUTPUT,
+    (
+        lambda: schemas.ACCESS_DENIED_EXCEPTION,
+        lambda: schemas.INTERNAL_SERVER_EXCEPTION,
+        lambda: schemas.THROTTLING_EXCEPTION,
+        lambda: schemas.VALIDATION_EXCEPTION,
+    ),
+)
+
+DATASET_SUMMARY: StaticSchema = (
+    18,
+    n0,
+    _DSa,
+    0,
+    (_dA, _dI, _dNa, _d, _st, _dS, _sTc, _eCx, _eCBF, _cA, _uA),
+    (
+        (lambda: schemas.DATASET_ARN, 1),
+        (lambda: schemas.DATASET_ID, 1),
+        (lambda: schemas.DATASET_NAME, 1),
+        (3, 0),
+        (lambda: schemas.DATASET_STATUS, 1),
+        (lambda: schemas.DRAFT_STATUS, 0),
+        (lambda: schemas.DATASET_SCHEMA_TYPE, 0),
+        (8, 1),
+        (lambda: schemas.EXAMPLE_COUNT_BY_FIELD, 0),
+        (4, 1),
+        (4, 1),
+    ),
+)
+
+DATASET_SUMMARY_LIST: StaticSchema = (16, n0, _DSL, 0, (_mem,), ((DATASET_SUMMARY, 0),))
+
+LIST_DATASET_VERSIONS_FILTER: StaticSchema = (
+    18,
+    n0,
+    _LDVF,
+    0,
+    (_eCBF,),
+    ((EXAMPLE_COUNT_BY_FIELD_CONDITION_LIST, 0),),
+)
+
+LIST_DATASET_VERSIONS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _LDVI,
+    {_sSI: _cLDVR, _smith: None},
+    (_dI, _fi, _nT, _mR),
+    (
+        (lambda: schemas.DATASET_ID, 9),
+        (LIST_DATASET_VERSIONS_FILTER, 0),
+        (3, 0),
+        (7, 0),
+    ),
+)
+
+LIST_DATASET_VERSIONS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _LDVO,
+    {_sSI: _cLDVRo, _smithy: None},
+    (_ver, _nT),
+    ((lambda: DATASET_VERSION_SUMMARY_LIST, 1), (3, 0)),
+)
+
+LIST_DATASET_VERSIONS: StaticOperationSchema = (
+    23,
+    n0,
+    _LDV,
+    {
+        _smithya: MappingProxyType(
+            {
+                "method": "POST",
+                "uri": "/datasets/{datasetId}/versions/list",
+                "code": 200,
+            }
+        )
+    },
+    LIST_DATASET_VERSIONS_INPUT,
+    LIST_DATASET_VERSIONS_OUTPUT,
+    (
+        lambda: schemas.ACCESS_DENIED_EXCEPTION,
+        lambda: schemas.INTERNAL_SERVER_EXCEPTION,
+        lambda: schemas.RESOURCE_NOT_FOUND_EXCEPTION,
+        lambda: schemas.THROTTLING_EXCEPTION,
+        lambda: schemas.VALIDATION_EXCEPTION,
+    ),
+)
+
+DATASET_VERSION_SUMMARY: StaticSchema = (
+    18,
+    n0,
+    _DVS,
+    0,
+    (_dV, _eCx, _eCBF, _cA),
+    (
+        (lambda: schemas.DATASET_VERSION, 1),
+        (8, 1),
+        (lambda: schemas.EXAMPLE_COUNT_BY_FIELD, 0),
+        (4, 1),
+    ),
+)
+
+DATASET_VERSION_SUMMARY_LIST: StaticSchema = (
+    16,
+    n0,
+    _DVSL,
+    0,
+    (_mem,),
+    ((DATASET_VERSION_SUMMARY, 0),),
+)
+
+UPDATE_DATASET_INPUT: StaticSchema = (
+    18,
+    n0,
+    _UDI,
+    {_sSI: _cUDR, _smith: None},
+    (_dI, _cT, _d),
+    ((lambda: schemas.DATASET_ID, 9), (lambda: schemas.CLIENT_TOKEN, 2), (3, 0)),
+)
+
+UPDATE_DATASET_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _UDO,
+    {_sSI: _cUDRo, _smithy: None},
+    (_dA, _dI, _uA),
+    ((lambda: schemas.DATASET_ARN, 1), (lambda: schemas.DATASET_ID, 1), (4, 1)),
+)
+
+UPDATE_DATASET: StaticOperationSchema = (
+    23,
+    n0,
+    _UDp,
+    {
+        _smithya: MappingProxyType(
+            {"method": "PUT", "uri": "/datasets/{datasetId}", "code": 200}
+        )
+    },
+    UPDATE_DATASET_INPUT,
+    UPDATE_DATASET_OUTPUT,
+    (
+        lambda: schemas.ACCESS_DENIED_EXCEPTION,
+        lambda: schemas.CONFLICT_EXCEPTION,
+        lambda: schemas.INTERNAL_SERVER_EXCEPTION,
+        lambda: schemas.RESOURCE_NOT_FOUND_EXCEPTION,
+        lambda: schemas.THROTTLING_EXCEPTION,
+        lambda: schemas.VALIDATION_EXCEPTION,
+    ),
+)
+
+UPDATE_DATASET_EXAMPLES_INPUT: StaticSchema = (
+    18,
+    n0,
+    _UDEI,
+    {_sSI: _cUDER, _smith: None},
+    (_dI, _cT, _ex),
+    (
+        (lambda: schemas.DATASET_ID, 9),
+        (lambda: schemas.CLIENT_TOKEN, 2),
+        (lambda: schemas.DATASET_EXAMPLE_LIST, 1),
+    ),
+)
+
+UPDATE_DATASET_EXAMPLES_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _UDEO,
+    {_sSI: _cUDERo, _smithy: None},
+    (_dA, _dI, _st, _uC, _uA),
+    (
+        (lambda: schemas.DATASET_ARN, 1),
+        (lambda: schemas.DATASET_ID, 1),
+        (lambda: schemas.DATASET_STATUS, 1),
+        (8, 1),
+        (4, 1),
+    ),
+)
+
+UPDATE_DATASET_EXAMPLES: StaticOperationSchema = (
+    23,
+    n0,
+    _UDE,
+    {
+        _smithya: MappingProxyType(
+            {
+                "method": "POST",
+                "uri": "/datasets/{datasetId}/examples/update",
+                "code": 202,
+            }
+        )
+    },
+    UPDATE_DATASET_EXAMPLES_INPUT,
+    UPDATE_DATASET_EXAMPLES_OUTPUT,
+    (
+        lambda: schemas.ACCESS_DENIED_EXCEPTION,
+        lambda: schemas.CONFLICT_EXCEPTION,
+        lambda: schemas.INTERNAL_SERVER_EXCEPTION,
+        lambda: schemas.RESOURCE_NOT_FOUND_EXCEPTION,
+        lambda: schemas.SERVICE_QUOTA_EXCEEDED_EXCEPTION,
+        lambda: schemas.THROTTLING_EXCEPTION,
+        lambda: schemas.VALIDATION_EXCEPTION,
+    ),
+)
+
+DELETE_RESOURCE_POLICY_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DRPI,
+    {_sSI: _cDRPR, _smith: None},
+    (_rAe,),
+    ((lambda: schemas.BEDROCK_AGENTCORE_RESOURCE_ARN, 9),),
+)
+
+DELETE_RESOURCE_POLICY_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DRPO,
+    {_sSI: _cDRPRo, _smithy: None},
+)
+
+DELETE_RESOURCE_POLICY: StaticOperationSchema = (
+    23,
+    n0,
+    _DRP,
+    {
+        _smithya: MappingProxyType(
+            {"code": 204, "method": "DELETE", "uri": "/resourcepolicy/{resourceArn}"}
+        )
+    },
+    DELETE_RESOURCE_POLICY_INPUT,
+    DELETE_RESOURCE_POLICY_OUTPUT,
+    (
+        lambda: schemas.ACCESS_DENIED_EXCEPTION,
+        lambda: schemas.INTERNAL_SERVER_EXCEPTION,
+        lambda: schemas.RESOURCE_NOT_FOUND_EXCEPTION,
+        lambda: schemas.THROTTLING_EXCEPTION,
+        lambda: schemas.VALIDATION_EXCEPTION,
+    ),
+)
 
 EVALUATOR_DESCRIPTION: StaticSchema = (3, n0, _ED, 4)
 
@@ -277,17 +576,13 @@ CODE_BASED_EVALUATOR_CONFIG: StaticSchema = (
     ((LAMBDA_EVALUATOR_CONFIG, 0),),
 )
 
-EVALUATOR_ID: StaticSchema = (3, n0, _EIv, 0)
-
-NON_EMPTY_STRING: StaticSchema = (3, n0, _NES, 0)
-
 NON_EMPTY_STRING_LIST: StaticSchema = (
     16,
     n0,
     _NESL,
     0,
     (_mem,),
-    ((NON_EMPTY_STRING, 0),),
+    ((lambda: schemas.NON_EMPTY_STRING, 0),),
 )
 
 INFERENCE_CONFIGURATION: StaticSchema = (
@@ -344,7 +639,7 @@ DERIVED_EVALUATOR_CONFIG: StaticSchema = (
     _DEC,
     0,
     (_bEI, _mCo),
-    ((EVALUATOR_ID, 1), (EVALUATOR_MODEL_CONFIG, 1)),
+    ((lambda: schemas.EVALUATOR_ID, 1), (EVALUATOR_MODEL_CONFIG, 1)),
 )
 
 EVALUATOR_INSTRUCTIONS: StaticSchema = (3, n0, _EIva, 4)
@@ -438,7 +733,7 @@ LLM_AS_A_JUDGE_EVALUATOR_CONFIG: StaticSchema = (
     n0,
     _LAAJEC,
     0,
-    (_in, _rS, _mCo),
+    (_ins, _rS, _mCo),
     ((EVALUATOR_INSTRUCTIONS, 1), (RATING_SCALE, 1), (EVALUATOR_MODEL_CONFIG, 1)),
 )
 
@@ -491,7 +786,7 @@ CREATE_EVALUATOR_OUTPUT: StaticSchema = (
     (_eA, _eIv, _cA, _st),
     (
         (lambda: CUSTOM_EVALUATOR_ARN, 1),
-        (EVALUATOR_ID, 1),
+        (lambda: schemas.EVALUATOR_ID, 1),
         (4, 1),
         (lambda: EVALUATOR_STATUS, 1),
     ),
@@ -542,7 +837,7 @@ DELETE_EVALUATOR_INPUT: StaticSchema = (
     _DEI,
     {_sSI: _cDER, _smith: None},
     (_eIv,),
-    ((EVALUATOR_ID, 9),),
+    ((lambda: schemas.EVALUATOR_ID, 9),),
 )
 
 DELETE_EVALUATOR_OUTPUT: StaticSchema = (
@@ -551,7 +846,11 @@ DELETE_EVALUATOR_OUTPUT: StaticSchema = (
     _DEO,
     {_sSI: _cDERo, _smithy: None},
     (_eA, _eIv, _st),
-    ((lambda: EVALUATOR_ARN, 1), (EVALUATOR_ID, 1), (EVALUATOR_STATUS, 1)),
+    (
+        (lambda: EVALUATOR_ARN, 1),
+        (lambda: schemas.EVALUATOR_ID, 1),
+        (EVALUATOR_STATUS, 1),
+    ),
 )
 
 DELETE_EVALUATOR: StaticOperationSchema = (
@@ -592,7 +891,7 @@ GET_EVALUATOR_INPUT: StaticSchema = (
     _GEI,
     {_sSI: _cGER, _smith: None},
     (_eIv, _iD),
-    ((EVALUATOR_ID, 9), (INCLUDED_DATA, {_sQ: _iD})),
+    ((lambda: schemas.EVALUATOR_ID, 9), (INCLUDED_DATA, {_sQ: _iD})),
 )
 
 GET_EVALUATOR_OUTPUT: StaticSchema = (
@@ -603,7 +902,7 @@ GET_EVALUATOR_OUTPUT: StaticSchema = (
     (_eA, _eIv, _eNv, _d, _eCv, _eT, _pr, _le, _st, _cA, _uA, _lFM, _kKA),
     (
         (EVALUATOR_ARN, 1),
-        (EVALUATOR_ID, 1),
+        (lambda: schemas.EVALUATOR_ID, 1),
         (lambda: EVALUATOR_NAME, 1),
         (EVALUATOR_DESCRIPTION, 0),
         (EVALUATOR_CONFIG, 1),
@@ -701,7 +1000,7 @@ EVALUATOR_SUMMARY: StaticSchema = (
     (_eA, _eIv, _eNv, _d, _eT, _pr, _le, _st, _cA, _uA, _lFM, _kKA),
     (
         (EVALUATOR_ARN, 1),
-        (EVALUATOR_ID, 1),
+        (lambda: schemas.EVALUATOR_ID, 1),
         (EVALUATOR_NAME, 1),
         (EVALUATOR_DESCRIPTION, 0),
         (EVALUATOR_TYPE, 1),
@@ -732,7 +1031,7 @@ UPDATE_EVALUATOR_INPUT: StaticSchema = (
     (_cT, _eIv, _d, _eCv, _le, _kKA),
     (
         (lambda: schemas.CLIENT_TOKEN, 2),
-        (EVALUATOR_ID, 9),
+        (lambda: schemas.EVALUATOR_ID, 9),
         (EVALUATOR_DESCRIPTION, 0),
         (EVALUATOR_CONFIG, 0),
         (EVALUATOR_LEVEL, 0),
@@ -746,7 +1045,12 @@ UPDATE_EVALUATOR_OUTPUT: StaticSchema = (
     _UEO,
     {_sSI: _cUERo, _smithy: None},
     (_eA, _eIv, _uA, _st),
-    ((EVALUATOR_ARN, 1), (EVALUATOR_ID, 1), (4, 1), (EVALUATOR_STATUS, 1)),
+    (
+        (EVALUATOR_ARN, 1),
+        (lambda: schemas.EVALUATOR_ID, 1),
+        (4, 1),
+        (EVALUATOR_STATUS, 1),
+    ),
 )
 
 UPDATE_EVALUATOR: StaticOperationSchema = (
@@ -785,7 +1089,7 @@ PERIOD: StaticSchema = (
     _Pe,
     0,
     (_SECOND, _MINUTE),
-    ((-1, {_sVm: _sec}), (-1, {_sVm: _mi})),
+    ((-1, {_sVm: _sec}), (-1, {_sVm: _min})),
 )
 
 RATE_CONFIG: StaticSchema = (18, n0, _RCa, 0, (_ra, _pe), ((10, 1), (PERIOD, 1)))
@@ -844,7 +1148,7 @@ BATCH_PUT_GATEWAY_RATE_LIMITS_INPUT: StaticSchema = (
     n0,
     _BPGRLI,
     {_sSI: _cBPGRLR, _smith: None},
-    (_gI, _cT, _rL),
+    (_gIa, _cT, _rL),
     (
         (GATEWAY_IDENTIFIER, 9),
         (lambda: schemas.CLIENT_TOKEN, 2),
@@ -906,7 +1210,7 @@ GATEWAY_RATE_LIMIT_DETAIL: StaticSchema = (
     n0,
     _GRLDa,
     0,
-    (_rLI, _gI, _d, _dK, _ent, _st, _cA, _uA),
+    (_rLI, _gIa, _d, _dK, _ent, _st, _cA, _uA),
     (
         (GATEWAY_RATE_LIMIT_ID, 1),
         (GATEWAY_IDENTIFIER, 1),
@@ -933,7 +1237,7 @@ CREATE_GATEWAY_RATE_LIMIT_INPUT: StaticSchema = (
     n0,
     _CGRLI,
     {_sSI: _cCGRLR, _smith: None},
-    (_gI, _cT, _rLI, _d, _dK, _ent),
+    (_gIa, _cT, _rLI, _d, _dK, _ent),
     (
         (GATEWAY_IDENTIFIER, 9),
         (lambda: schemas.CLIENT_TOKEN, 2),
@@ -949,7 +1253,7 @@ CREATE_GATEWAY_RATE_LIMIT_OUTPUT: StaticSchema = (
     n0,
     _CGRLO,
     {_sSI: _cCGRLRo, _smithy: None},
-    (_rLI, _gI, _d, _dK, _ent, _st, _cA, _uA),
+    (_rLI, _gIa, _d, _dK, _ent, _st, _cA, _uA),
     (
         (GATEWAY_RATE_LIMIT_ID, 1),
         (GATEWAY_IDENTIFIER, 1),
@@ -993,7 +1297,7 @@ DELETE_GATEWAY_RATE_LIMIT_INPUT: StaticSchema = (
     n0,
     _DGRLI,
     {_sSI: _cDGRLR, _smith: None},
-    (_gI, _rLI),
+    (_gIa, _rLI),
     ((GATEWAY_IDENTIFIER, 9), (GATEWAY_RATE_LIMIT_ID, 9)),
 )
 
@@ -1036,7 +1340,7 @@ GET_GATEWAY_RATE_LIMIT_INPUT: StaticSchema = (
     n0,
     _GGRLI,
     {_sSI: _cGGRLR, _smith: None},
-    (_gI, _rLI),
+    (_gIa, _rLI),
     ((GATEWAY_IDENTIFIER, 9), (GATEWAY_RATE_LIMIT_ID, 9)),
 )
 
@@ -1045,7 +1349,7 @@ GET_GATEWAY_RATE_LIMIT_OUTPUT: StaticSchema = (
     n0,
     _GGRLO,
     {_sSI: _cGGRLRo, _smithy: None},
-    (_rLI, _gI, _d, _dK, _ent, _st, _cA, _uA),
+    (_rLI, _gIa, _d, _dK, _ent, _st, _cA, _uA),
     (
         (GATEWAY_RATE_LIMIT_ID, 1),
         (GATEWAY_IDENTIFIER, 1),
@@ -1080,218 +1384,4 @@ GET_GATEWAY_RATE_LIMIT: StaticOperationSchema = (
         lambda: schemas.THROTTLING_EXCEPTION,
         lambda: schemas.VALIDATION_EXCEPTION,
     ),
-)
-
-GATEWAY_RATE_LIMIT_MAX_RESULTS: StaticSchema = (7, n0, _GRLMR, 0)
-
-GATEWAY_RATE_LIMIT_NEXT_TOKEN: StaticSchema = (3, n0, _GRLNT, 0)
-
-LIST_GATEWAY_RATE_LIMITS_INPUT: StaticSchema = (
-    18,
-    n0,
-    _LGRLI,
-    {_sSI: _cLGRLR, _smith: None},
-    (_gI, _mR, _nT),
-    (
-        (GATEWAY_IDENTIFIER, 9),
-        (GATEWAY_RATE_LIMIT_MAX_RESULTS, {_sQ: _mR}),
-        (GATEWAY_RATE_LIMIT_NEXT_TOKEN, {_sQ: _nT}),
-    ),
-)
-
-LIST_GATEWAY_RATE_LIMITS_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _LGRLO,
-    {_sSI: _cLGRLRo, _smithy: None},
-    (_rL, _nT),
-    ((GATEWAY_RATE_LIMITS, 1), (GATEWAY_RATE_LIMIT_NEXT_TOKEN, 0)),
-)
-
-LIST_GATEWAY_RATE_LIMITS: StaticOperationSchema = (
-    23,
-    n0,
-    _LGRL,
-    {
-        _smithya: MappingProxyType(
-            {
-                "code": 200,
-                "method": "GET",
-                "uri": "/gateways/{gatewayIdentifier}/rate-limits",
-            }
-        )
-    },
-    LIST_GATEWAY_RATE_LIMITS_INPUT,
-    LIST_GATEWAY_RATE_LIMITS_OUTPUT,
-    (
-        lambda: schemas.ACCESS_DENIED_EXCEPTION,
-        lambda: schemas.INTERNAL_SERVER_EXCEPTION,
-        lambda: schemas.RESOURCE_NOT_FOUND_EXCEPTION,
-        lambda: schemas.THROTTLING_EXCEPTION,
-        lambda: schemas.VALIDATION_EXCEPTION,
-    ),
-)
-
-UPDATE_GATEWAY_RATE_LIMIT_INPUT: StaticSchema = (
-    18,
-    n0,
-    _UGRLI,
-    {_sSI: _cUGRLR, _smith: None},
-    (_gI, _rLI, _d, _ent),
-    (
-        (GATEWAY_IDENTIFIER, 9),
-        (GATEWAY_RATE_LIMIT_ID, 9),
-        (GATEWAY_RATE_LIMIT_DESCRIPTION, 0),
-        (LIMIT_ENTRIES, 1),
-    ),
-)
-
-UPDATE_GATEWAY_RATE_LIMIT_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _UGRLO,
-    {_sSI: _cUGRLRo, _smithy: None},
-    (_rLI, _gI, _d, _dK, _ent, _st, _cA, _uA),
-    (
-        (GATEWAY_RATE_LIMIT_ID, 1),
-        (GATEWAY_IDENTIFIER, 1),
-        (GATEWAY_RATE_LIMIT_DESCRIPTION, 0),
-        (DIMENSION_KEYS, 1),
-        (LIMIT_ENTRIES, 1),
-        (GATEWAY_RATE_LIMIT_STATUS, 1),
-        (lambda: schemas.DATE_TIMESTAMP, 1),
-        (lambda: schemas.DATE_TIMESTAMP, 1),
-    ),
-)
-
-UPDATE_GATEWAY_RATE_LIMIT: StaticOperationSchema = (
-    23,
-    n0,
-    _UGRL,
-    {
-        _smithya: MappingProxyType(
-            {
-                "code": 200,
-                "method": "PATCH",
-                "uri": "/gateways/{gatewayIdentifier}/rate-limits/{rateLimitId}",
-            }
-        )
-    },
-    UPDATE_GATEWAY_RATE_LIMIT_INPUT,
-    UPDATE_GATEWAY_RATE_LIMIT_OUTPUT,
-    (
-        lambda: schemas.ACCESS_DENIED_EXCEPTION,
-        lambda: schemas.CONFLICT_EXCEPTION,
-        lambda: schemas.INTERNAL_SERVER_EXCEPTION,
-        lambda: schemas.RESOURCE_NOT_FOUND_EXCEPTION,
-        lambda: schemas.THROTTLING_EXCEPTION,
-        lambda: schemas.VALIDATION_EXCEPTION,
-    ),
-)
-
-AUTHORIZER_TYPE: StaticSchema = (
-    14,
-    n0,
-    _AT,
-    0,
-    (_CJ, _AI, _NONE, _AO),
-    ((-1, {_sVm: _CJ}), (-1, {_sVm: _AI}), (-1, {_sVm: _NONE}), (-1, {_sVm: _AO})),
-)
-
-GATEWAY_DESCRIPTION: StaticSchema = (3, n0, _GDa, 4)
-
-PUBLIC_DOMAIN_NAME: StaticSchema = (3, n0, _PDN, 0)
-
-PUBLIC_DOMAIN_NAME_LIST: StaticSchema = (
-    16,
-    n0,
-    _PDNL,
-    0,
-    (_mem,),
-    ((PUBLIC_DOMAIN_NAME, 0),),
-)
-
-DOMAIN_OVERRIDE: StaticSchema = (
-    18,
-    n0,
-    _DO,
-    0,
-    (_dD, _aD),
-    ((PUBLIC_DOMAIN_NAME, {_sN: _def, _sm: None}), (PUBLIC_DOMAIN_NAME_LIST, 0)),
-)
-
-EXCEPTION_LEVEL: StaticSchema = (14, n0, _ELx, 0, (_DEBUG,), ((-1, {_sVm: _DEBUG}),))
-
-INTERCEPTOR_PAYLOAD_EXCLUSION: StaticSchema = (
-    14,
-    n0,
-    _IPE,
-    0,
-    (_RB,),
-    ((-1, {_sVm: _RB}),),
-)
-
-INTERCEPTOR_PAYLOAD_EXCLUSION_SELECTOR: StaticSchema = (
-    19,
-    n0,
-    _IPES,
-    0,
-    (_fie,),
-    ((INTERCEPTOR_PAYLOAD_EXCLUSION, 0),),
-)
-
-INTERCEPTOR_PAYLOAD_EXCLUSION_SELECTOR_LIST: StaticSchema = (
-    16,
-    n0,
-    _IPESL,
-    0,
-    (_mem,),
-    ((INTERCEPTOR_PAYLOAD_EXCLUSION_SELECTOR, 0),),
-)
-
-INTERCEPTOR_PAYLOAD_FILTER: StaticSchema = (
-    18,
-    n0,
-    _IPF,
-    0,
-    (_exc,),
-    ((INTERCEPTOR_PAYLOAD_EXCLUSION_SELECTOR_LIST, 1),),
-)
-
-INTERCEPTOR_INPUT_CONFIGURATION: StaticSchema = (
-    18,
-    n0,
-    _IIC,
-    0,
-    (_pRH, _pF),
-    ((2, 1), (INTERCEPTOR_PAYLOAD_FILTER, 0)),
-)
-
-GATEWAY_INTERCEPTION_POINT: StaticSchema = (
-    14,
-    n0,
-    _GIP,
-    0,
-    (_REQUEST, _RESPONSE),
-    ((-1, {_sVm: _REQUEST}), (-1, {_sVm: _RESPONSE})),
-)
-
-GATEWAY_INTERCEPTION_POINTS: StaticSchema = (
-    16,
-    n0,
-    _GIPa,
-    0,
-    (_mem,),
-    ((GATEWAY_INTERCEPTION_POINT, 0),),
-)
-
-LAMBDA_FUNCTION_ARN: StaticSchema = (3, n0, _LFA, 0)
-
-LAMBDA_INTERCEPTOR_CONFIGURATION: StaticSchema = (
-    18,
-    n0,
-    _LIC,
-    0,
-    (_a,),
-    ((LAMBDA_FUNCTION_ARN, 1),),
 )

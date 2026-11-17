@@ -9,10 +9,8 @@ from . import schemas
 
 n0 = "com.amazonaws.apigateway"
 _sV = "smithy.api#enumValue"
-_f = "format"
 _m = "member"
 _s = "smithy.api#default"
-_k = "key"
 _v = "value"
 _i = "id"
 _n = "name"
@@ -20,17 +18,19 @@ _d = "description"
 _cD = "createdDate"
 _lUD = "lastUpdatedDate"
 _t = "tags"
-_th = "throttle"
+_sm = "smithy.api#required"
+_r = "required"
 _ty = "type"
 _rAI = "restApiId"
 _sN = "stageName"
 _sSI = "smithy.synthetic#originalShapeId"
-_smi = "smithy.api#input"
-_smit = "smithy.api#output"
+_smit = "smithy.api#input"
+_smith = "smithy.api#output"
 _sH = "smithy.api#httpHeader"
-_smith = "smithy.api#http"
-_smithy = "smithy.api#required"
+_smithy = "smithy.api#http"
 _sL = "smithy.api#httpLabel"
+_dN = "domainName"
+_dNI = "domainNameId"
 _sQ = "smithy.api#httpQuery"
 _cCE = "cacheClusterEnabled"
 _cCS = "cacheClusterSize"
@@ -39,14 +39,38 @@ _cS = "canarySettings"
 _tE = "tracingEnabled"
 _aTu = "authorizationType"
 _aKR = "apiKeyRequired"
+_p = "path"
 _sC = "statusCode"
 _dV = "documentationVersion"
 _ve = "version"
+_cNe = "certificateName"
+_cAe = "certificateArn"
+_rCN = "regionalCertificateName"
+_rCA = "regionalCertificateArn"
 _eC = "endpointConfiguration"
 _sP = "securityPolicy"
 _eAM = "endpointAccessMode"
+_mTA = "mutualTlsAuthentication"
+_oVCA = "ownershipVerificationCertificateArn"
 _po = "policy"
+_rM = "routingMode"
+_dNA = "domainNameArn"
+_cUD = "certificateUploadDate"
+_rDN = "regionalDomainName"
+_rHZI = "regionalHostedZoneId"
+_dDN = "distributionDomainName"
+_dHZI = "distributionHostedZoneId"
+_dNS = "domainNameStatus"
+_dNSM = "domainNameStatusMessage"
+_mP = "managementPolicy"
+_sc = "schema"
 _cT = "contentType"
+_cM = "com.amazonaws.apigateway#Model"
+_vRB = "validateRequestBody"
+_vRP = "validateRequestParameters"
+_cRV = "com.amazonaws.apigateway#RequestValidator"
+_pI = "parentId"
+_pP = "pathPart"
 _sPe = "selectionPattern"
 _rP = "responseParameters"
 _rT = "responseTemplates"
@@ -74,6 +98,8 @@ _rMeq = "requestModels"
 _mR = "methodResponses"
 _mI = "methodIntegration"
 _aSu = "authorizationScopes"
+_cR = "com.amazonaws.apigateway#Resource"
+_rMes = "resourceMethods"
 _bMT = "binaryMediaTypes"
 _mCS = "minimumCompressionSize"
 _aKS = "apiKeySource"
@@ -91,39 +117,113 @@ _mS = "methodSettings"
 _aLS = "accessLogSettings"
 _wAA = "webAclArn"
 _li = "limit"
-_aSpi = "apiStages"
-_q = "quota"
-_cUP = "com.amazonaws.apigateway#UsagePlan"
-_pC = "productCode"
-_uPI = "usagePlanId"
-_kI = "keyId"
-_cUPK = "com.amazonaws.apigateway#UsagePlanKey"
-_tA = "targetArns"
-_cVL = "com.amazonaws.apigateway#VpcLink"
-_sta = "status"
-_sM = "statusMessage"
 _rTes = "responseType"
 _rI = "resourceId"
-_vLI = "vpcLinkId"
+_mN = "modelName"
 _pos = "position"
-_nQ = "nameQuery"
 _it = "items"
 _sNm = "smithy.api#jsonName"
 _ite = "item"
+_em = "embed"
+_RO = "ResourceOwner"
+_SELF = "SELF"
+_OA = "OTHER_ACCOUNTS"
+_rO = "resourceOwner"
+_LODNAA = "ListOfDomainNameAccessAssociation"
+_GDNIe = "GetDomainNamesInput"
+_cGDNRo = "com.amazonaws.apigateway#GetDomainNamesRequest"
+_DN = "DomainName"
+_LODN = "ListOfDomainName"
+_GDNOe = "GetDomainNamesOutput"
+_cDNo = "com.amazonaws.apigateway#DomainNames"
+_GDNe = "GetDomainNames"
+_GEI = "GetExportInput"
+_cGER = "com.amazonaws.apigateway#GetExportRequest"
+_eT = "exportType"
 _pa = "parameters"
 _sQP = "smithy.api#httpQueryParams"
+_ac = "accepts"
+_Ac = "Accept"
+_GEO = "GetExportOutput"
+_cER = "com.amazonaws.apigateway#ExportResponse"
 _CT_ = "Content-Type"
 _cDon = "contentDisposition"
 _CD_ = "Content-Disposition"
 _b = "body"
 _sPm = "smithy.api#httpPayload"
+_GE = "GetExport"
+_GGRI = "GetGatewayResponseInput"
+_cGGRR = "com.amazonaws.apigateway#GetGatewayResponseRequest"
+_GGRO = "GetGatewayResponseOutput"
 _cGR = "com.amazonaws.apigateway#GatewayResponse"
 _dR = "defaultResponse"
+_GGR = "GetGatewayResponse"
+_GGRIe = "GetGatewayResponsesInput"
+_cGGRRo = "com.amazonaws.apigateway#GetGatewayResponsesRequest"
+_GR = "GatewayResponse"
+_LOGR = "ListOfGatewayResponse"
+_GGROe = "GetGatewayResponsesOutput"
+_cGRo = "com.amazonaws.apigateway#GatewayResponses"
+_GGRe = "GetGatewayResponses"
+_GII = "GetIntegrationInput"
+_cGIR = "com.amazonaws.apigateway#GetIntegrationRequest"
+_GIO = "GetIntegrationOutput"
 _cIom = "com.amazonaws.apigateway#Integration"
+_GI = "GetIntegration"
+_GIRI = "GetIntegrationResponseInput"
+_cGIRR = "com.amazonaws.apigateway#GetIntegrationResponseRequest"
+_GIRO = "GetIntegrationResponseOutput"
 _cIR = "com.amazonaws.apigateway#IntegrationResponse"
+_GIR = "GetIntegrationResponse"
+_GMI = "GetMethodInput"
+_cGMR = "com.amazonaws.apigateway#GetMethodRequest"
+_GMO = "GetMethodOutput"
 _cMo = "com.amazonaws.apigateway#Method"
+_GM = "GetMethod"
+_GMRI = "GetMethodResponseInput"
+_cGMRR = "com.amazonaws.apigateway#GetMethodResponseRequest"
+_GMRO = "GetMethodResponseOutput"
 _cMR = "com.amazonaws.apigateway#MethodResponse"
+_GMR = "GetMethodResponse"
+_GMIe = "GetModelInput"
+_cGMRo = "com.amazonaws.apigateway#GetModelRequest"
+_fl = "flatten"
+_GMOe = "GetModelOutput"
+_GMe = "GetModel"
+_GMIet = "GetModelsInput"
+_cGMRom = "com.amazonaws.apigateway#GetModelsRequest"
+_Mo = "Model"
+_LOM = "ListOfModel"
+_GMOet = "GetModelsOutput"
+_cMom = "com.amazonaws.apigateway#Models"
+_GMet = "GetModels"
+_GMTI = "GetModelTemplateInput"
+_cGMTR = "com.amazonaws.apigateway#GetModelTemplateRequest"
+_GMTO = "GetModelTemplateOutput"
+_cTom = "com.amazonaws.apigateway#Template"
+_GMT = "GetModelTemplate"
+_GRVI = "GetRequestValidatorInput"
+_cGRVR = "com.amazonaws.apigateway#GetRequestValidatorRequest"
+_GRVO = "GetRequestValidatorOutput"
+_GRV = "GetRequestValidator"
+_GRVIe = "GetRequestValidatorsInput"
+_cGRVRo = "com.amazonaws.apigateway#GetRequestValidatorsRequest"
+_RV = "RequestValidator"
+_LORV = "ListOfRequestValidator"
+_GRVOe = "GetRequestValidatorsOutput"
+_cRVo = "com.amazonaws.apigateway#RequestValidators"
+_GRVe = "GetRequestValidators"
+_GRI = "GetResourceInput"
+_cGRR = "com.amazonaws.apigateway#GetResourceRequest"
+_GRO = "GetResourceOutput"
+_GRe = "GetResource"
+_GRIe = "GetResourcesInput"
+_cGRRo = "com.amazonaws.apigateway#GetResourcesRequest"
+_R = "Resource"
 _LOR = "ListOfResource"
+_GROe = "GetResourcesOutput"
+_cRo = "com.amazonaws.apigateway#Resources"
+_GRet = "GetResources"
 _GRAI = "GetRestApiInput"
 _cGRAR = "com.amazonaws.apigateway#GetRestApiRequest"
 _GRAO = "GetRestApiOutput"
@@ -145,7 +245,6 @@ _GSTI = "GetSdkTypeInput"
 _cGSTR = "com.amazonaws.apigateway#GetSdkTypeRequest"
 _SCP = "SdkConfigurationProperty"
 _fN = "friendlyName"
-_r = "required"
 _dVe = "defaultValue"
 _LOSCP = "ListOfSdkConfigurationProperty"
 _GSTO = "GetSdkTypeOutput"
@@ -165,125 +264,918 @@ _GSOe = "GetStageOutput"
 _GSe = "GetStage"
 _GSIet = "GetStagesInput"
 _cGSRom = "com.amazonaws.apigateway#GetStagesRequest"
-_St = "Stage"
-_LOSi = "ListOfStage"
 _GSOet = "GetStagesOutput"
 _cSom = "com.amazonaws.apigateway#Stages"
 _GSet = "GetStages"
-_GTI = "GetTagsInput"
-_cGTR = "com.amazonaws.apigateway#GetTagsRequest"
-_rA = "resourceArn"
-_GTO = "GetTagsOutput"
-_cToma = "com.amazonaws.apigateway#Tags"
-_GT = "GetTags"
-_GUI = "GetUsageInput"
-_cGUR = "com.amazonaws.apigateway#GetUsageRequest"
-_sDt = "startDate"
-_eDn = "endDate"
-_LOL = "ListOfLong"
-_LOU = "ListOfUsage"
-_MOKU = "MapOfKeyUsages"
-_GUO = "GetUsageOutput"
-_cU = "com.amazonaws.apigateway#Usage"
-_val = "values"
-_GU = "GetUsage"
-_GUPI = "GetUsagePlanInput"
-_cGUPR = "com.amazonaws.apigateway#GetUsagePlanRequest"
-_GUPO = "GetUsagePlanOutput"
-_GUP = "GetUsagePlan"
-_GUPKI = "GetUsagePlanKeyInput"
-_cGUPKR = "com.amazonaws.apigateway#GetUsagePlanKeyRequest"
-_GUPKO = "GetUsagePlanKeyOutput"
-_GUPK = "GetUsagePlanKey"
-_GUPKIe = "GetUsagePlanKeysInput"
-_cGUPKRo = "com.amazonaws.apigateway#GetUsagePlanKeysRequest"
-_UPK = "UsagePlanKey"
-_LOUPK = "ListOfUsagePlanKey"
-_GUPKOe = "GetUsagePlanKeysOutput"
-_cUPKo = "com.amazonaws.apigateway#UsagePlanKeys"
-_GUPKe = "GetUsagePlanKeys"
-_GUPIe = "GetUsagePlansInput"
-_cGUPRo = "com.amazonaws.apigateway#GetUsagePlansRequest"
-_UP = "UsagePlan"
-_LOUP = "ListOfUsagePlan"
-_GUPOe = "GetUsagePlansOutput"
-_cUPo = "com.amazonaws.apigateway#UsagePlans"
-_GUPe = "GetUsagePlans"
-_GVLI = "GetVpcLinkInput"
-_cGVLR = "com.amazonaws.apigateway#GetVpcLinkRequest"
-_GVLO = "GetVpcLinkOutput"
-_GVL = "GetVpcLink"
-_GVLIe = "GetVpcLinksInput"
-_cGVLRo = "com.amazonaws.apigateway#GetVpcLinksRequest"
-_VLp = "VpcLink"
-_LOVL = "ListOfVpcLink"
-_GVLOe = "GetVpcLinksOutput"
-_cVLo = "com.amazonaws.apigateway#VpcLinks"
-_GVLe = "GetVpcLinks"
-_IAKI = "ImportApiKeysInput"
-_cIAKR = "com.amazonaws.apigateway#ImportApiKeysRequest"
-_fOW = "failOnWarnings"
-_fa = "failonwarnings"
-_IAKO = "ImportApiKeysOutput"
-_cAKI = "com.amazonaws.apigateway#ApiKeyIds"
-_id = "ids"
-_IAKm = "ImportApiKeys"
-_PM = "PutMode"
-_Me = "Merge"
-_mer = "merge"
-_O = "Overwrite"
-_ov = "overwrite"
-_IDPI = "ImportDocumentationPartsInput"
-_cIDPR = "com.amazonaws.apigateway#ImportDocumentationPartsRequest"
-_mo = "mode"
-_IDPO = "ImportDocumentationPartsOutput"
-_cDPI = "com.amazonaws.apigateway#DocumentationPartIds"
-_IDP = "ImportDocumentationParts"
-_IRAI = "ImportRestApiInput"
-_cIRAR = "com.amazonaws.apigateway#ImportRestApiRequest"
-_IRAO = "ImportRestApiOutput"
-_IRA = "ImportRestApi"
-_PGRI = "PutGatewayResponseInput"
-_cPGRR = "com.amazonaws.apigateway#PutGatewayResponseRequest"
-_PGRO = "PutGatewayResponseOutput"
-_PGR = "PutGatewayResponse"
-_PII = "PutIntegrationInput"
-_cPIR = "com.amazonaws.apigateway#PutIntegrationRequest"
-_rHM = "requestHttpMethod"
-_iHM = "integrationHttpMethod"
-_PIO = "PutIntegrationOutput"
-_PI = "PutIntegration"
-_PIRI = "PutIntegrationResponseInput"
-_cPIRR = "com.amazonaws.apigateway#PutIntegrationResponseRequest"
-_PIRO = "PutIntegrationResponseOutput"
-_PIR = "PutIntegrationResponse"
-_PMI = "PutMethodInput"
-_cPMR = "com.amazonaws.apigateway#PutMethodRequest"
-_PMO = "PutMethodOutput"
-_PMu = "PutMethod"
-_PMRI = "PutMethodResponseInput"
-_cPMRR = "com.amazonaws.apigateway#PutMethodResponseRequest"
-_PMRO = "PutMethodResponseOutput"
-_PMR = "PutMethodResponse"
-_PRAI = "PutRestApiInput"
-_cPRAR = "com.amazonaws.apigateway#PutRestApiRequest"
-_PRAO = "PutRestApiOutput"
-_PRA = "PutRestApi"
 
-LIST_OF_RESOURCE: StaticSchema = (
+RESOURCE_OWNER: StaticSchema = (
+    14,
+    n0,
+    _RO,
+    0,
+    (_SELF, _OA),
+    ((-1, {_sV: _SELF}), (-1, {_sV: _OA})),
+)
+
+LIST_OF_DOMAIN_NAME_ACCESS_ASSOCIATION: StaticSchema = (
     16,
     n0,
-    _LOR,
+    _LODNAA,
     0,
     (_m,),
-    ((lambda: schemas.RESOURCE, 0),),
+    ((lambda: schemas.DOMAIN_NAME_ACCESS_ASSOCIATION, 0),),
 )
+
+GET_DOMAIN_NAMES_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GDNIe,
+    {_sSI: _cGDNRo, _smit: None},
+    (_pos, _li, _rO),
+    (
+        (lambda: schemas.STRING, {_sQ: _pos}),
+        (lambda: schemas.NULLABLE_INTEGER, {_sQ: _li}),
+        (RESOURCE_OWNER, {_sQ: _rO}),
+    ),
+)
+
+GET_DOMAIN_NAMES_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GDNOe,
+    {_sSI: _cDNo, _smith: None},
+    (_it, _pos),
+    (
+        (lambda: LIST_OF_DOMAIN_NAME, {_sNm: _ite}),
+        (lambda: schemas.STRING, {_sQ: _pos}),
+    ),
+)
+
+GET_DOMAIN_NAMES: StaticOperationSchema = (
+    23,
+    n0,
+    _GDNe,
+    {_smithy: MappingProxyType({"method": "GET", "uri": "/domainnames", "code": 200})},
+    GET_DOMAIN_NAMES_INPUT,
+    GET_DOMAIN_NAMES_OUTPUT,
+    (
+        lambda: schemas.BAD_REQUEST_EXCEPTION,
+        lambda: schemas.NOT_FOUND_EXCEPTION,
+        lambda: schemas.TOO_MANY_REQUESTS_EXCEPTION,
+        lambda: schemas.UNAUTHORIZED_EXCEPTION,
+    ),
+)
+
+DOMAIN_NAME: StaticSchema = (
+    18,
+    n0,
+    _DN,
+    0,
+    (
+        _dN,
+        _dNI,
+        _dNA,
+        _cNe,
+        _cAe,
+        _cUD,
+        _rDN,
+        _rHZI,
+        _rCN,
+        _rCA,
+        _dDN,
+        _dHZI,
+        _eC,
+        _dNS,
+        _dNSM,
+        _sP,
+        _eAM,
+        _t,
+        _mTA,
+        _oVCA,
+        _mP,
+        _po,
+        _rM,
+    ),
+    (
+        (lambda: schemas.STRING, 0),
+        (lambda: schemas.STRING, 0),
+        (lambda: schemas.STRING, 0),
+        (lambda: schemas.STRING, 0),
+        (lambda: schemas.STRING, 0),
+        (lambda: schemas.TIMESTAMP, 0),
+        (lambda: schemas.STRING, 0),
+        (lambda: schemas.STRING, 0),
+        (lambda: schemas.STRING, 0),
+        (lambda: schemas.STRING, 0),
+        (lambda: schemas.STRING, 0),
+        (lambda: schemas.STRING, 0),
+        (lambda: schemas.ENDPOINT_CONFIGURATION, 0),
+        (lambda: schemas.DOMAIN_NAME_STATUS, 0),
+        (lambda: schemas.STRING, 0),
+        (lambda: schemas.SECURITY_POLICY, 0),
+        (lambda: schemas.ENDPOINT_ACCESS_MODE, 0),
+        (lambda: schemas.MAP_OF_STRING_TO_STRING, 0),
+        (lambda: schemas.MUTUAL_TLS_AUTHENTICATION, 0),
+        (lambda: schemas.STRING, 0),
+        (lambda: schemas.STRING, 0),
+        (lambda: schemas.STRING, 0),
+        (lambda: schemas.ROUTING_MODE, 0),
+    ),
+)
+
+LIST_OF_DOMAIN_NAME: StaticSchema = (16, n0, _LODN, 0, (_m,), ((DOMAIN_NAME, 0),))
+
+GET_EXPORT_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GEI,
+    {_sSI: _cGER, _smit: None},
+    (_rAI, _sN, _eT, _pa, _ac),
+    (
+        (lambda: schemas.STRING, 9),
+        (lambda: schemas.STRING, 9),
+        (lambda: schemas.STRING, 9),
+        (lambda: schemas.MAP_OF_STRING_TO_STRING, 1024),
+        (lambda: schemas.STRING, {_sH: _Ac}),
+    ),
+)
+
+GET_EXPORT_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GEO,
+    {_sSI: _cER, _smith: None},
+    (_cT, _cDon, _b),
+    (
+        (lambda: schemas.STRING, {_sH: _CT_}),
+        (lambda: schemas.STRING, {_sH: _CD_}),
+        (lambda: schemas.BLOB, 16),
+    ),
+)
+
+GET_EXPORT: StaticOperationSchema = (
+    23,
+    n0,
+    _GE,
+    {
+        _smithy: MappingProxyType(
+            {
+                "method": "GET",
+                "uri": "/restapis/{restApiId}/stages/{stageName}/exports/{exportType}",
+                "code": 200,
+            }
+        )
+    },
+    GET_EXPORT_INPUT,
+    GET_EXPORT_OUTPUT,
+    (
+        lambda: schemas.BAD_REQUEST_EXCEPTION,
+        lambda: schemas.CONFLICT_EXCEPTION,
+        lambda: schemas.LIMIT_EXCEEDED_EXCEPTION,
+        lambda: schemas.NOT_FOUND_EXCEPTION,
+        lambda: schemas.TOO_MANY_REQUESTS_EXCEPTION,
+        lambda: schemas.UNAUTHORIZED_EXCEPTION,
+    ),
+)
+
+GET_GATEWAY_RESPONSE_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GGRI,
+    {_sSI: _cGGRR, _smit: None},
+    (_rAI, _rTes),
+    ((lambda: schemas.STRING, 9), (lambda: schemas.GATEWAY_RESPONSE_TYPE, 9)),
+)
+
+GET_GATEWAY_RESPONSE_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GGRO,
+    {_sSI: _cGR, _smith: None},
+    (_rTes, _sC, _rP, _rT, _dR),
+    (
+        (lambda: schemas.GATEWAY_RESPONSE_TYPE, 0),
+        (lambda: schemas.STATUS_CODE, 0),
+        (lambda: schemas.MAP_OF_STRING_TO_STRING, 0),
+        (lambda: schemas.MAP_OF_STRING_TO_STRING, 0),
+        (lambda: schemas.BOOLEAN, {_s: False}),
+    ),
+)
+
+GET_GATEWAY_RESPONSE: StaticOperationSchema = (
+    23,
+    n0,
+    _GGR,
+    {
+        _smithy: MappingProxyType(
+            {
+                "method": "GET",
+                "uri": "/restapis/{restApiId}/gatewayresponses/{responseType}",
+                "code": 200,
+            }
+        )
+    },
+    GET_GATEWAY_RESPONSE_INPUT,
+    GET_GATEWAY_RESPONSE_OUTPUT,
+    (
+        lambda: schemas.BAD_REQUEST_EXCEPTION,
+        lambda: schemas.NOT_FOUND_EXCEPTION,
+        lambda: schemas.TOO_MANY_REQUESTS_EXCEPTION,
+        lambda: schemas.UNAUTHORIZED_EXCEPTION,
+    ),
+)
+
+GET_GATEWAY_RESPONSES_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GGRIe,
+    {_sSI: _cGGRRo, _smit: None},
+    (_rAI, _pos, _li),
+    (
+        (lambda: schemas.STRING, 9),
+        (lambda: schemas.STRING, {_sQ: _pos}),
+        (lambda: schemas.NULLABLE_INTEGER, {_sQ: _li}),
+    ),
+)
+
+GET_GATEWAY_RESPONSES_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GGROe,
+    {_sSI: _cGRo, _smith: None},
+    (_it, _pos),
+    (
+        (lambda: LIST_OF_GATEWAY_RESPONSE, {_sNm: _ite}),
+        (lambda: schemas.STRING, {_sQ: _pos}),
+    ),
+)
+
+GET_GATEWAY_RESPONSES: StaticOperationSchema = (
+    23,
+    n0,
+    _GGRe,
+    {
+        _smithy: MappingProxyType(
+            {
+                "method": "GET",
+                "uri": "/restapis/{restApiId}/gatewayresponses",
+                "code": 200,
+            }
+        )
+    },
+    GET_GATEWAY_RESPONSES_INPUT,
+    GET_GATEWAY_RESPONSES_OUTPUT,
+    (
+        lambda: schemas.BAD_REQUEST_EXCEPTION,
+        lambda: schemas.NOT_FOUND_EXCEPTION,
+        lambda: schemas.TOO_MANY_REQUESTS_EXCEPTION,
+        lambda: schemas.UNAUTHORIZED_EXCEPTION,
+    ),
+)
+
+GATEWAY_RESPONSE: StaticSchema = (
+    18,
+    n0,
+    _GR,
+    0,
+    (_rTes, _sC, _rP, _rT, _dR),
+    (
+        (lambda: schemas.GATEWAY_RESPONSE_TYPE, 0),
+        (lambda: schemas.STATUS_CODE, 0),
+        (lambda: schemas.MAP_OF_STRING_TO_STRING, 0),
+        (lambda: schemas.MAP_OF_STRING_TO_STRING, 0),
+        (lambda: schemas.BOOLEAN, {_s: False}),
+    ),
+)
+
+LIST_OF_GATEWAY_RESPONSE: StaticSchema = (
+    16,
+    n0,
+    _LOGR,
+    0,
+    (_m,),
+    ((GATEWAY_RESPONSE, 0),),
+)
+
+GET_INTEGRATION_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GII,
+    {_sSI: _cGIR, _smit: None},
+    (_rAI, _rI, _hM),
+    (
+        (lambda: schemas.STRING, 9),
+        (lambda: schemas.STRING, 9),
+        (lambda: schemas.STRING, 9),
+    ),
+)
+
+GET_INTEGRATION_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GIO,
+    {_sSI: _cIom, _smith: None},
+    (
+        _ty,
+        _hM,
+        _u,
+        _cTo,
+        _cIo,
+        _cr,
+        _rPe,
+        _rTe,
+        _pB,
+        _cH,
+        _tIM,
+        _cNa,
+        _cKP,
+        _iR,
+        _tC,
+        _rTM,
+        _iT,
+    ),
+    (
+        (lambda: schemas.INTEGRATION_TYPE, 0),
+        (lambda: schemas.STRING, 0),
+        (lambda: schemas.STRING, 0),
+        (lambda: schemas.CONNECTION_TYPE, 0),
+        (lambda: schemas.STRING, 0),
+        (lambda: schemas.STRING, 0),
+        (lambda: schemas.MAP_OF_STRING_TO_STRING, 0),
+        (lambda: schemas.MAP_OF_STRING_TO_STRING, 0),
+        (lambda: schemas.STRING, 0),
+        (lambda: schemas.CONTENT_HANDLING_STRATEGY, 0),
+        (lambda: schemas.INTEGER, {_s: 0}),
+        (lambda: schemas.STRING, 0),
+        (lambda: schemas.LIST_OF_STRING, 0),
+        (lambda: schemas.MAP_OF_INTEGRATION_RESPONSE, 0),
+        (lambda: schemas.TLS_CONFIG, 0),
+        (lambda: schemas.RESPONSE_TRANSFER_MODE, 0),
+        (lambda: schemas.STRING, 0),
+    ),
+)
+
+GET_INTEGRATION: StaticOperationSchema = (
+    23,
+    n0,
+    _GI,
+    {
+        _smithy: MappingProxyType(
+            {
+                "method": "GET",
+                "uri": "/restapis/{restApiId}/resources/{resourceId}/methods/{httpMethod}/integration",
+                "code": 200,
+            }
+        )
+    },
+    GET_INTEGRATION_INPUT,
+    GET_INTEGRATION_OUTPUT,
+    (
+        lambda: schemas.BAD_REQUEST_EXCEPTION,
+        lambda: schemas.NOT_FOUND_EXCEPTION,
+        lambda: schemas.TOO_MANY_REQUESTS_EXCEPTION,
+        lambda: schemas.UNAUTHORIZED_EXCEPTION,
+    ),
+)
+
+GET_INTEGRATION_RESPONSE_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GIRI,
+    {_sSI: _cGIRR, _smit: None},
+    (_rAI, _rI, _hM, _sC),
+    (
+        (lambda: schemas.STRING, 9),
+        (lambda: schemas.STRING, 9),
+        (lambda: schemas.STRING, 9),
+        (lambda: schemas.STATUS_CODE, 9),
+    ),
+)
+
+GET_INTEGRATION_RESPONSE_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GIRO,
+    {_sSI: _cIR, _smith: None},
+    (_sC, _sPe, _rP, _rT, _cH),
+    (
+        (lambda: schemas.STATUS_CODE, 0),
+        (lambda: schemas.STRING, 0),
+        (lambda: schemas.MAP_OF_STRING_TO_STRING, 0),
+        (lambda: schemas.MAP_OF_STRING_TO_STRING, 0),
+        (lambda: schemas.CONTENT_HANDLING_STRATEGY, 0),
+    ),
+)
+
+GET_INTEGRATION_RESPONSE: StaticOperationSchema = (
+    23,
+    n0,
+    _GIR,
+    {
+        _smithy: MappingProxyType(
+            {
+                "method": "GET",
+                "uri": "/restapis/{restApiId}/resources/{resourceId}/methods/{httpMethod}/integration/responses/{statusCode}",
+                "code": 200,
+            }
+        )
+    },
+    GET_INTEGRATION_RESPONSE_INPUT,
+    GET_INTEGRATION_RESPONSE_OUTPUT,
+    (
+        lambda: schemas.BAD_REQUEST_EXCEPTION,
+        lambda: schemas.NOT_FOUND_EXCEPTION,
+        lambda: schemas.TOO_MANY_REQUESTS_EXCEPTION,
+        lambda: schemas.UNAUTHORIZED_EXCEPTION,
+    ),
+)
+
+GET_METHOD_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GMI,
+    {_sSI: _cGMR, _smit: None},
+    (_rAI, _rI, _hM),
+    (
+        (lambda: schemas.STRING, 9),
+        (lambda: schemas.STRING, 9),
+        (lambda: schemas.STRING, 9),
+    ),
+)
+
+GET_METHOD_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GMO,
+    {_sSI: _cMo, _smith: None},
+    (_hM, _aTu, _aIu, _aKR, _rVI, _oN, _rPe, _rMeq, _mR, _mI, _aSu),
+    (
+        (lambda: schemas.STRING, 0),
+        (lambda: schemas.STRING, 0),
+        (lambda: schemas.STRING, 0),
+        (lambda: schemas.NULLABLE_BOOLEAN, 0),
+        (lambda: schemas.STRING, 0),
+        (lambda: schemas.STRING, 0),
+        (lambda: schemas.MAP_OF_STRING_TO_BOOLEAN, 0),
+        (lambda: schemas.MAP_OF_STRING_TO_STRING, 0),
+        (lambda: schemas.MAP_OF_METHOD_RESPONSE, 0),
+        (lambda: schemas.INTEGRATION, 0),
+        (lambda: schemas.LIST_OF_STRING, 0),
+    ),
+)
+
+GET_METHOD: StaticOperationSchema = (
+    23,
+    n0,
+    _GM,
+    {
+        _smithy: MappingProxyType(
+            {
+                "method": "GET",
+                "uri": "/restapis/{restApiId}/resources/{resourceId}/methods/{httpMethod}",
+                "code": 200,
+            }
+        )
+    },
+    GET_METHOD_INPUT,
+    GET_METHOD_OUTPUT,
+    (
+        lambda: schemas.NOT_FOUND_EXCEPTION,
+        lambda: schemas.TOO_MANY_REQUESTS_EXCEPTION,
+        lambda: schemas.UNAUTHORIZED_EXCEPTION,
+    ),
+)
+
+GET_METHOD_RESPONSE_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GMRI,
+    {_sSI: _cGMRR, _smit: None},
+    (_rAI, _rI, _hM, _sC),
+    (
+        (lambda: schemas.STRING, 9),
+        (lambda: schemas.STRING, 9),
+        (lambda: schemas.STRING, 9),
+        (lambda: schemas.STATUS_CODE, 9),
+    ),
+)
+
+GET_METHOD_RESPONSE_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GMRO,
+    {_sSI: _cMR, _smith: None},
+    (_sC, _rP, _rMe),
+    (
+        (lambda: schemas.STATUS_CODE, 0),
+        (lambda: schemas.MAP_OF_STRING_TO_BOOLEAN, 0),
+        (lambda: schemas.MAP_OF_STRING_TO_STRING, 0),
+    ),
+)
+
+GET_METHOD_RESPONSE: StaticOperationSchema = (
+    23,
+    n0,
+    _GMR,
+    {
+        _smithy: MappingProxyType(
+            {
+                "method": "GET",
+                "uri": "/restapis/{restApiId}/resources/{resourceId}/methods/{httpMethod}/responses/{statusCode}",
+                "code": 200,
+            }
+        )
+    },
+    GET_METHOD_RESPONSE_INPUT,
+    GET_METHOD_RESPONSE_OUTPUT,
+    (
+        lambda: schemas.NOT_FOUND_EXCEPTION,
+        lambda: schemas.TOO_MANY_REQUESTS_EXCEPTION,
+        lambda: schemas.UNAUTHORIZED_EXCEPTION,
+    ),
+)
+
+GET_MODEL_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GMIe,
+    {_sSI: _cGMRo, _smit: None},
+    (_rAI, _mN, _fl),
+    (
+        (lambda: schemas.STRING, 9),
+        (lambda: schemas.STRING, 9),
+        (lambda: schemas.BOOLEAN, {_s: False, _sQ: _fl}),
+    ),
+)
+
+GET_MODEL_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GMOe,
+    {_sSI: _cM, _smith: None},
+    (_i, _n, _d, _sc, _cT),
+    (
+        (lambda: schemas.STRING, 0),
+        (lambda: schemas.STRING, 0),
+        (lambda: schemas.STRING, 0),
+        (lambda: schemas.STRING, 0),
+        (lambda: schemas.STRING, 0),
+    ),
+)
+
+GET_MODEL: StaticOperationSchema = (
+    23,
+    n0,
+    _GMe,
+    {
+        _smithy: MappingProxyType(
+            {
+                "method": "GET",
+                "uri": "/restapis/{restApiId}/models/{modelName}",
+                "code": 200,
+            }
+        )
+    },
+    GET_MODEL_INPUT,
+    GET_MODEL_OUTPUT,
+    (
+        lambda: schemas.BAD_REQUEST_EXCEPTION,
+        lambda: schemas.NOT_FOUND_EXCEPTION,
+        lambda: schemas.TOO_MANY_REQUESTS_EXCEPTION,
+        lambda: schemas.UNAUTHORIZED_EXCEPTION,
+    ),
+)
+
+GET_MODELS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GMIet,
+    {_sSI: _cGMRom, _smit: None},
+    (_rAI, _pos, _li),
+    (
+        (lambda: schemas.STRING, 9),
+        (lambda: schemas.STRING, {_sQ: _pos}),
+        (lambda: schemas.NULLABLE_INTEGER, {_sQ: _li}),
+    ),
+)
+
+GET_MODELS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GMOet,
+    {_sSI: _cMom, _smith: None},
+    (_it, _pos),
+    ((lambda: LIST_OF_MODEL, {_sNm: _ite}), (lambda: schemas.STRING, {_sQ: _pos})),
+)
+
+GET_MODELS: StaticOperationSchema = (
+    23,
+    n0,
+    _GMet,
+    {
+        _smithy: MappingProxyType(
+            {"method": "GET", "uri": "/restapis/{restApiId}/models", "code": 200}
+        )
+    },
+    GET_MODELS_INPUT,
+    GET_MODELS_OUTPUT,
+    (
+        lambda: schemas.BAD_REQUEST_EXCEPTION,
+        lambda: schemas.NOT_FOUND_EXCEPTION,
+        lambda: schemas.TOO_MANY_REQUESTS_EXCEPTION,
+        lambda: schemas.UNAUTHORIZED_EXCEPTION,
+    ),
+)
+
+MODEL: StaticSchema = (
+    18,
+    n0,
+    _Mo,
+    0,
+    (_i, _n, _d, _sc, _cT),
+    (
+        (lambda: schemas.STRING, 0),
+        (lambda: schemas.STRING, 0),
+        (lambda: schemas.STRING, 0),
+        (lambda: schemas.STRING, 0),
+        (lambda: schemas.STRING, 0),
+    ),
+)
+
+LIST_OF_MODEL: StaticSchema = (16, n0, _LOM, 0, (_m,), ((MODEL, 0),))
+
+GET_MODEL_TEMPLATE_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GMTI,
+    {_sSI: _cGMTR, _smit: None},
+    (_rAI, _mN),
+    ((lambda: schemas.STRING, 9), (lambda: schemas.STRING, 9)),
+)
+
+GET_MODEL_TEMPLATE_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GMTO,
+    {_sSI: _cTom, _smith: None},
+    (_v,),
+    ((lambda: schemas.STRING, 0),),
+)
+
+GET_MODEL_TEMPLATE: StaticOperationSchema = (
+    23,
+    n0,
+    _GMT,
+    {
+        _smithy: MappingProxyType(
+            {
+                "method": "GET",
+                "uri": "/restapis/{restApiId}/models/{modelName}/default_template",
+                "code": 200,
+            }
+        )
+    },
+    GET_MODEL_TEMPLATE_INPUT,
+    GET_MODEL_TEMPLATE_OUTPUT,
+    (
+        lambda: schemas.BAD_REQUEST_EXCEPTION,
+        lambda: schemas.NOT_FOUND_EXCEPTION,
+        lambda: schemas.TOO_MANY_REQUESTS_EXCEPTION,
+        lambda: schemas.UNAUTHORIZED_EXCEPTION,
+    ),
+)
+
+GET_REQUEST_VALIDATOR_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GRVI,
+    {_sSI: _cGRVR, _smit: None},
+    (_rAI, _rVI),
+    ((lambda: schemas.STRING, 9), (lambda: schemas.STRING, 9)),
+)
+
+GET_REQUEST_VALIDATOR_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GRVO,
+    {_sSI: _cRV, _smith: None},
+    (_i, _n, _vRB, _vRP),
+    (
+        (lambda: schemas.STRING, 0),
+        (lambda: schemas.STRING, 0),
+        (lambda: schemas.BOOLEAN, {_s: False}),
+        (lambda: schemas.BOOLEAN, {_s: False}),
+    ),
+)
+
+GET_REQUEST_VALIDATOR: StaticOperationSchema = (
+    23,
+    n0,
+    _GRV,
+    {
+        _smithy: MappingProxyType(
+            {
+                "method": "GET",
+                "uri": "/restapis/{restApiId}/requestvalidators/{requestValidatorId}",
+                "code": 200,
+            }
+        )
+    },
+    GET_REQUEST_VALIDATOR_INPUT,
+    GET_REQUEST_VALIDATOR_OUTPUT,
+    (
+        lambda: schemas.BAD_REQUEST_EXCEPTION,
+        lambda: schemas.NOT_FOUND_EXCEPTION,
+        lambda: schemas.TOO_MANY_REQUESTS_EXCEPTION,
+        lambda: schemas.UNAUTHORIZED_EXCEPTION,
+    ),
+)
+
+GET_REQUEST_VALIDATORS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GRVIe,
+    {_sSI: _cGRVRo, _smit: None},
+    (_rAI, _pos, _li),
+    (
+        (lambda: schemas.STRING, 9),
+        (lambda: schemas.STRING, {_sQ: _pos}),
+        (lambda: schemas.NULLABLE_INTEGER, {_sQ: _li}),
+    ),
+)
+
+GET_REQUEST_VALIDATORS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GRVOe,
+    {_sSI: _cRVo, _smith: None},
+    (_it, _pos),
+    (
+        (lambda: LIST_OF_REQUEST_VALIDATOR, {_sNm: _ite}),
+        (lambda: schemas.STRING, {_sQ: _pos}),
+    ),
+)
+
+GET_REQUEST_VALIDATORS: StaticOperationSchema = (
+    23,
+    n0,
+    _GRVe,
+    {
+        _smithy: MappingProxyType(
+            {
+                "method": "GET",
+                "uri": "/restapis/{restApiId}/requestvalidators",
+                "code": 200,
+            }
+        )
+    },
+    GET_REQUEST_VALIDATORS_INPUT,
+    GET_REQUEST_VALIDATORS_OUTPUT,
+    (
+        lambda: schemas.BAD_REQUEST_EXCEPTION,
+        lambda: schemas.NOT_FOUND_EXCEPTION,
+        lambda: schemas.TOO_MANY_REQUESTS_EXCEPTION,
+        lambda: schemas.UNAUTHORIZED_EXCEPTION,
+    ),
+)
+
+REQUEST_VALIDATOR: StaticSchema = (
+    18,
+    n0,
+    _RV,
+    0,
+    (_i, _n, _vRB, _vRP),
+    (
+        (lambda: schemas.STRING, 0),
+        (lambda: schemas.STRING, 0),
+        (lambda: schemas.BOOLEAN, {_s: False}),
+        (lambda: schemas.BOOLEAN, {_s: False}),
+    ),
+)
+
+LIST_OF_REQUEST_VALIDATOR: StaticSchema = (
+    16,
+    n0,
+    _LORV,
+    0,
+    (_m,),
+    ((REQUEST_VALIDATOR, 0),),
+)
+
+GET_RESOURCE_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GRI,
+    {_sSI: _cGRR, _smit: None},
+    (_rAI, _rI, _em),
+    (
+        (lambda: schemas.STRING, 9),
+        (lambda: schemas.STRING, 9),
+        (lambda: schemas.LIST_OF_STRING, {_sQ: _em}),
+    ),
+)
+
+GET_RESOURCE_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GRO,
+    {_sSI: _cR, _smith: None},
+    (_i, _pI, _pP, _p, _rMes),
+    (
+        (lambda: schemas.STRING, 0),
+        (lambda: schemas.STRING, 0),
+        (lambda: schemas.STRING, 0),
+        (lambda: schemas.STRING, 0),
+        (lambda: schemas.MAP_OF_METHOD, 0),
+    ),
+)
+
+GET_RESOURCE: StaticOperationSchema = (
+    23,
+    n0,
+    _GRe,
+    {
+        _smithy: MappingProxyType(
+            {
+                "method": "GET",
+                "uri": "/restapis/{restApiId}/resources/{resourceId}",
+                "code": 200,
+            }
+        )
+    },
+    GET_RESOURCE_INPUT,
+    GET_RESOURCE_OUTPUT,
+    (
+        lambda: schemas.NOT_FOUND_EXCEPTION,
+        lambda: schemas.TOO_MANY_REQUESTS_EXCEPTION,
+        lambda: schemas.UNAUTHORIZED_EXCEPTION,
+    ),
+)
+
+GET_RESOURCES_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GRIe,
+    {_sSI: _cGRRo, _smit: None},
+    (_rAI, _pos, _li, _em),
+    (
+        (lambda: schemas.STRING, 9),
+        (lambda: schemas.STRING, {_sQ: _pos}),
+        (lambda: schemas.NULLABLE_INTEGER, {_sQ: _li}),
+        (lambda: schemas.LIST_OF_STRING, {_sQ: _em}),
+    ),
+)
+
+GET_RESOURCES_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GROe,
+    {_sSI: _cRo, _smith: None},
+    (_it, _pos),
+    ((lambda: LIST_OF_RESOURCE, {_sNm: _ite}), (lambda: schemas.STRING, {_sQ: _pos})),
+)
+
+GET_RESOURCES: StaticOperationSchema = (
+    23,
+    n0,
+    _GRet,
+    {
+        _smithy: MappingProxyType(
+            {"method": "GET", "uri": "/restapis/{restApiId}/resources", "code": 200}
+        )
+    },
+    GET_RESOURCES_INPUT,
+    GET_RESOURCES_OUTPUT,
+    (
+        lambda: schemas.BAD_REQUEST_EXCEPTION,
+        lambda: schemas.NOT_FOUND_EXCEPTION,
+        lambda: schemas.TOO_MANY_REQUESTS_EXCEPTION,
+        lambda: schemas.UNAUTHORIZED_EXCEPTION,
+    ),
+)
+
+RESOURCE: StaticSchema = (
+    18,
+    n0,
+    _R,
+    0,
+    (_i, _pI, _pP, _p, _rMes),
+    (
+        (lambda: schemas.STRING, 0),
+        (lambda: schemas.STRING, 0),
+        (lambda: schemas.STRING, 0),
+        (lambda: schemas.STRING, 0),
+        (lambda: schemas.MAP_OF_METHOD, 0),
+    ),
+)
+
+LIST_OF_RESOURCE: StaticSchema = (16, n0, _LOR, 0, (_m,), ((RESOURCE, 0),))
 
 GET_REST_API_INPUT: StaticSchema = (
     18,
     n0,
     _GRAI,
-    {_sSI: _cGRAR, _smi: None},
+    {_sSI: _cGRAR, _smit: None},
     (_rAI,),
     ((lambda: schemas.STRING, 9),),
 )
@@ -292,7 +1184,7 @@ GET_REST_API_OUTPUT: StaticSchema = (
     18,
     n0,
     _GRAO,
-    {_sSI: _cRA, _smit: None},
+    {_sSI: _cRA, _smith: None},
     (
         _i,
         _n,
@@ -340,7 +1232,7 @@ GET_REST_API: StaticOperationSchema = (
     n0,
     _GRA,
     {
-        _smith: MappingProxyType(
+        _smithy: MappingProxyType(
             {"method": "GET", "uri": "/restapis/{restApiId}", "code": 200}
         )
     },
@@ -358,7 +1250,7 @@ GET_REST_APIS_INPUT: StaticSchema = (
     18,
     n0,
     _GRAIe,
-    {_sSI: _cGRARo, _smi: None},
+    {_sSI: _cGRARo, _smit: None},
     (_pos, _li),
     (
         (lambda: schemas.STRING, {_sQ: _pos}),
@@ -370,7 +1262,7 @@ GET_REST_APIS_OUTPUT: StaticSchema = (
     18,
     n0,
     _GRAOe,
-    {_sSI: _cRAo, _smit: None},
+    {_sSI: _cRAo, _smith: None},
     (_it, _pos),
     ((lambda: LIST_OF_REST_API, {_sNm: _ite}), (lambda: schemas.STRING, {_sQ: _pos})),
 )
@@ -379,7 +1271,7 @@ GET_REST_APIS: StaticOperationSchema = (
     23,
     n0,
     _GRAe,
-    {_smith: MappingProxyType({"method": "GET", "uri": "/restapis", "code": 200})},
+    {_smithy: MappingProxyType({"method": "GET", "uri": "/restapis", "code": 200})},
     GET_REST_APIS_INPUT,
     GET_REST_APIS_OUTPUT,
     (
@@ -443,7 +1335,7 @@ GET_SDK_INPUT: StaticSchema = (
     18,
     n0,
     _GSI,
-    {_sSI: _cGSR, _smi: None},
+    {_sSI: _cGSR, _smit: None},
     (_rAI, _sN, _sT, _pa),
     (
         (lambda: schemas.STRING, 9),
@@ -457,7 +1349,7 @@ GET_SDK_OUTPUT: StaticSchema = (
     18,
     n0,
     _GSO,
-    {_sSI: _cSR, _smit: None},
+    {_sSI: _cSR, _smith: None},
     (_cT, _cDon, _b),
     (
         (lambda: schemas.STRING, {_sH: _CT_}),
@@ -471,7 +1363,7 @@ GET_SDK: StaticOperationSchema = (
     n0,
     _GS,
     {
-        _smith: MappingProxyType(
+        _smithy: MappingProxyType(
             {
                 "method": "GET",
                 "uri": "/restapis/{restApiId}/stages/{stageName}/sdks/{sdkType}",
@@ -495,7 +1387,7 @@ GET_SDK_TYPE_INPUT: StaticSchema = (
     18,
     n0,
     _GSTI,
-    {_sSI: _cGSTR, _smi: None},
+    {_sSI: _cGSTR, _smit: None},
     (_i,),
     ((lambda: schemas.STRING, 9),),
 )
@@ -504,7 +1396,7 @@ GET_SDK_TYPE_OUTPUT: StaticSchema = (
     18,
     n0,
     _GSTO,
-    {_sSI: _cST, _smit: None},
+    {_sSI: _cST, _smith: None},
     (_i, _fN, _d, _cP),
     (
         (lambda: schemas.STRING, 0),
@@ -518,7 +1410,11 @@ GET_SDK_TYPE: StaticOperationSchema = (
     23,
     n0,
     _GST,
-    {_smith: MappingProxyType({"method": "GET", "uri": "/sdktypes/{id}", "code": 200})},
+    {
+        _smithy: MappingProxyType(
+            {"method": "GET", "uri": "/sdktypes/{id}", "code": 200}
+        )
+    },
     GET_SDK_TYPE_INPUT,
     GET_SDK_TYPE_OUTPUT,
     (
@@ -557,7 +1453,7 @@ GET_SDK_TYPES_INPUT: StaticSchema = (
     18,
     n0,
     _GSTIe,
-    {_sSI: _cGSTRo, _smi: None},
+    {_sSI: _cGSTRo, _smit: None},
     (_pos, _li),
     (
         (lambda: schemas.STRING, {_sQ: _pos}),
@@ -569,7 +1465,7 @@ GET_SDK_TYPES_OUTPUT: StaticSchema = (
     18,
     n0,
     _GSTOe,
-    {_sSI: _cSTo, _smit: None},
+    {_sSI: _cSTo, _smith: None},
     (_it,),
     ((lambda: LIST_OF_SDK_TYPE, {_sNm: _ite}),),
 )
@@ -578,7 +1474,7 @@ GET_SDK_TYPES: StaticOperationSchema = (
     23,
     n0,
     _GSTe,
-    {_smith: MappingProxyType({"method": "GET", "uri": "/sdktypes", "code": 200})},
+    {_smithy: MappingProxyType({"method": "GET", "uri": "/sdktypes", "code": 200})},
     GET_SDK_TYPES_INPUT,
     GET_SDK_TYPES_OUTPUT,
     (
@@ -609,7 +1505,7 @@ GET_STAGE_INPUT: StaticSchema = (
     18,
     n0,
     _GSIe,
-    {_sSI: _cGSRo, _smi: None},
+    {_sSI: _cGSRo, _smit: None},
     (_rAI, _sN),
     ((lambda: schemas.STRING, 9), (lambda: schemas.STRING, 9)),
 )
@@ -618,7 +1514,7 @@ GET_STAGE_OUTPUT: StaticSchema = (
     18,
     n0,
     _GSOe,
-    {_sSI: _cSo, _smit: None},
+    {_sSI: _cSo, _smith: None},
     (
         _dI,
         _cCI,
@@ -664,7 +1560,7 @@ GET_STAGE: StaticOperationSchema = (
     n0,
     _GSe,
     {
-        _smith: MappingProxyType(
+        _smithy: MappingProxyType(
             {
                 "method": "GET",
                 "uri": "/restapis/{restApiId}/stages/{stageName}",
@@ -688,7 +1584,7 @@ GET_STAGES_INPUT: StaticSchema = (
     18,
     n0,
     _GSIet,
-    {_sSI: _cGSRom, _smi: None},
+    {_sSI: _cGSRom, _smit: None},
     (_rAI, _dI),
     ((lambda: schemas.STRING, 9), (lambda: schemas.STRING, {_sQ: _dI})),
 )
@@ -697,9 +1593,9 @@ GET_STAGES_OUTPUT: StaticSchema = (
     18,
     n0,
     _GSOet,
-    {_sSI: _cSom, _smit: None},
+    {_sSI: _cSom, _smith: None},
     (_ite,),
-    ((lambda: LIST_OF_STAGE, 0),),
+    ((lambda: schemas.LIST_OF_STAGE, 0),),
 )
 
 GET_STAGES: StaticOperationSchema = (
@@ -707,1097 +1603,12 @@ GET_STAGES: StaticOperationSchema = (
     n0,
     _GSet,
     {
-        _smith: MappingProxyType(
+        _smithy: MappingProxyType(
             {"method": "GET", "uri": "/restapis/{restApiId}/stages", "code": 200}
         )
     },
     GET_STAGES_INPUT,
     GET_STAGES_OUTPUT,
-    (
-        lambda: schemas.BAD_REQUEST_EXCEPTION,
-        lambda: schemas.CONFLICT_EXCEPTION,
-        lambda: schemas.LIMIT_EXCEEDED_EXCEPTION,
-        lambda: schemas.NOT_FOUND_EXCEPTION,
-        lambda: schemas.TOO_MANY_REQUESTS_EXCEPTION,
-        lambda: schemas.UNAUTHORIZED_EXCEPTION,
-    ),
-)
-
-STAGE: StaticSchema = (
-    18,
-    n0,
-    _St,
-    0,
-    (
-        _dI,
-        _cCI,
-        _sN,
-        _d,
-        _cCE,
-        _cCS,
-        _cCSa,
-        _mS,
-        _va,
-        _dV,
-        _aLS,
-        _cS,
-        _tE,
-        _wAA,
-        _t,
-        _cD,
-        _lUD,
-    ),
-    (
-        (lambda: schemas.STRING, 0),
-        (lambda: schemas.STRING, 0),
-        (lambda: schemas.STRING, 0),
-        (lambda: schemas.STRING, 0),
-        (lambda: schemas.BOOLEAN, {_s: False}),
-        (lambda: schemas.CACHE_CLUSTER_SIZE, 0),
-        (lambda: schemas.CACHE_CLUSTER_STATUS, 0),
-        (lambda: schemas.MAP_OF_METHOD_SETTINGS, 0),
-        (lambda: schemas.MAP_OF_STRING_TO_STRING, 0),
-        (lambda: schemas.STRING, 0),
-        (lambda: schemas.ACCESS_LOG_SETTINGS, 0),
-        (lambda: schemas.CANARY_SETTINGS, 0),
-        (lambda: schemas.BOOLEAN, {_s: False}),
-        (lambda: schemas.STRING, 0),
-        (lambda: schemas.MAP_OF_STRING_TO_STRING, 0),
-        (lambda: schemas.TIMESTAMP, 0),
-        (lambda: schemas.TIMESTAMP, 0),
-    ),
-)
-
-LIST_OF_STAGE: StaticSchema = (16, n0, _LOSi, 0, (_m,), ((STAGE, 0),))
-
-GET_TAGS_INPUT: StaticSchema = (
-    18,
-    n0,
-    _GTI,
-    {_sSI: _cGTR, _smi: None},
-    (_rA, _pos, _li),
-    (
-        (lambda: schemas.STRING, 9),
-        (lambda: schemas.STRING, {_sQ: _pos}),
-        (lambda: schemas.NULLABLE_INTEGER, {_sQ: _li}),
-    ),
-)
-
-GET_TAGS_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _GTO,
-    {_sSI: _cToma, _smit: None},
-    (_t,),
-    ((lambda: schemas.MAP_OF_STRING_TO_STRING, 0),),
-)
-
-GET_TAGS: StaticOperationSchema = (
-    23,
-    n0,
-    _GT,
-    {
-        _smith: MappingProxyType(
-            {"method": "GET", "uri": "/tags/{resourceArn}", "code": 200}
-        )
-    },
-    GET_TAGS_INPUT,
-    GET_TAGS_OUTPUT,
-    (
-        lambda: schemas.BAD_REQUEST_EXCEPTION,
-        lambda: schemas.NOT_FOUND_EXCEPTION,
-        lambda: schemas.TOO_MANY_REQUESTS_EXCEPTION,
-        lambda: schemas.UNAUTHORIZED_EXCEPTION,
-    ),
-)
-
-GET_USAGE_INPUT: StaticSchema = (
-    18,
-    n0,
-    _GUI,
-    {_sSI: _cGUR, _smi: None},
-    (_uPI, _kI, _sDt, _eDn, _pos, _li),
-    (
-        (lambda: schemas.STRING, 9),
-        (lambda: schemas.STRING, {_sQ: _kI}),
-        (lambda: schemas.STRING, {_sQ: _sDt, _smithy: None}),
-        (lambda: schemas.STRING, {_sQ: _eDn, _smithy: None}),
-        (lambda: schemas.STRING, {_sQ: _pos}),
-        (lambda: schemas.NULLABLE_INTEGER, {_sQ: _li}),
-    ),
-)
-
-GET_USAGE_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _GUO,
-    {_sSI: _cU, _smit: None},
-    (_uPI, _sDt, _eDn, _it, _pos),
-    (
-        (lambda: schemas.STRING, 0),
-        (lambda: schemas.STRING, 0),
-        (lambda: schemas.STRING, 0),
-        (lambda: MAP_OF_KEY_USAGES, {_sNm: _val}),
-        (lambda: schemas.STRING, {_sQ: _pos}),
-    ),
-)
-
-GET_USAGE: StaticOperationSchema = (
-    23,
-    n0,
-    _GU,
-    {
-        _smith: MappingProxyType(
-            {"method": "GET", "uri": "/usageplans/{usagePlanId}/usage", "code": 200}
-        )
-    },
-    GET_USAGE_INPUT,
-    GET_USAGE_OUTPUT,
-    (
-        lambda: schemas.BAD_REQUEST_EXCEPTION,
-        lambda: schemas.NOT_FOUND_EXCEPTION,
-        lambda: schemas.TOO_MANY_REQUESTS_EXCEPTION,
-        lambda: schemas.UNAUTHORIZED_EXCEPTION,
-    ),
-)
-
-LIST_OF_LONG: StaticSchema = (16, n0, _LOL, 0, (_m,), ((lambda: schemas.LONG, 0),))
-
-LIST_OF_USAGE: StaticSchema = (16, n0, _LOU, 0, (_m,), ((LIST_OF_LONG, 0),))
-
-MAP_OF_KEY_USAGES: StaticSchema = (
-    17,
-    n0,
-    _MOKU,
-    0,
-    (_k, _v),
-    ((lambda: schemas.STRING, 0), (LIST_OF_USAGE, 0)),
-)
-
-GET_USAGE_PLAN_INPUT: StaticSchema = (
-    18,
-    n0,
-    _GUPI,
-    {_sSI: _cGUPR, _smi: None},
-    (_uPI,),
-    ((lambda: schemas.STRING, 9),),
-)
-
-GET_USAGE_PLAN_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _GUPO,
-    {_sSI: _cUP, _smit: None},
-    (_i, _n, _d, _aSpi, _th, _q, _pC, _t),
-    (
-        (lambda: schemas.STRING, 0),
-        (lambda: schemas.STRING, 0),
-        (lambda: schemas.STRING, 0),
-        (lambda: schemas.LIST_OF_API_STAGE, 0),
-        (lambda: schemas.THROTTLE_SETTINGS, 0),
-        (lambda: schemas.QUOTA_SETTINGS, 0),
-        (lambda: schemas.STRING, 0),
-        (lambda: schemas.MAP_OF_STRING_TO_STRING, 0),
-    ),
-)
-
-GET_USAGE_PLAN: StaticOperationSchema = (
-    23,
-    n0,
-    _GUP,
-    {
-        _smith: MappingProxyType(
-            {"method": "GET", "uri": "/usageplans/{usagePlanId}", "code": 200}
-        )
-    },
-    GET_USAGE_PLAN_INPUT,
-    GET_USAGE_PLAN_OUTPUT,
-    (
-        lambda: schemas.BAD_REQUEST_EXCEPTION,
-        lambda: schemas.NOT_FOUND_EXCEPTION,
-        lambda: schemas.TOO_MANY_REQUESTS_EXCEPTION,
-        lambda: schemas.UNAUTHORIZED_EXCEPTION,
-    ),
-)
-
-GET_USAGE_PLAN_KEY_INPUT: StaticSchema = (
-    18,
-    n0,
-    _GUPKI,
-    {_sSI: _cGUPKR, _smi: None},
-    (_uPI, _kI),
-    ((lambda: schemas.STRING, 9), (lambda: schemas.STRING, 9)),
-)
-
-GET_USAGE_PLAN_KEY_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _GUPKO,
-    {_sSI: _cUPK, _smit: None},
-    (_i, _ty, _v, _n),
-    (
-        (lambda: schemas.STRING, 0),
-        (lambda: schemas.STRING, 0),
-        (lambda: schemas.STRING, 0),
-        (lambda: schemas.STRING, 0),
-    ),
-)
-
-GET_USAGE_PLAN_KEY: StaticOperationSchema = (
-    23,
-    n0,
-    _GUPK,
-    {
-        _smith: MappingProxyType(
-            {
-                "method": "GET",
-                "uri": "/usageplans/{usagePlanId}/keys/{keyId}",
-                "code": 200,
-            }
-        )
-    },
-    GET_USAGE_PLAN_KEY_INPUT,
-    GET_USAGE_PLAN_KEY_OUTPUT,
-    (
-        lambda: schemas.BAD_REQUEST_EXCEPTION,
-        lambda: schemas.NOT_FOUND_EXCEPTION,
-        lambda: schemas.TOO_MANY_REQUESTS_EXCEPTION,
-        lambda: schemas.UNAUTHORIZED_EXCEPTION,
-    ),
-)
-
-GET_USAGE_PLAN_KEYS_INPUT: StaticSchema = (
-    18,
-    n0,
-    _GUPKIe,
-    {_sSI: _cGUPKRo, _smi: None},
-    (_uPI, _pos, _li, _nQ),
-    (
-        (lambda: schemas.STRING, 9),
-        (lambda: schemas.STRING, {_sQ: _pos}),
-        (lambda: schemas.NULLABLE_INTEGER, {_sQ: _li}),
-        (lambda: schemas.STRING, {_sQ: _n}),
-    ),
-)
-
-GET_USAGE_PLAN_KEYS_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _GUPKOe,
-    {_sSI: _cUPKo, _smit: None},
-    (_it, _pos),
-    (
-        (lambda: LIST_OF_USAGE_PLAN_KEY, {_sNm: _ite}),
-        (lambda: schemas.STRING, {_sQ: _pos}),
-    ),
-)
-
-GET_USAGE_PLAN_KEYS: StaticOperationSchema = (
-    23,
-    n0,
-    _GUPKe,
-    {
-        _smith: MappingProxyType(
-            {"method": "GET", "uri": "/usageplans/{usagePlanId}/keys", "code": 200}
-        )
-    },
-    GET_USAGE_PLAN_KEYS_INPUT,
-    GET_USAGE_PLAN_KEYS_OUTPUT,
-    (
-        lambda: schemas.BAD_REQUEST_EXCEPTION,
-        lambda: schemas.NOT_FOUND_EXCEPTION,
-        lambda: schemas.TOO_MANY_REQUESTS_EXCEPTION,
-        lambda: schemas.UNAUTHORIZED_EXCEPTION,
-    ),
-)
-
-USAGE_PLAN_KEY: StaticSchema = (
-    18,
-    n0,
-    _UPK,
-    0,
-    (_i, _ty, _v, _n),
-    (
-        (lambda: schemas.STRING, 0),
-        (lambda: schemas.STRING, 0),
-        (lambda: schemas.STRING, 0),
-        (lambda: schemas.STRING, 0),
-    ),
-)
-
-LIST_OF_USAGE_PLAN_KEY: StaticSchema = (
-    16,
-    n0,
-    _LOUPK,
-    0,
-    (_m,),
-    ((USAGE_PLAN_KEY, 0),),
-)
-
-GET_USAGE_PLANS_INPUT: StaticSchema = (
-    18,
-    n0,
-    _GUPIe,
-    {_sSI: _cGUPRo, _smi: None},
-    (_pos, _kI, _li),
-    (
-        (lambda: schemas.STRING, {_sQ: _pos}),
-        (lambda: schemas.STRING, {_sQ: _kI}),
-        (lambda: schemas.NULLABLE_INTEGER, {_sQ: _li}),
-    ),
-)
-
-GET_USAGE_PLANS_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _GUPOe,
-    {_sSI: _cUPo, _smit: None},
-    (_it, _pos),
-    ((lambda: LIST_OF_USAGE_PLAN, {_sNm: _ite}), (lambda: schemas.STRING, {_sQ: _pos})),
-)
-
-GET_USAGE_PLANS: StaticOperationSchema = (
-    23,
-    n0,
-    _GUPe,
-    {_smith: MappingProxyType({"method": "GET", "uri": "/usageplans", "code": 200})},
-    GET_USAGE_PLANS_INPUT,
-    GET_USAGE_PLANS_OUTPUT,
-    (
-        lambda: schemas.BAD_REQUEST_EXCEPTION,
-        lambda: schemas.NOT_FOUND_EXCEPTION,
-        lambda: schemas.TOO_MANY_REQUESTS_EXCEPTION,
-        lambda: schemas.UNAUTHORIZED_EXCEPTION,
-    ),
-)
-
-USAGE_PLAN: StaticSchema = (
-    18,
-    n0,
-    _UP,
-    0,
-    (_i, _n, _d, _aSpi, _th, _q, _pC, _t),
-    (
-        (lambda: schemas.STRING, 0),
-        (lambda: schemas.STRING, 0),
-        (lambda: schemas.STRING, 0),
-        (lambda: schemas.LIST_OF_API_STAGE, 0),
-        (lambda: schemas.THROTTLE_SETTINGS, 0),
-        (lambda: schemas.QUOTA_SETTINGS, 0),
-        (lambda: schemas.STRING, 0),
-        (lambda: schemas.MAP_OF_STRING_TO_STRING, 0),
-    ),
-)
-
-LIST_OF_USAGE_PLAN: StaticSchema = (16, n0, _LOUP, 0, (_m,), ((USAGE_PLAN, 0),))
-
-GET_VPC_LINK_INPUT: StaticSchema = (
-    18,
-    n0,
-    _GVLI,
-    {_sSI: _cGVLR, _smi: None},
-    (_vLI,),
-    ((lambda: schemas.STRING, 9),),
-)
-
-GET_VPC_LINK_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _GVLO,
-    {_sSI: _cVL, _smit: None},
-    (_i, _n, _d, _tA, _sta, _sM, _t),
-    (
-        (lambda: schemas.STRING, 0),
-        (lambda: schemas.STRING, 0),
-        (lambda: schemas.STRING, 0),
-        (lambda: schemas.LIST_OF_STRING, 0),
-        (lambda: schemas.VPC_LINK_STATUS, 0),
-        (lambda: schemas.STRING, 0),
-        (lambda: schemas.MAP_OF_STRING_TO_STRING, 0),
-    ),
-)
-
-GET_VPC_LINK: StaticOperationSchema = (
-    23,
-    n0,
-    _GVL,
-    {
-        _smith: MappingProxyType(
-            {"method": "GET", "uri": "/vpclinks/{vpcLinkId}", "code": 200}
-        )
-    },
-    GET_VPC_LINK_INPUT,
-    GET_VPC_LINK_OUTPUT,
-    (
-        lambda: schemas.BAD_REQUEST_EXCEPTION,
-        lambda: schemas.NOT_FOUND_EXCEPTION,
-        lambda: schemas.TOO_MANY_REQUESTS_EXCEPTION,
-        lambda: schemas.UNAUTHORIZED_EXCEPTION,
-    ),
-)
-
-GET_VPC_LINKS_INPUT: StaticSchema = (
-    18,
-    n0,
-    _GVLIe,
-    {_sSI: _cGVLRo, _smi: None},
-    (_pos, _li),
-    (
-        (lambda: schemas.STRING, {_sQ: _pos}),
-        (lambda: schemas.NULLABLE_INTEGER, {_sQ: _li}),
-    ),
-)
-
-GET_VPC_LINKS_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _GVLOe,
-    {_sSI: _cVLo, _smit: None},
-    (_it, _pos),
-    ((lambda: LIST_OF_VPC_LINK, {_sNm: _ite}), (lambda: schemas.STRING, {_sQ: _pos})),
-)
-
-GET_VPC_LINKS: StaticOperationSchema = (
-    23,
-    n0,
-    _GVLe,
-    {_smith: MappingProxyType({"method": "GET", "uri": "/vpclinks", "code": 200})},
-    GET_VPC_LINKS_INPUT,
-    GET_VPC_LINKS_OUTPUT,
-    (
-        lambda: schemas.BAD_REQUEST_EXCEPTION,
-        lambda: schemas.NOT_FOUND_EXCEPTION,
-        lambda: schemas.TOO_MANY_REQUESTS_EXCEPTION,
-        lambda: schemas.UNAUTHORIZED_EXCEPTION,
-    ),
-)
-
-VPC_LINK: StaticSchema = (
-    18,
-    n0,
-    _VLp,
-    0,
-    (_i, _n, _d, _tA, _sta, _sM, _t),
-    (
-        (lambda: schemas.STRING, 0),
-        (lambda: schemas.STRING, 0),
-        (lambda: schemas.STRING, 0),
-        (lambda: schemas.LIST_OF_STRING, 0),
-        (lambda: schemas.VPC_LINK_STATUS, 0),
-        (lambda: schemas.STRING, 0),
-        (lambda: schemas.MAP_OF_STRING_TO_STRING, 0),
-    ),
-)
-
-LIST_OF_VPC_LINK: StaticSchema = (16, n0, _LOVL, 0, (_m,), ((VPC_LINK, 0),))
-
-IMPORT_API_KEYS_INPUT: StaticSchema = (
-    18,
-    n0,
-    _IAKI,
-    {_sSI: _cIAKR, _smi: None},
-    (_b, _f, _fOW),
-    (
-        (lambda: schemas.BLOB, 17),
-        (lambda: schemas.API_KEYS_FORMAT, {_sQ: _f, _smithy: None}),
-        (lambda: schemas.BOOLEAN, {_s: False, _sQ: _fa}),
-    ),
-)
-
-IMPORT_API_KEYS_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _IAKO,
-    {_sSI: _cAKI, _smit: None},
-    (_id, _w),
-    ((lambda: schemas.LIST_OF_STRING, 0), (lambda: schemas.LIST_OF_STRING, 0)),
-)
-
-IMPORT_API_KEYS: StaticOperationSchema = (
-    23,
-    n0,
-    _IAKm,
-    {
-        _smith: MappingProxyType(
-            {"method": "POST", "uri": "/apikeys?mode=import", "code": 201}
-        )
-    },
-    IMPORT_API_KEYS_INPUT,
-    IMPORT_API_KEYS_OUTPUT,
-    (
-        lambda: schemas.BAD_REQUEST_EXCEPTION,
-        lambda: schemas.CONFLICT_EXCEPTION,
-        lambda: schemas.LIMIT_EXCEEDED_EXCEPTION,
-        lambda: schemas.NOT_FOUND_EXCEPTION,
-        lambda: schemas.TOO_MANY_REQUESTS_EXCEPTION,
-        lambda: schemas.UNAUTHORIZED_EXCEPTION,
-    ),
-)
-
-PUT_MODE: StaticSchema = (
-    14,
-    n0,
-    _PM,
-    0,
-    (_Me, _O),
-    ((-1, {_sV: _mer}), (-1, {_sV: _ov})),
-)
-
-IMPORT_DOCUMENTATION_PARTS_INPUT: StaticSchema = (
-    18,
-    n0,
-    _IDPI,
-    {_sSI: _cIDPR, _smi: None},
-    (_rAI, _mo, _fOW, _b),
-    (
-        (lambda: schemas.STRING, 9),
-        (PUT_MODE, {_sQ: _mo}),
-        (lambda: schemas.BOOLEAN, {_s: False, _sQ: _fa}),
-        (lambda: schemas.BLOB, 17),
-    ),
-)
-
-IMPORT_DOCUMENTATION_PARTS_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _IDPO,
-    {_sSI: _cDPI, _smit: None},
-    (_id, _w),
-    ((lambda: schemas.LIST_OF_STRING, 0), (lambda: schemas.LIST_OF_STRING, 0)),
-)
-
-IMPORT_DOCUMENTATION_PARTS: StaticOperationSchema = (
-    23,
-    n0,
-    _IDP,
-    {
-        _smith: MappingProxyType(
-            {
-                "method": "PUT",
-                "uri": "/restapis/{restApiId}/documentation/parts",
-                "code": 200,
-            }
-        )
-    },
-    IMPORT_DOCUMENTATION_PARTS_INPUT,
-    IMPORT_DOCUMENTATION_PARTS_OUTPUT,
-    (
-        lambda: schemas.BAD_REQUEST_EXCEPTION,
-        lambda: schemas.CONFLICT_EXCEPTION,
-        lambda: schemas.LIMIT_EXCEEDED_EXCEPTION,
-        lambda: schemas.NOT_FOUND_EXCEPTION,
-        lambda: schemas.TOO_MANY_REQUESTS_EXCEPTION,
-        lambda: schemas.UNAUTHORIZED_EXCEPTION,
-    ),
-)
-
-IMPORT_REST_API_INPUT: StaticSchema = (
-    18,
-    n0,
-    _IRAI,
-    {_sSI: _cIRAR, _smi: None},
-    (_fOW, _pa, _b),
-    (
-        (lambda: schemas.BOOLEAN, {_s: False, _sQ: _fa}),
-        (lambda: schemas.MAP_OF_STRING_TO_STRING, 1024),
-        (lambda: schemas.BLOB, 17),
-    ),
-)
-
-IMPORT_REST_API_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _IRAO,
-    {_sSI: _cRA, _smit: None},
-    (
-        _i,
-        _n,
-        _d,
-        _cD,
-        _ve,
-        _w,
-        _bMT,
-        _mCS,
-        _aKS,
-        _eC,
-        _po,
-        _t,
-        _dEAE,
-        _rRI,
-        _sP,
-        _eAM,
-        _aSp,
-        _aSM,
-    ),
-    (
-        (lambda: schemas.STRING, 0),
-        (lambda: schemas.STRING, 0),
-        (lambda: schemas.STRING, 0),
-        (lambda: schemas.TIMESTAMP, 0),
-        (lambda: schemas.STRING, 0),
-        (lambda: schemas.LIST_OF_STRING, 0),
-        (lambda: schemas.LIST_OF_STRING, 0),
-        (lambda: schemas.NULLABLE_INTEGER, 0),
-        (lambda: schemas.API_KEY_SOURCE_TYPE, 0),
-        (lambda: schemas.ENDPOINT_CONFIGURATION, 0),
-        (lambda: schemas.STRING, 0),
-        (lambda: schemas.MAP_OF_STRING_TO_STRING, 0),
-        (lambda: schemas.BOOLEAN, {_s: False}),
-        (lambda: schemas.STRING, 0),
-        (lambda: schemas.SECURITY_POLICY, 0),
-        (lambda: schemas.ENDPOINT_ACCESS_MODE, 0),
-        (lambda: schemas.API_STATUS, 0),
-        (lambda: schemas.STRING, 0),
-    ),
-)
-
-IMPORT_REST_API: StaticOperationSchema = (
-    23,
-    n0,
-    _IRA,
-    {
-        _smith: MappingProxyType(
-            {"method": "POST", "uri": "/restapis?mode=import", "code": 201}
-        )
-    },
-    IMPORT_REST_API_INPUT,
-    IMPORT_REST_API_OUTPUT,
-    (
-        lambda: schemas.BAD_REQUEST_EXCEPTION,
-        lambda: schemas.CONFLICT_EXCEPTION,
-        lambda: schemas.LIMIT_EXCEEDED_EXCEPTION,
-        lambda: schemas.NOT_FOUND_EXCEPTION,
-        lambda: schemas.TOO_MANY_REQUESTS_EXCEPTION,
-        lambda: schemas.UNAUTHORIZED_EXCEPTION,
-    ),
-)
-
-PUT_GATEWAY_RESPONSE_INPUT: StaticSchema = (
-    18,
-    n0,
-    _PGRI,
-    {_sSI: _cPGRR, _smi: None},
-    (_rAI, _rTes, _sC, _rP, _rT),
-    (
-        (lambda: schemas.STRING, 9),
-        (lambda: schemas.GATEWAY_RESPONSE_TYPE, 9),
-        (lambda: schemas.STATUS_CODE, 0),
-        (lambda: schemas.MAP_OF_STRING_TO_STRING, 0),
-        (lambda: schemas.MAP_OF_STRING_TO_STRING, 0),
-    ),
-)
-
-PUT_GATEWAY_RESPONSE_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _PGRO,
-    {_sSI: _cGR, _smit: None},
-    (_rTes, _sC, _rP, _rT, _dR),
-    (
-        (lambda: schemas.GATEWAY_RESPONSE_TYPE, 0),
-        (lambda: schemas.STATUS_CODE, 0),
-        (lambda: schemas.MAP_OF_STRING_TO_STRING, 0),
-        (lambda: schemas.MAP_OF_STRING_TO_STRING, 0),
-        (lambda: schemas.BOOLEAN, {_s: False}),
-    ),
-)
-
-PUT_GATEWAY_RESPONSE: StaticOperationSchema = (
-    23,
-    n0,
-    _PGR,
-    {
-        _smith: MappingProxyType(
-            {
-                "method": "PUT",
-                "uri": "/restapis/{restApiId}/gatewayresponses/{responseType}",
-                "code": 201,
-            }
-        )
-    },
-    PUT_GATEWAY_RESPONSE_INPUT,
-    PUT_GATEWAY_RESPONSE_OUTPUT,
-    (
-        lambda: schemas.BAD_REQUEST_EXCEPTION,
-        lambda: schemas.CONFLICT_EXCEPTION,
-        lambda: schemas.LIMIT_EXCEEDED_EXCEPTION,
-        lambda: schemas.NOT_FOUND_EXCEPTION,
-        lambda: schemas.TOO_MANY_REQUESTS_EXCEPTION,
-        lambda: schemas.UNAUTHORIZED_EXCEPTION,
-    ),
-)
-
-PUT_INTEGRATION_INPUT: StaticSchema = (
-    18,
-    n0,
-    _PII,
-    {_sSI: _cPIR, _smi: None},
-    (
-        _rAI,
-        _rI,
-        _hM,
-        _ty,
-        _iHM,
-        _u,
-        _cTo,
-        _cIo,
-        _cr,
-        _rPe,
-        _rTe,
-        _pB,
-        _cNa,
-        _cKP,
-        _cH,
-        _tIM,
-        _tC,
-        _rTM,
-        _iT,
-    ),
-    (
-        (lambda: schemas.STRING, 9),
-        (lambda: schemas.STRING, 9),
-        (lambda: schemas.STRING, {_sNm: _rHM, _smithy: None, _sL: None}),
-        (lambda: schemas.INTEGRATION_TYPE, 1),
-        (lambda: schemas.STRING, {_sNm: _hM}),
-        (lambda: schemas.STRING, 0),
-        (lambda: schemas.CONNECTION_TYPE, 0),
-        (lambda: schemas.STRING, 0),
-        (lambda: schemas.STRING, 0),
-        (lambda: schemas.MAP_OF_STRING_TO_STRING, 0),
-        (lambda: schemas.MAP_OF_STRING_TO_STRING, 0),
-        (lambda: schemas.STRING, 0),
-        (lambda: schemas.STRING, 0),
-        (lambda: schemas.LIST_OF_STRING, 0),
-        (lambda: schemas.CONTENT_HANDLING_STRATEGY, 0),
-        (lambda: schemas.NULLABLE_INTEGER, 0),
-        (lambda: schemas.TLS_CONFIG, 0),
-        (lambda: schemas.RESPONSE_TRANSFER_MODE, 0),
-        (lambda: schemas.STRING, 0),
-    ),
-)
-
-PUT_INTEGRATION_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _PIO,
-    {_sSI: _cIom, _smit: None},
-    (
-        _ty,
-        _hM,
-        _u,
-        _cTo,
-        _cIo,
-        _cr,
-        _rPe,
-        _rTe,
-        _pB,
-        _cH,
-        _tIM,
-        _cNa,
-        _cKP,
-        _iR,
-        _tC,
-        _rTM,
-        _iT,
-    ),
-    (
-        (lambda: schemas.INTEGRATION_TYPE, 0),
-        (lambda: schemas.STRING, 0),
-        (lambda: schemas.STRING, 0),
-        (lambda: schemas.CONNECTION_TYPE, 0),
-        (lambda: schemas.STRING, 0),
-        (lambda: schemas.STRING, 0),
-        (lambda: schemas.MAP_OF_STRING_TO_STRING, 0),
-        (lambda: schemas.MAP_OF_STRING_TO_STRING, 0),
-        (lambda: schemas.STRING, 0),
-        (lambda: schemas.CONTENT_HANDLING_STRATEGY, 0),
-        (lambda: schemas.INTEGER, {_s: 0}),
-        (lambda: schemas.STRING, 0),
-        (lambda: schemas.LIST_OF_STRING, 0),
-        (lambda: schemas.MAP_OF_INTEGRATION_RESPONSE, 0),
-        (lambda: schemas.TLS_CONFIG, 0),
-        (lambda: schemas.RESPONSE_TRANSFER_MODE, 0),
-        (lambda: schemas.STRING, 0),
-    ),
-)
-
-PUT_INTEGRATION: StaticOperationSchema = (
-    23,
-    n0,
-    _PI,
-    {
-        _smith: MappingProxyType(
-            {
-                "method": "PUT",
-                "uri": "/restapis/{restApiId}/resources/{resourceId}/methods/{httpMethod}/integration",
-                "code": 201,
-            }
-        )
-    },
-    PUT_INTEGRATION_INPUT,
-    PUT_INTEGRATION_OUTPUT,
-    (
-        lambda: schemas.BAD_REQUEST_EXCEPTION,
-        lambda: schemas.CONFLICT_EXCEPTION,
-        lambda: schemas.LIMIT_EXCEEDED_EXCEPTION,
-        lambda: schemas.NOT_FOUND_EXCEPTION,
-        lambda: schemas.TOO_MANY_REQUESTS_EXCEPTION,
-        lambda: schemas.UNAUTHORIZED_EXCEPTION,
-    ),
-)
-
-PUT_INTEGRATION_RESPONSE_INPUT: StaticSchema = (
-    18,
-    n0,
-    _PIRI,
-    {_sSI: _cPIRR, _smi: None},
-    (_rAI, _rI, _hM, _sC, _sPe, _rP, _rT, _cH),
-    (
-        (lambda: schemas.STRING, 9),
-        (lambda: schemas.STRING, 9),
-        (lambda: schemas.STRING, 9),
-        (lambda: schemas.STATUS_CODE, 9),
-        (lambda: schemas.STRING, 0),
-        (lambda: schemas.MAP_OF_STRING_TO_STRING, 0),
-        (lambda: schemas.MAP_OF_STRING_TO_STRING, 0),
-        (lambda: schemas.CONTENT_HANDLING_STRATEGY, 0),
-    ),
-)
-
-PUT_INTEGRATION_RESPONSE_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _PIRO,
-    {_sSI: _cIR, _smit: None},
-    (_sC, _sPe, _rP, _rT, _cH),
-    (
-        (lambda: schemas.STATUS_CODE, 0),
-        (lambda: schemas.STRING, 0),
-        (lambda: schemas.MAP_OF_STRING_TO_STRING, 0),
-        (lambda: schemas.MAP_OF_STRING_TO_STRING, 0),
-        (lambda: schemas.CONTENT_HANDLING_STRATEGY, 0),
-    ),
-)
-
-PUT_INTEGRATION_RESPONSE: StaticOperationSchema = (
-    23,
-    n0,
-    _PIR,
-    {
-        _smith: MappingProxyType(
-            {
-                "method": "PUT",
-                "uri": "/restapis/{restApiId}/resources/{resourceId}/methods/{httpMethod}/integration/responses/{statusCode}",
-                "code": 201,
-            }
-        )
-    },
-    PUT_INTEGRATION_RESPONSE_INPUT,
-    PUT_INTEGRATION_RESPONSE_OUTPUT,
-    (
-        lambda: schemas.BAD_REQUEST_EXCEPTION,
-        lambda: schemas.CONFLICT_EXCEPTION,
-        lambda: schemas.LIMIT_EXCEEDED_EXCEPTION,
-        lambda: schemas.NOT_FOUND_EXCEPTION,
-        lambda: schemas.TOO_MANY_REQUESTS_EXCEPTION,
-        lambda: schemas.UNAUTHORIZED_EXCEPTION,
-    ),
-)
-
-PUT_METHOD_INPUT: StaticSchema = (
-    18,
-    n0,
-    _PMI,
-    {_sSI: _cPMR, _smi: None},
-    (_rAI, _rI, _hM, _aTu, _aIu, _aKR, _oN, _rPe, _rMeq, _rVI, _aSu),
-    (
-        (lambda: schemas.STRING, 9),
-        (lambda: schemas.STRING, 9),
-        (lambda: schemas.STRING, 9),
-        (lambda: schemas.STRING, 1),
-        (lambda: schemas.STRING, 0),
-        (lambda: schemas.BOOLEAN, {_s: False}),
-        (lambda: schemas.STRING, 0),
-        (lambda: schemas.MAP_OF_STRING_TO_BOOLEAN, 0),
-        (lambda: schemas.MAP_OF_STRING_TO_STRING, 0),
-        (lambda: schemas.STRING, 0),
-        (lambda: schemas.LIST_OF_STRING, 0),
-    ),
-)
-
-PUT_METHOD_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _PMO,
-    {_sSI: _cMo, _smit: None},
-    (_hM, _aTu, _aIu, _aKR, _rVI, _oN, _rPe, _rMeq, _mR, _mI, _aSu),
-    (
-        (lambda: schemas.STRING, 0),
-        (lambda: schemas.STRING, 0),
-        (lambda: schemas.STRING, 0),
-        (lambda: schemas.NULLABLE_BOOLEAN, 0),
-        (lambda: schemas.STRING, 0),
-        (lambda: schemas.STRING, 0),
-        (lambda: schemas.MAP_OF_STRING_TO_BOOLEAN, 0),
-        (lambda: schemas.MAP_OF_STRING_TO_STRING, 0),
-        (lambda: schemas.MAP_OF_METHOD_RESPONSE, 0),
-        (lambda: schemas.INTEGRATION, 0),
-        (lambda: schemas.LIST_OF_STRING, 0),
-    ),
-)
-
-PUT_METHOD: StaticOperationSchema = (
-    23,
-    n0,
-    _PMu,
-    {
-        _smith: MappingProxyType(
-            {
-                "method": "PUT",
-                "uri": "/restapis/{restApiId}/resources/{resourceId}/methods/{httpMethod}",
-                "code": 201,
-            }
-        )
-    },
-    PUT_METHOD_INPUT,
-    PUT_METHOD_OUTPUT,
-    (
-        lambda: schemas.BAD_REQUEST_EXCEPTION,
-        lambda: schemas.CONFLICT_EXCEPTION,
-        lambda: schemas.LIMIT_EXCEEDED_EXCEPTION,
-        lambda: schemas.NOT_FOUND_EXCEPTION,
-        lambda: schemas.TOO_MANY_REQUESTS_EXCEPTION,
-        lambda: schemas.UNAUTHORIZED_EXCEPTION,
-    ),
-)
-
-PUT_METHOD_RESPONSE_INPUT: StaticSchema = (
-    18,
-    n0,
-    _PMRI,
-    {_sSI: _cPMRR, _smi: None},
-    (_rAI, _rI, _hM, _sC, _rP, _rMe),
-    (
-        (lambda: schemas.STRING, 9),
-        (lambda: schemas.STRING, 9),
-        (lambda: schemas.STRING, 9),
-        (lambda: schemas.STATUS_CODE, 9),
-        (lambda: schemas.MAP_OF_STRING_TO_BOOLEAN, 0),
-        (lambda: schemas.MAP_OF_STRING_TO_STRING, 0),
-    ),
-)
-
-PUT_METHOD_RESPONSE_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _PMRO,
-    {_sSI: _cMR, _smit: None},
-    (_sC, _rP, _rMe),
-    (
-        (lambda: schemas.STATUS_CODE, 0),
-        (lambda: schemas.MAP_OF_STRING_TO_BOOLEAN, 0),
-        (lambda: schemas.MAP_OF_STRING_TO_STRING, 0),
-    ),
-)
-
-PUT_METHOD_RESPONSE: StaticOperationSchema = (
-    23,
-    n0,
-    _PMR,
-    {
-        _smith: MappingProxyType(
-            {
-                "method": "PUT",
-                "uri": "/restapis/{restApiId}/resources/{resourceId}/methods/{httpMethod}/responses/{statusCode}",
-                "code": 201,
-            }
-        )
-    },
-    PUT_METHOD_RESPONSE_INPUT,
-    PUT_METHOD_RESPONSE_OUTPUT,
-    (
-        lambda: schemas.BAD_REQUEST_EXCEPTION,
-        lambda: schemas.CONFLICT_EXCEPTION,
-        lambda: schemas.LIMIT_EXCEEDED_EXCEPTION,
-        lambda: schemas.NOT_FOUND_EXCEPTION,
-        lambda: schemas.TOO_MANY_REQUESTS_EXCEPTION,
-        lambda: schemas.UNAUTHORIZED_EXCEPTION,
-    ),
-)
-
-PUT_REST_API_INPUT: StaticSchema = (
-    18,
-    n0,
-    _PRAI,
-    {_sSI: _cPRAR, _smi: None},
-    (_rAI, _mo, _fOW, _pa, _b),
-    (
-        (lambda: schemas.STRING, 9),
-        (PUT_MODE, {_sQ: _mo}),
-        (lambda: schemas.BOOLEAN, {_s: False, _sQ: _fa}),
-        (lambda: schemas.MAP_OF_STRING_TO_STRING, 1024),
-        (lambda: schemas.BLOB, 17),
-    ),
-)
-
-PUT_REST_API_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _PRAO,
-    {_sSI: _cRA, _smit: None},
-    (
-        _i,
-        _n,
-        _d,
-        _cD,
-        _ve,
-        _w,
-        _bMT,
-        _mCS,
-        _aKS,
-        _eC,
-        _po,
-        _t,
-        _dEAE,
-        _rRI,
-        _sP,
-        _eAM,
-        _aSp,
-        _aSM,
-    ),
-    (
-        (lambda: schemas.STRING, 0),
-        (lambda: schemas.STRING, 0),
-        (lambda: schemas.STRING, 0),
-        (lambda: schemas.TIMESTAMP, 0),
-        (lambda: schemas.STRING, 0),
-        (lambda: schemas.LIST_OF_STRING, 0),
-        (lambda: schemas.LIST_OF_STRING, 0),
-        (lambda: schemas.NULLABLE_INTEGER, 0),
-        (lambda: schemas.API_KEY_SOURCE_TYPE, 0),
-        (lambda: schemas.ENDPOINT_CONFIGURATION, 0),
-        (lambda: schemas.STRING, 0),
-        (lambda: schemas.MAP_OF_STRING_TO_STRING, 0),
-        (lambda: schemas.BOOLEAN, {_s: False}),
-        (lambda: schemas.STRING, 0),
-        (lambda: schemas.SECURITY_POLICY, 0),
-        (lambda: schemas.ENDPOINT_ACCESS_MODE, 0),
-        (lambda: schemas.API_STATUS, 0),
-        (lambda: schemas.STRING, 0),
-    ),
-)
-
-PUT_REST_API: StaticOperationSchema = (
-    23,
-    n0,
-    _PRA,
-    {
-        _smith: MappingProxyType(
-            {"method": "PUT", "uri": "/restapis/{restApiId}", "code": 200}
-        )
-    },
-    PUT_REST_API_INPUT,
-    PUT_REST_API_OUTPUT,
     (
         lambda: schemas.BAD_REQUEST_EXCEPTION,
         lambda: schemas.CONFLICT_EXCEPTION,

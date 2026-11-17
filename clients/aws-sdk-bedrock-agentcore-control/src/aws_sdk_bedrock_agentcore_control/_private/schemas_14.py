@@ -50,6 +50,7 @@ _oV = "optionalValue"
 _sco = "scopes"
 _rAe = "resourceArn"
 _de = "definition"
+_LO = "LOG_ONLY"
 _mc = "mcp"
 _sRta = "statusReasons"
 _pAr = "providerArn"
@@ -68,7 +69,11 @@ _ur = "url"
 _too = "tools"
 _cPCr = "credentialProviderConfigurations"
 _pEI = "policyEngineId"
+_EM = "EnforcementMode"
+_PN = "PolicyName"
+_PVM = "PolicyValidationMode"
 _FOAF = "FAIL_ON_ANY_FINDINGS"
+_IAF = "IGNORE_ALL_FINDINGS"
 _CPIr = "CreatePolicyInput"
 _cCPR = "com.amazonaws.bedrockagentcorecontrol#CreatePolicyRequest"
 _vM = "validationMode"
@@ -134,7 +139,6 @@ _DTe = "DescriptorType"
 _AS = "AGENT_SKILLS"
 _RRN = "RegistryRecordName"
 _RRV = "RegistryRecordVersion"
-_RIe = "RegistryIdentifier"
 _ISR = "IamSigningRegion"
 _IRA = "IamRoleArn"
 _ISSN = "IamSigningServiceName"
@@ -184,7 +188,6 @@ _DRR = "DeleteRegistryRecord"
 _GRRI = "GetRegistryRecordInput"
 _cGRRR = "com.amazonaws.bedrockagentcorecontrol#GetRegistryRecordRequest"
 _RRI = "RegistryRecordId"
-_RAe = "RegistryArn"
 _GRRO = "GetRegistryRecordOutput"
 _cGRRRo = "com.amazonaws.bedrockagentcorecontrol#GetRegistryRecordResponse"
 _rAeg = "registryArn"
@@ -221,6 +224,26 @@ _UDpd = "UpdatedDescriptors"
 _USC = "UpdatedSynchronizationConfiguration"
 _UST = "UpdatedSynchronizationType"
 
+ENFORCEMENT_MODE: StaticSchema = (
+    14,
+    n0,
+    _EM,
+    {_smi: _ACTIVE},
+    (_ACTIVE, _LO),
+    ((-1, {_sVm: _ACTIVE}), (-1, {_sVm: _LO})),
+)
+
+POLICY_NAME: StaticSchema = (3, n0, _PN, 0)
+
+POLICY_VALIDATION_MODE: StaticSchema = (
+    14,
+    n0,
+    _PVM,
+    {_smi: _FOAF},
+    (_FOAF, _IAF),
+    ((-1, {_sVm: _FOAF}), (-1, {_sVm: _IAF})),
+)
+
 CREATE_POLICY_INPUT: StaticSchema = (
     18,
     n0,
@@ -228,11 +251,11 @@ CREATE_POLICY_INPUT: StaticSchema = (
     {_sSI: _cCPR, _smith: None},
     (_n, _de, _d, _vM, _eM, _pEI, _cT),
     (
-        (lambda: schemas.POLICY_NAME, 1),
+        (POLICY_NAME, 1),
         (lambda: schemas.POLICY_DEFINITION, 1),
         (lambda: schemas.DESCRIPTION, 0),
-        (lambda: schemas.POLICY_VALIDATION_MODE, {_smi: _FOAF}),
-        (lambda: schemas.ENFORCEMENT_MODE, {_smi: _ACTIVE}),
+        (POLICY_VALIDATION_MODE, {_smi: _FOAF}),
+        (ENFORCEMENT_MODE, {_smi: _ACTIVE}),
         (lambda: schemas.RESOURCE_ID, 9),
         (lambda: schemas.CLIENT_TOKEN, 2),
     ),
@@ -246,13 +269,13 @@ CREATE_POLICY_OUTPUT: StaticSchema = (
     (_pIo, _n, _pEI, _cA, _uA, _pAo, _st, _eM, _de, _d, _sRta),
     (
         (lambda: schemas.RESOURCE_ID, 1),
-        (lambda: schemas.POLICY_NAME, 1),
+        (POLICY_NAME, 1),
         (lambda: schemas.RESOURCE_ID, 1),
         (lambda: schemas.DATE_TIMESTAMP, 1),
         (lambda: schemas.DATE_TIMESTAMP, 1),
         (lambda: POLICY_ARN, 1),
         (lambda: POLICY_STATUS, 1),
-        (lambda: schemas.ENFORCEMENT_MODE, {_smi: _ACTIVE}),
+        (ENFORCEMENT_MODE, {_smi: _ACTIVE}),
         (lambda: schemas.POLICY_DEFINITION, 1),
         (lambda: schemas.DESCRIPTION, 0),
         (lambda: schemas.POLICY_STATUS_REASONS, 1),
@@ -321,13 +344,13 @@ DELETE_POLICY_OUTPUT: StaticSchema = (
     (_pIo, _n, _pEI, _cA, _uA, _pAo, _st, _eM, _de, _d, _sRta),
     (
         (lambda: schemas.RESOURCE_ID, 1),
-        (lambda: schemas.POLICY_NAME, 1),
+        (POLICY_NAME, 1),
         (lambda: schemas.RESOURCE_ID, 1),
         (lambda: schemas.DATE_TIMESTAMP, 1),
         (lambda: schemas.DATE_TIMESTAMP, 1),
         (POLICY_ARN, 1),
         (POLICY_STATUS, 1),
-        (lambda: schemas.ENFORCEMENT_MODE, {_smi: _ACTIVE}),
+        (ENFORCEMENT_MODE, {_smi: _ACTIVE}),
         (lambda: schemas.POLICY_DEFINITION, 1),
         (lambda: schemas.DESCRIPTION, 0),
         (lambda: schemas.POLICY_STATUS_REASONS, 1),
@@ -376,13 +399,13 @@ GET_POLICY_OUTPUT: StaticSchema = (
     (_pIo, _n, _pEI, _cA, _uA, _pAo, _st, _eM, _de, _d, _sRta),
     (
         (lambda: schemas.RESOURCE_ID, 1),
-        (lambda: schemas.POLICY_NAME, 1),
+        (POLICY_NAME, 1),
         (lambda: schemas.RESOURCE_ID, 1),
         (lambda: schemas.DATE_TIMESTAMP, 1),
         (lambda: schemas.DATE_TIMESTAMP, 1),
         (POLICY_ARN, 1),
         (POLICY_STATUS, 1),
-        (lambda: schemas.ENFORCEMENT_MODE, {_smi: _ACTIVE}),
+        (ENFORCEMENT_MODE, {_smi: _ACTIVE}),
         (lambda: schemas.POLICY_DEFINITION, 1),
         (lambda: schemas.DESCRIPTION, 0),
         (lambda: schemas.POLICY_STATUS_REASONS, 1),
@@ -430,13 +453,13 @@ GET_POLICY_SUMMARY_OUTPUT: StaticSchema = (
     (_pIo, _n, _pEI, _cA, _uA, _pAo, _st, _eM),
     (
         (lambda: schemas.RESOURCE_ID, 1),
-        (lambda: schemas.POLICY_NAME, 1),
+        (POLICY_NAME, 1),
         (lambda: schemas.RESOURCE_ID, 1),
         (lambda: schemas.DATE_TIMESTAMP, 1),
         (lambda: schemas.DATE_TIMESTAMP, 1),
         (POLICY_ARN, 1),
         (POLICY_STATUS, 1),
-        (lambda: schemas.ENFORCEMENT_MODE, {_smi: _ACTIVE}),
+        (ENFORCEMENT_MODE, {_smi: _ACTIVE}),
     ),
 )
 
@@ -519,13 +542,13 @@ POLICY: StaticSchema = (
     (_pIo, _n, _pEI, _cA, _uA, _pAo, _st, _eM, _de, _d, _sRta),
     (
         (lambda: schemas.RESOURCE_ID, 1),
-        (lambda: schemas.POLICY_NAME, 1),
+        (POLICY_NAME, 1),
         (lambda: schemas.RESOURCE_ID, 1),
         (lambda: schemas.DATE_TIMESTAMP, 1),
         (lambda: schemas.DATE_TIMESTAMP, 1),
         (POLICY_ARN, 1),
         (POLICY_STATUS, 1),
-        (lambda: schemas.ENFORCEMENT_MODE, {_smi: _ACTIVE}),
+        (ENFORCEMENT_MODE, {_smi: _ACTIVE}),
         (lambda: schemas.POLICY_DEFINITION, 1),
         (lambda: schemas.DESCRIPTION, 0),
         (lambda: schemas.POLICY_STATUS_REASONS, 1),
@@ -589,13 +612,13 @@ POLICY_SUMMARY: StaticSchema = (
     (_pIo, _n, _pEI, _cA, _uA, _pAo, _st, _eM),
     (
         (lambda: schemas.RESOURCE_ID, 1),
-        (lambda: schemas.POLICY_NAME, 1),
+        (POLICY_NAME, 1),
         (lambda: schemas.RESOURCE_ID, 1),
         (lambda: schemas.DATE_TIMESTAMP, 1),
         (lambda: schemas.DATE_TIMESTAMP, 1),
         (POLICY_ARN, 1),
         (POLICY_STATUS, 1),
-        (lambda: schemas.ENFORCEMENT_MODE, {_smi: _ACTIVE}),
+        (ENFORCEMENT_MODE, {_smi: _ACTIVE}),
     ),
 )
 
@@ -612,8 +635,8 @@ UPDATE_POLICY_INPUT: StaticSchema = (
         (lambda: schemas.RESOURCE_ID, 9),
         (lambda: schemas.UPDATED_DESCRIPTION, 0),
         (lambda: schemas.POLICY_DEFINITION, 0),
-        (lambda: schemas.POLICY_VALIDATION_MODE, {_smi: _FOAF}),
-        (lambda: schemas.ENFORCEMENT_MODE, {_smi: None}),
+        (POLICY_VALIDATION_MODE, {_smi: _FOAF}),
+        (ENFORCEMENT_MODE, {_smi: None}),
     ),
 )
 
@@ -625,13 +648,13 @@ UPDATE_POLICY_OUTPUT: StaticSchema = (
     (_pIo, _n, _pEI, _cA, _uA, _pAo, _st, _eM, _de, _d, _sRta),
     (
         (lambda: schemas.RESOURCE_ID, 1),
-        (lambda: schemas.POLICY_NAME, 1),
+        (POLICY_NAME, 1),
         (lambda: schemas.RESOURCE_ID, 1),
         (lambda: schemas.DATE_TIMESTAMP, 1),
         (lambda: schemas.DATE_TIMESTAMP, 1),
         (POLICY_ARN, 1),
         (POLICY_STATUS, 1),
-        (lambda: schemas.ENFORCEMENT_MODE, {_smi: _ACTIVE}),
+        (ENFORCEMENT_MODE, {_smi: _ACTIVE}),
         (lambda: schemas.POLICY_DEFINITION, 1),
         (lambda: schemas.DESCRIPTION, 0),
         (lambda: schemas.POLICY_STATUS_REASONS, 1),
@@ -768,8 +791,6 @@ REGISTRY_RECORD_NAME: StaticSchema = (3, n0, _RRN, 0)
 
 REGISTRY_RECORD_VERSION: StaticSchema = (3, n0, _RRV, 0)
 
-REGISTRY_IDENTIFIER: StaticSchema = (3, n0, _RIe, 0)
-
 IAM_SIGNING_REGION: StaticSchema = (3, n0, _ISR, 0)
 
 IAM_ROLE_ARN: StaticSchema = (3, n0, _IRA, 0)
@@ -885,7 +906,7 @@ CREATE_REGISTRY_RECORD_INPUT: StaticSchema = (
     {_sSI: _cCRRR, _smith: None},
     (_rIe, _n, _d, _dT, _des, _rVe, _sTy, _sCy, _cT),
     (
-        (REGISTRY_IDENTIFIER, 9),
+        (lambda: schemas.REGISTRY_IDENTIFIER, 9),
         (REGISTRY_RECORD_NAME, 1),
         (lambda: schemas.DESCRIPTION, 0),
         (DESCRIPTOR_TYPE, 1),
@@ -957,7 +978,7 @@ DELETE_REGISTRY_RECORD_INPUT: StaticSchema = (
     _DRRI,
     {_sSI: _cDRRR, _smith: None},
     (_rIe, _rIec),
-    ((REGISTRY_IDENTIFIER, 9), (RECORD_IDENTIFIER, 9)),
+    ((lambda: schemas.REGISTRY_IDENTIFIER, 9), (RECORD_IDENTIFIER, 9)),
 )
 
 DELETE_REGISTRY_RECORD_OUTPUT: StaticSchema = (
@@ -998,7 +1019,7 @@ GET_REGISTRY_RECORD_INPUT: StaticSchema = (
     _GRRI,
     {_sSI: _cGRRR, _smith: None},
     (_rIe, _rIec),
-    ((REGISTRY_IDENTIFIER, 9), (RECORD_IDENTIFIER, 9)),
+    ((lambda: schemas.REGISTRY_IDENTIFIER, 9), (RECORD_IDENTIFIER, 9)),
 )
 
 GET_REGISTRY_RECORD_OUTPUT: StaticSchema = (
@@ -1008,7 +1029,7 @@ GET_REGISTRY_RECORD_OUTPUT: StaticSchema = (
     {_sSI: _cGRRRo, _smithy: None},
     (_rAeg, _rAec, _rIec, _n, _d, _dT, _des, _rVe, _st, _cA, _uA, _sRt, _sTy, _sCy),
     (
-        (lambda: REGISTRY_ARN, 1),
+        (lambda: schemas.REGISTRY_ARN, 1),
         (REGISTRY_RECORD_ARN, 1),
         (lambda: REGISTRY_RECORD_ID, 1),
         (REGISTRY_RECORD_NAME, 1),
@@ -1052,8 +1073,6 @@ GET_REGISTRY_RECORD: StaticOperationSchema = (
 
 REGISTRY_RECORD_ID: StaticSchema = (3, n0, _RRI, 0)
 
-REGISTRY_ARN: StaticSchema = (3, n0, _RAe, 0)
-
 LIST_REGISTRY_RECORDS_INPUT: StaticSchema = (
     18,
     n0,
@@ -1061,7 +1080,7 @@ LIST_REGISTRY_RECORDS_INPUT: StaticSchema = (
     {_sSI: _cLRRR, _smith: None},
     (_rIe, _mR, _nT, _n, _st, _dT),
     (
-        (REGISTRY_IDENTIFIER, 9),
+        (lambda: schemas.REGISTRY_IDENTIFIER, 9),
         (lambda: schemas.MAX_RESULTS, {_sQ: _mR}),
         (lambda: schemas.NEXT_TOKEN, {_sQ: _nT}),
         (REGISTRY_RECORD_NAME, {_sQ: _n}),
@@ -1107,7 +1126,7 @@ REGISTRY_RECORD_SUMMARY: StaticSchema = (
     0,
     (_rAeg, _rAec, _rIec, _n, _d, _dT, _rVe, _st, _cA, _uA),
     (
-        (REGISTRY_ARN, 1),
+        (lambda: schemas.REGISTRY_ARN, 1),
         (REGISTRY_RECORD_ARN, 1),
         (REGISTRY_RECORD_ID, 1),
         (REGISTRY_RECORD_NAME, 1),
@@ -1135,7 +1154,7 @@ SUBMIT_REGISTRY_RECORD_FOR_APPROVAL_INPUT: StaticSchema = (
     _SRRFAI,
     {_sSI: _cSRRFAR, _smith: None},
     (_rIe, _rIec),
-    ((REGISTRY_IDENTIFIER, 9), (RECORD_IDENTIFIER, 9)),
+    ((lambda: schemas.REGISTRY_IDENTIFIER, 9), (RECORD_IDENTIFIER, 9)),
 )
 
 SUBMIT_REGISTRY_RECORD_FOR_APPROVAL_OUTPUT: StaticSchema = (
@@ -1145,7 +1164,7 @@ SUBMIT_REGISTRY_RECORD_FOR_APPROVAL_OUTPUT: StaticSchema = (
     {_sSI: _cSRRFARo, _smithy: None},
     (_rAeg, _rAec, _rIec, _st, _uA),
     (
-        (REGISTRY_ARN, 1),
+        (lambda: schemas.REGISTRY_ARN, 1),
         (REGISTRY_RECORD_ARN, 1),
         (REGISTRY_RECORD_ID, 1),
         (REGISTRY_RECORD_STATUS, 1),

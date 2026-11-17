@@ -114,6 +114,8 @@ _DCT = "DeploymentControllerType"
 _ECS = "ECS"
 _CD_ = "CODE_DEPLOY"
 _DCepl = "DeploymentController"
+_GCDD = "GatewayConnectorDeregistrationDelay"
+_tS = "timeoutSeconds"
 _GCF = "GatewayConnectorFilters"
 _aTcc = "accessTypes"
 _GCHCP = "GatewayConnectorHealthCheckProtocol"
@@ -131,6 +133,7 @@ _mat = "matcher"
 _GCa = "GatewayConnector"
 _pN = "portName"
 _fil = "filters"
+_dDe = "deregistrationDelay"
 _GCL = "GatewayConnectorList"
 _LB = "LoadBalancer"
 _tGA = "targetGroupArn"
@@ -241,7 +244,7 @@ _sIn = "snapshotId"
 _vIR = "volumeInitializationRate"
 _io = "iops"
 _thr = "throughput"
-_tS = "tagSpecifications"
+_tSa = "tagSpecifications"
 _fT = "filesystemType"
 _ECSVN = "ECSVolumeName"
 _SVC = "ServiceVolumeConfiguration"
@@ -306,7 +309,6 @@ _TSa = "TaskSets"
 _CSO = "CreateServiceOutput"
 _cCSRo = "com.amazonaws.ecs#CreateServiceResponse"
 _CSr = "CreateService"
-_SNAE = "ServiceNotActiveException"
 
 CREATE_EXPRESS_GATEWAY_SERVICE_INPUT: StaticSchema = (
     18,
@@ -484,6 +486,15 @@ DEPLOYMENT_CONTROLLER: StaticSchema = (
     ((DEPLOYMENT_CONTROLLER_TYPE, 1),),
 )
 
+GATEWAY_CONNECTOR_DEREGISTRATION_DELAY: StaticSchema = (
+    18,
+    n0,
+    _GCDD,
+    0,
+    (_tS,),
+    ((lambda: schemas.BOXED_INTEGER, 0),),
+)
+
 GATEWAY_CONNECTOR_FILTERS: StaticSchema = (
     18,
     n0,
@@ -534,11 +545,12 @@ GATEWAY_CONNECTOR: StaticSchema = (
     n0,
     _GCa,
     0,
-    (_pN, _hC, _fil),
+    (_pN, _hC, _fil, _dDe),
     (
         (lambda: schemas.STRING, 1),
         (GATEWAY_CONNECTOR_HEALTH_CHECK, 0),
         (GATEWAY_CONNECTOR_FILTERS, 0),
+        (GATEWAY_CONNECTOR_DEREGISTRATION_DELAY, 0),
     ),
 )
 
@@ -942,7 +954,7 @@ SERVICE_MANAGED_EBS_VOLUME_CONFIGURATION: StaticSchema = (
     n0,
     _SMEBSVC,
     0,
-    (_enc, _kKI, _vT, _sIGB, _sIn, _vIR, _io, _thr, _tS, _rA, _fT),
+    (_enc, _kKI, _vT, _sIGB, _sIn, _vIR, _io, _thr, _tSa, _rA, _fT),
     (
         (lambda: schemas.BOXED_BOOLEAN, 0),
         (EBSKMS_KEY_ID, 0),
@@ -1330,12 +1342,3 @@ TASK_SET: StaticSchema = (
 )
 
 TASK_SETS: StaticSchema = (16, n0, _TSa, 0, (_me,), ((TASK_SET, 0),))
-
-SERVICE_NOT_ACTIVE_EXCEPTION: StaticSchema = (
-    18,
-    n0,
-    _SNAE,
-    {_s: _c},
-    (_mes,),
-    ((lambda: schemas.STRING, 0),),
-)

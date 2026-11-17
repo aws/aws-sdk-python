@@ -11,16 +11,19 @@ n0 = "com.amazonaws.kinesis"
 _s = "smithy.api#error"
 _c = "client"
 _m = "message"
+_sm = "smithy.api#required"
+_me = "member"
+_QARN = "QueueARN"
+_smi = "smithy.api#input"
+_sP = "smithy.rules#contextParam"
+_smit = "smithy.api#output"
+_sCP = "smithy.rules#staticContextParams"
 _SARN = "StreamARN"
 _SI = "StreamId"
 _SN = "StreamName"
-_sm = "smithy.api#input"
-_smi = "smithy.api#required"
-_sP = "smithy.rules#contextParam"
+_T = "Tags"
 _sSI = "smithy.synthetic#originalShapeId"
 _sU = "smithy.api#Unit"
-_smit = "smithy.api#output"
-_sCP = "smithy.rules#staticContextParams"
 _CARN = "ChannelARN"
 _Ti = "Timestamp"
 _CREATING = "CREATING"
@@ -30,20 +33,71 @@ _UPDATING = "UPDATING"
 _DELETING = "DELETING"
 _KI = "KeyId"
 _ET = "EncryptionType"
-_me = "member"
+_NONE = "NONE"
 _SCTt = "StreamCreationTimestamp"
 _CD = "ChannelDescription"
+_SCL = "StreamConfigurationList"
 _HKR = "HashKeyRange"
 _SIh = "ShardId"
 _CARNo = "ConsumerARN"
 _CNo = "ConsumerName"
 _CDo = "ConsumerDescription"
+_VE = "ValidationException"
+_MRC = "MaxReceiveCount"
+_TT = "TargetType"
+_BI = "BUILT_IN"
+_DLC = "DeadLetterConfiguration"
+_VTS = "VisibilityTimeoutSeconds"
+_QA = "QueueAttributes"
+_QN = "QueueName"
+_QSPT = "QueueStartingPositionType"
+_TH_ = "TRIM_HORIZON"
+_LATEST = "LATEST"
+_AT = "AT_TIMESTAMP"
+_QSP = "QueueStartingPosition"
+_Ty = "Type"
+_QSC = "QueueStreamConfiguration"
+_SP = "StartingPosition"
+_QSCL = "QueueStreamConfigurationList"
+_CQI = "CreateQueueInput"
+_QS = "QueueStatus"
+_QD = "QueueDescription"
+_QCT = "QueueCreationTimestamp"
+_CQO = "CreateQueueOutput"
+_CQ = "CreateQueue"
 _MRSIKB = "MaxRecordSizeInKiB"
 _RDS = "RecordDistributionStrategy"
+_AUTO = "AUTO"
+_UPK = "USER_PARTITION_KEY"
+_PIO = "PositiveIntegerObject"
+_SM = "StreamMode"
+_PROVISIONED = "PROVISIONED"
+_OD = "ON_DEMAND"
 _SMD = "StreamModeDetails"
-_D = "Data"
+_NIO = "NaturalIntegerObject"
+_CSIr = "CreateStreamInput"
+_SCh = "ShardCount"
+_WTMB = "WarmThroughputMiBps"
+_CSO = "CreateStreamOutput"
+_CSr = "CreateStream"
 _RPH = "RetentionPeriodHours"
+_DSRPI = "DecreaseStreamRetentionPeriodInput"
+_DSRPO = "DecreaseStreamRetentionPeriodOutput"
+_DSRP = "DecreaseStreamRetentionPeriod"
+_DCI = "DeleteChannelInput"
+_DCO = "DeleteChannelOutput"
+_DC = "DeleteChannel"
+_DQI = "DeleteQueueInput"
+_DQO = "DeleteQueueOutput"
+_DQ = "DeleteQueue"
 _RARNe = "ResourceARN"
+_DRPI = "DeleteResourcePolicyInput"
+_DRPO = "DeleteResourcePolicyOutput"
+_DRP = "DeleteResourcePolicy"
+_DSI = "DeleteStreamInput"
+_ECD = "EnforceConsumerDeletion"
+_DSO = "DeleteStreamOutput"
+_DS = "DeleteStream"
 _DSCI = "DeregisterStreamConsumerInput"
 _DSCO = "DeregisterStreamConsumerOutput"
 _DSC = "DeregisterStreamConsumer"
@@ -75,6 +129,9 @@ _ODSCL = "OnDemandStreamCountLimit"
 _CCh = "ChannelCount"
 _CCL = "ChannelCountLimit"
 _DL = "DescribeLimits"
+_DQIe = "DescribeQueueInput"
+_DQOe = "DescribeQueueOutput"
+_DQe = "DescribeQueue"
 _DSIL = "DescribeStreamInputLimit"
 _DSIe = "DescribeStreamInput"
 _L = "Limit"
@@ -118,9 +175,14 @@ _DSCIe = "DescribeStreamConsumerInput"
 _DSCOe = "DescribeStreamConsumerOutput"
 _DSCe = "DescribeStreamConsumer"
 _DSSI = "DescribeStreamSummaryInput"
+_QCO = "QueueCountObject"
+_WTO = "WarmThroughputObject"
+_TMB = "TargetMiBps"
+_CMB = "CurrentMiBps"
 _SDS = "StreamDescriptionSummary"
 _CCo = "ConsumerCount"
 _WT = "WarmThroughput"
+_QC = "QueueCount"
 _DSSO = "DescribeStreamSummaryOutput"
 _DSS = "DescribeStreamSummary"
 _DEMI = "DisableEnhancedMonitoringInput"
@@ -133,75 +195,401 @@ _DROE = "DryRunOperationException"
 _EEMI = "EnableEnhancedMonitoringInput"
 _EEMO = "EnableEnhancedMonitoringOutput"
 _EEM = "EnableEnhancedMonitoring"
-_ECr = "ErrorCode"
-_EIE = "ExpiredIteratorException"
-_ENTE = "ExpiredNextTokenException"
-_GRIL = "GetRecordsInputLimit"
-_SIha = "ShardIterator"
-_GRI = "GetRecordsInput"
-_DR = "DryRun"
-_MBL = "MillisBehindLatest"
-_PK = "PartitionKey"
-_R = "Record"
-_AAT = "ApproximateArrivalTimestamp"
-_RL = "RecordList"
-_GRO = "GetRecordsOutput"
-_Re = "Records"
-_NSI = "NextShardIterator"
-_CShil = "ChildShards"
-_IFE = "InternalFailureException"
-_se = "server"
-_PTEE = "ProvisionedThroughputExceededException"
-_GR = "GetRecords"
-_GRPI = "GetResourcePolicyInput"
-_P = "Policy"
-_GRPO = "GetResourcePolicyOutput"
-_GRP = "GetResourcePolicy"
-_SIT = "ShardIteratorType"
-_ASN = "AT_SEQUENCE_NUMBER"
-_ASN_ = "AFTER_SEQUENCE_NUMBER"
-_TH_ = "TRIM_HORIZON"
-_LATEST = "LATEST"
-_AT = "AT_TIMESTAMP"
-_GSII = "GetShardIteratorInput"
-_GSIO = "GetShardIteratorOutput"
-_GSI = "GetShardIterator"
-_ISRPI = "IncreaseStreamRetentionPeriodInput"
-_ISRPO = "IncreaseStreamRetentionPeriodOutput"
-_ISRP = "IncreaseStreamRetentionPeriod"
-_LCIL = "ListChannelsInputLimit"
-_NT = "NextToken"
-_SF = "StreamFilter"
-_SFL = "StreamFilterList"
-_LCI = "ListChannelsInput"
-_MR = "MaxResults"
-_LCO = "ListChannelsOutput"
-_CSha = "ChannelSummaries"
-_LCi = "ListChannels"
-_LSIL = "ListShardsInputLimit"
-_SFT = "ShardFilterType"
-_ASI = "AFTER_SHARD_ID"
-_ATH = "AT_TRIM_HORIZON"
-_FTH = "FROM_TRIM_HORIZON"
-_AL = "AT_LATEST"
-_FT = "FROM_TIMESTAMP"
-_SFh = "ShardFilter"
-_Ty = "Type"
-_LSI = "ListShardsInput"
-_LSO = "ListShardsOutput"
-_LS = "ListShards"
-_LSCIL = "ListStreamConsumersInputLimit"
-_LSCI = "ListStreamConsumersInput"
-_LSCO = "ListStreamConsumersOutput"
-_Co = "Consumers"
-_LSC = "ListStreamConsumers"
-_LSILi = "ListStreamsInputLimit"
+
+VALIDATION_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _VE,
+    {_s: _c},
+    (_m,),
+    ((lambda: schemas.ERROR_MESSAGE, 0),),
+)
+
+MAX_RECEIVE_COUNT: StaticSchema = (7, n0, _MRC, 0)
+
+TARGET_TYPE: StaticSchema = (
+    14,
+    n0,
+    _TT,
+    0,
+    (_BI, _NONE),
+    ((-1, {_sV: _BI}), (-1, {_sV: _NONE})),
+)
+
+DEAD_LETTER_CONFIGURATION: StaticSchema = (
+    18,
+    n0,
+    _DLC,
+    0,
+    (_TT, _MRC),
+    ((TARGET_TYPE, 1), (MAX_RECEIVE_COUNT, 0)),
+)
+
+QUEUE_ATTRIBUTES: StaticSchema = (
+    18,
+    n0,
+    _QA,
+    0,
+    (_VTS, _DLC),
+    ((lambda: schemas.VISIBILITY_TIMEOUT_SECONDS, 0), (DEAD_LETTER_CONFIGURATION, 0)),
+)
+
+QUEUE_NAME: StaticSchema = (3, n0, _QN, 0)
+
+QUEUE_STARTING_POSITION_TYPE: StaticSchema = (
+    14,
+    n0,
+    _QSPT,
+    0,
+    (_TH_, _LATEST, _AT),
+    ((-1, {_sV: _TH_}), (-1, {_sV: _LATEST}), (-1, {_sV: _AT})),
+)
+
+QUEUE_STARTING_POSITION: StaticSchema = (
+    18,
+    n0,
+    _QSP,
+    0,
+    (_Ty, _Ti),
+    ((QUEUE_STARTING_POSITION_TYPE, 1), (lambda: schemas.TIMESTAMP, 0)),
+)
+
+QUEUE_STREAM_CONFIGURATION: StaticSchema = (
+    18,
+    n0,
+    _QSC,
+    0,
+    (_SARN, _SP),
+    ((lambda: schemas.STREAM_ARN, 1), (QUEUE_STARTING_POSITION, 0)),
+)
+
+QUEUE_STREAM_CONFIGURATION_LIST: StaticSchema = (
+    16,
+    n0,
+    _QSCL,
+    0,
+    (_me,),
+    ((QUEUE_STREAM_CONFIGURATION, 0),),
+)
+
+CREATE_QUEUE_INPUT: StaticSchema = (
+    18,
+    n0,
+    _CQI,
+    {_smi: None},
+    (_QN, _SCL, _QA, _T),
+    (
+        (QUEUE_NAME, 1),
+        (QUEUE_STREAM_CONFIGURATION_LIST, 1),
+        (QUEUE_ATTRIBUTES, 0),
+        (lambda: schemas.TAG_MAP, 0),
+    ),
+)
+
+CREATE_QUEUE_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _CQO,
+    {_smit: None},
+    (_QD,),
+    ((lambda: QUEUE_DESCRIPTION, 1),),
+)
+
+CREATE_QUEUE: StaticOperationSchema = (
+    23,
+    n0,
+    _CQ,
+    {
+        _sCP: MappingProxyType(
+            {
+                "ResourceType": MappingProxyType({"value": "queue"}),
+                "OperationType": MappingProxyType({"value": "control"}),
+            }
+        )
+    },
+    CREATE_QUEUE_INPUT,
+    CREATE_QUEUE_OUTPUT,
+    (
+        lambda: schemas.ACCESS_DENIED_EXCEPTION,
+        lambda: schemas.INTERNAL_FAILURE_EXCEPTION,
+        lambda: schemas.INVALID_ARGUMENT_EXCEPTION,
+        lambda: schemas.LIMIT_EXCEEDED_EXCEPTION,
+        lambda: schemas.RESOURCE_IN_USE_EXCEPTION,
+        lambda: schemas.RESOURCE_NOT_FOUND_EXCEPTION,
+        VALIDATION_EXCEPTION,
+    ),
+)
+
+QUEUE_STATUS: StaticSchema = (
+    14,
+    n0,
+    _QS,
+    0,
+    (_CREATING, _ACTIVE, _UPDATING, _DELETING),
+    (
+        (-1, {_sV: _CREATING}),
+        (-1, {_sV: _ACTIVE}),
+        (-1, {_sV: _UPDATING}),
+        (-1, {_sV: _DELETING}),
+    ),
+)
+
+QUEUE_DESCRIPTION: StaticSchema = (
+    18,
+    n0,
+    _QD,
+    0,
+    (_QN, _QARN, _QS, _QCT, _SCL, _QA),
+    (
+        (QUEUE_NAME, 1),
+        (lambda: schemas.QUEUE_ARN, 1),
+        (QUEUE_STATUS, 1),
+        (lambda: schemas.TIMESTAMP, 1),
+        (QUEUE_STREAM_CONFIGURATION_LIST, 1),
+        (QUEUE_ATTRIBUTES, 0),
+    ),
+)
+
+MAX_RECORD_SIZE_IN_KI_B: StaticSchema = (7, n0, _MRSIKB, 0)
+
+RECORD_DISTRIBUTION_STRATEGY: StaticSchema = (
+    14,
+    n0,
+    _RDS,
+    0,
+    (_AUTO, _UPK),
+    ((-1, {_sV: _AUTO}), (-1, {_sV: _UPK})),
+)
+
+POSITIVE_INTEGER_OBJECT: StaticSchema = (7, n0, _PIO, 0)
+
+STREAM_MODE: StaticSchema = (
+    14,
+    n0,
+    _SM,
+    0,
+    (_PROVISIONED, _OD),
+    ((-1, {_sV: _PROVISIONED}), (-1, {_sV: _OD})),
+)
+
+STREAM_MODE_DETAILS: StaticSchema = (18, n0, _SMD, 0, (_SM,), ((STREAM_MODE, 1),))
+
+NATURAL_INTEGER_OBJECT: StaticSchema = (7, n0, _NIO, 0)
+
+CREATE_STREAM_INPUT: StaticSchema = (
+    18,
+    n0,
+    _CSIr,
+    {_smi: None},
+    (_SN, _SCh, _SMD, _T, _WTMB, _MRSIKB, _RDS),
+    (
+        (lambda: schemas.STREAM_NAME, 1),
+        (POSITIVE_INTEGER_OBJECT, 0),
+        (STREAM_MODE_DETAILS, 0),
+        (lambda: schemas.TAG_MAP, 0),
+        (NATURAL_INTEGER_OBJECT, 0),
+        (MAX_RECORD_SIZE_IN_KI_B, 0),
+        (RECORD_DISTRIBUTION_STRATEGY, 0),
+    ),
+)
+
+CREATE_STREAM_OUTPUT: StaticSchema = (18, n0, _CSO, {_sSI: _sU, _smit: None})
+
+CREATE_STREAM: StaticOperationSchema = (
+    23,
+    n0,
+    _CSr,
+    {_sCP: MappingProxyType({"OperationType": MappingProxyType({"value": "control"})})},
+    CREATE_STREAM_INPUT,
+    CREATE_STREAM_OUTPUT,
+    (
+        lambda: schemas.INVALID_ARGUMENT_EXCEPTION,
+        lambda: schemas.LIMIT_EXCEEDED_EXCEPTION,
+        lambda: schemas.RESOURCE_IN_USE_EXCEPTION,
+        VALIDATION_EXCEPTION,
+    ),
+)
+
+DECREASE_STREAM_RETENTION_PERIOD_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DSRPI,
+    {_smi: None},
+    (_SN, _RPH, _SARN, _SI),
+    (
+        (lambda: schemas.STREAM_NAME, 0),
+        (lambda: schemas.RETENTION_PERIOD_HOURS, 1),
+        (lambda: schemas.STREAM_ARN, {_sP: MappingProxyType({"name": "StreamARN"})}),
+        (lambda: schemas.STREAM_ID, {_sP: MappingProxyType({"name": "StreamId"})}),
+    ),
+)
+
+DECREASE_STREAM_RETENTION_PERIOD_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DSRPO,
+    {_sSI: _sU, _smit: None},
+)
+
+DECREASE_STREAM_RETENTION_PERIOD: StaticOperationSchema = (
+    23,
+    n0,
+    _DSRP,
+    {_sCP: MappingProxyType({"OperationType": MappingProxyType({"value": "control"})})},
+    DECREASE_STREAM_RETENTION_PERIOD_INPUT,
+    DECREASE_STREAM_RETENTION_PERIOD_OUTPUT,
+    (
+        lambda: schemas.ACCESS_DENIED_EXCEPTION,
+        lambda: schemas.INVALID_ARGUMENT_EXCEPTION,
+        lambda: schemas.LIMIT_EXCEEDED_EXCEPTION,
+        lambda: schemas.RESOURCE_IN_USE_EXCEPTION,
+        lambda: schemas.RESOURCE_NOT_FOUND_EXCEPTION,
+    ),
+)
+
+DELETE_CHANNEL_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DCI,
+    {_smi: None},
+    (_CARN,),
+    (
+        (
+            lambda: schemas.CHANNEL_ARN,
+            {_sP: MappingProxyType({"name": "ChannelARN"}), _sm: None},
+        ),
+    ),
+)
+
+DELETE_CHANNEL_OUTPUT: StaticSchema = (18, n0, _DCO, {_sSI: _sU, _smit: None})
+
+DELETE_CHANNEL: StaticOperationSchema = (
+    23,
+    n0,
+    _DC,
+    {_sCP: MappingProxyType({"OperationType": MappingProxyType({"value": "control"})})},
+    DELETE_CHANNEL_INPUT,
+    DELETE_CHANNEL_OUTPUT,
+    (
+        lambda: schemas.ACCESS_DENIED_EXCEPTION,
+        lambda: schemas.INVALID_ARGUMENT_EXCEPTION,
+        lambda: schemas.LIMIT_EXCEEDED_EXCEPTION,
+        lambda: schemas.RESOURCE_NOT_FOUND_EXCEPTION,
+        VALIDATION_EXCEPTION,
+    ),
+)
+
+DELETE_QUEUE_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DQI,
+    {_smi: None},
+    (_QARN,),
+    (
+        (
+            lambda: schemas.QUEUE_ARN,
+            {_sP: MappingProxyType({"name": "QueueARN"}), _sm: None},
+        ),
+    ),
+)
+
+DELETE_QUEUE_OUTPUT: StaticSchema = (18, n0, _DQO, {_sSI: _sU, _smit: None})
+
+DELETE_QUEUE: StaticOperationSchema = (
+    23,
+    n0,
+    _DQ,
+    {
+        _sCP: MappingProxyType(
+            {
+                "ResourceType": MappingProxyType({"value": "queue"}),
+                "OperationType": MappingProxyType({"value": "control"}),
+            }
+        )
+    },
+    DELETE_QUEUE_INPUT,
+    DELETE_QUEUE_OUTPUT,
+    (
+        lambda: schemas.ACCESS_DENIED_EXCEPTION,
+        lambda: schemas.INTERNAL_FAILURE_EXCEPTION,
+        lambda: schemas.INVALID_ARGUMENT_EXCEPTION,
+        lambda: schemas.LIMIT_EXCEEDED_EXCEPTION,
+        lambda: schemas.RESOURCE_NOT_FOUND_EXCEPTION,
+        VALIDATION_EXCEPTION,
+    ),
+)
+
+RESOURCE_ARN: StaticSchema = (3, n0, _RARNe, 0)
+
+DELETE_RESOURCE_POLICY_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DRPI,
+    {_smi: None},
+    (_RARNe, _SI),
+    (
+        (RESOURCE_ARN, {_sP: MappingProxyType({"name": "ResourceARN"}), _sm: None}),
+        (lambda: schemas.STREAM_ID, {_sP: MappingProxyType({"name": "StreamId"})}),
+    ),
+)
+
+DELETE_RESOURCE_POLICY_OUTPUT: StaticSchema = (18, n0, _DRPO, {_sSI: _sU, _smit: None})
+
+DELETE_RESOURCE_POLICY: StaticOperationSchema = (
+    23,
+    n0,
+    _DRP,
+    {_sCP: MappingProxyType({"OperationType": MappingProxyType({"value": "control"})})},
+    DELETE_RESOURCE_POLICY_INPUT,
+    DELETE_RESOURCE_POLICY_OUTPUT,
+    (
+        lambda: schemas.ACCESS_DENIED_EXCEPTION,
+        lambda: schemas.INTERNAL_FAILURE_EXCEPTION,
+        lambda: schemas.INVALID_ARGUMENT_EXCEPTION,
+        lambda: schemas.LIMIT_EXCEEDED_EXCEPTION,
+        lambda: schemas.RESOURCE_IN_USE_EXCEPTION,
+        lambda: schemas.RESOURCE_NOT_FOUND_EXCEPTION,
+        VALIDATION_EXCEPTION,
+    ),
+)
+
+DELETE_STREAM_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DSI,
+    {_smi: None},
+    (_SN, _ECD, _SARN, _SI),
+    (
+        (lambda: schemas.STREAM_NAME, 0),
+        (lambda: schemas.BOOLEAN_OBJECT, 0),
+        (lambda: schemas.STREAM_ARN, {_sP: MappingProxyType({"name": "StreamARN"})}),
+        (lambda: schemas.STREAM_ID, {_sP: MappingProxyType({"name": "StreamId"})}),
+    ),
+)
+
+DELETE_STREAM_OUTPUT: StaticSchema = (18, n0, _DSO, {_sSI: _sU, _smit: None})
+
+DELETE_STREAM: StaticOperationSchema = (
+    23,
+    n0,
+    _DS,
+    {_sCP: MappingProxyType({"OperationType": MappingProxyType({"value": "control"})})},
+    DELETE_STREAM_INPUT,
+    DELETE_STREAM_OUTPUT,
+    (
+        lambda: schemas.ACCESS_DENIED_EXCEPTION,
+        lambda: schemas.INVALID_ARGUMENT_EXCEPTION,
+        lambda: schemas.LIMIT_EXCEEDED_EXCEPTION,
+        lambda: schemas.RESOURCE_IN_USE_EXCEPTION,
+        lambda: schemas.RESOURCE_NOT_FOUND_EXCEPTION,
+    ),
+)
 
 DEREGISTER_STREAM_CONSUMER_INPUT: StaticSchema = (
     18,
     n0,
     _DSCI,
-    {_sm: None},
+    {_smi: None},
     (_SARN, _CNo, _CARNo, _SI),
     (
         (lambda: schemas.STREAM_ARN, {_sP: MappingProxyType({"name": "StreamARN"})}),
@@ -235,7 +623,7 @@ DEREGISTER_STREAM_CONSUMER: StaticOperationSchema = (
     ),
 )
 
-DESCRIBE_ACCOUNT_SETTINGS_INPUT: StaticSchema = (18, n0, _DASI, {_sm: None})
+DESCRIBE_ACCOUNT_SETTINGS_INPUT: StaticSchema = (18, n0, _DASI, {_smi: None})
 
 DESCRIBE_ACCOUNT_SETTINGS_OUTPUT: StaticSchema = (
     18,
@@ -283,12 +671,12 @@ DESCRIBE_CHANNEL_INPUT: StaticSchema = (
     18,
     n0,
     _DCIe,
-    {_sm: None},
+    {_smi: None},
     (_CARN,),
     (
         (
             lambda: schemas.CHANNEL_ARN,
-            {_sP: MappingProxyType({"name": "ChannelARN"}), _smi: None},
+            {_sP: MappingProxyType({"name": "ChannelARN"}), _sm: None},
         ),
     ),
 )
@@ -314,11 +702,11 @@ DESCRIBE_CHANNEL: StaticOperationSchema = (
         lambda: schemas.INVALID_ARGUMENT_EXCEPTION,
         lambda: schemas.LIMIT_EXCEEDED_EXCEPTION,
         lambda: schemas.RESOURCE_NOT_FOUND_EXCEPTION,
-        lambda: schemas.VALIDATION_EXCEPTION,
+        VALIDATION_EXCEPTION,
     ),
 )
 
-DESCRIBE_LIMITS_INPUT: StaticSchema = (18, n0, _DLI, {_sm: None})
+DESCRIBE_LIMITS_INPUT: StaticSchema = (18, n0, _DLI, {_smi: None})
 
 DESCRIBE_LIMITS_OUTPUT: StaticSchema = (
     18,
@@ -352,13 +740,60 @@ ON_DEMAND_STREAM_COUNT_LIMIT_OBJECT: StaticSchema = (7, n0, _ODSCLO, 0)
 
 SHARD_COUNT_OBJECT: StaticSchema = (7, n0, _SCO, 0)
 
+DESCRIBE_QUEUE_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DQIe,
+    {_smi: None},
+    (_QARN,),
+    (
+        (
+            lambda: schemas.QUEUE_ARN,
+            {_sP: MappingProxyType({"name": "QueueARN"}), _sm: None},
+        ),
+    ),
+)
+
+DESCRIBE_QUEUE_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DQOe,
+    {_smit: None},
+    (_QD,),
+    ((QUEUE_DESCRIPTION, 1),),
+)
+
+DESCRIBE_QUEUE: StaticOperationSchema = (
+    23,
+    n0,
+    _DQe,
+    {
+        _sCP: MappingProxyType(
+            {
+                "ResourceType": MappingProxyType({"value": "queue"}),
+                "OperationType": MappingProxyType({"value": "control"}),
+            }
+        )
+    },
+    DESCRIBE_QUEUE_INPUT,
+    DESCRIBE_QUEUE_OUTPUT,
+    (
+        lambda: schemas.ACCESS_DENIED_EXCEPTION,
+        lambda: schemas.INTERNAL_FAILURE_EXCEPTION,
+        lambda: schemas.INVALID_ARGUMENT_EXCEPTION,
+        lambda: schemas.LIMIT_EXCEEDED_EXCEPTION,
+        lambda: schemas.RESOURCE_NOT_FOUND_EXCEPTION,
+        VALIDATION_EXCEPTION,
+    ),
+)
+
 DESCRIBE_STREAM_INPUT_LIMIT: StaticSchema = (7, n0, _DSIL, 0)
 
 DESCRIBE_STREAM_INPUT: StaticSchema = (
     18,
     n0,
     _DSIe,
-    {_sm: None},
+    {_smi: None},
     (_SN, _L, _ESSI, _SARN, _SI),
     (
         (lambda: schemas.STREAM_NAME, 0),
@@ -476,7 +911,7 @@ STREAM_DESCRIPTION: StaticSchema = (
         (lambda: schemas.STREAM_NAME, 1),
         (lambda: schemas.STREAM_ARN, 1),
         (STREAM_STATUS, 1),
-        (lambda: schemas.STREAM_MODE_DETAILS, 0),
+        (STREAM_MODE_DETAILS, 0),
         (SHARD_LIST, 1),
         (lambda: schemas.BOOLEAN_OBJECT, 1),
         (lambda: schemas.RETENTION_PERIOD_HOURS, 1),
@@ -491,7 +926,7 @@ DESCRIBE_STREAM_CONSUMER_INPUT: StaticSchema = (
     18,
     n0,
     _DSCIe,
-    {_sm: None},
+    {_smi: None},
     (_SARN, _CNo, _CARNo, _SI),
     (
         (lambda: schemas.STREAM_ARN, {_sP: MappingProxyType({"name": "StreamARN"})}),
@@ -531,7 +966,7 @@ DESCRIBE_STREAM_SUMMARY_INPUT: StaticSchema = (
     18,
     n0,
     _DSSI,
-    {_sm: None},
+    {_smi: None},
     (_SN, _SARN, _SI),
     (
         (lambda: schemas.STREAM_NAME, 0),
@@ -564,6 +999,17 @@ DESCRIBE_STREAM_SUMMARY: StaticOperationSchema = (
     ),
 )
 
+QUEUE_COUNT_OBJECT: StaticSchema = (7, n0, _QCO, 0)
+
+WARM_THROUGHPUT_OBJECT: StaticSchema = (
+    18,
+    n0,
+    _WTO,
+    0,
+    (_TMB, _CMB),
+    ((NATURAL_INTEGER_OBJECT, 0), (NATURAL_INTEGER_OBJECT, 0)),
+)
+
 STREAM_DESCRIPTION_SUMMARY: StaticSchema = (
     18,
     n0,
@@ -586,13 +1032,14 @@ STREAM_DESCRIPTION_SUMMARY: StaticSchema = (
         _MRSIKB,
         _CCh,
         _RDS,
+        _QC,
     ),
     (
         (lambda: schemas.STREAM_NAME, 1),
         (lambda: schemas.STREAM_ARN, 1),
         (lambda: schemas.STREAM_ID, 0),
         (STREAM_STATUS, 1),
-        (lambda: schemas.STREAM_MODE_DETAILS, 0),
+        (STREAM_MODE_DETAILS, 0),
         (lambda: schemas.RETENTION_PERIOD_HOURS, 1),
         (lambda: schemas.TIMESTAMP, 1),
         (ENHANCED_MONITORING_LIST, 1),
@@ -600,10 +1047,11 @@ STREAM_DESCRIPTION_SUMMARY: StaticSchema = (
         (lambda: schemas.KEY_ID, 0),
         (SHARD_COUNT_OBJECT, 1),
         (lambda: schemas.CONSUMER_COUNT_OBJECT, 0),
-        (lambda: schemas.WARM_THROUGHPUT_OBJECT, 0),
-        (lambda: schemas.MAX_RECORD_SIZE_IN_KI_B, 0),
+        (WARM_THROUGHPUT_OBJECT, 0),
+        (MAX_RECORD_SIZE_IN_KI_B, 0),
         (lambda: schemas.CHANNEL_COUNT_OBJECT, 0),
-        (lambda: schemas.RECORD_DISTRIBUTION_STRATEGY, 0),
+        (RECORD_DISTRIBUTION_STRATEGY, 0),
+        (QUEUE_COUNT_OBJECT, 0),
     ),
 )
 
@@ -611,7 +1059,7 @@ DISABLE_ENHANCED_MONITORING_INPUT: StaticSchema = (
     18,
     n0,
     _DEMI,
-    {_sm: None},
+    {_smi: None},
     (_SN, _SLM, _SARN, _SI),
     (
         (lambda: schemas.STREAM_NAME, 0),
@@ -664,7 +1112,7 @@ ENABLE_ENHANCED_MONITORING_INPUT: StaticSchema = (
     18,
     n0,
     _EEMI,
-    {_sm: None},
+    {_smi: None},
     (_SN, _SLM, _SARN, _SI),
     (
         (lambda: schemas.STREAM_NAME, 0),
@@ -703,426 +1151,3 @@ ENABLE_ENHANCED_MONITORING: StaticOperationSchema = (
         lambda: schemas.RESOURCE_NOT_FOUND_EXCEPTION,
     ),
 )
-
-ERROR_CODE: StaticSchema = (3, n0, _ECr, 0)
-
-EXPIRED_ITERATOR_EXCEPTION: StaticSchema = (
-    18,
-    n0,
-    _EIE,
-    {_s: _c},
-    (_m,),
-    ((lambda: schemas.ERROR_MESSAGE, 0),),
-)
-
-EXPIRED_NEXT_TOKEN_EXCEPTION: StaticSchema = (
-    18,
-    n0,
-    _ENTE,
-    {_s: _c},
-    (_m,),
-    ((lambda: schemas.ERROR_MESSAGE, 0),),
-)
-
-GET_RECORDS_INPUT_LIMIT: StaticSchema = (7, n0, _GRIL, 0)
-
-SHARD_ITERATOR: StaticSchema = (3, n0, _SIha, 0)
-
-GET_RECORDS_INPUT: StaticSchema = (
-    18,
-    n0,
-    _GRI,
-    {_sm: None},
-    (_SIha, _L, _SARN, _SI, _DR),
-    (
-        (SHARD_ITERATOR, 1),
-        (GET_RECORDS_INPUT_LIMIT, 0),
-        (lambda: schemas.STREAM_ARN, {_sP: MappingProxyType({"name": "StreamARN"})}),
-        (lambda: schemas.STREAM_ID, {_sP: MappingProxyType({"name": "StreamId"})}),
-        (lambda: schemas.BOOLEAN_OBJECT, 0),
-    ),
-)
-
-GET_RECORDS_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _GRO,
-    {_smit: None},
-    (_Re, _NSI, _MBL, _CShil),
-    (
-        (lambda: RECORD_LIST, 1),
-        (SHARD_ITERATOR, 0),
-        (lambda: MILLIS_BEHIND_LATEST, 0),
-        (lambda: schemas.CHILD_SHARD_LIST, 0),
-    ),
-)
-
-GET_RECORDS: StaticOperationSchema = (
-    23,
-    n0,
-    _GR,
-    {_sCP: MappingProxyType({"OperationType": MappingProxyType({"value": "data"})})},
-    GET_RECORDS_INPUT,
-    GET_RECORDS_OUTPUT,
-    (
-        lambda: schemas.ACCESS_DENIED_EXCEPTION,
-        DRY_RUN_OPERATION_EXCEPTION,
-        EXPIRED_ITERATOR_EXCEPTION,
-        lambda: INTERNAL_FAILURE_EXCEPTION,
-        lambda: schemas.INVALID_ARGUMENT_EXCEPTION,
-        lambda: schemas.KMS_ACCESS_DENIED_EXCEPTION,
-        lambda: schemas.KMS_DISABLED_EXCEPTION,
-        lambda: schemas.KMS_INVALID_STATE_EXCEPTION,
-        lambda: schemas.KMS_NOT_FOUND_EXCEPTION,
-        lambda: schemas.KMS_OPT_IN_REQUIRED,
-        lambda: schemas.KMS_THROTTLING_EXCEPTION,
-        lambda: PROVISIONED_THROUGHPUT_EXCEEDED_EXCEPTION,
-        lambda: schemas.RESOURCE_NOT_FOUND_EXCEPTION,
-    ),
-)
-
-MILLIS_BEHIND_LATEST: StaticSchema = (8, n0, _MBL, 0)
-
-PARTITION_KEY: StaticSchema = (3, n0, _PK, 0)
-
-RECORD: StaticSchema = (
-    18,
-    n0,
-    _R,
-    0,
-    (_SNe, _AAT, _D, _PK, _ET),
-    (
-        (SEQUENCE_NUMBER, 1),
-        (lambda: schemas.TIMESTAMP, 0),
-        (lambda: schemas.DATA, 1),
-        (PARTITION_KEY, 0),
-        (lambda: schemas.ENCRYPTION_TYPE, 0),
-    ),
-)
-
-RECORD_LIST: StaticSchema = (16, n0, _RL, 0, (_me,), ((RECORD, 0),))
-
-INTERNAL_FAILURE_EXCEPTION: StaticSchema = (
-    18,
-    n0,
-    _IFE,
-    {_s: _se},
-    (_m,),
-    ((lambda: schemas.ERROR_MESSAGE, 0),),
-)
-
-PROVISIONED_THROUGHPUT_EXCEEDED_EXCEPTION: StaticSchema = (
-    18,
-    n0,
-    _PTEE,
-    {_s: _c},
-    (_m,),
-    ((lambda: schemas.ERROR_MESSAGE, 0),),
-)
-
-GET_RESOURCE_POLICY_INPUT: StaticSchema = (
-    18,
-    n0,
-    _GRPI,
-    {_sm: None},
-    (_RARNe, _SI),
-    (
-        (
-            lambda: schemas.RESOURCE_ARN,
-            {_sP: MappingProxyType({"name": "ResourceARN"}), _smi: None},
-        ),
-        (lambda: schemas.STREAM_ID, {_sP: MappingProxyType({"name": "StreamId"})}),
-    ),
-)
-
-GET_RESOURCE_POLICY_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _GRPO,
-    {_smit: None},
-    (_P,),
-    ((lambda: schemas.POLICY, 1),),
-)
-
-GET_RESOURCE_POLICY: StaticOperationSchema = (
-    23,
-    n0,
-    _GRP,
-    {_sCP: MappingProxyType({"OperationType": MappingProxyType({"value": "control"})})},
-    GET_RESOURCE_POLICY_INPUT,
-    GET_RESOURCE_POLICY_OUTPUT,
-    (
-        lambda: schemas.ACCESS_DENIED_EXCEPTION,
-        lambda: schemas.INVALID_ARGUMENT_EXCEPTION,
-        lambda: schemas.LIMIT_EXCEEDED_EXCEPTION,
-        lambda: schemas.RESOURCE_IN_USE_EXCEPTION,
-        lambda: schemas.RESOURCE_NOT_FOUND_EXCEPTION,
-    ),
-)
-
-SHARD_ITERATOR_TYPE: StaticSchema = (
-    14,
-    n0,
-    _SIT,
-    0,
-    (_ASN, _ASN_, _TH_, _LATEST, _AT),
-    (
-        (-1, {_sV: _ASN}),
-        (-1, {_sV: _ASN_}),
-        (-1, {_sV: _TH_}),
-        (-1, {_sV: _LATEST}),
-        (-1, {_sV: _AT}),
-    ),
-)
-
-GET_SHARD_ITERATOR_INPUT: StaticSchema = (
-    18,
-    n0,
-    _GSII,
-    {_sm: None},
-    (_SN, _SIh, _SIT, _SSN, _Ti, _SARN, _SI, _DR),
-    (
-        (lambda: schemas.STREAM_NAME, 0),
-        (lambda: schemas.SHARD_ID, 1),
-        (SHARD_ITERATOR_TYPE, 1),
-        (SEQUENCE_NUMBER, 0),
-        (lambda: schemas.TIMESTAMP, 0),
-        (lambda: schemas.STREAM_ARN, {_sP: MappingProxyType({"name": "StreamARN"})}),
-        (lambda: schemas.STREAM_ID, {_sP: MappingProxyType({"name": "StreamId"})}),
-        (lambda: schemas.BOOLEAN_OBJECT, 0),
-    ),
-)
-
-GET_SHARD_ITERATOR_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _GSIO,
-    {_smit: None},
-    (_SIha,),
-    ((SHARD_ITERATOR, 0),),
-)
-
-GET_SHARD_ITERATOR: StaticOperationSchema = (
-    23,
-    n0,
-    _GSI,
-    {_sCP: MappingProxyType({"OperationType": MappingProxyType({"value": "data"})})},
-    GET_SHARD_ITERATOR_INPUT,
-    GET_SHARD_ITERATOR_OUTPUT,
-    (
-        lambda: schemas.ACCESS_DENIED_EXCEPTION,
-        DRY_RUN_OPERATION_EXCEPTION,
-        INTERNAL_FAILURE_EXCEPTION,
-        lambda: schemas.INVALID_ARGUMENT_EXCEPTION,
-        PROVISIONED_THROUGHPUT_EXCEEDED_EXCEPTION,
-        lambda: schemas.RESOURCE_NOT_FOUND_EXCEPTION,
-    ),
-)
-
-INCREASE_STREAM_RETENTION_PERIOD_INPUT: StaticSchema = (
-    18,
-    n0,
-    _ISRPI,
-    {_sm: None},
-    (_SN, _RPH, _SARN, _SI),
-    (
-        (lambda: schemas.STREAM_NAME, 0),
-        (lambda: schemas.RETENTION_PERIOD_HOURS, 1),
-        (lambda: schemas.STREAM_ARN, {_sP: MappingProxyType({"name": "StreamARN"})}),
-        (lambda: schemas.STREAM_ID, {_sP: MappingProxyType({"name": "StreamId"})}),
-    ),
-)
-
-INCREASE_STREAM_RETENTION_PERIOD_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _ISRPO,
-    {_sSI: _sU, _smit: None},
-)
-
-INCREASE_STREAM_RETENTION_PERIOD: StaticOperationSchema = (
-    23,
-    n0,
-    _ISRP,
-    {_sCP: MappingProxyType({"OperationType": MappingProxyType({"value": "control"})})},
-    INCREASE_STREAM_RETENTION_PERIOD_INPUT,
-    INCREASE_STREAM_RETENTION_PERIOD_OUTPUT,
-    (
-        lambda: schemas.ACCESS_DENIED_EXCEPTION,
-        lambda: schemas.INVALID_ARGUMENT_EXCEPTION,
-        lambda: schemas.LIMIT_EXCEEDED_EXCEPTION,
-        lambda: schemas.RESOURCE_IN_USE_EXCEPTION,
-        lambda: schemas.RESOURCE_NOT_FOUND_EXCEPTION,
-    ),
-)
-
-LIST_CHANNELS_INPUT_LIMIT: StaticSchema = (7, n0, _LCIL, 0)
-
-NEXT_TOKEN: StaticSchema = (3, n0, _NT, 0)
-
-STREAM_FILTER: StaticSchema = (
-    18,
-    n0,
-    _SF,
-    0,
-    (_SARN, _SCTt),
-    ((lambda: schemas.STREAM_ARN, 1), (lambda: schemas.TIMESTAMP, 0)),
-)
-
-STREAM_FILTER_LIST: StaticSchema = (16, n0, _SFL, 0, (_me,), ((STREAM_FILTER, 0),))
-
-LIST_CHANNELS_INPUT: StaticSchema = (
-    18,
-    n0,
-    _LCI,
-    {_sm: None},
-    (_SF, _MR, _NT),
-    ((STREAM_FILTER_LIST, 0), (LIST_CHANNELS_INPUT_LIMIT, 0), (NEXT_TOKEN, 0)),
-)
-
-LIST_CHANNELS_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _LCO,
-    {_smit: None},
-    (_CSha, _NT),
-    ((lambda: schemas.CHANNEL_SUMMARY_LIST, 1), (NEXT_TOKEN, 0)),
-)
-
-LIST_CHANNELS: StaticOperationSchema = (
-    23,
-    n0,
-    _LCi,
-    {_sCP: MappingProxyType({"OperationType": MappingProxyType({"value": "control"})})},
-    LIST_CHANNELS_INPUT,
-    LIST_CHANNELS_OUTPUT,
-    (
-        lambda: schemas.ACCESS_DENIED_EXCEPTION,
-        EXPIRED_NEXT_TOKEN_EXCEPTION,
-        lambda: schemas.INVALID_ARGUMENT_EXCEPTION,
-        lambda: schemas.LIMIT_EXCEEDED_EXCEPTION,
-        lambda: schemas.VALIDATION_EXCEPTION,
-    ),
-)
-
-LIST_SHARDS_INPUT_LIMIT: StaticSchema = (7, n0, _LSIL, 0)
-
-SHARD_FILTER_TYPE: StaticSchema = (
-    14,
-    n0,
-    _SFT,
-    0,
-    (_ASI, _ATH, _FTH, _AL, _AT, _FT),
-    (
-        (-1, {_sV: _ASI}),
-        (-1, {_sV: _ATH}),
-        (-1, {_sV: _FTH}),
-        (-1, {_sV: _AL}),
-        (-1, {_sV: _AT}),
-        (-1, {_sV: _FT}),
-    ),
-)
-
-SHARD_FILTER: StaticSchema = (
-    18,
-    n0,
-    _SFh,
-    0,
-    (_Ty, _SIh, _Ti),
-    (
-        (SHARD_FILTER_TYPE, 1),
-        (lambda: schemas.SHARD_ID, 0),
-        (lambda: schemas.TIMESTAMP, 0),
-    ),
-)
-
-LIST_SHARDS_INPUT: StaticSchema = (
-    18,
-    n0,
-    _LSI,
-    {_sm: None},
-    (_SN, _NT, _ESSI, _MR, _SCTt, _SFh, _SARN, _SI),
-    (
-        (lambda: schemas.STREAM_NAME, 0),
-        (NEXT_TOKEN, 0),
-        (lambda: schemas.SHARD_ID, 0),
-        (LIST_SHARDS_INPUT_LIMIT, 0),
-        (lambda: schemas.TIMESTAMP, 0),
-        (SHARD_FILTER, 0),
-        (lambda: schemas.STREAM_ARN, {_sP: MappingProxyType({"name": "StreamARN"})}),
-        (lambda: schemas.STREAM_ID, {_sP: MappingProxyType({"name": "StreamId"})}),
-    ),
-)
-
-LIST_SHARDS_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _LSO,
-    {_smit: None},
-    (_Sha, _NT),
-    ((SHARD_LIST, 0), (NEXT_TOKEN, 0)),
-)
-
-LIST_SHARDS: StaticOperationSchema = (
-    23,
-    n0,
-    _LS,
-    {_sCP: MappingProxyType({"OperationType": MappingProxyType({"value": "control"})})},
-    LIST_SHARDS_INPUT,
-    LIST_SHARDS_OUTPUT,
-    (
-        lambda: schemas.ACCESS_DENIED_EXCEPTION,
-        EXPIRED_NEXT_TOKEN_EXCEPTION,
-        lambda: schemas.INVALID_ARGUMENT_EXCEPTION,
-        lambda: schemas.LIMIT_EXCEEDED_EXCEPTION,
-        lambda: schemas.RESOURCE_IN_USE_EXCEPTION,
-        lambda: schemas.RESOURCE_NOT_FOUND_EXCEPTION,
-    ),
-)
-
-LIST_STREAM_CONSUMERS_INPUT_LIMIT: StaticSchema = (7, n0, _LSCIL, 0)
-
-LIST_STREAM_CONSUMERS_INPUT: StaticSchema = (
-    18,
-    n0,
-    _LSCI,
-    {_sm: None},
-    (_SARN, _NT, _MR, _SCTt, _SI),
-    (
-        (
-            lambda: schemas.STREAM_ARN,
-            {_sP: MappingProxyType({"name": "StreamARN"}), _smi: None},
-        ),
-        (NEXT_TOKEN, 0),
-        (LIST_STREAM_CONSUMERS_INPUT_LIMIT, 0),
-        (lambda: schemas.TIMESTAMP, 0),
-        (lambda: schemas.STREAM_ID, {_sP: MappingProxyType({"name": "StreamId"})}),
-    ),
-)
-
-LIST_STREAM_CONSUMERS_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _LSCO,
-    {_smit: None},
-    (_Co, _NT),
-    ((lambda: schemas.CONSUMER_LIST, 0), (NEXT_TOKEN, 0)),
-)
-
-LIST_STREAM_CONSUMERS: StaticOperationSchema = (
-    23,
-    n0,
-    _LSC,
-    {_sCP: MappingProxyType({"OperationType": MappingProxyType({"value": "control"})})},
-    LIST_STREAM_CONSUMERS_INPUT,
-    LIST_STREAM_CONSUMERS_OUTPUT,
-    (
-        EXPIRED_NEXT_TOKEN_EXCEPTION,
-        lambda: schemas.INVALID_ARGUMENT_EXCEPTION,
-        lambda: schemas.LIMIT_EXCEEDED_EXCEPTION,
-        lambda: schemas.RESOURCE_IN_USE_EXCEPTION,
-        lambda: schemas.RESOURCE_NOT_FOUND_EXCEPTION,
-    ),
-)
-
-LIST_STREAMS_INPUT_LIMIT: StaticSchema = (7, n0, _LSILi, 0)

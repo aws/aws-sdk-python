@@ -11,7 +11,8 @@ _sN = "smithy.api#xmlName"
 _sV = "smithy.api#enumValue"
 _me = "member"
 _i = "item"
-_ip = "ipam"
+_Va = "Value"
+_va = "value"
 _TS = "TagSpecification"
 _Tag = "Tags"
 _sSI = "smithy.synthetic#originalShapeId"
@@ -32,6 +33,9 @@ _TGI = "TransitGatewayId"
 _tGI = "transitGatewayId"
 _St = "State"
 _st = "state"
+_as = "associating"
+_ass = "associated"
+_di = "disassociating"
 _fa = "failed"
 _mo = "modifying"
 _C = "Code"
@@ -58,13 +62,19 @@ _CGI = "CarrierGatewayId"
 _CNA = "CoreNetworkArn"
 _cNA = "coreNetworkArn"
 _VC = "VpnConnection"
+_vC = "vpnConnection"
 _VG = "VpnGateway"
 _vG = "vpnGateway"
 _Sou = "Source"
 _so = "source"
+_PAKE = "Phase1AdditionalKeyExchanges"
+_PAKES = "Phase1AdditionalKeyExchangeSet"
+_pAKES = "phase1AdditionalKeyExchangeSet"
+_PAKEh = "Phase2AdditionalKeyExchanges"
+_PAKESh = "Phase2AdditionalKeyExchangeSet"
+_pAKESh = "phase2AdditionalKeyExchangeSet"
 _SMt = "StatusMessage"
 _sMt = "statusMessage"
-_IPI = "IpamPoolId"
 _CTl = "ClientToken"
 _sT = "smithy.api#idempotencyToken"
 _FAILED = "FAILED"
@@ -75,16 +85,11 @@ _CAe = "CertificateArn"
 _IEWI = "InstanceEventWindowId"
 _IEWS = "InstanceEventWindowState"
 _iEWI = "instanceEventWindowId"
-_IIp = "IpamId"
-_IRDI = "IpamResourceDiscoveryId"
 _ACTIVE = "ACTIVE"
 _IGI = "InternetGatewayId"
 _iGI = "internetGatewayId"
+_smith = "smithy.api#sensitive"
 _VGI = "VpnGatewayId"
-_IIRAI = "IpamInternetRegistryAssociationId"
-_Fo = "Force"
-_IRPRD = "IpamRoutingPolicyRegistrationDelta"
-_iRPRD = "ipamRoutingPolicyRegistrationDelta"
 _SUBMITTED = "SUBMITTED"
 _subm = "submitted"
 _MODIFYING = "MODIFYING"
@@ -112,48 +117,16 @@ _CCo = "CoipCidr"
 _cCo = "coipCidr"
 _CP = "CoipPool"
 _cP = "coipPool"
-_GT = "GatewayType"
-_i_________________________________________________________________________ = "ipsec_1"
-_ips = "ipsec.1"
 _cAe = "certificateArn"
 _CGIu = "CustomerGatewayId"
 _cGIu = "customerGatewayId"
 _ty = "type"
-_LTI = "LaunchTemplateId"
-_LTN = "LaunchTemplateName"
-_KN = "KeyName"
 _FIl = "FleetId"
 _fIl = "fleetId"
 _FLI = "FlowLogIds"
 _ICEI = "InstanceConnectEndpointId"
 _ICE = "InstanceConnectEndpoint"
 _iCE = "instanceConnectEndpoint"
-_ISI = "IpamScopeId"
-_Ipa = "Ipam"
-_IERVTI = "IpamExternalResourceVerificationTokenId"
-_IERVT = "IpamExternalResourceVerificationToken"
-_iERVT = "ipamExternalResourceVerificationToken"
-_IIRA = "IpamInternetRegistryAssociation"
-_iIRA = "ipamInternetRegistryAssociation"
-_IPIp = "IpamPolicyId"
-_IPpa = "IpamPolicy"
-_iPpa = "ipamPolicy"
-_IPpam = "IpamPool"
-_iPpam = "ipamPool"
-_IPLRI = "IpamPrefixListResolverId"
-_IPLR = "IpamPrefixListResolver"
-_iPLR = "ipamPrefixListResolver"
-_IPLRTI = "IpamPrefixListResolverTargetId"
-_IPLRT = "IpamPrefixListResolverTarget"
-_iPLRT = "ipamPrefixListResolverTarget"
-_IRD = "IpamResourceDiscovery"
-_iRD = "ipamResourceDiscovery"
-_ISpam = "IpamScope"
-_iSpa = "ipamScope"
-_KPI = "KeyPairId"
-_kPI = "keyPairId"
-_LT = "LaunchTemplate"
-_lT = "launchTemplate"
 _dCB = "destinationCidrBlock"
 _DELETED = "DELETED"
 _ASA = "AmazonSideAsn"
@@ -166,6 +139,33 @@ _tTGAI = "transportTransitGatewayAttachmentId"
 _VCI = "VpnConcentratorId"
 _vCI = "vpnConcentratorId"
 _TIIV = "TunnelInsideIpVersion"
+_LEo = "LogEnabled"
+_LGA = "LogGroupArn"
+_LOF = "LogOutputFormat"
+_BLE = "BgpLogEnabled"
+_BLGA = "BgpLogGroupArn"
+_BLOF = "BgpLogOutputFormat"
+_CWLO = "CloudWatchLogOptions"
+_pSK = "preSharedKey"
+_TICu = "TunnelInsideCidr"
+_TIIC = "TunnelInsideIpv6Cidr"
+_PSK = "PreSharedKey"
+_PLSh = "Phase1LifetimeSeconds"
+_PLSha = "Phase2LifetimeSeconds"
+_RMTS = "RekeyMarginTimeSeconds"
+_RFP = "RekeyFuzzPercentage"
+_RWS = "ReplayWindowSize"
+_PEAha = "Phase1EncryptionAlgorithms"
+_PEAhas = "Phase2EncryptionAlgorithms"
+_PIAha = "Phase1IntegrityAlgorithms"
+_PIAhas = "Phase2IntegrityAlgorithms"
+_PDHGN = "Phase1DHGroupNumbers"
+_PDHGNha = "Phase2DHGroupNumbers"
+_SAt = "StartupAction"
+_LO = "LogOptions"
+_ETLC = "EnableTunnelLifecycleControl"
+_VTOSL = "VpnTunnelOptionsSpecificationsList"
+_VCOS = "VpnConnectionOptionsSpecification"
 _EAna = "EnableAcceleration"
 _TO = "TunnelOptions"
 _LINC = "LocalIpv4NetworkCidr"
@@ -176,10 +176,68 @@ _OIAT = "OutsideIpAddressType"
 _TB = "TunnelBandwidth"
 _SRO = "StaticRoutesOnly"
 _sRO = "staticRoutesOnly"
+_CVCIr = "CreateVpnConnectionInput"
+_cCVCRom = "com.amazonaws.ec2#CreateVpnConnectionRequest"
+_PSKS = "PreSharedKeyStorage"
 _cGC = "customerGatewayConfiguration"
 _GAS = "GatewayAssociationState"
+_na___ = "not_associated"
+_na____ = "not-associated"
+_IKEVLV = "IKEVersionsListValue"
+_IKEVL = "IKEVersionsList"
+_lEo = "logEnabled"
+_lGA = "logGroupArn"
+_lOF = "logOutputFormat"
+_bLE = "bgpLogEnabled"
+_bLGA = "bgpLogGroupArn"
+_bLOF = "bgpLogOutputFormat"
+_VTLO = "VpnTunnelLogOptions"
+_cWLO = "cloudWatchLogOptions"
+_PDHGNLV = "Phase1DHGroupNumbersListValue"
+_PDHGNL = "Phase1DHGroupNumbersList"
+_PEALV = "Phase1EncryptionAlgorithmsListValue"
+_PEAL = "Phase1EncryptionAlgorithmsList"
+_PIALV = "Phase1IntegrityAlgorithmsListValue"
+_PIAL = "Phase1IntegrityAlgorithmsList"
+_PDHGNLVh = "Phase2DHGroupNumbersListValue"
+_PDHGNLh = "Phase2DHGroupNumbersList"
+_PEALVh = "Phase2EncryptionAlgorithmsListValue"
+_PEALh = "Phase2EncryptionAlgorithmsList"
+_PIALVh = "Phase2IntegrityAlgorithmsListValue"
+_PIALh = "Phase2IntegrityAlgorithmsList"
+_TOu = "TunnelOption"
 _OIA = "OutsideIpAddress"
 _oIA = "outsideIpAddress"
+_tICu = "tunnelInsideCidr"
+_tIIC = "tunnelInsideIpv6Cidr"
+_pLS = "phase1LifetimeSeconds"
+_pLSh = "phase2LifetimeSeconds"
+_rMTS = "rekeyMarginTimeSeconds"
+_rFP = "rekeyFuzzPercentage"
+_rWS = "replayWindowSize"
+_DTS = "DpdTimeoutSeconds"
+_dTS = "dpdTimeoutSeconds"
+_DTA = "DpdTimeoutAction"
+_dTA = "dpdTimeoutAction"
+_PEAS = "Phase1EncryptionAlgorithmSet"
+_pEAS = "phase1EncryptionAlgorithmSet"
+_PEASh = "Phase2EncryptionAlgorithmSet"
+_pEASh = "phase2EncryptionAlgorithmSet"
+_PIASh = "Phase1IntegrityAlgorithmSet"
+_pIASh = "phase1IntegrityAlgorithmSet"
+_PIASha = "Phase2IntegrityAlgorithmSet"
+_pIASha = "phase2IntegrityAlgorithmSet"
+_PDHGNS = "Phase1DHGroupNumberSet"
+_pDHGNS = "phase1DHGroupNumberSet"
+_PDHGNSh = "Phase2DHGroupNumberSet"
+_pDHGNSh = "phase2DHGroupNumberSet"
+_IVk = "IkeVersions"
+_IVS = "IkeVersionSet"
+_iVS = "ikeVersionSet"
+_sAt = "startupAction"
+_lO = "logOptions"
+_eTLC = "enableTunnelLifecycleControl"
+_TOL = "TunnelOptionsList"
 _VCO = "VpnConnectionOptions"
 _eAn = "enableAcceleration"
 _lINC = "localIpv4NetworkCidr"
@@ -216,6 +274,9 @@ _VCIp = "VpnConnectionId"
 _vCIp = "vpnConnectionId"
 _CGC = "CustomerGatewayConfiguration"
 _vGI = "vpnGatewayId"
+_CVCOr = "CreateVpnConnectionOutput"
+_cCVCRoma = "com.amazonaws.ec2#CreateVpnConnectionResult"
+_CVCr = "CreateVpnConnection"
 _CVCRI = "CreateVpnConnectionRouteInput"
 _cCVCRR = "com.amazonaws.ec2#CreateVpnConnectionRouteRequest"
 _CVCRO = "CreateVpnConnectionRouteOutput"
@@ -348,81 +409,304 @@ _DIGI = "DeleteInternetGatewayInput"
 _cDIGR = "com.amazonaws.ec2#DeleteInternetGatewayRequest"
 _DIGO = "DeleteInternetGatewayOutput"
 _DIG = "DeleteInternetGateway"
-_DII = "DeleteIpamInput"
-_cDIR = "com.amazonaws.ec2#DeleteIpamRequest"
-_Cas = "Cascade"
-_DIO = "DeleteIpamOutput"
-_cDIRo = "com.amazonaws.ec2#DeleteIpamResult"
-_DIel = "DeleteIpam"
-_DIERVTI = "DeleteIpamExternalResourceVerificationTokenInput"
-_cDIERVTR = "com.amazonaws.ec2#DeleteIpamExternalResourceVerificationTokenRequest"
-_DIERVTO = "DeleteIpamExternalResourceVerificationTokenOutput"
-_cDIERVTRo = "com.amazonaws.ec2#DeleteIpamExternalResourceVerificationTokenResult"
-_DIERVT = "DeleteIpamExternalResourceVerificationToken"
-_DIIRAI = "DeleteIpamInternetRegistryAssociationInput"
-_cDIIRAR = "com.amazonaws.ec2#DeleteIpamInternetRegistryAssociationRequest"
-_DIIRAO = "DeleteIpamInternetRegistryAssociationOutput"
-_cDIIRARo = "com.amazonaws.ec2#DeleteIpamInternetRegistryAssociationResult"
-_DIIRA = "DeleteIpamInternetRegistryAssociation"
-_DIPI = "DeleteIpamPolicyInput"
-_cDIPR = "com.amazonaws.ec2#DeleteIpamPolicyRequest"
-_DIPO = "DeleteIpamPolicyOutput"
-_cDIPRo = "com.amazonaws.ec2#DeleteIpamPolicyResult"
-_DIPe = "DeleteIpamPolicy"
-_DIPIe = "DeleteIpamPoolInput"
-_cDIPRom = "com.amazonaws.ec2#DeleteIpamPoolRequest"
-_DIPOe = "DeleteIpamPoolOutput"
-_cDIPRoma = "com.amazonaws.ec2#DeleteIpamPoolResult"
-_DIPel = "DeleteIpamPool"
-_DIPLRI = "DeleteIpamPrefixListResolverInput"
-_cDIPLRR = "com.amazonaws.ec2#DeleteIpamPrefixListResolverRequest"
-_DIPLRO = "DeleteIpamPrefixListResolverOutput"
-_cDIPLRRo = "com.amazonaws.ec2#DeleteIpamPrefixListResolverResult"
-_DIPLR = "DeleteIpamPrefixListResolver"
-_DIPLRTI = "DeleteIpamPrefixListResolverTargetInput"
-_cDIPLRTR = "com.amazonaws.ec2#DeleteIpamPrefixListResolverTargetRequest"
-_DIPLRTO = "DeleteIpamPrefixListResolverTargetOutput"
-_cDIPLRTRo = "com.amazonaws.ec2#DeleteIpamPrefixListResolverTargetResult"
-_DIPLRT = "DeleteIpamPrefixListResolverTarget"
-_DIRDI = "DeleteIpamResourceDiscoveryInput"
-_cDIRDR = "com.amazonaws.ec2#DeleteIpamResourceDiscoveryRequest"
-_DIRDO = "DeleteIpamResourceDiscoveryOutput"
-_cDIRDRo = "com.amazonaws.ec2#DeleteIpamResourceDiscoveryResult"
-_DIRD = "DeleteIpamResourceDiscovery"
-_DIRPRI = "DeleteIpamRoutingPolicyRegistrationInput"
-_cDIRPRR = "com.amazonaws.ec2#DeleteIpamRoutingPolicyRegistrationRequest"
-_DIRPRO = "DeleteIpamRoutingPolicyRegistrationOutput"
-_cDIRPRRo = "com.amazonaws.ec2#DeleteIpamRoutingPolicyRegistrationResult"
-_DIRPR = "DeleteIpamRoutingPolicyRegistration"
-_DISI = "DeleteIpamScopeInput"
-_cDISR = "com.amazonaws.ec2#DeleteIpamScopeRequest"
-_DISO = "DeleteIpamScopeOutput"
-_cDISRo = "com.amazonaws.ec2#DeleteIpamScopeResult"
-_DIS = "DeleteIpamScope"
-_KPNWR = "KeyPairNameWithResolver"
-_DKPI = "DeleteKeyPairInput"
-_cDKPR = "com.amazonaws.ec2#DeleteKeyPairRequest"
-_DKPO = "DeleteKeyPairOutput"
-_cDKPRo = "com.amazonaws.ec2#DeleteKeyPairResult"
-_DKP = "DeleteKeyPair"
-_DLTI = "DeleteLaunchTemplateInput"
-_cDLTR = "com.amazonaws.ec2#DeleteLaunchTemplateRequest"
-_DLTO = "DeleteLaunchTemplateOutput"
-_cDLTRo = "com.amazonaws.ec2#DeleteLaunchTemplateResult"
-_DLT = "DeleteLaunchTemplate"
-
-VPN_GATEWAY_ID: StaticSchema = (3, n0, _VGI, 0)
-
-GATEWAY_TYPE: StaticSchema = (
-    14,
-    n0,
-    _GT,
-    0,
-    (_i_________________________________________________________________________,),
-    ((-1, {_sV: _ips}),),
-)
 
 CUSTOMER_GATEWAY_ID: StaticSchema = (3, n0, _CGIu, 0)
+
+VPN_TUNNEL_OPTIONS_SPECIFICATIONS_LIST: StaticSchema = (
+    16,
+    n0,
+    _VTOSL,
+    0,
+    (_me,),
+    ((lambda: schemas.VPN_TUNNEL_OPTIONS_SPECIFICATION, 0),),
+)
+
+VPN_CONNECTION_OPTIONS_SPECIFICATION: StaticSchema = (
+    18,
+    n0,
+    _VCOS,
+    0,
+    (_EAna, _TIIV, _TO, _LINC, _RINC, _LINCo, _RINCe, _OIAT, _TTGAI, _TB, _SRO),
+    (
+        (lambda: schemas.BOOLEAN, 0),
+        (lambda: schemas.TUNNEL_INSIDE_IP_VERSION, 0),
+        (VPN_TUNNEL_OPTIONS_SPECIFICATIONS_LIST, 0),
+        (lambda: schemas.STRING, 0),
+        (lambda: schemas.STRING, 0),
+        (lambda: schemas.STRING, 0),
+        (lambda: schemas.STRING, 0),
+        (lambda: schemas.STRING, 0),
+        (lambda: schemas.TRANSIT_GATEWAY_ATTACHMENT_ID, 0),
+        (lambda: schemas.VPN_TUNNEL_BANDWIDTH, 0),
+        (lambda: schemas.BOOLEAN, {_aQN: _SRO, _sN: _sRO}),
+    ),
+)
+
+CREATE_VPN_CONNECTION_INPUT: StaticSchema = (
+    18,
+    n0,
+    _CVCIr,
+    {_sSI: _cCVCRom, _sm: None},
+    (_CGIu, _Ty, _VGI, _TGI, _VCI, _TSa, _PSKS, _DR, _O),
+    (
+        (CUSTOMER_GATEWAY_ID, {_sO: None, _smi: None}),
+        (lambda: schemas.STRING, {_sO: None, _smi: None}),
+        (lambda: schemas.VPN_GATEWAY_ID, 0),
+        (lambda: schemas.TRANSIT_GATEWAY_ID, 0),
+        (lambda: schemas.VPN_CONCENTRATOR_ID, 0),
+        (lambda: schemas.TAG_SPECIFICATION_LIST, {_sN: _TS}),
+        (lambda: schemas.STRING, 0),
+        (lambda: schemas.BOOLEAN, {_aQN: _DR, _sN: _dRr}),
+        (VPN_CONNECTION_OPTIONS_SPECIFICATION, {_aQN: _O, _sN: _o}),
+    ),
+)
+
+CREATE_VPN_CONNECTION_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _CVCOr,
+    {_sSI: _cCVCRoma, _smit: None},
+    (_VC,),
+    ((lambda: VPN_CONNECTION, {_aQN: _VC, _sN: _vC}),),
+)
+
+CREATE_VPN_CONNECTION: StaticOperationSchema = (
+    23,
+    n0,
+    _CVCr,
+    0,
+    CREATE_VPN_CONNECTION_INPUT,
+    CREATE_VPN_CONNECTION_OUTPUT,
+    (),
+)
+
+CUSTOMER_GATEWAY_CONFIGURATION: StaticSchema = (3, n0, _cGC, 4)
+
+GATEWAY_ASSOCIATION_STATE: StaticSchema = (
+    14,
+    n0,
+    _GAS,
+    0,
+    (_ass, _na___, _as, _di),
+    ((-1, {_sV: _ass}), (-1, {_sV: _na____}), (-1, {_sV: _as}), (-1, {_sV: _di})),
+)
+
+IKE_VERSIONS_LIST_VALUE: StaticSchema = (
+    18,
+    n0,
+    _IKEVLV,
+    0,
+    (_Va,),
+    ((lambda: schemas.STRING, {_aQN: _Va, _sN: _va}),),
+)
+
+IKE_VERSIONS_LIST: StaticSchema = (
+    16,
+    n0,
+    _IKEVL,
+    0,
+    (_me,),
+    ((IKE_VERSIONS_LIST_VALUE, {_sN: _i}),),
+)
+
+CLOUD_WATCH_LOG_OPTIONS: StaticSchema = (
+    18,
+    n0,
+    _CWLO,
+    0,
+    (_LEo, _LGA, _LOF, _BLE, _BLGA, _BLOF),
+    (
+        (lambda: schemas.BOOLEAN, {_aQN: _LEo, _sN: _lEo}),
+        (lambda: schemas.STRING, {_aQN: _LGA, _sN: _lGA}),
+        (lambda: schemas.STRING, {_aQN: _LOF, _sN: _lOF}),
+        (lambda: schemas.BOOLEAN, {_aQN: _BLE, _sN: _bLE}),
+        (lambda: schemas.STRING, {_aQN: _BLGA, _sN: _bLGA}),
+        (lambda: schemas.STRING, {_aQN: _BLOF, _sN: _bLOF}),
+    ),
+)
+
+VPN_TUNNEL_LOG_OPTIONS: StaticSchema = (
+    18,
+    n0,
+    _VTLO,
+    0,
+    (_CWLO,),
+    ((CLOUD_WATCH_LOG_OPTIONS, {_aQN: _CWLO, _sN: _cWLO}),),
+)
+
+PHASE1_DH_GROUP_NUMBERS_LIST_VALUE: StaticSchema = (
+    18,
+    n0,
+    _PDHGNLV,
+    0,
+    (_Va,),
+    ((lambda: schemas.INTEGER, {_aQN: _Va, _sN: _va}),),
+)
+
+PHASE1_DH_GROUP_NUMBERS_LIST: StaticSchema = (
+    16,
+    n0,
+    _PDHGNL,
+    0,
+    (_me,),
+    ((PHASE1_DH_GROUP_NUMBERS_LIST_VALUE, {_sN: _i}),),
+)
+
+PHASE1_ENCRYPTION_ALGORITHMS_LIST_VALUE: StaticSchema = (
+    18,
+    n0,
+    _PEALV,
+    0,
+    (_Va,),
+    ((lambda: schemas.STRING, {_aQN: _Va, _sN: _va}),),
+)
+
+PHASE1_ENCRYPTION_ALGORITHMS_LIST: StaticSchema = (
+    16,
+    n0,
+    _PEAL,
+    0,
+    (_me,),
+    ((PHASE1_ENCRYPTION_ALGORITHMS_LIST_VALUE, {_sN: _i}),),
+)
+
+PHASE1_INTEGRITY_ALGORITHMS_LIST_VALUE: StaticSchema = (
+    18,
+    n0,
+    _PIALV,
+    0,
+    (_Va,),
+    ((lambda: schemas.STRING, {_aQN: _Va, _sN: _va}),),
+)
+
+PHASE1_INTEGRITY_ALGORITHMS_LIST: StaticSchema = (
+    16,
+    n0,
+    _PIAL,
+    0,
+    (_me,),
+    ((PHASE1_INTEGRITY_ALGORITHMS_LIST_VALUE, {_sN: _i}),),
+)
+
+PHASE2_DH_GROUP_NUMBERS_LIST_VALUE: StaticSchema = (
+    18,
+    n0,
+    _PDHGNLVh,
+    0,
+    (_Va,),
+    ((lambda: schemas.INTEGER, {_aQN: _Va, _sN: _va}),),
+)
+
+PHASE2_DH_GROUP_NUMBERS_LIST: StaticSchema = (
+    16,
+    n0,
+    _PDHGNLh,
+    0,
+    (_me,),
+    ((PHASE2_DH_GROUP_NUMBERS_LIST_VALUE, {_sN: _i}),),
+)
+
+PHASE2_ENCRYPTION_ALGORITHMS_LIST_VALUE: StaticSchema = (
+    18,
+    n0,
+    _PEALVh,
+    0,
+    (_Va,),
+    ((lambda: schemas.STRING, {_aQN: _Va, _sN: _va}),),
+)
+
+PHASE2_ENCRYPTION_ALGORITHMS_LIST: StaticSchema = (
+    16,
+    n0,
+    _PEALh,
+    0,
+    (_me,),
+    ((PHASE2_ENCRYPTION_ALGORITHMS_LIST_VALUE, {_sN: _i}),),
+)
+
+PHASE2_INTEGRITY_ALGORITHMS_LIST_VALUE: StaticSchema = (
+    18,
+    n0,
+    _PIALVh,
+    0,
+    (_Va,),
+    ((lambda: schemas.STRING, {_aQN: _Va, _sN: _va}),),
+)
+
+PHASE2_INTEGRITY_ALGORITHMS_LIST: StaticSchema = (
+    16,
+    n0,
+    _PIALh,
+    0,
+    (_me,),
+    ((PHASE2_INTEGRITY_ALGORITHMS_LIST_VALUE, {_sN: _i}),),
+)
+
+TUNNEL_OPTION: StaticSchema = (
+    18,
+    n0,
+    _TOu,
+    0,
+    (
+        _OIA,
+        _TICu,
+        _TIIC,
+        _PSK,
+        _PLSh,
+        _PLSha,
+        _RMTS,
+        _RFP,
+        _RWS,
+        _DTS,
+        _DTA,
+        _PEAha,
+        _PEAhas,
+        _PIAha,
+        _PIAhas,
+        _PDHGN,
+        _PDHGNha,
+        _IVk,
+        _SAt,
+        _LO,
+        _ETLC,
+        _PAKE,
+        _PAKEh,
+    ),
+    (
+        (lambda: schemas.STRING, {_aQN: _OIA, _sN: _oIA}),
+        (lambda: schemas.STRING, {_aQN: _TICu, _sN: _tICu}),
+        (lambda: schemas.STRING, {_aQN: _TIIC, _sN: _tIIC}),
+        (lambda: schemas.PRE_SHARED_KEY, {_aQN: _PSK, _sN: _pSK}),
+        (lambda: schemas.INTEGER, {_aQN: _PLSh, _sN: _pLS}),
+        (lambda: schemas.INTEGER, {_aQN: _PLSha, _sN: _pLSh}),
+        (lambda: schemas.INTEGER, {_aQN: _RMTS, _sN: _rMTS}),
+        (lambda: schemas.INTEGER, {_aQN: _RFP, _sN: _rFP}),
+        (lambda: schemas.INTEGER, {_aQN: _RWS, _sN: _rWS}),
+        (lambda: schemas.INTEGER, {_aQN: _DTS, _sN: _dTS}),
+        (lambda: schemas.STRING, {_aQN: _DTA, _sN: _dTA}),
+        (PHASE1_ENCRYPTION_ALGORITHMS_LIST, {_aQN: _PEAS, _sN: _pEAS}),
+        (PHASE2_ENCRYPTION_ALGORITHMS_LIST, {_aQN: _PEASh, _sN: _pEASh}),
+        (PHASE1_INTEGRITY_ALGORITHMS_LIST, {_aQN: _PIASh, _sN: _pIASh}),
+        (PHASE2_INTEGRITY_ALGORITHMS_LIST, {_aQN: _PIASha, _sN: _pIASha}),
+        (PHASE1_DH_GROUP_NUMBERS_LIST, {_aQN: _PDHGNS, _sN: _pDHGNS}),
+        (PHASE2_DH_GROUP_NUMBERS_LIST, {_aQN: _PDHGNSh, _sN: _pDHGNSh}),
+        (IKE_VERSIONS_LIST, {_aQN: _IVS, _sN: _iVS}),
+        (lambda: schemas.STRING, {_aQN: _SAt, _sN: _sAt}),
+        (VPN_TUNNEL_LOG_OPTIONS, {_aQN: _LO, _sN: _lO}),
+        (lambda: schemas.BOOLEAN, {_aQN: _ETLC, _sN: _eTLC}),
+        (lambda: schemas.ADDITIONAL_KEY_EXCHANGES_LIST, {_aQN: _PAKES, _sN: _pAKES}),
+        (lambda: schemas.ADDITIONAL_KEY_EXCHANGES_LIST, {_aQN: _PAKESh, _sN: _pAKESh}),
+    ),
+)
+
+TUNNEL_OPTIONS_LIST: StaticSchema = (
+    16,
+    n0,
+    _TOL,
+    0,
+    (_me,),
+    ((TUNNEL_OPTION, {_sN: _i}),),
+)
 
 VPN_CONNECTION_OPTIONS: StaticSchema = (
     18,
@@ -440,7 +724,7 @@ VPN_CONNECTION_OPTIONS: StaticSchema = (
         (lambda: schemas.STRING, {_aQN: _OIAT, _sN: _oIAT}),
         (lambda: schemas.STRING, {_aQN: _TTGAI, _sN: _tTGAI}),
         (lambda: schemas.TUNNEL_INSIDE_IP_VERSION, {_aQN: _TIIV, _sN: _tIIV}),
-        (lambda: schemas.TUNNEL_OPTIONS_LIST, {_aQN: _TOS, _sN: _tOS}),
+        (TUNNEL_OPTIONS_LIST, {_aQN: _TOS, _sN: _tOS}),
         (lambda: schemas.VPN_TUNNEL_BANDWIDTH, {_aQN: _TB, _sN: _tB}),
     ),
 )
@@ -549,7 +833,7 @@ VPN_CONNECTION: StaticSchema = (
         (lambda: schemas.STRING, {_aQN: _VCI, _sN: _vCI}),
         (lambda: schemas.STRING, {_aQN: _CNA, _sN: _cNA}),
         (lambda: schemas.STRING, {_aQN: _CNAA, _sN: _cNAA}),
-        (lambda: schemas.GATEWAY_ASSOCIATION_STATE, {_aQN: _GAS, _sN: _gAS}),
+        (GATEWAY_ASSOCIATION_STATE, {_aQN: _GAS, _sN: _gAS}),
         (VPN_CONNECTION_OPTIONS, {_aQN: _O, _sN: _o}),
         (VPN_STATIC_ROUTE_LIST, {_aQN: _Rout, _sN: _rout}),
         (lambda: schemas.TAG_LIST, {_aQN: _TSag, _sN: _tS}),
@@ -557,8 +841,8 @@ VPN_CONNECTION: StaticSchema = (
         (lambda: schemas.STRING, {_aQN: _PSKA, _sN: _pSKA}),
         (lambda: schemas.STRING, {_aQN: _VCIp, _sN: _vCIp}),
         (VPN_STATE, {_aQN: _St, _sN: _st}),
-        (lambda: schemas.CUSTOMER_GATEWAY_CONFIGURATION, {_aQN: _CGC, _sN: _cGC}),
-        (GATEWAY_TYPE, {_aQN: _Ty, _sN: _ty}),
+        (CUSTOMER_GATEWAY_CONFIGURATION, {_aQN: _CGC, _sN: _cGC}),
+        (lambda: schemas.GATEWAY_TYPE, {_aQN: _Ty, _sN: _ty}),
         (lambda: schemas.STRING, {_aQN: _CGIu, _sN: _cGIu}),
         (lambda: schemas.STRING, {_aQN: _VGI, _sN: _vGI}),
     ),
@@ -603,7 +887,7 @@ CREATE_VPN_GATEWAY_INPUT: StaticSchema = (
     (_AZ, _Ty, _TSa, _ASA, _DR),
     (
         (lambda: schemas.STRING, 0),
-        (GATEWAY_TYPE, {_sO: None, _smi: None}),
+        (lambda: schemas.GATEWAY_TYPE, {_sO: None, _smi: None}),
         (lambda: schemas.TAG_SPECIFICATION_LIST, {_sN: _TS}),
         (lambda: schemas.LONG, 0),
         (lambda: schemas.BOOLEAN, {_aQN: _DR, _sN: _dRr}),
@@ -649,7 +933,7 @@ VPN_GATEWAY: StaticSchema = (
         (lambda: schemas.TAG_LIST, {_aQN: _TSag, _sN: _tS}),
         (lambda: schemas.STRING, {_aQN: _VGI, _sN: _vGI}),
         (VPN_STATE, {_aQN: _St, _sN: _st}),
-        (GATEWAY_TYPE, {_aQN: _Ty, _sN: _ty}),
+        (lambda: schemas.GATEWAY_TYPE, {_aQN: _Ty, _sN: _ty}),
         (lambda: schemas.STRING, {_aQN: _AZ, _sN: _aZ}),
         (VPC_ATTACHMENT_LIST, {_aQN: _Att, _sN: _attac}),
     ),
@@ -1331,410 +1615,5 @@ DELETE_INTERNET_GATEWAY: StaticOperationSchema = (
     0,
     DELETE_INTERNET_GATEWAY_INPUT,
     DELETE_INTERNET_GATEWAY_OUTPUT,
-    (),
-)
-
-DELETE_IPAM_INPUT: StaticSchema = (
-    18,
-    n0,
-    _DII,
-    {_sSI: _cDIR, _sm: None},
-    (_DR, _IIp, _Cas),
-    (
-        (lambda: schemas.BOOLEAN, 0),
-        (lambda: schemas.IPAM_ID, {_sO: None, _smi: None}),
-        (lambda: schemas.BOOLEAN, 0),
-    ),
-)
-
-DELETE_IPAM_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _DIO,
-    {_sSI: _cDIRo, _smit: None},
-    (_Ipa,),
-    ((lambda: schemas.IPAM, {_aQN: _Ipa, _sN: _ip}),),
-)
-
-DELETE_IPAM: StaticOperationSchema = (
-    23,
-    n0,
-    _DIel,
-    0,
-    DELETE_IPAM_INPUT,
-    DELETE_IPAM_OUTPUT,
-    (),
-)
-
-DELETE_IPAM_EXTERNAL_RESOURCE_VERIFICATION_TOKEN_INPUT: StaticSchema = (
-    18,
-    n0,
-    _DIERVTI,
-    {_sSI: _cDIERVTR, _sm: None},
-    (_DR, _IERVTI),
-    (
-        (lambda: schemas.BOOLEAN, 0),
-        (
-            lambda: schemas.IPAM_EXTERNAL_RESOURCE_VERIFICATION_TOKEN_ID,
-            {_sO: None, _smi: None},
-        ),
-    ),
-)
-
-DELETE_IPAM_EXTERNAL_RESOURCE_VERIFICATION_TOKEN_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _DIERVTO,
-    {_sSI: _cDIERVTRo, _smit: None},
-    (_IERVT,),
-    (
-        (
-            lambda: schemas.IPAM_EXTERNAL_RESOURCE_VERIFICATION_TOKEN,
-            {_aQN: _IERVT, _sN: _iERVT},
-        ),
-    ),
-)
-
-DELETE_IPAM_EXTERNAL_RESOURCE_VERIFICATION_TOKEN: StaticOperationSchema = (
-    23,
-    n0,
-    _DIERVT,
-    0,
-    DELETE_IPAM_EXTERNAL_RESOURCE_VERIFICATION_TOKEN_INPUT,
-    DELETE_IPAM_EXTERNAL_RESOURCE_VERIFICATION_TOKEN_OUTPUT,
-    (),
-)
-
-DELETE_IPAM_INTERNET_REGISTRY_ASSOCIATION_INPUT: StaticSchema = (
-    18,
-    n0,
-    _DIIRAI,
-    {_sSI: _cDIIRAR, _sm: None},
-    (_DR, _IIRAI),
-    (
-        (lambda: schemas.BOOLEAN, 0),
-        (
-            lambda: schemas.IPAM_INTERNET_REGISTRY_ASSOCIATION_ID,
-            {_sO: None, _smi: None},
-        ),
-    ),
-)
-
-DELETE_IPAM_INTERNET_REGISTRY_ASSOCIATION_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _DIIRAO,
-    {_sSI: _cDIIRARo, _smit: None},
-    (_IIRA,),
-    ((lambda: schemas.IPAM_INTERNET_REGISTRY_ASSOCIATION, {_aQN: _IIRA, _sN: _iIRA}),),
-)
-
-DELETE_IPAM_INTERNET_REGISTRY_ASSOCIATION: StaticOperationSchema = (
-    23,
-    n0,
-    _DIIRA,
-    0,
-    DELETE_IPAM_INTERNET_REGISTRY_ASSOCIATION_INPUT,
-    DELETE_IPAM_INTERNET_REGISTRY_ASSOCIATION_OUTPUT,
-    (),
-)
-
-DELETE_IPAM_POLICY_INPUT: StaticSchema = (
-    18,
-    n0,
-    _DIPI,
-    {_sSI: _cDIPR, _sm: None},
-    (_DR, _IPIp),
-    (
-        (lambda: schemas.BOOLEAN, 0),
-        (lambda: schemas.IPAM_POLICY_ID, {_sO: None, _smi: None}),
-    ),
-)
-
-DELETE_IPAM_POLICY_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _DIPO,
-    {_sSI: _cDIPRo, _smit: None},
-    (_IPpa,),
-    ((lambda: schemas.IPAM_POLICY, {_aQN: _IPpa, _sN: _iPpa}),),
-)
-
-DELETE_IPAM_POLICY: StaticOperationSchema = (
-    23,
-    n0,
-    _DIPe,
-    0,
-    DELETE_IPAM_POLICY_INPUT,
-    DELETE_IPAM_POLICY_OUTPUT,
-    (),
-)
-
-DELETE_IPAM_POOL_INPUT: StaticSchema = (
-    18,
-    n0,
-    _DIPIe,
-    {_sSI: _cDIPRom, _sm: None},
-    (_DR, _IPI, _Cas),
-    (
-        (lambda: schemas.BOOLEAN, 0),
-        (lambda: schemas.IPAM_POOL_ID, {_sO: None, _smi: None}),
-        (lambda: schemas.BOOLEAN, 0),
-    ),
-)
-
-DELETE_IPAM_POOL_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _DIPOe,
-    {_sSI: _cDIPRoma, _smit: None},
-    (_IPpam,),
-    ((lambda: schemas.IPAM_POOL, {_aQN: _IPpam, _sN: _iPpam}),),
-)
-
-DELETE_IPAM_POOL: StaticOperationSchema = (
-    23,
-    n0,
-    _DIPel,
-    0,
-    DELETE_IPAM_POOL_INPUT,
-    DELETE_IPAM_POOL_OUTPUT,
-    (),
-)
-
-DELETE_IPAM_PREFIX_LIST_RESOLVER_INPUT: StaticSchema = (
-    18,
-    n0,
-    _DIPLRI,
-    {_sSI: _cDIPLRR, _sm: None},
-    (_DR, _IPLRI),
-    (
-        (lambda: schemas.BOOLEAN, 0),
-        (lambda: schemas.IPAM_PREFIX_LIST_RESOLVER_ID, {_sO: None, _smi: None}),
-    ),
-)
-
-DELETE_IPAM_PREFIX_LIST_RESOLVER_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _DIPLRO,
-    {_sSI: _cDIPLRRo, _smit: None},
-    (_IPLR,),
-    ((lambda: schemas.IPAM_PREFIX_LIST_RESOLVER, {_aQN: _IPLR, _sN: _iPLR}),),
-)
-
-DELETE_IPAM_PREFIX_LIST_RESOLVER: StaticOperationSchema = (
-    23,
-    n0,
-    _DIPLR,
-    0,
-    DELETE_IPAM_PREFIX_LIST_RESOLVER_INPUT,
-    DELETE_IPAM_PREFIX_LIST_RESOLVER_OUTPUT,
-    (),
-)
-
-DELETE_IPAM_PREFIX_LIST_RESOLVER_TARGET_INPUT: StaticSchema = (
-    18,
-    n0,
-    _DIPLRTI,
-    {_sSI: _cDIPLRTR, _sm: None},
-    (_DR, _IPLRTI),
-    (
-        (lambda: schemas.BOOLEAN, 0),
-        (lambda: schemas.IPAM_PREFIX_LIST_RESOLVER_TARGET_ID, {_sO: None, _smi: None}),
-    ),
-)
-
-DELETE_IPAM_PREFIX_LIST_RESOLVER_TARGET_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _DIPLRTO,
-    {_sSI: _cDIPLRTRo, _smit: None},
-    (_IPLRT,),
-    ((lambda: schemas.IPAM_PREFIX_LIST_RESOLVER_TARGET, {_aQN: _IPLRT, _sN: _iPLRT}),),
-)
-
-DELETE_IPAM_PREFIX_LIST_RESOLVER_TARGET: StaticOperationSchema = (
-    23,
-    n0,
-    _DIPLRT,
-    0,
-    DELETE_IPAM_PREFIX_LIST_RESOLVER_TARGET_INPUT,
-    DELETE_IPAM_PREFIX_LIST_RESOLVER_TARGET_OUTPUT,
-    (),
-)
-
-DELETE_IPAM_RESOURCE_DISCOVERY_INPUT: StaticSchema = (
-    18,
-    n0,
-    _DIRDI,
-    {_sSI: _cDIRDR, _sm: None},
-    (_DR, _IRDI),
-    (
-        (lambda: schemas.BOOLEAN, 0),
-        (lambda: schemas.IPAM_RESOURCE_DISCOVERY_ID, {_sO: None, _smi: None}),
-    ),
-)
-
-DELETE_IPAM_RESOURCE_DISCOVERY_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _DIRDO,
-    {_sSI: _cDIRDRo, _smit: None},
-    (_IRD,),
-    ((lambda: schemas.IPAM_RESOURCE_DISCOVERY, {_aQN: _IRD, _sN: _iRD}),),
-)
-
-DELETE_IPAM_RESOURCE_DISCOVERY: StaticOperationSchema = (
-    23,
-    n0,
-    _DIRD,
-    0,
-    DELETE_IPAM_RESOURCE_DISCOVERY_INPUT,
-    DELETE_IPAM_RESOURCE_DISCOVERY_OUTPUT,
-    (),
-)
-
-DELETE_IPAM_ROUTING_POLICY_REGISTRATION_INPUT: StaticSchema = (
-    18,
-    n0,
-    _DIRPRI,
-    {_sSI: _cDIRPRR, _sm: None},
-    (_DR, _IIRAI, _Ci, _Fo, _CTl),
-    (
-        (lambda: schemas.BOOLEAN, 0),
-        (
-            lambda: schemas.IPAM_INTERNET_REGISTRY_ASSOCIATION_ID,
-            {_sO: None, _smi: None},
-        ),
-        (lambda: schemas.STRING, {_sO: None, _smi: None}),
-        (lambda: schemas.BOXED_BOOLEAN, 0),
-        (lambda: schemas.STRING, 2),
-    ),
-)
-
-DELETE_IPAM_ROUTING_POLICY_REGISTRATION_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _DIRPRO,
-    {_sSI: _cDIRPRRo, _smit: None},
-    (_IRPRD,),
-    (
-        (
-            lambda: schemas.IPAM_ROUTING_POLICY_REGISTRATION_DELTA,
-            {_aQN: _IRPRD, _sN: _iRPRD},
-        ),
-    ),
-)
-
-DELETE_IPAM_ROUTING_POLICY_REGISTRATION: StaticOperationSchema = (
-    23,
-    n0,
-    _DIRPR,
-    0,
-    DELETE_IPAM_ROUTING_POLICY_REGISTRATION_INPUT,
-    DELETE_IPAM_ROUTING_POLICY_REGISTRATION_OUTPUT,
-    (),
-)
-
-DELETE_IPAM_SCOPE_INPUT: StaticSchema = (
-    18,
-    n0,
-    _DISI,
-    {_sSI: _cDISR, _sm: None},
-    (_DR, _ISI),
-    (
-        (lambda: schemas.BOOLEAN, 0),
-        (lambda: schemas.IPAM_SCOPE_ID, {_sO: None, _smi: None}),
-    ),
-)
-
-DELETE_IPAM_SCOPE_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _DISO,
-    {_sSI: _cDISRo, _smit: None},
-    (_ISpam,),
-    ((lambda: schemas.IPAM_SCOPE, {_aQN: _ISpam, _sN: _iSpa}),),
-)
-
-DELETE_IPAM_SCOPE: StaticOperationSchema = (
-    23,
-    n0,
-    _DIS,
-    0,
-    DELETE_IPAM_SCOPE_INPUT,
-    DELETE_IPAM_SCOPE_OUTPUT,
-    (),
-)
-
-KEY_PAIR_NAME_WITH_RESOLVER: StaticSchema = (3, n0, _KPNWR, 0)
-
-KEY_PAIR_ID: StaticSchema = (3, n0, _KPI, 0)
-
-DELETE_KEY_PAIR_INPUT: StaticSchema = (
-    18,
-    n0,
-    _DKPI,
-    {_sSI: _cDKPR, _sm: None},
-    (_KN, _KPI, _DR),
-    (
-        (KEY_PAIR_NAME_WITH_RESOLVER, 0),
-        (KEY_PAIR_ID, 0),
-        (lambda: schemas.BOOLEAN, {_aQN: _DR, _sN: _dRr}),
-    ),
-)
-
-DELETE_KEY_PAIR_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _DKPO,
-    {_sSI: _cDKPRo, _smit: None},
-    (_R, _KPI),
-    (
-        (lambda: schemas.BOOLEAN, {_aQN: _R, _sN: _r}),
-        (lambda: schemas.STRING, {_aQN: _KPI, _sN: _kPI}),
-    ),
-)
-
-DELETE_KEY_PAIR: StaticOperationSchema = (
-    23,
-    n0,
-    _DKP,
-    0,
-    DELETE_KEY_PAIR_INPUT,
-    DELETE_KEY_PAIR_OUTPUT,
-    (),
-)
-
-DELETE_LAUNCH_TEMPLATE_INPUT: StaticSchema = (
-    18,
-    n0,
-    _DLTI,
-    {_sSI: _cDLTR, _sm: None},
-    (_DR, _LTI, _LTN),
-    (
-        (lambda: schemas.BOOLEAN, 0),
-        (lambda: schemas.LAUNCH_TEMPLATE_ID, 0),
-        (lambda: schemas.LAUNCH_TEMPLATE_NAME, 0),
-    ),
-)
-
-DELETE_LAUNCH_TEMPLATE_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _DLTO,
-    {_sSI: _cDLTRo, _smit: None},
-    (_LT,),
-    ((lambda: schemas.LAUNCH_TEMPLATE, {_aQN: _LT, _sN: _lT}),),
-)
-
-DELETE_LAUNCH_TEMPLATE: StaticOperationSchema = (
-    23,
-    n0,
-    _DLT,
-    0,
-    DELETE_LAUNCH_TEMPLATE_INPUT,
-    DELETE_LAUNCH_TEMPLATE_OUTPUT,
     (),
 )

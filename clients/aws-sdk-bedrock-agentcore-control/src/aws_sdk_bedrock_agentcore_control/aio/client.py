@@ -81,6 +81,7 @@ if TYPE_CHECKING:
         DeleteRegistryRecordOutput,
         DeleteResourcePolicyOutput,
         DeleteWorkloadIdentityOutput,
+        GetAgentInsightStoreOutput,
         GetAgentRuntimeEndpointOutput,
         GetAgentRuntimeOutput,
         GetApiKeyCredentialProviderOutput,
@@ -116,6 +117,7 @@ if TYPE_CHECKING:
         GetResourcePolicyOutput,
         GetTokenVaultOutput,
         GetWorkloadIdentityOutput,
+        ListAgentInsightStoresOutput,
         ListAgentRuntimeEndpointsOutput,
         ListAgentRuntimeVersionsByCapacityProviderOutput,
         ListAgentRuntimeVersionsOutput,
@@ -165,6 +167,7 @@ if TYPE_CHECKING:
         SynchronizeGatewayTargetsOutput,
         TagResourceOutput,
         UntagResourceOutput,
+        UpdateAgentInsightStoreOutput,
         UpdateAgentRuntimeEndpointOutput,
         UpdateAgentRuntimeOutput,
         UpdateApiKeyCredentialProviderOutput,
@@ -2878,6 +2881,50 @@ class AsyncBedrockAgentCoreControlClient(
         )
 
     @_overload
+    async def get_agent_insight_store(
+        self,
+        request: _models.GetAgentInsightStoreInput
+        | _models.GetAgentInsightStoreInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetAgentInsightStoreOutput: ...
+
+    @_overload
+    async def get_agent_insight_store(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetAgentInsightStoreInputDict],
+    ) -> GetAgentInsightStoreOutput:
+        """
+        Returns the account's service-defined default Agent Insight Store. The
+        logical default exists for every enrolled account; its backing state may
+        be initialized on first access.
+
+        Args:
+            plugins:
+                A list of callables that modify the configuration dynamically.
+                Changes made by these plugins only apply for the duration of the
+                operation execution and will not affect any other operation
+                invocations.
+
+        Returns:
+            An instance of `GetAgentInsightStoreOutput`.
+        """
+
+    async def get_agent_insight_store(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetAgentInsightStoreOutput:
+        return await self._invoke(
+            self._select_input(_models.GET_AGENT_INSIGHT_STORE, args, kwargs),
+            _models.GET_AGENT_INSIGHT_STORE,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def get_agent_runtime(
         self,
         request: _models.GetAgentRuntimeInput | _models.GetAgentRuntimeInputDict,
@@ -4368,6 +4415,49 @@ class AsyncBedrockAgentCoreControlClient(
         )
 
     @_overload
+    async def list_agent_insight_stores(
+        self,
+        request: _models.ListAgentInsightStoresInput
+        | _models.ListAgentInsightStoresInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListAgentInsightStoresOutput: ...
+
+    @_overload
+    async def list_agent_insight_stores(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListAgentInsightStoresInputDict],
+    ) -> ListAgentInsightStoresOutput:
+        """
+        Lists the account's service-defined default Agent Insight Store. The
+        singleton backing state may be initialized on first access.
+
+        Args:
+            plugins:
+                A list of callables that modify the configuration dynamically.
+                Changes made by these plugins only apply for the duration of the
+                operation execution and will not affect any other operation
+                invocations.
+
+        Returns:
+            An instance of `ListAgentInsightStoresOutput`.
+        """
+
+    async def list_agent_insight_stores(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListAgentInsightStoresOutput:
+        return await self._invoke(
+            self._select_input(_models.LIST_AGENT_INSIGHT_STORES, args, kwargs),
+            _models.LIST_AGENT_INSIGHT_STORES,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def list_agent_runtime_endpoints(
         self,
         request: _models.ListAgentRuntimeEndpointsInput
@@ -4901,7 +4991,9 @@ class AsyncBedrockAgentCoreControlClient(
         Returns paginated examples from the dataset. The server embeds the
         resolved version in the pagination token. Once pagination begins, all
         subsequent pages are pinned to that version regardless of concurrent
-        mutations.
+        mutations. A request with a pagination token can omit `datasetVersion`.
+        If it sets a version that differs from the token's version, the request
+        fails with a `ValidationException`.
 
         Args:
             plugins:
@@ -6540,6 +6632,49 @@ class AsyncBedrockAgentCoreControlClient(
         return await self._invoke(
             self._select_input(_models.UNTAG_RESOURCE, args, kwargs),
             _models.UNTAG_RESOURCE,
+            [],
+            plugins,
+        )
+
+    @_overload
+    async def update_agent_insight_store(
+        self,
+        request: _models.UpdateAgentInsightStoreInput
+        | _models.UpdateAgentInsightStoreInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UpdateAgentInsightStoreOutput: ...
+
+    @_overload
+    async def update_agent_insight_store(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateAgentInsightStoreInputDict],
+    ) -> UpdateAgentInsightStoreOutput:
+        """
+        Updates the enablement status or encryption configuration of an Agent
+        Insight Store.
+
+        Args:
+            plugins:
+                A list of callables that modify the configuration dynamically.
+                Changes made by these plugins only apply for the duration of the
+                operation execution and will not affect any other operation
+                invocations.
+
+        Returns:
+            An instance of `UpdateAgentInsightStoreOutput`.
+        """
+
+    async def update_agent_insight_store(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateAgentInsightStoreOutput:
+        return await self._invoke(
+            self._select_input(_models.UPDATE_AGENT_INSIGHT_STORE, args, kwargs),
+            _models.UPDATE_AGENT_INSIGHT_STORE,
             [],
             plugins,
         )

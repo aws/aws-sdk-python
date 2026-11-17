@@ -8,12 +8,12 @@ from . import schemas
 
 
 n0 = "com.amazonaws.lambda"
-_s = "smithy.api#default"
+_s = "smithy.api#required"
+_sm = "smithy.api#default"
 _SI = "StatementId"
 _sSI = "smithy.synthetic#originalShapeId"
-_sm = "smithy.api#input"
+_smi = "smithy.api#input"
 _LN = "LayerName"
-_smi = "smithy.api#required"
 _sL = "smithy.api#httpLabel"
 _VN = "VersionNumber"
 _RI = "RevisionId"
@@ -24,7 +24,7 @@ _c = "client"
 _sE = "smithy.api#httpError"
 _T = "Type"
 _m = "message"
-_M = "Message"
+_Me = "Message"
 _smithy = "smithy.api#http"
 _Ar = "Arn"
 _FN = "FunctionName"
@@ -66,8 +66,18 @@ _RPCE = "RequestedProvisionedConcurrentExecutions"
 _APCE = "AvailableProvisionedConcurrentExecutions"
 _APCEl = "AllocatedProvisionedConcurrentExecutions"
 _SRt = "StatusReason"
+_GFEICI = "GetFunctionEventInvokeConfigInput"
+_cGFEICR = "com.amazonaws.lambda#GetFunctionEventInvokeConfigRequest"
 _MEAIS = "MaximumEventAgeInSeconds"
+_GFEICO = "GetFunctionEventInvokeConfigOutput"
 _cFEIC = "com.amazonaws.lambda#FunctionEventInvokeConfig"
+_GFEIC = "GetFunctionEventInvokeConfig"
+_GRPI = "GetResourcePolicyInput"
+_cGRPR = "com.amazonaws.lambda#GetResourcePolicyRequest"
+_RP = "ResourcePolicy"
+_GRPO = "GetResourcePolicyOutput"
+_cGRPRo = "com.amazonaws.lambda#GetResourcePolicyResponse"
+_GRP = "GetResourcePolicy"
 _MLLI = "MaxLayerListItems"
 _LLI = "ListLayersInput"
 _cLLR = "com.amazonaws.lambda#ListLayersRequest"
@@ -207,13 +217,110 @@ _aw = "aws.api#service"
 _aws = "aws.auth#sigv4"
 _aJ = "aws.protocols#restJson1"
 
+GET_FUNCTION_EVENT_INVOKE_CONFIG_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GFEICI,
+    {_sSI: _cGFEICR, _smi: None},
+    (_FN, _Q),
+    (
+        (lambda: schemas.NAMESPACED_FUNCTION_NAME, 9),
+        (lambda: schemas.NUMERIC_LATEST_PUBLISHED_OR_ALIAS_QUALIFIER, {_sQ: _Q}),
+    ),
+)
+
+GET_FUNCTION_EVENT_INVOKE_CONFIG_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GFEICO,
+    {_sSI: _cFEIC, _smit: None},
+    (_LM, _FA, _MRA, _MEAIS, _DCe),
+    (
+        (lambda: schemas.DATE, 0),
+        (lambda: schemas.FUNCTION_ARN, 0),
+        (lambda: MAXIMUM_RETRY_ATTEMPTS, 0),
+        (lambda: MAXIMUM_EVENT_AGE_IN_SECONDS, 0),
+        (lambda: schemas.DESTINATION_CONFIG, 0),
+    ),
+)
+
+GET_FUNCTION_EVENT_INVOKE_CONFIG: StaticOperationSchema = (
+    23,
+    n0,
+    _GFEIC,
+    {
+        _smithy: MappingProxyType(
+            {
+                "method": "GET",
+                "uri": "/2019-09-25/functions/{FunctionName}/event-invoke-config",
+                "code": 200,
+            }
+        )
+    },
+    GET_FUNCTION_EVENT_INVOKE_CONFIG_INPUT,
+    GET_FUNCTION_EVENT_INVOKE_CONFIG_OUTPUT,
+    (
+        lambda: schemas.INVALID_PARAMETER_VALUE_EXCEPTION,
+        lambda: schemas.RESOURCE_NOT_FOUND_EXCEPTION,
+        lambda: schemas.SERVICE_EXCEPTION,
+        lambda: schemas.TOO_MANY_REQUESTS_EXCEPTION,
+    ),
+)
+
+MAXIMUM_EVENT_AGE_IN_SECONDS: StaticSchema = (7, n0, _MEAIS, 0)
+
+MAXIMUM_RETRY_ATTEMPTS: StaticSchema = (7, n0, _MRA, 0)
+
+GET_RESOURCE_POLICY_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GRPI,
+    {_sSI: _cGRPR, _smi: None},
+    (_RAe,),
+    ((lambda: schemas.POLICY_RESOURCE_ARN, 9),),
+)
+
+GET_RESOURCE_POLICY_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GRPO,
+    {_sSI: _cGRPRo, _smit: None},
+    (_Po, _RI),
+    ((lambda: RESOURCE_POLICY, 0), (lambda: schemas.REVISION_ID, 0)),
+)
+
+GET_RESOURCE_POLICY: StaticOperationSchema = (
+    23,
+    n0,
+    _GRP,
+    {
+        _smithy: MappingProxyType(
+            {
+                "method": "GET",
+                "uri": "/2026-07-09/resource-policy/{ResourceArn}",
+                "code": 200,
+            }
+        )
+    },
+    GET_RESOURCE_POLICY_INPUT,
+    GET_RESOURCE_POLICY_OUTPUT,
+    (
+        lambda: schemas.INVALID_PARAMETER_VALUE_EXCEPTION,
+        lambda: schemas.RESOURCE_NOT_FOUND_EXCEPTION,
+        lambda: schemas.SERVICE_EXCEPTION,
+        lambda: schemas.TOO_MANY_REQUESTS_EXCEPTION,
+    ),
+)
+
+RESOURCE_POLICY: StaticSchema = (3, n0, _RP, 0)
+
 MAX_LAYER_LIST_ITEMS: StaticSchema = (7, n0, _MLLI, 0)
 
 LIST_LAYERS_INPUT: StaticSchema = (
     18,
     n0,
     _LLI,
-    {_sSI: _cLLR, _sm: None},
+    {_sSI: _cLLR, _smi: None},
     (_CAo, _CR, _Mar, _MI),
     (
         (lambda: schemas.ARCHITECTURE, {_sQ: _CAo}),
@@ -278,7 +385,7 @@ LAYER_VERSIONS_LIST_ITEM: StaticSchema = (
     (_LVA, _V, _D, _CDr, _CAom, _CRo, _LI),
     (
         (lambda: schemas.LAYER_VERSION_ARN, 0),
-        (lambda: schemas.LAYER_VERSION_NUMBER, {_s: 0}),
+        (lambda: schemas.LAYER_VERSION_NUMBER, {_sm: 0}),
         (lambda: schemas.DESCRIPTION, 0),
         (lambda: schemas.TIMESTAMP, 0),
         (COMPATIBLE_ARCHITECTURES, 0),
@@ -306,11 +413,11 @@ DELETE_LAYER_VERSION_INPUT: StaticSchema = (
     18,
     n0,
     _DLVI,
-    {_sSI: _cDLVR, _sm: None},
+    {_sSI: _cDLVR, _smi: None},
     (_LN, _VN),
     (
         (lambda: schemas.LAYER_NAME_OR_ARN, 9),
-        (lambda: schemas.LAYER_VERSION_NUMBER, {_s: None, _smi: None, _sL: None}),
+        (lambda: schemas.LAYER_VERSION_NUMBER, {_sm: None, _s: None, _sL: None}),
     ),
 )
 
@@ -343,11 +450,11 @@ GET_LAYER_VERSION_INPUT: StaticSchema = (
     18,
     n0,
     _GLVI,
-    {_sSI: _cGLVR, _sm: None},
+    {_sSI: _cGLVR, _smi: None},
     (_LN, _VN),
     (
         (lambda: schemas.LAYER_NAME_OR_ARN, 9),
-        (lambda: schemas.LAYER_VERSION_NUMBER, {_s: None, _smi: None, _sL: None}),
+        (lambda: schemas.LAYER_VERSION_NUMBER, {_sm: None, _s: None, _sL: None}),
     ),
 )
 
@@ -363,7 +470,7 @@ GET_LAYER_VERSION_OUTPUT: StaticSchema = (
         (lambda: schemas.LAYER_VERSION_ARN, 0),
         (lambda: schemas.DESCRIPTION, 0),
         (lambda: schemas.TIMESTAMP, 0),
-        (lambda: schemas.LAYER_VERSION_NUMBER, {_s: 0}),
+        (lambda: schemas.LAYER_VERSION_NUMBER, {_sm: 0}),
         (COMPATIBLE_ARCHITECTURES, 0),
         (COMPATIBLE_RUNTIMES, 0),
         (LICENSE_INFO, 0),
@@ -402,7 +509,7 @@ LAYER_VERSION_CONTENT_OUTPUT: StaticSchema = (
     (
         (lambda: schemas.SENSITIVE_STRING_ON_SERVER_ONLY, 0),
         (lambda: schemas.STRING, 0),
-        (lambda: schemas.LONG, {_s: 0}),
+        (lambda: schemas.LONG, {_sm: 0}),
         (lambda: schemas.ARN, 0),
         (lambda: schemas.ARN, 0),
         (lambda: schemas.RESOLVED_S3_OBJECT, 0),
@@ -413,9 +520,9 @@ GET_LAYER_VERSION_BY_ARN_INPUT: StaticSchema = (
     18,
     n0,
     _GLVBAI,
-    {_sSI: _cGLVBAR, _sm: None},
+    {_sSI: _cGLVBAR, _smi: None},
     (_Ar,),
-    ((lambda: schemas.LAYER_VERSION_ARN, {_sQ: _Ar, _smi: None}),),
+    ((lambda: schemas.LAYER_VERSION_ARN, {_sQ: _Ar, _s: None}),),
 )
 
 GET_LAYER_VERSION_BY_ARN_OUTPUT: StaticSchema = (
@@ -430,7 +537,7 @@ GET_LAYER_VERSION_BY_ARN_OUTPUT: StaticSchema = (
         (lambda: schemas.LAYER_VERSION_ARN, 0),
         (lambda: schemas.DESCRIPTION, 0),
         (lambda: schemas.TIMESTAMP, 0),
-        (lambda: schemas.LAYER_VERSION_NUMBER, {_s: 0}),
+        (lambda: schemas.LAYER_VERSION_NUMBER, {_sm: 0}),
         (COMPATIBLE_ARCHITECTURES, 0),
         (COMPATIBLE_RUNTIMES, 0),
         (LICENSE_INFO, 0),
@@ -464,11 +571,11 @@ GET_LAYER_VERSION_POLICY_INPUT: StaticSchema = (
     18,
     n0,
     _GLVPI,
-    {_sSI: _cGLVPR, _sm: None},
+    {_sSI: _cGLVPR, _smi: None},
     (_LN, _VN),
     (
         (lambda: schemas.LAYER_NAME_OR_ARN, 9),
-        (lambda: schemas.LAYER_VERSION_NUMBER, {_s: None, _smi: None, _sL: None}),
+        (lambda: schemas.LAYER_VERSION_NUMBER, {_sm: None, _s: None, _sL: None}),
     ),
 )
 
@@ -508,7 +615,7 @@ LIST_LAYER_VERSIONS_INPUT: StaticSchema = (
     18,
     n0,
     _LLVI,
-    {_sSI: _cLLVR, _sm: None},
+    {_sSI: _cLLVR, _smi: None},
     (_CAo, _CR, _LN, _Mar, _MI),
     (
         (lambda: schemas.ARCHITECTURE, {_sQ: _CAo}),
@@ -579,7 +686,7 @@ PUBLISH_LAYER_VERSION_INPUT: StaticSchema = (
     18,
     n0,
     _PLVI,
-    {_sSI: _cPLVR, _sm: None},
+    {_sSI: _cPLVR, _smi: None},
     (_LN, _D, _Cont, _CAom, _CRo, _LI),
     (
         (lambda: schemas.LAYER_NAME_OR_ARN, 9),
@@ -603,7 +710,7 @@ PUBLISH_LAYER_VERSION_OUTPUT: StaticSchema = (
         (lambda: schemas.LAYER_VERSION_ARN, 0),
         (lambda: schemas.DESCRIPTION, 0),
         (lambda: schemas.TIMESTAMP, 0),
-        (lambda: schemas.LAYER_VERSION_NUMBER, {_s: 0}),
+        (lambda: schemas.LAYER_VERSION_NUMBER, {_sm: 0}),
         (COMPATIBLE_ARCHITECTURES, 0),
         (COMPATIBLE_RUNTIMES, 0),
         (LICENSE_INFO, 0),
@@ -638,11 +745,11 @@ REMOVE_LAYER_VERSION_PERMISSION_INPUT: StaticSchema = (
     18,
     n0,
     _RLVPI,
-    {_sSI: _cRLVPR, _sm: None},
+    {_sSI: _cRLVPR, _smi: None},
     (_LN, _VN, _SI, _RI),
     (
         (lambda: schemas.LAYER_NAME_OR_ARN, 9),
-        (lambda: schemas.LAYER_VERSION_NUMBER, {_s: None, _smi: None, _sL: None}),
+        (lambda: schemas.LAYER_VERSION_NUMBER, {_sm: None, _s: None, _sL: None}),
         (lambda: schemas.STATEMENT_ID, 9),
         (lambda: schemas.STRING, {_sQ: _RI}),
     ),
@@ -686,7 +793,7 @@ LIST_FUNCTION_EVENT_INVOKE_CONFIGS_INPUT: StaticSchema = (
     18,
     n0,
     _LFEICI,
-    {_sSI: _cLFEICR, _sm: None},
+    {_sSI: _cLFEICR, _smi: None},
     (_FN, _Mar, _MI),
     (
         (lambda: schemas.NAMESPACED_FUNCTION_NAME, 9),
@@ -736,8 +843,8 @@ FUNCTION_EVENT_INVOKE_CONFIG: StaticSchema = (
     (
         (lambda: schemas.DATE, 0),
         (lambda: schemas.FUNCTION_ARN, 0),
-        (lambda: schemas.MAXIMUM_RETRY_ATTEMPTS, 0),
-        (lambda: schemas.MAXIMUM_EVENT_AGE_IN_SECONDS, 0),
+        (MAXIMUM_RETRY_ATTEMPTS, 0),
+        (MAXIMUM_EVENT_AGE_IN_SECONDS, 0),
         (lambda: schemas.DESTINATION_CONFIG, 0),
     ),
 )
@@ -757,7 +864,7 @@ LIST_TAGS_INPUT: StaticSchema = (
     18,
     n0,
     _LTI,
-    {_sSI: _cLTR, _sm: None},
+    {_sSI: _cLTR, _smi: None},
     (_Reso,),
     ((TAGGABLE_RESOURCE, 9),),
 )
@@ -796,7 +903,7 @@ REMOVE_PERMISSION_INPUT: StaticSchema = (
     18,
     n0,
     _RPI,
-    {_sSI: _cRPR, _sm: None},
+    {_sSI: _cRPR, _smi: None},
     (_FN, _SI, _Q, _RI),
     (
         (lambda: schemas.NAMESPACED_FUNCTION_NAME, 9),
@@ -839,9 +946,9 @@ DELETE_PROVISIONED_CONCURRENCY_CONFIG_INPUT: StaticSchema = (
     18,
     n0,
     _DPCCI,
-    {_sSI: _cDPCCR, _sm: None},
+    {_sSI: _cDPCCR, _smi: None},
     (_FN, _Q),
-    ((lambda: schemas.FUNCTION_NAME, 9), (QUALIFIER, {_sQ: _Q, _smi: None})),
+    ((lambda: schemas.FUNCTION_NAME, 9), (QUALIFIER, {_sQ: _Q, _s: None})),
 )
 
 DELETE_PROVISIONED_CONCURRENCY_CONFIG_OUTPUT: StaticSchema = (
@@ -879,9 +986,9 @@ GET_PROVISIONED_CONCURRENCY_CONFIG_INPUT: StaticSchema = (
     18,
     n0,
     _GPCCI,
-    {_sSI: _cGPCCR, _sm: None},
+    {_sSI: _cGPCCR, _smi: None},
     (_FN, _Q),
-    ((lambda: schemas.FUNCTION_NAME, 9), (QUALIFIER, {_sQ: _Q, _smi: None})),
+    ((lambda: schemas.FUNCTION_NAME, 9), (QUALIFIER, {_sQ: _Q, _s: None})),
 )
 
 GET_PROVISIONED_CONCURRENCY_CONFIG_OUTPUT: StaticSchema = (
@@ -937,11 +1044,11 @@ PUT_PROVISIONED_CONCURRENCY_CONFIG_INPUT: StaticSchema = (
     18,
     n0,
     _PPCCI,
-    {_sSI: _cPPCCR, _sm: None},
+    {_sSI: _cPPCCR, _smi: None},
     (_FN, _Q, _PCE),
     (
         (lambda: schemas.FUNCTION_NAME, 9),
-        (QUALIFIER, {_sQ: _Q, _smi: None}),
+        (QUALIFIER, {_sQ: _Q, _s: None}),
         (lambda: schemas.POSITIVE_INTEGER, 1),
     ),
 )
@@ -990,13 +1097,13 @@ PUT_FUNCTION_EVENT_INVOKE_CONFIG_INPUT: StaticSchema = (
     18,
     n0,
     _PFEICI,
-    {_sSI: _cPFEICR, _sm: None},
+    {_sSI: _cPFEICR, _smi: None},
     (_FN, _Q, _MRA, _MEAIS, _DCe),
     (
         (lambda: schemas.NAMESPACED_FUNCTION_NAME, 9),
         (lambda: schemas.NUMERIC_LATEST_PUBLISHED_OR_ALIAS_QUALIFIER, {_sQ: _Q}),
-        (lambda: schemas.MAXIMUM_RETRY_ATTEMPTS, 0),
-        (lambda: schemas.MAXIMUM_EVENT_AGE_IN_SECONDS, 0),
+        (MAXIMUM_RETRY_ATTEMPTS, 0),
+        (MAXIMUM_EVENT_AGE_IN_SECONDS, 0),
         (lambda: schemas.DESTINATION_CONFIG, 0),
     ),
 )
@@ -1010,8 +1117,8 @@ PUT_FUNCTION_EVENT_INVOKE_CONFIG_OUTPUT: StaticSchema = (
     (
         (lambda: schemas.DATE, 0),
         (lambda: schemas.FUNCTION_ARN, 0),
-        (lambda: schemas.MAXIMUM_RETRY_ATTEMPTS, 0),
-        (lambda: schemas.MAXIMUM_EVENT_AGE_IN_SECONDS, 0),
+        (MAXIMUM_RETRY_ATTEMPTS, 0),
+        (MAXIMUM_EVENT_AGE_IN_SECONDS, 0),
         (lambda: schemas.DESTINATION_CONFIG, 0),
     ),
 )
@@ -1044,11 +1151,11 @@ PUT_RESOURCE_POLICY_INPUT: StaticSchema = (
     18,
     n0,
     _PRPI,
-    {_sSI: _cPRPR, _sm: None},
+    {_sSI: _cPRPR, _smi: None},
     (_RAe, _Po, _RI),
     (
         (lambda: schemas.POLICY_RESOURCE_ARN, 9),
-        (lambda: schemas.RESOURCE_POLICY, 1),
+        (RESOURCE_POLICY, 1),
         (lambda: schemas.REVISION_ID, 0),
     ),
 )
@@ -1059,7 +1166,7 @@ PUT_RESOURCE_POLICY_OUTPUT: StaticSchema = (
     _PRPO,
     {_sSI: _cPRPRo, _smit: None},
     (_Po, _RI),
-    ((lambda: schemas.RESOURCE_POLICY, 0), (lambda: schemas.REVISION_ID, 0)),
+    ((RESOURCE_POLICY, 0), (lambda: schemas.REVISION_ID, 0)),
 )
 
 PUT_RESOURCE_POLICY: StaticOperationSchema = (
@@ -1094,7 +1201,7 @@ CALLBACK_TIMEOUT_EXCEPTION: StaticSchema = (
     n0,
     _CTE,
     {_smith: _c, _sE: 400},
-    (_T, _M),
+    (_T, _Me),
     ((lambda: schemas.STRING, 0), (lambda: schemas.STRING, 0)),
 )
 
@@ -1102,7 +1209,7 @@ SEND_DURABLE_EXECUTION_CALLBACK_FAILURE_INPUT: StaticSchema = (
     18,
     n0,
     _SDECFI,
-    {_sSI: _cSDECFR, _sm: None},
+    {_sSI: _cSDECFR, _smi: None},
     (_CIa, _E),
     ((lambda: schemas.CALLBACK_ID, 9), (lambda: schemas.ERROR_OBJECT, 16)),
 )
@@ -1145,7 +1252,7 @@ SEND_DURABLE_EXECUTION_CALLBACK_HEARTBEAT_INPUT: StaticSchema = (
     18,
     n0,
     _SDECHI,
-    {_sSI: _cSDECHR, _sm: None},
+    {_sSI: _cSDECHR, _smi: None},
     (_CIa,),
     ((lambda: schemas.CALLBACK_ID, 9),),
 )
@@ -1186,7 +1293,7 @@ SEND_DURABLE_EXECUTION_CALLBACK_SUCCESS_INPUT: StaticSchema = (
     18,
     n0,
     _SDECSI,
-    {_sSI: _cSDECSR, _sm: None},
+    {_sSI: _cSDECSR, _smi: None},
     (_CIa, _Re),
     ((lambda: schemas.CALLBACK_ID, 9), (BINARY_OPERATION_PAYLOAD, 16)),
 )
@@ -1229,7 +1336,7 @@ TAG_RESOURCE_INPUT: StaticSchema = (
     18,
     n0,
     _TRI,
-    {_sSI: _cTRR, _sm: None},
+    {_sSI: _cTRR, _smi: None},
     (_Reso, _Ta),
     ((TAGGABLE_RESOURCE, 9), (lambda: schemas.TAGS, 1)),
 )
@@ -1269,9 +1376,9 @@ UNTAG_RESOURCE_INPUT: StaticSchema = (
     18,
     n0,
     _URIn,
-    {_sSI: _cURR, _sm: None},
+    {_sSI: _cURR, _smi: None},
     (_Reso, _TKa),
-    ((TAGGABLE_RESOURCE, 9), (TAG_KEY_LIST, {_sQ: _tK, _smi: None})),
+    ((TAGGABLE_RESOURCE, 9), (TAG_KEY_LIST, {_sQ: _tK, _s: None})),
 )
 
 UNTAG_RESOURCE_OUTPUT: StaticSchema = (18, n0, _UROn, {_sSI: _sU, _smit: None})
@@ -1300,13 +1407,13 @@ UPDATE_FUNCTION_EVENT_INVOKE_CONFIG_INPUT: StaticSchema = (
     18,
     n0,
     _UFEICI,
-    {_sSI: _cUFEICR, _sm: None},
+    {_sSI: _cUFEICR, _smi: None},
     (_FN, _Q, _MRA, _MEAIS, _DCe),
     (
         (lambda: schemas.NAMESPACED_FUNCTION_NAME, 9),
         (lambda: schemas.NUMERIC_LATEST_PUBLISHED_OR_ALIAS_QUALIFIER, {_sQ: _Q}),
-        (lambda: schemas.MAXIMUM_RETRY_ATTEMPTS, 0),
-        (lambda: schemas.MAXIMUM_EVENT_AGE_IN_SECONDS, 0),
+        (MAXIMUM_RETRY_ATTEMPTS, 0),
+        (MAXIMUM_EVENT_AGE_IN_SECONDS, 0),
         (lambda: schemas.DESTINATION_CONFIG, 0),
     ),
 )
@@ -1320,8 +1427,8 @@ UPDATE_FUNCTION_EVENT_INVOKE_CONFIG_OUTPUT: StaticSchema = (
     (
         (lambda: schemas.DATE, 0),
         (lambda: schemas.FUNCTION_ARN, 0),
-        (lambda: schemas.MAXIMUM_RETRY_ATTEMPTS, 0),
-        (lambda: schemas.MAXIMUM_EVENT_AGE_IN_SECONDS, 0),
+        (MAXIMUM_RETRY_ATTEMPTS, 0),
+        (MAXIMUM_EVENT_AGE_IN_SECONDS, 0),
         (lambda: schemas.DESTINATION_CONFIG, 0),
     ),
 )

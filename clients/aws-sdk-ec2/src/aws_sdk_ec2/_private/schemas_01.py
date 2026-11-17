@@ -18,13 +18,8 @@ _vp = "vpc"
 _rT = "resourceType"
 _Tag = "Tags"
 _Ad = "Address"
-_sO = "smithy.api#clientOptional"
-_smi = "smithy.api#required"
 _p = "pending"
-_PI = "PublicIp"
-_pI = "publicIp"
-_AI = "AllocationId"
-_aI = "allocationId"
+_d = "disabled"
 _pa = "pending_acceptance"
 _pa_ = "pending-acceptance"
 _re = "rejected"
@@ -36,10 +31,15 @@ _tGI = "transitGatewayId"
 _St = "State"
 _st = "state"
 _fa = "failed"
-_SIu = "SubnetId"
-_sI = "subnetId"
 _RIe = "ResourceId"
 _rI = "resourceId"
+_OIw = "OwnerId"
+_oI = "ownerId"
+_Re = "Region"
+_reg = "region"
+_en = "enabled"
+_MRS = "MultipathResilienceStatus"
+_mRS = "multipathResilienceStatus"
 _C = "Code"
 _co = "code"
 _Me = "Message"
@@ -48,10 +48,36 @@ _Sta = "Status"
 _sta = "status"
 _TSag = "TagSet"
 _tS = "tagSet"
-_SIe = "ServiceId"
+_VI = "VpcId"
+_vI = "vpcId"
 _er = "error"
 _VPCI = "VpcPeeringConnectionId"
 _vPCI = "vpcPeeringConnectionId"
+_CB = "CidrBlock"
+_cB = "cidrBlock"
+_CBS = "CidrBlockSet"
+_ICB = "Ipv6CidrBlock"
+_iCB = "ipv6CidrBlock"
+_ICBS = "Ipv6CidrBlockSet"
+_MRM = "MultipathResilienceMode"
+_VPCOD = "VpcPeeringConnectionOptionsDescription"
+_ADRFRV = "AllowDnsResolutionFromRemoteVpc"
+_aDRFRV = "allowDnsResolutionFromRemoteVpc"
+_AEFLCLTRV = "AllowEgressFromLocalClassicLinkToRemoteVpc"
+_aEFLCLTRV = "allowEgressFromLocalClassicLinkToRemoteVpc"
+_AEFLVTRCL = "AllowEgressFromLocalVpcToRemoteClassicLink"
+_aEFLVTRCL = "allowEgressFromLocalVpcToRemoteClassicLink"
+_AMR = "AllowMultipathResilience"
+_aMR = "allowMultipathResilience"
+_mRM = "multipathResilienceMode"
+_VPCVI = "VpcPeeringConnectionVpcInfo"
+_iCBS = "ipv6CidrBlockSet"
+_cBS = "cidrBlockSet"
+_PO = "PeeringOptions"
+_pO = "peeringOptions"
+_PENDING = "PENDING"
+_ENABLED = "ENABLED"
+_DISABLED = "DISABLED"
 _VPCSRC = "VpcPeeringConnectionStateReasonCode"
 _ir = "initiating_request"
 _ir_ = "initiating-request"
@@ -453,6 +479,12 @@ _exc = "exclusions"
 _mB = "managedBy"
 _LUT = "LastUpdateTimestamp"
 _lUT = "lastUpdateTimestamp"
+_AVTAKE = "ActiveVpnTunnelAdditionalKeyExchange"
+_AKER = "AdditionalKeyExchangeRound"
+_aKER = "additionalKeyExchangeRound"
+_KEM = "KeyExchangeMethod"
+_kEM = "keyExchangeMethod"
+_AAKEL = "ActiveAdditionalKeyExchangesList"
 _IHS = "InstanceHealthStatus"
 _HS = "HEALTHY_STATUS"
 _he = "healthy"
@@ -486,6 +518,12 @@ _PSr = "ProvisioningStatus"
 _pSr = "provisioningStatus"
 _PSRr = "ProvisioningStatusReason"
 _pSR = "provisioningStatusReason"
+_PAKE = "Phase1AdditionalKeyExchanges"
+_PAKES = "Phase1AdditionalKeyExchangeSet"
+_pAKES = "phase1AdditionalKeyExchangeSet"
+_PAKEh = "Phase2AdditionalKeyExchanges"
+_PAKESh = "Phase2AdditionalKeyExchangeSet"
+_pAKESh = "phase2AdditionalKeyExchangeSet"
 _ASc = "ActivityStatus"
 _ERROR = "ERROR"
 _PF_ = "PENDING_FULFILLMENT"
@@ -494,49 +532,6 @@ _PT = "PENDING_TERMINATION"
 _pt = "pending_termination"
 _FULFILLED = "FULFILLED"
 _fu = "fulfilled"
-_PTr = "PrincipalType"
-_AP = "AddedPrincipal"
-_pT = "principalType"
-_Pri = "Principal"
-_prin = "principal"
-_SPI = "ServicePermissionId"
-_sPI = "servicePermissionId"
-_sIe = "serviceId"
-_APS = "AddedPrincipalSet"
-_AIOR = "AddIpamOperatingRegion"
-_RNe = "RegionName"
-_AIORS = "AddIpamOperatingRegionSet"
-_AIOUE = "AddIpamOrganizationalUnitExclusion"
-_OEP = "OrganizationsEntityPath"
-_AIOUES = "AddIpamOrganizationalUnitExclusionSet"
-_AFNI = "AdditionalFlexibleNetworkInterfaces"
-_APLE = "AddPrefixListEntry"
-_Des = "Description"
-_APLEd = "AddPrefixListEntries"
-_SM = "ServiceManaged"
-_al = "alb"
-_nl = "nlb"
-_rn = "rnat"
-_rd = "rds"
-_AIs = "AssociationId"
-_aIs = "associationId"
-_Do = "Domain"
-_dom = "domain"
-_NIOI = "NetworkInterfaceOwnerId"
-_nIOI = "networkInterfaceOwnerId"
-_PIAr = "PrivateIpAddress"
-_pIAr = "privateIpAddress"
-_PIP = "PublicIpv4Pool"
-_pIP = "publicIpv4Pool"
-_NBG = "NetworkBorderGroup"
-_nBG = "networkBorderGroup"
-_COI = "CustomerOwnedIp"
-_cOI = "customerOwnedIp"
-_COIP = "CustomerOwnedIpv4Pool"
-_cOIP = "customerOwnedIpv4Pool"
-_CI = "CarrierIp"
-_cI = "carrierIp"
-_sM = "serviceManaged"
 _AF = "AddressFamily"
 _ipv = "ipv4"
 _ipv_ = "ipv6"
@@ -544,6 +539,12 @@ _suc = "succeeded"
 _IRDAI = "IpamResourceDiscoveryAssociationId"
 _LGRI = "LocalGatewayRoutetableId"
 _ISI = "IpamScopeId"
+_Ri = "Rir"
+_ripe = "ripe"
+_apn = "apnic"
+_ari = "arin"
+_lac = "lacnic"
+_nic = "nicbr"
 _MPa = "MatchPaths"
 _EP = "ExcludePaths"
 _NIAS = "NetworkInsightsAccessScope"
@@ -561,7 +562,76 @@ _ePS = "excludePathSet"
 _NIPI = "NetworkInsightsPathId"
 _NIAI = "NetworkInsightsAnalysisId"
 _ru = "running"
+_NIMR = "NetworkInsightsMaxResults"
 _ASn = "AnalysisStatus"
+
+CIDR_BLOCK_SET: StaticSchema = (
+    16,
+    n0,
+    _CBS,
+    0,
+    (_me,),
+    ((lambda: schemas.CIDR_BLOCK, {_sN: _i}),),
+)
+
+IPV6_CIDR_BLOCK: StaticSchema = (
+    18,
+    n0,
+    _ICB,
+    0,
+    (_ICB,),
+    ((lambda: schemas.STRING, {_aQN: _ICB, _sN: _iCB}),),
+)
+
+IPV6_CIDR_BLOCK_SET: StaticSchema = (
+    16,
+    n0,
+    _ICBS,
+    0,
+    (_me,),
+    ((IPV6_CIDR_BLOCK, {_sN: _i}),),
+)
+
+VPC_PEERING_CONNECTION_OPTIONS_DESCRIPTION: StaticSchema = (
+    18,
+    n0,
+    _VPCOD,
+    0,
+    (_ADRFRV, _AEFLCLTRV, _AEFLVTRCL, _AMR, _MRM),
+    (
+        (lambda: schemas.BOOLEAN, {_aQN: _ADRFRV, _sN: _aDRFRV}),
+        (lambda: schemas.BOOLEAN, {_aQN: _AEFLCLTRV, _sN: _aEFLCLTRV}),
+        (lambda: schemas.BOOLEAN, {_aQN: _AEFLVTRCL, _sN: _aEFLVTRCL}),
+        (lambda: schemas.BOOLEAN, {_aQN: _AMR, _sN: _aMR}),
+        (lambda: schemas.MULTIPATH_RESILIENCE_MODE, {_aQN: _MRM, _sN: _mRM}),
+    ),
+)
+
+VPC_PEERING_CONNECTION_VPC_INFO: StaticSchema = (
+    18,
+    n0,
+    _VPCVI,
+    0,
+    (_CB, _ICBS, _CBS, _OIw, _PO, _VI, _Re),
+    (
+        (lambda: schemas.STRING, {_aQN: _CB, _sN: _cB}),
+        (IPV6_CIDR_BLOCK_SET, {_aQN: _ICBS, _sN: _iCBS}),
+        (CIDR_BLOCK_SET, {_aQN: _CBS, _sN: _cBS}),
+        (lambda: schemas.STRING, {_aQN: _OIw, _sN: _oI}),
+        (VPC_PEERING_CONNECTION_OPTIONS_DESCRIPTION, {_aQN: _PO, _sN: _pO}),
+        (lambda: schemas.STRING, {_aQN: _VI, _sN: _vI}),
+        (lambda: schemas.STRING, {_aQN: _Re, _sN: _reg}),
+    ),
+)
+
+MULTIPATH_RESILIENCE_STATUS: StaticSchema = (
+    14,
+    n0,
+    _MRS,
+    0,
+    (_PENDING, _ENABLED, _DISABLED),
+    ((-1, {_sV: _p}), (-1, {_sV: _en}), (-1, {_sV: _d})),
+)
 
 VPC_PEERING_CONNECTION_STATE_REASON_CODE: StaticSchema = (
     14,
@@ -599,14 +669,15 @@ VPC_PEERING_CONNECTION: StaticSchema = (
     n0,
     _VPC,
     0,
-    (_AVI, _ET, _RVI, _Sta, _Tag, _VPCI),
+    (_AVI, _ET, _RVI, _Sta, _Tag, _VPCI, _MRS),
     (
-        (lambda: schemas.VPC_PEERING_CONNECTION_VPC_INFO, {_aQN: _AVI, _sN: _aVI}),
+        (VPC_PEERING_CONNECTION_VPC_INFO, {_aQN: _AVI, _sN: _aVI}),
         (lambda: schemas.DATE_TIME, {_aQN: _ET, _sN: _eT}),
-        (lambda: schemas.VPC_PEERING_CONNECTION_VPC_INFO, {_aQN: _RVI, _sN: _rVI}),
+        (VPC_PEERING_CONNECTION_VPC_INFO, {_aQN: _RVI, _sN: _rVI}),
         (VPC_PEERING_CONNECTION_STATE_REASON, {_aQN: _Sta, _sN: _sta}),
         (lambda: schemas.TAG_LIST, {_aQN: _TSag, _sN: _tS}),
         (lambda: schemas.STRING, {_aQN: _VPCI, _sN: _vPCI}),
+        (MULTIPATH_RESILIENCE_STATUS, {_aQN: _MRS, _sN: _mRS}),
     ),
 )
 
@@ -1434,6 +1505,27 @@ ACCOUNT_VPC_ENCRYPTION_CONTROL: StaticSchema = (
     ),
 )
 
+ACTIVE_VPN_TUNNEL_ADDITIONAL_KEY_EXCHANGE: StaticSchema = (
+    18,
+    n0,
+    _AVTAKE,
+    0,
+    (_AKER, _KEM),
+    (
+        (lambda: schemas.INTEGER, {_aQN: _AKER, _sN: _aKER}),
+        (lambda: schemas.INTEGER, {_aQN: _KEM, _sN: _kEM}),
+    ),
+)
+
+ACTIVE_ADDITIONAL_KEY_EXCHANGES_LIST: StaticSchema = (
+    16,
+    n0,
+    _AAKEL,
+    0,
+    (_me,),
+    ((ACTIVE_VPN_TUNNEL_ADDITIONAL_KEY_EXCHANGE, {_sN: _i}),),
+)
+
 INSTANCE_HEALTH_STATUS: StaticSchema = (
     14,
     n0,
@@ -1480,7 +1572,7 @@ ACTIVE_VPN_TUNNEL_STATUS: StaticSchema = (
     n0,
     _AVTS,
     0,
-    (_PEA, _PEAh, _PIA, _PIAh, _PDHG, _PDHGh, _IV, _PSr, _PSRr),
+    (_PEA, _PEAh, _PIA, _PIAh, _PDHG, _PDHGh, _IV, _PSr, _PSRr, _PAKE, _PAKEh),
     (
         (lambda: schemas.STRING, {_aQN: _PEA, _sN: _pEA}),
         (lambda: schemas.STRING, {_aQN: _PEAh, _sN: _pEAh}),
@@ -1491,6 +1583,8 @@ ACTIVE_VPN_TUNNEL_STATUS: StaticSchema = (
         (lambda: schemas.STRING, {_aQN: _IV, _sN: _iV}),
         (VPN_TUNNEL_PROVISIONING_STATUS, {_aQN: _PSr, _sN: _pSr}),
         (lambda: schemas.STRING, {_aQN: _PSRr, _sN: _pSR}),
+        (ACTIVE_ADDITIONAL_KEY_EXCHANGES_LIST, {_aQN: _PAKES, _sN: _pAKES}),
+        (ACTIVE_ADDITIONAL_KEY_EXCHANGES_LIST, {_aQN: _PAKESh, _sN: _pAKESh}),
     ),
 )
 
@@ -1501,137 +1595,6 @@ ACTIVITY_STATUS: StaticSchema = (
     0,
     (_ERROR, _PF_, _PT, _FULFILLED),
     ((-1, {_sV: _er}), (-1, {_sV: _pf}), (-1, {_sV: _pt}), (-1, {_sV: _fu})),
-)
-
-ADDED_PRINCIPAL: StaticSchema = (
-    18,
-    n0,
-    _AP,
-    0,
-    (_PTr, _Pri, _SPI, _SIe),
-    (
-        (lambda: schemas.PRINCIPAL_TYPE, {_aQN: _PTr, _sN: _pT}),
-        (lambda: schemas.STRING, {_aQN: _Pri, _sN: _prin}),
-        (lambda: schemas.STRING, {_aQN: _SPI, _sN: _sPI}),
-        (lambda: schemas.STRING, {_aQN: _SIe, _sN: _sIe}),
-    ),
-)
-
-ADDED_PRINCIPAL_SET: StaticSchema = (
-    16,
-    n0,
-    _APS,
-    0,
-    (_me,),
-    ((ADDED_PRINCIPAL, {_sN: _i}),),
-)
-
-ADD_IPAM_OPERATING_REGION: StaticSchema = (
-    18,
-    n0,
-    _AIOR,
-    0,
-    (_RNe,),
-    ((lambda: schemas.STRING, 0),),
-)
-
-ADD_IPAM_OPERATING_REGION_SET: StaticSchema = (
-    16,
-    n0,
-    _AIORS,
-    0,
-    (_me,),
-    ((ADD_IPAM_OPERATING_REGION, 0),),
-)
-
-ADD_IPAM_ORGANIZATIONAL_UNIT_EXCLUSION: StaticSchema = (
-    18,
-    n0,
-    _AIOUE,
-    0,
-    (_OEP,),
-    ((lambda: schemas.STRING, 0),),
-)
-
-ADD_IPAM_ORGANIZATIONAL_UNIT_EXCLUSION_SET: StaticSchema = (
-    16,
-    n0,
-    _AIOUES,
-    0,
-    (_me,),
-    ((ADD_IPAM_ORGANIZATIONAL_UNIT_EXCLUSION, 0),),
-)
-
-ADDITIONAL_FLEXIBLE_NETWORK_INTERFACES: StaticSchema = (7, n0, _AFNI, 0)
-
-ADD_PREFIX_LIST_ENTRY: StaticSchema = (
-    18,
-    n0,
-    _APLE,
-    0,
-    (_Ci, _Des),
-    ((lambda: schemas.STRING, {_sO: None, _smi: None}), (lambda: schemas.STRING, 0)),
-)
-
-ADD_PREFIX_LIST_ENTRIES: StaticSchema = (
-    16,
-    n0,
-    _APLEd,
-    0,
-    (_me,),
-    ((ADD_PREFIX_LIST_ENTRY, 0),),
-)
-
-SERVICE_MANAGED: StaticSchema = (
-    14,
-    n0,
-    _SM,
-    0,
-    (_al, _nl, _rn, _rd),
-    ((-1, {_sV: _al}), (-1, {_sV: _nl}), (-1, {_sV: _rn}), (-1, {_sV: _rd})),
-)
-
-ADDRESS: StaticSchema = (
-    18,
-    n0,
-    _Ad,
-    0,
-    (
-        _AI,
-        _AIs,
-        _Do,
-        _NII,
-        _NIOI,
-        _PIAr,
-        _Tag,
-        _PIP,
-        _NBG,
-        _COI,
-        _COIP,
-        _CI,
-        _SIu,
-        _SM,
-        _II,
-        _PI,
-    ),
-    (
-        (lambda: schemas.STRING, {_aQN: _AI, _sN: _aI}),
-        (lambda: schemas.STRING, {_aQN: _AIs, _sN: _aIs}),
-        (lambda: schemas.DOMAIN_TYPE, {_aQN: _Do, _sN: _dom}),
-        (lambda: schemas.STRING, {_aQN: _NII, _sN: _nII}),
-        (lambda: schemas.STRING, {_aQN: _NIOI, _sN: _nIOI}),
-        (lambda: schemas.STRING, {_aQN: _PIAr, _sN: _pIAr}),
-        (lambda: schemas.TAG_LIST, {_aQN: _TSag, _sN: _tS}),
-        (lambda: schemas.STRING, {_aQN: _PIP, _sN: _pIP}),
-        (lambda: schemas.STRING, {_aQN: _NBG, _sN: _nBG}),
-        (lambda: schemas.STRING, {_aQN: _COI, _sN: _cOI}),
-        (lambda: schemas.STRING, {_aQN: _COIP, _sN: _cOIP}),
-        (lambda: schemas.STRING, {_aQN: _CI, _sN: _cI}),
-        (lambda: schemas.STRING, {_aQN: _SIu, _sN: _sI}),
-        (SERVICE_MANAGED, {_aQN: _SM, _sN: _sM}),
-        (lambda: schemas.STRING, {_aQN: _II, _sN: _iI}),
-        (lambda: schemas.STRING, {_aQN: _PI, _sN: _pI}),
-    ),
 )
 
 ADDRESS_FAMILY: StaticSchema = (
@@ -1648,6 +1611,21 @@ IPAM_RESOURCE_DISCOVERY_ASSOCIATION_ID: StaticSchema = (3, n0, _IRDAI, 0)
 LOCAL_GATEWAY_ROUTETABLE_ID: StaticSchema = (3, n0, _LGRI, 0)
 
 IPAM_SCOPE_ID: StaticSchema = (3, n0, _ISI, 0)
+
+RIR: StaticSchema = (
+    14,
+    n0,
+    _Ri,
+    0,
+    (_ripe, _apn, _ari, _lac, _nic),
+    (
+        (-1, {_sV: _ripe}),
+        (-1, {_sV: _apn}),
+        (-1, {_sV: _ari}),
+        (-1, {_sV: _lac}),
+        (-1, {_sV: _nic}),
+    ),
+)
 
 NETWORK_INSIGHTS_ACCESS_SCOPE: StaticSchema = (
     18,
@@ -1680,6 +1658,8 @@ NETWORK_INSIGHTS_ACCESS_SCOPE_CONTENT: StaticSchema = (
 NETWORK_INSIGHTS_PATH_ID: StaticSchema = (3, n0, _NIPI, 0)
 
 NETWORK_INSIGHTS_ANALYSIS_ID: StaticSchema = (3, n0, _NIAI, 0)
+
+NETWORK_INSIGHTS_MAX_RESULTS: StaticSchema = (7, n0, _NIMR, 0)
 
 ANALYSIS_STATUS: StaticSchema = (
     14,

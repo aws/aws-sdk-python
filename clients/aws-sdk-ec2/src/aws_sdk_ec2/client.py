@@ -47,6 +47,7 @@ if TYPE_CHECKING:
         AssociateInstanceEventWindowOutput,
         AssociateIpamByoasnOutput,
         AssociateIpamResourceDiscoveryOutput,
+        AssociateKmsKeyIdOutput,
         AssociateNatGatewayAddressOutput,
         AssociateNetworkingFlexCostAllocationPolicyOutput,
         AssociateRouteServerOutput,
@@ -173,6 +174,7 @@ if TYPE_CHECKING:
         CreateTransitGatewayMeteringPolicyEntryOutput,
         CreateTransitGatewayMeteringPolicyOutput,
         CreateTransitGatewayMulticastDomainOutput,
+        CreateTransitGatewayNetworkFunctionAttachmentOutput,
         CreateTransitGatewayOutput,
         CreateTransitGatewayPeeringAttachmentOutput,
         CreateTransitGatewayPolicyTableEntryOutput,
@@ -273,6 +275,7 @@ if TYPE_CHECKING:
         DeleteTransitGatewayMeteringPolicyEntryOutput,
         DeleteTransitGatewayMeteringPolicyOutput,
         DeleteTransitGatewayMulticastDomainOutput,
+        DeleteTransitGatewayNetworkFunctionAttachmentOutput,
         DeleteTransitGatewayOutput,
         DeleteTransitGatewayPeeringAttachmentOutput,
         DeleteTransitGatewayPolicyTableEntryOutput,
@@ -468,6 +471,7 @@ if TYPE_CHECKING:
         DescribeTransitGatewayConnectsOutput,
         DescribeTransitGatewayMeteringPoliciesOutput,
         DescribeTransitGatewayMulticastDomainsOutput,
+        DescribeTransitGatewayNetworkFunctionAttachmentsOutput,
         DescribeTransitGatewayPeeringAttachmentsOutput,
         DescribeTransitGatewayPolicyTablesOutput,
         DescribeTransitGatewayRouteTableAnnouncementsOutput,
@@ -540,6 +544,7 @@ if TYPE_CHECKING:
         DisassociateInstanceEventWindowOutput,
         DisassociateIpamByoasnOutput,
         DisassociateIpamResourceDiscoveryOutput,
+        DisassociateKmsKeyIdOutput,
         DisassociateNatGatewayAddressOutput,
         DisassociateNetworkingFlexCostAllocationPolicyOutput,
         DisassociateRouteServerOutput,
@@ -732,7 +737,9 @@ if TYPE_CHECKING:
         ModifyTrafficMirrorSessionOutput,
         ModifyTransitGatewayAttachmentNatConfigurationOutput,
         ModifyTransitGatewayMeteringPolicyOutput,
+        ModifyTransitGatewayNetworkFunctionAttachmentOutput,
         ModifyTransitGatewayOutput,
+        ModifyTransitGatewayPeeringAttachmentOutput,
         ModifyTransitGatewayPolicyTableEntryOutput,
         ModifyTransitGatewayPrefixListReferenceOutput,
         ModifyTransitGatewayVpcAttachmentOutput,
@@ -1287,6 +1294,15 @@ class EC2Client(Client[EC2Config]):
 
         For an inter-Region VPC peering connection request, you must accept the
         VPC peering connection in the Region of the accepter VPC.
+
+        If the requester allows multipath resilience, accepting the request also
+        allows multipath resilience for the accepter VPC, and the
+        `multipathResilienceStatus` of the VPC peering connection becomes
+        `enabled`. Additional charges apply. For more information, see [Amazon
+        VPC pricing](http://aws.amazon.com/vpc/pricing/). To stop allowing
+        multipath resilience for the accepter VPC, use
+        ModifyVpcPeeringConnectionOptions and set `AllowMultipathResilience` to
+        `false`.
 
         Args:
             plugins:
@@ -2292,6 +2308,55 @@ class EC2Client(Client[EC2Config]):
         return self._invoke(
             self._select_input(_models.ASSOCIATE_IPAM_RESOURCE_DISCOVERY, args, kwargs),
             _models.ASSOCIATE_IPAM_RESOURCE_DISCOVERY,
+            [],
+            plugins,
+        )
+
+    @_overload
+    def associate_kms_key_id(
+        self,
+        request: _models.AssociateKmsKeyIdInput | _models.AssociateKmsKeyIdInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> AssociateKmsKeyIdOutput: ...
+
+    @_overload
+    def associate_kms_key_id(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.AssociateKmsKeyIdInputDict],
+    ) -> AssociateKmsKeyIdOutput:
+        """
+        Associates an additional KMS key with an encrypted Amazon EBS snapshot.
+        With the associated key, you have a second, independent way to access
+        the snapshot's data, in addition to the key the snapshot is already
+        encrypted under. Associating a key doesn't re-encrypt the snapshot or
+        grant access to its original key.
+
+        For more information, see [Associated KMS
+        keys](https://docs.aws.amazon.com/ebs/latest/userguide/associated-kms-keys.html)
+        in the *Amazon EBS User Guide*.
+
+        Args:
+            plugins:
+                A list of callables that modify the configuration dynamically.
+                Changes made by these plugins only apply for the duration of the
+                operation execution and will not affect any other operation
+                invocations.
+
+        Returns:
+            An instance of `AssociateKmsKeyIdOutput`.
+        """
+
+    def associate_kms_key_id(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> AssociateKmsKeyIdOutput:
+        return self._invoke(
+            self._select_input(_models.ASSOCIATE_KMS_KEY_ID, args, kwargs),
+            _models.ASSOCIATE_KMS_KEY_ID,
             [],
             plugins,
         )
@@ -9031,6 +9096,61 @@ class EC2Client(Client[EC2Config]):
         )
 
     @_overload
+    def create_transit_gateway_network_function_attachment(
+        self,
+        request: _models.CreateTransitGatewayNetworkFunctionAttachmentInput
+        | _models.CreateTransitGatewayNetworkFunctionAttachmentInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CreateTransitGatewayNetworkFunctionAttachmentOutput: ...
+
+    @_overload
+    def create_transit_gateway_network_function_attachment(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[
+            _models.CreateTransitGatewayNetworkFunctionAttachmentInputDict
+        ],
+    ) -> CreateTransitGatewayNetworkFunctionAttachmentOutput:
+        """
+        Creates a network function attachment that connects the specified
+        transit gateway to a Gateway Load Balancer endpoint service. Traffic
+        that you route to the attachment is sent to the network function
+        appliances behind the endpoint service. To use this operation, you must
+        be the owner of the transit gateway.
+
+        You can create one network function attachment for each combination of
+        transit gateway and endpoint service. The attachment remains in the
+        `pendingAcceptance` state until the endpoint service owner accepts the
+        endpoint connection.
+
+        Args:
+            plugins:
+                A list of callables that modify the configuration dynamically.
+                Changes made by these plugins only apply for the duration of the
+                operation execution and will not affect any other operation
+                invocations.
+
+        Returns:
+            An instance of `CreateTransitGatewayNetworkFunctionAttachmentOutput`.
+        """
+
+    def create_transit_gateway_network_function_attachment(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateTransitGatewayNetworkFunctionAttachmentOutput:
+        return self._invoke(
+            self._select_input(
+                _models.CREATE_TRANSIT_GATEWAY_NETWORK_FUNCTION_ATTACHMENT, args, kwargs
+            ),
+            _models.CREATE_TRANSIT_GATEWAY_NETWORK_FUNCTION_ATTACHMENT,
+            [],
+            plugins,
+        )
+
+    @_overload
     def create_transit_gateway_peering_attachment(
         self,
         request: _models.CreateTransitGatewayPeeringAttachmentInput
@@ -9996,6 +10116,9 @@ class EC2Client(Client[EC2Config]):
         The owner of the accepter VPC must accept the peering request to
         activate the peering connection. The VPC peering connection request
         expires after 7 days, after which it cannot be accepted or rejected.
+
+        Multipath resilience replicates the traffic of an inter-Region VPC
+        peering connection across multiple network paths.
 
         If you create a VPC peering connection request between VPCs with
         overlapping CIDR blocks, the VPC peering connection has a status of
@@ -13686,6 +13809,53 @@ class EC2Client(Client[EC2Config]):
                 _models.DELETE_TRANSIT_GATEWAY_MULTICAST_DOMAIN, args, kwargs
             ),
             _models.DELETE_TRANSIT_GATEWAY_MULTICAST_DOMAIN,
+            [],
+            plugins,
+        )
+
+    @_overload
+    def delete_transit_gateway_network_function_attachment(
+        self,
+        request: _models.DeleteTransitGatewayNetworkFunctionAttachmentInput
+        | _models.DeleteTransitGatewayNetworkFunctionAttachmentInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteTransitGatewayNetworkFunctionAttachmentOutput: ...
+
+    @_overload
+    def delete_transit_gateway_network_function_attachment(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[
+            _models.DeleteTransitGatewayNetworkFunctionAttachmentInputDict
+        ],
+    ) -> DeleteTransitGatewayNetworkFunctionAttachmentOutput:
+        """
+        Deletes the specified network function attachment. The attachment must
+        be in the `available` or `pendingAcceptance` state.
+
+        Args:
+            plugins:
+                A list of callables that modify the configuration dynamically.
+                Changes made by these plugins only apply for the duration of the
+                operation execution and will not affect any other operation
+                invocations.
+
+        Returns:
+            An instance of `DeleteTransitGatewayNetworkFunctionAttachmentOutput`.
+        """
+
+    def delete_transit_gateway_network_function_attachment(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteTransitGatewayNetworkFunctionAttachmentOutput:
+        return self._invoke(
+            self._select_input(
+                _models.DELETE_TRANSIT_GATEWAY_NETWORK_FUNCTION_ATTACHMENT, args, kwargs
+            ),
+            _models.DELETE_TRANSIT_GATEWAY_NETWORK_FUNCTION_ATTACHMENT,
             [],
             plugins,
         )
@@ -23102,6 +23272,56 @@ class EC2Client(Client[EC2Config]):
         )
 
     @_overload
+    def describe_transit_gateway_network_function_attachments(
+        self,
+        request: _models.DescribeTransitGatewayNetworkFunctionAttachmentsInput
+        | _models.DescribeTransitGatewayNetworkFunctionAttachmentsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DescribeTransitGatewayNetworkFunctionAttachmentsOutput: ...
+
+    @_overload
+    def describe_transit_gateway_network_function_attachments(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[
+            _models.DescribeTransitGatewayNetworkFunctionAttachmentsInputDict
+        ],
+    ) -> DescribeTransitGatewayNetworkFunctionAttachmentsOutput:
+        """
+        Describes one or more network function attachments. You can describe
+        attachments that you own or that are attached to a transit gateway that
+        you own.
+
+        Args:
+            plugins:
+                A list of callables that modify the configuration dynamically.
+                Changes made by these plugins only apply for the duration of the
+                operation execution and will not affect any other operation
+                invocations.
+
+        Returns:
+            An instance of `DescribeTransitGatewayNetworkFunctionAttachmentsOutput`.
+        """
+
+    def describe_transit_gateway_network_function_attachments(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DescribeTransitGatewayNetworkFunctionAttachmentsOutput:
+        return self._invoke(
+            self._select_input(
+                _models.DESCRIBE_TRANSIT_GATEWAY_NETWORK_FUNCTION_ATTACHMENTS,
+                args,
+                kwargs,
+            ),
+            _models.DESCRIBE_TRANSIT_GATEWAY_NETWORK_FUNCTION_ATTACHMENTS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def describe_transit_gateway_peering_attachments(
         self,
         request: _models.DescribeTransitGatewayPeeringAttachmentsInput
@@ -26597,6 +26817,50 @@ class EC2Client(Client[EC2Config]):
                 _models.DISASSOCIATE_IPAM_RESOURCE_DISCOVERY, args, kwargs
             ),
             _models.DISASSOCIATE_IPAM_RESOURCE_DISCOVERY,
+            [],
+            plugins,
+        )
+
+    @_overload
+    def disassociate_kms_key_id(
+        self,
+        request: _models.DisassociateKmsKeyIdInput
+        | _models.DisassociateKmsKeyIdInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DisassociateKmsKeyIdOutput: ...
+
+    @_overload
+    def disassociate_kms_key_id(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DisassociateKmsKeyIdInputDict],
+    ) -> DisassociateKmsKeyIdOutput:
+        """
+        Removes an associated KMS key from an Amazon EBS snapshot. After you
+        disassociate the key, it can no longer be used to access the snapshot's
+        data. The snapshot's original encryption key is unaffected.
+
+        Args:
+            plugins:
+                A list of callables that modify the configuration dynamically.
+                Changes made by these plugins only apply for the duration of the
+                operation execution and will not affect any other operation
+                invocations.
+
+        Returns:
+            An instance of `DisassociateKmsKeyIdOutput`.
+        """
+
+    def disassociate_kms_key_id(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DisassociateKmsKeyIdOutput:
+        return self._invoke(
+            self._select_input(_models.DISASSOCIATE_KMS_KEY_ID, args, kwargs),
+            _models.DISASSOCIATE_KMS_KEY_ID,
             [],
             plugins,
         )
@@ -36160,6 +36424,118 @@ class EC2Client(Client[EC2Config]):
         )
 
     @_overload
+    def modify_transit_gateway_network_function_attachment(
+        self,
+        request: _models.ModifyTransitGatewayNetworkFunctionAttachmentInput
+        | _models.ModifyTransitGatewayNetworkFunctionAttachmentInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ModifyTransitGatewayNetworkFunctionAttachmentOutput: ...
+
+    @_overload
+    def modify_transit_gateway_network_function_attachment(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[
+            _models.ModifyTransitGatewayNetworkFunctionAttachmentInputDict
+        ],
+    ) -> ModifyTransitGatewayNetworkFunctionAttachmentOutput:
+        """
+        Adds Availability Zones to or removes Availability Zones from the
+        specified network function attachment. The attachment must be in the
+        `available` state. You must specify at least one Availability Zone to
+        add or remove, and the attachment must keep at least one Availability
+        Zone.
+
+        Adding an Availability Zone provisions a new Gateway Load Balancer
+        endpoint in that Availability Zone. If the endpoint service doesn't
+        automatically accept connection requests, the endpoint service owner
+        must accept the endpoint connection for each Availability Zone that you
+        add.
+
+        Args:
+            plugins:
+                A list of callables that modify the configuration dynamically.
+                Changes made by these plugins only apply for the duration of the
+                operation execution and will not affect any other operation
+                invocations.
+
+        Returns:
+            An instance of `ModifyTransitGatewayNetworkFunctionAttachmentOutput`.
+        """
+
+    def modify_transit_gateway_network_function_attachment(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ModifyTransitGatewayNetworkFunctionAttachmentOutput:
+        return self._invoke(
+            self._select_input(
+                _models.MODIFY_TRANSIT_GATEWAY_NETWORK_FUNCTION_ATTACHMENT, args, kwargs
+            ),
+            _models.MODIFY_TRANSIT_GATEWAY_NETWORK_FUNCTION_ATTACHMENT,
+            [],
+            plugins,
+        )
+
+    @_overload
+    def modify_transit_gateway_peering_attachment(
+        self,
+        request: _models.ModifyTransitGatewayPeeringAttachmentInput
+        | _models.ModifyTransitGatewayPeeringAttachmentInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ModifyTransitGatewayPeeringAttachmentOutput: ...
+
+    @_overload
+    def modify_transit_gateway_peering_attachment(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ModifyTransitGatewayPeeringAttachmentInputDict],
+    ) -> ModifyTransitGatewayPeeringAttachmentOutput:
+        """
+        Modifies the options for a transit gateway peering attachment. The
+        peering attachment must be in the `available` state.
+
+        You can allow multipath resilience for your side of an inter-Region
+        transit gateway peering attachment between supported Regions. Multipath
+        resilience isn't supported for transit gateway peering attachments in
+        the same Region. It takes effect only when both the requester and the
+        accepter allow it. To modify the requester side, send the request in the
+        Region of the requester transit gateway. To modify the accepter side,
+        send the request in the Region of the accepter transit gateway. To check
+        whether multipath resilience is in effect, use
+        DescribeTransitGatewayPeeringAttachments and check
+        `multipathResilienceStatus`.
+
+        Args:
+            plugins:
+                A list of callables that modify the configuration dynamically.
+                Changes made by these plugins only apply for the duration of the
+                operation execution and will not affect any other operation
+                invocations.
+
+        Returns:
+            An instance of `ModifyTransitGatewayPeeringAttachmentOutput`.
+        """
+
+    def modify_transit_gateway_peering_attachment(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ModifyTransitGatewayPeeringAttachmentOutput:
+        return self._invoke(
+            self._select_input(
+                _models.MODIFY_TRANSIT_GATEWAY_PEERING_ATTACHMENT, args, kwargs
+            ),
+            _models.MODIFY_TRANSIT_GATEWAY_PEERING_ATTACHMENT,
+            [],
+            plugins,
+        )
+
+    @_overload
     def modify_transit_gateway_policy_table_entry(
         self,
         request: _models.ModifyTransitGatewayPolicyTableEntryInput
@@ -37169,6 +37545,14 @@ class EC2Client(Client[EC2Config]):
         an endpoint. If the service does not require manual approval,
         attachments are automatically approved.
 
+        By default, principals that you grant permissions to can create VPC
+        endpoints that connect to your endpoint service. For Gateway Load
+        Balancer endpoint services, you can instead grant permissions so that
+        principals can create transit gateway attachments that connect to your
+        endpoint service. To do so, specify `transit-gateway-attachment` for
+        `PermissionType`. The two permission types are independent. A principal
+        can have either or both.
+
         Args:
             plugins:
                 A list of callables that modify the configuration dynamically.
@@ -37226,6 +37610,16 @@ class EC2Client(Client[EC2Config]):
         the Region for the accepter VPC to modify the accepter VPC peering
         options. To verify which VPCs are the accepter and the requester for a
         VPC peering connection, use the DescribeVpcPeeringConnections command.
+
+        Multipath resilience replicates the traffic of an inter-Region VPC
+        peering connection across multiple network paths. You can allow
+        multipath resilience for your side of the connection if both of its
+        Regions are supported. It takes effect only when both the requester and
+        the accepter allow it. Additional charges apply when multipath
+        resilience is in effect. For more information, see [Amazon VPC
+        pricing](http://aws.amazon.com/vpc/pricing/). To check whether multipath
+        resilience is in effect, use DescribeVpcPeeringConnections and check
+        `multipathResilienceStatus`.
 
         Args:
             plugins:

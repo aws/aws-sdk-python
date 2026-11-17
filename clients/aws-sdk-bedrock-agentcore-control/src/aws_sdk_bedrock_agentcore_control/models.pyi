@@ -25,6 +25,12 @@ from ._private.models_0 import (
     AddDatasetExamplesOutput as AddDatasetExamplesOutput,
     AgentCardDefinition as AgentCardDefinition,
     AgentCardDefinitionDict as AgentCardDefinitionDict,
+    AgentInsightStoreEnablementStatus as AgentInsightStoreEnablementStatus,
+    AgentInsightStoreEncryptionConfiguration as AgentInsightStoreEncryptionConfiguration,
+    AgentInsightStoreEncryptionConfigurationDict as AgentInsightStoreEncryptionConfigurationDict,
+    AgentInsightStoreEncryptionMode as AgentInsightStoreEncryptionMode,
+    AgentInsightStoreStatus as AgentInsightStoreStatus,
+    AgentInsightStoreSummary as AgentInsightStoreSummary,
     AgentManagedRuntimeType as AgentManagedRuntimeType,
     AgentRuntime as AgentRuntime,
     AgentRuntimeArtifactContainerConfiguration as AgentRuntimeArtifactContainerConfiguration,
@@ -541,6 +547,9 @@ from ._private.models_0 import (
     DeleteRegistryOutput as DeleteRegistryOutput,
     DeleteRegistryRecordInput as DeleteRegistryRecordInput,
     DeleteRegistryRecordInputDict as DeleteRegistryRecordInputDict,
+)
+
+from ._private.models_1 import (
     DeleteRegistryRecordOutput as DeleteRegistryRecordOutput,
     DeleteResourcePolicyInput as DeleteResourcePolicyInput,
     DeleteResourcePolicyInputDict as DeleteResourcePolicyInputDict,
@@ -548,9 +557,6 @@ from ._private.models_0 import (
     DeleteWorkloadIdentityInput as DeleteWorkloadIdentityInput,
     DeleteWorkloadIdentityInputDict as DeleteWorkloadIdentityInputDict,
     DeleteWorkloadIdentityOutput as DeleteWorkloadIdentityOutput,
-)
-
-from ._private.models_1 import (
     DerivedEvaluatorConfig as DerivedEvaluatorConfig,
     DerivedEvaluatorConfigDict as DerivedEvaluatorConfigDict,
     Descriptors as Descriptors,
@@ -629,6 +635,12 @@ from ._private.models_1 import (
     EvaluatorStatus as EvaluatorStatus,
     EvaluatorSummary as EvaluatorSummary,
     EvaluatorType as EvaluatorType,
+    ExampleCountByField as ExampleCountByField,
+    ExampleCountByFieldCondition as ExampleCountByFieldCondition,
+    ExampleCountByFieldConditionDict as ExampleCountByFieldConditionDict,
+    ExampleField as ExampleField,
+    ExampleFieldCondition as ExampleFieldCondition,
+    ExampleFieldConditionDict as ExampleFieldConditionDict,
     ExceptionLevel as ExceptionLevel,
     ExtractionConfigLlmExtractionConfig as ExtractionConfigLlmExtractionConfig,
     ExtractionConfigUnknown as ExtractionConfigUnknown,
@@ -699,6 +711,9 @@ from ._private.models_1 import (
     GatewayStatus as GatewayStatus,
     GatewaySummary as GatewaySummary,
     GatewayTarget as GatewayTarget,
+    GetAgentInsightStoreInput as GetAgentInsightStoreInput,
+    GetAgentInsightStoreInputDict as GetAgentInsightStoreInputDict,
+    GetAgentInsightStoreOutput as GetAgentInsightStoreOutput,
     GetAgentRuntimeEndpointInput as GetAgentRuntimeEndpointInput,
     GetAgentRuntimeEndpointInputDict as GetAgentRuntimeEndpointInputDict,
     GetAgentRuntimeEndpointOutput as GetAgentRuntimeEndpointOutput,
@@ -1115,6 +1130,12 @@ from ._private.models_1 import (
     LinkedinOauth2ProviderConfigInput as LinkedinOauth2ProviderConfigInput,
     LinkedinOauth2ProviderConfigInputDict as LinkedinOauth2ProviderConfigInputDict,
     LinkedinOauth2ProviderConfigOutput as LinkedinOauth2ProviderConfigOutput,
+)
+
+from ._private.models_2 import (
+    ListAgentInsightStoresInput as ListAgentInsightStoresInput,
+    ListAgentInsightStoresInputDict as ListAgentInsightStoresInputDict,
+    ListAgentInsightStoresOutput as ListAgentInsightStoresOutput,
     ListAgentRuntimeEndpointsInput as ListAgentRuntimeEndpointsInput,
     ListAgentRuntimeEndpointsInputDict as ListAgentRuntimeEndpointsInputDict,
     ListAgentRuntimeEndpointsOutput as ListAgentRuntimeEndpointsOutput,
@@ -1132,9 +1153,6 @@ from ._private.models_1 import (
     ListApiKeyCredentialProvidersOutput as ListApiKeyCredentialProvidersOutput,
     ListBrowserProfilesInput as ListBrowserProfilesInput,
     ListBrowserProfilesInputDict as ListBrowserProfilesInputDict,
-)
-
-from ._private.models_2 import (
     ListBrowserProfilesOutput as ListBrowserProfilesOutput,
     ListBrowsersInput as ListBrowsersInput,
     ListBrowsersInputDict as ListBrowsersInputDict,
@@ -1154,12 +1172,18 @@ from ._private.models_2 import (
     ListConsentPortalsInput as ListConsentPortalsInput,
     ListConsentPortalsInputDict as ListConsentPortalsInputDict,
     ListConsentPortalsOutput as ListConsentPortalsOutput,
+    ListDatasetExamplesFilter as ListDatasetExamplesFilter,
+    ListDatasetExamplesFilterDict as ListDatasetExamplesFilterDict,
     ListDatasetExamplesInput as ListDatasetExamplesInput,
     ListDatasetExamplesInputDict as ListDatasetExamplesInputDict,
     ListDatasetExamplesOutput as ListDatasetExamplesOutput,
+    ListDatasetsFilter as ListDatasetsFilter,
+    ListDatasetsFilterDict as ListDatasetsFilterDict,
     ListDatasetsInput as ListDatasetsInput,
     ListDatasetsInputDict as ListDatasetsInputDict,
     ListDatasetsOutput as ListDatasetsOutput,
+    ListDatasetVersionsFilter as ListDatasetVersionsFilter,
+    ListDatasetVersionsFilterDict as ListDatasetVersionsFilterDict,
     ListDatasetVersionsInput as ListDatasetVersionsInput,
     ListDatasetVersionsInputDict as ListDatasetVersionsInputDict,
     ListDatasetVersionsOutput as ListDatasetVersionsOutput,
@@ -1651,6 +1675,9 @@ from ._private.models_2 import (
     SecretsManagerLocation as SecretsManagerLocation,
     SecretsManagerLocationDict as SecretsManagerLocationDict,
     SecretSourceType as SecretSourceType,
+)
+
+from ._private.models_3 import (
     SelfManagedConfiguration as SelfManagedConfiguration,
     SelfManagedConfigurationInput as SelfManagedConfigurationInput,
     SelfManagedConfigurationInputDict as SelfManagedConfigurationInputDict,
@@ -1681,9 +1708,6 @@ from ._private.models_2 import (
     SessionConfigurationDict as SessionConfigurationDict,
     SessionStorageConfiguration as SessionStorageConfiguration,
     SessionStorageConfigurationDict as SessionStorageConfigurationDict,
-)
-
-from ._private.models_3 import (
     SetTokenVaultCMKInput as SetTokenVaultCMKInput,
     SetTokenVaultCMKInputDict as SetTokenVaultCMKInputDict,
     SetTokenVaultCMKOutput as SetTokenVaultCMKOutput,
@@ -1813,6 +1837,9 @@ from ._private.models_3 import (
     UntagResourceInput as UntagResourceInput,
     UntagResourceInputDict as UntagResourceInputDict,
     UntagResourceOutput as UntagResourceOutput,
+    UpdateAgentInsightStoreInput as UpdateAgentInsightStoreInput,
+    UpdateAgentInsightStoreInputDict as UpdateAgentInsightStoreInputDict,
+    UpdateAgentInsightStoreOutput as UpdateAgentInsightStoreOutput,
     UpdateAgentRuntimeEndpointInput as UpdateAgentRuntimeEndpointInput,
     UpdateAgentRuntimeEndpointInputDict as UpdateAgentRuntimeEndpointInputDict,
     UpdateAgentRuntimeEndpointOutput as UpdateAgentRuntimeEndpointOutput,
@@ -2126,6 +2153,9 @@ DELETE_RESOURCE_POLICY: APIOperation[
 DELETE_WORKLOAD_IDENTITY: APIOperation[
     DeleteWorkloadIdentityInput, DeleteWorkloadIdentityOutput
 ]
+GET_AGENT_INSIGHT_STORE: APIOperation[
+    GetAgentInsightStoreInput, GetAgentInsightStoreOutput
+]
 GET_AGENT_RUNTIME: APIOperation[GetAgentRuntimeInput, GetAgentRuntimeOutput]
 GET_AGENT_RUNTIME_ENDPOINT: APIOperation[
     GetAgentRuntimeEndpointInput, GetAgentRuntimeEndpointOutput
@@ -2181,6 +2211,9 @@ GET_REGISTRY_RECORD: APIOperation[GetRegistryRecordInput, GetRegistryRecordOutpu
 GET_RESOURCE_POLICY: APIOperation[GetResourcePolicyInput, GetResourcePolicyOutput]
 GET_TOKEN_VAULT: APIOperation[GetTokenVaultInput, GetTokenVaultOutput]
 GET_WORKLOAD_IDENTITY: APIOperation[GetWorkloadIdentityInput, GetWorkloadIdentityOutput]
+LIST_AGENT_INSIGHT_STORES: APIOperation[
+    ListAgentInsightStoresInput, ListAgentInsightStoresOutput
+]
 LIST_AGENT_RUNTIME_ENDPOINTS: APIOperation[
     ListAgentRuntimeEndpointsInput, ListAgentRuntimeEndpointsOutput
 ]
@@ -2281,6 +2314,9 @@ SYNCHRONIZE_GATEWAY_TARGETS: APIOperation[
 ]
 TAG_RESOURCE: APIOperation[TagResourceInput, TagResourceOutput]
 UNTAG_RESOURCE: APIOperation[UntagResourceInput, UntagResourceOutput]
+UPDATE_AGENT_INSIGHT_STORE: APIOperation[
+    UpdateAgentInsightStoreInput, UpdateAgentInsightStoreOutput
+]
 UPDATE_AGENT_RUNTIME: APIOperation[UpdateAgentRuntimeInput, UpdateAgentRuntimeOutput]
 UPDATE_AGENT_RUNTIME_ENDPOINT: APIOperation[
     UpdateAgentRuntimeEndpointInput, UpdateAgentRuntimeEndpointOutput

@@ -12,8 +12,8 @@ _sV = "smithy.api#enumValue"
 _me = "member"
 _i = "item"
 _RT = "ResourceType"
-_cb = "capacity_block"
-_cb_ = "capacity-block"
+_Va = "Value"
+_va = "value"
 _rT = "resourceType"
 _Tag = "Tags"
 _sSI = "smithy.synthetic#originalShapeId"
@@ -23,54 +23,44 @@ _smi = "smithy.api#required"
 _DR = "DryRun"
 _p = "pending"
 _d = "disabled"
-_PI = "PublicIp"
-_pI = "publicIp"
 _smit = "smithy.api#output"
+_av = "available"
 _St = "State"
 _st = "state"
 _CT = "CreationTime"
 _cT = "creationTime"
+_fa = "failed"
 _OIw = "OwnerId"
-_C = "Code"
-_co = "code"
+_en = "enabled"
 _Sta = "Status"
 _sta = "status"
 _TSag = "TagSet"
 _tS = "tagSet"
+_er = "error"
 _dRr = "dryRun"
 _ET = "ExpirationTime"
 _eT = "expirationTime"
+_Ar = "Arn"
+_ar = "arn"
 _N = "Name"
 _nam = "name"
-_AZ = "AvailabilityZone"
-_aZ = "availabilityZone"
 _II = "InstanceId"
 _iI = "instanceId"
 _RTe = "ResourceTypes"
 _RTS = "ResourceTypeSet"
 _rTS = "resourceTypeSet"
-_ena = "enabled"
-_disab = "disabling"
 _IT = "InstanceType"
 _iT = "instanceType"
 _Des = "Description"
-_COI = "CustomerOwnedIp"
-_cOI = "customerOwnedIp"
-_CI = "CarrierIp"
-_cI = "carrierIp"
 _SMt = "StatusMessage"
 _sMt = "statusMessage"
 _desc = "description"
-_def = "default"
-_ASS = "AmdSevSnp"
-_CO = "CpuOptions"
-_IIn = "InstanceIds"
-_IEWI = "InstanceEventWindowId"
+_KKI = "KmsKeyId"
+_SIn = "SnapshotId"
 _G = "Groups"
 _IIm = "ImageId"
-_ESUS = "EnaSrdUdpSpecification"
-_ESUE = "EnaSrdUdpEnabled"
-_ESE = "EnaSrdEnabled"
+_WK = "WatermarkKey"
+_wK = "watermarkKey"
 _smith = "smithy.api#sensitive"
 _VIo = "VolumeId"
 _ECI = "EbsCardIndex"
@@ -87,33 +77,23 @@ _prog = "progress"
 _RIep = "ReportId"
 _ITI = "ImportTaskId"
 _iTI = "importTaskId"
-_KKI = "KmsKeyId"
 _En = "Encrypted"
 _enc = "encrypted"
 _kKI = "kmsKeyId"
+_SII = "SourceImageId"
 _iIm = "imageId"
-_SIn = "SnapshotId"
 _sIn = "snapshotId"
 _Op = "Operator"
-_ope = "operator"
+_oper = "operator"
 _EO = "EbsOptimized"
-_ap = "applied"
-_sch = "scheduled"
 _eO = "ebsOptimized"
-_requ = "required"
+_ITSn = "InstanceTypeSpecification"
 _Ena = "Enabled"
 _DNe = "DeviceName"
 _dNe = "deviceName"
 _Eb = "Ebs"
 _BDM = "BlockDeviceMapping"
-_opt = "optional"
-_HTt = "HttpTokens"
-_HPRHL = "HttpPutResponseHopLimit"
-_HE = "HttpEndpoint"
 _BDMl = "BlockDeviceMappings"
-_icr = "interruptible-capacity-reservation"
-_CRTap = "CapacityReservationTarget"
-_spo = "spot"
 _eb = "ebs"
 _Pla = "Platform"
 _plat = "platform"
@@ -121,58 +101,30 @@ _ue = "uefi"
 _bDM = "blockDeviceMapping"
 _ON = "OptionName"
 _OV = "OptionValues"
+_OVp = "OptionValue"
 _RTO = "ResourceTypeOptions"
+_RTOe = "ResourceTypeOption"
 _AIcc = "AccountIds"
+_AIcco = "AccountId"
 _rIe = "reportId"
 _ICEI = "InstanceConnectEndpointId"
 _SBu = "S3Bucket"
 _sB = "s3Bucket"
 _SK = "S3Key"
 _sK = "s3Key"
-_CRP = "CapacityReservationPreference"
-_CCor = "CoreCount"
-_TPC = "ThreadsPerCore"
-_NV = "NestedVirtualization"
-_CCp = "CpuCredits"
-_Conf = "Configured"
-_icr_ = "interruptible_capacity_reservation"
 _KI = "KernelId"
 _LCA = "LicenseConfigurationArn"
-_ARu = "AutoRecovery"
-_HPI = "HttpProtocolIpv6"
-_IMT = "InstanceMetadataTags"
-_MCIe = "MetricCategoryIds"
 _RIa = "RamdiskId"
-_Mon = "Monitoring"
 _DAT = "DisableApiTermination"
 _IISB = "InstanceInitiatedShutdownBehavior"
 _UDs = "UserData"
 _LSic = "LicenseSpecifications"
-_HO = "HibernationOptions"
 _EOn = "EnclaveOptions"
 _DASi = "DisableApiStop"
-_cRP = "capacityReservationPreference"
-_cRT = "capacityReservationTarget"
-_cCor = "coreCount"
-_tPC = "threadsPerCore"
-_aSS = "amdSevSnp"
-_nV = "nestedVirtualization"
-_cCp = "cpuCredits"
-_conf = "configured"
 _lCA = "licenseConfigurationArn"
-_aRu = "autoRecovery"
-_hTt = "httpTokens"
-_hPRHL = "httpPutResponseHopLimit"
-_hE = "httpEndpoint"
-_hPI = "httpProtocolIpv6"
-_iMT = "instanceMetadataTags"
-_MCIS = "MetricCategoryIdSet"
-_mCIS = "metricCategoryIdSet"
-_eSUE = "enaSrdUdpEnabled"
-_eSE = "enaSrdEnabled"
-_eSUS = "enaSrdUdpSpecification"
 _GS = "GroupSet"
 _gS = "groupSet"
+_kI = "kernelId"
 _dAT = "disableApiTermination"
 _iISB = "instanceInitiatedShutdownBehavior"
 _uDs = "userData"
@@ -180,47 +132,135 @@ _eOn = "enclaveOptions"
 _dASi = "disableApiStop"
 _SRt = "StateReason"
 _sRt = "stateReason"
-_IOI = "IpOwnerId"
-_iOI = "ipOwnerId"
-_PDNu = "PublicDnsName"
-_pDNu = "publicDnsName"
-_IOIn = "InstanceOwnerId"
-_iOIn = "instanceOwnerId"
 _SDC = "SourceDestCheck"
 _sDC = "sourceDestCheck"
-_ITA = "InstanceTagAttribute"
-_iTA = "instanceTagAttribute"
+_Ow = "Owner"
 _Fi = "Filter"
 _Fil = "Filters"
 _NTex = "NextToken"
 _Attr = "Attribute"
 _MR = "MaxResults"
 _nT = "nextToken"
-_ZI = "ZoneId"
-_zI = "zoneId"
-_IISL = "InstanceIdStringList"
-_mR = "maxResults"
-_termin = "terminated"
 _For = "Format"
 _fo = "format"
+_Im = "Image"
 _RIepo = "ReportIds"
-_ru = "running"
-_EGI = "ElasticGpuId"
-_eGI = "elasticGpuId"
 _IIma = "ImageIds"
 _pCr = "productCodes"
 _PCro = "ProductCodes"
+_Own = "Owners"
+_Pu = "Public"
 _ker = "kernel"
 _ramd = "ramdisk"
 _sNS = "sriovNetSupport"
 _bMo = "bootMode"
+_tSp = "tpmSupport"
+_lLT = "lastLaunchedTime"
+_iSm = "imdsSupport"
+_dPer = "deregistrationProtection"
 _Ker = "Kernel"
 _Ra = "Ramdisk"
 _SNSr = "SriovNetSupport"
 _BMo = "BootMode"
+_TSp = "TpmSupport"
+_LLT = "LastLaunchedTime"
+_ISm = "ImdsSupport"
+_DPer = "DeregistrationProtection"
+_DIRMR = "DescribeImageReferencesMaxResults"
+_IRRT = "ImageReferenceResourceType"
+_EI_ = "EC2_INSTANCE"
+_eIc = "ec2:Instance"
+_ELT = "EC2_LAUNCH_TEMPLATE"
+_eLT = "ec2:LaunchTemplate"
+_SP_ = "SSM_PARAMETER"
+_sPs = "ssm:Parameter"
+_IBIR = "IMAGE_BUILDER_IMAGE_RECIPE"
+_iIR = "imagebuilder:ImageRecipe"
+_IBCR = "IMAGE_BUILDER_CONTAINER_RECIPE"
+_iCR = "imagebuilder:ContainerRecipe"
+_IRON = "ImageReferenceOptionName"
+_SN_ = "STATE_NAME"
+_sn__ = "state-name"
+_VD_ = "VERSION_DEPTH"
+_vd = "version-depth"
+_RTOV = "ResourceTypeOptionValue"
+_RTOVL = "ResourceTypeOptionValuesList"
+_RTOL = "ResourceTypeOptionList"
+_RTRe = "ResourceTypeRequest"
+_RTRL = "ResourceTypeRequestList"
+_DIRI = "DescribeImageReferencesInput"
+_cDIRR = "com.amazonaws.ec2#DescribeImageReferencesRequest"
+_IART = "IncludeAllResourceTypes"
+_IRm = "ImageReference"
+_IRLm = "ImageReferenceList"
+_DIRO = "DescribeImageReferencesOutput"
+_cDIRRo = "com.amazonaws.ec2#DescribeImageReferencesResult"
+_IRma = "ImageReferences"
+_IRS = "ImageReferenceSet"
+_iRS = "imageReferenceSet"
+_DIR = "DescribeImageReferences"
+_EBSL = "ExecutableByStringList"
+_EBx = "ExecutableBy"
+_DIIes = "DescribeImagesInput"
+_cDIRomam = "com.amazonaws.ec2#DescribeImagesRequest"
+_EU = "ExecutableUsers"
+_IDn = "IncludeDeprecated"
+_IDnc = "IncludeDisabled"
+_BMV = "BootModeValues"
 _lb__ = "legacy_bios"
 _lb___ = "legacy-bios"
+_up__ = "uefi_preferred"
+_up___ = "uefi-preferred"
+_HTy = "HypervisorType"
+_ovm = "ovm"
+_xen = "xen"
+_ITV = "ImageTypeValues"
+_mach = "machine"
+_IW = "ImageWatermark"
+_SIR = "SourceImageRegion"
+_sIR = "sourceImageRegion"
+_sII = "sourceImageId"
+_SICT = "SourceImageCreationTime"
+_sICT = "sourceImageCreationTime"
+_WCT = "WatermarkCreationTime"
+_wCT = "watermarkCreationTime"
+_IWL = "ImageWatermarkList"
+_ISVm = "ImdsSupportValues"
+_v______ = "v2_0"
+_v_______ = "v2.0"
+_ITIn = "InstanceTypeItem"
+_SITS = "SupportedInstanceTypeSet"
+_UITS = "UnsupportedInstanceTypeSet"
+_SITu = "SupportedInstanceTypes"
+_sITS = "supportedInstanceTypeSet"
+_UIT = "UnsupportedInstanceTypes"
+_uITS = "unsupportedInstanceTypeSet"
+_DTev = "DeviceType"
+_is__ = "instance_store"
+_is___ = "instance-store"
+_SRc = "ScanResults"
+_HFSL = "HighestFindingSeverityLabel"
+_hFSL = "highestFindingSeverityLabel"
+_FSD = "FindingScanDate"
+_fSD = "findingScanDate"
+_IFAS = "InformationalFixAvailableSince"
+_iFAS = "informationalFixAvailableSince"
+_LFAS = "LowFixAvailableSince"
+_lFAS = "lowFixAvailableSince"
+_MFAS = "MediumFixAvailableSince"
+_mFAS = "mediumFixAvailableSince"
+_HFAS = "HighFixAvailableSince"
+_hFAS = "highFixAvailableSince"
+_CFAS = "CriticalFixAvailableSince"
+_cFAS = "criticalFixAvailableSince"
 _ISma = "ImageState"
+_inv = "invalid"
+_der = "deregistered"
+_tran = "transient"
+_TSV = "TpmSupportValues"
+_VTi = "VirtualizationType"
+_PDl = "PlatformDetails"
+_pDl = "platformDetails"
 _UO = "UsageOperation"
 _uO = "usageOperation"
 _ESna = "EnaSupport"
@@ -231,13 +271,26 @@ _IOA = "ImageOwnerAlias"
 _iOA = "imageOwnerAlias"
 _RDN = "RootDeviceName"
 _rDN = "rootDeviceName"
+_RDT = "RootDeviceType"
+_rDT = "rootDeviceType"
+_vTi = "virtualizationType"
 _DTep = "DeprecationTime"
 _dTep = "deprecationTime"
+_SIIo = "SourceInstanceId"
+_sIIo = "sourceInstanceId"
 _IAm = "ImageAllowed"
 _iAm = "imageAllowed"
+_FTE = "FreeTierEligible"
+_fTE = "freeTierEligible"
+_PSPN = "PublicSsmParameterName"
+_pSPN = "publicSsmParameterName"
 _IWm = "ImageWatermarks"
 _IWS = "ImageWatermarkSet"
 _iWS = "imageWatermarkSet"
+_sRc = "scanResults"
+_iTS = "instanceTypeSpecification"
+_ILm = "ImageLocation"
+_iL = "imageLocation"
 _iSma = "imageState"
 _IOIm = "ImageOwnerId"
 _iOIm = "imageOwnerId"
@@ -247,6 +300,34 @@ _IPsu = "IsPublic"
 _iPsu = "isPublic"
 _Arc = "Architecture"
 _arch = "architecture"
+_ITm = "ImageType"
+_iTm = "imageType"
+_rIa = "ramdiskId"
+_ILma = "ImageList"
+_DIOes = "DescribeImagesOutput"
+_cDIRomama = "com.amazonaws.ec2#DescribeImagesResult"
+_Ima = "Images"
+_ISmag = "ImagesSet"
+_iSmag = "imagesSet"
+_DIesc = "DescribeImages"
+_DIURIISL = "DescribeImageUsageReportsImageIdStringList"
+_DIUREMR = "DescribeImageUsageReportEntriesMaxResults"
+_IURISL = "ImageUsageReportIdStringList"
+_DIUREI = "DescribeImageUsageReportEntriesInput"
+_cDIURER = "com.amazonaws.ec2#DescribeImageUsageReportEntriesRequest"
+_IURE = "ImageUsageReportEntry"
+_UCs = "UsageCount"
+_uCs = "usageCount"
+_aIc = "accountId"
+_RCT = "ReportCreationTime"
+_rCT = "reportCreationTime"
+_IUREL = "ImageUsageReportEntryList"
+_DIUREO = "DescribeImageUsageReportEntriesOutput"
+_cDIURERo = "com.amazonaws.ec2#DescribeImageUsageReportEntriesResult"
+_IUREm = "ImageUsageReportEntries"
+_IURES = "ImageUsageReportEntrySet"
+_iURES = "imageUsageReportEntrySet"
+_DIURE = "DescribeImageUsageReportEntries"
 _DIURMR = "DescribeImageUsageReportsMaxResults"
 _DIURIe = "DescribeImageUsageReportsInput"
 _cDIURRom = "com.amazonaws.ec2#DescribeImageUsageReportsRequest"
@@ -326,6 +407,7 @@ _VOIo = "VolumeOwnerId"
 _vOIo = "volumeOwnerId"
 _IBDM = "InstanceBlockDeviceMapping"
 _IBDML = "InstanceBlockDeviceMappingList"
+_ABV = "AttributeBooleanValue"
 _DIAOe = "DescribeInstanceAttributeOutput"
 _cIAom = "com.amazonaws.ec2#InstanceAttribute"
 _DIAe = "DescribeInstanceAttribute"
@@ -339,109 +421,521 @@ _cDICERoma = "com.amazonaws.ec2#DescribeInstanceConnectEndpointsResult"
 _ICEn = "InstanceConnectEndpoints"
 _iCES = "instanceConnectEndpointSet"
 _DICEe = "DescribeInstanceConnectEndpoints"
-_DICSMR = "DescribeInstanceCreditSpecificationsMaxResults"
-_DICSI = "DescribeInstanceCreditSpecificationsInput"
-_cDICSR = "com.amazonaws.ec2#DescribeInstanceCreditSpecificationsRequest"
-_ICS = "InstanceCreditSpecification"
-_ICSL = "InstanceCreditSpecificationList"
-_DICSO = "DescribeInstanceCreditSpecificationsOutput"
-_cDICSRo = "com.amazonaws.ec2#DescribeInstanceCreditSpecificationsResult"
-_ICSn = "InstanceCreditSpecifications"
-_ICSS = "InstanceCreditSpecificationSet"
-_iCSS = "instanceCreditSpecificationSet"
-_DICS = "DescribeInstanceCreditSpecifications"
-_DIENAIe = "DescribeInstanceEventNotificationAttributesInput"
-_cDIENARom = "com.amazonaws.ec2#DescribeInstanceEventNotificationAttributesRequest"
-_DIENAOe = "DescribeInstanceEventNotificationAttributesOutput"
-_cDIENARoma = "com.amazonaws.ec2#DescribeInstanceEventNotificationAttributesResult"
-_DIENAe = "DescribeInstanceEventNotificationAttributes"
-_IEWIS = "InstanceEventWindowIdSet"
-_RRe = "ResultRange"
-_DIEWIe = "DescribeInstanceEventWindowsInput"
-_cDIEWRom = "com.amazonaws.ec2#DescribeInstanceEventWindowsRequest"
-_IEWIn = "InstanceEventWindowIds"
-_IEWSn = "InstanceEventWindowSet"
-_DIEWOe = "DescribeInstanceEventWindowsOutput"
-_cDIEWRoma = "com.amazonaws.ec2#DescribeInstanceEventWindowsResult"
-_IEWn = "InstanceEventWindows"
-_iEWSn = "instanceEventWindowSet"
-_DIEWe = "DescribeInstanceEventWindows"
-_DIIMMR = "DescribeInstanceImageMetadataMaxResults"
-_DIIMI = "DescribeInstanceImageMetadataInput"
-_cDIIMR = "com.amazonaws.ec2#DescribeInstanceImageMetadataRequest"
-_IM = "ImageMetadata"
-_ISN = "InstanceStateName"
-_sd__ = "shutting_down"
-_sd___ = "shutting-down"
-_stopp = "stopping"
-_stoppe = "stopped"
-_ISnsta = "InstanceState"
-_IIM = "InstanceImageMetadata"
-_LTa = "LaunchTime"
-_lTa = "launchTime"
-_iSnst = "instanceState"
-_iM = "imageMetadata"
-_IIML = "InstanceImageMetadataList"
-_DIIMO = "DescribeInstanceImageMetadataOutput"
-_cDIIMRo = "com.amazonaws.ec2#DescribeInstanceImageMetadataResult"
-_IIMS = "InstanceImageMetadataSet"
-_iIMS = "instanceImageMetadataSet"
-_DIIM = "DescribeInstanceImageMetadata"
-_DIIesc = "DescribeInstancesInput"
-_cDIRomamaz = "com.amazonaws.ec2#DescribeInstancesRequest"
-_IMR = "IncludeManagedResources"
-_CRSR = "CapacityReservationSpecificationResponse"
-_IBMV = "InstanceBootModeValues"
-_EGA = "ElasticGpuAssociation"
-_EGAI = "ElasticGpuAssociationId"
-_eGAI = "elasticGpuAssociationId"
-_EGAS = "ElasticGpuAssociationState"
-_eGAS = "elasticGpuAssociationState"
-_EGAT = "ElasticGpuAssociationTime"
-_eGAT = "elasticGpuAssociationTime"
-_EGAL = "ElasticGpuAssociationList"
-_EIAA = "ElasticInferenceAcceleratorAssociation"
-_EIAAl = "ElasticInferenceAcceleratorArn"
-_eIAA = "elasticInferenceAcceleratorArn"
-_EIAAI = "ElasticInferenceAcceleratorAssociationId"
-_eIAAI = "elasticInferenceAcceleratorAssociationId"
-_EIAAS = "ElasticInferenceAcceleratorAssociationState"
-_eIAAS = "elasticInferenceAcceleratorAssociationState"
-_EIAAT = "ElasticInferenceAcceleratorAssociationTime"
-_eIAAT = "elasticInferenceAcceleratorAssociationTime"
-_EIAAL = "ElasticInferenceAcceleratorAssociationList"
-_ILT = "InstanceLifecycleType"
-_LC = "LicenseConfiguration"
-_LL = "LicenseList"
-_IARS = "InstanceAutoRecoveryState"
-_IRMS = "InstanceRebootMigrationState"
-_IMOn = "InstanceMaintenanceOptions"
-_RMeb = "RebootMigration"
-_rMeb = "rebootMigration"
-_IMES = "InstanceMetadataEndpointState"
-_IMPS = "InstanceMetadataProtocolState"
-_HTS = "HttpTokensState"
-_IMTS = "InstanceMetadataTagsState"
-_IMOS = "InstanceMetadataOptionsState"
-_IMOR = "InstanceMetadataOptionsResponse"
-_MSon = "MonitoringState"
-_INIA = "InstanceNetworkInterfaceAssociation"
-_IAESUS = "InstanceAttachmentEnaSrdUdpSpecification"
-_IAESS = "InstanceAttachmentEnaSrdSpecification"
-_DIOesc = "DescribeInstancesOutput"
-_cDIRomamazo = "com.amazonaws.ec2#DescribeInstancesResult"
-_Reser = "Reservations"
-_RSese = "ReservationSet"
-_rSese = "reservationSet"
-_DIescr = "DescribeInstances"
 
-INSTANCE_ID_STRING_LIST: StaticSchema = (
+DESCRIBE_IMAGE_REFERENCES_MAX_RESULTS: StaticSchema = (7, n0, _DIRMR, 0)
+
+IMAGE_REFERENCE_RESOURCE_TYPE: StaticSchema = (
+    14,
+    n0,
+    _IRRT,
+    0,
+    (_EI_, _ELT, _SP_, _IBIR, _IBCR),
+    (
+        (-1, {_sV: _eIc}),
+        (-1, {_sV: _eLT}),
+        (-1, {_sV: _sPs}),
+        (-1, {_sV: _iIR}),
+        (-1, {_sV: _iCR}),
+    ),
+)
+
+IMAGE_REFERENCE_OPTION_NAME: StaticSchema = (
+    14,
+    n0,
+    _IRON,
+    0,
+    (_SN_, _VD_),
+    ((-1, {_sV: _sn__}), (-1, {_sV: _vd})),
+)
+
+RESOURCE_TYPE_OPTION_VALUE: StaticSchema = (3, n0, _RTOV, 0)
+
+RESOURCE_TYPE_OPTION_VALUES_LIST: StaticSchema = (
     16,
     n0,
-    _IISL,
+    _RTOVL,
     0,
     (_me,),
-    ((lambda: schemas.INSTANCE_ID, {_sN: _II}),),
+    ((RESOURCE_TYPE_OPTION_VALUE, 0),),
+)
+
+RESOURCE_TYPE_OPTION: StaticSchema = (
+    18,
+    n0,
+    _RTOe,
+    0,
+    (_ON, _OV),
+    ((IMAGE_REFERENCE_OPTION_NAME, 0), (RESOURCE_TYPE_OPTION_VALUES_LIST, {_sN: _OVp})),
+)
+
+RESOURCE_TYPE_OPTION_LIST: StaticSchema = (
+    16,
+    n0,
+    _RTOL,
+    0,
+    (_me,),
+    ((RESOURCE_TYPE_OPTION, 0),),
+)
+
+RESOURCE_TYPE_REQUEST: StaticSchema = (
+    18,
+    n0,
+    _RTRe,
+    0,
+    (_RT, _RTO),
+    ((IMAGE_REFERENCE_RESOURCE_TYPE, 0), (RESOURCE_TYPE_OPTION_LIST, {_sN: _RTOe})),
+)
+
+RESOURCE_TYPE_REQUEST_LIST: StaticSchema = (
+    16,
+    n0,
+    _RTRL,
+    0,
+    (_me,),
+    ((RESOURCE_TYPE_REQUEST, 0),),
+)
+
+DESCRIBE_IMAGE_REFERENCES_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DIRI,
+    {_sSI: _cDIRR, _sm: None},
+    (_IIma, _IART, _RTe, _NTex, _DR, _MR),
+    (
+        (
+            lambda: schemas.DESCRIBE_IMAGE_REFERENCES_IMAGE_ID_STRING_LIST,
+            {_sN: _IIm, _sO: None, _smi: None},
+        ),
+        (lambda: schemas.BOOLEAN, 0),
+        (RESOURCE_TYPE_REQUEST_LIST, {_sN: _RT}),
+        (lambda: schemas.STRING, 0),
+        (lambda: schemas.BOOLEAN, 0),
+        (DESCRIBE_IMAGE_REFERENCES_MAX_RESULTS, 0),
+    ),
+)
+
+DESCRIBE_IMAGE_REFERENCES_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DIRO,
+    {_sSI: _cDIRRo, _smit: None},
+    (_NTex, _IRma),
+    (
+        (lambda: schemas.STRING, {_aQN: _NTex, _sN: _nT}),
+        (lambda: IMAGE_REFERENCE_LIST, {_aQN: _IRS, _sN: _iRS}),
+    ),
+)
+
+DESCRIBE_IMAGE_REFERENCES: StaticOperationSchema = (
+    23,
+    n0,
+    _DIR,
+    0,
+    DESCRIBE_IMAGE_REFERENCES_INPUT,
+    DESCRIBE_IMAGE_REFERENCES_OUTPUT,
+    (),
+)
+
+IMAGE_REFERENCE: StaticSchema = (
+    18,
+    n0,
+    _IRm,
+    0,
+    (_IIm, _RT, _Ar),
+    (
+        (lambda: schemas.IMAGE_ID, {_aQN: _IIm, _sN: _iIm}),
+        (IMAGE_REFERENCE_RESOURCE_TYPE, {_aQN: _RT, _sN: _rT}),
+        (lambda: schemas.STRING, {_aQN: _Ar, _sN: _ar}),
+    ),
+)
+
+IMAGE_REFERENCE_LIST: StaticSchema = (
+    16,
+    n0,
+    _IRLm,
+    0,
+    (_me,),
+    ((IMAGE_REFERENCE, {_sN: _i}),),
+)
+
+EXECUTABLE_BY_STRING_LIST: StaticSchema = (
+    16,
+    n0,
+    _EBSL,
+    0,
+    (_me,),
+    ((lambda: schemas.STRING, {_sN: _EBx}),),
+)
+
+DESCRIBE_IMAGES_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DIIes,
+    {_sSI: _cDIRomam, _sm: None},
+    (_EU, _IIma, _Own, _IDn, _IDnc, _MR, _NTex, _DR, _Fil),
+    (
+        (EXECUTABLE_BY_STRING_LIST, {_sN: _EBx}),
+        (lambda: schemas.IMAGE_ID_STRING_LIST, {_sN: _IIm}),
+        (lambda: schemas.OWNER_STRING_LIST, {_sN: _Ow}),
+        (lambda: schemas.BOOLEAN, 0),
+        (lambda: schemas.BOOLEAN, 0),
+        (lambda: schemas.INTEGER, 0),
+        (lambda: schemas.STRING, 0),
+        (lambda: schemas.BOOLEAN, {_aQN: _DR, _sN: _dRr}),
+        (lambda: schemas.FILTER_LIST, {_sN: _Fi}),
+    ),
+)
+
+DESCRIBE_IMAGES_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DIOes,
+    {_sSI: _cDIRomama, _smit: None},
+    (_NTex, _Ima),
+    (
+        (lambda: schemas.STRING, {_aQN: _NTex, _sN: _nT}),
+        (lambda: IMAGE_LIST, {_aQN: _ISmag, _sN: _iSmag}),
+    ),
+)
+
+DESCRIBE_IMAGES: StaticOperationSchema = (
+    23,
+    n0,
+    _DIesc,
+    0,
+    DESCRIBE_IMAGES_INPUT,
+    DESCRIBE_IMAGES_OUTPUT,
+    (),
+)
+
+BOOT_MODE_VALUES: StaticSchema = (
+    14,
+    n0,
+    _BMV,
+    0,
+    (_lb__, _ue, _up__),
+    ((-1, {_sV: _lb___}), (-1, {_sV: _ue}), (-1, {_sV: _up___})),
+)
+
+HYPERVISOR_TYPE: StaticSchema = (
+    14,
+    n0,
+    _HTy,
+    0,
+    (_ovm, _xen),
+    ((-1, {_sV: _ovm}), (-1, {_sV: _xen})),
+)
+
+IMAGE_TYPE_VALUES: StaticSchema = (
+    14,
+    n0,
+    _ITV,
+    0,
+    (_mach, _ker, _ramd),
+    ((-1, {_sV: _mach}), (-1, {_sV: _ker}), (-1, {_sV: _ramd})),
+)
+
+IMAGE_WATERMARK: StaticSchema = (
+    18,
+    n0,
+    _IW,
+    0,
+    (_WK, _SIR, _SII, _SICT, _WCT),
+    (
+        (lambda: schemas.STRING, {_aQN: _WK, _sN: _wK}),
+        (lambda: schemas.STRING, {_aQN: _SIR, _sN: _sIR}),
+        (lambda: schemas.STRING, {_aQN: _SII, _sN: _sII}),
+        (lambda: schemas.MILLISECOND_DATE_TIME, {_aQN: _SICT, _sN: _sICT}),
+        (lambda: schemas.MILLISECOND_DATE_TIME, {_aQN: _WCT, _sN: _wCT}),
+    ),
+)
+
+IMAGE_WATERMARK_LIST: StaticSchema = (
+    16,
+    n0,
+    _IWL,
+    0,
+    (_me,),
+    ((IMAGE_WATERMARK, {_sN: _i}),),
+)
+
+IMDS_SUPPORT_VALUES: StaticSchema = (
+    14,
+    n0,
+    _ISVm,
+    0,
+    (_v______,),
+    ((-1, {_sV: _v_______}),),
+)
+
+INSTANCE_TYPE_ITEM: StaticSchema = (
+    18,
+    n0,
+    _ITIn,
+    0,
+    (_IT,),
+    ((lambda: schemas.STRING, {_aQN: _IT, _sN: _iT}),),
+)
+
+SUPPORTED_INSTANCE_TYPE_SET: StaticSchema = (
+    16,
+    n0,
+    _SITS,
+    0,
+    (_me,),
+    ((INSTANCE_TYPE_ITEM, {_sN: _i}),),
+)
+
+UNSUPPORTED_INSTANCE_TYPE_SET: StaticSchema = (
+    16,
+    n0,
+    _UITS,
+    0,
+    (_me,),
+    ((INSTANCE_TYPE_ITEM, {_sN: _i}),),
+)
+
+INSTANCE_TYPE_SPECIFICATION: StaticSchema = (
+    18,
+    n0,
+    _ITSn,
+    0,
+    (_SITu, _UIT),
+    (
+        (SUPPORTED_INSTANCE_TYPE_SET, {_aQN: _SITS, _sN: _sITS}),
+        (UNSUPPORTED_INSTANCE_TYPE_SET, {_aQN: _UITS, _sN: _uITS}),
+    ),
+)
+
+DEVICE_TYPE: StaticSchema = (
+    14,
+    n0,
+    _DTev,
+    0,
+    (_eb, _is__),
+    ((-1, {_sV: _eb}), (-1, {_sV: _is___})),
+)
+
+SCAN_RESULTS: StaticSchema = (
+    18,
+    n0,
+    _SRc,
+    0,
+    (_HFSL, _FSD, _IFAS, _LFAS, _MFAS, _HFAS, _CFAS),
+    (
+        (lambda: schemas.SEVERITY_LABEL, {_aQN: _HFSL, _sN: _hFSL}),
+        (lambda: schemas.MILLISECOND_DATE_TIME, {_aQN: _FSD, _sN: _fSD}),
+        (lambda: schemas.MILLISECOND_DATE_TIME, {_aQN: _IFAS, _sN: _iFAS}),
+        (lambda: schemas.MILLISECOND_DATE_TIME, {_aQN: _LFAS, _sN: _lFAS}),
+        (lambda: schemas.MILLISECOND_DATE_TIME, {_aQN: _MFAS, _sN: _mFAS}),
+        (lambda: schemas.MILLISECOND_DATE_TIME, {_aQN: _HFAS, _sN: _hFAS}),
+        (lambda: schemas.MILLISECOND_DATE_TIME, {_aQN: _CFAS, _sN: _cFAS}),
+    ),
+)
+
+IMAGE_STATE: StaticSchema = (
+    14,
+    n0,
+    _ISma,
+    0,
+    (_p, _av, _inv, _der, _tran, _fa, _er, _d),
+    (
+        (-1, {_sV: _p}),
+        (-1, {_sV: _av}),
+        (-1, {_sV: _inv}),
+        (-1, {_sV: _der}),
+        (-1, {_sV: _tran}),
+        (-1, {_sV: _fa}),
+        (-1, {_sV: _er}),
+        (-1, {_sV: _d}),
+    ),
+)
+
+TPM_SUPPORT_VALUES: StaticSchema = (
+    14,
+    n0,
+    _TSV,
+    0,
+    (_v______,),
+    ((-1, {_sV: _v_______}),),
+)
+
+IMAGE: StaticSchema = (
+    18,
+    n0,
+    _Im,
+    0,
+    (
+        _PDl,
+        _UO,
+        _BDMl,
+        _Des,
+        _ESna,
+        _Hy,
+        _IOA,
+        _N,
+        _RDN,
+        _RDT,
+        _SNSr,
+        _SRt,
+        _Tag,
+        _VTi,
+        _BMo,
+        _TSp,
+        _DTep,
+        _ISm,
+        _SIIo,
+        _DPer,
+        _LLT,
+        _IAm,
+        _SII,
+        _SIR,
+        _FTE,
+        _PSPN,
+        _IWm,
+        _SRc,
+        _ITSn,
+        _IIm,
+        _ILm,
+        _St,
+        _OIw,
+        _CDre,
+        _Pu,
+        _PCro,
+        _Arc,
+        _ITm,
+        _KI,
+        _RIa,
+        _Pla,
+    ),
+    (
+        (lambda: schemas.STRING, {_aQN: _PDl, _sN: _pDl}),
+        (lambda: schemas.STRING, {_aQN: _UO, _sN: _uO}),
+        (lambda: schemas.BLOCK_DEVICE_MAPPING_LIST, {_aQN: _BDM, _sN: _bDM}),
+        (lambda: schemas.STRING, {_aQN: _Des, _sN: _desc}),
+        (lambda: schemas.BOOLEAN, {_aQN: _ESna, _sN: _eSna}),
+        (HYPERVISOR_TYPE, {_aQN: _Hy, _sN: _hy}),
+        (lambda: schemas.STRING, {_aQN: _IOA, _sN: _iOA}),
+        (lambda: schemas.STRING, {_aQN: _N, _sN: _nam}),
+        (lambda: schemas.STRING, {_aQN: _RDN, _sN: _rDN}),
+        (DEVICE_TYPE, {_aQN: _RDT, _sN: _rDT}),
+        (lambda: schemas.STRING, {_aQN: _SNSr, _sN: _sNS}),
+        (lambda: schemas.STATE_REASON, {_aQN: _SRt, _sN: _sRt}),
+        (lambda: schemas.TAG_LIST, {_aQN: _TSag, _sN: _tS}),
+        (lambda: schemas.VIRTUALIZATION_TYPE, {_aQN: _VTi, _sN: _vTi}),
+        (BOOT_MODE_VALUES, {_aQN: _BMo, _sN: _bMo}),
+        (TPM_SUPPORT_VALUES, {_aQN: _TSp, _sN: _tSp}),
+        (lambda: schemas.STRING, {_aQN: _DTep, _sN: _dTep}),
+        (IMDS_SUPPORT_VALUES, {_aQN: _ISm, _sN: _iSm}),
+        (lambda: schemas.STRING, {_aQN: _SIIo, _sN: _sIIo}),
+        (lambda: schemas.STRING, {_aQN: _DPer, _sN: _dPer}),
+        (lambda: schemas.STRING, {_aQN: _LLT, _sN: _lLT}),
+        (lambda: schemas.BOOLEAN, {_aQN: _IAm, _sN: _iAm}),
+        (lambda: schemas.STRING, {_aQN: _SII, _sN: _sII}),
+        (lambda: schemas.STRING, {_aQN: _SIR, _sN: _sIR}),
+        (lambda: schemas.BOOLEAN, {_aQN: _FTE, _sN: _fTE}),
+        (lambda: schemas.STRING, {_aQN: _PSPN, _sN: _pSPN}),
+        (IMAGE_WATERMARK_LIST, {_aQN: _IWS, _sN: _iWS}),
+        (SCAN_RESULTS, {_aQN: _SRc, _sN: _sRc}),
+        (INSTANCE_TYPE_SPECIFICATION, {_aQN: _ITSn, _sN: _iTS}),
+        (lambda: schemas.STRING, {_aQN: _IIm, _sN: _iIm}),
+        (lambda: schemas.STRING, {_aQN: _ILm, _sN: _iL}),
+        (IMAGE_STATE, {_aQN: _ISma, _sN: _iSma}),
+        (lambda: schemas.STRING, {_aQN: _IOIm, _sN: _iOIm}),
+        (lambda: schemas.STRING, {_aQN: _CDre, _sN: _cDre}),
+        (lambda: schemas.BOOLEAN, {_aQN: _IPsu, _sN: _iPsu}),
+        (lambda: schemas.PRODUCT_CODE_LIST, {_aQN: _PCro, _sN: _pCr}),
+        (lambda: schemas.ARCHITECTURE_VALUES, {_aQN: _Arc, _sN: _arch}),
+        (IMAGE_TYPE_VALUES, {_aQN: _ITm, _sN: _iTm}),
+        (lambda: schemas.STRING, {_aQN: _KI, _sN: _kI}),
+        (lambda: schemas.STRING, {_aQN: _RIa, _sN: _rIa}),
+        (lambda: schemas.PLATFORM_VALUES, {_aQN: _Pla, _sN: _plat}),
+    ),
+)
+
+IMAGE_LIST: StaticSchema = (16, n0, _ILma, 0, (_me,), ((IMAGE, {_sN: _i}),))
+
+DESCRIBE_IMAGE_USAGE_REPORTS_IMAGE_ID_STRING_LIST: StaticSchema = (
+    16,
+    n0,
+    _DIURIISL,
+    0,
+    (_me,),
+    ((lambda: schemas.IMAGE_ID, 0),),
+)
+
+DESCRIBE_IMAGE_USAGE_REPORT_ENTRIES_MAX_RESULTS: StaticSchema = (7, n0, _DIUREMR, 0)
+
+IMAGE_USAGE_REPORT_ID_STRING_LIST: StaticSchema = (
+    16,
+    n0,
+    _IURISL,
+    0,
+    (_me,),
+    ((lambda: schemas.IMAGE_USAGE_REPORT_ID, 0),),
+)
+
+DESCRIBE_IMAGE_USAGE_REPORT_ENTRIES_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DIUREI,
+    {_sSI: _cDIURER, _sm: None},
+    (_IIma, _RIepo, _NTex, _Fil, _DR, _MR),
+    (
+        (DESCRIBE_IMAGE_USAGE_REPORTS_IMAGE_ID_STRING_LIST, {_sN: _IIm}),
+        (IMAGE_USAGE_REPORT_ID_STRING_LIST, {_sN: _RIep}),
+        (lambda: schemas.STRING, 0),
+        (lambda: schemas.FILTER_LIST, {_sN: _Fi}),
+        (lambda: schemas.BOOLEAN, 0),
+        (DESCRIBE_IMAGE_USAGE_REPORT_ENTRIES_MAX_RESULTS, 0),
+    ),
+)
+
+DESCRIBE_IMAGE_USAGE_REPORT_ENTRIES_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DIUREO,
+    {_sSI: _cDIURERo, _smit: None},
+    (_NTex, _IUREm),
+    (
+        (lambda: schemas.STRING, {_aQN: _NTex, _sN: _nT}),
+        (lambda: IMAGE_USAGE_REPORT_ENTRY_LIST, {_aQN: _IURES, _sN: _iURES}),
+    ),
+)
+
+DESCRIBE_IMAGE_USAGE_REPORT_ENTRIES: StaticOperationSchema = (
+    23,
+    n0,
+    _DIURE,
+    0,
+    DESCRIBE_IMAGE_USAGE_REPORT_ENTRIES_INPUT,
+    DESCRIBE_IMAGE_USAGE_REPORT_ENTRIES_OUTPUT,
+    (),
+)
+
+IMAGE_USAGE_REPORT_ENTRY: StaticSchema = (
+    18,
+    n0,
+    _IURE,
+    0,
+    (_RT, _RIep, _UCs, _AIcco, _IIm, _RCT),
+    (
+        (lambda: schemas.IMAGE_USAGE_RESOURCE_TYPE_NAME, {_aQN: _RT, _sN: _rT}),
+        (lambda: schemas.IMAGE_USAGE_REPORT_ID, {_aQN: _RIep, _sN: _rIe}),
+        (lambda: schemas.LONG, {_aQN: _UCs, _sN: _uCs}),
+        (lambda: schemas.STRING, {_aQN: _AIcco, _sN: _aIc}),
+        (lambda: schemas.IMAGE_ID, {_aQN: _IIm, _sN: _iIm}),
+        (lambda: schemas.MILLISECOND_DATE_TIME, {_aQN: _RCT, _sN: _rCT}),
+    ),
+)
+
+IMAGE_USAGE_REPORT_ENTRY_LIST: StaticSchema = (
+    16,
+    n0,
+    _IUREL,
+    0,
+    (_me,),
+    ((IMAGE_USAGE_REPORT_ENTRY, {_sN: _i}),),
 )
 
 DESCRIBE_IMAGE_USAGE_REPORTS_MAX_RESULTS: StaticSchema = (7, n0, _DIURMR, 0)
@@ -453,11 +947,8 @@ DESCRIBE_IMAGE_USAGE_REPORTS_INPUT: StaticSchema = (
     {_sSI: _cDIURRom, _sm: None},
     (_IIma, _RIepo, _NTex, _Fil, _DR, _MR),
     (
-        (
-            lambda: schemas.DESCRIBE_IMAGE_USAGE_REPORTS_IMAGE_ID_STRING_LIST,
-            {_sN: _IIm},
-        ),
-        (lambda: schemas.IMAGE_USAGE_REPORT_ID_STRING_LIST, {_sN: _RIep}),
+        (DESCRIBE_IMAGE_USAGE_REPORTS_IMAGE_ID_STRING_LIST, {_sN: _IIm}),
+        (IMAGE_USAGE_REPORT_ID_STRING_LIST, {_sN: _RIep}),
         (lambda: schemas.STRING, 0),
         (lambda: schemas.FILTER_LIST, {_sN: _Fi}),
         (lambda: schemas.BOOLEAN, 0),
@@ -723,7 +1214,7 @@ IMPORT_IMAGE_TASK: StaticSchema = (
         (lambda: schemas.TAG_LIST, {_aQN: _TSag, _sN: _tS}),
         (IMPORT_IMAGE_LICENSE_SPECIFICATION_LIST_RESPONSE, {_aQN: _LSic, _sN: _lSic}),
         (lambda: schemas.STRING, {_aQN: _UO, _sN: _uO}),
-        (lambda: schemas.BOOT_MODE_VALUES, {_aQN: _BMo, _sN: _bMo}),
+        (BOOT_MODE_VALUES, {_aQN: _BMo, _sN: _bMo}),
     ),
 )
 
@@ -910,10 +1401,10 @@ DESCRIBE_INSTANCE_ATTRIBUTE_OUTPUT: StaticSchema = (
     ),
     (
         (lambda: INSTANCE_BLOCK_DEVICE_MAPPING_LIST, {_aQN: _BDM, _sN: _bDM}),
-        (lambda: schemas.ATTRIBUTE_BOOLEAN_VALUE, {_aQN: _DAT, _sN: _dAT}),
-        (lambda: schemas.ATTRIBUTE_BOOLEAN_VALUE, {_aQN: _ESna, _sN: _eSna}),
+        (lambda: ATTRIBUTE_BOOLEAN_VALUE, {_aQN: _DAT, _sN: _dAT}),
+        (lambda: ATTRIBUTE_BOOLEAN_VALUE, {_aQN: _ESna, _sN: _eSna}),
         (lambda: ENCLAVE_OPTIONS, {_aQN: _EOn, _sN: _eOn}),
-        (lambda: schemas.ATTRIBUTE_BOOLEAN_VALUE, {_aQN: _EO, _sN: _eO}),
+        (lambda: ATTRIBUTE_BOOLEAN_VALUE, {_aQN: _EO, _sN: _eO}),
         (lambda: schemas.STRING, {_aQN: _II, _sN: _iI}),
         (lambda: schemas.ATTRIBUTE_VALUE, {_aQN: _IISB, _sN: _iISB}),
         (lambda: schemas.ATTRIBUTE_VALUE, {_aQN: _IT, _sN: _iT}),
@@ -921,10 +1412,10 @@ DESCRIBE_INSTANCE_ATTRIBUTE_OUTPUT: StaticSchema = (
         (lambda: schemas.PRODUCT_CODE_LIST, {_aQN: _PCro, _sN: _pCr}),
         (lambda: schemas.ATTRIBUTE_VALUE, {_aQN: _Ra, _sN: _ramd}),
         (lambda: schemas.ATTRIBUTE_VALUE, {_aQN: _RDN, _sN: _rDN}),
-        (lambda: schemas.ATTRIBUTE_BOOLEAN_VALUE, {_aQN: _SDC, _sN: _sDC}),
+        (lambda: ATTRIBUTE_BOOLEAN_VALUE, {_aQN: _SDC, _sN: _sDC}),
         (lambda: schemas.ATTRIBUTE_VALUE, {_aQN: _SNSr, _sN: _sNS}),
         (lambda: schemas.ATTRIBUTE_VALUE, {_aQN: _UDs, _sN: _uDs}),
-        (lambda: schemas.ATTRIBUTE_BOOLEAN_VALUE, {_aQN: _DASi, _sN: _dASi}),
+        (lambda: ATTRIBUTE_BOOLEAN_VALUE, {_aQN: _DASi, _sN: _dASi}),
         (lambda: schemas.GROUP_IDENTIFIER_LIST, {_aQN: _GS, _sN: _gS}),
     ),
 )
@@ -952,7 +1443,7 @@ EBS_INSTANCE_BLOCK_DEVICE: StaticSchema = (
         (lambda: schemas.STRING, {_aQN: _VIo, _sN: _vIo}),
         (lambda: schemas.STRING, {_aQN: _ARs, _sN: _aRs}),
         (lambda: schemas.STRING, {_aQN: _VOIo, _sN: _vOIo}),
-        (lambda: schemas.OPERATOR_RESPONSE, {_aQN: _Op, _sN: _ope}),
+        (lambda: schemas.OPERATOR_RESPONSE, {_aQN: _Op, _sN: _oper}),
         (lambda: schemas.INTEGER, {_aQN: _ECI, _sN: _eCI}),
     ),
 )
@@ -978,13 +1469,22 @@ INSTANCE_BLOCK_DEVICE_MAPPING_LIST: StaticSchema = (
     ((INSTANCE_BLOCK_DEVICE_MAPPING, {_sN: _i}),),
 )
 
+ATTRIBUTE_BOOLEAN_VALUE: StaticSchema = (
+    18,
+    n0,
+    _ABV,
+    0,
+    (_Va,),
+    ((lambda: schemas.BOOLEAN, {_aQN: _Va, _sN: _va}),),
+)
+
 ENCLAVE_OPTIONS: StaticSchema = (
     18,
     n0,
     _EOn,
     0,
     (_Ena,),
-    ((lambda: schemas.BOOLEAN, {_aQN: _Ena, _sN: _ena}),),
+    ((lambda: schemas.BOOLEAN, {_aQN: _Ena, _sN: _en}),),
 )
 
 INSTANCE_CONNECT_ENDPOINT_MAX_RESULTS: StaticSchema = (7, n0, _ICEMR, 0)
@@ -1011,7 +1511,7 @@ DESCRIBE_INSTANCE_CONNECT_ENDPOINTS_OUTPUT: StaticSchema = (
     {_sSI: _cDICERoma, _smit: None},
     (_ICEn, _NTex),
     (
-        (lambda: INSTANCE_CONNECT_ENDPOINT_SET, {_aQN: _ICES, _sN: _iCES}),
+        (lambda: schemas.INSTANCE_CONNECT_ENDPOINT_SET, {_aQN: _ICES, _sN: _iCES}),
         (lambda: schemas.NEXT_TOKEN, {_aQN: _NTex, _sN: _nT}),
     ),
 )
@@ -1024,580 +1524,4 @@ DESCRIBE_INSTANCE_CONNECT_ENDPOINTS: StaticOperationSchema = (
     DESCRIBE_INSTANCE_CONNECT_ENDPOINTS_INPUT,
     DESCRIBE_INSTANCE_CONNECT_ENDPOINTS_OUTPUT,
     (),
-)
-
-INSTANCE_CONNECT_ENDPOINT_SET: StaticSchema = (
-    16,
-    n0,
-    _ICES,
-    0,
-    (_me,),
-    ((lambda: schemas.EC2_INSTANCE_CONNECT_ENDPOINT, {_sN: _i}),),
-)
-
-DESCRIBE_INSTANCE_CREDIT_SPECIFICATIONS_MAX_RESULTS: StaticSchema = (7, n0, _DICSMR, 0)
-
-DESCRIBE_INSTANCE_CREDIT_SPECIFICATIONS_INPUT: StaticSchema = (
-    18,
-    n0,
-    _DICSI,
-    {_sSI: _cDICSR, _sm: None},
-    (_DR, _Fil, _IIn, _MR, _NTex),
-    (
-        (lambda: schemas.BOOLEAN, 0),
-        (lambda: schemas.FILTER_LIST, {_sN: _Fi}),
-        (INSTANCE_ID_STRING_LIST, {_sN: _II}),
-        (DESCRIBE_INSTANCE_CREDIT_SPECIFICATIONS_MAX_RESULTS, 0),
-        (lambda: schemas.STRING, 0),
-    ),
-)
-
-DESCRIBE_INSTANCE_CREDIT_SPECIFICATIONS_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _DICSO,
-    {_sSI: _cDICSRo, _smit: None},
-    (_ICSn, _NTex),
-    (
-        (lambda: INSTANCE_CREDIT_SPECIFICATION_LIST, {_aQN: _ICSS, _sN: _iCSS}),
-        (lambda: schemas.STRING, {_aQN: _NTex, _sN: _nT}),
-    ),
-)
-
-DESCRIBE_INSTANCE_CREDIT_SPECIFICATIONS: StaticOperationSchema = (
-    23,
-    n0,
-    _DICS,
-    0,
-    DESCRIBE_INSTANCE_CREDIT_SPECIFICATIONS_INPUT,
-    DESCRIBE_INSTANCE_CREDIT_SPECIFICATIONS_OUTPUT,
-    (),
-)
-
-INSTANCE_CREDIT_SPECIFICATION: StaticSchema = (
-    18,
-    n0,
-    _ICS,
-    0,
-    (_II, _CCp),
-    (
-        (lambda: schemas.STRING, {_aQN: _II, _sN: _iI}),
-        (lambda: schemas.STRING, {_aQN: _CCp, _sN: _cCp}),
-    ),
-)
-
-INSTANCE_CREDIT_SPECIFICATION_LIST: StaticSchema = (
-    16,
-    n0,
-    _ICSL,
-    0,
-    (_me,),
-    ((INSTANCE_CREDIT_SPECIFICATION, {_sN: _i}),),
-)
-
-DESCRIBE_INSTANCE_EVENT_NOTIFICATION_ATTRIBUTES_INPUT: StaticSchema = (
-    18,
-    n0,
-    _DIENAIe,
-    {_sSI: _cDIENARom, _sm: None},
-    (_DR,),
-    ((lambda: schemas.BOOLEAN, 0),),
-)
-
-DESCRIBE_INSTANCE_EVENT_NOTIFICATION_ATTRIBUTES_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _DIENAOe,
-    {_sSI: _cDIENARoma, _smit: None},
-    (_ITA,),
-    ((lambda: schemas.INSTANCE_TAG_NOTIFICATION_ATTRIBUTE, {_aQN: _ITA, _sN: _iTA}),),
-)
-
-DESCRIBE_INSTANCE_EVENT_NOTIFICATION_ATTRIBUTES: StaticOperationSchema = (
-    23,
-    n0,
-    _DIENAe,
-    0,
-    DESCRIBE_INSTANCE_EVENT_NOTIFICATION_ATTRIBUTES_INPUT,
-    DESCRIBE_INSTANCE_EVENT_NOTIFICATION_ATTRIBUTES_OUTPUT,
-    (),
-)
-
-INSTANCE_EVENT_WINDOW_ID_SET: StaticSchema = (
-    16,
-    n0,
-    _IEWIS,
-    0,
-    (_me,),
-    ((lambda: schemas.INSTANCE_EVENT_WINDOW_ID, {_sN: _IEWI}),),
-)
-
-RESULT_RANGE: StaticSchema = (7, n0, _RRe, 0)
-
-DESCRIBE_INSTANCE_EVENT_WINDOWS_INPUT: StaticSchema = (
-    18,
-    n0,
-    _DIEWIe,
-    {_sSI: _cDIEWRom, _sm: None},
-    (_DR, _IEWIn, _Fil, _MR, _NTex),
-    (
-        (lambda: schemas.BOOLEAN, 0),
-        (INSTANCE_EVENT_WINDOW_ID_SET, {_sN: _IEWI}),
-        (lambda: schemas.FILTER_LIST, {_sN: _Fi}),
-        (RESULT_RANGE, 0),
-        (lambda: schemas.STRING, 0),
-    ),
-)
-
-DESCRIBE_INSTANCE_EVENT_WINDOWS_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _DIEWOe,
-    {_sSI: _cDIEWRoma, _smit: None},
-    (_IEWn, _NTex),
-    (
-        (lambda: INSTANCE_EVENT_WINDOW_SET, {_aQN: _IEWSn, _sN: _iEWSn}),
-        (lambda: schemas.STRING, {_aQN: _NTex, _sN: _nT}),
-    ),
-)
-
-DESCRIBE_INSTANCE_EVENT_WINDOWS: StaticOperationSchema = (
-    23,
-    n0,
-    _DIEWe,
-    0,
-    DESCRIBE_INSTANCE_EVENT_WINDOWS_INPUT,
-    DESCRIBE_INSTANCE_EVENT_WINDOWS_OUTPUT,
-    (),
-)
-
-INSTANCE_EVENT_WINDOW_SET: StaticSchema = (
-    16,
-    n0,
-    _IEWSn,
-    0,
-    (_me,),
-    ((lambda: schemas.INSTANCE_EVENT_WINDOW, {_sN: _i}),),
-)
-
-DESCRIBE_INSTANCE_IMAGE_METADATA_MAX_RESULTS: StaticSchema = (7, n0, _DIIMMR, 0)
-
-DESCRIBE_INSTANCE_IMAGE_METADATA_INPUT: StaticSchema = (
-    18,
-    n0,
-    _DIIMI,
-    {_sSI: _cDIIMR, _sm: None},
-    (_Fil, _IIn, _MR, _NTex, _DR),
-    (
-        (lambda: schemas.FILTER_LIST, {_sN: _Fi}),
-        (INSTANCE_ID_STRING_LIST, {_sN: _II}),
-        (DESCRIBE_INSTANCE_IMAGE_METADATA_MAX_RESULTS, 0),
-        (lambda: schemas.STRING, 0),
-        (lambda: schemas.BOOLEAN, 0),
-    ),
-)
-
-DESCRIBE_INSTANCE_IMAGE_METADATA_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _DIIMO,
-    {_sSI: _cDIIMRo, _smit: None},
-    (_IIM, _NTex),
-    (
-        (lambda: INSTANCE_IMAGE_METADATA_LIST, {_aQN: _IIMS, _sN: _iIMS}),
-        (lambda: schemas.STRING, {_aQN: _NTex, _sN: _nT}),
-    ),
-)
-
-DESCRIBE_INSTANCE_IMAGE_METADATA: StaticOperationSchema = (
-    23,
-    n0,
-    _DIIM,
-    0,
-    DESCRIBE_INSTANCE_IMAGE_METADATA_INPUT,
-    DESCRIBE_INSTANCE_IMAGE_METADATA_OUTPUT,
-    (),
-)
-
-IMAGE_METADATA: StaticSchema = (
-    18,
-    n0,
-    _IM,
-    0,
-    (_IIm, _N, _OIw, _St, _IOA, _CDre, _DTep, _IAm, _IPsu, _IWm),
-    (
-        (lambda: schemas.IMAGE_ID, {_aQN: _IIm, _sN: _iIm}),
-        (lambda: schemas.STRING, {_aQN: _N, _sN: _nam}),
-        (lambda: schemas.STRING, {_aQN: _IOIm, _sN: _iOIm}),
-        (lambda: schemas.IMAGE_STATE, {_aQN: _ISma, _sN: _iSma}),
-        (lambda: schemas.STRING, {_aQN: _IOA, _sN: _iOA}),
-        (lambda: schemas.STRING, {_aQN: _CDre, _sN: _cDre}),
-        (lambda: schemas.STRING, {_aQN: _DTep, _sN: _dTep}),
-        (lambda: schemas.BOOLEAN, {_aQN: _IAm, _sN: _iAm}),
-        (lambda: schemas.BOOLEAN, {_aQN: _IPsu, _sN: _iPsu}),
-        (lambda: schemas.IMAGE_WATERMARK_LIST, {_aQN: _IWS, _sN: _iWS}),
-    ),
-)
-
-INSTANCE_STATE_NAME: StaticSchema = (
-    14,
-    n0,
-    _ISN,
-    0,
-    (_p, _ru, _sd__, _termin, _stopp, _stoppe),
-    (
-        (-1, {_sV: _p}),
-        (-1, {_sV: _ru}),
-        (-1, {_sV: _sd___}),
-        (-1, {_sV: _termin}),
-        (-1, {_sV: _stopp}),
-        (-1, {_sV: _stoppe}),
-    ),
-)
-
-INSTANCE_STATE: StaticSchema = (
-    18,
-    n0,
-    _ISnsta,
-    0,
-    (_C, _N),
-    (
-        (lambda: schemas.INTEGER, {_aQN: _C, _sN: _co}),
-        (INSTANCE_STATE_NAME, {_aQN: _N, _sN: _nam}),
-    ),
-)
-
-INSTANCE_IMAGE_METADATA: StaticSchema = (
-    18,
-    n0,
-    _IIM,
-    0,
-    (_II, _IT, _LTa, _AZ, _ZI, _St, _OIw, _Tag, _IM, _Op),
-    (
-        (lambda: schemas.INSTANCE_ID, {_aQN: _II, _sN: _iI}),
-        (lambda: schemas.INSTANCE_TYPE, {_aQN: _IT, _sN: _iT}),
-        (lambda: schemas.MILLISECOND_DATE_TIME, {_aQN: _LTa, _sN: _lTa}),
-        (lambda: schemas.STRING, {_aQN: _AZ, _sN: _aZ}),
-        (lambda: schemas.STRING, {_aQN: _ZI, _sN: _zI}),
-        (INSTANCE_STATE, {_aQN: _ISnsta, _sN: _iSnst}),
-        (lambda: schemas.STRING, {_aQN: _IOIn, _sN: _iOIn}),
-        (lambda: schemas.TAG_LIST, {_aQN: _TSag, _sN: _tS}),
-        (IMAGE_METADATA, {_aQN: _IM, _sN: _iM}),
-        (lambda: schemas.OPERATOR_RESPONSE, {_aQN: _Op, _sN: _ope}),
-    ),
-)
-
-INSTANCE_IMAGE_METADATA_LIST: StaticSchema = (
-    16,
-    n0,
-    _IIML,
-    0,
-    (_me,),
-    ((INSTANCE_IMAGE_METADATA, {_sN: _i}),),
-)
-
-DESCRIBE_INSTANCES_INPUT: StaticSchema = (
-    18,
-    n0,
-    _DIIesc,
-    {_sSI: _cDIRomamaz, _sm: None},
-    (_IIn, _IMR, _DR, _Fil, _NTex, _MR),
-    (
-        (INSTANCE_ID_STRING_LIST, {_sN: _II}),
-        (lambda: schemas.BOOLEAN, 0),
-        (lambda: schemas.BOOLEAN, {_aQN: _DR, _sN: _dRr}),
-        (lambda: schemas.FILTER_LIST, {_sN: _Fi}),
-        (lambda: schemas.STRING, {_aQN: _NTex, _sN: _nT}),
-        (lambda: schemas.INTEGER, {_aQN: _MR, _sN: _mR}),
-    ),
-)
-
-DESCRIBE_INSTANCES_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _DIOesc,
-    {_sSI: _cDIRomamazo, _smit: None},
-    (_NTex, _Reser),
-    (
-        (lambda: schemas.STRING, {_aQN: _NTex, _sN: _nT}),
-        (lambda: schemas.RESERVATION_LIST, {_aQN: _RSese, _sN: _rSese}),
-    ),
-)
-
-DESCRIBE_INSTANCES: StaticOperationSchema = (
-    23,
-    n0,
-    _DIescr,
-    0,
-    DESCRIBE_INSTANCES_INPUT,
-    DESCRIBE_INSTANCES_OUTPUT,
-    (),
-)
-
-CAPACITY_RESERVATION_SPECIFICATION_RESPONSE: StaticSchema = (
-    18,
-    n0,
-    _CRSR,
-    0,
-    (_CRP, _CRTap),
-    (
-        (lambda: schemas.CAPACITY_RESERVATION_PREFERENCE, {_aQN: _CRP, _sN: _cRP}),
-        (
-            lambda: schemas.CAPACITY_RESERVATION_TARGET_RESPONSE,
-            {_aQN: _CRTap, _sN: _cRT},
-        ),
-    ),
-)
-
-CPU_OPTIONS: StaticSchema = (
-    18,
-    n0,
-    _CO,
-    0,
-    (_CCor, _TPC, _ASS, _NV),
-    (
-        (lambda: schemas.INTEGER, {_aQN: _CCor, _sN: _cCor}),
-        (lambda: schemas.INTEGER, {_aQN: _TPC, _sN: _tPC}),
-        (lambda: schemas.AMD_SEV_SNP_SPECIFICATION, {_aQN: _ASS, _sN: _aSS}),
-        (lambda: schemas.NESTED_VIRTUALIZATION_SPECIFICATION, {_aQN: _NV, _sN: _nV}),
-    ),
-)
-
-INSTANCE_BOOT_MODE_VALUES: StaticSchema = (
-    14,
-    n0,
-    _IBMV,
-    0,
-    (_lb__, _ue),
-    ((-1, {_sV: _lb___}), (-1, {_sV: _ue})),
-)
-
-ELASTIC_GPU_ASSOCIATION: StaticSchema = (
-    18,
-    n0,
-    _EGA,
-    0,
-    (_EGI, _EGAI, _EGAS, _EGAT),
-    (
-        (lambda: schemas.ELASTIC_GPU_ID, {_aQN: _EGI, _sN: _eGI}),
-        (lambda: schemas.STRING, {_aQN: _EGAI, _sN: _eGAI}),
-        (lambda: schemas.STRING, {_aQN: _EGAS, _sN: _eGAS}),
-        (lambda: schemas.STRING, {_aQN: _EGAT, _sN: _eGAT}),
-    ),
-)
-
-ELASTIC_GPU_ASSOCIATION_LIST: StaticSchema = (
-    16,
-    n0,
-    _EGAL,
-    0,
-    (_me,),
-    ((ELASTIC_GPU_ASSOCIATION, {_sN: _i}),),
-)
-
-ELASTIC_INFERENCE_ACCELERATOR_ASSOCIATION: StaticSchema = (
-    18,
-    n0,
-    _EIAA,
-    0,
-    (_EIAAl, _EIAAI, _EIAAS, _EIAAT),
-    (
-        (lambda: schemas.STRING, {_aQN: _EIAAl, _sN: _eIAA}),
-        (lambda: schemas.STRING, {_aQN: _EIAAI, _sN: _eIAAI}),
-        (lambda: schemas.STRING, {_aQN: _EIAAS, _sN: _eIAAS}),
-        (lambda: schemas.DATE_TIME, {_aQN: _EIAAT, _sN: _eIAAT}),
-    ),
-)
-
-ELASTIC_INFERENCE_ACCELERATOR_ASSOCIATION_LIST: StaticSchema = (
-    16,
-    n0,
-    _EIAAL,
-    0,
-    (_me,),
-    ((ELASTIC_INFERENCE_ACCELERATOR_ASSOCIATION, {_sN: _i}),),
-)
-
-HIBERNATION_OPTIONS: StaticSchema = (
-    18,
-    n0,
-    _HO,
-    0,
-    (_Conf,),
-    ((lambda: schemas.BOOLEAN, {_aQN: _Conf, _sN: _conf}),),
-)
-
-INSTANCE_LIFECYCLE_TYPE: StaticSchema = (
-    14,
-    n0,
-    _ILT,
-    0,
-    (_spo, _sch, _cb, _icr_),
-    ((-1, {_sV: _spo}), (-1, {_sV: _sch}), (-1, {_sV: _cb_}), (-1, {_sV: _icr})),
-)
-
-LICENSE_CONFIGURATION: StaticSchema = (
-    18,
-    n0,
-    _LC,
-    0,
-    (_LCA,),
-    ((lambda: schemas.STRING, {_aQN: _LCA, _sN: _lCA}),),
-)
-
-LICENSE_LIST: StaticSchema = (
-    16,
-    n0,
-    _LL,
-    0,
-    (_me,),
-    ((LICENSE_CONFIGURATION, {_sN: _i}),),
-)
-
-INSTANCE_AUTO_RECOVERY_STATE: StaticSchema = (
-    14,
-    n0,
-    _IARS,
-    0,
-    (_d, _def),
-    ((-1, {_sV: _d}), (-1, {_sV: _def})),
-)
-
-INSTANCE_REBOOT_MIGRATION_STATE: StaticSchema = (
-    14,
-    n0,
-    _IRMS,
-    0,
-    (_d, _def),
-    ((-1, {_sV: _d}), (-1, {_sV: _def})),
-)
-
-INSTANCE_MAINTENANCE_OPTIONS: StaticSchema = (
-    18,
-    n0,
-    _IMOn,
-    0,
-    (_ARu, _RMeb),
-    (
-        (INSTANCE_AUTO_RECOVERY_STATE, {_aQN: _ARu, _sN: _aRu}),
-        (INSTANCE_REBOOT_MIGRATION_STATE, {_aQN: _RMeb, _sN: _rMeb}),
-    ),
-)
-
-INSTANCE_METADATA_ENDPOINT_STATE: StaticSchema = (
-    14,
-    n0,
-    _IMES,
-    0,
-    (_d, _ena),
-    ((-1, {_sV: _d}), (-1, {_sV: _ena})),
-)
-
-INSTANCE_METADATA_PROTOCOL_STATE: StaticSchema = (
-    14,
-    n0,
-    _IMPS,
-    0,
-    (_d, _ena),
-    ((-1, {_sV: _d}), (-1, {_sV: _ena})),
-)
-
-HTTP_TOKENS_STATE: StaticSchema = (
-    14,
-    n0,
-    _HTS,
-    0,
-    (_opt, _requ),
-    ((-1, {_sV: _opt}), (-1, {_sV: _requ})),
-)
-
-INSTANCE_METADATA_TAGS_STATE: StaticSchema = (
-    14,
-    n0,
-    _IMTS,
-    0,
-    (_d, _ena),
-    ((-1, {_sV: _d}), (-1, {_sV: _ena})),
-)
-
-INSTANCE_METADATA_OPTIONS_STATE: StaticSchema = (
-    14,
-    n0,
-    _IMOS,
-    0,
-    (_p, _ap),
-    ((-1, {_sV: _p}), (-1, {_sV: _ap})),
-)
-
-INSTANCE_METADATA_OPTIONS_RESPONSE: StaticSchema = (
-    18,
-    n0,
-    _IMOR,
-    0,
-    (_St, _HTt, _HPRHL, _HE, _HPI, _IMT),
-    (
-        (INSTANCE_METADATA_OPTIONS_STATE, {_aQN: _St, _sN: _st}),
-        (HTTP_TOKENS_STATE, {_aQN: _HTt, _sN: _hTt}),
-        (lambda: schemas.INTEGER, {_aQN: _HPRHL, _sN: _hPRHL}),
-        (INSTANCE_METADATA_ENDPOINT_STATE, {_aQN: _HE, _sN: _hE}),
-        (INSTANCE_METADATA_PROTOCOL_STATE, {_aQN: _HPI, _sN: _hPI}),
-        (INSTANCE_METADATA_TAGS_STATE, {_aQN: _IMT, _sN: _iMT}),
-    ),
-)
-
-MONITORING_STATE: StaticSchema = (
-    14,
-    n0,
-    _MSon,
-    0,
-    (_d, _disab, _ena, _p),
-    ((-1, {_sV: _d}), (-1, {_sV: _disab}), (-1, {_sV: _ena}), (-1, {_sV: _p})),
-)
-
-MONITORING: StaticSchema = (
-    18,
-    n0,
-    _Mon,
-    0,
-    (_MCIe, _St),
-    (
-        (lambda: schemas.METRIC_CATEGORY_ID_LIST, {_aQN: _MCIS, _sN: _mCIS}),
-        (MONITORING_STATE, {_aQN: _St, _sN: _st}),
-    ),
-)
-
-INSTANCE_NETWORK_INTERFACE_ASSOCIATION: StaticSchema = (
-    18,
-    n0,
-    _INIA,
-    0,
-    (_CI, _COI, _IOI, _PDNu, _PI),
-    (
-        (lambda: schemas.STRING, {_aQN: _CI, _sN: _cI}),
-        (lambda: schemas.STRING, {_aQN: _COI, _sN: _cOI}),
-        (lambda: schemas.STRING, {_aQN: _IOI, _sN: _iOI}),
-        (lambda: schemas.STRING, {_aQN: _PDNu, _sN: _pDNu}),
-        (lambda: schemas.STRING, {_aQN: _PI, _sN: _pI}),
-    ),
-)
-
-INSTANCE_ATTACHMENT_ENA_SRD_UDP_SPECIFICATION: StaticSchema = (
-    18,
-    n0,
-    _IAESUS,
-    0,
-    (_ESUE,),
-    ((lambda: schemas.BOOLEAN, {_aQN: _ESUE, _sN: _eSUE}),),
-)
-
-INSTANCE_ATTACHMENT_ENA_SRD_SPECIFICATION: StaticSchema = (
-    18,
-    n0,
-    _IAESS,
-    0,
-    (_ESE, _ESUS),
-    (
-        (lambda: schemas.BOOLEAN, {_aQN: _ESE, _sN: _eSE}),
-        (INSTANCE_ATTACHMENT_ENA_SRD_UDP_SPECIFICATION, {_aQN: _ESUS, _sN: _eSUS}),
-    ),
 )

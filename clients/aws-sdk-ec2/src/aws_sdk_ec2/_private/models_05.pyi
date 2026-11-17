@@ -11,25 +11,17 @@ from smithy_core.types import UnknownEnumMixin
 
 from ..models import (
     AddressTransfer,
-    AnalysisAclRule,
-    AnalysisComponent,
-    AnalysisLoadBalancerListener,
-    AnalysisLoadBalancerTarget,
-    AnalysisRouteTableRoute,
-    AnalysisSecurityGroupRule,
-    AnalysisTransitGatewayPolicyTableEntry,
+    AllowedPrincipal,
     AsnAssociation,
     AssociationStatus,
     AttributeValue,
-    ClientCertificateRevocationListStatus,
+    ClassicLinkDnsSupport,
     ClientVpnTrustProvider,
     ClientVpnTrustProviderRequest,
     ClientVpnTrustProviderRequestDict,
+    ConnectionNotification,
     CustomTagKeyValueRequestPair,
     CustomTagKeyValueRequestPairDict,
-    ExportTaskS3Location,
-    ExportTaskS3LocationRequest,
-    ExportTaskS3LocationRequestDict,
     FastLaunchLaunchTemplateSpecificationRequest,
     FastLaunchLaunchTemplateSpecificationRequestDict,
     FastLaunchLaunchTemplateSpecificationResponse,
@@ -38,8 +30,6 @@ from ..models import (
     FastLaunchSnapshotConfigurationResponse,
     Filter,
     FilterDict,
-    FirewallStatefulRule,
-    FirewallStatelessRule,
     FlexCostAllocationOperationFailure,
     IamInstanceProfileAssociation,
     InstanceConnectEndpointPublicDnsNames,
@@ -51,22 +41,19 @@ from ..models import (
     IpamResourceDiscoveryAssociation,
     NatGatewayAddress,
     OperatorResponse,
-    PortRange,
     RegisteredInstance,
     RouteServerAssociation,
     RouteServerPropagation,
+    ServiceConfiguration,
     ServiceDetail,
     SubnetIpv6CidrBlockAssociation,
     SuccessfulAssociationResponseObject,
     SuccessfulSuppressionResponseObject,
     Tag,
-    TagSpecification,
-    TagSpecificationDict,
     TransitGatewayAssociation,
     TransitGatewayMulticastDomainAssociations,
     TransitGatewayPolicyTableAssociation,
     TransitGatewayPropagation,
-    TransitGatewayRouteTableRoute,
     UnsuccessfulAssociationResponseObject,
     UnsuccessfulSuppressionResponseObject,
     VerifiedAccessInstance,
@@ -75,7 +62,11 @@ from ..models import (
     VolumeDetailDict,
     Vpc,
     VpcCidrBlockAssociation,
+    VpcClassicLink,
+    VpcEncryptionControl,
     VpcEndpoint,
+    VpcEndpointAssociation,
+    VpcEndpointConnection,
     VpcIpv6CidrBlockAssociation,
     VpcPeeringConnection,
     VpnConcentrator,
@@ -83,6 +74,795 @@ from ..models import (
     VpnGateway,
     _SerdeShape,
 )
+
+@dataclass(kw_only=True)
+class DescribeVpcClassicLinkDnsSupportOutput(_SerdeShape):
+    """Dataclass for DescribeVpcClassicLinkDnsSupportOutput structure."""
+
+    next_token: str | None = ...
+    """
+    The token to include in another request to get the next page of items.
+    This value is `null` when there are no more items to return.
+    """
+    vpcs: list[ClassicLinkDnsSupport] | None = ...
+    """Information about the ClassicLink DNS support status of the VPCs."""
+    response_metadata: ResponseMetadata = ...
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+@dataclass(kw_only=True)
+class DescribeVpcClassicLinkInput(_SerdeShape):
+    """Dataclass for DescribeVpcClassicLinkInput structure."""
+
+    dry_run: bool | None = ...
+    """
+    Checks whether you have the required permissions for the action, without
+    actually making the request, and provides an error response. If you have
+    the required permissions, the error response is `DryRunOperation`.
+    Otherwise, it is `UnauthorizedOperation`.
+    """
+    vpc_ids: list[str] | None = ...
+    """The VPCs for which you want to describe the ClassicLink status."""
+    filters: list[Filter] | None = ...
+    """
+    The filters.
+
+    - `is-classic-link-enabled` - Whether the VPC is enabled for ClassicLink
+      (`true` | `false`).
+
+    - `tag` - The key/value combination of a tag assigned to the resource.
+      Use the tag key in the filter name and the tag value as the filter
+      value. For example, to find all resources that have a tag with the key
+      `Owner` and the value `TeamA`, specify `tag:Owner` for the filter name
+      and `TeamA` for the filter value.
+
+    - `tag-key` - The key of a tag assigned to the resource. Use this filter
+      to find all resources assigned a tag with a specific key, regardless
+      of the tag value.
+    """
+
+class DescribeVpcClassicLinkInputDict(TypedDict, total=False):
+    """Dictionary form of `DescribeVpcClassicLinkInput`."""
+
+    dry_run: bool | None
+    """
+    Checks whether you have the required permissions for the action, without
+    actually making the request, and provides an error response. If you have
+    the required permissions, the error response is `DryRunOperation`.
+    Otherwise, it is `UnauthorizedOperation`.
+    """
+    vpc_ids: Sequence[str] | None
+    """The VPCs for which you want to describe the ClassicLink status."""
+    filters: Sequence[Filter | FilterDict] | None
+    """
+    The filters.
+
+    - `is-classic-link-enabled` - Whether the VPC is enabled for ClassicLink
+      (`true` | `false`).
+
+    - `tag` - The key/value combination of a tag assigned to the resource.
+      Use the tag key in the filter name and the tag value as the filter
+      value. For example, to find all resources that have a tag with the key
+      `Owner` and the value `TeamA`, specify `tag:Owner` for the filter name
+      and `TeamA` for the filter value.
+
+    - `tag-key` - The key of a tag assigned to the resource. Use this filter
+      to find all resources assigned a tag with a specific key, regardless
+      of the tag value.
+    """
+
+@dataclass(kw_only=True)
+class DescribeVpcClassicLinkOutput(_SerdeShape):
+    """Dataclass for DescribeVpcClassicLinkOutput structure."""
+
+    vpcs: list[VpcClassicLink] | None = ...
+    """The ClassicLink status of the VPCs."""
+    response_metadata: ResponseMetadata = ...
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+@dataclass(kw_only=True)
+class DescribeVpcEncryptionControlsInput(_SerdeShape):
+    """Dataclass for DescribeVpcEncryptionControlsInput structure."""
+
+    dry_run: bool | None = ...
+    """
+    Checks whether you have the required permissions for the action, without
+    actually making the request, and provides an error response. If you have
+    the required permissions, the error response is `DryRunOperation`.
+    Otherwise, it is `UnauthorizedOperation`.
+    """
+    filters: list[Filter] | None = ...
+    """The filters to apply to the request."""
+    vpc_encryption_control_ids: list[str] | None = ...
+    """The IDs of the VPC Encryption Control configurations to describe."""
+    vpc_ids: list[str] | None = ...
+    """The IDs of the VPCs to describe encryption control configurations for."""
+    next_token: str | None = ...
+    """
+    The token returned from a previous paginated request. Pagination
+    continues from the end of the items returned by the previous request.
+    """
+    max_results: int | None = ...
+    """
+    The maximum number of items to return for this request. To get the next
+    page of items, make another request with the token returned in the
+    output. For more information, see
+    [Pagination](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination).
+    """
+
+class DescribeVpcEncryptionControlsInputDict(TypedDict, total=False):
+    """Dictionary form of `DescribeVpcEncryptionControlsInput`."""
+
+    dry_run: bool | None
+    """
+    Checks whether you have the required permissions for the action, without
+    actually making the request, and provides an error response. If you have
+    the required permissions, the error response is `DryRunOperation`.
+    Otherwise, it is `UnauthorizedOperation`.
+    """
+    filters: Sequence[Filter | FilterDict] | None
+    """The filters to apply to the request."""
+    vpc_encryption_control_ids: Sequence[str] | None
+    """The IDs of the VPC Encryption Control configurations to describe."""
+    vpc_ids: Sequence[str] | None
+    """The IDs of the VPCs to describe encryption control configurations for."""
+    next_token: str | None
+    """
+    The token returned from a previous paginated request. Pagination
+    continues from the end of the items returned by the previous request.
+    """
+    max_results: int | None
+    """
+    The maximum number of items to return for this request. To get the next
+    page of items, make another request with the token returned in the
+    output. For more information, see
+    [Pagination](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination).
+    """
+
+@dataclass(kw_only=True)
+class DescribeVpcEncryptionControlsOutput(_SerdeShape):
+    """Dataclass for DescribeVpcEncryptionControlsOutput structure."""
+
+    vpc_encryption_controls: list[VpcEncryptionControl] | None = ...
+    """Information about the VPC Encryption Control configurations."""
+    next_token: str | None = ...
+    """
+    The token to include in another request to get the next page of items.
+    This value is `null` when there are no more items to return.
+    """
+    response_metadata: ResponseMetadata = ...
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+@dataclass(kw_only=True)
+class DescribeVpcEndpointAssociationsInput(_SerdeShape):
+    """Dataclass for DescribeVpcEndpointAssociationsInput structure."""
+
+    dry_run: bool | None = ...
+    """
+    Checks whether you have the required permissions for the action, without
+    actually making the request, and provides an error response. If you have
+    the required permissions, the error response is `DryRunOperation`.
+    Otherwise, it is `UnauthorizedOperation`.
+    """
+    vpc_endpoint_ids: list[str] | None = ...
+    """The IDs of the VPC endpoints."""
+    filters: list[Filter] | None = ...
+    """
+    The filters.
+
+    - `vpc-endpoint-id` - The ID of the VPC endpoint.
+
+    - `associated-resource-accessibility` - The association state. When the
+      state is `accessible`, it returns `AVAILABLE`. When the state is
+      `inaccessible`, it returns `PENDING` or `FAILED`.
+
+    - `association-id` - The ID of the VPC endpoint association.
+
+    - `associated-resource-id` - The ID of the associated resource
+      configuration.
+
+    - `service-network-arn` - The Amazon Resource Name (ARN) of the
+      associated service network. Only VPC endpoints of type service network
+      will be returned.
+
+    - `resource-configuration-group-arn` - The Amazon Resource Name (ARN) of
+      the resource configuration of type GROUP.
+    """
+    max_results: int | None = ...
+    """The maximum page size."""
+    next_token: str | None = ...
+    """The pagination token."""
+
+class DescribeVpcEndpointAssociationsInputDict(TypedDict, total=False):
+    """Dictionary form of `DescribeVpcEndpointAssociationsInput`."""
+
+    dry_run: bool | None
+    """
+    Checks whether you have the required permissions for the action, without
+    actually making the request, and provides an error response. If you have
+    the required permissions, the error response is `DryRunOperation`.
+    Otherwise, it is `UnauthorizedOperation`.
+    """
+    vpc_endpoint_ids: Sequence[str] | None
+    """The IDs of the VPC endpoints."""
+    filters: Sequence[Filter | FilterDict] | None
+    """
+    The filters.
+
+    - `vpc-endpoint-id` - The ID of the VPC endpoint.
+
+    - `associated-resource-accessibility` - The association state. When the
+      state is `accessible`, it returns `AVAILABLE`. When the state is
+      `inaccessible`, it returns `PENDING` or `FAILED`.
+
+    - `association-id` - The ID of the VPC endpoint association.
+
+    - `associated-resource-id` - The ID of the associated resource
+      configuration.
+
+    - `service-network-arn` - The Amazon Resource Name (ARN) of the
+      associated service network. Only VPC endpoints of type service network
+      will be returned.
+
+    - `resource-configuration-group-arn` - The Amazon Resource Name (ARN) of
+      the resource configuration of type GROUP.
+    """
+    max_results: int | None
+    """The maximum page size."""
+    next_token: str | None
+    """The pagination token."""
+
+@dataclass(kw_only=True)
+class DescribeVpcEndpointAssociationsOutput(_SerdeShape):
+    """Dataclass for DescribeVpcEndpointAssociationsOutput structure."""
+
+    vpc_endpoint_associations: list[VpcEndpointAssociation] | None = ...
+    """Details of the endpoint associations."""
+    next_token: str | None = ...
+    """The pagination token."""
+    response_metadata: ResponseMetadata = ...
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+@dataclass(kw_only=True)
+class DescribeVpcEndpointConnectionNotificationsInput(_SerdeShape):
+    """Dataclass for DescribeVpcEndpointConnectionNotificationsInput structure."""
+
+    dry_run: bool | None = ...
+    """
+    Checks whether you have the required permissions for the action, without
+    actually making the request, and provides an error response. If you have
+    the required permissions, the error response is `DryRunOperation`.
+    Otherwise, it is `UnauthorizedOperation`.
+    """
+    connection_notification_id: str | None = ...
+    """The ID of the notification."""
+    filters: list[Filter] | None = ...
+    """
+    The filters.
+
+    - `connection-notification-arn` - The ARN of the SNS topic for the
+      notification.
+
+    - `connection-notification-id` - The ID of the notification.
+
+    - `connection-notification-state` - The state of the notification
+      (`Enabled` | `Disabled`).
+
+    - `connection-notification-type` - The type of notification (`Topic`).
+
+    - `service-id` - The ID of the endpoint service.
+
+    - `vpc-endpoint-id` - The ID of the VPC endpoint.
+    """
+    max_results: int | None = ...
+    """
+    The maximum number of results to return in a single call. To retrieve
+    the remaining results, make another request with the returned
+    `NextToken` value.
+    """
+    next_token: str | None = ...
+    """The token to request the next page of results."""
+
+class DescribeVpcEndpointConnectionNotificationsInputDict(TypedDict, total=False):
+    """Dictionary form of `DescribeVpcEndpointConnectionNotificationsInput`."""
+
+    dry_run: bool | None
+    """
+    Checks whether you have the required permissions for the action, without
+    actually making the request, and provides an error response. If you have
+    the required permissions, the error response is `DryRunOperation`.
+    Otherwise, it is `UnauthorizedOperation`.
+    """
+    connection_notification_id: str | None
+    """The ID of the notification."""
+    filters: Sequence[Filter | FilterDict] | None
+    """
+    The filters.
+
+    - `connection-notification-arn` - The ARN of the SNS topic for the
+      notification.
+
+    - `connection-notification-id` - The ID of the notification.
+
+    - `connection-notification-state` - The state of the notification
+      (`Enabled` | `Disabled`).
+
+    - `connection-notification-type` - The type of notification (`Topic`).
+
+    - `service-id` - The ID of the endpoint service.
+
+    - `vpc-endpoint-id` - The ID of the VPC endpoint.
+    """
+    max_results: int | None
+    """
+    The maximum number of results to return in a single call. To retrieve
+    the remaining results, make another request with the returned
+    `NextToken` value.
+    """
+    next_token: str | None
+    """The token to request the next page of results."""
+
+@dataclass(kw_only=True)
+class DescribeVpcEndpointConnectionNotificationsOutput(_SerdeShape):
+    """
+    Dataclass for DescribeVpcEndpointConnectionNotificationsOutput
+    structure.
+    """
+
+    connection_notification_set: list[ConnectionNotification] | None = ...
+    """The notifications."""
+    next_token: str | None = ...
+    """
+    The token to use to retrieve the next page of results. This value is
+    `null` when there are no more results to return.
+    """
+    response_metadata: ResponseMetadata = ...
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+@dataclass(kw_only=True)
+class DescribeVpcEndpointConnectionsInput(_SerdeShape):
+    """Dataclass for DescribeVpcEndpointConnectionsInput structure."""
+
+    dry_run: bool | None = ...
+    """
+    Checks whether you have the required permissions for the action, without
+    actually making the request, and provides an error response. If you have
+    the required permissions, the error response is `DryRunOperation`.
+    Otherwise, it is `UnauthorizedOperation`.
+    """
+    filters: list[Filter] | None = ...
+    """
+    The filters.
+
+    - `ip-address-type` - The IP address type (`ipv4` | `ipv6`).
+
+    - `service-id` - The ID of the service.
+
+    - `transit-gateway-attachment-id` - The ID of the transit gateway
+      attachment.
+
+    - `vpc-endpoint-owner` - The ID of the Amazon Web Services account ID
+      that owns the endpoint.
+
+    - `vpc-endpoint-region` - The Region of the endpoint or `cross-region`
+      to find endpoints for other Regions.
+
+    - `vpc-endpoint-state` - The state of the endpoint (`pendingAcceptance`
+      | `pending` | `available` | `deleting` | `deleted` | `rejected`
+      | `failed`).
+
+    - `vpc-endpoint-id` - The ID of the endpoint.
+    """
+    max_results: int | None = ...
+    """
+    The maximum number of results to return for the request in a single
+    page. The remaining results of the initial request can be seen by
+    sending another request with the returned `NextToken` value. This value
+    can be between 5 and 1,000; if `MaxResults` is given a value larger than
+    1,000, only 1,000 results are returned.
+    """
+    next_token: str | None = ...
+    """The token to retrieve the next page of results."""
+
+class DescribeVpcEndpointConnectionsInputDict(TypedDict, total=False):
+    """Dictionary form of `DescribeVpcEndpointConnectionsInput`."""
+
+    dry_run: bool | None
+    """
+    Checks whether you have the required permissions for the action, without
+    actually making the request, and provides an error response. If you have
+    the required permissions, the error response is `DryRunOperation`.
+    Otherwise, it is `UnauthorizedOperation`.
+    """
+    filters: Sequence[Filter | FilterDict] | None
+    """
+    The filters.
+
+    - `ip-address-type` - The IP address type (`ipv4` | `ipv6`).
+
+    - `service-id` - The ID of the service.
+
+    - `transit-gateway-attachment-id` - The ID of the transit gateway
+      attachment.
+
+    - `vpc-endpoint-owner` - The ID of the Amazon Web Services account ID
+      that owns the endpoint.
+
+    - `vpc-endpoint-region` - The Region of the endpoint or `cross-region`
+      to find endpoints for other Regions.
+
+    - `vpc-endpoint-state` - The state of the endpoint (`pendingAcceptance`
+      | `pending` | `available` | `deleting` | `deleted` | `rejected`
+      | `failed`).
+
+    - `vpc-endpoint-id` - The ID of the endpoint.
+    """
+    max_results: int | None
+    """
+    The maximum number of results to return for the request in a single
+    page. The remaining results of the initial request can be seen by
+    sending another request with the returned `NextToken` value. This value
+    can be between 5 and 1,000; if `MaxResults` is given a value larger than
+    1,000, only 1,000 results are returned.
+    """
+    next_token: str | None
+    """The token to retrieve the next page of results."""
+
+@dataclass(kw_only=True)
+class DescribeVpcEndpointConnectionsOutput(_SerdeShape):
+    """Dataclass for DescribeVpcEndpointConnectionsOutput structure."""
+
+    vpc_endpoint_connections: list[VpcEndpointConnection] | None = ...
+    """Information about the VPC endpoint connections."""
+    next_token: str | None = ...
+    """
+    The token to use to retrieve the next page of results. This value is
+    `null` when there are no more results to return.
+    """
+    response_metadata: ResponseMetadata = ...
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+@dataclass(kw_only=True)
+class DescribeVpcEndpointServiceConfigurationsInput(_SerdeShape):
+    """Dataclass for DescribeVpcEndpointServiceConfigurationsInput structure."""
+
+    dry_run: bool | None = ...
+    """
+    Checks whether you have the required permissions for the action, without
+    actually making the request, and provides an error response. If you have
+    the required permissions, the error response is `DryRunOperation`.
+    Otherwise, it is `UnauthorizedOperation`.
+    """
+    service_ids: list[str] | None = ...
+    """The IDs of the endpoint services."""
+    filters: list[Filter] | None = ...
+    """
+    The filters.
+
+    - `service-name` - The name of the service.
+
+    - `service-id` - The ID of the service.
+
+    - `service-state` - The state of the service (`Pending` | `Available`
+      | `Deleting` | `Deleted` | `Failed`).
+
+    - `supported-ip-address-types` - The IP address type (`ipv4` | `ipv6`).
+
+    - `tag`:`<key>`{=html} - The key/value combination of a tag assigned to
+      the resource. Use the tag key in the filter name and the tag value as
+      the filter value. For example, to find all resources that have a tag
+      with the key `Owner` and the value `TeamA`, specify `tag:Owner` for
+      the filter name and `TeamA` for the filter value.
+
+    - `tag-key` - The key of a tag assigned to the resource. Use this filter
+      to find all resources assigned a tag with a specific key, regardless
+      of the tag value.
+    """
+    max_results: int | None = ...
+    """
+    The maximum number of results to return for the request in a single
+    page. The remaining results of the initial request can be seen by
+    sending another request with the returned `NextToken` value. This value
+    can be between 5 and 1,000; if `MaxResults` is given a value larger than
+    1,000, only 1,000 results are returned.
+    """
+    next_token: str | None = ...
+    """The token to retrieve the next page of results."""
+
+class DescribeVpcEndpointServiceConfigurationsInputDict(TypedDict, total=False):
+    """Dictionary form of `DescribeVpcEndpointServiceConfigurationsInput`."""
+
+    dry_run: bool | None
+    """
+    Checks whether you have the required permissions for the action, without
+    actually making the request, and provides an error response. If you have
+    the required permissions, the error response is `DryRunOperation`.
+    Otherwise, it is `UnauthorizedOperation`.
+    """
+    service_ids: Sequence[str] | None
+    """The IDs of the endpoint services."""
+    filters: Sequence[Filter | FilterDict] | None
+    """
+    The filters.
+
+    - `service-name` - The name of the service.
+
+    - `service-id` - The ID of the service.
+
+    - `service-state` - The state of the service (`Pending` | `Available`
+      | `Deleting` | `Deleted` | `Failed`).
+
+    - `supported-ip-address-types` - The IP address type (`ipv4` | `ipv6`).
+
+    - `tag`:`<key>`{=html} - The key/value combination of a tag assigned to
+      the resource. Use the tag key in the filter name and the tag value as
+      the filter value. For example, to find all resources that have a tag
+      with the key `Owner` and the value `TeamA`, specify `tag:Owner` for
+      the filter name and `TeamA` for the filter value.
+
+    - `tag-key` - The key of a tag assigned to the resource. Use this filter
+      to find all resources assigned a tag with a specific key, regardless
+      of the tag value.
+    """
+    max_results: int | None
+    """
+    The maximum number of results to return for the request in a single
+    page. The remaining results of the initial request can be seen by
+    sending another request with the returned `NextToken` value. This value
+    can be between 5 and 1,000; if `MaxResults` is given a value larger than
+    1,000, only 1,000 results are returned.
+    """
+    next_token: str | None
+    """The token to retrieve the next page of results."""
+
+@dataclass(kw_only=True)
+class DescribeVpcEndpointServiceConfigurationsOutput(_SerdeShape):
+    """Dataclass for DescribeVpcEndpointServiceConfigurationsOutput structure."""
+
+    service_configurations: list[ServiceConfiguration] | None = ...
+    """Information about the services."""
+    next_token: str | None = ...
+    """
+    The token to use to retrieve the next page of results. This value is
+    `null` when there are no more results to return.
+    """
+    response_metadata: ResponseMetadata = ...
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+@dataclass(kw_only=True)
+class DescribeVpcEndpointServicePermissionsInput(_SerdeShape):
+    """Dataclass for DescribeVpcEndpointServicePermissionsInput structure."""
+
+    dry_run: bool | None = ...
+    """
+    Checks whether you have the required permissions for the action, without
+    actually making the request, and provides an error response. If you have
+    the required permissions, the error response is `DryRunOperation`.
+    Otherwise, it is `UnauthorizedOperation`.
+    """
+    service_id: str | None = ...
+    """The ID of the service."""
+    filters: list[Filter] | None = ...
+    """
+    The filters.
+
+    - `permission-type` - The permission type (`vpc-endpoint` |
+      `transit-gateway-attachment`).
+
+    - `principal` - The ARN of the principal.
+
+    - `principal-type` - The principal type (`All` | `Service` |
+      `OrganizationUnit` | `Account` | `User` | `Role`).
+    """
+    max_results: int | None = ...
+    """
+    The maximum number of results to return for the request in a single
+    page. The remaining results of the initial request can be seen by
+    sending another request with the returned `NextToken` value. This value
+    can be between 5 and 1,000; if `MaxResults` is given a value larger than
+    1,000, only 1,000 results are returned.
+    """
+    next_token: str | None = ...
+    """The token to retrieve the next page of results."""
+
+class DescribeVpcEndpointServicePermissionsInputDict(TypedDict, total=False):
+    """Dictionary form of `DescribeVpcEndpointServicePermissionsInput`."""
+
+    dry_run: bool | None
+    """
+    Checks whether you have the required permissions for the action, without
+    actually making the request, and provides an error response. If you have
+    the required permissions, the error response is `DryRunOperation`.
+    Otherwise, it is `UnauthorizedOperation`.
+    """
+    service_id: Required[str]
+    """The ID of the service."""
+    filters: Sequence[Filter | FilterDict] | None
+    """
+    The filters.
+
+    - `permission-type` - The permission type (`vpc-endpoint` |
+      `transit-gateway-attachment`).
+
+    - `principal` - The ARN of the principal.
+
+    - `principal-type` - The principal type (`All` | `Service` |
+      `OrganizationUnit` | `Account` | `User` | `Role`).
+    """
+    max_results: int | None
+    """
+    The maximum number of results to return for the request in a single
+    page. The remaining results of the initial request can be seen by
+    sending another request with the returned `NextToken` value. This value
+    can be between 5 and 1,000; if `MaxResults` is given a value larger than
+    1,000, only 1,000 results are returned.
+    """
+    next_token: str | None
+    """The token to retrieve the next page of results."""
+
+@dataclass(kw_only=True)
+class DescribeVpcEndpointServicePermissionsOutput(_SerdeShape):
+    """Dataclass for DescribeVpcEndpointServicePermissionsOutput structure."""
+
+    allowed_principals: list[AllowedPrincipal] | None = ...
+    """Information about the allowed principals."""
+    next_token: str | None = ...
+    """
+    The token to use to retrieve the next page of results. This value is
+    `null` when there are no more results to return.
+    """
+    response_metadata: ResponseMetadata = ...
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+@dataclass(kw_only=True)
+class DescribeVpcEndpointServicesInput(_SerdeShape):
+    """Dataclass for DescribeVpcEndpointServicesInput structure."""
+
+    dry_run: bool | None = ...
+    """
+    Checks whether you have the required permissions for the action, without
+    actually making the request, and provides an error response. If you have
+    the required permissions, the error response is `DryRunOperation`.
+    Otherwise, it is `UnauthorizedOperation`.
+    """
+    service_names: list[str] | None = ...
+    """The service names."""
+    filters: list[Filter] | None = ...
+    """
+    The filters.
+
+    - `owner` - The ID or alias of the Amazon Web Services account that owns
+      the service.
+
+    - `service-name` - The name of the service.
+
+    - `service-region` - The Region of the service.
+
+    - `service-type` - The type of service (`Interface` | `Gateway` |
+      `GatewayLoadBalancer`).
+
+    - `supported-ip-address-types` - The IP address type (`ipv4` | `ipv6`).
+
+    - `tag`:`<key>`{=html} - The key/value combination of a tag assigned to
+      the resource. Use the tag key in the filter name and the tag value as
+      the filter value. For example, to find all resources that have a tag
+      with the key `Owner` and the value `TeamA`, specify `tag:Owner` for
+      the filter name and `TeamA` for the filter value.
+
+    - `tag-key` - The key of a tag assigned to the resource. Use this filter
+      to find all resources assigned a tag with a specific key, regardless
+      of the tag value.
+    """
+    max_results: int | None = ...
+    """
+    The maximum number of items to return for this request. The request
+    returns a token that you can specify in a subsequent call to get the
+    next set of results.
+
+    Constraint: If the value is greater than 1,000, we return only 1,000
+    items.
+    """
+    next_token: str | None = ...
+    """
+    The token for the next set of items to return. (You received this token
+    from a prior call.)
+    """
+    service_regions: list[str] | None = ...
+    """The service Regions."""
+
+class DescribeVpcEndpointServicesInputDict(TypedDict, total=False):
+    """Dictionary form of `DescribeVpcEndpointServicesInput`."""
+
+    dry_run: bool | None
+    """
+    Checks whether you have the required permissions for the action, without
+    actually making the request, and provides an error response. If you have
+    the required permissions, the error response is `DryRunOperation`.
+    Otherwise, it is `UnauthorizedOperation`.
+    """
+    service_names: Sequence[str] | None
+    """The service names."""
+    filters: Sequence[Filter | FilterDict] | None
+    """
+    The filters.
+
+    - `owner` - The ID or alias of the Amazon Web Services account that owns
+      the service.
+
+    - `service-name` - The name of the service.
+
+    - `service-region` - The Region of the service.
+
+    - `service-type` - The type of service (`Interface` | `Gateway` |
+      `GatewayLoadBalancer`).
+
+    - `supported-ip-address-types` - The IP address type (`ipv4` | `ipv6`).
+
+    - `tag`:`<key>`{=html} - The key/value combination of a tag assigned to
+      the resource. Use the tag key in the filter name and the tag value as
+      the filter value. For example, to find all resources that have a tag
+      with the key `Owner` and the value `TeamA`, specify `tag:Owner` for
+      the filter name and `TeamA` for the filter value.
+
+    - `tag-key` - The key of a tag assigned to the resource. Use this filter
+      to find all resources assigned a tag with a specific key, regardless
+      of the tag value.
+    """
+    max_results: int | None
+    """
+    The maximum number of items to return for this request. The request
+    returns a token that you can specify in a subsequent call to get the
+    next set of results.
+
+    Constraint: If the value is greater than 1,000, we return only 1,000
+    items.
+    """
+    next_token: str | None
+    """
+    The token for the next set of items to return. (You received this token
+    from a prior call.)
+    """
+    service_regions: Sequence[str] | None
+    """The service Regions."""
 
 @dataclass(kw_only=True)
 class DescribeVpcEndpointServicesOutput(_SerdeShape):
@@ -3129,6 +3909,57 @@ class DisassociateIpamResourceDiscoveryOutput(_SerdeShape):
 
     ipam_resource_discovery_association: IpamResourceDiscoveryAssociation | None = ...
     """A resource discovery association."""
+    response_metadata: ResponseMetadata = ...
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+@dataclass(kw_only=True)
+class DisassociateKmsKeyIdInput(_SerdeShape):
+    """Dataclass for DisassociateKmsKeyIdInput structure."""
+
+    snapshot_id: str | None = ...
+    """The ID of the Amazon EBS snapshot."""
+    kms_key_id: str | None = ...
+    """
+    The ID, alias, or ARN of the associated KMS key to remove from the
+    snapshot.
+    """
+    dry_run: bool | None = ...
+    """
+    Checks whether you have the required permissions for the action, without
+    actually making the request, and provides an error response. If you have
+    the required permissions, the error response is `DryRunOperation`.
+    Otherwise, it is `UnauthorizedOperation`.
+    """
+
+class DisassociateKmsKeyIdInputDict(TypedDict, total=False):
+    """Dictionary form of `DisassociateKmsKeyIdInput`."""
+
+    snapshot_id: str | None
+    """The ID of the Amazon EBS snapshot."""
+    kms_key_id: Required[str]
+    """
+    The ID, alias, or ARN of the associated KMS key to remove from the
+    snapshot.
+    """
+    dry_run: bool | None
+    """
+    Checks whether you have the required permissions for the action, without
+    actually making the request, and provides an error response. If you have
+    the required permissions, the error response is `DryRunOperation`.
+    Otherwise, it is `UnauthorizedOperation`.
+    """
+
+@dataclass(kw_only=True)
+class DisassociateKmsKeyIdOutput(_SerdeShape):
+    """Dataclass for DisassociateKmsKeyIdOutput structure."""
+
+    return_: bool | None = ...
+    """Returns `true` if the request succeeds; otherwise, it returns an error."""
     response_metadata: ResponseMetadata = ...
     """
     Metadata about the response that produced this output. Use this to
@@ -6621,502 +7452,4 @@ class EnclaveOptionsRequestDict(TypedDict, total=False):
     """
     To enable the instance for Amazon Web Services Nitro Enclaves, set this
     parameter to `true`.
-    """
-
-class EncryptionStateValue(UnknownEnumMixin, StrEnum):
-    ENABLING = "enabling"
-    ENABLED = "enabled"
-    DISABLING = "disabling"
-    DISABLED = "disabled"
-
-@dataclass(kw_only=True)
-class EncryptionSupport(_SerdeShape):
-    """Describes the encryption support status for a transit gateway."""
-
-    encryption_state: str | None = ...
-    """The current encryption state of the resource."""
-    state_message: str | None = ...
-    """A message describing the encryption state."""
-
-class EncryptionSupportOptionValue(UnknownEnumMixin, StrEnum):
-    ENABLE = "enable"
-    DISABLE = "disable"
-
-class EndDateType(UnknownEnumMixin, StrEnum):
-    UNLIMITED = "unlimited"
-    LIMITED = "limited"
-
-class EndpointIpAddressType(UnknownEnumMixin, StrEnum):
-    IPV4 = "ipv4"
-    IPV6 = "ipv6"
-    DUAL_STACK = "dual-stack"
-
-class EphemeralNvmeSupport(UnknownEnumMixin, StrEnum):
-    UNSUPPORTED = "unsupported"
-    SUPPORTED = "supported"
-    REQUIRED = "required"
-
-class EventCode(UnknownEnumMixin, StrEnum):
-    INSTANCE_REBOOT = "instance-reboot"
-    SYSTEM_REBOOT = "system-reboot"
-    SYSTEM_MAINTENANCE = "system-maintenance"
-    INSTANCE_RETIREMENT = "instance-retirement"
-    INSTANCE_STOP = "instance-stop"
-
-@dataclass(kw_only=True)
-class EventInformation(_SerdeShape):
-    """Describes an EC2 Fleet or Spot Fleet event."""
-
-    event_description: str | None = ...
-    """The description of the event."""
-    event_sub_type: str | None = ...
-    """
-    The event.
-
-    `error` events:
-
-    - `iamFleetRoleInvalid` - The EC2 Fleet or Spot Fleet does not have the
-      required permissions either to launch or terminate an instance.
-
-    - `allLaunchSpecsTemporarilyBlacklisted` - None of the configurations
-      are valid, and several attempts to launch instances have failed. For
-      more information, see the description of the event.
-
-    - `spotInstanceCountLimitExceeded` - You've reached the limit on the
-      number of Spot Instances that you can launch.
-
-    - `spotFleetRequestConfigurationInvalid` - The configuration is not
-      valid. For more information, see the description of the event.
-
-    `fleetRequestChange` events:
-
-    - `active` - The EC2 Fleet or Spot Fleet request has been validated and
-      Amazon EC2 is attempting to maintain the target number of running
-      instances.
-
-    - `deleted` (EC2 Fleet) / `cancelled` (Spot Fleet) - The EC2 Fleet is
-      deleted or the Spot Fleet request is canceled and has no running
-      instances. The EC2 Fleet or Spot Fleet will be deleted two days after
-      its instances are terminated.
-
-    - `deleted_running` (EC2 Fleet) / `cancelled_running` (Spot Fleet) - The
-      EC2 Fleet is deleted or the Spot Fleet request is canceled and does
-      not launch additional instances. Its existing instances continue to
-      run until they are interrupted or terminated. The request remains in
-      this state until all instances are interrupted or terminated.
-
-    - `deleted_terminating` (EC2 Fleet) / `cancelled_terminating` (Spot
-      Fleet) - The EC2 Fleet is deleted or the Spot Fleet request is
-      canceled and its instances are terminating. The request remains in
-      this state until all instances are terminated.
-
-    - `expired` - The EC2 Fleet or Spot Fleet request has expired. If the
-      request was created with `TerminateInstancesWithExpiration` set, a
-      subsequent `terminated` event indicates that the instances are
-      terminated.
-
-    - `modify_in_progress` - The EC2 Fleet or Spot Fleet request is being
-      modified. The request remains in this state until the modification is
-      fully processed.
-
-    - `modify_succeeded` - The EC2 Fleet or Spot Fleet request was modified.
-
-    - `submitted` - The EC2 Fleet or Spot Fleet request is being evaluated
-      and Amazon EC2 is preparing to launch the target number of instances.
-
-    - `progress` - The EC2 Fleet or Spot Fleet request is in the process of
-      being fulfilled.
-
-    `instanceChange` events:
-
-    - `launched` - A new instance was launched.
-
-    - `terminated` - An instance was terminated by the user.
-
-    - `termination_notified` - An instance termination notification was sent
-      when a Spot Instance was terminated by Amazon EC2 during scale-down,
-      when the target capacity of the fleet was modified down, for example,
-      from a target capacity of 4 to a target capacity of 3.
-
-    `Information` events:
-
-    - `fleetProgressHalted` - The price in every launch specification is not
-      valid because it is below the Spot price (all the launch
-      specifications have produced `launchSpecUnusable` events). A launch
-      specification might become valid if the Spot price changes.
-
-    - `launchSpecTemporarilyBlacklisted` - The configuration is not valid
-      and several attempts to launch instances have failed. For more
-      information, see the description of the event.
-
-    - `launchSpecUnusable` - The price specified in a launch specification
-      is not valid because it is below the Spot price for the requested Spot
-      pools.
-
-      Note: Even if a fleet with the `maintain` request type is in the
-      process of being canceled, it may still publish a `launchSpecUnusable`
-      event. This does not mean that the canceled fleet is attempting to
-      launch a new instance.
-
-    - `registerWithLoadBalancersFailed` - An attempt to register instances
-      with load balancers failed. For more information, see the description
-      of the event.
-    """
-    instance_id: str | None = ...
-    """
-    The ID of the instance. This information is available only for
-    `instanceChange` events.
-    """
-
-class EventType(UnknownEnumMixin, StrEnum):
-    INSTANCE_CHANGE = "instanceChange"
-    BATCH_CHANGE = "fleetRequestChange"
-    ERROR = "error"
-    INFORMATION = "information"
-
-class ExcessCapacityTerminationPolicy(UnknownEnumMixin, StrEnum):
-    NO_TERMINATION = "noTermination"
-    DEFAULT = "default"
-
-@dataclass(kw_only=True)
-class Explanation(_SerdeShape):
-    """
-    Describes an explanation code for an unreachable path. For more
-    information, see [Reachability Analyzer explanation
-    codes](https://docs.aws.amazon.com/vpc/latest/reachability/explanation-codes.html).
-    """
-
-    acl: AnalysisComponent | None = ...
-    """The network ACL."""
-    acl_rule: AnalysisAclRule | None = ...
-    """The network ACL rule."""
-    address: str | None = ...
-    """The IPv4 address, in CIDR notation."""
-    addresses: list[str] | None = ...
-    """The IPv4 addresses, in CIDR notation."""
-    attached_to: AnalysisComponent | None = ...
-    """The resource to which the component is attached."""
-    availability_zones: list[str] | None = ...
-    """The Availability Zones."""
-    availability_zone_ids: list[str] | None = ...
-    """The IDs of the Availability Zones."""
-    cidrs: list[str] | None = ...
-    """The CIDR ranges."""
-    component: AnalysisComponent | None = ...
-    """The component."""
-    customer_gateway: AnalysisComponent | None = ...
-    """The customer gateway."""
-    destination: AnalysisComponent | None = ...
-    """The destination."""
-    destination_vpc: AnalysisComponent | None = ...
-    """The destination VPC."""
-    direction: str | None = ...
-    """
-    The direction. The following are the possible values:
-
-    - egress
-
-    - ingress
-    """
-    explanation_code: str | None = ...
-    """The explanation code."""
-    ingress_route_table: AnalysisComponent | None = ...
-    """The route table."""
-    internet_gateway: AnalysisComponent | None = ...
-    """The internet gateway."""
-    load_balancer_arn: str | None = ...
-    """The Amazon Resource Name (ARN) of the load balancer."""
-    classic_load_balancer_listener: AnalysisLoadBalancerListener | None = ...
-    """The listener for a Classic Load Balancer."""
-    load_balancer_listener_port: int | None = ...
-    """The listener port of the load balancer."""
-    load_balancer_target: AnalysisLoadBalancerTarget | None = ...
-    """The target."""
-    load_balancer_target_group: AnalysisComponent | None = ...
-    """The target group."""
-    load_balancer_target_groups: list[AnalysisComponent] | None = ...
-    """The target groups."""
-    load_balancer_target_port: int | None = ...
-    """The target port."""
-    elastic_load_balancer_listener: AnalysisComponent | None = ...
-    """The load balancer listener."""
-    missing_component: str | None = ...
-    """The missing component."""
-    nat_gateway: AnalysisComponent | None = ...
-    """The NAT gateway."""
-    network_interface: AnalysisComponent | None = ...
-    """The network interface."""
-    packet_field: str | None = ...
-    """The packet field."""
-    vpc_peering_connection: AnalysisComponent | None = ...
-    """The VPC peering connection."""
-    port: int | None = ...
-    """The port."""
-    port_ranges: list[PortRange] | None = ...
-    """The port ranges."""
-    prefix_list: AnalysisComponent | None = ...
-    """The prefix list."""
-    protocols: list[str] | None = ...
-    """The protocols."""
-    route_table_route: AnalysisRouteTableRoute | None = ...
-    """The route table route."""
-    route_table: AnalysisComponent | None = ...
-    """The route table."""
-    security_group: AnalysisComponent | None = ...
-    """The security group."""
-    security_group_rule: AnalysisSecurityGroupRule | None = ...
-    """The security group rule."""
-    security_groups: list[AnalysisComponent] | None = ...
-    """The security groups."""
-    source_vpc: AnalysisComponent | None = ...
-    """The source VPC."""
-    state: str | None = ...
-    """The state."""
-    subnet: AnalysisComponent | None = ...
-    """The subnet."""
-    subnet_route_table: AnalysisComponent | None = ...
-    """The route table for the subnet."""
-    vpc: AnalysisComponent | None = ...
-    """The component VPC."""
-    vpc_endpoint: AnalysisComponent | None = ...
-    """The VPC endpoint."""
-    vpn_connection: AnalysisComponent | None = ...
-    """The VPN connection."""
-    vpn_gateway: AnalysisComponent | None = ...
-    """The VPN gateway."""
-    transit_gateway: AnalysisComponent | None = ...
-    """The transit gateway."""
-    transit_gateway_route_table: AnalysisComponent | None = ...
-    """The transit gateway route table."""
-    transit_gateway_route_table_route: TransitGatewayRouteTableRoute | None = ...
-    """The transit gateway route table route."""
-    transit_gateway_policy_table: AnalysisComponent | None = ...
-    """The transit gateway policy table."""
-    transit_gateway_policy_table_entry: (
-        AnalysisTransitGatewayPolicyTableEntry | None
-    ) = ...
-    """The transit gateway policy table entry."""
-    transit_gateway_attachment: AnalysisComponent | None = ...
-    """The transit gateway attachment."""
-    component_account: str | None = ...
-    """The Amazon Web Services account for the component."""
-    component_region: str | None = ...
-    """The Region for the component."""
-    firewall_stateless_rule: FirewallStatelessRule | None = ...
-    """The Network Firewall stateless rule."""
-    firewall_stateful_rule: FirewallStatefulRule | None = ...
-    """The Network Firewall stateful rule."""
-
-@dataclass(kw_only=True)
-class ExportClientVpnClientCertificateRevocationListInput(_SerdeShape):
-    """
-    Dataclass for ExportClientVpnClientCertificateRevocationListInput
-    structure.
-    """
-
-    client_vpn_endpoint_id: str | None = ...
-    """The ID of the Client VPN endpoint."""
-    dry_run: bool | None = ...
-    """
-    Checks whether you have the required permissions for the action, without
-    actually making the request, and provides an error response. If you have
-    the required permissions, the error response is `DryRunOperation`.
-    Otherwise, it is `UnauthorizedOperation`.
-    """
-
-class ExportClientVpnClientCertificateRevocationListInputDict(TypedDict, total=False):
-    """Dictionary form of `ExportClientVpnClientCertificateRevocationListInput`."""
-
-    client_vpn_endpoint_id: Required[str]
-    """The ID of the Client VPN endpoint."""
-    dry_run: bool | None
-    """
-    Checks whether you have the required permissions for the action, without
-    actually making the request, and provides an error response. If you have
-    the required permissions, the error response is `DryRunOperation`.
-    Otherwise, it is `UnauthorizedOperation`.
-    """
-
-@dataclass(kw_only=True)
-class ExportClientVpnClientCertificateRevocationListOutput(_SerdeShape):
-    """
-    Dataclass for ExportClientVpnClientCertificateRevocationListOutput
-    structure.
-    """
-
-    certificate_revocation_list: str | None = ...
-    """Information about the client certificate revocation list."""
-    status: ClientCertificateRevocationListStatus | None = ...
-    """The current state of the client certificate revocation list."""
-    response_metadata: ResponseMetadata = ...
-    """
-    Metadata about the response that produced this output. Use this to
-    recover the request identifiers a service's support team needs in order
-    to investigate a call. Members of the metadata are individually
-    optional.
-    """
-
-@dataclass(kw_only=True)
-class ExportClientVpnClientConfigurationInput(_SerdeShape):
-    """Dataclass for ExportClientVpnClientConfigurationInput structure."""
-
-    client_vpn_endpoint_id: str | None = ...
-    """The ID of the Client VPN endpoint."""
-    dry_run: bool | None = ...
-    """
-    Checks whether you have the required permissions for the action, without
-    actually making the request, and provides an error response. If you have
-    the required permissions, the error response is `DryRunOperation`.
-    Otherwise, it is `UnauthorizedOperation`.
-    """
-
-class ExportClientVpnClientConfigurationInputDict(TypedDict, total=False):
-    """Dictionary form of `ExportClientVpnClientConfigurationInput`."""
-
-    client_vpn_endpoint_id: Required[str]
-    """The ID of the Client VPN endpoint."""
-    dry_run: bool | None
-    """
-    Checks whether you have the required permissions for the action, without
-    actually making the request, and provides an error response. If you have
-    the required permissions, the error response is `DryRunOperation`.
-    Otherwise, it is `UnauthorizedOperation`.
-    """
-
-@dataclass(kw_only=True)
-class ExportClientVpnClientConfigurationOutput(_SerdeShape):
-    """Dataclass for ExportClientVpnClientConfigurationOutput structure."""
-
-    client_configuration: str | None = ...
-    """The contents of the Client VPN endpoint configuration file."""
-    response_metadata: ResponseMetadata = ...
-    """
-    Metadata about the response that produced this output. Use this to
-    recover the request identifiers a service's support team needs in order
-    to investigate a call. Members of the metadata are individually
-    optional.
-    """
-
-class ExportEnvironment(UnknownEnumMixin, StrEnum):
-    CITRIX = "citrix"
-    VMWARE = "vmware"
-    MICROSOFT = "microsoft"
-
-@dataclass(kw_only=True)
-class ExportImageInput(_SerdeShape):
-    """Dataclass for ExportImageInput structure."""
-
-    client_token: str | None = ...
-    """
-    Token to enable idempotency for export image requests.
-
-    This field is autopopulated if not provided.
-    """
-    description: str | None = ...
-    """
-    A description of the image being exported. The maximum length is 255
-    characters.
-    """
-    disk_image_format: str | None = ...
-    """The disk image format."""
-    dry_run: bool | None = ...
-    """
-    Checks whether you have the required permissions for the action, without
-    actually making the request, and provides an error response. If you have
-    the required permissions, the error response is `DryRunOperation`.
-    Otherwise, it is `UnauthorizedOperation`.
-    """
-    image_id: str | None = ...
-    """The ID of the image."""
-    s3_export_location: ExportTaskS3LocationRequest | None = ...
-    """
-    The Amazon S3 bucket for the destination image. The destination bucket
-    must exist.
-    """
-    role_name: str | None = ...
-    """
-    The name of the role that grants VM Import/Export permission to export
-    images to your Amazon S3 bucket. If this parameter is not specified, the
-    default role is named 'vmimport'.
-    """
-    tag_specifications: list[TagSpecification] | None = ...
-    """The tags to apply to the export image task during creation."""
-
-class ExportImageInputDict(TypedDict, total=False):
-    """Dictionary form of `ExportImageInput`."""
-
-    client_token: str | None
-    """
-    Token to enable idempotency for export image requests.
-
-    This field is autopopulated if not provided.
-    """
-    description: str | None
-    """
-    A description of the image being exported. The maximum length is 255
-    characters.
-    """
-    disk_image_format: Required[str]
-    """The disk image format."""
-    dry_run: bool | None
-    """
-    Checks whether you have the required permissions for the action, without
-    actually making the request, and provides an error response. If you have
-    the required permissions, the error response is `DryRunOperation`.
-    Otherwise, it is `UnauthorizedOperation`.
-    """
-    image_id: Required[str]
-    """The ID of the image."""
-    s3_export_location: Required[
-        ExportTaskS3LocationRequest | ExportTaskS3LocationRequestDict
-    ]
-    """
-    The Amazon S3 bucket for the destination image. The destination bucket
-    must exist.
-    """
-    role_name: str | None
-    """
-    The name of the role that grants VM Import/Export permission to export
-    images to your Amazon S3 bucket. If this parameter is not specified, the
-    default role is named 'vmimport'.
-    """
-    tag_specifications: Sequence[TagSpecification | TagSpecificationDict] | None
-    """The tags to apply to the export image task during creation."""
-
-@dataclass(kw_only=True)
-class ExportImageOutput(_SerdeShape):
-    """Dataclass for ExportImageOutput structure."""
-
-    description: str | None = ...
-    """A description of the image being exported."""
-    disk_image_format: str | None = ...
-    """The disk image format for the exported image."""
-    export_image_task_id: str | None = ...
-    """The ID of the export image task."""
-    image_id: str | None = ...
-    """The ID of the image."""
-    role_name: str | None = ...
-    """
-    The name of the role that grants VM Import/Export permission to export
-    images to your Amazon S3 bucket.
-    """
-    progress: str | None = ...
-    """The percent complete of the export image task."""
-    s3_export_location: ExportTaskS3Location | None = ...
-    """Information about the destination Amazon S3 bucket."""
-    status: str | None = ...
-    """
-    The status of the export image task. The possible values are `active`,
-    `completed`, `deleting`, and `deleted`.
-    """
-    status_message: str | None = ...
-    """The status message for the export image task."""
-    tags: list[Tag] | None = ...
-    """Any tags assigned to the export image task."""
-    response_metadata: ResponseMetadata = ...
-    """
-    Metadata about the response that produced this output. Use this to
-    recover the request identifiers a service's support team needs in order
-    to investigate a call. Members of the metadata are individually
-    optional.
     """

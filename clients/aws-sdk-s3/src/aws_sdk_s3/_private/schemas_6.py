@@ -29,6 +29,8 @@ _xaebo = "x-amz-expected-bucket-owner"
 _RC = "RequestCharged"
 _smi = "smithy.api#output"
 _xarc = "x-amz-request-charged"
+_VI = "VersionId"
+_xavi = "x-amz-version-id"
 _smith = "smithy.api#http"
 _ARI = "AbortRuleId"
 _AC = "AccelerateConfiguration"
@@ -59,7 +61,6 @@ _sPm = "smithy.api#httpPayload"
 _xasseca = "x-amz-server-side-encryption-customer-algorithm"
 _xasseck = "x-amz-server-side-encryption-customer-key"
 _xasseckM = "x-amz-server-side-encryption-customer-key-MD5"
-_VI = "VersionId"
 _CA = "ChecksumAlgorithm"
 _GFC = "GrantFullControl"
 _GR = "GrantRead"
@@ -550,7 +551,25 @@ LIST_PARTS_OUTPUT: StaticSchema = (
     n0,
     _LPO,
     {_sN: _LPR, _smi: None},
-    (_AD, _ARI, _B, _K, _UI, _PNM, _NPNM, _MP, _ITs, _Pa, _Ini, _O, _SC, _RC, _CA, _CT),
+    (
+        _AD,
+        _ARI,
+        _B,
+        _K,
+        _UI,
+        _PNM,
+        _NPNM,
+        _MP,
+        _ITs,
+        _Pa,
+        _Ini,
+        _O,
+        _SC,
+        _RC,
+        _CA,
+        _CT,
+        _VI,
+    ),
     (
         (lambda: schemas.ABORT_DATE, {_sH: _xaad}),
         (lambda: schemas.ABORT_RULE_ID, {_sH: _xaari}),
@@ -568,6 +587,7 @@ LIST_PARTS_OUTPUT: StaticSchema = (
         (lambda: schemas.REQUEST_CHARGED, {_sH: _xarc}),
         (lambda: schemas.CHECKSUM_ALGORITHM, 0),
         (lambda: schemas.CHECKSUM_TYPE, 0),
+        (lambda: schemas.OBJECT_VERSION_ID, {_sH: _xavi}),
     ),
 )
 

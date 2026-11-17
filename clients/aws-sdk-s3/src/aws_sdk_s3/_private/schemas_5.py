@@ -24,8 +24,11 @@ _xarp = "x-amz-request-payer"
 _EBO = "ExpectedBucketOwner"
 _xaebo = "x-amz-expected-bucket-owner"
 _RC = "RequestCharged"
+_OVI = "ObjectVersionId"
 _smi = "smithy.api#output"
 _xarc = "x-amz-request-charged"
+_VI = "VersionId"
+_xavi = "x-amz-version-id"
 _smit = "smithy.api#error"
 _c = "client"
 _sE = "smithy.api#httpError"
@@ -76,11 +79,8 @@ _BKE = "BucketKeyEnabled"
 _Ex = "Expiration"
 _SSE = "ServerSideEncryption"
 _SSEKMSKI = "SSEKMSKeyId"
-_OVI = "ObjectVersionId"
 _xae = "x-amz-expiration"
 _xasse = "x-amz-server-side-encryption"
-_VI = "VersionId"
-_xavi = "x-amz-version-id"
 _xasseakki = "x-amz-server-side-encryption-aws-kms-key-id"
 _xassebke = "x-amz-server-side-encryption-bucket-key-enabled"
 _CC = "CacheControl"
@@ -130,7 +130,6 @@ _xaovi = "x-amz-object-version-id"
 _Si = "Size"
 _Pr = "Prefix"
 _ACn = "AnalyticsConfiguration"
-_Rul = "Rule"
 _AA = "ARCHIVE_ACCESS"
 _DAA = "DEEP_ARCHIVE_ACCESS"
 _ITCn = "IntelligentTieringConfiguration"
@@ -177,10 +176,6 @@ _xars = "x-amz-replication-status"
 _xampc = "x-amz-mp-parts-count"
 _xatc = "x-amz-tagging-count"
 _ITs = "IsTruncated"
-_OLE = "ObjectLockEnabled"
-_DRef = "DefaultRetention"
-_OLR = "ObjectLockRule"
-_OLC = "ObjectLockConfiguration"
 _GORI = "GetObjectRetentionInput"
 _cGORR = "com.amazonaws.s3#GetObjectRetentionRequest"
 _GORO = "GetObjectRetentionOutput"
@@ -327,24 +322,6 @@ _Cont = "Contents"
 _LO = "ListObjects"
 
 S3_REGIONAL_OR_S3_EXPRESS_BUCKET_ARN_STRING: StaticSchema = (3, n0, _SROSEBAS, 0)
-
-OBJECT_LOCK_RULE: StaticSchema = (
-    18,
-    n0,
-    _OLR,
-    0,
-    (_DRef,),
-    ((lambda: schemas.DEFAULT_RETENTION, 0),),
-)
-
-OBJECT_LOCK_CONFIGURATION: StaticSchema = (
-    18,
-    n0,
-    _OLC,
-    0,
-    (_OLE, _Rul),
-    ((lambda: schemas.OBJECT_LOCK_ENABLED, 0), (OBJECT_LOCK_RULE, 0)),
-)
 
 GET_OBJECT_RETENTION_INPUT: StaticSchema = (
     18,
@@ -1185,7 +1162,7 @@ MULTIPART_UPLOAD: StaticSchema = (
     n0,
     _MU,
     0,
-    (_UI, _K, _In, _SC, _O, _Ini, _CA, _CT),
+    (_UI, _K, _In, _SC, _O, _Ini, _CA, _CT, _VI),
     (
         (lambda: schemas.MULTIPART_UPLOAD_ID, 0),
         (lambda: schemas.OBJECT_KEY, 0),
@@ -1195,6 +1172,7 @@ MULTIPART_UPLOAD: StaticSchema = (
         (lambda: schemas.INITIATOR, 0),
         (lambda: schemas.CHECKSUM_ALGORITHM, 0),
         (lambda: schemas.CHECKSUM_TYPE, 0),
+        (lambda: schemas.OBJECT_VERSION_ID, 0),
     ),
 )
 

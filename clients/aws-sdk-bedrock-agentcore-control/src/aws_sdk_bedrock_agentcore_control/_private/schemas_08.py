@@ -17,7 +17,6 @@ _mem = "member"
 _sVm = "smithy.api#enumValue"
 _smi = "smithy.api#default"
 _smit = "smithy.api#sensitive"
-_mod = "model"
 _NONE = "NONE"
 _sSI = "smithy.synthetic#originalShapeId"
 _smith = "smithy.api#input"
@@ -34,11 +33,9 @@ _smithy = "smithy.api#output"
 _st = "status"
 _uA = "updatedAt"
 _smithya = "smithy.api#http"
-_aRI = "agentRuntimeId"
 _t = "tags"
 _READY = "READY"
 _tV = "targetVersion"
-_aRA = "agentRuntimeArn"
 _eN = "endpointName"
 _cA = "createdAt"
 _sQ = "smithy.api#httpQuery"
@@ -46,38 +43,71 @@ _lV = "liveVersion"
 _fR = "failureReason"
 _mR = "maxResults"
 _nT = "nextToken"
+_kKA = "kmsKeyArn"
 _s_ = "s3"
 _cC = "containerConfiguration"
 _a = "arn"
 _u = "uri"
 _pa = "path"
-_aRN = "agentRuntimeName"
 _nC = "networkConfiguration"
-_aCu = "authorizerConfiguration"
 _lC = "lifecycleConfiguration"
-_eV = "environmentVariables"
 _fC = "filesystemConfigurations"
 _ty = "type"
-_eRA = "executionRoleArn"
 _bAr = "browserArn"
 _no = "none"
 _cIA = "codeInterpreterArn"
 _AG = "AGENTCORE_GATEWAY"
+_rAe = "resourceArn"
 _mT = "maxTokens"
 _te = "temperature"
 _tP = "topP"
 _mI = "modelId"
+_gIa = "gatewayIdentifier"
 _lam = "lambda"
 _SEMANTIC = "SEMANTIC"
 _fM = "failureMode"
 _gA = "gatewayArn"
 _end = "endpoint"
+_TSar = "TargetSummaries"
+_TIL = "TargetIdList"
+_SGTI = "SynchronizeGatewayTargetsInput"
+_cSGTR = "com.amazonaws.bedrockagentcorecontrol#SynchronizeGatewayTargetsRequest"
+_tIL = "targetIdList"
+_GRPI = "GetResourcePolicyInput"
+_cGRPR = "com.amazonaws.bedrockagentcorecontrol#GetResourcePolicyRequest"
+_GRPO = "GetResourcePolicyOutput"
+_cGRPRo = "com.amazonaws.bedrockagentcorecontrol#GetResourcePolicyResponse"
+_pol = "policy"
+_GRPe = "GetResourcePolicy"
+_TVIT = "TokenVaultIdType"
+_GTVI = "GetTokenVaultInput"
+_cGTVR = "com.amazonaws.bedrockagentcorecontrol#GetTokenVaultRequest"
+_tVI = "tokenVaultId"
+_KT = "KeyType"
+_CMKu = "CustomerManagedKey"
+_SMK = "ServiceManagedKey"
+_KC = "KmsConfiguration"
+_kT = "keyType"
+_GTVO = "GetTokenVaultOutput"
+_cGTVRo = "com.amazonaws.bedrockagentcorecontrol#GetTokenVaultResponse"
+_kC = "kmsConfiguration"
+_lMD = "lastModifiedDate"
+_GTV = "GetTokenVault"
+_HED = "HarnessEndpointDescription"
+_HEN = "HarnessEndpointName"
+_HI = "HarnessId"
+_HV = "HarnessVersion"
+_CHEI = "CreateHarnessEndpointInput"
+_cCHER = "com.amazonaws.bedrockagentcorecontrol#CreateHarnessEndpointRequest"
 _hI = "harnessId"
 _HEA = "HarnessEndpointArn"
 _HNa = "HarnessName"
 _HES = "HarnessEndpointStatus"
 _HEa = "HarnessEndpoint"
 _hN = "harnessName"
+_CHEO = "CreateHarnessEndpointOutput"
+_cCHERo = "com.amazonaws.bedrockagentcorecontrol#CreateHarnessEndpointResponse"
+_CHE = "CreateHarnessEndpoint"
 _DHEI = "DeleteHarnessEndpointInput"
 _cDHER = "com.amazonaws.bedrockagentcorecontrol#DeleteHarnessEndpointRequest"
 _DHEO = "DeleteHarnessEndpointOutput"
@@ -258,28 +288,224 @@ _SW = "SLIDING_WINDOW"
 _sw = "sliding_window"
 _HTCar = "HarnessTruncationConfiguration"
 _strat = "strategy"
-_CHI = "CreateHarnessInput"
-_cCHR = "com.amazonaws.bedrockagentcorecontrol#CreateHarnessRequest"
-_env = "environment"
-_eAn = "environmentArtifact"
-_sPy = "systemPrompt"
-_too = "tools"
-_sk = "skills"
-_aTl = "allowedTools"
-_memo = "memory"
-_tr = "truncation"
-_ho = "hooks"
-_mIa = "maxIterations"
-_HA = "HarnessArn"
-_HACRE = "HarnessAgentCoreRuntimeEnvironment"
-_HEP = "HarnessEnvironmentProvider"
-_HSar = "HarnessStatus"
-_H = "Harness"
-_hV = "harnessVersion"
-_CHO = "CreateHarnessOutput"
-_cCHRo = "com.amazonaws.bedrockagentcorecontrol#CreateHarnessResponse"
-_ha = "harness"
-_CH = "CreateHarness"
+_SGTO = "SynchronizeGatewayTargetsOutput"
+_cSGTRo = "com.amazonaws.bedrockagentcorecontrol#SynchronizeGatewayTargetsResponse"
+_tar = "targets"
+_SGT = "SynchronizeGatewayTargets"
+
+TARGET_SUMMARIES: StaticSchema = (
+    16,
+    n0,
+    _TSar,
+    0,
+    (_mem,),
+    ((lambda: schemas.TARGET_SUMMARY, 0),),
+)
+
+TARGET_ID_LIST: StaticSchema = (
+    16,
+    n0,
+    _TIL,
+    0,
+    (_mem,),
+    ((lambda: schemas.TARGET_ID, 0),),
+)
+
+SYNCHRONIZE_GATEWAY_TARGETS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _SGTI,
+    {_sSI: _cSGTR, _smith: None},
+    (_gIa, _tIL),
+    ((lambda: schemas.GATEWAY_IDENTIFIER, 9), (TARGET_ID_LIST, 1)),
+)
+
+SYNCHRONIZE_GATEWAY_TARGETS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _SGTO,
+    {_sSI: _cSGTRo, _smithy: None},
+    (_tar,),
+    ((lambda: schemas.GATEWAY_TARGET_LIST, 0),),
+)
+
+SYNCHRONIZE_GATEWAY_TARGETS: StaticOperationSchema = (
+    23,
+    n0,
+    _SGT,
+    {
+        _smithya: MappingProxyType(
+            {
+                "code": 202,
+                "method": "PUT",
+                "uri": "/gateways/{gatewayIdentifier}/synchronizeTargets",
+            }
+        )
+    },
+    SYNCHRONIZE_GATEWAY_TARGETS_INPUT,
+    SYNCHRONIZE_GATEWAY_TARGETS_OUTPUT,
+    (
+        lambda: schemas.ACCESS_DENIED_EXCEPTION,
+        lambda: schemas.CONFLICT_EXCEPTION,
+        lambda: schemas.INTERNAL_SERVER_EXCEPTION,
+        lambda: schemas.RESOURCE_NOT_FOUND_EXCEPTION,
+        lambda: schemas.SERVICE_QUOTA_EXCEEDED_EXCEPTION,
+        lambda: schemas.THROTTLING_EXCEPTION,
+        lambda: schemas.VALIDATION_EXCEPTION,
+    ),
+)
+
+GET_RESOURCE_POLICY_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GRPI,
+    {_sSI: _cGRPR, _smith: None},
+    (_rAe,),
+    ((lambda: schemas.BEDROCK_AGENTCORE_RESOURCE_ARN, 9),),
+)
+
+GET_RESOURCE_POLICY_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GRPO,
+    {_sSI: _cGRPRo, _smithy: None},
+    (_pol,),
+    ((lambda: schemas.RESOURCE_POLICY_BODY, 0),),
+)
+
+GET_RESOURCE_POLICY: StaticOperationSchema = (
+    23,
+    n0,
+    _GRPe,
+    {
+        _smithya: MappingProxyType(
+            {"code": 200, "method": "GET", "uri": "/resourcepolicy/{resourceArn}"}
+        )
+    },
+    GET_RESOURCE_POLICY_INPUT,
+    GET_RESOURCE_POLICY_OUTPUT,
+    (
+        lambda: schemas.ACCESS_DENIED_EXCEPTION,
+        lambda: schemas.INTERNAL_SERVER_EXCEPTION,
+        lambda: schemas.RESOURCE_NOT_FOUND_EXCEPTION,
+        lambda: schemas.THROTTLING_EXCEPTION,
+        lambda: schemas.VALIDATION_EXCEPTION,
+    ),
+)
+
+TOKEN_VAULT_ID_TYPE: StaticSchema = (3, n0, _TVIT, 0)
+
+GET_TOKEN_VAULT_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GTVI,
+    {_sSI: _cGTVR, _smith: None},
+    (_tVI,),
+    ((TOKEN_VAULT_ID_TYPE, 0),),
+)
+
+GET_TOKEN_VAULT_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GTVO,
+    {_sSI: _cGTVRo, _smithy: None},
+    (_tVI, _kC, _lMD),
+    ((TOKEN_VAULT_ID_TYPE, 1), (lambda: KMS_CONFIGURATION, 1), (4, 1)),
+)
+
+GET_TOKEN_VAULT: StaticOperationSchema = (
+    23,
+    n0,
+    _GTV,
+    {
+        _smithya: MappingProxyType(
+            {"uri": "/identities/get-token-vault", "method": "POST"}
+        )
+    },
+    GET_TOKEN_VAULT_INPUT,
+    GET_TOKEN_VAULT_OUTPUT,
+    (
+        lambda: schemas.ACCESS_DENIED_EXCEPTION,
+        lambda: schemas.INTERNAL_SERVER_EXCEPTION,
+        lambda: schemas.RESOURCE_NOT_FOUND_EXCEPTION,
+        lambda: schemas.THROTTLING_EXCEPTION,
+        lambda: schemas.UNAUTHORIZED_EXCEPTION,
+        lambda: schemas.VALIDATION_EXCEPTION,
+    ),
+)
+
+KEY_TYPE: StaticSchema = (
+    14,
+    n0,
+    _KT,
+    0,
+    (_CMKu, _SMK),
+    ((-1, {_sVm: _CMKu}), (-1, {_sVm: _SMK})),
+)
+
+KMS_CONFIGURATION: StaticSchema = (
+    18,
+    n0,
+    _KC,
+    0,
+    (_kT, _kKA),
+    ((KEY_TYPE, 1), (lambda: schemas.KMS_KEY_ARN, 0)),
+)
+
+HARNESS_ENDPOINT_DESCRIPTION: StaticSchema = (3, n0, _HED, 0)
+
+HARNESS_ENDPOINT_NAME: StaticSchema = (3, n0, _HEN, 0)
+
+HARNESS_ID: StaticSchema = (3, n0, _HI, 0)
+
+HARNESS_VERSION: StaticSchema = (3, n0, _HV, 0)
+
+CREATE_HARNESS_ENDPOINT_INPUT: StaticSchema = (
+    18,
+    n0,
+    _CHEI,
+    {_sSI: _cCHER, _smith: None},
+    (_hI, _eN, _tV, _d, _cT, _t),
+    (
+        (HARNESS_ID, 9),
+        (HARNESS_ENDPOINT_NAME, 1),
+        (HARNESS_VERSION, 0),
+        (HARNESS_ENDPOINT_DESCRIPTION, 0),
+        (lambda: schemas.CLIENT_TOKEN, 2),
+        (lambda: schemas.TAGS_MAP, 0),
+    ),
+)
+
+CREATE_HARNESS_ENDPOINT_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _CHEO,
+    {_sSI: _cCHERo, _smithy: None},
+    (_end,),
+    ((lambda: HARNESS_ENDPOINT, 1),),
+)
+
+CREATE_HARNESS_ENDPOINT: StaticOperationSchema = (
+    23,
+    n0,
+    _CHE,
+    {
+        _smithya: MappingProxyType(
+            {"code": 201, "method": "POST", "uri": "/harnesses/{harnessId}/endpoints"}
+        )
+    },
+    CREATE_HARNESS_ENDPOINT_INPUT,
+    CREATE_HARNESS_ENDPOINT_OUTPUT,
+    (
+        lambda: schemas.ACCESS_DENIED_EXCEPTION,
+        lambda: schemas.CONFLICT_EXCEPTION,
+        lambda: schemas.INTERNAL_SERVER_EXCEPTION,
+        lambda: schemas.RESOURCE_NOT_FOUND_EXCEPTION,
+        lambda: schemas.SERVICE_QUOTA_EXCEEDED_EXCEPTION,
+        lambda: schemas.THROTTLING_EXCEPTION,
+        lambda: schemas.VALIDATION_EXCEPTION,
+    ),
+)
 
 HARNESS_ENDPOINT_ARN: StaticSchema = (3, n0, _HEA, 0)
 
@@ -309,16 +535,16 @@ HARNESS_ENDPOINT: StaticSchema = (
     0,
     (_hI, _hN, _eN, _a, _st, _cA, _uA, _lV, _tV, _d, _fR),
     (
-        (lambda: schemas.HARNESS_ID, 1),
+        (HARNESS_ID, 1),
         (HARNESS_NAME, 1),
-        (lambda: schemas.HARNESS_ENDPOINT_NAME, 1),
+        (HARNESS_ENDPOINT_NAME, 1),
         (HARNESS_ENDPOINT_ARN, 1),
         (HARNESS_ENDPOINT_STATUS, 1),
         (lambda: schemas.DATE_TIMESTAMP, 1),
         (lambda: schemas.DATE_TIMESTAMP, 1),
-        (lambda: schemas.HARNESS_VERSION, 0),
-        (lambda: schemas.HARNESS_VERSION, 0),
-        (lambda: schemas.HARNESS_ENDPOINT_DESCRIPTION, 0),
+        (HARNESS_VERSION, 0),
+        (HARNESS_VERSION, 0),
+        (HARNESS_ENDPOINT_DESCRIPTION, 0),
         (3, 0),
     ),
 )
@@ -330,8 +556,8 @@ DELETE_HARNESS_ENDPOINT_INPUT: StaticSchema = (
     {_sSI: _cDHER, _smith: None},
     (_hI, _eN, _cT),
     (
-        (lambda: schemas.HARNESS_ID, 9),
-        (lambda: schemas.HARNESS_ENDPOINT_NAME, 9),
+        (HARNESS_ID, 9),
+        (HARNESS_ENDPOINT_NAME, 9),
         (lambda: schemas.CLIENT_TOKEN, {_sQ: _cT, _sT: None}),
     ),
 )
@@ -376,7 +602,7 @@ GET_HARNESS_ENDPOINT_INPUT: StaticSchema = (
     _GHEI,
     {_sSI: _cGHER, _smith: None},
     (_hI, _eN),
-    ((lambda: schemas.HARNESS_ID, 9), (lambda: schemas.HARNESS_ENDPOINT_NAME, 9)),
+    ((HARNESS_ID, 9), (HARNESS_ENDPOINT_NAME, 9)),
 )
 
 GET_HARNESS_ENDPOINT_OUTPUT: StaticSchema = (
@@ -419,7 +645,7 @@ LIST_HARNESS_ENDPOINTS_INPUT: StaticSchema = (
     {_sSI: _cLHER, _smith: None},
     (_hI, _mR, _nT),
     (
-        (lambda: schemas.HARNESS_ID, 9),
+        (HARNESS_ID, 9),
         (lambda: schemas.MAX_RESULTS, {_sQ: _mR}),
         (lambda: schemas.NEXT_TOKEN, {_sQ: _nT}),
     ),
@@ -463,10 +689,10 @@ UPDATE_HARNESS_ENDPOINT_INPUT: StaticSchema = (
     {_sSI: _cUHER, _smith: None},
     (_hI, _eN, _tV, _d, _cT),
     (
-        (lambda: schemas.HARNESS_ID, 9),
-        (lambda: schemas.HARNESS_ENDPOINT_NAME, 9),
-        (lambda: schemas.HARNESS_VERSION, 0),
-        (lambda: schemas.HARNESS_ENDPOINT_DESCRIPTION, 0),
+        (HARNESS_ID, 9),
+        (HARNESS_ENDPOINT_NAME, 9),
+        (HARNESS_VERSION, 0),
+        (HARNESS_ENDPOINT_DESCRIPTION, 0),
         (lambda: schemas.CLIENT_TOKEN, 2),
     ),
 )
@@ -1125,182 +1351,4 @@ HARNESS_TRUNCATION_CONFIGURATION: StaticSchema = (
     0,
     (_strat, _confi),
     ((HARNESS_TRUNCATION_STRATEGY, 1), (HARNESS_TRUNCATION_STRATEGY_CONFIGURATION, 0)),
-)
-
-CREATE_HARNESS_INPUT: StaticSchema = (
-    18,
-    n0,
-    _CHI,
-    {_sSI: _cCHR, _smith: None},
-    (
-        _hN,
-        _cT,
-        _eRA,
-        _env,
-        _eAn,
-        _eV,
-        _aCu,
-        _mod,
-        _sPy,
-        _too,
-        _sk,
-        _aTl,
-        _memo,
-        _tr,
-        _ho,
-        _mIa,
-        _mT,
-        _tSi,
-        _t,
-    ),
-    (
-        (HARNESS_NAME, 1),
-        (lambda: schemas.CLIENT_TOKEN, 2),
-        (lambda: schemas.ROLE_ARN, 1),
-        (HARNESS_ENVIRONMENT_PROVIDER_REQUEST, 0),
-        (HARNESS_ENVIRONMENT_ARTIFACT, 0),
-        (lambda: schemas.ENVIRONMENT_VARIABLES_MAP, 0),
-        (lambda: schemas.AUTHORIZER_CONFIGURATION, 0),
-        (HARNESS_MODEL_CONFIGURATION, 0),
-        (HARNESS_SYSTEM_PROMPT, 0),
-        (HARNESS_TOOLS, 0),
-        (HARNESS_SKILLS, 0),
-        (HARNESS_ALLOWED_TOOLS, 0),
-        (HARNESS_MEMORY_CONFIGURATION, 0),
-        (HARNESS_TRUNCATION_CONFIGURATION, 0),
-        (HARNESS_HOOKS, 0),
-        (7, 0),
-        (7, 0),
-        (7, 0),
-        (lambda: schemas.TAGS_MAP, 0),
-    ),
-)
-
-CREATE_HARNESS_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _CHO,
-    {_sSI: _cCHRo, _smithy: None},
-    (_ha,),
-    ((lambda: HARNESS, 1),),
-)
-
-CREATE_HARNESS: StaticOperationSchema = (
-    23,
-    n0,
-    _CH,
-    {_smithya: MappingProxyType({"code": 201, "method": "POST", "uri": "/harnesses"})},
-    CREATE_HARNESS_INPUT,
-    CREATE_HARNESS_OUTPUT,
-    (
-        lambda: schemas.ACCESS_DENIED_EXCEPTION,
-        lambda: schemas.CONFLICT_EXCEPTION,
-        lambda: schemas.INTERNAL_SERVER_EXCEPTION,
-        lambda: schemas.SERVICE_QUOTA_EXCEEDED_EXCEPTION,
-        lambda: schemas.THROTTLING_EXCEPTION,
-        lambda: schemas.VALIDATION_EXCEPTION,
-    ),
-)
-
-HARNESS_ARN: StaticSchema = (3, n0, _HA, 0)
-
-HARNESS_AGENT_CORE_RUNTIME_ENVIRONMENT: StaticSchema = (
-    18,
-    n0,
-    _HACRE,
-    0,
-    (_aRA, _aRN, _aRI, _lC, _nC, _fC),
-    (
-        (lambda: schemas.BEDROCK_AGENTCORE_RESOURCE_ARN, 1),
-        (3, 1),
-        (3, 1),
-        (lambda: schemas.LIFECYCLE_CONFIGURATION, 1),
-        (lambda: schemas.NETWORK_CONFIGURATION, 1),
-        (lambda: schemas.FILESYSTEM_CONFIGURATIONS, 0),
-    ),
-)
-
-HARNESS_ENVIRONMENT_PROVIDER: StaticSchema = (
-    19,
-    n0,
-    _HEP,
-    0,
-    (_aCRE,),
-    ((HARNESS_AGENT_CORE_RUNTIME_ENVIRONMENT, 0),),
-)
-
-HARNESS_STATUS: StaticSchema = (
-    14,
-    n0,
-    _HSar,
-    0,
-    (_CREATING, _CF, _UPDATING, _UF, _READY, _DELETING, _DF),
-    (
-        (-1, {_sVm: _CREATING}),
-        (-1, {_sVm: _CF}),
-        (-1, {_sVm: _UPDATING}),
-        (-1, {_sVm: _UF}),
-        (-1, {_sVm: _READY}),
-        (-1, {_sVm: _DELETING}),
-        (-1, {_sVm: _DF}),
-    ),
-)
-
-HARNESS: StaticSchema = (
-    18,
-    n0,
-    _H,
-    0,
-    (
-        _hI,
-        _hN,
-        _a,
-        _st,
-        _hV,
-        _eRA,
-        _cA,
-        _uA,
-        _mod,
-        _sPy,
-        _too,
-        _sk,
-        _aTl,
-        _tr,
-        _env,
-        _eAn,
-        _eV,
-        _aCu,
-        _memo,
-        _ho,
-        _mIa,
-        _mT,
-        _tSi,
-        _fR,
-    ),
-    (
-        (lambda: schemas.HARNESS_ID, 1),
-        (HARNESS_NAME, 1),
-        (HARNESS_ARN, 1),
-        (HARNESS_STATUS, 1),
-        (lambda: schemas.HARNESS_VERSION, 0),
-        (lambda: schemas.ROLE_ARN, 1),
-        (lambda: schemas.DATE_TIMESTAMP, 1),
-        (lambda: schemas.DATE_TIMESTAMP, 1),
-        (HARNESS_MODEL_CONFIGURATION, 1),
-        (HARNESS_SYSTEM_PROMPT, 1),
-        (HARNESS_TOOLS, 1),
-        (HARNESS_SKILLS, 1),
-        (HARNESS_ALLOWED_TOOLS, 1),
-        (HARNESS_TRUNCATION_CONFIGURATION, 1),
-        (HARNESS_ENVIRONMENT_PROVIDER, 1),
-        (HARNESS_ENVIRONMENT_ARTIFACT, 0),
-        (lambda: schemas.ENVIRONMENT_VARIABLES_MAP, 0),
-        (lambda: schemas.AUTHORIZER_CONFIGURATION, 0),
-        (HARNESS_MEMORY_CONFIGURATION, 0),
-        (HARNESS_HOOKS, 0),
-        (7, 0),
-        (7, 0),
-        (7, 0),
-        (3, 0),
-    ),
 )

@@ -25,6 +25,22 @@ from ._private.models_0 import (
     ActorSummary as ActorSummary,
     AffectedSession as AffectedSession,
     AgentCardDefinition as AgentCardDefinition,
+    AgentCoreRuntimeInvocation as AgentCoreRuntimeInvocation,
+    AgentCoreRuntimeInvocationDict as AgentCoreRuntimeInvocationDict,
+    AgentCoreRuntimeInvocationDetails as AgentCoreRuntimeInvocationDetails,
+    AgentInsightArchiveStatus as AgentInsightArchiveStatus,
+    AgentInsightCustomerMetadataStatus as AgentInsightCustomerMetadataStatus,
+    AgentInsightSummary as AgentInsightSummary,
+    AgentInvocationConfigAgentCoreRuntime as AgentInvocationConfigAgentCoreRuntime,
+    AgentInvocationConfigUnknown as AgentInvocationConfigUnknown,
+    AgentInvocationConfig as AgentInvocationConfig,
+    _AgentInvocationConfigDeserializer as _AgentInvocationConfigDeserializer,
+    AgentInvocationConfigAgentCoreRuntimeDict as AgentInvocationConfigAgentCoreRuntimeDict,
+    AgentInvocationConfigDict as AgentInvocationConfigDict,
+    AgentInvocationDetailsAgentCoreRuntime as AgentInvocationDetailsAgentCoreRuntime,
+    AgentInvocationDetailsUnknown as AgentInvocationDetailsUnknown,
+    AgentInvocationDetails as AgentInvocationDetails,
+    _AgentInvocationDetailsDeserializer as _AgentInvocationDetailsDeserializer,
     AgentSkillsDescriptor as AgentSkillsDescriptor,
     AgentTracesConfigSessionSpans as AgentTracesConfigSessionSpans,
     AgentTracesConfigCloudwatchLogs as AgentTracesConfigCloudwatchLogs,
@@ -53,6 +69,8 @@ from ._private.models_0 import (
     BatchDeleteMemoryRecordsInput as BatchDeleteMemoryRecordsInput,
     BatchDeleteMemoryRecordsInputDict as BatchDeleteMemoryRecordsInputDict,
     BatchDeleteMemoryRecordsOutput as BatchDeleteMemoryRecordsOutput,
+    BatchEvaluationSourceConfig as BatchEvaluationSourceConfig,
+    BatchEvaluationSourceConfigDict as BatchEvaluationSourceConfigDict,
     BatchEvaluationStatus as BatchEvaluationStatus,
     BatchEvaluationSummary as BatchEvaluationSummary,
     BatchEvaluationTraceConfig as BatchEvaluationTraceConfig,
@@ -125,6 +143,8 @@ from ._private.models_0 import (
     CloudWatchLogsRuleDict as CloudWatchLogsRuleDict,
     CloudWatchLogsSource as CloudWatchLogsSource,
     CloudWatchLogsSourceDict as CloudWatchLogsSourceDict,
+    CloudWatchLogsSourceConfig as CloudWatchLogsSourceConfig,
+    CloudWatchLogsSourceConfigDict as CloudWatchLogsSourceConfigDict,
     CloudWatchLogsTraceConfig as CloudWatchLogsTraceConfig,
     CloudWatchLogsTraceConfigDict as CloudWatchLogsTraceConfigDict,
     CloudWatchOutputConfig as CloudWatchOutputConfig,
@@ -199,7 +219,17 @@ from ._private.models_0 import (
     CryptoX402PaymentInputDict as CryptoX402PaymentInputDict,
     CryptoX402PaymentOutput as CryptoX402PaymentOutput,
     Currency as Currency,
+    CustomDataIdentifier as CustomDataIdentifier,
+    CustomDataIdentifierDict as CustomDataIdentifierDict,
     CustomDescriptor as CustomDescriptor,
+    DatasetDetails as DatasetDetails,
+    DatasetExecutionConfig as DatasetExecutionConfig,
+    DatasetExecutionConfigDict as DatasetExecutionConfigDict,
+    DatasetExecutionDetails as DatasetExecutionDetails,
+    DatasetGenerationStatus as DatasetGenerationStatus,
+    DatasetGenerationSummary as DatasetGenerationSummary,
+    DatasetSource as DatasetSource,
+    DatasetSourceDict as DatasetSourceDict,
     DataSourceConfigCloudWatchLogs as DataSourceConfigCloudWatchLogs,
     DataSourceConfigOnlineEvaluationConfigSource as DataSourceConfigOnlineEvaluationConfigSource,
     DataSourceConfigUnknown as DataSourceConfigUnknown,
@@ -217,6 +247,9 @@ from ._private.models_0 import (
     DeleteCapacityProviderSessionInput as DeleteCapacityProviderSessionInput,
     DeleteCapacityProviderSessionInputDict as DeleteCapacityProviderSessionInputDict,
     DeleteCapacityProviderSessionOutput as DeleteCapacityProviderSessionOutput,
+    DeleteDatasetGenerationInput as DeleteDatasetGenerationInput,
+    DeleteDatasetGenerationInputDict as DeleteDatasetGenerationInputDict,
+    DeleteDatasetGenerationOutput as DeleteDatasetGenerationOutput,
     DeleteEventInput as DeleteEventInput,
     DeleteEventInputDict as DeleteEventInputDict,
     DeleteEventOutput as DeleteEventOutput,
@@ -278,6 +311,8 @@ from ._private.models_0 import (
     EvaluationTargetDict as EvaluationTargetDict,
     Evaluator as Evaluator,
     EvaluatorDict as EvaluatorDict,
+    EvaluatorFilter as EvaluatorFilter,
+    EvaluatorFilterDict as EvaluatorFilterDict,
     EvaluatorMetric as EvaluatorMetric,
     EvaluatorStatistics as EvaluatorStatistics,
     EvaluatorSummary as EvaluatorSummary,
@@ -322,12 +357,60 @@ from ._private.models_0 import (
     FindingTargetType as FindingTargetType,
     GatewayFilter as GatewayFilter,
     GatewayFilterDict as GatewayFilterDict,
+    GenerationAttributeFilter as GenerationAttributeFilter,
+    GenerationAttributeFilterDict as GenerationAttributeFilterDict,
+    GenerationErrorDetail as GenerationErrorDetail,
+    GenerationFilterOperator as GenerationFilterOperator,
+    GenerationFilters as GenerationFilters,
+    GenerationFiltersDict as GenerationFiltersDict,
+    GenerationFilterValueStringValue as GenerationFilterValueStringValue,
+    GenerationFilterValueDoubleValue as GenerationFilterValueDoubleValue,
+    GenerationFilterValueBooleanValue as GenerationFilterValueBooleanValue,
+    GenerationFilterValueUnknown as GenerationFilterValueUnknown,
+    GenerationFilterValue as GenerationFilterValue,
+    _GenerationFilterValueDeserializer as _GenerationFilterValueDeserializer,
+    GenerationFilterValueStringValueDict as GenerationFilterValueStringValueDict,
+    GenerationFilterValueDoubleValueDict as GenerationFilterValueDoubleValueDict,
+    GenerationFilterValueBooleanValueDict as GenerationFilterValueBooleanValueDict,
+    GenerationFilterValueDict as GenerationFilterValueDict,
+    GenerationIdentifierCounts as GenerationIdentifierCounts,
+    GenerationIdentifiers as GenerationIdentifiers,
+    GenerationIdentifiersDict as GenerationIdentifiersDict,
+    GenerationResults as GenerationResults,
+    GenerationSamplingConfig as GenerationSamplingConfig,
+    GenerationSamplingConfigDict as GenerationSamplingConfigDict,
+    GenerationSelectionFilters as GenerationSelectionFilters,
+    GenerationSelectionIdentifiers as GenerationSelectionIdentifiers,
+    GenerationSelectionUnknown as GenerationSelectionUnknown,
+    GenerationSelection as GenerationSelection,
+    _GenerationSelectionDeserializer as _GenerationSelectionDeserializer,
+    GenerationSelectionFiltersDict as GenerationSelectionFiltersDict,
+    GenerationSelectionIdentifiersDict as GenerationSelectionIdentifiersDict,
+    GenerationSelectionDict as GenerationSelectionDict,
+    GenerationSelectionRecordFilters as GenerationSelectionRecordFilters,
+    GenerationSelectionRecordIdentifiers as GenerationSelectionRecordIdentifiers,
+    GenerationSelectionRecordUnknown as GenerationSelectionRecordUnknown,
+    GenerationSelectionRecord as GenerationSelectionRecord,
+    _GenerationSelectionRecordDeserializer as _GenerationSelectionRecordDeserializer,
+    GenerationSourceTraceGeneration as GenerationSourceTraceGeneration,
+    GenerationSourceUnknown as GenerationSourceUnknown,
+    GenerationSource as GenerationSource,
+    _GenerationSourceDeserializer as _GenerationSourceDeserializer,
+    GenerationSourceTraceGenerationDict as GenerationSourceTraceGenerationDict,
+    GenerationSourceDict as GenerationSourceDict,
+    GenerationSourceRecordTraceGeneration as GenerationSourceRecordTraceGeneration,
+    GenerationSourceRecordUnknown as GenerationSourceRecordUnknown,
+    GenerationSourceRecord as GenerationSourceRecord,
+    _GenerationSourceRecordDeserializer as _GenerationSourceRecordDeserializer,
     GetABTestInput as GetABTestInput,
     GetABTestInputDict as GetABTestInputDict,
     GetABTestOutput as GetABTestOutput,
     GetAgentCardInput as GetAgentCardInput,
     GetAgentCardInputDict as GetAgentCardInputDict,
     GetAgentCardOutput as GetAgentCardOutput,
+    GetAgentInsightInput as GetAgentInsightInput,
+    GetAgentInsightInputDict as GetAgentInsightInputDict,
+    GetAgentInsightOutput as GetAgentInsightOutput,
     GetBatchEvaluationInput as GetBatchEvaluationInput,
     GetBatchEvaluationInputDict as GetBatchEvaluationInputDict,
     GetBatchEvaluationOutput as GetBatchEvaluationOutput,
@@ -337,6 +420,9 @@ from ._private.models_0 import (
     GetCodeInterpreterSessionInput as GetCodeInterpreterSessionInput,
     GetCodeInterpreterSessionInputDict as GetCodeInterpreterSessionInputDict,
     GetCodeInterpreterSessionOutput as GetCodeInterpreterSessionOutput,
+    GetDatasetGenerationInput as GetDatasetGenerationInput,
+    GetDatasetGenerationInputDict as GetDatasetGenerationInputDict,
+    GetDatasetGenerationOutput as GetDatasetGenerationOutput,
     GetEventInput as GetEventInput,
     GetEventInputDict as GetEventInputDict,
     GetEventOutput as GetEventOutput,
@@ -373,6 +459,9 @@ from ._private.models_0 import (
     GetWorkloadAccessTokenInput as GetWorkloadAccessTokenInput,
     GetWorkloadAccessTokenInputDict as GetWorkloadAccessTokenInputDict,
     GetWorkloadAccessTokenOutput as GetWorkloadAccessTokenOutput,
+    GroundTruthConfig as GroundTruthConfig,
+    GroundTruthConfigDict as GroundTruthConfigDict,
+    GroundTruthField as GroundTruthField,
     GroundTruthSourceInline as GroundTruthSourceInline,
     GroundTruthSourceUnknown as GroundTruthSourceUnknown,
     GroundTruthSource as GroundTruthSource,
@@ -482,6 +571,9 @@ from ._private.models_0 import (
     HarnessReasoningTextBlockDict as HarnessReasoningTextBlockDict,
     HarnessRemoteMcpConfig as HarnessRemoteMcpConfig,
     HarnessRemoteMcpConfigDict as HarnessRemoteMcpConfigDict,
+)
+
+from ._private.models_1 import (
     HarnessRemoteMcpOutboundAuthAwsIam as HarnessRemoteMcpOutboundAuthAwsIam,
     HarnessRemoteMcpOutboundAuthNone as HarnessRemoteMcpOutboundAuthNone,
     HarnessRemoteMcpOutboundAuthUnknown as HarnessRemoteMcpOutboundAuthUnknown,
@@ -587,9 +679,6 @@ from ._private.models_0 import (
     InsightType as InsightType,
     InstrumentBalanceToken as InstrumentBalanceToken,
     InternalServerException as InternalServerException,
-)
-
-from ._private.models_1 import (
     InvalidInputException as InvalidInputException,
     InvokeAgentRuntimeCommandInput as InvokeAgentRuntimeCommandInput,
     InvokeAgentRuntimeCommandInputDict as InvokeAgentRuntimeCommandInputDict,
@@ -689,6 +778,9 @@ from ._private.models_1 import (
     ListActorsInput as ListActorsInput,
     ListActorsInputDict as ListActorsInputDict,
     ListActorsOutput as ListActorsOutput,
+    ListAgentInsightsInput as ListAgentInsightsInput,
+    ListAgentInsightsInputDict as ListAgentInsightsInputDict,
+    ListAgentInsightsOutput as ListAgentInsightsOutput,
     ListBatchEvaluationsInput as ListBatchEvaluationsInput,
     ListBatchEvaluationsInputDict as ListBatchEvaluationsInputDict,
     ListBatchEvaluationsOutput as ListBatchEvaluationsOutput,
@@ -698,6 +790,9 @@ from ._private.models_1 import (
     ListCodeInterpreterSessionsInput as ListCodeInterpreterSessionsInput,
     ListCodeInterpreterSessionsInputDict as ListCodeInterpreterSessionsInputDict,
     ListCodeInterpreterSessionsOutput as ListCodeInterpreterSessionsOutput,
+    ListDatasetGenerationsInput as ListDatasetGenerationsInput,
+    ListDatasetGenerationsInputDict as ListDatasetGenerationsInputDict,
+    ListDatasetGenerationsOutput as ListDatasetGenerationsOutput,
     ListEventsInput as ListEventsInput,
     ListEventsInputDict as ListEventsInputDict,
     ListEventsOutput as ListEventsOutput,
@@ -797,6 +892,8 @@ from ._private.models_1 import (
     OAuthGrantType as OAuthGrantType,
     OnlineEvaluationConfigSource as OnlineEvaluationConfigSource,
     OnlineEvaluationConfigSourceDict as OnlineEvaluationConfigSourceDict,
+    OnlineEvaluationSourceConfig as OnlineEvaluationSourceConfig,
+    OnlineEvaluationSourceConfigDict as OnlineEvaluationSourceConfigDict,
     OnlineEvaluationTraceConfig as OnlineEvaluationTraceConfig,
     OnlineEvaluationTraceConfigDict as OnlineEvaluationTraceConfigDict,
     OperatorType as OperatorType,
@@ -912,6 +1009,10 @@ from ._private.models_1 import (
     RecordExpirySpecificationRecordExpiryDurationDaysDict as RecordExpirySpecificationRecordExpiryDurationDaysDict,
     RecordExpirySpecificationActionDict as RecordExpirySpecificationActionDict,
     RecordExpirySpecificationDict as RecordExpirySpecificationDict,
+    RedactionConfiguration as RedactionConfiguration,
+    RedactionConfigurationDict as RedactionConfigurationDict,
+    RedactionIdentifier as RedactionIdentifier,
+    RedactionSummary as RedactionSummary,
     RegistryRecordStatus as RegistryRecordStatus,
     RegistryRecordSummary as RegistryRecordSummary,
     ResourceContent as ResourceContent,
@@ -924,6 +1025,7 @@ from ._private.models_1 import (
     ResourceLocationDict as ResourceLocationDict,
     ResourceNotFoundException as ResourceNotFoundException,
     ResponseChunk as ResponseChunk,
+    ResultAggregation as ResultAggregation,
     ResultDestination as ResultDestination,
     RetrieveMemoryRecordsInput as RetrieveMemoryRecordsInput,
     RetrieveMemoryRecordsInputDict as RetrieveMemoryRecordsInputDict,
@@ -946,6 +1048,7 @@ from ._private.models_1 import (
     SaveBrowserSessionProfileInput as SaveBrowserSessionProfileInput,
     SaveBrowserSessionProfileInputDict as SaveBrowserSessionProfileInputDict,
     SaveBrowserSessionProfileOutput as SaveBrowserSessionProfileOutput,
+    ScenarioType as ScenarioType,
     ScreenshotArguments as ScreenshotArguments,
     ScreenshotArgumentsDict as ScreenshotArgumentsDict,
     ScreenshotFormat as ScreenshotFormat,
@@ -987,6 +1090,9 @@ from ._private.models_1 import (
     StartCodeInterpreterSessionInput as StartCodeInterpreterSessionInput,
     StartCodeInterpreterSessionInputDict as StartCodeInterpreterSessionInputDict,
     StartCodeInterpreterSessionOutput as StartCodeInterpreterSessionOutput,
+    StartDatasetGenerationInput as StartDatasetGenerationInput,
+    StartDatasetGenerationInputDict as StartDatasetGenerationInputDict,
+    StartDatasetGenerationOutput as StartDatasetGenerationOutput,
     StartMemoryExtractionJobInput as StartMemoryExtractionJobInput,
     StartMemoryExtractionJobInputDict as StartMemoryExtractionJobInputDict,
     StartMemoryExtractionJobOutput as StartMemoryExtractionJobOutput,
@@ -1037,6 +1143,9 @@ from ._private.models_1 import (
     TokenUsage as TokenUsage,
     ToolArguments as ToolArguments,
     ToolArgumentsDict as ToolArgumentsDict,
+)
+
+from ._private.models_2 import (
     ToolDescriptionConfigText as ToolDescriptionConfigText,
     ToolDescriptionConfigUnknown as ToolDescriptionConfigUnknown,
     ToolDescriptionConfig as ToolDescriptionConfig,
@@ -1072,10 +1181,28 @@ from ._private.models_1 import (
     ToolsFileSystemConfigurationS3FilesConfigurationDict as ToolsFileSystemConfigurationS3FilesConfigurationDict,
     ToolsFileSystemConfigurationEfsConfigurationDict as ToolsFileSystemConfigurationEfsConfigurationDict,
     ToolsFileSystemConfigurationDict as ToolsFileSystemConfigurationDict,
+    TraceGenerationRecord as TraceGenerationRecord,
+    TraceGenerationSource as TraceGenerationSource,
+    TraceGenerationSourceDict as TraceGenerationSourceDict,
+    TraceSourceConfigCloudWatchLogs as TraceSourceConfigCloudWatchLogs,
+    TraceSourceConfigOnlineEvaluation as TraceSourceConfigOnlineEvaluation,
+    TraceSourceConfigBatchEvaluation as TraceSourceConfigBatchEvaluation,
+    TraceSourceConfigUnknown as TraceSourceConfigUnknown,
+    TraceSourceConfig as TraceSourceConfig,
+    _TraceSourceConfigDeserializer as _TraceSourceConfigDeserializer,
+    TraceSourceConfigCloudWatchLogsDict as TraceSourceConfigCloudWatchLogsDict,
+    TraceSourceConfigOnlineEvaluationDict as TraceSourceConfigOnlineEvaluationDict,
+    TraceSourceConfigBatchEvaluationDict as TraceSourceConfigBatchEvaluationDict,
+    TraceSourceConfigDict as TraceSourceConfigDict,
+    TurnCountRange as TurnCountRange,
+    TurnCountRangeDict as TurnCountRangeDict,
     UnauthorizedException as UnauthorizedException,
     UpdateABTestInput as UpdateABTestInput,
     UpdateABTestInputDict as UpdateABTestInputDict,
     UpdateABTestOutput as UpdateABTestOutput,
+    UpdateAgentInsightInput as UpdateAgentInsightInput,
+    UpdateAgentInsightInputDict as UpdateAgentInsightInputDict,
+    UpdateAgentInsightOutput as UpdateAgentInsightOutput,
     UpdateBrowserStreamInput as UpdateBrowserStreamInput,
     UpdateBrowserStreamInputDict as UpdateBrowserStreamInputDict,
     UpdateBrowserStreamOutput as UpdateBrowserStreamOutput,
@@ -1148,6 +1275,9 @@ DELETE_BATCH_EVALUATION: APIOperation[
 DELETE_CAPACITY_PROVIDER_SESSION: APIOperation[
     DeleteCapacityProviderSessionInput, DeleteCapacityProviderSessionOutput
 ]
+DELETE_DATASET_GENERATION: APIOperation[
+    DeleteDatasetGenerationInput, DeleteDatasetGenerationOutput
+]
 DELETE_EVENT: APIOperation[DeleteEventInput, DeleteEventOutput]
 DELETE_MEMORY_RECORD: APIOperation[DeleteMemoryRecordInput, DeleteMemoryRecordOutput]
 DELETE_PAYMENT_INSTRUMENT: APIOperation[
@@ -1162,10 +1292,14 @@ DELETE_RECOMMENDATION: APIOperation[
 EVALUATE: APIOperation[EvaluateInput, EvaluateOutput]
 GET_AB_TEST: APIOperation[GetABTestInput, GetABTestOutput]
 GET_AGENT_CARD: APIOperation[GetAgentCardInput, GetAgentCardOutput]
+GET_AGENT_INSIGHT: APIOperation[GetAgentInsightInput, GetAgentInsightOutput]
 GET_BATCH_EVALUATION: APIOperation[GetBatchEvaluationInput, GetBatchEvaluationOutput]
 GET_BROWSER_SESSION: APIOperation[GetBrowserSessionInput, GetBrowserSessionOutput]
 GET_CODE_INTERPRETER_SESSION: APIOperation[
     GetCodeInterpreterSessionInput, GetCodeInterpreterSessionOutput
+]
+GET_DATASET_GENERATION: APIOperation[
+    GetDatasetGenerationInput, GetDatasetGenerationOutput
 ]
 GET_EVENT: APIOperation[GetEventInput, GetEventOutput]
 GET_MEMORY_RECORD: APIOperation[GetMemoryRecordInput, GetMemoryRecordOutput]
@@ -1206,12 +1340,16 @@ INVOKE_HARNESS: APIOperation[InvokeHarnessInput, InvokeHarnessOutput]
 INVOKE_WEB_SEARCH: APIOperation[InvokeWebSearchInput, InvokeWebSearchOutput]
 LIST_AB_TESTS: APIOperation[ListABTestsInput, ListABTestsOutput]
 LIST_ACTORS: APIOperation[ListActorsInput, ListActorsOutput]
+LIST_AGENT_INSIGHTS: APIOperation[ListAgentInsightsInput, ListAgentInsightsOutput]
 LIST_BATCH_EVALUATIONS: APIOperation[
     ListBatchEvaluationsInput, ListBatchEvaluationsOutput
 ]
 LIST_BROWSER_SESSIONS: APIOperation[ListBrowserSessionsInput, ListBrowserSessionsOutput]
 LIST_CODE_INTERPRETER_SESSIONS: APIOperation[
     ListCodeInterpreterSessionsInput, ListCodeInterpreterSessionsOutput
+]
+LIST_DATASET_GENERATIONS: APIOperation[
+    ListDatasetGenerationsInput, ListDatasetGenerationsOutput
 ]
 LIST_EVENTS: APIOperation[ListEventsInput, ListEventsOutput]
 LIST_MEMORY_EXTRACTION_JOBS: APIOperation[
@@ -1241,6 +1379,9 @@ START_BROWSER_SESSION: APIOperation[StartBrowserSessionInput, StartBrowserSessio
 START_CODE_INTERPRETER_SESSION: APIOperation[
     StartCodeInterpreterSessionInput, StartCodeInterpreterSessionOutput
 ]
+START_DATASET_GENERATION: APIOperation[
+    StartDatasetGenerationInput, StartDatasetGenerationOutput
+]
 START_MEMORY_EXTRACTION_JOB: APIOperation[
     StartMemoryExtractionJobInput, StartMemoryExtractionJobOutput
 ]
@@ -1252,4 +1393,5 @@ STOP_CODE_INTERPRETER_SESSION: APIOperation[
 ]
 STOP_RUNTIME_SESSION: APIOperation[StopRuntimeSessionInput, StopRuntimeSessionOutput]
 UPDATE_AB_TEST: APIOperation[UpdateABTestInput, UpdateABTestOutput]
+UPDATE_AGENT_INSIGHT: APIOperation[UpdateAgentInsightInput, UpdateAgentInsightOutput]
 UPDATE_BROWSER_STREAM: APIOperation[UpdateBrowserStreamInput, UpdateBrowserStreamOutput]

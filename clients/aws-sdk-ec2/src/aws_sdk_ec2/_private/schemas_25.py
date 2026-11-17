@@ -11,8 +11,6 @@ _sN = "smithy.api#xmlName"
 _sV = "smithy.api#enumValue"
 _me = "member"
 _i = "item"
-_im = "image"
-_vo = "volume"
 _vp = "vpc"
 _Tag = "Tags"
 _sSI = "smithy.synthetic#originalShapeId"
@@ -20,9 +18,13 @@ _sm = "smithy.api#input"
 _sO = "smithy.api#clientOptional"
 _smi = "smithy.api#required"
 _DR = "DryRun"
+_p = "pending"
+_ac = "accepted"
 _smit = "smithy.api#output"
+_CRI = "CapacityReservationId"
 _TGAI = "TransitGatewayAttachmentId"
 _CVEI = "ClientVpnEndpointId"
+_re = "rejected"
 _TGI = "TransitGatewayId"
 _tGAI = "transitGatewayAttachmentId"
 _tGI = "transitGatewayId"
@@ -31,6 +33,7 @@ _St = "State"
 _st = "state"
 _CT = "CreationTime"
 _cT = "creationTime"
+_en = "enabled"
 _C = "Code"
 _co = "code"
 _Me = "Message"
@@ -41,45 +44,36 @@ _TSag = "TagSet"
 _tS = "tagSet"
 _VI = "VpcId"
 _vI = "vpcId"
-_er = "error"
 _dRr = "dryRun"
 _act = "active"
-_ET = "ExpirationTime"
-_eT = "expirationTime"
-_Id = "Id"
-_id = "id"
-_IA = "IpAddress"
+_ex = "expired"
 _AZ = "AvailabilityZone"
 _aZ = "availabilityZone"
 _AZI = "AvailabilityZoneId"
 _aZI = "availabilityZoneId"
 _DC = "DestinationCidr"
 _dC = "destinationCidr"
-_EOIGI = "EgressOnlyInternetGatewayId"
 _II = "InstanceId"
 _iI = "instanceId"
 _Or = "Origin"
 _or = "origin"
+_CGI = "CarrierGatewayId"
 _AZv = "AvailabilityZones"
 _AZS = "AvailabilityZoneSet"
 _aZS = "availabilityZoneSet"
 _AZIv = "AvailabilityZoneIds"
 _AZIS = "AvailabilityZoneIdSet"
 _aZIS = "availabilityZoneIdSet"
-_CG = "CustomerGateway"
-_SGe = "SecurityGroups"
-_ena = "enabled"
+_IT = "InstanceType"
+_iT = "instanceType"
 _Des = "Description"
-_AIs = "AssociationId"
-_aIs = "associationId"
 _SMt = "StatusMessage"
 _sMt = "statusMessage"
 _desc = "description"
-_PIo = "PoolId"
-_ca = "cancelling"
+_ASll = "AllocationStrategy"
 _SGIe = "SecurityGroupIds"
-_DOI = "DhcpOptionsId"
-_CAe = "CertificateArn"
+_IIn = "InstanceIds"
+_URBOI = "UnusedReservationBillingOwnerId"
 _Ti = "Timestamp"
 _ti = "timestamp"
 _GIr = "GroupId"
@@ -91,22 +85,36 @@ _TI = "TenantId"
 _tI = "tenantId"
 _PSKU = "PublicSigningKeyUrl"
 _pSKU = "publicSigningKeyUrl"
-_smith = "smithy.api#sensitive"
-_comp = "complete"
-_ST = "StartTime"
-_sTt = "startTime"
+_GN = "GroupName"
+_gN = "groupName"
+_CRCQI = "CapacityReservationCancellationQuoteId"
+_CRFI = "CapacityReservationFleetId"
+_CRFIa = "CapacityReservationFleetIds"
+_cRFI = "capacityReservationFleetId"
 _can = "cancelled"
-_CTI = "ConversionTaskId"
-_cTI = "conversionTaskId"
-_RIep = "ReportId"
-_compl = "completed"
-_Si = "Size"
-_Vo = "Volume"
-_siz = "size"
-_Vol = "Volumes"
+_CTr = "CreateTime"
+_cTr = "createTime"
 _DTe = "DeletionTime"
 _dT = "deletionTime"
+_IMC = "InstanceMatchCriteria"
+_Ten = "Tenancy"
+_ED = "EndDate"
+_eD = "endDate"
 _ap = "applied"
+_CBI = "CapacityBlockId"
+_cRI = "capacityReservationId"
+_ten = "tenancy"
+_iMC = "instanceMatchCriteria"
+_uRBOI = "unusedReservationBillingOwnerId"
+_cBI = "capacityBlockId"
+_CRMQI = "CapacityReservationModificationQuoteId"
+_ITS = "InstanceTypeSpecifications"
+_IRn = "InstanceRequirements"
+_TTC = "TotalTargetCapacity"
+_tTC = "totalTargetCapacity"
+_TFC = "TotalFulfilledCapacity"
+_tFC = "totalFulfilledCapacity"
+_aSl = "allocationStrategy"
 _DIi = "DirectoryId"
 _Ty = "Type"
 _ADc = "ActiveDirectory"
@@ -130,7 +138,7 @@ _TIAT = "TrafficIpAddressType"
 _TPra = "TransportProtocol"
 _CCB = "ClientCidrBlock"
 _SCA = "ServerCertificateArn"
-_AO = "AuthenticationOptions"
+_AOu = "AuthenticationOptions"
 _DSn = "DnsServers"
 _VPp = "VpnPort"
 _STp = "SplitTunnel"
@@ -139,29 +147,15 @@ _DOST = "DisconnectOnSessionTimeout"
 _TGC = "TransitGatewayConfiguration"
 _DN = "DnsName"
 _dN = "dnsName"
-_BA = "BgpAsn"
-_DNe = "DeviceName"
-_BAE = "BgpAsnExtended"
-_cAe = "certificateArn"
-_dNe = "deviceName"
-_bAE = "bgpAsnExtended"
-_CGIu = "CustomerGatewayId"
-_cGIu = "customerGatewayId"
 _ty = "type"
-_iApd = "ipAddress"
-_bA = "bgpAsn"
-_DOh = "DhcpOptions"
-_Pla = "Platform"
-_plat = "platform"
-_rIe = "reportId"
+_CRIa = "CapacityReservationIds"
+_iRn = "instanceRequirements"
+_Ins = "Instances"
 _SGIS = "SecurityGroupIdSet"
 _sGIS = "securityGroupIdSet"
-_SBu = "S3Bucket"
-_sB = "s3Bucket"
-_SPr = "S3Prefix"
-_sP = "s3Prefix"
 _GS = "GroupSet"
 _gS = "groupSet"
+_revo = "revoked"
 _Rout = "Routes"
 _NTe = "NetworkType"
 _rout = "routes"
@@ -170,9 +164,95 @@ _Fil = "Filters"
 _NTex = "NextToken"
 _MR = "MaxResults"
 _nT = "nextToken"
+_CRIap = "CapacityReservationInfo"
+_CRBRS = "CapacityReservationBillingRequestStatus"
+_CRBR = "CapacityReservationBillingRequest"
+_RB = "RequestedBy"
+_rBe = "requestedBy"
+_LUTas = "LastUpdateTime"
+_lUTas = "lastUpdateTime"
+_cRIa = "capacityReservationInfo"
+_CRBRSa = "CapacityReservationBillingRequestSet"
+_CRCQIS = "CapacityReservationCancellationQuoteIdSet"
+_DCRCQRMR = "DescribeCapacityReservationCancellationQuotesRequestMaxResults"
+_DCRCQI = "DescribeCapacityReservationCancellationQuotesInput"
+_cDCRCQR = "com.amazonaws.ec2#DescribeCapacityReservationCancellationQuotesRequest"
+_CRCQIa = "CapacityReservationCancellationQuoteIds"
+_CRCQRS = "CapacityReservationCancellationQuoteResponseSet"
+_DCRCQO = "DescribeCapacityReservationCancellationQuotesOutput"
+_cDCRCQRo = "com.amazonaws.ec2#DescribeCapacityReservationCancellationQuotesResult"
+_CRCQa = "CapacityReservationCancellationQuotes"
+_CRCQSa = "CapacityReservationCancellationQuoteSet"
+_cRCQS = "capacityReservationCancellationQuoteSet"
+_DCRCQ = "DescribeCapacityReservationCancellationQuotes"
+_CRMQIS = "CapacityReservationModificationQuoteIdSet"
+_DCRDCQRMR = "DescribeCapacityReservationDateChangeQuotesRequestMaxResults"
+_DCRDCQI = "DescribeCapacityReservationDateChangeQuotesInput"
+_cDCRDCQR = "com.amazonaws.ec2#DescribeCapacityReservationDateChangeQuotesRequest"
+_CRMQIa = "CapacityReservationModificationQuoteIds"
+_CRMQRS = "CapacityReservationModificationQuoteResponseSet"
+_DCRDCQO = "DescribeCapacityReservationDateChangeQuotesOutput"
+_cDCRDCQRo = "com.amazonaws.ec2#DescribeCapacityReservationDateChangeQuotesResult"
+_CRMQa = "CapacityReservationModificationQuotes"
+_CRMQSa = "CapacityReservationModificationQuoteSet"
+_cRMQS = "capacityReservationModificationQuoteSet"
+_DCRDCQ = "DescribeCapacityReservationDateChangeQuotes"
+_DCRFMR = "DescribeCapacityReservationFleetsMaxResults"
+_DCRFI = "DescribeCapacityReservationFleetsInput"
+_cDCRFR = "com.amazonaws.ec2#DescribeCapacityReservationFleetsRequest"
+_CRF = "CapacityReservationFleet"
+_CRFA = "CapacityReservationFleetArn"
+_cRFA = "capacityReservationFleetArn"
+_ITSS = "InstanceTypeSpecificationSet"
+_iTSS = "instanceTypeSpecificationSet"
+_CRFSa = "CapacityReservationFleetSet"
+_DCRFO = "DescribeCapacityReservationFleetsOutput"
+_cDCRFRo = "com.amazonaws.ec2#DescribeCapacityReservationFleetsResult"
+_CRFa = "CapacityReservationFleets"
+_cRFS = "capacityReservationFleetSet"
+_DCRF = "DescribeCapacityReservationFleets"
+_DCRMR = "DescribeCapacityReservationsMaxResults"
+_DCRI = "DescribeCapacityReservationsInput"
+_cDCRR = "com.amazonaws.ec2#DescribeCapacityReservationsRequest"
+_CRSapac = "CapacityReservationSet"
+_DCRO = "DescribeCapacityReservationsOutput"
+_cDCRRo = "com.amazonaws.ec2#DescribeCapacityReservationsResult"
+_CRapac = "CapacityReservations"
+_cRSa = "capacityReservationSet"
+_DCRe = "DescribeCapacityReservations"
+_DCRTMR = "DescribeCapacityReservationTopologyMaxResults"
+_DCRTI = "DescribeCapacityReservationTopologyInput"
+_cDCRTR = "com.amazonaws.ec2#DescribeCapacityReservationTopologyRequest"
+_NNS = "NetworkNodeSet"
+_CRTapa = "CapacityReservationTopology"
+_NN = "NetworkNodes"
+_nNS = "networkNodeSet"
+_CRTS = "CapacityReservationTopologySet"
+_DCRTO = "DescribeCapacityReservationTopologyOutput"
+_cDCRTRo = "com.amazonaws.ec2#DescribeCapacityReservationTopologyResult"
+_DCRT = "DescribeCapacityReservationTopology"
+_CGIS = "CarrierGatewayIdSet"
+_CGMR = "CarrierGatewayMaxResults"
+_DCGIes = "DescribeCarrierGatewaysInput"
+_cDCGRoma = "com.amazonaws.ec2#DescribeCarrierGatewaysRequest"
+_CGIa = "CarrierGatewayIds"
+_CGSa = "CarrierGatewaySet"
+_DCGOes = "DescribeCarrierGatewaysOutput"
+_cDCGRomam = "com.amazonaws.ec2#DescribeCarrierGatewaysResult"
+_CGar = "CarrierGateways"
+_cGS = "carrierGatewaySet"
+_DCGes = "DescribeCarrierGateways"
+_DCLIMR = "DescribeClassicLinkInstancesMaxResults"
+_DCLII = "DescribeClassicLinkInstancesInput"
+_cDCLIR = "com.amazonaws.ec2#DescribeClassicLinkInstancesRequest"
 _mR = "maxResults"
 _CLI = "ClassicLinkInstance"
 _CLIL = "ClassicLinkInstanceList"
+_DCLIO = "DescribeClassicLinkInstancesOutput"
+_cDCLIRo = "com.amazonaws.ec2#DescribeClassicLinkInstancesResult"
+_ISnst = "InstancesSet"
+_iSns = "instancesSet"
+_DCLI = "DescribeClassicLinkInstances"
 _DCVARMR = "DescribeClientVpnAuthorizationRulesMaxResults"
 _DCVARI = "DescribeClientVpnAuthorizationRulesInput"
 _cDCVARR = "com.amazonaws.ec2#DescribeClientVpnAuthorizationRulesRequest"
@@ -315,139 +395,481 @@ _DCVTNMR = "DescribeClientVpnTargetNetworksMaxResults"
 _DCVTNI = "DescribeClientVpnTargetNetworksInput"
 _cDCVTNR = "com.amazonaws.ec2#DescribeClientVpnTargetNetworksRequest"
 _AIsso = "AssociationIds"
-_TNa = "TargetNetwork"
-_TNI = "TargetNetworkId"
-_tNI = "targetNetworkId"
-_sGe = "securityGroups"
-_TNS = "TargetNetworkSet"
 _DCVTNO = "DescribeClientVpnTargetNetworksOutput"
 _cDCVTNRo = "com.amazonaws.ec2#DescribeClientVpnTargetNetworksResult"
 _CVTN = "ClientVpnTargetNetworks"
 _cVTN = "clientVpnTargetNetworks"
 _DCVTN = "DescribeClientVpnTargetNetworks"
-_CPIS = "CoipPoolIdSet"
-_DCPIe = "DescribeCoipPoolsInput"
-_cDCPRom = "com.amazonaws.ec2#DescribeCoipPoolsRequest"
-_PIoo = "PoolIds"
-_CPS = "CoipPoolSet"
-_DCPOe = "DescribeCoipPoolsOutput"
-_cDCPRoma = "com.amazonaws.ec2#DescribeCoipPoolsResult"
-_CPo = "CoipPools"
-_cPS = "coipPoolSet"
-_DCPe = "DescribeCoipPools"
-_CISL = "ConversionIdStringList"
-_DCTI = "DescribeConversionTasksInput"
-_cDCTR = "com.amazonaws.ec2#DescribeConversionTasksRequest"
-_CTIo = "ConversionTaskIds"
-_IMU = "ImportManifestUrl"
-_DID = "DiskImageDescription"
-_Ch = "Checksum"
-_ch = "checksum"
-_For = "Format"
-_fo = "format"
-_iMU = "importManifestUrl"
-_DIVD = "DiskImageVolumeDescription"
-_IIVDI = "ImportInstanceVolumeDetailItem"
-_BCyt = "BytesConverted"
-_bCy = "bytesConverted"
-_Im = "Image"
-_IIVDS = "ImportInstanceVolumeDetailSet"
-_IITD = "ImportInstanceTaskDetails"
-_vol = "volumes"
-_IVTD = "ImportVolumeTaskDetails"
-_CTSon = "ConversionTaskState"
-_CTon = "ConversionTask"
-_IImp = "ImportInstance"
-_iImp = "importInstance"
-_IVm = "ImportVolume"
-_iVm = "importVolume"
-_DCTL = "DescribeConversionTaskList"
-_DCTO = "DescribeConversionTasksOutput"
-_cDCTRo = "com.amazonaws.ec2#DescribeConversionTasksResult"
-_CTonv = "ConversionTasks"
-_cTon = "conversionTasks"
-_DCT = "DescribeConversionTasks"
-_CGISL = "CustomerGatewayIdStringList"
-_DCGIesc = "DescribeCustomerGatewaysInput"
-_cDCGRomama = "com.amazonaws.ec2#DescribeCustomerGatewaysRequest"
-_CGIus = "CustomerGatewayIds"
-_CGL = "CustomerGatewayList"
-_DCGOesc = "DescribeCustomerGatewaysOutput"
-_cDCGRomamaz = "com.amazonaws.ec2#DescribeCustomerGatewaysResult"
-_CGu = "CustomerGateways"
-_CGSu = "CustomerGatewaySet"
-_cGSu = "customerGatewaySet"
-_DCGesc = "DescribeCustomerGateways"
-_DPMR = "DeclarativePoliciesMaxResults"
-_DDPRI = "DescribeDeclarativePoliciesReportsInput"
-_cDDPRR = "com.amazonaws.ec2#DescribeDeclarativePoliciesReportsRequest"
-_RIepo = "ReportIds"
-_RSepo = "ReportState"
-_ru = "running"
-_DPRec = "DeclarativePoliciesReport"
-_TIa = "TargetId"
-_tIa = "targetId"
-_ETnd = "EndTime"
-_eTnd = "endTime"
-_DPRL = "DeclarativePoliciesReportList"
-_DDPRO = "DescribeDeclarativePoliciesReportsOutput"
-_cDDPRRo = "com.amazonaws.ec2#DescribeDeclarativePoliciesReportsResult"
-_Rep = "Reports"
-_RSepor = "ReportSet"
-_rSep = "reportSet"
-_DDPR = "DescribeDeclarativePoliciesReports"
-_DOISL = "DhcpOptionsIdStringList"
-_DDOMR = "DescribeDhcpOptionsMaxResults"
-_DDOIes = "DescribeDhcpOptionsInput"
-_cDDORo = "com.amazonaws.ec2#DescribeDhcpOptionsRequest"
-_DOIh = "DhcpOptionsIds"
-_DOL = "DhcpOptionsList"
-_DDOOe = "DescribeDhcpOptionsOutput"
-_cDDORom = "com.amazonaws.ec2#DescribeDhcpOptionsResult"
-_DOSh = "DhcpOptionsSet"
-_dOS = "dhcpOptionsSet"
-_DDOe = "DescribeDhcpOptions"
-_EOIGIL = "EgressOnlyInternetGatewayIdList"
-_DEOIGMR = "DescribeEgressOnlyInternetGatewaysMaxResults"
-_DEOIGIe = "DescribeEgressOnlyInternetGatewaysInput"
-_cDEOIGRom = "com.amazonaws.ec2#DescribeEgressOnlyInternetGatewaysRequest"
-_EOIGIg = "EgressOnlyInternetGatewayIds"
-_EOIGL = "EgressOnlyInternetGatewayList"
-_DEOIGOe = "DescribeEgressOnlyInternetGatewaysOutput"
-_cDEOIGRoma = "com.amazonaws.ec2#DescribeEgressOnlyInternetGatewaysResult"
-_EOIGg = "EgressOnlyInternetGateways"
-_EOIGS = "EgressOnlyInternetGatewaySet"
-_eOIGS = "egressOnlyInternetGatewaySet"
-_DEOIGe = "DescribeEgressOnlyInternetGateways"
-_EGI = "ElasticGpuId"
-_EGIS = "ElasticGpuIdSet"
-_DEGMR = "DescribeElasticGpusMaxResults"
-_DEGI = "DescribeElasticGpusInput"
-_cDEGR = "com.amazonaws.ec2#DescribeElasticGpusRequest"
-_EGIl = "ElasticGpuIds"
-_EGSlast = "ElasticGpuSet"
-_DEGO = "DescribeElasticGpusOutput"
-_cDEGRo = "com.amazonaws.ec2#DescribeElasticGpusResult"
-_eGSl = "elasticGpuSet"
-_DEG = "DescribeElasticGpus"
 
-CUSTOMER_GATEWAY: StaticSchema = (
+CAPACITY_RESERVATION_BILLING_REQUEST_STATUS: StaticSchema = (
+    14,
+    n0,
+    _CRBRS,
+    0,
+    (_p, _ac, _re, _can, _revo, _ex),
+    (
+        (-1, {_sV: _p}),
+        (-1, {_sV: _ac}),
+        (-1, {_sV: _re}),
+        (-1, {_sV: _can}),
+        (-1, {_sV: _revo}),
+        (-1, {_sV: _ex}),
+    ),
+)
+
+CAPACITY_RESERVATION_BILLING_REQUEST: StaticSchema = (
     18,
     n0,
-    _CG,
+    _CRBR,
     0,
-    (_CAe, _DNe, _Tag, _BAE, _CGIu, _St, _Ty, _IA, _BA),
+    (_CRI, _RB, _URBOI, _LUTas, _Sta, _SMt, _CRIap),
     (
-        (lambda: schemas.STRING, {_aQN: _CAe, _sN: _cAe}),
-        (lambda: schemas.STRING, {_aQN: _DNe, _sN: _dNe}),
-        (lambda: schemas.TAG_LIST, {_aQN: _TSag, _sN: _tS}),
-        (lambda: schemas.STRING, {_aQN: _BAE, _sN: _bAE}),
-        (lambda: schemas.STRING, {_aQN: _CGIu, _sN: _cGIu}),
-        (lambda: schemas.STRING, {_aQN: _St, _sN: _st}),
-        (lambda: schemas.STRING, {_aQN: _Ty, _sN: _ty}),
-        (lambda: schemas.STRING, {_aQN: _IA, _sN: _iApd}),
-        (lambda: schemas.STRING, {_aQN: _BA, _sN: _bA}),
+        (lambda: schemas.STRING, {_aQN: _CRI, _sN: _cRI}),
+        (lambda: schemas.STRING, {_aQN: _RB, _sN: _rBe}),
+        (lambda: schemas.ACCOUNT_ID, {_aQN: _URBOI, _sN: _uRBOI}),
+        (lambda: schemas.MILLISECOND_DATE_TIME, {_aQN: _LUTas, _sN: _lUTas}),
+        (CAPACITY_RESERVATION_BILLING_REQUEST_STATUS, {_aQN: _Sta, _sN: _sta}),
+        (lambda: schemas.STRING, {_aQN: _SMt, _sN: _sMt}),
+        (lambda: schemas.CAPACITY_RESERVATION_INFO, {_aQN: _CRIap, _sN: _cRIa}),
     ),
+)
+
+CAPACITY_RESERVATION_BILLING_REQUEST_SET: StaticSchema = (
+    16,
+    n0,
+    _CRBRSa,
+    0,
+    (_me,),
+    ((CAPACITY_RESERVATION_BILLING_REQUEST, {_sN: _i}),),
+)
+
+CAPACITY_RESERVATION_CANCELLATION_QUOTE_ID_SET: StaticSchema = (
+    16,
+    n0,
+    _CRCQIS,
+    0,
+    (_me,),
+    ((lambda: schemas.CAPACITY_RESERVATION_CANCELLATION_QUOTE_ID, {_sN: _i}),),
+)
+
+DESCRIBE_CAPACITY_RESERVATION_CANCELLATION_QUOTES_REQUEST_MAX_RESULTS: StaticSchema = (
+    7,
+    n0,
+    _DCRCQRMR,
+    0,
+)
+
+DESCRIBE_CAPACITY_RESERVATION_CANCELLATION_QUOTES_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DCRCQI,
+    {_sSI: _cDCRCQR, _sm: None},
+    (_CRCQIa, _MR, _NTex, _DR, _Fil),
+    (
+        (CAPACITY_RESERVATION_CANCELLATION_QUOTE_ID_SET, {_sN: _CRCQI}),
+        (DESCRIBE_CAPACITY_RESERVATION_CANCELLATION_QUOTES_REQUEST_MAX_RESULTS, 0),
+        (lambda: schemas.STRING, 0),
+        (lambda: schemas.BOOLEAN, 0),
+        (lambda: schemas.FILTER_LIST, {_sN: _Fi}),
+    ),
+)
+
+DESCRIBE_CAPACITY_RESERVATION_CANCELLATION_QUOTES_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DCRCQO,
+    {_sSI: _cDCRCQRo, _smit: None},
+    (_CRCQa, _NTex),
+    (
+        (
+            lambda: CAPACITY_RESERVATION_CANCELLATION_QUOTE_RESPONSE_SET,
+            {_aQN: _CRCQSa, _sN: _cRCQS},
+        ),
+        (lambda: schemas.STRING, {_aQN: _NTex, _sN: _nT}),
+    ),
+)
+
+DESCRIBE_CAPACITY_RESERVATION_CANCELLATION_QUOTES: StaticOperationSchema = (
+    23,
+    n0,
+    _DCRCQ,
+    0,
+    DESCRIBE_CAPACITY_RESERVATION_CANCELLATION_QUOTES_INPUT,
+    DESCRIBE_CAPACITY_RESERVATION_CANCELLATION_QUOTES_OUTPUT,
+    (),
+)
+
+CAPACITY_RESERVATION_CANCELLATION_QUOTE_RESPONSE_SET: StaticSchema = (
+    16,
+    n0,
+    _CRCQRS,
+    0,
+    (_me,),
+    ((lambda: schemas.CAPACITY_RESERVATION_CANCELLATION_QUOTE, {_sN: _i}),),
+)
+
+CAPACITY_RESERVATION_MODIFICATION_QUOTE_ID_SET: StaticSchema = (
+    16,
+    n0,
+    _CRMQIS,
+    0,
+    (_me,),
+    ((lambda: schemas.CAPACITY_RESERVATION_MODIFICATION_QUOTE_ID, {_sN: _i}),),
+)
+
+DESCRIBE_CAPACITY_RESERVATION_DATE_CHANGE_QUOTES_REQUEST_MAX_RESULTS: StaticSchema = (
+    7,
+    n0,
+    _DCRDCQRMR,
+    0,
+)
+
+DESCRIBE_CAPACITY_RESERVATION_DATE_CHANGE_QUOTES_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DCRDCQI,
+    {_sSI: _cDCRDCQR, _sm: None},
+    (_CRMQIa, _MR, _NTex, _DR, _Fil),
+    (
+        (CAPACITY_RESERVATION_MODIFICATION_QUOTE_ID_SET, {_sN: _CRMQI}),
+        (DESCRIBE_CAPACITY_RESERVATION_DATE_CHANGE_QUOTES_REQUEST_MAX_RESULTS, 0),
+        (lambda: schemas.STRING, 0),
+        (lambda: schemas.BOOLEAN, 0),
+        (lambda: schemas.FILTER_LIST, {_sN: _Fi}),
+    ),
+)
+
+DESCRIBE_CAPACITY_RESERVATION_DATE_CHANGE_QUOTES_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DCRDCQO,
+    {_sSI: _cDCRDCQRo, _smit: None},
+    (_CRMQa, _NTex),
+    (
+        (
+            lambda: CAPACITY_RESERVATION_MODIFICATION_QUOTE_RESPONSE_SET,
+            {_aQN: _CRMQSa, _sN: _cRMQS},
+        ),
+        (lambda: schemas.STRING, {_aQN: _NTex, _sN: _nT}),
+    ),
+)
+
+DESCRIBE_CAPACITY_RESERVATION_DATE_CHANGE_QUOTES: StaticOperationSchema = (
+    23,
+    n0,
+    _DCRDCQ,
+    0,
+    DESCRIBE_CAPACITY_RESERVATION_DATE_CHANGE_QUOTES_INPUT,
+    DESCRIBE_CAPACITY_RESERVATION_DATE_CHANGE_QUOTES_OUTPUT,
+    (),
+)
+
+CAPACITY_RESERVATION_MODIFICATION_QUOTE_RESPONSE_SET: StaticSchema = (
+    16,
+    n0,
+    _CRMQRS,
+    0,
+    (_me,),
+    ((lambda: schemas.CAPACITY_RESERVATION_MODIFICATION_QUOTE, {_sN: _i}),),
+)
+
+DESCRIBE_CAPACITY_RESERVATION_FLEETS_MAX_RESULTS: StaticSchema = (7, n0, _DCRFMR, 0)
+
+DESCRIBE_CAPACITY_RESERVATION_FLEETS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DCRFI,
+    {_sSI: _cDCRFR, _sm: None},
+    (_CRFIa, _NTex, _MR, _Fil, _DR),
+    (
+        (lambda: schemas.CAPACITY_RESERVATION_FLEET_ID_SET, {_sN: _CRFI}),
+        (lambda: schemas.STRING, 0),
+        (DESCRIBE_CAPACITY_RESERVATION_FLEETS_MAX_RESULTS, 0),
+        (lambda: schemas.FILTER_LIST, {_sN: _Fi}),
+        (lambda: schemas.BOOLEAN, 0),
+    ),
+)
+
+DESCRIBE_CAPACITY_RESERVATION_FLEETS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DCRFO,
+    {_sSI: _cDCRFRo, _smit: None},
+    (_CRFa, _NTex),
+    (
+        (lambda: CAPACITY_RESERVATION_FLEET_SET, {_aQN: _CRFSa, _sN: _cRFS}),
+        (lambda: schemas.STRING, {_aQN: _NTex, _sN: _nT}),
+    ),
+)
+
+DESCRIBE_CAPACITY_RESERVATION_FLEETS: StaticOperationSchema = (
+    23,
+    n0,
+    _DCRF,
+    0,
+    DESCRIBE_CAPACITY_RESERVATION_FLEETS_INPUT,
+    DESCRIBE_CAPACITY_RESERVATION_FLEETS_OUTPUT,
+    (),
+)
+
+CAPACITY_RESERVATION_FLEET: StaticSchema = (
+    18,
+    n0,
+    _CRF,
+    0,
+    (
+        _CRFI,
+        _CRFA,
+        _St,
+        _TTC,
+        _TFC,
+        _Ten,
+        _ED,
+        _CTr,
+        _IMC,
+        _ASll,
+        _ITS,
+        _IRn,
+        _AZ,
+        _AZI,
+        _Tag,
+    ),
+    (
+        (lambda: schemas.CAPACITY_RESERVATION_FLEET_ID, {_aQN: _CRFI, _sN: _cRFI}),
+        (lambda: schemas.STRING, {_aQN: _CRFA, _sN: _cRFA}),
+        (lambda: schemas.CAPACITY_RESERVATION_FLEET_STATE, {_aQN: _St, _sN: _st}),
+        (lambda: schemas.INTEGER, {_aQN: _TTC, _sN: _tTC}),
+        (lambda: schemas.DOUBLE, {_aQN: _TFC, _sN: _tFC}),
+        (lambda: schemas.FLEET_CAPACITY_RESERVATION_TENANCY, {_aQN: _Ten, _sN: _ten}),
+        (lambda: schemas.MILLISECOND_DATE_TIME, {_aQN: _ED, _sN: _eD}),
+        (lambda: schemas.MILLISECOND_DATE_TIME, {_aQN: _CTr, _sN: _cTr}),
+        (lambda: schemas.FLEET_INSTANCE_MATCH_CRITERIA, {_aQN: _IMC, _sN: _iMC}),
+        (lambda: schemas.STRING, {_aQN: _ASll, _sN: _aSl}),
+        (lambda: schemas.FLEET_CAPACITY_RESERVATION_SET, {_aQN: _ITSS, _sN: _iTSS}),
+        (lambda: schemas.INSTANCE_REQUIREMENTS_REQUEST, {_aQN: _IRn, _sN: _iRn}),
+        (lambda: schemas.STRING, {_aQN: _AZ, _sN: _aZ}),
+        (lambda: schemas.STRING, {_aQN: _AZI, _sN: _aZI}),
+        (lambda: schemas.TAG_LIST, {_aQN: _TSag, _sN: _tS}),
+    ),
+)
+
+CAPACITY_RESERVATION_FLEET_SET: StaticSchema = (
+    16,
+    n0,
+    _CRFSa,
+    0,
+    (_me,),
+    ((CAPACITY_RESERVATION_FLEET, {_sN: _i}),),
+)
+
+DESCRIBE_CAPACITY_RESERVATIONS_MAX_RESULTS: StaticSchema = (7, n0, _DCRMR, 0)
+
+DESCRIBE_CAPACITY_RESERVATIONS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DCRI,
+    {_sSI: _cDCRR, _sm: None},
+    (_CRIa, _NTex, _MR, _Fil, _DR),
+    (
+        (lambda: schemas.CAPACITY_RESERVATION_ID_SET, {_sN: _CRI}),
+        (lambda: schemas.STRING, 0),
+        (DESCRIBE_CAPACITY_RESERVATIONS_MAX_RESULTS, 0),
+        (lambda: schemas.FILTER_LIST, {_sN: _Fi}),
+        (lambda: schemas.BOOLEAN, 0),
+    ),
+)
+
+DESCRIBE_CAPACITY_RESERVATIONS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DCRO,
+    {_sSI: _cDCRRo, _smit: None},
+    (_NTex, _CRapac),
+    (
+        (lambda: schemas.STRING, {_aQN: _NTex, _sN: _nT}),
+        (lambda: schemas.CAPACITY_RESERVATION_SET, {_aQN: _CRSapac, _sN: _cRSa}),
+    ),
+)
+
+DESCRIBE_CAPACITY_RESERVATIONS: StaticOperationSchema = (
+    23,
+    n0,
+    _DCRe,
+    0,
+    DESCRIBE_CAPACITY_RESERVATIONS_INPUT,
+    DESCRIBE_CAPACITY_RESERVATIONS_OUTPUT,
+    (),
+)
+
+DESCRIBE_CAPACITY_RESERVATION_TOPOLOGY_MAX_RESULTS: StaticSchema = (7, n0, _DCRTMR, 0)
+
+DESCRIBE_CAPACITY_RESERVATION_TOPOLOGY_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DCRTI,
+    {_sSI: _cDCRTR, _sm: None},
+    (_DR, _NTex, _MR, _CRIa, _Fil),
+    (
+        (lambda: schemas.BOOLEAN, 0),
+        (lambda: schemas.STRING, 0),
+        (DESCRIBE_CAPACITY_RESERVATION_TOPOLOGY_MAX_RESULTS, 0),
+        (lambda: schemas.CAPACITY_RESERVATION_ID_SET, {_sN: _CRI}),
+        (lambda: schemas.FILTER_LIST, {_sN: _Fi}),
+    ),
+)
+
+DESCRIBE_CAPACITY_RESERVATION_TOPOLOGY_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DCRTO,
+    {_sSI: _cDCRTRo, _smit: None},
+    (_NTex, _CRapac),
+    (
+        (lambda: schemas.STRING, {_aQN: _NTex, _sN: _nT}),
+        (lambda: CAPACITY_RESERVATION_TOPOLOGY_SET, {_aQN: _CRSapac, _sN: _cRSa}),
+    ),
+)
+
+DESCRIBE_CAPACITY_RESERVATION_TOPOLOGY: StaticOperationSchema = (
+    23,
+    n0,
+    _DCRT,
+    0,
+    DESCRIBE_CAPACITY_RESERVATION_TOPOLOGY_INPUT,
+    DESCRIBE_CAPACITY_RESERVATION_TOPOLOGY_OUTPUT,
+    (),
+)
+
+NETWORK_NODE_SET: StaticSchema = (
+    16,
+    n0,
+    _NNS,
+    0,
+    (_me,),
+    ((lambda: schemas.STRING, {_sN: _i}),),
+)
+
+CAPACITY_RESERVATION_TOPOLOGY: StaticSchema = (
+    18,
+    n0,
+    _CRTapa,
+    0,
+    (_CRI, _CBI, _St, _IT, _GN, _NN, _AZI, _AZ),
+    (
+        (lambda: schemas.STRING, {_aQN: _CRI, _sN: _cRI}),
+        (lambda: schemas.STRING, {_aQN: _CBI, _sN: _cBI}),
+        (lambda: schemas.STRING, {_aQN: _St, _sN: _st}),
+        (lambda: schemas.STRING, {_aQN: _IT, _sN: _iT}),
+        (lambda: schemas.STRING, {_aQN: _GN, _sN: _gN}),
+        (NETWORK_NODE_SET, {_aQN: _NNS, _sN: _nNS}),
+        (lambda: schemas.STRING, {_aQN: _AZI, _sN: _aZI}),
+        (lambda: schemas.STRING, {_aQN: _AZ, _sN: _aZ}),
+    ),
+)
+
+CAPACITY_RESERVATION_TOPOLOGY_SET: StaticSchema = (
+    16,
+    n0,
+    _CRTS,
+    0,
+    (_me,),
+    ((CAPACITY_RESERVATION_TOPOLOGY, {_sN: _i}),),
+)
+
+CARRIER_GATEWAY_ID_SET: StaticSchema = (
+    16,
+    n0,
+    _CGIS,
+    0,
+    (_me,),
+    ((lambda: schemas.CARRIER_GATEWAY_ID, 0),),
+)
+
+CARRIER_GATEWAY_MAX_RESULTS: StaticSchema = (7, n0, _CGMR, 0)
+
+DESCRIBE_CARRIER_GATEWAYS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DCGIes,
+    {_sSI: _cDCGRoma, _sm: None},
+    (_CGIa, _Fil, _MR, _NTex, _DR),
+    (
+        (CARRIER_GATEWAY_ID_SET, {_sN: _CGI}),
+        (lambda: schemas.FILTER_LIST, {_sN: _Fi}),
+        (CARRIER_GATEWAY_MAX_RESULTS, 0),
+        (lambda: schemas.STRING, 0),
+        (lambda: schemas.BOOLEAN, 0),
+    ),
+)
+
+DESCRIBE_CARRIER_GATEWAYS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DCGOes,
+    {_sSI: _cDCGRomam, _smit: None},
+    (_CGar, _NTex),
+    (
+        (lambda: CARRIER_GATEWAY_SET, {_aQN: _CGSa, _sN: _cGS}),
+        (lambda: schemas.STRING, {_aQN: _NTex, _sN: _nT}),
+    ),
+)
+
+DESCRIBE_CARRIER_GATEWAYS: StaticOperationSchema = (
+    23,
+    n0,
+    _DCGes,
+    0,
+    DESCRIBE_CARRIER_GATEWAYS_INPUT,
+    DESCRIBE_CARRIER_GATEWAYS_OUTPUT,
+    (),
+)
+
+CARRIER_GATEWAY_SET: StaticSchema = (
+    16,
+    n0,
+    _CGSa,
+    0,
+    (_me,),
+    ((lambda: schemas.CARRIER_GATEWAY, {_sN: _i}),),
+)
+
+DESCRIBE_CLASSIC_LINK_INSTANCES_MAX_RESULTS: StaticSchema = (7, n0, _DCLIMR, 0)
+
+DESCRIBE_CLASSIC_LINK_INSTANCES_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DCLII,
+    {_sSI: _cDCLIR, _sm: None},
+    (_DR, _IIn, _Fil, _NTex, _MR),
+    (
+        (lambda: schemas.BOOLEAN, {_aQN: _DR, _sN: _dRr}),
+        (lambda: schemas.INSTANCE_ID_STRING_LIST, {_sN: _II}),
+        (lambda: schemas.FILTER_LIST, {_sN: _Fi}),
+        (lambda: schemas.STRING, {_aQN: _NTex, _sN: _nT}),
+        (DESCRIBE_CLASSIC_LINK_INSTANCES_MAX_RESULTS, {_aQN: _MR, _sN: _mR}),
+    ),
+)
+
+DESCRIBE_CLASSIC_LINK_INSTANCES_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DCLIO,
+    {_sSI: _cDCLIRo, _smit: None},
+    (_Ins, _NTex),
+    (
+        (lambda: CLASSIC_LINK_INSTANCE_LIST, {_aQN: _ISnst, _sN: _iSns}),
+        (lambda: schemas.STRING, {_aQN: _NTex, _sN: _nT}),
+    ),
+)
+
+DESCRIBE_CLASSIC_LINK_INSTANCES: StaticOperationSchema = (
+    23,
+    n0,
+    _DCLI,
+    0,
+    DESCRIBE_CLASSIC_LINK_INSTANCES_INPUT,
+    DESCRIBE_CLASSIC_LINK_INSTANCES_OUTPUT,
+    (),
 )
 
 CLASSIC_LINK_INSTANCE: StaticSchema = (
@@ -801,7 +1223,7 @@ CLIENT_CONNECT_RESPONSE_OPTIONS: StaticSchema = (
     0,
     (_Ena, _LFA, _Sta),
     (
-        (lambda: schemas.BOOLEAN, {_aQN: _Ena, _sN: _ena}),
+        (lambda: schemas.BOOLEAN, {_aQN: _Ena, _sN: _en}),
         (lambda: schemas.STRING, {_aQN: _LFA, _sN: _lFA}),
         (CLIENT_VPN_ENDPOINT_ATTRIBUTE_STATUS, {_aQN: _Sta, _sN: _sta}),
     ),
@@ -814,7 +1236,7 @@ CLIENT_LOGIN_BANNER_RESPONSE_OPTIONS: StaticSchema = (
     0,
     (_Ena, _BTa),
     (
-        (lambda: schemas.BOOLEAN, {_aQN: _Ena, _sN: _ena}),
+        (lambda: schemas.BOOLEAN, {_aQN: _Ena, _sN: _en}),
         (lambda: schemas.STRING, {_aQN: _BTa, _sN: _bT}),
     ),
 )
@@ -915,7 +1337,7 @@ CLIENT_VPN_ENDPOINT: StaticSchema = (
         _VPp,
         _ATNs,
         _SCA,
-        _AO,
+        _AOu,
         _CLO,
         _Tag,
         _SGIe,
@@ -946,7 +1368,7 @@ CLIENT_VPN_ENDPOINT: StaticSchema = (
         (lambda: schemas.INTEGER, {_aQN: _VPp, _sN: _vPpn}),
         (ASSOCIATED_TARGET_NETWORK_SET, {_aQN: _ATN, _sN: _aTN}),
         (lambda: schemas.STRING, {_aQN: _SCA, _sN: _sCA}),
-        (CLIENT_VPN_AUTHENTICATION_LIST, {_aQN: _AO, _sN: _aO}),
+        (CLIENT_VPN_AUTHENTICATION_LIST, {_aQN: _AOu, _sN: _aO}),
         (CONNECTION_LOG_RESPONSE_OPTIONS, {_aQN: _CLO, _sN: _cLO}),
         (lambda: schemas.TAG_LIST, {_aQN: _TSag, _sN: _tS}),
         (lambda: schemas.CLIENT_VPN_SECURITY_GROUP_ID_SET, {_aQN: _SGIS, _sN: _sGIS}),
@@ -1067,7 +1489,7 @@ DESCRIBE_CLIENT_VPN_TARGET_NETWORKS_OUTPUT: StaticSchema = (
     {_sSI: _cDCVTNRo, _smit: None},
     (_CVTN, _NTex),
     (
-        (lambda: TARGET_NETWORK_SET, {_aQN: _CVTN, _sN: _cVTN}),
+        (lambda: schemas.TARGET_NETWORK_SET, {_aQN: _CVTN, _sN: _cVTN}),
         (lambda: schemas.NEXT_TOKEN, {_aQN: _NTex, _sN: _nT}),
     ),
 )
@@ -1079,537 +1501,5 @@ DESCRIBE_CLIENT_VPN_TARGET_NETWORKS: StaticOperationSchema = (
     0,
     DESCRIBE_CLIENT_VPN_TARGET_NETWORKS_INPUT,
     DESCRIBE_CLIENT_VPN_TARGET_NETWORKS_OUTPUT,
-    (),
-)
-
-TARGET_NETWORK: StaticSchema = (
-    18,
-    n0,
-    _TNa,
-    0,
-    (_AIs, _VI, _TNI, _CVEI, _Sta, _SGe, _AZv, _AZIv),
-    (
-        (lambda: schemas.STRING, {_aQN: _AIs, _sN: _aIs}),
-        (lambda: schemas.STRING, {_aQN: _VI, _sN: _vI}),
-        (lambda: schemas.STRING, {_aQN: _TNI, _sN: _tNI}),
-        (lambda: schemas.STRING, {_aQN: _CVEI, _sN: _cVEI}),
-        (lambda: schemas.ASSOCIATION_STATUS, {_aQN: _Sta, _sN: _sta}),
-        (lambda: schemas.VALUE_STRING_LIST, {_aQN: _SGe, _sN: _sGe}),
-        (lambda: schemas.CLIENT_VPN_AVAILABILITY_ZONE_SET, {_aQN: _AZS, _sN: _aZS}),
-        (
-            lambda: schemas.CLIENT_VPN_AVAILABILITY_ZONE_ID_SET,
-            {_aQN: _AZIS, _sN: _aZIS},
-        ),
-    ),
-)
-
-TARGET_NETWORK_SET: StaticSchema = (
-    16,
-    n0,
-    _TNS,
-    0,
-    (_me,),
-    ((TARGET_NETWORK, {_sN: _i}),),
-)
-
-COIP_POOL_ID_SET: StaticSchema = (
-    16,
-    n0,
-    _CPIS,
-    0,
-    (_me,),
-    ((lambda: schemas.IPV4_POOL_COIP_ID, {_sN: _i}),),
-)
-
-DESCRIBE_COIP_POOLS_INPUT: StaticSchema = (
-    18,
-    n0,
-    _DCPIe,
-    {_sSI: _cDCPRom, _sm: None},
-    (_PIoo, _Fil, _MR, _NTex, _DR),
-    (
-        (COIP_POOL_ID_SET, {_sN: _PIo}),
-        (lambda: schemas.FILTER_LIST, {_sN: _Fi}),
-        (lambda: schemas.COIP_POOL_MAX_RESULTS, 0),
-        (lambda: schemas.STRING, 0),
-        (lambda: schemas.BOOLEAN, 0),
-    ),
-)
-
-DESCRIBE_COIP_POOLS_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _DCPOe,
-    {_sSI: _cDCPRoma, _smit: None},
-    (_CPo, _NTex),
-    (
-        (lambda: COIP_POOL_SET, {_aQN: _CPS, _sN: _cPS}),
-        (lambda: schemas.STRING, {_aQN: _NTex, _sN: _nT}),
-    ),
-)
-
-DESCRIBE_COIP_POOLS: StaticOperationSchema = (
-    23,
-    n0,
-    _DCPe,
-    0,
-    DESCRIBE_COIP_POOLS_INPUT,
-    DESCRIBE_COIP_POOLS_OUTPUT,
-    (),
-)
-
-COIP_POOL_SET: StaticSchema = (
-    16,
-    n0,
-    _CPS,
-    0,
-    (_me,),
-    ((lambda: schemas.COIP_POOL, {_sN: _i}),),
-)
-
-CONVERSION_ID_STRING_LIST: StaticSchema = (
-    16,
-    n0,
-    _CISL,
-    0,
-    (_me,),
-    ((lambda: schemas.CONVERSION_TASK_ID, {_sN: _i}),),
-)
-
-DESCRIBE_CONVERSION_TASKS_INPUT: StaticSchema = (
-    18,
-    n0,
-    _DCTI,
-    {_sSI: _cDCTR, _sm: None},
-    (_DR, _CTIo),
-    (
-        (lambda: schemas.BOOLEAN, {_aQN: _DR, _sN: _dRr}),
-        (CONVERSION_ID_STRING_LIST, {_aQN: _CTI, _sN: _cTI}),
-    ),
-)
-
-DESCRIBE_CONVERSION_TASKS_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _DCTO,
-    {_sSI: _cDCTRo, _smit: None},
-    (_CTonv,),
-    ((lambda: DESCRIBE_CONVERSION_TASK_LIST, {_aQN: _CTonv, _sN: _cTon}),),
-)
-
-DESCRIBE_CONVERSION_TASKS: StaticOperationSchema = (
-    23,
-    n0,
-    _DCT,
-    0,
-    DESCRIBE_CONVERSION_TASKS_INPUT,
-    DESCRIBE_CONVERSION_TASKS_OUTPUT,
-    (),
-)
-
-IMPORT_MANIFEST_URL: StaticSchema = (3, n0, _IMU, 4)
-
-DISK_IMAGE_DESCRIPTION: StaticSchema = (
-    18,
-    n0,
-    _DID,
-    0,
-    (_Ch, _For, _IMU, _Si),
-    (
-        (lambda: schemas.STRING, {_aQN: _Ch, _sN: _ch}),
-        (lambda: schemas.DISK_IMAGE_FORMAT, {_aQN: _For, _sN: _fo}),
-        (IMPORT_MANIFEST_URL, {_aQN: _IMU, _sN: _iMU}),
-        (lambda: schemas.LONG, {_aQN: _Si, _sN: _siz}),
-    ),
-)
-
-DISK_IMAGE_VOLUME_DESCRIPTION: StaticSchema = (
-    18,
-    n0,
-    _DIVD,
-    0,
-    (_Id, _Si),
-    (
-        (lambda: schemas.STRING, {_aQN: _Id, _sN: _id}),
-        (lambda: schemas.LONG, {_aQN: _Si, _sN: _siz}),
-    ),
-)
-
-IMPORT_INSTANCE_VOLUME_DETAIL_ITEM: StaticSchema = (
-    18,
-    n0,
-    _IIVDI,
-    0,
-    (_AZ, _AZI, _BCyt, _Des, _Im, _Sta, _SMt, _Vo),
-    (
-        (lambda: schemas.STRING, {_aQN: _AZ, _sN: _aZ}),
-        (lambda: schemas.STRING, {_aQN: _AZI, _sN: _aZI}),
-        (lambda: schemas.LONG, {_aQN: _BCyt, _sN: _bCy}),
-        (lambda: schemas.STRING, {_aQN: _Des, _sN: _desc}),
-        (DISK_IMAGE_DESCRIPTION, {_aQN: _Im, _sN: _im}),
-        (lambda: schemas.STRING, {_aQN: _Sta, _sN: _sta}),
-        (lambda: schemas.STRING, {_aQN: _SMt, _sN: _sMt}),
-        (DISK_IMAGE_VOLUME_DESCRIPTION, {_aQN: _Vo, _sN: _vo}),
-    ),
-)
-
-IMPORT_INSTANCE_VOLUME_DETAIL_SET: StaticSchema = (
-    16,
-    n0,
-    _IIVDS,
-    0,
-    (_me,),
-    ((IMPORT_INSTANCE_VOLUME_DETAIL_ITEM, {_sN: _i}),),
-)
-
-IMPORT_INSTANCE_TASK_DETAILS: StaticSchema = (
-    18,
-    n0,
-    _IITD,
-    0,
-    (_Des, _II, _Pla, _Vol),
-    (
-        (lambda: schemas.STRING, {_aQN: _Des, _sN: _desc}),
-        (lambda: schemas.STRING, {_aQN: _II, _sN: _iI}),
-        (lambda: schemas.PLATFORM_VALUES, {_aQN: _Pla, _sN: _plat}),
-        (IMPORT_INSTANCE_VOLUME_DETAIL_SET, {_aQN: _Vol, _sN: _vol}),
-    ),
-)
-
-IMPORT_VOLUME_TASK_DETAILS: StaticSchema = (
-    18,
-    n0,
-    _IVTD,
-    0,
-    (_AZ, _AZI, _BCyt, _Des, _Im, _Vo),
-    (
-        (lambda: schemas.STRING, {_aQN: _AZ, _sN: _aZ}),
-        (lambda: schemas.STRING, {_aQN: _AZI, _sN: _aZI}),
-        (lambda: schemas.LONG, {_aQN: _BCyt, _sN: _bCy}),
-        (lambda: schemas.STRING, {_aQN: _Des, _sN: _desc}),
-        (DISK_IMAGE_DESCRIPTION, {_aQN: _Im, _sN: _im}),
-        (DISK_IMAGE_VOLUME_DESCRIPTION, {_aQN: _Vo, _sN: _vo}),
-    ),
-)
-
-CONVERSION_TASK_STATE: StaticSchema = (
-    14,
-    n0,
-    _CTSon,
-    0,
-    (_act, _ca, _can, _compl),
-    ((-1, {_sV: _act}), (-1, {_sV: _ca}), (-1, {_sV: _can}), (-1, {_sV: _compl})),
-)
-
-CONVERSION_TASK: StaticSchema = (
-    18,
-    n0,
-    _CTon,
-    0,
-    (_CTI, _ET, _IImp, _IVm, _St, _SMt, _Tag),
-    (
-        (lambda: schemas.STRING, {_aQN: _CTI, _sN: _cTI}),
-        (lambda: schemas.STRING, {_aQN: _ET, _sN: _eT}),
-        (IMPORT_INSTANCE_TASK_DETAILS, {_aQN: _IImp, _sN: _iImp}),
-        (IMPORT_VOLUME_TASK_DETAILS, {_aQN: _IVm, _sN: _iVm}),
-        (CONVERSION_TASK_STATE, {_aQN: _St, _sN: _st}),
-        (lambda: schemas.STRING, {_aQN: _SMt, _sN: _sMt}),
-        (lambda: schemas.TAG_LIST, {_aQN: _TSag, _sN: _tS}),
-    ),
-)
-
-DESCRIBE_CONVERSION_TASK_LIST: StaticSchema = (
-    16,
-    n0,
-    _DCTL,
-    0,
-    (_me,),
-    ((CONVERSION_TASK, {_sN: _i}),),
-)
-
-CUSTOMER_GATEWAY_ID_STRING_LIST: StaticSchema = (
-    16,
-    n0,
-    _CGISL,
-    0,
-    (_me,),
-    ((lambda: schemas.CUSTOMER_GATEWAY_ID, {_sN: _CGIu}),),
-)
-
-DESCRIBE_CUSTOMER_GATEWAYS_INPUT: StaticSchema = (
-    18,
-    n0,
-    _DCGIesc,
-    {_sSI: _cDCGRomama, _sm: None},
-    (_CGIus, _Fil, _DR),
-    (
-        (CUSTOMER_GATEWAY_ID_STRING_LIST, {_sN: _CGIu}),
-        (lambda: schemas.FILTER_LIST, {_sN: _Fi}),
-        (lambda: schemas.BOOLEAN, {_aQN: _DR, _sN: _dRr}),
-    ),
-)
-
-DESCRIBE_CUSTOMER_GATEWAYS_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _DCGOesc,
-    {_sSI: _cDCGRomamaz, _smit: None},
-    (_CGu,),
-    ((lambda: CUSTOMER_GATEWAY_LIST, {_aQN: _CGSu, _sN: _cGSu}),),
-)
-
-DESCRIBE_CUSTOMER_GATEWAYS: StaticOperationSchema = (
-    23,
-    n0,
-    _DCGesc,
-    0,
-    DESCRIBE_CUSTOMER_GATEWAYS_INPUT,
-    DESCRIBE_CUSTOMER_GATEWAYS_OUTPUT,
-    (),
-)
-
-CUSTOMER_GATEWAY_LIST: StaticSchema = (
-    16,
-    n0,
-    _CGL,
-    0,
-    (_me,),
-    ((CUSTOMER_GATEWAY, {_sN: _i}),),
-)
-
-DECLARATIVE_POLICIES_MAX_RESULTS: StaticSchema = (7, n0, _DPMR, 0)
-
-DESCRIBE_DECLARATIVE_POLICIES_REPORTS_INPUT: StaticSchema = (
-    18,
-    n0,
-    _DDPRI,
-    {_sSI: _cDDPRR, _sm: None},
-    (_DR, _NTex, _MR, _RIepo),
-    (
-        (lambda: schemas.BOOLEAN, 0),
-        (lambda: schemas.STRING, 0),
-        (DECLARATIVE_POLICIES_MAX_RESULTS, 0),
-        (lambda: schemas.VALUE_STRING_LIST, {_sN: _RIep}),
-    ),
-)
-
-DESCRIBE_DECLARATIVE_POLICIES_REPORTS_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _DDPRO,
-    {_sSI: _cDDPRRo, _smit: None},
-    (_NTex, _Rep),
-    (
-        (lambda: schemas.STRING, {_aQN: _NTex, _sN: _nT}),
-        (lambda: DECLARATIVE_POLICIES_REPORT_LIST, {_aQN: _RSepor, _sN: _rSep}),
-    ),
-)
-
-DESCRIBE_DECLARATIVE_POLICIES_REPORTS: StaticOperationSchema = (
-    23,
-    n0,
-    _DDPR,
-    0,
-    DESCRIBE_DECLARATIVE_POLICIES_REPORTS_INPUT,
-    DESCRIBE_DECLARATIVE_POLICIES_REPORTS_OUTPUT,
-    (),
-)
-
-REPORT_STATE: StaticSchema = (
-    14,
-    n0,
-    _RSepo,
-    0,
-    (_ru, _can, _comp, _er),
-    ((-1, {_sV: _ru}), (-1, {_sV: _can}), (-1, {_sV: _comp}), (-1, {_sV: _er})),
-)
-
-DECLARATIVE_POLICIES_REPORT: StaticSchema = (
-    18,
-    n0,
-    _DPRec,
-    0,
-    (_RIep, _SBu, _SPr, _TIa, _ST, _ETnd, _Sta, _Tag),
-    (
-        (lambda: schemas.STRING, {_aQN: _RIep, _sN: _rIe}),
-        (lambda: schemas.STRING, {_aQN: _SBu, _sN: _sB}),
-        (lambda: schemas.STRING, {_aQN: _SPr, _sN: _sP}),
-        (lambda: schemas.STRING, {_aQN: _TIa, _sN: _tIa}),
-        (lambda: schemas.MILLISECOND_DATE_TIME, {_aQN: _ST, _sN: _sTt}),
-        (lambda: schemas.MILLISECOND_DATE_TIME, {_aQN: _ETnd, _sN: _eTnd}),
-        (REPORT_STATE, {_aQN: _Sta, _sN: _sta}),
-        (lambda: schemas.TAG_LIST, {_aQN: _TSag, _sN: _tS}),
-    ),
-)
-
-DECLARATIVE_POLICIES_REPORT_LIST: StaticSchema = (
-    16,
-    n0,
-    _DPRL,
-    0,
-    (_me,),
-    ((DECLARATIVE_POLICIES_REPORT, {_sN: _i}),),
-)
-
-DHCP_OPTIONS_ID_STRING_LIST: StaticSchema = (
-    16,
-    n0,
-    _DOISL,
-    0,
-    (_me,),
-    ((lambda: schemas.DHCP_OPTIONS_ID, {_sN: _DOI}),),
-)
-
-DESCRIBE_DHCP_OPTIONS_MAX_RESULTS: StaticSchema = (7, n0, _DDOMR, 0)
-
-DESCRIBE_DHCP_OPTIONS_INPUT: StaticSchema = (
-    18,
-    n0,
-    _DDOIes,
-    {_sSI: _cDDORo, _sm: None},
-    (_DOIh, _NTex, _MR, _DR, _Fil),
-    (
-        (DHCP_OPTIONS_ID_STRING_LIST, {_sN: _DOI}),
-        (lambda: schemas.STRING, 0),
-        (DESCRIBE_DHCP_OPTIONS_MAX_RESULTS, 0),
-        (lambda: schemas.BOOLEAN, {_aQN: _DR, _sN: _dRr}),
-        (lambda: schemas.FILTER_LIST, {_sN: _Fi}),
-    ),
-)
-
-DESCRIBE_DHCP_OPTIONS_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _DDOOe,
-    {_sSI: _cDDORom, _smit: None},
-    (_NTex, _DOh),
-    (
-        (lambda: schemas.STRING, {_aQN: _NTex, _sN: _nT}),
-        (lambda: DHCP_OPTIONS_LIST, {_aQN: _DOSh, _sN: _dOS}),
-    ),
-)
-
-DESCRIBE_DHCP_OPTIONS: StaticOperationSchema = (
-    23,
-    n0,
-    _DDOe,
-    0,
-    DESCRIBE_DHCP_OPTIONS_INPUT,
-    DESCRIBE_DHCP_OPTIONS_OUTPUT,
-    (),
-)
-
-DHCP_OPTIONS_LIST: StaticSchema = (
-    16,
-    n0,
-    _DOL,
-    0,
-    (_me,),
-    ((lambda: schemas.DHCP_OPTIONS, {_sN: _i}),),
-)
-
-EGRESS_ONLY_INTERNET_GATEWAY_ID_LIST: StaticSchema = (
-    16,
-    n0,
-    _EOIGIL,
-    0,
-    (_me,),
-    ((lambda: schemas.EGRESS_ONLY_INTERNET_GATEWAY_ID, {_sN: _i}),),
-)
-
-DESCRIBE_EGRESS_ONLY_INTERNET_GATEWAYS_MAX_RESULTS: StaticSchema = (7, n0, _DEOIGMR, 0)
-
-DESCRIBE_EGRESS_ONLY_INTERNET_GATEWAYS_INPUT: StaticSchema = (
-    18,
-    n0,
-    _DEOIGIe,
-    {_sSI: _cDEOIGRom, _sm: None},
-    (_DR, _EOIGIg, _MR, _NTex, _Fil),
-    (
-        (lambda: schemas.BOOLEAN, 0),
-        (EGRESS_ONLY_INTERNET_GATEWAY_ID_LIST, {_sN: _EOIGI}),
-        (DESCRIBE_EGRESS_ONLY_INTERNET_GATEWAYS_MAX_RESULTS, 0),
-        (lambda: schemas.STRING, 0),
-        (lambda: schemas.FILTER_LIST, {_sN: _Fi}),
-    ),
-)
-
-DESCRIBE_EGRESS_ONLY_INTERNET_GATEWAYS_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _DEOIGOe,
-    {_sSI: _cDEOIGRoma, _smit: None},
-    (_EOIGg, _NTex),
-    (
-        (lambda: EGRESS_ONLY_INTERNET_GATEWAY_LIST, {_aQN: _EOIGS, _sN: _eOIGS}),
-        (lambda: schemas.STRING, {_aQN: _NTex, _sN: _nT}),
-    ),
-)
-
-DESCRIBE_EGRESS_ONLY_INTERNET_GATEWAYS: StaticOperationSchema = (
-    23,
-    n0,
-    _DEOIGe,
-    0,
-    DESCRIBE_EGRESS_ONLY_INTERNET_GATEWAYS_INPUT,
-    DESCRIBE_EGRESS_ONLY_INTERNET_GATEWAYS_OUTPUT,
-    (),
-)
-
-EGRESS_ONLY_INTERNET_GATEWAY_LIST: StaticSchema = (
-    16,
-    n0,
-    _EOIGL,
-    0,
-    (_me,),
-    ((lambda: schemas.EGRESS_ONLY_INTERNET_GATEWAY, {_sN: _i}),),
-)
-
-ELASTIC_GPU_ID_SET: StaticSchema = (
-    16,
-    n0,
-    _EGIS,
-    0,
-    (_me,),
-    ((lambda: schemas.ELASTIC_GPU_ID, {_sN: _i}),),
-)
-
-DESCRIBE_ELASTIC_GPUS_MAX_RESULTS: StaticSchema = (7, n0, _DEGMR, 0)
-
-DESCRIBE_ELASTIC_GPUS_INPUT: StaticSchema = (
-    18,
-    n0,
-    _DEGI,
-    {_sSI: _cDEGR, _sm: None},
-    (_EGIl, _DR, _Fil, _MR, _NTex),
-    (
-        (ELASTIC_GPU_ID_SET, {_sN: _EGI}),
-        (lambda: schemas.BOOLEAN, 0),
-        (lambda: schemas.FILTER_LIST, {_sN: _Fi}),
-        (DESCRIBE_ELASTIC_GPUS_MAX_RESULTS, 0),
-        (lambda: schemas.STRING, 0),
-    ),
-)
-
-DESCRIBE_ELASTIC_GPUS_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _DEGO,
-    {_sSI: _cDEGRo, _smit: None},
-    (_EGSlast, _MR, _NTex),
-    (
-        (lambda: schemas.ELASTIC_GPU_SET, {_aQN: _EGSlast, _sN: _eGSl}),
-        (lambda: schemas.INTEGER, {_aQN: _MR, _sN: _mR}),
-        (lambda: schemas.STRING, {_aQN: _NTex, _sN: _nT}),
-    ),
-)
-
-DESCRIBE_ELASTIC_GPUS: StaticOperationSchema = (
-    23,
-    n0,
-    _DEG,
-    0,
-    DESCRIBE_ELASTIC_GPUS_INPUT,
-    DESCRIBE_ELASTIC_GPUS_OUTPUT,
     (),
 )

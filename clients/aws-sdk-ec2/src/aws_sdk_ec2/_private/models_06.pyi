@@ -12,6 +12,13 @@ from smithy_core.types import UnknownEnumMixin
 from ..models import (
     AccessScopeAnalysisFinding,
     ActiveVpnTunnelStatus,
+    AnalysisAclRule,
+    AnalysisComponent,
+    AnalysisLoadBalancerListener,
+    AnalysisLoadBalancerTarget,
+    AnalysisRouteTableRoute,
+    AnalysisSecurityGroupRule,
+    AnalysisTransitGatewayPolicyTableEntry,
     AssociatedRole,
     AttributeSummary,
     BlockDeviceMappingResponse,
@@ -22,6 +29,7 @@ from ..models import (
     CapacityManagerMonitoredTagKey,
     CapacityManagerSupportabilityScore,
     CapacityReservationGroup,
+    ClientCertificateRevocationListStatus,
     CoipAddressUsage,
     DataQuery,
     DataQueryDict,
@@ -69,7 +77,6 @@ from ..models import (
     IpamRoutingPolicyRegistrationDelta,
     Ipv6CidrAssociation,
     LoadPermission,
-    MaintenanceDetails,
     ManagedResourceVisibilitySettings,
     MetricDataResult,
     NatFlexCostAllocationPolicyDocument,
@@ -100,6 +107,8 @@ from ..models import (
     SubnetCidrReservation,
     Tag,
     TagFieldSpecificationResponse,
+    TagSpecification,
+    TagSpecificationDict,
     TargetCapacitySpecification,
     TargetConfigurationRequest,
     TargetConfigurationRequestDict,
@@ -112,14 +121,509 @@ from ..models import (
     TransitGatewayPolicyTableEntry,
     TransitGatewayPrefixListReference,
     TransitGatewayRouteTableAssociation,
-    TransitGatewayRouteTablePropagation,
-    VerifiedAccessEndpointTarget,
+    TransitGatewayRouteTableRoute,
     VerifiedAccessInstanceOpenVpnClientConfiguration,
     VerifiedAccessInstanceUserTrustProviderClientConfiguration,
-    VpcEncryptionNonCompliantResource,
-    VpnConnectionDeviceType,
     _SerdeShape,
 )
+
+class EncryptionStateValue(UnknownEnumMixin, StrEnum):
+    ENABLING = "enabling"
+    ENABLED = "enabled"
+    DISABLING = "disabling"
+    DISABLED = "disabled"
+
+@dataclass(kw_only=True)
+class EncryptionSupport(_SerdeShape):
+    """Describes the encryption support status for a transit gateway."""
+
+    encryption_state: str | None = ...
+    """The current encryption state of the resource."""
+    state_message: str | None = ...
+    """A message describing the encryption state."""
+
+class EncryptionSupportOptionValue(UnknownEnumMixin, StrEnum):
+    ENABLE = "enable"
+    DISABLE = "disable"
+
+class EndDateType(UnknownEnumMixin, StrEnum):
+    UNLIMITED = "unlimited"
+    LIMITED = "limited"
+
+class EndpointIpAddressType(UnknownEnumMixin, StrEnum):
+    IPV4 = "ipv4"
+    IPV6 = "ipv6"
+    DUAL_STACK = "dual-stack"
+
+class EphemeralNvmeSupport(UnknownEnumMixin, StrEnum):
+    UNSUPPORTED = "unsupported"
+    SUPPORTED = "supported"
+    REQUIRED = "required"
+
+class EventCode(UnknownEnumMixin, StrEnum):
+    INSTANCE_REBOOT = "instance-reboot"
+    SYSTEM_REBOOT = "system-reboot"
+    SYSTEM_MAINTENANCE = "system-maintenance"
+    INSTANCE_RETIREMENT = "instance-retirement"
+    INSTANCE_STOP = "instance-stop"
+
+@dataclass(kw_only=True)
+class EventInformation(_SerdeShape):
+    """Describes an EC2 Fleet or Spot Fleet event."""
+
+    event_description: str | None = ...
+    """The description of the event."""
+    event_sub_type: str | None = ...
+    """
+    The event.
+
+    `error` events:
+
+    - `iamFleetRoleInvalid` - The EC2 Fleet or Spot Fleet does not have the
+      required permissions either to launch or terminate an instance.
+
+    - `allLaunchSpecsTemporarilyBlacklisted` - None of the configurations
+      are valid, and several attempts to launch instances have failed. For
+      more information, see the description of the event.
+
+    - `spotInstanceCountLimitExceeded` - You've reached the limit on the
+      number of Spot Instances that you can launch.
+
+    - `spotFleetRequestConfigurationInvalid` - The configuration is not
+      valid. For more information, see the description of the event.
+
+    `fleetRequestChange` events:
+
+    - `active` - The EC2 Fleet or Spot Fleet request has been validated and
+      Amazon EC2 is attempting to maintain the target number of running
+      instances.
+
+    - `deleted` (EC2 Fleet) / `cancelled` (Spot Fleet) - The EC2 Fleet is
+      deleted or the Spot Fleet request is canceled and has no running
+      instances. The EC2 Fleet or Spot Fleet will be deleted two days after
+      its instances are terminated.
+
+    - `deleted_running` (EC2 Fleet) / `cancelled_running` (Spot Fleet) - The
+      EC2 Fleet is deleted or the Spot Fleet request is canceled and does
+      not launch additional instances. Its existing instances continue to
+      run until they are interrupted or terminated. The request remains in
+      this state until all instances are interrupted or terminated.
+
+    - `deleted_terminating` (EC2 Fleet) / `cancelled_terminating` (Spot
+      Fleet) - The EC2 Fleet is deleted or the Spot Fleet request is
+      canceled and its instances are terminating. The request remains in
+      this state until all instances are terminated.
+
+    - `expired` - The EC2 Fleet or Spot Fleet request has expired. If the
+      request was created with `TerminateInstancesWithExpiration` set, a
+      subsequent `terminated` event indicates that the instances are
+      terminated.
+
+    - `modify_in_progress` - The EC2 Fleet or Spot Fleet request is being
+      modified. The request remains in this state until the modification is
+      fully processed.
+
+    - `modify_succeeded` - The EC2 Fleet or Spot Fleet request was modified.
+
+    - `submitted` - The EC2 Fleet or Spot Fleet request is being evaluated
+      and Amazon EC2 is preparing to launch the target number of instances.
+
+    - `progress` - The EC2 Fleet or Spot Fleet request is in the process of
+      being fulfilled.
+
+    `instanceChange` events:
+
+    - `launched` - A new instance was launched.
+
+    - `terminated` - An instance was terminated by the user.
+
+    - `termination_notified` - An instance termination notification was sent
+      when a Spot Instance was terminated by Amazon EC2 during scale-down,
+      when the target capacity of the fleet was modified down, for example,
+      from a target capacity of 4 to a target capacity of 3.
+
+    `Information` events:
+
+    - `fleetProgressHalted` - The price in every launch specification is not
+      valid because it is below the Spot price (all the launch
+      specifications have produced `launchSpecUnusable` events). A launch
+      specification might become valid if the Spot price changes.
+
+    - `launchSpecTemporarilyBlacklisted` - The configuration is not valid
+      and several attempts to launch instances have failed. For more
+      information, see the description of the event.
+
+    - `launchSpecUnusable` - The price specified in a launch specification
+      is not valid because it is below the Spot price for the requested Spot
+      pools.
+
+      Note: Even if a fleet with the `maintain` request type is in the
+      process of being canceled, it may still publish a `launchSpecUnusable`
+      event. This does not mean that the canceled fleet is attempting to
+      launch a new instance.
+
+    - `registerWithLoadBalancersFailed` - An attempt to register instances
+      with load balancers failed. For more information, see the description
+      of the event.
+    """
+    instance_id: str | None = ...
+    """
+    The ID of the instance. This information is available only for
+    `instanceChange` events.
+    """
+
+class EventType(UnknownEnumMixin, StrEnum):
+    INSTANCE_CHANGE = "instanceChange"
+    BATCH_CHANGE = "fleetRequestChange"
+    ERROR = "error"
+    INFORMATION = "information"
+
+class ExcessCapacityTerminationPolicy(UnknownEnumMixin, StrEnum):
+    NO_TERMINATION = "noTermination"
+    DEFAULT = "default"
+
+@dataclass(kw_only=True)
+class Explanation(_SerdeShape):
+    """
+    Describes an explanation code for an unreachable path. For more
+    information, see [Reachability Analyzer explanation
+    codes](https://docs.aws.amazon.com/vpc/latest/reachability/explanation-codes.html).
+    """
+
+    acl: AnalysisComponent | None = ...
+    """The network ACL."""
+    acl_rule: AnalysisAclRule | None = ...
+    """The network ACL rule."""
+    address: str | None = ...
+    """The IPv4 address, in CIDR notation."""
+    addresses: list[str] | None = ...
+    """The IPv4 addresses, in CIDR notation."""
+    attached_to: AnalysisComponent | None = ...
+    """The resource to which the component is attached."""
+    availability_zones: list[str] | None = ...
+    """The Availability Zones."""
+    availability_zone_ids: list[str] | None = ...
+    """The IDs of the Availability Zones."""
+    cidrs: list[str] | None = ...
+    """The CIDR ranges."""
+    component: AnalysisComponent | None = ...
+    """The component."""
+    customer_gateway: AnalysisComponent | None = ...
+    """The customer gateway."""
+    destination: AnalysisComponent | None = ...
+    """The destination."""
+    destination_vpc: AnalysisComponent | None = ...
+    """The destination VPC."""
+    direction: str | None = ...
+    """
+    The direction. The following are the possible values:
+
+    - egress
+
+    - ingress
+    """
+    explanation_code: str | None = ...
+    """The explanation code."""
+    ingress_route_table: AnalysisComponent | None = ...
+    """The route table."""
+    internet_gateway: AnalysisComponent | None = ...
+    """The internet gateway."""
+    load_balancer_arn: str | None = ...
+    """The Amazon Resource Name (ARN) of the load balancer."""
+    classic_load_balancer_listener: AnalysisLoadBalancerListener | None = ...
+    """The listener for a Classic Load Balancer."""
+    load_balancer_listener_port: int | None = ...
+    """The listener port of the load balancer."""
+    load_balancer_target: AnalysisLoadBalancerTarget | None = ...
+    """The target."""
+    load_balancer_target_group: AnalysisComponent | None = ...
+    """The target group."""
+    load_balancer_target_groups: list[AnalysisComponent] | None = ...
+    """The target groups."""
+    load_balancer_target_port: int | None = ...
+    """The target port."""
+    elastic_load_balancer_listener: AnalysisComponent | None = ...
+    """The load balancer listener."""
+    missing_component: str | None = ...
+    """The missing component."""
+    nat_gateway: AnalysisComponent | None = ...
+    """The NAT gateway."""
+    network_interface: AnalysisComponent | None = ...
+    """The network interface."""
+    packet_field: str | None = ...
+    """The packet field."""
+    vpc_peering_connection: AnalysisComponent | None = ...
+    """The VPC peering connection."""
+    port: int | None = ...
+    """The port."""
+    port_ranges: list[PortRange] | None = ...
+    """The port ranges."""
+    prefix_list: AnalysisComponent | None = ...
+    """The prefix list."""
+    protocols: list[str] | None = ...
+    """The protocols."""
+    route_table_route: AnalysisRouteTableRoute | None = ...
+    """The route table route."""
+    route_table: AnalysisComponent | None = ...
+    """The route table."""
+    security_group: AnalysisComponent | None = ...
+    """The security group."""
+    security_group_rule: AnalysisSecurityGroupRule | None = ...
+    """The security group rule."""
+    security_groups: list[AnalysisComponent] | None = ...
+    """The security groups."""
+    source_vpc: AnalysisComponent | None = ...
+    """The source VPC."""
+    state: str | None = ...
+    """The state."""
+    subnet: AnalysisComponent | None = ...
+    """The subnet."""
+    subnet_route_table: AnalysisComponent | None = ...
+    """The route table for the subnet."""
+    vpc: AnalysisComponent | None = ...
+    """The component VPC."""
+    vpc_endpoint: AnalysisComponent | None = ...
+    """The VPC endpoint."""
+    vpn_connection: AnalysisComponent | None = ...
+    """The VPN connection."""
+    vpn_gateway: AnalysisComponent | None = ...
+    """The VPN gateway."""
+    transit_gateway: AnalysisComponent | None = ...
+    """The transit gateway."""
+    transit_gateway_route_table: AnalysisComponent | None = ...
+    """The transit gateway route table."""
+    transit_gateway_route_table_route: TransitGatewayRouteTableRoute | None = ...
+    """The transit gateway route table route."""
+    transit_gateway_policy_table: AnalysisComponent | None = ...
+    """The transit gateway policy table."""
+    transit_gateway_policy_table_entry: (
+        AnalysisTransitGatewayPolicyTableEntry | None
+    ) = ...
+    """The transit gateway policy table entry."""
+    transit_gateway_attachment: AnalysisComponent | None = ...
+    """The transit gateway attachment."""
+    component_account: str | None = ...
+    """The Amazon Web Services account for the component."""
+    component_region: str | None = ...
+    """The Region for the component."""
+    firewall_stateless_rule: FirewallStatelessRule | None = ...
+    """The Network Firewall stateless rule."""
+    firewall_stateful_rule: FirewallStatefulRule | None = ...
+    """The Network Firewall stateful rule."""
+
+@dataclass(kw_only=True)
+class ExportClientVpnClientCertificateRevocationListInput(_SerdeShape):
+    """
+    Dataclass for ExportClientVpnClientCertificateRevocationListInput
+    structure.
+    """
+
+    client_vpn_endpoint_id: str | None = ...
+    """The ID of the Client VPN endpoint."""
+    dry_run: bool | None = ...
+    """
+    Checks whether you have the required permissions for the action, without
+    actually making the request, and provides an error response. If you have
+    the required permissions, the error response is `DryRunOperation`.
+    Otherwise, it is `UnauthorizedOperation`.
+    """
+
+class ExportClientVpnClientCertificateRevocationListInputDict(TypedDict, total=False):
+    """Dictionary form of `ExportClientVpnClientCertificateRevocationListInput`."""
+
+    client_vpn_endpoint_id: Required[str]
+    """The ID of the Client VPN endpoint."""
+    dry_run: bool | None
+    """
+    Checks whether you have the required permissions for the action, without
+    actually making the request, and provides an error response. If you have
+    the required permissions, the error response is `DryRunOperation`.
+    Otherwise, it is `UnauthorizedOperation`.
+    """
+
+@dataclass(kw_only=True)
+class ExportClientVpnClientCertificateRevocationListOutput(_SerdeShape):
+    """
+    Dataclass for ExportClientVpnClientCertificateRevocationListOutput
+    structure.
+    """
+
+    certificate_revocation_list: str | None = ...
+    """Information about the client certificate revocation list."""
+    status: ClientCertificateRevocationListStatus | None = ...
+    """The current state of the client certificate revocation list."""
+    response_metadata: ResponseMetadata = ...
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+@dataclass(kw_only=True)
+class ExportClientVpnClientConfigurationInput(_SerdeShape):
+    """Dataclass for ExportClientVpnClientConfigurationInput structure."""
+
+    client_vpn_endpoint_id: str | None = ...
+    """The ID of the Client VPN endpoint."""
+    dry_run: bool | None = ...
+    """
+    Checks whether you have the required permissions for the action, without
+    actually making the request, and provides an error response. If you have
+    the required permissions, the error response is `DryRunOperation`.
+    Otherwise, it is `UnauthorizedOperation`.
+    """
+
+class ExportClientVpnClientConfigurationInputDict(TypedDict, total=False):
+    """Dictionary form of `ExportClientVpnClientConfigurationInput`."""
+
+    client_vpn_endpoint_id: Required[str]
+    """The ID of the Client VPN endpoint."""
+    dry_run: bool | None
+    """
+    Checks whether you have the required permissions for the action, without
+    actually making the request, and provides an error response. If you have
+    the required permissions, the error response is `DryRunOperation`.
+    Otherwise, it is `UnauthorizedOperation`.
+    """
+
+@dataclass(kw_only=True)
+class ExportClientVpnClientConfigurationOutput(_SerdeShape):
+    """Dataclass for ExportClientVpnClientConfigurationOutput structure."""
+
+    client_configuration: str | None = ...
+    """The contents of the Client VPN endpoint configuration file."""
+    response_metadata: ResponseMetadata = ...
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+class ExportEnvironment(UnknownEnumMixin, StrEnum):
+    CITRIX = "citrix"
+    VMWARE = "vmware"
+    MICROSOFT = "microsoft"
+
+@dataclass(kw_only=True)
+class ExportImageInput(_SerdeShape):
+    """Dataclass for ExportImageInput structure."""
+
+    client_token: str | None = ...
+    """
+    Token to enable idempotency for export image requests.
+
+    This field is autopopulated if not provided.
+    """
+    description: str | None = ...
+    """
+    A description of the image being exported. The maximum length is 255
+    characters.
+    """
+    disk_image_format: str | None = ...
+    """The disk image format."""
+    dry_run: bool | None = ...
+    """
+    Checks whether you have the required permissions for the action, without
+    actually making the request, and provides an error response. If you have
+    the required permissions, the error response is `DryRunOperation`.
+    Otherwise, it is `UnauthorizedOperation`.
+    """
+    image_id: str | None = ...
+    """The ID of the image."""
+    s3_export_location: ExportTaskS3LocationRequest | None = ...
+    """
+    The Amazon S3 bucket for the destination image. The destination bucket
+    must exist.
+    """
+    role_name: str | None = ...
+    """
+    The name of the role that grants VM Import/Export permission to export
+    images to your Amazon S3 bucket. If this parameter is not specified, the
+    default role is named 'vmimport'.
+    """
+    tag_specifications: list[TagSpecification] | None = ...
+    """The tags to apply to the export image task during creation."""
+
+class ExportImageInputDict(TypedDict, total=False):
+    """Dictionary form of `ExportImageInput`."""
+
+    client_token: str | None
+    """
+    Token to enable idempotency for export image requests.
+
+    This field is autopopulated if not provided.
+    """
+    description: str | None
+    """
+    A description of the image being exported. The maximum length is 255
+    characters.
+    """
+    disk_image_format: Required[str]
+    """The disk image format."""
+    dry_run: bool | None
+    """
+    Checks whether you have the required permissions for the action, without
+    actually making the request, and provides an error response. If you have
+    the required permissions, the error response is `DryRunOperation`.
+    Otherwise, it is `UnauthorizedOperation`.
+    """
+    image_id: Required[str]
+    """The ID of the image."""
+    s3_export_location: Required[
+        ExportTaskS3LocationRequest | ExportTaskS3LocationRequestDict
+    ]
+    """
+    The Amazon S3 bucket for the destination image. The destination bucket
+    must exist.
+    """
+    role_name: str | None
+    """
+    The name of the role that grants VM Import/Export permission to export
+    images to your Amazon S3 bucket. If this parameter is not specified, the
+    default role is named 'vmimport'.
+    """
+    tag_specifications: Sequence[TagSpecification | TagSpecificationDict] | None
+    """The tags to apply to the export image task during creation."""
+
+@dataclass(kw_only=True)
+class ExportImageOutput(_SerdeShape):
+    """Dataclass for ExportImageOutput structure."""
+
+    description: str | None = ...
+    """A description of the image being exported."""
+    disk_image_format: str | None = ...
+    """The disk image format for the exported image."""
+    export_image_task_id: str | None = ...
+    """The ID of the export image task."""
+    image_id: str | None = ...
+    """The ID of the image."""
+    role_name: str | None = ...
+    """
+    The name of the role that grants VM Import/Export permission to export
+    images to your Amazon S3 bucket.
+    """
+    progress: str | None = ...
+    """The percent complete of the export image task."""
+    s3_export_location: ExportTaskS3Location | None = ...
+    """Information about the destination Amazon S3 bucket."""
+    status: str | None = ...
+    """
+    The status of the export image task. The possible values are `active`,
+    `completed`, `deleting`, and `deleted`.
+    """
+    status_message: str | None = ...
+    """The status message for the export image task."""
+    tags: list[Tag] | None = ...
+    """Any tags assigned to the export image task."""
+    response_metadata: ResponseMetadata = ...
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
 @dataclass(kw_only=True)
 class ExportImageTask(_SerdeShape):
@@ -8162,564 +8666,3 @@ class GetTransitGatewayRouteTableAssociationsOutput(_SerdeShape):
     to investigate a call. Members of the metadata are individually
     optional.
     """
-
-@dataclass(kw_only=True)
-class GetTransitGatewayRouteTablePropagationsInput(_SerdeShape):
-    """Dataclass for GetTransitGatewayRouteTablePropagationsInput structure."""
-
-    transit_gateway_route_table_id: str | None = ...
-    """The ID of the transit gateway route table."""
-    filters: list[Filter] | None = ...
-    """
-    One or more filters. The possible values are:
-
-    - `resource-id` - The ID of the resource.
-
-    - `resource-type` - The resource type. Valid values are `vpc` | `vpn`
-      | `direct-connect-gateway` | `peering` | `connect`.
-
-    - `transit-gateway-attachment-id` - The ID of the attachment.
-    """
-    max_results: int | None = ...
-    """
-    The maximum number of results to return with a single call. To retrieve
-    the remaining results, make another call with the returned `nextToken`
-    value.
-    """
-    next_token: str | None = ...
-    """The token for the next page of results."""
-    dry_run: bool | None = ...
-    """
-    Checks whether you have the required permissions for the action, without
-    actually making the request, and provides an error response. If you have
-    the required permissions, the error response is `DryRunOperation`.
-    Otherwise, it is `UnauthorizedOperation`.
-    """
-
-class GetTransitGatewayRouteTablePropagationsInputDict(TypedDict, total=False):
-    """Dictionary form of `GetTransitGatewayRouteTablePropagationsInput`."""
-
-    transit_gateway_route_table_id: Required[str]
-    """The ID of the transit gateway route table."""
-    filters: Sequence[Filter | FilterDict] | None
-    """
-    One or more filters. The possible values are:
-
-    - `resource-id` - The ID of the resource.
-
-    - `resource-type` - The resource type. Valid values are `vpc` | `vpn`
-      | `direct-connect-gateway` | `peering` | `connect`.
-
-    - `transit-gateway-attachment-id` - The ID of the attachment.
-    """
-    max_results: int | None
-    """
-    The maximum number of results to return with a single call. To retrieve
-    the remaining results, make another call with the returned `nextToken`
-    value.
-    """
-    next_token: str | None
-    """The token for the next page of results."""
-    dry_run: bool | None
-    """
-    Checks whether you have the required permissions for the action, without
-    actually making the request, and provides an error response. If you have
-    the required permissions, the error response is `DryRunOperation`.
-    Otherwise, it is `UnauthorizedOperation`.
-    """
-
-@dataclass(kw_only=True)
-class GetTransitGatewayRouteTablePropagationsOutput(_SerdeShape):
-    """Dataclass for GetTransitGatewayRouteTablePropagationsOutput structure."""
-
-    transit_gateway_route_table_propagations: (
-        list[TransitGatewayRouteTablePropagation] | None
-    ) = ...
-    """Information about the route table propagations."""
-    next_token: str | None = ...
-    """
-    The token to use to retrieve the next page of results. This value is
-    `null` when there are no more results to return.
-    """
-    response_metadata: ResponseMetadata = ...
-    """
-    Metadata about the response that produced this output. Use this to
-    recover the request identifiers a service's support team needs in order
-    to investigate a call. Members of the metadata are individually
-    optional.
-    """
-
-@dataclass(kw_only=True)
-class GetVerifiedAccessEndpointPolicyInput(_SerdeShape):
-    """Dataclass for GetVerifiedAccessEndpointPolicyInput structure."""
-
-    verified_access_endpoint_id: str | None = ...
-    """The ID of the Verified Access endpoint."""
-    dry_run: bool | None = ...
-    """
-    Checks whether you have the required permissions for the action, without
-    actually making the request, and provides an error response. If you have
-    the required permissions, the error response is `DryRunOperation`.
-    Otherwise, it is `UnauthorizedOperation`.
-    """
-
-class GetVerifiedAccessEndpointPolicyInputDict(TypedDict, total=False):
-    """Dictionary form of `GetVerifiedAccessEndpointPolicyInput`."""
-
-    verified_access_endpoint_id: Required[str]
-    """The ID of the Verified Access endpoint."""
-    dry_run: bool | None
-    """
-    Checks whether you have the required permissions for the action, without
-    actually making the request, and provides an error response. If you have
-    the required permissions, the error response is `DryRunOperation`.
-    Otherwise, it is `UnauthorizedOperation`.
-    """
-
-@dataclass(kw_only=True)
-class GetVerifiedAccessEndpointPolicyOutput(_SerdeShape):
-    """Dataclass for GetVerifiedAccessEndpointPolicyOutput structure."""
-
-    policy_enabled: bool | None = ...
-    """The status of the Verified Access policy."""
-    policy_document: str | None = ...
-    """The Verified Access policy document."""
-    response_metadata: ResponseMetadata = ...
-    """
-    Metadata about the response that produced this output. Use this to
-    recover the request identifiers a service's support team needs in order
-    to investigate a call. Members of the metadata are individually
-    optional.
-    """
-
-@dataclass(kw_only=True)
-class GetVerifiedAccessEndpointTargetsInput(_SerdeShape):
-    """Dataclass for GetVerifiedAccessEndpointTargetsInput structure."""
-
-    verified_access_endpoint_id: str | None = ...
-    """The ID of the network CIDR endpoint."""
-    max_results: int | None = ...
-    """
-    The maximum number of results to return with a single call. To retrieve
-    the remaining results, make another call with the returned `nextToken`
-    value.
-    """
-    next_token: str | None = ...
-    """The token for the next page of results."""
-    dry_run: bool | None = ...
-    """
-    Checks whether you have the required permissions for the action, without
-    actually making the request, and provides an error response. If you have
-    the required permissions, the error response is `DryRunOperation`.
-    Otherwise, it is `UnauthorizedOperation`.
-    """
-
-class GetVerifiedAccessEndpointTargetsInputDict(TypedDict, total=False):
-    """Dictionary form of `GetVerifiedAccessEndpointTargetsInput`."""
-
-    verified_access_endpoint_id: Required[str]
-    """The ID of the network CIDR endpoint."""
-    max_results: int | None
-    """
-    The maximum number of results to return with a single call. To retrieve
-    the remaining results, make another call with the returned `nextToken`
-    value.
-    """
-    next_token: str | None
-    """The token for the next page of results."""
-    dry_run: bool | None
-    """
-    Checks whether you have the required permissions for the action, without
-    actually making the request, and provides an error response. If you have
-    the required permissions, the error response is `DryRunOperation`.
-    Otherwise, it is `UnauthorizedOperation`.
-    """
-
-@dataclass(kw_only=True)
-class GetVerifiedAccessEndpointTargetsOutput(_SerdeShape):
-    """Dataclass for GetVerifiedAccessEndpointTargetsOutput structure."""
-
-    verified_access_endpoint_targets: list[VerifiedAccessEndpointTarget] | None = ...
-    """The Verified Access targets."""
-    next_token: str | None = ...
-    """
-    The token to use to retrieve the next page of results. This value is
-    `null` when there are no more results to return.
-    """
-    response_metadata: ResponseMetadata = ...
-    """
-    Metadata about the response that produced this output. Use this to
-    recover the request identifiers a service's support team needs in order
-    to investigate a call. Members of the metadata are individually
-    optional.
-    """
-
-@dataclass(kw_only=True)
-class GetVerifiedAccessGroupPolicyInput(_SerdeShape):
-    """Dataclass for GetVerifiedAccessGroupPolicyInput structure."""
-
-    verified_access_group_id: str | None = ...
-    """The ID of the Verified Access group."""
-    dry_run: bool | None = ...
-    """
-    Checks whether you have the required permissions for the action, without
-    actually making the request, and provides an error response. If you have
-    the required permissions, the error response is `DryRunOperation`.
-    Otherwise, it is `UnauthorizedOperation`.
-    """
-
-class GetVerifiedAccessGroupPolicyInputDict(TypedDict, total=False):
-    """Dictionary form of `GetVerifiedAccessGroupPolicyInput`."""
-
-    verified_access_group_id: Required[str]
-    """The ID of the Verified Access group."""
-    dry_run: bool | None
-    """
-    Checks whether you have the required permissions for the action, without
-    actually making the request, and provides an error response. If you have
-    the required permissions, the error response is `DryRunOperation`.
-    Otherwise, it is `UnauthorizedOperation`.
-    """
-
-@dataclass(kw_only=True)
-class GetVerifiedAccessGroupPolicyOutput(_SerdeShape):
-    """Dataclass for GetVerifiedAccessGroupPolicyOutput structure."""
-
-    policy_enabled: bool | None = ...
-    """The status of the Verified Access policy."""
-    policy_document: str | None = ...
-    """The Verified Access policy document."""
-    response_metadata: ResponseMetadata = ...
-    """
-    Metadata about the response that produced this output. Use this to
-    recover the request identifiers a service's support team needs in order
-    to investigate a call. Members of the metadata are individually
-    optional.
-    """
-
-@dataclass(kw_only=True)
-class GetVpcResourcesBlockingEncryptionEnforcementInput(_SerdeShape):
-    """
-    Dataclass for GetVpcResourcesBlockingEncryptionEnforcementInput
-    structure.
-    """
-
-    vpc_id: str | None = ...
-    """
-    The ID of the VPC to check for resources blocking encryption
-    enforcement.
-    """
-    max_results: int | None = ...
-    """
-    The maximum number of items to return for this request. To get the next
-    page of items, make another request with the token returned in the
-    output. For more information, see
-    [Pagination](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination).
-    """
-    next_token: str | None = ...
-    """
-    The token returned from a previous paginated request. Pagination
-    continues from the end of the items returned by the previous request.
-    """
-    dry_run: bool | None = ...
-    """
-    Checks whether you have the required permissions for the action, without
-    actually making the request, and provides an error response. If you have
-    the required permissions, the error response is `DryRunOperation`.
-    Otherwise, it is `UnauthorizedOperation`.
-    """
-
-class GetVpcResourcesBlockingEncryptionEnforcementInputDict(TypedDict, total=False):
-    """Dictionary form of `GetVpcResourcesBlockingEncryptionEnforcementInput`."""
-
-    vpc_id: Required[str]
-    """
-    The ID of the VPC to check for resources blocking encryption
-    enforcement.
-    """
-    max_results: int | None
-    """
-    The maximum number of items to return for this request. To get the next
-    page of items, make another request with the token returned in the
-    output. For more information, see
-    [Pagination](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination).
-    """
-    next_token: str | None
-    """
-    The token returned from a previous paginated request. Pagination
-    continues from the end of the items returned by the previous request.
-    """
-    dry_run: bool | None
-    """
-    Checks whether you have the required permissions for the action, without
-    actually making the request, and provides an error response. If you have
-    the required permissions, the error response is `DryRunOperation`.
-    Otherwise, it is `UnauthorizedOperation`.
-    """
-
-@dataclass(kw_only=True)
-class GetVpcResourcesBlockingEncryptionEnforcementOutput(_SerdeShape):
-    """
-    Dataclass for GetVpcResourcesBlockingEncryptionEnforcementOutput
-    structure.
-    """
-
-    non_compliant_resources: list[VpcEncryptionNonCompliantResource] | None = ...
-    """Information about resources that are blocking encryption enforcement."""
-    next_token: str | None = ...
-    """
-    The token to include in another request to get the next page of items.
-    This value is `null` when there are no more items to return.
-    """
-    response_metadata: ResponseMetadata = ...
-    """
-    Metadata about the response that produced this output. Use this to
-    recover the request identifiers a service's support team needs in order
-    to investigate a call. Members of the metadata are individually
-    optional.
-    """
-
-@dataclass(kw_only=True)
-class GetVpnConnectionDeviceSampleConfigurationInput(_SerdeShape):
-    """Dataclass for GetVpnConnectionDeviceSampleConfigurationInput structure."""
-
-    vpn_connection_id: str | None = ...
-    """
-    The `VpnConnectionId` specifies the Site-to-Site VPN connection used for
-    the sample configuration.
-    """
-    vpn_connection_device_type_id: str | None = ...
-    """Device identifier provided by the `GetVpnConnectionDeviceTypes` API."""
-    internet_key_exchange_version: str | None = ...
-    """
-    The IKE version to be used in the sample configuration file for your
-    customer gateway device. You can specify one of the following versions:
-    `ikev1` or `ikev2`.
-    """
-    sample_type: str | None = ...
-    """
-    The type of sample configuration to generate. Valid values are
-    \"compatibility\" (includes IKEv1) or \"recommended\" (throws
-    UnsupportedOperationException for IKEv1).
-    """
-    dry_run: bool | None = ...
-    """
-    Checks whether you have the required permissions for the action, without
-    actually making the request, and provides an error response. If you have
-    the required permissions, the error response is `DryRunOperation`.
-    Otherwise, it is `UnauthorizedOperation`.
-    """
-
-class GetVpnConnectionDeviceSampleConfigurationInputDict(TypedDict, total=False):
-    """Dictionary form of `GetVpnConnectionDeviceSampleConfigurationInput`."""
-
-    vpn_connection_id: Required[str]
-    """
-    The `VpnConnectionId` specifies the Site-to-Site VPN connection used for
-    the sample configuration.
-    """
-    vpn_connection_device_type_id: Required[str]
-    """Device identifier provided by the `GetVpnConnectionDeviceTypes` API."""
-    internet_key_exchange_version: str | None
-    """
-    The IKE version to be used in the sample configuration file for your
-    customer gateway device. You can specify one of the following versions:
-    `ikev1` or `ikev2`.
-    """
-    sample_type: str | None
-    """
-    The type of sample configuration to generate. Valid values are
-    \"compatibility\" (includes IKEv1) or \"recommended\" (throws
-    UnsupportedOperationException for IKEv1).
-    """
-    dry_run: bool | None
-    """
-    Checks whether you have the required permissions for the action, without
-    actually making the request, and provides an error response. If you have
-    the required permissions, the error response is `DryRunOperation`.
-    Otherwise, it is `UnauthorizedOperation`.
-    """
-
-@dataclass(kw_only=True)
-class GetVpnConnectionDeviceSampleConfigurationOutput(_SerdeShape):
-    """Dataclass for GetVpnConnectionDeviceSampleConfigurationOutput structure."""
-
-    vpn_connection_device_sample_configuration: str | None = ...
-    """Sample configuration file for the specified customer gateway device."""
-    response_metadata: ResponseMetadata = ...
-    """
-    Metadata about the response that produced this output. Use this to
-    recover the request identifiers a service's support team needs in order
-    to investigate a call. Members of the metadata are individually
-    optional.
-    """
-
-@dataclass(kw_only=True)
-class GetVpnConnectionDeviceTypesInput(_SerdeShape):
-    """Dataclass for GetVpnConnectionDeviceTypesInput structure."""
-
-    max_results: int | None = ...
-    """
-    The maximum number of results returned by `GetVpnConnectionDeviceTypes`
-    in paginated output. When this parameter is used,
-    `GetVpnConnectionDeviceTypes` only returns `MaxResults` results in a
-    single page along with a `NextToken` response element. The remaining
-    results of the initial request can be seen by sending another
-    `GetVpnConnectionDeviceTypes` request with the returned `NextToken`
-    value. This value can be between 200 and 1000. If this parameter is not
-    used, then `GetVpnConnectionDeviceTypes` returns all results.
-    """
-    next_token: str | None = ...
-    """
-    The `NextToken` value returned from a previous paginated
-    `GetVpnConnectionDeviceTypes` request where `MaxResults` was used and
-    the results exceeded the value of that parameter. Pagination continues
-    from the end of the previous results that returned the `NextToken`
-    value. This value is null when there are no more results to return.
-    """
-    dry_run: bool | None = ...
-    """
-    Checks whether you have the required permissions for the action, without
-    actually making the request, and provides an error response. If you have
-    the required permissions, the error response is `DryRunOperation`.
-    Otherwise, it is `UnauthorizedOperation`.
-    """
-
-class GetVpnConnectionDeviceTypesInputDict(TypedDict, total=False):
-    """Dictionary form of `GetVpnConnectionDeviceTypesInput`."""
-
-    max_results: int | None
-    """
-    The maximum number of results returned by `GetVpnConnectionDeviceTypes`
-    in paginated output. When this parameter is used,
-    `GetVpnConnectionDeviceTypes` only returns `MaxResults` results in a
-    single page along with a `NextToken` response element. The remaining
-    results of the initial request can be seen by sending another
-    `GetVpnConnectionDeviceTypes` request with the returned `NextToken`
-    value. This value can be between 200 and 1000. If this parameter is not
-    used, then `GetVpnConnectionDeviceTypes` returns all results.
-    """
-    next_token: str | None
-    """
-    The `NextToken` value returned from a previous paginated
-    `GetVpnConnectionDeviceTypes` request where `MaxResults` was used and
-    the results exceeded the value of that parameter. Pagination continues
-    from the end of the previous results that returned the `NextToken`
-    value. This value is null when there are no more results to return.
-    """
-    dry_run: bool | None
-    """
-    Checks whether you have the required permissions for the action, without
-    actually making the request, and provides an error response. If you have
-    the required permissions, the error response is `DryRunOperation`.
-    Otherwise, it is `UnauthorizedOperation`.
-    """
-
-@dataclass(kw_only=True)
-class GetVpnConnectionDeviceTypesOutput(_SerdeShape):
-    """Dataclass for GetVpnConnectionDeviceTypesOutput structure."""
-
-    vpn_connection_device_types: list[VpnConnectionDeviceType] | None = ...
-    """
-    List of customer gateway devices that have a sample configuration file
-    available for use.
-    """
-    next_token: str | None = ...
-    """
-    The `NextToken` value to include in a future
-    `GetVpnConnectionDeviceTypes` request. When the results of a
-    `GetVpnConnectionDeviceTypes` request exceed `MaxResults`, this value
-    can be used to retrieve the next page of results. This value is null
-    when there are no more results to return.
-    """
-    response_metadata: ResponseMetadata = ...
-    """
-    Metadata about the response that produced this output. Use this to
-    recover the request identifiers a service's support team needs in order
-    to investigate a call. Members of the metadata are individually
-    optional.
-    """
-
-@dataclass(kw_only=True)
-class GetVpnTunnelReplacementStatusInput(_SerdeShape):
-    """Dataclass for GetVpnTunnelReplacementStatusInput structure."""
-
-    vpn_connection_id: str | None = ...
-    """The ID of the Site-to-Site VPN connection."""
-    vpn_tunnel_outside_ip_address: str | None = ...
-    """The external IP address of the VPN tunnel."""
-    dry_run: bool | None = ...
-    """
-    Checks whether you have the required permissions for the action, without
-    actually making the request, and provides an error response. If you have
-    the required permissions, the error response is `DryRunOperation`.
-    Otherwise, it is `UnauthorizedOperation`.
-    """
-
-class GetVpnTunnelReplacementStatusInputDict(TypedDict, total=False):
-    """Dictionary form of `GetVpnTunnelReplacementStatusInput`."""
-
-    vpn_connection_id: Required[str]
-    """The ID of the Site-to-Site VPN connection."""
-    vpn_tunnel_outside_ip_address: Required[str]
-    """The external IP address of the VPN tunnel."""
-    dry_run: bool | None
-    """
-    Checks whether you have the required permissions for the action, without
-    actually making the request, and provides an error response. If you have
-    the required permissions, the error response is `DryRunOperation`.
-    Otherwise, it is `UnauthorizedOperation`.
-    """
-
-@dataclass(kw_only=True)
-class GetVpnTunnelReplacementStatusOutput(_SerdeShape):
-    """Dataclass for GetVpnTunnelReplacementStatusOutput structure."""
-
-    vpn_connection_id: str | None = ...
-    """The ID of the Site-to-Site VPN connection."""
-    transit_gateway_id: str | None = ...
-    """The ID of the transit gateway associated with the VPN connection."""
-    customer_gateway_id: str | None = ...
-    """The ID of the customer gateway."""
-    vpn_gateway_id: str | None = ...
-    """The ID of the virtual private gateway."""
-    vpn_tunnel_outside_ip_address: str | None = ...
-    """The external IP address of the VPN tunnel."""
-    maintenance_details: MaintenanceDetails | None = ...
-    """Get details of pending tunnel endpoint maintenance."""
-    response_metadata: ResponseMetadata = ...
-    """
-    Metadata about the response that produced this output. Use this to
-    recover the request identifiers a service's support team needs in order
-    to investigate a call. Members of the metadata are individually
-    optional.
-    """
-
-@dataclass(kw_only=True)
-class GpuDeviceInfo(_SerdeShape):
-    """Describes the GPU accelerators for the instance type."""
-
-    name: str | None = ...
-    """The name of the GPU accelerator."""
-    manufacturer: str | None = ...
-    """The manufacturer of the GPU accelerator."""
-    count: int | None = ...
-    """The number of GPUs for the instance type."""
-    logical_gpu_count: int | None = ...
-    """Total number of GPU devices of this type."""
-    gpu_partition_size: float | None = ...
-    """
-    The size of each GPU as a fraction of a full GPU, between 0 (excluded)
-    and 1 (included).
-    """
-    workloads: list[str] | None = ...
-    """A list of workload types this GPU supports."""
-    memory_info: GpuDeviceMemoryInfo | None = ...
-    """Describes the memory available to the GPU accelerator."""
-
-@dataclass(kw_only=True)
-class GpuDeviceMemoryInfo(_SerdeShape):
-    """Describes the memory available to the GPU accelerator."""
-
-    size_in_mi_b: int | None = ...
-    """The size of the memory available to the GPU accelerator, in MiB."""
