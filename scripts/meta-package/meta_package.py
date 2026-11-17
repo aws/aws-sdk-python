@@ -4,7 +4,9 @@
 """Checks that the aws-sdk-python meta-package matches the repository's clients.
 
 Each client under ``clients/`` must have:
-  - an extra named after its module suffix pinning ``<module>~=<client version>``,
+  - an extra named after its module suffix pinning ``<module>~=<major>.<minor>.0``
+    for the client's current version (a patch bump stays inside the ``~=`` range,
+    so the extra is only rewritten on a minor or major bump),
   - an entry in the ``all`` extra,
   - an editable ``[tool.uv.sources]`` path, so a version bump that is not yet on
     PyPI still resolves.
@@ -45,7 +47,7 @@ def _check_extras(extras: dict[str, list[str]], clients: dict[str, str]) -> list
     expected = {_extra(name): name for name in clients}
 
     for extra, name in sorted(expected.items()):
-        want = [f"{_module(name)}~={clients[name]}"]
+        want = [f"{_module(name)}~={_compatible(clients[name])}"]
         got = extras.get(extra)
         if got is None:
             errors.append(f"missing extra {extra} = {want}")
@@ -84,6 +86,12 @@ def _extra(name: str) -> str:
 
 def _module(name: str) -> str:
     return name.replace("-", "_")
+
+
+def _compatible(version: str) -> str:
+    """Return the ``~=`` floor for ``version``: ``<major>.<minor>.0``."""
+    major, minor = version.split(".")[:2]
+    return f"{major}.{minor}.0"
 
 
 def _load(path: Path) -> dict:
