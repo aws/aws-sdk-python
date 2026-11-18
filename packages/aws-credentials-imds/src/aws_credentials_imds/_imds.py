@@ -5,6 +5,7 @@
 import functools
 import json
 import os
+import warnings
 from collections.abc import Callable
 from dataclasses import dataclass
 from datetime import UTC, datetime, timedelta
@@ -16,7 +17,13 @@ from smithy_aws_core.config.merged_config import MergedConfig
 from smithy_aws_core.identity import AWSCredentialsIdentity
 from smithy_core import URI
 from smithy_core.exceptions import SmithyError, SmithyIdentityError
+from smithy_core.interfaces.retries import RetryStrategy
 from smithy_core.program import Program
+from smithy_core.retries import (
+    ExponentialBackoffJitterType,
+    ExponentialRetryBackoffStrategy,
+    SimpleRetryStrategy,
+)
 from smithy_http import Field, Fields, HTTPRequest
 from smithy_http.interfaces import HTTPRequestConfiguration
 
@@ -40,9 +47,13 @@ DEFAULT_MAX_ATTEMPTS = 4
 # IMDS is a link-local endpoint, so a healthy instance answers well within a second.
 TIMEOUT_SECONDS = 1.0
 _REQUEST_CONFIG = HTTPRequestConfiguration(read_timeout=TIMEOUT_SECONDS)
-# Waits of 0.25 s, 0.5 s and 1 s across the default 3 retries.
-_BACKOFF_BASE_SECONDS = 0.25
-_MAX_BACKOFF_SECONDS = 1.0
+# Waits of 0.25 s, 0.5 s and 1 s across the default 3 retries. IMDS is link-local,
+# so it gets a short fixed backoff rather than a service client's retry strategy.
+_BACKOFF = ExponentialRetryBackoffStrategy(
+    backoff_scale_value=0.25,
+    max_backoff=1.0,
+    jitter_type=ExponentialBackoffJitterType.NONE,
+)
 
 
 class IMDSConfigurationError(SmithyError):
@@ -67,17 +78,42 @@ class IMDSConfig:
     def __init__(
         self,
         *,
-        max_attempts: int = DEFAULT_MAX_ATTEMPTS,
+        max_attempts: int | None = None,
+        retry_strategy: RetryStrategy | None = None,
         endpoint_uri: URI | None = None,
         endpoint_mode: Literal["IPv4", "IPv6"] = "IPv4",
         token_ttl: int = _MAX_TTL,
         ec2_instance_profile_name: str | None = None,
     ):
-        self.max_attempts = self._validate_max_attempts(max_attempts)
+        if retry_strategy is not None:
+            warnings.warn(
+                "IMDSConfig's retry_strategy is deprecated; use max_attempts. Only the "
+                "strategy's max_attempts is used.",
+                DeprecationWarning,
+                stacklevel=2,
+            )
+            if max_attempts is None:
+                max_attempts = retry_strategy.max_attempts
+        self.max_attempts = self._validate_max_attempts(
+            DEFAULT_MAX_ATTEMPTS if max_attempts is None else max_attempts
+        )
         self.endpoint_mode = endpoint_mode
         self.endpoint_uri = self._resolve_endpoint(endpoint_uri, endpoint_mode)
         self.token_ttl = self._validate_token_ttl(token_ttl)
         self.ec2_instance_profile_name = ec2_instance_profile_name
+
+    @property
+    def retry_strategy(self) -> RetryStrategy:
+        """Deprecated: a strategy with this config's ``max_attempts``.
+
+        IMDS ignores its backoff, so read ``max_attempts`` instead.
+        """
+        warnings.warn(
+            "IMDSConfig's retry_strategy is deprecated; use max_attempts.",
+            DeprecationWarning,
+            stacklevel=2,
+        )
+        return SimpleRetryStrategy(max_attempts=self.max_attempts)
 
     def _validate_max_attempts(self, max_attempts: int) -> int:
         # bool is an int subclass, but True is not a meaningful attempt count.
@@ -286,7 +322,7 @@ def get_metadata(
 
 def backoff_delay(attempt: int) -> float:
     """Return the delay in seconds after the given failed attempt (1-based)."""
-    return min(_MAX_BACKOFF_SECONDS, _BACKOFF_BASE_SECONDS * 2 ** (attempt - 1))
+    return _BACKOFF.compute_next_backoff_delay(attempt)
 
 
 def resolve_credentials(
