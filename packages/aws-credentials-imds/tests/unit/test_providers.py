@@ -20,12 +20,14 @@ _ENDPOINT_ENV = "AWS_EC2_METADATA_SERVICE_ENDPOINT"
 _ENDPOINT_MODE_ENV = "AWS_EC2_METADATA_SERVICE_ENDPOINT_MODE"
 _DISABLED_ENV = "AWS_EC2_METADATA_DISABLED"
 _PROFILE_NAME_ENV = "AWS_EC2_INSTANCE_PROFILE_NAME"
+_MAX_ATTEMPTS_ENV = "AWS_METADATA_SERVICE_NUM_ATTEMPTS"
 
 _ALL_ENV = (
     _ENDPOINT_ENV,
     _ENDPOINT_MODE_ENV,
     _DISABLED_ENV,
     _PROFILE_NAME_ENV,
+    _MAX_ATTEMPTS_ENV,
 )
 
 
@@ -290,4 +292,59 @@ def test_blank_profile_name_raises(
         IMDSConfigurationError,
         match="The configured EC2 instance profile name must not be blank",
     ):
+        setup_provider(Ec2InstanceMetadataProvider())
+
+
+def test_max_attempts_defaults_to_four(
+    setup_provider: Callable[..., ChainSetup],
+) -> None:
+    setup = setup_provider(Ec2InstanceMetadataProvider())
+
+    assert _only_resolver(setup)._config.max_attempts == 4
+
+
+def test_max_attempts_from_env(
+    setup_provider: Callable[..., ChainSetup],
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    monkeypatch.setenv(_MAX_ATTEMPTS_ENV, "5")
+
+    setup = setup_provider(Ec2InstanceMetadataProvider())
+
+    assert _only_resolver(setup)._config.max_attempts == 5
+
+
+def test_max_attempts_from_profile(
+    setup_provider: Callable[..., ChainSetup],
+    merged_config: Callable[..., MergedConfig],
+) -> None:
+    config = merged_config({"default": {"metadata_service_num_attempts": "4"}})
+
+    setup = setup_provider(Ec2InstanceMetadataProvider(), config_file=config)
+
+    assert _only_resolver(setup)._config.max_attempts == 4
+
+
+def test_max_attempts_env_overrides_profile(
+    setup_provider: Callable[..., ChainSetup],
+    merged_config: Callable[..., MergedConfig],
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    monkeypatch.setenv(_MAX_ATTEMPTS_ENV, "2")
+    config = merged_config({"default": {"metadata_service_num_attempts": "4"}})
+
+    setup = setup_provider(Ec2InstanceMetadataProvider(), config_file=config)
+
+    assert _only_resolver(setup)._config.max_attempts == 2
+
+
+@pytest.mark.parametrize("value", ["0", "-1", "three", "2.5"])
+def test_invalid_max_attempts_raises(
+    value: str,
+    setup_provider: Callable[..., ChainSetup],
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    monkeypatch.setenv(_MAX_ATTEMPTS_ENV, value)
+
+    with pytest.raises(IMDSConfigurationError, match="max attempts"):
         setup_provider(Ec2InstanceMetadataProvider())

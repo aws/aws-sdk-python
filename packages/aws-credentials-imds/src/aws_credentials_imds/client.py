@@ -1,6 +1,10 @@
 # Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 # SPDX-License-Identifier: Apache-2.0
 import threading
+import time
+from contextlib import suppress
+from inspect import isawaitable
+from typing import Any
 
 from smithy_core.program import run_program
 from smithy_core.utils import read_streaming_blob
@@ -10,8 +14,8 @@ from ._imds import (
     IMDSConfig,
     IMDSConfigurationError,
     IMDSToken,
-    fetch_metadata,
     fetch_token,
+    get_metadata,
 )
 
 __all__ = (
@@ -29,31 +33,43 @@ class IMDSTokenCache:
     def __init__(self, http_client: HTTPClient, config: IMDSConfig):
         self._http_client = http_client
         self._config = config
+        # Held for a whole token fetch, so that concurrent callers fetch only once.
         self._refresh_lock = threading.Lock()
+        # Held only to swap the token, so invalidation never waits on a fetch.
+        self._token_lock = threading.Lock()
         self._token: IMDSToken | None = None
 
     def get_token(self) -> IMDSToken:
         """Return the cached session token, refreshing it once it expires."""
-        if self._should_refresh():
-            self._refresh()
-        assert self._token is not None  # noqa: S101
-        return self._token
+        # Read the token once: another thread may invalidate it at any point.
+        token = self._token
+        if token is None or token.is_expired():
+            token = self._refresh()
+        return token
 
-    def _should_refresh(self) -> bool:
-        return self._token is None or self._token.is_expired()
+    def _invalidate(self, token: IMDSToken) -> None:
+        # Leave a token another thread already refreshed in place.
+        with self._token_lock:
+            if self._token is token:
+                self._token = None
 
-    def _refresh(self) -> None:
+    def _refresh(self) -> IMDSToken:
         with self._refresh_lock:
-            if not self._should_refresh():
-                return
-            value = run_program(
+            token = self._token
+            if token is not None and not token.is_expired():
+                return token
+            token = run_program(
                 fetch_token(
-                    send=lambda request: self._http_client.send(request=request),
-                    read_body=read_streaming_blob,
+                    send=lambda request, config: self._http_client.send(
+                        request=request, request_config=config
+                    ),
+                    read_body=_read_body,
                     config=self._config,
                 )
             )
-            self._token = IMDSToken(value, self._config.token_ttl)
+            with self._token_lock:
+                self._token = token
+            return token
 
 
 class IMDSClient:
@@ -68,13 +84,38 @@ class IMDSClient:
 
     def get(self, *, path: str) -> str:
         """Fetch the instance metadata at ``path``."""
-        token = self._token_cache.get_token()
         return run_program(
-            fetch_metadata(
-                send=lambda request: self._http_client.send(request=request),
-                read_body=read_streaming_blob,
+            get_metadata(
+                send=lambda request, config: self._http_client.send(
+                    request=request, request_config=config
+                ),
+                read_body=_read_body,
+                sleep=time.sleep,
+                get_token=self._token_cache.get_token,
+                invalidate_token=self._token_cache._invalidate,
                 config=self._config,
-                token=token.value,
                 path=path,
             )
         )
+
+
+def _read_body(body: Any) -> bytes:
+    try:
+        return read_streaming_blob(body)
+    finally:
+        _close_quietly(body)
+
+
+def _close_quietly(body: Any) -> None:
+    # Hand the connection back, or drop it if the read was cut short, so a failed
+    # attempt doesn't hold a connection from the caller's pool. A close failure
+    # must not replace the read's own result or error.
+    close = getattr(body, "close", None)
+    if close is None:
+        return
+    with suppress(Exception):
+        result = close()
+        if isawaitable(result):
+            # An async body can't be closed here; don't leave a never-awaited
+            # coroutine behind.
+            getattr(result, "close", lambda: None)()

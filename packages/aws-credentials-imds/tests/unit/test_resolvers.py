@@ -10,6 +10,7 @@ import pytest
 from aws_credentials_imds.client import IMDSConfig
 from aws_credentials_imds.resolvers import IMDSCredentialsResolver
 from smithy_core.exceptions import SmithyIdentityError
+from smithy_http import Fields
 
 ISO8601 = "%Y-%m-%dT%H:%M:%SZ"
 
@@ -125,7 +126,7 @@ def test_resolver_requires_access_key_and_secret() -> None:
 def test_resolver_closes_default_http_client() -> None:
     http_client = Mock()
     http_client.send.side_effect = [
-        Mock(status=200, body=body)
+        Mock(status=200, body=body, fields=Fields())
         for body in (b"token", b"test-profile", json.dumps(_CREDS).encode())
     ]
     with patch("aws_credentials_imds.resolvers.Urllib3HTTPClient") as default_client:
@@ -134,3 +135,18 @@ def test_resolver_closes_default_http_client() -> None:
 
     assert credentials.access_key_id == "test-access-key"
     default_client.return_value.__exit__.assert_called_once()
+
+
+def test_resolver_default_http_client_uses_one_second_timeouts() -> None:
+    http_client = Mock()
+    http_client.send.side_effect = [
+        Mock(status=200, body=body, fields=Fields())
+        for body in (b"token", b"test-profile", json.dumps(_CREDS).encode())
+    ]
+    with patch("aws_credentials_imds.resolvers.Urllib3HTTPClient") as default_client:
+        default_client.return_value.__enter__.return_value = http_client
+        IMDSCredentialsResolver().get_identity(properties={})
+
+    client_config = default_client.call_args.kwargs["client_config"]
+    assert client_config.connect_timeout == 1.0
+    assert client_config.read_timeout == 1.0
