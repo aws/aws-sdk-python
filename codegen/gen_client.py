@@ -50,6 +50,13 @@ CLIENTS_REQUIRING_BOTO3 = {
     "aws-sdk-transcribe-streaming": ["iam", "s3", "sts"],
 }
 
+# Shared test helpers, such as dual_mode, live in the repo-root tests/ folder.
+SHARED_TEST_PATH = (
+    ("[tool.pytest.ini_options]\n", 'pythonpath = ["../../tests"]'),
+    # CAUTION: setting extraPaths drops pyright's implicit src, so list it too.
+    ("[tool.pyright]\n", 'extraPaths = ["src", "../../tests"]'),
+)
+
 
 @dataclass(frozen=True)
 class Service:
@@ -278,11 +285,21 @@ def _install_client(slug: str) -> None:
     shutil.copytree(projection, dest, dirs_exist_ok=True)
     for rel in overlays:
         shutil.copyfile(OVERLAYS / name / rel, dest / rel)
+    _add_shared_test_path(dest / "pyproject.toml")
 
     if name in CLIENTS_REQUIRING_BOTO3:
         services = ",".join(CLIENTS_REQUIRING_BOTO3[name])
         _uv_add(dest, "test", ["boto3", f"types-boto3-lite[{services}]"])
     print(f"wrote {dest}")
+
+
+def _add_shared_test_path(pyproject: Path) -> None:
+    text = pyproject.read_text()
+    for section, line in SHARED_TEST_PATH:
+        if section not in text:
+            sys.exit(f"{pyproject}: codegen no longer emits {section}")
+        text = text.replace(section, f"{section}{line}\n", 1)
+    pyproject.write_text(text)
 
 
 def _relative_files(root: Path) -> set[str]:

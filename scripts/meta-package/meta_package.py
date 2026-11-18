@@ -4,7 +4,10 @@
 """Checks that the aws-sdk-python meta-package matches the repository's clients.
 
 Each client under ``clients/`` must have:
-  - an extra named after its module suffix pinning ``<module>~=<client version>``,
+  - an extra named after its module suffix pinning ``<module>~=<version>``, where
+    the pin shares the client's major.minor and its patch does not exceed the
+    client's (a patch bump stays inside the ``~=`` range, so the pin is normally
+    left at ``x.y.0`` and only rewritten on a minor or major bump),
   - an entry in the ``all`` extra,
   - an editable ``[tool.uv.sources]`` path, so a version bump that is not yet on
     PyPI still resolves.
@@ -45,12 +48,12 @@ def _check_extras(extras: dict[str, list[str]], clients: dict[str, str]) -> list
     expected = {_extra(name): name for name in clients}
 
     for extra, name in sorted(expected.items()):
-        want = [f"{_module(name)}~={clients[name]}"]
+        module = _module(name)
         got = extras.get(extra)
         if got is None:
-            errors.append(f"missing extra {extra} = {want}")
-        elif got != want:
-            errors.append(f"extra {extra} is {got}, expected {want}")
+            errors.append(f"missing extra {extra} = ['{module}~={clients[name]}']")
+        elif error := _check_pin(got, module, clients[name]):
+            errors.append(f"extra {extra} is {got}, {error}")
 
     for extra in sorted(set(extras) - set(expected) - {ALL_EXTRA}):
         errors.append(f"extra {extra} has no client in clients/")
@@ -84,6 +87,28 @@ def _extra(name: str) -> str:
 
 def _module(name: str) -> str:
     return name.replace("-", "_")
+
+
+def _check_pin(got: list[str], module: str, client_version: str) -> str | None:
+    """A ``~=`` pin must share the client's major.minor and not exceed its patch."""
+    prefix = f"{module}~="
+    if len(got) != 1 or not got[0].startswith(prefix):
+        return f"expected ['{prefix}<version>']"
+    current = _version(client_version)
+    if current is None:
+        return f"but client version {client_version!r} is not <major>.<minor>.<patch>"
+    major, minor, patch = current
+    pinned = _version(got[0].removeprefix(prefix))
+    if pinned is None or pinned[:2] != (major, minor) or pinned[2] > patch:
+        return f"expected ['{prefix}{major}.{minor}.x'] with x <= {patch}"
+    return None
+
+
+def _version(version: str) -> tuple[int, int, int] | None:
+    parts = version.split(".")
+    if len(parts) != 3 or not all(part.isdigit() for part in parts):
+        return None
+    return int(parts[0]), int(parts[1]), int(parts[2])
 
 
 def _load(path: Path) -> dict:

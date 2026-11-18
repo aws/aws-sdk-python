@@ -2,7 +2,7 @@
 
 [project]
 name = "aws_sdk_transcribe_streaming"
-version = "0.13.0"
+version = "0.13.1"
 description = "Python client for Amazon Transcribe Streaming Service"
 readme = "README.md"
 requires-python = ">=3.12"
@@ -48,6 +48,7 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [tool.pyright]
+extraPaths = ["src", "../../tests"]
 typeCheckingMode = "strict"
 reportPrivateUsage = false
 reportUnusedFunction = false
@@ -69,5 +70,6 @@ ignore = ["F841"]
 skip-magic-trailing-comma = true
 
 [tool.pytest.ini_options]
+pythonpath = ["../../tests"]
 python_classes = ["!Test"]
 asyncio_mode = "auto"

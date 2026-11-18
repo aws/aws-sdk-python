@@ -240,7 +240,13 @@ inventories = ["https://docs.python.org/3/objects.inv"]
 paths = ["clients/*/src", "packages/*/src"]
 
 [project.plugins.mkdocstrings.handlers.python.options]
-extensions = ["scripts/docs/griffe_extensions.py:OverloadDocstrings"]
+# OverloadDocstrings must run first: it copies the description from an overload
+# that MergedOperationSignature replaces.
+extensions = [
+  "scripts/docs/griffe_extensions.py:OverloadDocstrings",
+  "scripts/docs/griffe_extensions.py:MergedOperationSignature",
+  "scripts/docs/griffe_extensions.py:ClientConstructors",
+]
 docstring_style = "google"
 inherited_members = true
 show_source = false

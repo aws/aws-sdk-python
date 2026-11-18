@@ -136,7 +136,9 @@ async def _receive_events(
     async for event in output_stream:
         if isinstance(event, MedicalScribeOutputStreamTranscriptEvent):
             segment = event.value.transcript_segment
-            assert segment is not None
+            # transcriptSegment is optional; the service may send events without one.
+            if segment is None:
+                continue
             assert segment.segment_id is not None
             assert segment.audio_begin_offset is not None
             assert segment.audio_end_offset is not None
