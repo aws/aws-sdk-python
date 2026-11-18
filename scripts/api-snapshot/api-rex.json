@@ -60,8 +60,8 @@
   "aws_credentials_imds.aio.client": {
     "IMDSConfig": "rex-class",
     "IMDSToken": "rex-class",
-    "fetch_metadata": "rex-function",
-    "fetch_token": "rex-function"
+    "fetch_token": "rex-function",
+    "get_metadata": "rex-function"
   },
   "aws_credentials_imds.aio.providers": {
     "AsyncIMDSCredentialsResolver": "rex-class[async]",
@@ -77,8 +77,8 @@
     "IMDSConfig": "rex-class",
     "IMDSConfigurationError": "rex-exception",
     "IMDSToken": "rex-class",
-    "fetch_metadata": "rex-function",
-    "fetch_token": "rex-function"
+    "fetch_token": "rex-function",
+    "get_metadata": "rex-function"
   },
   "aws_credentials_imds.providers": {
     "IMDSCredentialsResolver": "rex-class",

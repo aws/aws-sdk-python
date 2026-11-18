@@ -10,6 +10,7 @@ import pytest
 from aws_credentials_imds.aio.resolvers import AsyncIMDSCredentialsResolver
 from aws_credentials_imds.client import IMDSConfig
 from smithy_core.exceptions import SmithyIdentityError
+from smithy_http import Fields
 
 ISO8601 = "%Y-%m-%dT%H:%M:%SZ"
 
@@ -125,7 +126,7 @@ async def test_resolver_requires_access_key_and_secret() -> None:
 async def test_resolver_closes_default_http_client() -> None:
     http_client = AsyncMock()
     http_client.send.side_effect = [
-        Mock(status=200, body=body)
+        Mock(status=200, body=body, fields=Fields())
         for body in (b"token", b"test-profile", json.dumps(_CREDS).encode())
     ]
     with patch("aws_credentials_imds.aio.resolvers.AIOHTTPClient") as default_client:
