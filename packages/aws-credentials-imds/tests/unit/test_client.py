@@ -19,6 +19,7 @@ from aws_credentials_imds.client import (
 from smithy_core import URI
 from smithy_core.exceptions import SmithyIdentityError
 from smithy_core.program import run_program
+from smithy_core.retries import SimpleRetryStrategy
 from smithy_http import Field, Fields, HTTPRequest
 
 
@@ -230,6 +231,26 @@ def test_config_max_attempts() -> None:
 def test_config_rejects_invalid_max_attempts(value: Any) -> None:
     with pytest.raises(IMDSConfigurationError, match="max attempts"):
         IMDSConfig(max_attempts=value)
+
+
+def test_config_deprecated_retry_strategy_sets_max_attempts() -> None:
+    with pytest.warns(DeprecationWarning, match="retry_strategy is deprecated"):
+        config = IMDSConfig(retry_strategy=SimpleRetryStrategy(max_attempts=2))
+    assert config.max_attempts == 2
+
+
+def test_config_max_attempts_wins_over_deprecated_retry_strategy() -> None:
+    with pytest.warns(DeprecationWarning):
+        config = IMDSConfig(
+            max_attempts=5, retry_strategy=SimpleRetryStrategy(max_attempts=2)
+        )
+    assert config.max_attempts == 5
+
+
+def test_config_deprecated_retry_strategy_attribute() -> None:
+    config = IMDSConfig(max_attempts=3)
+    with pytest.warns(DeprecationWarning, match="retry_strategy is deprecated"):
+        assert config.retry_strategy.max_attempts == 3
 
 
 def test_backoff_is_exponential_and_capped() -> None:
