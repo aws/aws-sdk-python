@@ -1,11 +1,26 @@
-/* Custom breadcrumb styling */
-.breadcrumb {
-    font-size: 0.85em;
-    color: var(--md-default-fg-color--light);
-} 
+/* Symbol page breadcrumbs reuse the theme's path inside the article; undo article styles. */
+.md-typeset .md-path {
+  padding-top: 0;
+  margin: 0.25rem 0 0.95rem;
+}
 
-p:has(span.breadcrumb) {
-  margin-top: 0;
+.md-typeset .md-path .md-path__list {
+  display: flex;
+  margin: 0;
+  list-style: none;
+}
+
+.md-typeset .md-path .md-path__item {
+  margin: 0;
+}
+
+.md-typeset .md-path .md-path__link {
+  color: var(--md-default-fg-color--light);
+  text-decoration: none;
+}
+
+.md-typeset .md-path .md-path__link:is(:focus, :hover) {
+  color: var(--md-accent-fg-color);
 }
 
 /* Light mode - use dark logo */
@@ -37,4 +52,18 @@ p:has(span.breadcrumb) {
   color: inherit;
   text-decoration: underline;
   text-underline-offset: 0.1em;
+}
+
+/* Marks operations that only the asynchronous client supports. */
+.mode-badge {
+  display: inline-block;
+  margin-left: 0.4em;
+  padding: 0 0.45em;
+  border: 0.05rem solid var(--md-default-fg-color--lighter);
+  border-radius: 0.2rem;
+  color: var(--md-default-fg-color--light);
+  font-size: 0.7em;
+  font-weight: 700;
+  line-height: 1.6;
+  vertical-align: middle;
 }
