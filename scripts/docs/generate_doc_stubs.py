@@ -10,6 +10,7 @@ import argparse
 import logging
 import re
 import sys
+import tomllib
 from collections.abc import Sequence
 from dataclasses import dataclass
 from enum import Enum
@@ -41,6 +42,22 @@ logger = logging.getLogger("generate_doc_stubs")
 ENUM_BASE_CLASSES = ("StrEnum", "IntEnum")
 ERROR_BASE_CLASSES = ("ServiceError", "ModeledError")
 CLIENT_METHOD_NAMES = ("close",)
+
+# Content tab labels. Zensical links tabs that share a label, so a reader's
+# choice of mode carries across every page.
+SYNC_LABEL = "Sync"
+ASYNC_LABEL = "Async"
+
+# Badge and admonition title for operations that only the async client has.
+ASYNC_ONLY_LABEL = f"{ASYNC_LABEL} only"
+
+# Content tab labels for an operation's input, linked across pages like the modes.
+DICTIONARY_LABEL = "Dictionary"
+MODEL_LABEL = "Model"
+
+# The package extra that installs the AWS CRT HTTP client, which bidirectional
+# event streams require.
+CRT_EXTRA = "awscrt"
 
 
 class StreamType(Enum):
@@ -83,9 +100,11 @@ class OperationInfo:
     """Information about a client operation."""
 
     name: str
-    module_path: str
+    module_path: str  # The asynchronous client's method
+    sync_module_path: str | None  # None when only the async client has it
     input: TypeInfo
-    input_dicts: list[TypeInfo]
+    input_dicts: list[TypeInfo]  # Every dictionary the async client accepts
+    async_only_input_dicts: list[TypeInfo]  # Ones the sync client does not accept
     output: TypeInfo
     stream_type: StreamType | None
     event_input_type: str | None  # For input/duplex streams
@@ -112,18 +131,30 @@ class ModelsInfo:
 
 
 @dataclass
-class ClientInfo:
-    """Complete information about a client package."""
+class ClientModeInfo:
+    """The client, config, and plugin for one client mode (sync or async)."""
 
-    name: str  # e.g., "AsyncBedrockRuntimeClient"
-    # e.g., "aws_sdk_bedrock_runtime.aio.client.AsyncBedrockRuntimeClient"
-    module_path: str
-    package_name: str  # e.g., "aws_sdk_bedrock_runtime"
+    label: str  # e.g., "Async"
+    client: TypeInfo  # e.g., AsyncBedrockRuntimeClient
     config: TypeInfo
     plugin: TypeInfo
     client_methods: list[ClientMethodInfo]
+
+
+@dataclass
+class ClientInfo:
+    """Complete information about a client package."""
+
+    package_name: str  # e.g., "aws_sdk_bedrock_runtime"
+    sync: ClientModeInfo
+    async_: ClientModeInfo
     operations: list[OperationInfo]
     models: ModelsInfo
+
+    @property
+    def modes(self) -> list[ClientModeInfo]:
+        """Both client modes, in content tab order."""
+        return [self.sync, self.async_]
 
 
 class DocStubGenerator:
@@ -196,58 +227,79 @@ class DocStubGenerator:
         logger.info(f"Analyzing package: {package_name}")
         package = griffe.load(package_name, search_paths=[self.client_dir.parent])
 
-        required = ("aio.client", "aio.config", "models")
+        required = ("client", "config", "aio.client", "aio.config", "models")
         missing = [name for name in required if not self._has_module(package, name)]
         if missing:
             raise ValueError(
                 f"Missing required modules in {package_name}: {', '.join(missing)}"
             )
 
-        client_module = package["aio.client"]
-        config_module = package["aio.config"]
-        models_module = package["models"]
+        sync_mode, sync_class = self._analyze_mode(package, "", SYNC_LABEL)
+        async_mode, async_class = self._analyze_mode(package, "aio.", ASYNC_LABEL)
 
-        client_class = self._find_class_with_suffix(client_module, "Client")
-        if not client_class:
+        # Event streams are only available on the async client, so its
+        # operations are a superset of the sync client's.
+        sync_operations = {op.name: op for op in self._operation_methods(sync_class)}
+        operations = [
+            self._analyze_operation(op, sync_operations.pop(op.name, None))
+            for op in self._operation_methods(async_class)
+        ]
+        if sync_operations:
             raise ValueError(
-                f"No class ending with 'Client' found in {package_name}.aio.client"
+                f"Operations missing from {async_class.name}: "
+                f"{', '.join(sorted(sync_operations))}"
             )
-
-        config_class = self._find_class_with_suffix(config_module, "Config")
-        if not config_class:
-            raise ValueError(
-                f"No class ending with 'Config' found in {package_name}.aio.config"
-            )
-
-        plugin_alias = config_module.members.get("Plugin")
-        if not plugin_alias:
-            raise ValueError(f"Missing Plugin in {package_name}.aio.config")
-
-        config = TypeInfo(name=config_class.name, module_path=config_class.path)
-        plugin = TypeInfo(name=plugin_alias.name, module_path=plugin_alias.path)
-
-        client_methods = self._extract_client_methods(client_class)
-        operations = self._extract_operations(client_class)
-        models = self._extract_models(models_module, operations)
+        models = self._extract_models(package["models"], operations)
 
         logger.info(
-            f"Analyzed {client_class.name}: {len(client_methods)} client methods, "
-            f"{len(operations)} operations, "
+            f"Analyzed {async_class.name}: "
+            f"{len(async_mode.client_methods)} client methods, "
+            f"{len(operations)} operations "
+            f"({sum(op.sync_module_path is None for op in operations)} async only), "
             f"{len(models.structures)} structures, {len(models.errors)} errors, "
             f"{len(models.dictionaries)} dictionaries, "
             f"{len(models.unions)} unions, {len(models.enums)} enums"
         )
 
         return ClientInfo(
-            name=client_class.name,
-            module_path=client_class.path,
             package_name=package_name,
-            config=config,
-            plugin=plugin,
-            client_methods=client_methods,
+            sync=sync_mode,
+            async_=async_mode,
             operations=operations,
             models=models,
         )
+
+    def _analyze_mode(
+        self, package: Object | Alias, prefix: str, label: str
+    ) -> tuple[ClientModeInfo, Class]:
+        """Find the client, config, and plugin under a mode's module prefix."""
+        client_module = package[f"{prefix}client"]
+        config_module = package[f"{prefix}config"]
+
+        client_class = self._find_class_with_suffix(client_module, "Client")
+        if not client_class:
+            raise ValueError(
+                f"No class ending with 'Client' found in {client_module.path}"
+            )
+
+        config_class = self._find_class_with_suffix(config_module, "Config")
+        if not config_class:
+            raise ValueError(
+                f"No class ending with 'Config' found in {config_module.path}"
+            )
+
+        plugin_alias = config_module.members.get("Plugin")
+        if not plugin_alias:
+            raise ValueError(f"Missing Plugin in {config_module.path}")
+
+        mode = ClientModeInfo(
+            label=label,
+            client=TypeInfo(name=client_class.name, module_path=client_class.path),
+            config=TypeInfo(name=config_class.name, module_path=config_class.path),
+            plugin=TypeInfo(name=plugin_alias.name, module_path=plugin_alias.path),
+            client_methods=self._extract_client_methods(client_class),
+        )
+        return mode, client_class
 
     def _has_module(self, package: Object | Alias, dotted_name: str) -> bool:
         try:
@@ -266,19 +318,18 @@ class DocStubGenerator:
                 return cls
         return None
 
-    def _extract_operations(self, client_class: Class) -> list[OperationInfo]:
-        """Extract operation information from client class."""
-        operations = []
-        for op in client_class.functions.values():
-            if (
+    def _operation_methods(self, client_class: Class) -> list[Function]:
+        """Return the client methods that are service operations."""
+        return [
+            op
+            for op in client_class.functions.values()
+            if not (
                 op.is_private
                 or op.is_init_method
                 or op.is_special
                 or op.name in CLIENT_METHOD_NAMES
-            ):
-                continue
-            operations.append(self._analyze_operation(op))
-        return operations
+            )
+        ]
 
     def _extract_client_methods(self, client_class: Class) -> list[ClientMethodInfo]:
         """Extract public client methods that are not service operations."""
@@ -288,47 +339,37 @@ class DocStubGenerator:
             if not method.is_private and method.name in CLIENT_METHOD_NAMES
         ]
 
-    def _analyze_operation(self, operation: Function) -> OperationInfo:
-        """Analyze an operation method to extract information."""
+    def _analyze_operation(
+        self, operation: Function, sync_operation: Function | None
+    ) -> OperationInfo:
+        """Analyze an async operation method and its sync counterpart, if any."""
         stream_type = None
         event_input_type = None
         event_output_type = None
 
-        # Public request types live on the overloads; the implementation accepts
-        # *args/**kwargs and does not expose the input shape.
-        request_signature = next(
-            (
-                overload
-                for overload in operation.overloads or []
-                if "request" in overload.parameters
-            ),
-            None,
-        )
-        if request_signature:
-            input_annotation = request_signature.parameters["request"].annotation
-        else:
-            input_annotation = operation.parameters["input"].annotation
-        input_types = self._get_union_elements(
-            self._get_expr(input_annotation, f"'{operation.name}' input annotation")
-        )
-        model_types = [
-            expr for expr in input_types if not expr.canonical_name.endswith("Dict")
-        ]
-        dict_types = [
-            expr for expr in input_types if expr.canonical_name.endswith("Dict")
-        ]
-        if len(model_types) != 1:
-            raise ValueError(f"'{operation.name}': expected one input model")
-        input_info = TypeInfo(
-            name=model_types[0].canonical_name,
-            module_path=model_types[0].canonical_path,
-        )
-        input_dicts = [
-            TypeInfo(name=expr.canonical_name, module_path=expr.canonical_path)
-            for expr in dict_types
-        ]
-
+        input_info, input_dicts = self._input_types(operation)
         returns = self._get_expr(operation.returns, f"'{operation.name}' return type")
+        async_only_input_dicts = []
+        if sync_operation:
+            # The page documents one input and output for both clients, so the
+            # sync method may differ only by accepting fewer dictionaries.
+            sync_input, sync_dicts = self._input_types(sync_operation)
+            if sync_input != input_info or any(
+                d not in input_dicts for d in sync_dicts
+            ):
+                raise ValueError(
+                    f"'{operation.name}': sync input types are not a subset of "
+                    "the async input types"
+                )
+            sync_returns = self._get_expr(
+                sync_operation.returns, f"'{operation.name}' return type"
+            )
+            if sync_returns.canonical_path != returns.canonical_path:
+                raise ValueError(
+                    f"'{operation.name}': sync and async return types differ"
+                )
+            async_only_input_dicts = [d for d in input_dicts if d not in sync_dicts]
+
         output_type = returns.canonical_name
         stream_type_map = {s.value: s for s in StreamType}
 
@@ -354,13 +395,42 @@ class DocStubGenerator:
         return OperationInfo(
             name=operation.name,
             module_path=operation.path,
+            sync_module_path=sync_operation.path if sync_operation else None,
             input=input_info,
             input_dicts=input_dicts,
+            async_only_input_dicts=async_only_input_dicts,
             output=output_info,
             stream_type=stream_type,
             event_input_type=event_input_type,
             event_output_type=event_output_type,
         )
+
+    def _input_types(self, operation: Function) -> tuple[TypeInfo, list[TypeInfo]]:
+        """Return an operation's input model and the dictionaries it accepts."""
+        # Public request types live on the overloads; the implementation accepts
+        # *args/**kwargs and does not expose the input shape.
+        request_signature = next(
+            (
+                overload
+                for overload in operation.overloads or []
+                if "request" in overload.parameters
+            ),
+            None,
+        )
+        if request_signature:
+            input_annotation = request_signature.parameters["request"].annotation
+        else:
+            input_annotation = operation.parameters["input"].annotation
+        input_types = [
+            TypeInfo(name=expr.canonical_name, module_path=expr.canonical_path)
+            for expr in self._get_union_elements(
+                self._get_expr(input_annotation, f"'{operation.name}' input annotation")
+            )
+        ]
+        models = [t for t in input_types if not t.name.endswith("Dict")]
+        if len(models) != 1:
+            raise ValueError(f"'{operation.name}': expected one input model")
+        return models[0], [t for t in input_types if t.name.endswith("Dict")]
 
     def _get_expr(self, annotation: str | Expr | None, context: str) -> Expr:
         """Extract and validate an Expr from an annotation."""
@@ -550,6 +620,8 @@ class DocStubGenerator:
 
     def _generate_index(self, client_info: ClientInfo) -> None:
         """Generate the main index.md file."""
+        sync, async_ = client_info.sync, client_info.async_
+        distribution = client_info.package_name.replace("_", "-")
         lines = [
             f"# {self.service_name}",
             "",
@@ -558,31 +630,43 @@ class DocStubGenerator:
             f"To install the {self.service_name} client:",
             "",
             "```bash",
-            f"python -m pip install {client_info.package_name.replace('_', '-')}",
+            f"python -m pip install {distribution}",
             "```",
             "",
+            *self._bidirectional_streaming_setup(client_info, distribution),
             "## Client",
             "",
-            *self._mkdocs_directive(
-                client_info.module_path,
-                members=False,
-                merge_init_into_class=True,
-                ignore_init_summary=True,
-            ),
+            f"The package provides a synchronous client, `{sync.client.name}`, and "
+            f"an asynchronous client, `{async_.client.name}`. Both clients use "
+            "the same models.",
             "",
         ]
-
-        for method in sorted(client_info.client_methods, key=lambda x: x.name):
+        if any(op.sync_module_path is None for op in client_info.operations):
             lines.extend(
-                [*self._mkdocs_directive(method.module_path, heading_level=4), ""]
+                [
+                    "Operations that use event streams are available only on "
+                    f"`{async_.client.name}`. They are marked **{ASYNC_ONLY_LABEL}** "
+                    "under [Operations](#operations).",
+                    "",
+                ]
             )
+        lines.extend(
+            self._tabs(
+                {mode.label: self._client_tab(mode) for mode in client_info.modes}
+            )
+        )
 
         # Operations section
         if client_info.operations:
             lines.append("## Operations")
             lines.append("")
             for op in sorted(client_info.operations, key=lambda x: x.name):
-                lines.append(f"- [`{op.name}`](operations/{op.name}.md)")
+                badge = (
+                    ""
+                    if op.sync_module_path
+                    else f' <span class="mode-badge">{ASYNC_ONLY_LABEL}</span>'
+                )
+                lines.append(f"- [`{op.name}`](operations/{op.name}.md){badge}")
             lines.append("")
 
         # Configuration section
@@ -590,13 +674,9 @@ class DocStubGenerator:
             [
                 "## Configuration",
                 "",
-                *self._mkdocs_directive(
-                    client_info.config.module_path,
-                    merge_init_into_class=True,
-                    ignore_init_summary=True,
+                *self._tabs(
+                    {mode.label: self._config_tab(mode) for mode in client_info.modes}
                 ),
-                "",
-                *self._mkdocs_directive(client_info.plugin.module_path),
             ]
         )
 
@@ -628,38 +708,57 @@ class DocStubGenerator:
     def _generate_operation_stubs(self, operations: list[OperationInfo]) -> None:
         """Generate operation documentation files."""
         for op in operations:
-            lines = [
-                f"# {op.name}",
-                "",
-                "## Operation",
-                "",
-                *self._mkdocs_directive(op.module_path),
-                "",
-                "## Input",
-                "",
-            ]
+            lines = [f"# {op.name}", "", "## Operation", ""]
+            if op.sync_module_path:
+                lines.extend(
+                    self._tabs(
+                        {
+                            SYNC_LABEL: self._mkdocs_directive(
+                                op.sync_module_path, toc_label=SYNC_LABEL
+                            ),
+                            ASYNC_LABEL: self._mkdocs_directive(
+                                op.module_path, toc_label=ASYNC_LABEL
+                            ),
+                        }
+                    )
+                )
+            else:
+                lines.extend(
+                    [
+                        f'!!! info "{ASYNC_ONLY_LABEL}"',
+                        "",
+                        "    This operation uses an event stream, so only the "
+                        "asynchronous client supports it.",
+                        "",
+                        *self._mkdocs_directive(op.module_path, toc_label=ASYNC_LABEL),
+                        "",
+                    ]
+                )
+            lines.extend(["## Input", ""])
             if op.input_dicts:
                 lines.extend(
                     [
-                        "Pass the input fields as keyword arguments, or pass a model or dictionary "
-                        "as the first positional argument. Pass `plugins` separately as a keyword argument.",
+                        "Pass the input as keyword arguments, a positional dictionary, or a "
+                        "positional model object. Pass `plugins` separately as a keyword argument.",
                         "",
-                        "### Model",
-                        "",
-                        *self._mkdocs_directive(op.input.module_path, heading_level=4),
-                        "",
-                        "### Dictionaries",
                     ]
                 )
+                # The dictionaries and the model have the same fields, so show one
+                # at a time. Dictionaries come first: keyword arguments, the most
+                # common way to call an operation, follow their fields.
+                dictionaries = self._async_only_dicts_note(op)
                 for dictionary in op.input_dicts:
-                    lines.extend(
-                        [
-                            "",
-                            *self._mkdocs_directive(
-                                dictionary.module_path, heading_level=4
-                            ),
-                        ]
+                    if dictionaries:
+                        dictionaries.append("")
+                    dictionaries.extend(self._mkdocs_directive(dictionary.module_path))
+                lines.extend(
+                    self._tabs(
+                        {
+                            DICTIONARY_LABEL: dictionaries,
+                            MODEL_LABEL: self._mkdocs_directive(op.input.module_path),
+                        }
                     )
+                )
             else:
                 lines.extend(self._mkdocs_directive(op.input.module_path))
             lines.extend(["", "## Output", ""])
@@ -705,9 +804,7 @@ class DocStubGenerator:
 
             output_path = self.output_dir / "operations" / f"{op.name}.md"
             output_path.parent.mkdir(parents=True, exist_ok=True)
-            output_path.write_text(
-                self._breadcrumb("Operations", op.name) + "\n".join(lines)
-            )
+            output_path.write_text(self._breadcrumb("Operations") + "\n".join(lines))
 
         logger.info(f"Wrote {len(operations)} operation file(s)")
 
@@ -730,7 +827,7 @@ class DocStubGenerator:
             output_path = self.output_dir / category / f"{item.name}.md"
             output_path.parent.mkdir(parents=True, exist_ok=True)
             output_path.write_text(
-                self._breadcrumb(category.title(), item.name) + "\n".join(lines)
+                self._breadcrumb(category.title()) + "\n".join(lines)
             )
 
         logger.info(f"Wrote {len(items)} {category} file(s)")
@@ -755,11 +852,93 @@ class DocStubGenerator:
 
             output_path = self.output_dir / "unions" / f"{union.name}.md"
             output_path.parent.mkdir(parents=True, exist_ok=True)
-            output_path.write_text(
-                self._breadcrumb("Unions", union.name) + "\n".join(lines)
-            )
+            output_path.write_text(self._breadcrumb("Unions") + "\n".join(lines))
 
         logger.info(f"Wrote {len(unions)} union file(s)")
+
+    def _bidirectional_streaming_setup(
+        self, client_info: ClientInfo, distribution: str
+    ) -> list[str]:
+        """Generate the CRT install step, for clients with bidirectional streams."""
+        if not any(
+            op.stream_type is StreamType.DUPLEX for op in client_info.operations
+        ):
+            return []
+        pyproject = tomllib.loads(
+            (self.client_dir.parent.parent / "pyproject.toml").read_text()
+        )
+        if CRT_EXTRA not in pyproject["project"].get("optional-dependencies", {}):
+            raise ValueError(
+                f"{distribution} has bidirectional streams but no '{CRT_EXTRA}' extra"
+            )
+        return [
+            "### Bidirectional streaming",
+            "",
+            "This client supports bidirectional event streams, which require the AWS CRT "
+            f"HTTP client. To use this feature, install the package with the `{CRT_EXTRA}` extra:",
+            "",
+            "```bash",
+            f'python -m pip install "{distribution}[{CRT_EXTRA}]"',
+            "```",
+            "",
+            "Then pass an `AWSCRTHTTPClient` instance as the transport when you resolve the "
+            "config.",
+            "",
+        ]
+
+    def _client_tab(self, mode: ClientModeInfo) -> list[str]:
+        """Generate a mode's Client tab: the client class and non-operation methods."""
+        lines = self._mkdocs_directive(
+            mode.client.module_path,
+            members=False,
+            merge_init_into_class=True,
+            ignore_init_summary=True,
+        )
+        for method in sorted(mode.client_methods, key=lambda x: x.name):
+            lines.extend(
+                ["", *self._mkdocs_directive(method.module_path, heading_level=4)]
+            )
+        return lines
+
+    def _config_tab(self, mode: ClientModeInfo) -> list[str]:
+        """Generate a mode's Configuration tab: the config and Plugin types."""
+        return [
+            # No constructor signature: configs are built with resolve(), and
+            # calling the class directly raises.
+            *self._mkdocs_directive(mode.config.module_path),
+            "",
+            # Both modes define a Plugin, so the table of contents label tells
+            # them apart.
+            *self._mkdocs_directive(
+                mode.plugin.module_path,
+                toc_label=f"{mode.plugin.name} ({mode.label})",
+            ),
+        ]
+
+    def _async_only_dicts_note(self, op: OperationInfo) -> list[str]:
+        """Generate a note naming input dictionaries only the async client accepts."""
+        if not (op.sync_module_path and op.async_only_input_dicts):
+            return []
+
+        def names(dicts: list[TypeInfo]) -> str:
+            return ", ".join(f"`{d.name}`" for d in dicts)
+
+        shared = [d for d in op.input_dicts if d not in op.async_only_input_dicts]
+        note = (
+            f"Only the asynchronous client accepts {names(op.async_only_input_dicts)}."
+        )
+        if shared:
+            note = f"Both clients accept {names(shared)}. {note}"
+        return [note]
+
+    def _tabs(self, tabs: dict[str, list[str]]) -> list[str]:
+        """Wrap each label's lines in a content tab, ending with a blank line."""
+        lines = []
+        for label, body in tabs.items():
+            lines.extend([f'=== "{label}"', ""])
+            lines.extend(f"    {line}" if line else "" for line in body)
+            lines.append("")
+        return lines
 
     def _mkdocs_directive(
         self,
@@ -768,6 +947,7 @@ class DocStubGenerator:
         members: bool | None = None,
         merge_init_into_class: bool = False,
         ignore_init_summary: bool = False,
+        toc_label: str | None = None,
     ) -> list[str]:
         """Generate mkdocstrings directive lines for a module path.
 
@@ -777,6 +957,8 @@ class DocStubGenerator:
             members: Whether to show members (None omits the option).
             merge_init_into_class: Whether to merge __init__ docstring into class docs.
             ignore_init_summary: Whether to ignore init summary in docstrings.
+            toc_label: The object's label in the page's table of contents
+                (None uses its name).
 
         Returns:
             List of strings representing the mkdocstrings directive.
@@ -790,18 +972,32 @@ class DocStubGenerator:
             lines.append(f"        members: {'true' if members else 'false'}")
         if merge_init_into_class:
             lines.append("        merge_init_into_class: true")
+        if toc_label:
+            lines.append(f'        toc_label: "{toc_label}"')
         if ignore_init_summary:
             lines.append("        docstring_options:")
             lines.append("            ignore_init_summary: true")
 
         return lines
 
-    def _breadcrumb(self, category: str, name: str) -> str:
-        """Generate a breadcrumb navigation element."""
-        separator = "&nbsp;&nbsp;>&nbsp;&nbsp;"
-        home = f"[{self.service_name}](../index.md)"
-        section = f"[{category}](../index.md#{category.lower()})"
-        return f'<span class="breadcrumb">{home}{separator}{section}{separator}{name}</span>\n'
+    def _breadcrumb(self, category: str) -> str:
+        """Generate a breadcrumb trail in the theme's navigation path markup.
+
+        Symbol pages are left out of the navigation to keep the sidebar small, so
+        the theme renders no path for them. Like its path, this lists ancestors only.
+        """
+        items = "\n".join(
+            f'<li class="md-path__item" markdown>[<span class="md-ellipsis">{title}</span>]'
+            f"({href}){{ .md-path__link }}</li>"
+            for title, href in [
+                (self.service_name, "../index.md"),
+                (category, f"../index.md#{category.lower()}"),
+            ]
+        )
+        return (
+            '<nav class="md-path" aria-label="Navigation" markdown>\n'
+            f'<ol class="md-path__list" markdown>\n{items}\n</ol>\n</nav>\n\n'
+        )
 
 
 def main() -> int:

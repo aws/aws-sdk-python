@@ -1,7 +1,7 @@
 # AWS SDK for Python v4
 
-The AWS SDK for Python v4 provides asynchronous clients for supported AWS services.
-Each service has its own package.
+The AWS SDK for Python v4 provides synchronous and asynchronous clients for
+supported AWS services. Each service has its own package.
 
 !!! warning "Developer Preview"
 
@@ -15,14 +15,15 @@ Each service has its own package.
 
 ## Features
 
-- **Async operations.** Every service operation is an `async` method that works
-  with `asyncio`.
+- **Sync and async clients.** Each package includes a synchronous client and an
+  asynchronous client that works with `asyncio`. Both clients use the same
+  models.
 - **Per-service packages.** Install only the clients your application uses.
-- **Type annotations.** Operations, input models, and response models include
-  type annotations, so editors and type checkers do not need separate stub
-  packages.
-- **Streaming support.** Clients for streaming services support event streams
-  and bidirectional streaming.
+- **Generated types.** Each client and its data types are generated from the
+  service's Smithy model. Operations take keyword arguments and return typed
+  objects instead of dictionaries.
+- **Streaming support.** The asynchronous clients for streaming services
+  support event streams and bidirectional streaming.
 
 The code generator builds each client from its service's
 [Smithy](https://smithy.io/) model.
@@ -80,25 +81,40 @@ credentials provider are not yet supported.
 Use the [Amazon DynamoDB client](clients/dynamodb/index.md) to list up to ten
 tables in `us-east-1`:
 
-```python
-import asyncio
+=== "Sync"
 
-from aws_sdk_dynamodb import AsyncDynamoDBClient, AsyncDynamoDBConfig
+    ```python
+    from aws_sdk_dynamodb import DynamoDBClient, DynamoDBConfig
 
+    config = DynamoDBConfig.resolve(region="us-east-1")
 
-async def main():
-    config = await AsyncDynamoDBConfig.resolve(region="us-east-1")
-
-    async with AsyncDynamoDBClient(config=config) as client:
-        response = await client.list_tables(limit=10)
+    with DynamoDBClient(config=config) as client:
+        response = client.list_tables(limit=10)
         for table in response.table_names or []:
             print(table)
+    ```
+
+=== "Async"
+
+    ```python
+    import asyncio
+
+    from aws_sdk_dynamodb import AsyncDynamoDBClient, AsyncDynamoDBConfig
 
 
-asyncio.run(main())
-```
+    async def main():
+        config = await AsyncDynamoDBConfig.resolve(region="us-east-1")
 
-`AsyncDynamoDBConfig.resolve()` loads shared settings such as retry
+        async with AsyncDynamoDBClient(config=config) as client:
+            response = await client.list_tables(limit=10)
+            for table in response.table_names or []:
+                print(table)
+
+
+    asyncio.run(main())
+    ```
+
+The config's `resolve()` method loads shared settings such as retry
 configuration. Here, the `region` argument overrides a region set in the
 environment or shared config. The client resolves credentials through the
 default chain when it sends the request.
