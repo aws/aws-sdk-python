@@ -2,7 +2,7 @@
 
 [project]
 name = "aws_sdk_lambda"
-version = "0.13.0"
+version = "0.13.1"
 description = "Python client for AWS Lambda"
 readme = "README.md"
 requires-python = ">=3.12"

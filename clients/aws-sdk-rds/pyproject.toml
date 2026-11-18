@@ -2,7 +2,7 @@
 
 [project]
 name = "aws_sdk_rds"
-version = "0.13.0"
+version = "0.13.1"
 description = "Python client for Amazon Relational Database Service"
 readme = "README.md"
 requires-python = ">=3.12"

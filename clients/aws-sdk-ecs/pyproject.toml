@@ -2,7 +2,7 @@
 
 [project]
 name = "aws_sdk_ecs"
-version = "0.13.0"
+version = "0.13.1"
 description = "Python client for Amazon EC2 Container Service"
 readme = "README.md"
 requires-python = ">=3.12"

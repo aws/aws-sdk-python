@@ -1,0 +1,8 @@
+{
+  "changes": [
+    {
+      "type": "enhancement",
+      "description": "Update README with Developer Preview release status."
+    }
+  ]
+}

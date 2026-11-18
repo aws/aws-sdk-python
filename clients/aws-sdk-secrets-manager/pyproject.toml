@@ -2,7 +2,7 @@
 
 [project]
 name = "aws_sdk_secrets_manager"
-version = "0.13.0"
+version = "0.13.1"
 description = "Python client for AWS Secrets Manager"
 readme = "README.md"
 requires-python = ">=3.12"

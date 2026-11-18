@@ -2,7 +2,7 @@
 
 [project]
 name = "aws_sdk_bedrock_agent"
-version = "0.13.0"
+version = "0.13.1"
 description = "Python client for Agents for Amazon Bedrock"
 readme = "README.md"
 requires-python = ">=3.12"
