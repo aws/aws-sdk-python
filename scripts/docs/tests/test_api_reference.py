@@ -156,7 +156,7 @@ def test_index_documents_both_client_modes(tmp_path: Path) -> None:
     generator._generate_index(client)
     index = (tmp_path / "index.md").read_text()
 
-    client_section = index.split("## Client")[1].split("## Operations")[0]
+    client_section = index.split("## Clients")[1].split("## Operations")[0]
     config_section = index.split("## Configuration")[1].split("## Structures")[0]
     for section, sync_path, async_path in [
         (
@@ -194,8 +194,12 @@ def test_index_documents_both_client_modes(tmp_path: Path) -> None:
     assert "- [`converse`](operations/converse.md)\n" in index
 
     # Bidirectional streams need the CRT transport, so installation covers it.
-    installation = index.split("## Installation")[1].split("## Client")[0]
+    installation = index.split("## Installation")[1].split("## Clients")[0]
     assert "\n### Bidirectional streaming\n" in installation
+    assert (
+        "[AWS Common Runtime (CRT)]"
+        "(https://docs.aws.amazon.com/sdkref/latest/guide/common-runtime.html)"
+    ) in installation
     assert 'python -m pip install "aws-sdk-bedrock-runtime[awscrt]"' in installation
     assert "pass an `AWSCRTHTTPClient` instance as the transport" in installation
 

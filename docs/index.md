@@ -5,10 +5,10 @@ supported AWS services. Each service has its own package.
 
 !!! warning "Developer Preview"
 
-    The AWS SDK for Python v4 is intended for evaluation and testing only. Do
-    not use it for production workloads; use
-    [Boto3](https://docs.aws.amazon.com/boto3/latest/)
-    instead.
+    This SDK is for evaluation and testing only. APIs might change before
+    general availability, so we recommend pinning the versions of the packages
+    you install. For production workloads, use
+    [Boto3](https://aws.amazon.com/sdk-for-python/).
 
 [Browse clients](clients/index.md){ .md-button .md-button--primary }
 [View source](https://github.com/aws/aws-sdk-python){ .md-button }

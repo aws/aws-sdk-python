@@ -55,9 +55,10 @@ ASYNC_ONLY_LABEL = f"{ASYNC_LABEL} only"
 DICTIONARY_LABEL = "Dictionary"
 MODEL_LABEL = "Model"
 
-# The package extra that installs the AWS CRT HTTP client, which bidirectional
-# event streams require.
+# The package extra that installs the AWS Common Runtime (CRT) HTTP client, which
+# bidirectional event streams require.
 CRT_EXTRA = "awscrt"
+CRT_DOCS_URL = "https://docs.aws.amazon.com/sdkref/latest/guide/common-runtime.html"
 
 
 class StreamType(Enum):
@@ -634,7 +635,7 @@ class DocStubGenerator:
             "```",
             "",
             *self._bidirectional_streaming_setup(client_info, distribution),
-            "## Client",
+            "## Clients",
             "",
             f"The package provides a synchronous client, `{sync.client.name}`, and "
             f"an asynchronous client, `{async_.client.name}`. Both clients use "
@@ -874,8 +875,9 @@ class DocStubGenerator:
         return [
             "### Bidirectional streaming",
             "",
-            "This client supports bidirectional event streams, which require the AWS CRT "
-            f"HTTP client. To use this feature, install the package with the `{CRT_EXTRA}` extra:",
+            "This client supports bidirectional event streams, which require the HTTP "
+            f"client from the [AWS Common Runtime (CRT)]({CRT_DOCS_URL}). To use this "
+            f"feature, install the package with the `{CRT_EXTRA}` extra:",
             "",
             "```bash",
             f'python -m pip install "{distribution}[{CRT_EXTRA}]"',
