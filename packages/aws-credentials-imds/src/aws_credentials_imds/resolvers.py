@@ -4,9 +4,9 @@ from smithy_aws_core.identity import AWSCredentialsIdentity, AWSIdentityProperti
 from smithy_core.interfaces.identity import IdentityResolver
 from smithy_core.program import run_program
 from smithy_http.interfaces import HTTPClient
-from smithy_http.urllib3 import Urllib3HTTPClient
+from smithy_http.urllib3 import Urllib3HTTPClient, Urllib3HTTPClientConfig
 
-from ._imds import IMDSConfig, is_fresh, resolve_credentials
+from ._imds import TIMEOUT_SECONDS, IMDSConfig, is_fresh, resolve_credentials
 from .client import IMDSClient
 
 
@@ -38,7 +38,11 @@ class IMDSCredentialsResolver(
         if self._imds_client is not None:
             self._credentials = self._resolve(self._imds_client)
         else:
-            with Urllib3HTTPClient() as http_client:
+            with Urllib3HTTPClient(
+                client_config=Urllib3HTTPClientConfig(
+                    connect_timeout=TIMEOUT_SECONDS, read_timeout=TIMEOUT_SECONDS
+                )
+            ) as http_client:
                 self._credentials = self._resolve(
                     IMDSClient(http_client=http_client, config=self._config)
                 )
