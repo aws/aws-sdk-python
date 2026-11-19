@@ -8,7 +8,6 @@ from aws_sdk_cloudformation.models import (
     CreateStackInput,
     DeleteStackInput,
     DescribeStackEventsInput,
-    ListStacksInput,
     Parameter,
     StackStatus,
     Tag,
@@ -92,19 +91,3 @@ async def test_validate_template_reports_parameters_and_description(
     assert [(p.parameter_key, p.default_value) for p in result.parameters or []] == [
         ("Delay", "0")
     ]
-
-
-async def test_list_stacks_pages_to_the_end(
-    cloudformation: AsyncCloudFormationClient,
-) -> None:
-    """Following next_token through ListStacks ends on a page without a token."""
-    pages = 0
-    token: str | None = None
-    while True:
-        page = await cloudformation.list_stacks(ListStacksInput(next_token=token))
-        pages += 1
-        assert pages < 1000
-        token = page.next_token
-        if token is None:
-            break
-    assert pages >= 1

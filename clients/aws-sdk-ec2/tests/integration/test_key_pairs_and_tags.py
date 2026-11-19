@@ -107,7 +107,10 @@ async def test_tags_created_filtered_and_deleted(
     by_tag = await wait_until(
         lambda: ec2.describe_security_groups(
             DescribeSecurityGroupsInput(
-                filters=[Filter(name="tag:Stage", values=["beta", "alpha"])]
+                filters=[
+                    Filter(name="group-id", values=[security_group]),
+                    Filter(name="tag:Stage", values=["beta", "alpha"]),
+                ]
             )
         ),
         lambda found: bool(found.security_groups),

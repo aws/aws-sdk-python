@@ -25,7 +25,7 @@ from waiters import wait_until
 async def test_stream_is_active_on_demand(
     kinesis: AsyncKinesisClient, stream: str
 ) -> None:
-    """Verifies the shared stream reports ON_DEMAND mode, ACTIVE status, and its tags."""
+    """Verifies the shared stream reports ON_DEMAND mode and ACTIVE status."""
     summary = (
         await kinesis.describe_stream_summary(
             DescribeStreamSummaryInput(stream_name=stream)

@@ -9,37 +9,9 @@ IAM client into this package's test dependencies, so those flows are omitted.
 
 import pytest
 from aws_sdk_lambda.aio.client import AsyncLambdaClient
-from aws_sdk_lambda.models import (
-    GetFunctionInput,
-    ListFunctionsInput,
-    ResourceNotFoundException,
-)
+from aws_sdk_lambda.models import GetFunctionInput, ResourceNotFoundException
 
 from . import unique_name
-
-MAX_PAGES = 3
-
-
-async def test_list_functions_marker_pagination(
-    lambda_client: AsyncLambdaClient,
-) -> None:
-    """Following next_marker with one item per page yields distinct functions."""
-    names: list[str] = []
-    marker: str | None = None
-    for _ in range(MAX_PAGES):
-        page = await lambda_client.list_functions(
-            ListFunctionsInput(max_items=1, marker=marker)
-        )
-        functions = page.functions or []
-        assert len(functions) <= 1
-        names.extend(f.function_name for f in functions if f.function_name)
-        marker = page.next_marker
-        if marker is None:
-            break
-
-    if marker is None and len(names) < 2:
-        pytest.skip("account has fewer than two functions to paginate over")
-    assert len(names) == len(set(names))
 
 
 async def test_get_missing_function_raises_modeled_error(

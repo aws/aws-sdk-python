@@ -20,9 +20,14 @@ from aws_sdk_secrets_manager.models import (
     Tag,
 )
 from dual_mode import MODES, Mode, open_client
-from waiters import wait_until, wait_until_gone
+from waiters import wait_until
 
-from . import create_async_client, create_sync_client, unique_name
+from . import (
+    create_async_client,
+    create_sync_client,
+    unique_name,
+    wait_until_secret_deleted,
+)
 
 SECRET_VALUE = "first-value"
 
@@ -64,13 +69,7 @@ def secret_name() -> Iterator[str]:
             client.delete_secret(
                 DeleteSecretInput(secret_id=name, force_delete_without_recovery=True)
             )
-            asyncio.run(
-                wait_until_gone(
-                    lambda: _get(client, name),
-                    gone_on=(ResourceNotFoundException,),
-                    interval=2,
-                )
-            )
+            asyncio.run(wait_until_secret_deleted(lambda: _get(client, name)))
 
 
 async def _get(client: SecretsManagerClient, name: str) -> GetSecretValueOutput:
