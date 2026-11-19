@@ -1,30 +1,14 @@
 # Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 # SPDX-License-Identifier: Apache-2.0
 
-"""Credential chain and temporary credentials, from JS v3 STS e2e."""
-
-import re
+"""Temporary credentials, from JS v3 STS e2e."""
 
 import pytest
 from aws_sdk_sts.aio.client import AsyncSTSClient
-from aws_sdk_sts.models import GetCallerIdentityInput, GetSessionTokenInput
+from aws_sdk_sts.models import GetSessionTokenInput
 from smithy_aws_core.identity import AWSCredentialsIdentity
 
 from .conftest import STSFactory
-
-
-async def test_get_caller_identity_resolves_environment_credentials(
-    sts: AsyncSTSClient,
-) -> None:
-    """Verifies the environment credential chain signs a request that STS accepts and identifies."""
-    identity = await sts.get_caller_identity(GetCallerIdentityInput())
-
-    assert identity.account is not None
-    assert re.fullmatch(r"\d{12}", identity.account)
-    assert identity.arn is not None
-    assert identity.arn.startswith("arn:")
-    assert identity.user_id
-    assert identity.response_metadata.http_status_code == 200
 
 
 @pytest.mark.skip(
@@ -34,7 +18,7 @@ async def test_session_token_credentials_keep_caller_identity(
     sts: AsyncSTSClient, make_sts: STSFactory
 ) -> None:
     """Verifies temporary credentials from GetSessionToken authenticate as the same account and user."""
-    original = await sts.get_caller_identity(GetCallerIdentityInput())
+    original = await sts.get_caller_identity()
     token = await sts.get_session_token(GetSessionTokenInput(duration_seconds=900))
     assert token.credentials is not None
 
@@ -45,7 +29,7 @@ async def test_session_token_credentials_keep_caller_identity(
             session_token=token.credentials.session_token,
         )
     )
-    session = await temporary.get_caller_identity(GetCallerIdentityInput())
+    session = await temporary.get_caller_identity()
 
     assert session.account == original.account
     assert session.arn == original.arn

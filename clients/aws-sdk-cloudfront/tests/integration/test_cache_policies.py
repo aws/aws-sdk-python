@@ -12,7 +12,6 @@ from aws_sdk_cloudfront.models import (
     DeleteCachePolicyInput,
     GetCachePolicyInput,
     ListCachePoliciesInput,
-    ListDistributionsInput,
     NoSuchCachePolicy,
     PreconditionFailed,
     UpdateCachePolicyInput,
@@ -138,7 +137,7 @@ async def test_list_distributions_returns_a_count(
     cloudfront: AsyncCloudFrontClient,
 ) -> None:
     """ListDistributions succeeds with the configured credentials and reports a quantity."""
-    result = await cloudfront.list_distributions(ListDistributionsInput())
+    result = await cloudfront.list_distributions()
     assert result.distribution_list is not None
     assert result.distribution_list.quantity >= 0
 
