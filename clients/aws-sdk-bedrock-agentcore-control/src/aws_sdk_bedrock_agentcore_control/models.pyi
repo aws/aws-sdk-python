@@ -664,6 +664,7 @@ from ._private.models_1 import (
     FilesystemConfigurationS3FilesAccessPoint as FilesystemConfigurationS3FilesAccessPoint,
     FilesystemConfigurationEfsAccessPoint as FilesystemConfigurationEfsAccessPoint,
     FilesystemConfigurationCapacityProviderVolume as FilesystemConfigurationCapacityProviderVolume,
+    FilesystemConfigurationS3BucketMount as FilesystemConfigurationS3BucketMount,
     FilesystemConfigurationUnknown as FilesystemConfigurationUnknown,
     FilesystemConfiguration as FilesystemConfiguration,
     _FilesystemConfigurationDeserializer as _FilesystemConfigurationDeserializer,
@@ -671,6 +672,7 @@ from ._private.models_1 import (
     FilesystemConfigurationS3FilesAccessPointDict as FilesystemConfigurationS3FilesAccessPointDict,
     FilesystemConfigurationEfsAccessPointDict as FilesystemConfigurationEfsAccessPointDict,
     FilesystemConfigurationCapacityProviderVolumeDict as FilesystemConfigurationCapacityProviderVolumeDict,
+    FilesystemConfigurationS3BucketMountDict as FilesystemConfigurationS3BucketMountDict,
     FilesystemConfigurationDict as FilesystemConfigurationDict,
     Filter as Filter,
     FilterDict as FilterDict,
@@ -1133,6 +1135,8 @@ from ._private.models_1 import (
 )
 
 from ._private.models_2 import (
+    LinuxOperatingSystemConfiguration as LinuxOperatingSystemConfiguration,
+    LinuxOperatingSystemConfigurationDict as LinuxOperatingSystemConfigurationDict,
     ListAgentInsightStoresInput as ListAgentInsightStoresInput,
     ListAgentInsightStoresInputDict as ListAgentInsightStoresInputDict,
     ListAgentInsightStoresOutput as ListAgentInsightStoresOutput,
@@ -1458,6 +1462,12 @@ from ._private.models_2 import (
     OpenResponsesEvaluatorModelConfig as OpenResponsesEvaluatorModelConfig,
     OpenResponsesEvaluatorModelConfigDict as OpenResponsesEvaluatorModelConfigDict,
     OperatingSystem as OperatingSystem,
+    OperatingSystemConfigurationLinux as OperatingSystemConfigurationLinux,
+    OperatingSystemConfigurationUnknown as OperatingSystemConfigurationUnknown,
+    OperatingSystemConfiguration as OperatingSystemConfiguration,
+    _OperatingSystemConfigurationDeserializer as _OperatingSystemConfigurationDeserializer,
+    OperatingSystemConfigurationLinuxDict as OperatingSystemConfigurationLinuxDict,
+    OperatingSystemConfigurationDict as OperatingSystemConfigurationDict,
     OutputConfig as OutputConfig,
     OutputConfigDict as OutputConfigDict,
     OverrideType as OverrideType,
@@ -1537,6 +1547,7 @@ from ._private.models_2 import (
     _PrivateKeySourceDeserializer as _PrivateKeySourceDeserializer,
     PrivateKeySourceKmsKeySourceDict as PrivateKeySourceKmsKeySourceDict,
     PrivateKeySourceDict as PrivateKeySourceDict,
+    PrivilegeMode as PrivilegeMode,
     ProtocolConfiguration as ProtocolConfiguration,
     ProtocolConfigurationDict as ProtocolConfigurationDict,
     Provider as Provider,
@@ -1646,6 +1657,8 @@ from ._private.models_2 import (
     RuntimeMetadataConfigurationDict as RuntimeMetadataConfigurationDict,
     RuntimeTargetConfiguration as RuntimeTargetConfiguration,
     RuntimeTargetConfigurationDict as RuntimeTargetConfigurationDict,
+    S3BucketMountConfiguration as S3BucketMountConfiguration,
+    S3BucketMountConfigurationDict as S3BucketMountConfigurationDict,
     S3CertificateConfiguration as S3CertificateConfiguration,
     S3CertificateConfigurationDict as S3CertificateConfigurationDict,
     S3Configuration as S3Configuration,
@@ -1668,6 +1681,9 @@ from ._private.models_2 import (
     SchemaType as SchemaType,
     SearchType as SearchType,
     Secret as Secret,
+)
+
+from ._private.models_3 import (
     SecretReference as SecretReference,
     SecretReferenceDict as SecretReferenceDict,
     SecretsManagerCertificateConfiguration as SecretsManagerCertificateConfiguration,
@@ -1675,9 +1691,6 @@ from ._private.models_2 import (
     SecretsManagerLocation as SecretsManagerLocation,
     SecretsManagerLocationDict as SecretsManagerLocationDict,
     SecretSourceType as SecretSourceType,
-)
-
-from ._private.models_3 import (
     SelfManagedConfiguration as SelfManagedConfiguration,
     SelfManagedConfigurationInput as SelfManagedConfigurationInput,
     SelfManagedConfigurationInputDict as SelfManagedConfigurationInputDict,

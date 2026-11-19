@@ -183,7 +183,7 @@ _PMSa = "PaymentManagerSummary"
 _PMSay = "PaymentManagerSummaries"
 _LPMO = "ListPaymentManagersOutput"
 _cLPMRo = "com.amazonaws.bedrockagentcorecontrol#ListPaymentManagersResponse"
-_pM = "paymentManagers"
+_pMa = "paymentManagers"
 _LPM = "ListPaymentManagers"
 _PCPA = "PaymentCredentialProviderArn"
 _PCPC = "PaymentCredentialProviderConfiguration"
@@ -914,7 +914,7 @@ LIST_PAYMENT_MANAGERS_OUTPUT: StaticSchema = (
     n0,
     _LPMO,
     {_sSI: _cLPMRo, _smithy: None},
-    (_pM, _nT),
+    (_pMa, _nT),
     ((lambda: PAYMENT_MANAGER_SUMMARIES, 1), (lambda: schemas.NEXT_TOKEN, 0)),
 )
 

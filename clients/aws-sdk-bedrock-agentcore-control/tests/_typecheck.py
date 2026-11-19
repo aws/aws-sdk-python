@@ -668,6 +668,8 @@ from aws_sdk_bedrock_agentcore_control.models import (
     LinkedinOauth2ProviderConfigInput,
     LinkedinOauth2ProviderConfigInputDict,
     LinkedinOauth2ProviderConfigOutput,
+    LinuxOperatingSystemConfiguration,
+    LinuxOperatingSystemConfigurationDict,
     ListAgentInsightStoresInput,
     ListAgentInsightStoresInputDict,
     ListAgentInsightStoresOutput,
@@ -881,6 +883,7 @@ from aws_sdk_bedrock_agentcore_control.models import (
     OnlineEvaluationConfigSummary,
     OpenResponsesEvaluatorModelConfig,
     OpenResponsesEvaluatorModelConfigDict,
+    OperatingSystemConfigurationDict,
     OutputConfig,
     OutputConfigDict,
     PassthroughTargetConfiguration,
@@ -959,6 +962,8 @@ from aws_sdk_bedrock_agentcore_control.models import (
     RuntimeMetadataConfigurationDict,
     RuntimeTargetConfiguration,
     RuntimeTargetConfigurationDict,
+    S3BucketMountConfiguration,
+    S3BucketMountConfigurationDict,
     S3CertificateConfiguration,
     S3CertificateConfigurationDict,
     S3Configuration,
@@ -2109,6 +2114,7 @@ LifecycleHook(action=_)
 LimitEntry(dimensions=_)
 LinkedinOauth2ProviderConfigInput(client_id=_)
 LinkedinOauth2ProviderConfigOutput(oauth_discovery=_)
+LinuxOperatingSystemConfiguration()
 ListAgentInsightStoresInput()
 ListAgentInsightStoresOutput(agent_insight_stores=_)
 ListAgentRuntimeEndpointsInput()
@@ -2379,6 +2385,7 @@ Rule(sampling_config=_)
 RuntimeHooksConfiguration()
 RuntimeMetadataConfiguration(require_mmdsv2=_)
 RuntimeTargetConfiguration(arn=_)
+S3BucketMountConfiguration(bucket=_, mount_path=_)
 S3CertificateConfiguration(uri=_)
 S3Configuration()
 S3FilesAccessPointConfiguration(access_point_arn=_, mount_path=_)
@@ -3113,351 +3120,354 @@ _params_283: LifecycleHookDict = {"action": _}
 _params_284: LifecycleHookActionDict = {"http_post": _}
 _params_285: LimitEntryDict = {"dimensions": _}
 _params_286: LinkedinOauth2ProviderConfigInputDict = {"client_id": _}
-_params_287: ListAgentInsightStoresInputDict = {}
-_params_288: ListAgentRuntimeEndpointsInputDict = {"agent_runtime_id": _}
-_params_289: ListAgentRuntimesInputDict = {}
-_params_290: ListAgentRuntimeVersionsByCapacityProviderInputDict = {
+_params_287: LinuxOperatingSystemConfigurationDict = {}
+_params_288: ListAgentInsightStoresInputDict = {}
+_params_289: ListAgentRuntimeEndpointsInputDict = {"agent_runtime_id": _}
+_params_290: ListAgentRuntimesInputDict = {}
+_params_291: ListAgentRuntimeVersionsByCapacityProviderInputDict = {
     "capacity_provider_id": _
 }
-_params_291: ListAgentRuntimeVersionsInputDict = {"agent_runtime_id": _}
-_params_292: ListApiKeyCredentialProvidersInputDict = {}
-_params_293: ListBrowserProfilesInputDict = {}
-_params_294: ListBrowsersInputDict = {}
-_params_295: ListCapacityProvidersInputDict = {}
-_params_296: ListCodeInterpretersInputDict = {}
-_params_297: ListConfigurationBundlesInputDict = {}
-_params_298: ListConfigurationBundleVersionsInputDict = {"bundle_id": _}
-_params_299: ListConsentPortalsInputDict = {}
-_params_300: ListDatasetExamplesFilterDict = {}
-_params_301: ListDatasetExamplesInputDict = {"dataset_id": _}
-_params_302: ListDatasetsFilterDict = {}
-_params_303: ListDatasetsInputDict = {}
-_params_304: ListDatasetVersionsFilterDict = {}
-_params_305: ListDatasetVersionsInputDict = {"dataset_id": _}
-_params_306: ListEvaluatorsInputDict = {}
-_params_307: ListGatewayRateLimitsInputDict = {"gateway_identifier": _}
-_params_308: ListGatewayRulesInputDict = {"gateway_identifier": _}
-_params_309: ListGatewaysInputDict = {}
-_params_310: ListGatewayTargetsInputDict = {"gateway_identifier": _}
-_params_311: ListHarnessEndpointsInputDict = {"harness_id": _}
-_params_312: ListHarnessesInputDict = {}
-_params_313: ListHarnessVersionsInputDict = {"harness_id": _}
-_params_314: ListMemoriesInputDict = {}
-_params_315: ListOauth2CredentialProvidersInputDict = {}
-_params_316: ListOnlineEvaluationConfigsInputDict = {}
-_params_317: ListPaymentConnectorsInputDict = {"payment_manager_id": _}
-_params_318: ListPaymentCredentialProvidersInputDict = {}
-_params_319: ListPaymentManagersInputDict = {}
-_params_320: ListPoliciesInputDict = {"policy_engine_id": _}
-_params_321: ListPolicyEnginesInputDict = {}
-_params_322: ListPolicyEngineSummariesInputDict = {}
-_params_323: ListPolicyGenerationAssetsInputDict = {
+_params_292: ListAgentRuntimeVersionsInputDict = {"agent_runtime_id": _}
+_params_293: ListApiKeyCredentialProvidersInputDict = {}
+_params_294: ListBrowserProfilesInputDict = {}
+_params_295: ListBrowsersInputDict = {}
+_params_296: ListCapacityProvidersInputDict = {}
+_params_297: ListCodeInterpretersInputDict = {}
+_params_298: ListConfigurationBundlesInputDict = {}
+_params_299: ListConfigurationBundleVersionsInputDict = {"bundle_id": _}
+_params_300: ListConsentPortalsInputDict = {}
+_params_301: ListDatasetExamplesFilterDict = {}
+_params_302: ListDatasetExamplesInputDict = {"dataset_id": _}
+_params_303: ListDatasetsFilterDict = {}
+_params_304: ListDatasetsInputDict = {}
+_params_305: ListDatasetVersionsFilterDict = {}
+_params_306: ListDatasetVersionsInputDict = {"dataset_id": _}
+_params_307: ListEvaluatorsInputDict = {}
+_params_308: ListGatewayRateLimitsInputDict = {"gateway_identifier": _}
+_params_309: ListGatewayRulesInputDict = {"gateway_identifier": _}
+_params_310: ListGatewaysInputDict = {}
+_params_311: ListGatewayTargetsInputDict = {"gateway_identifier": _}
+_params_312: ListHarnessEndpointsInputDict = {"harness_id": _}
+_params_313: ListHarnessesInputDict = {}
+_params_314: ListHarnessVersionsInputDict = {"harness_id": _}
+_params_315: ListMemoriesInputDict = {}
+_params_316: ListOauth2CredentialProvidersInputDict = {}
+_params_317: ListOnlineEvaluationConfigsInputDict = {}
+_params_318: ListPaymentConnectorsInputDict = {"payment_manager_id": _}
+_params_319: ListPaymentCredentialProvidersInputDict = {}
+_params_320: ListPaymentManagersInputDict = {}
+_params_321: ListPoliciesInputDict = {"policy_engine_id": _}
+_params_322: ListPolicyEnginesInputDict = {}
+_params_323: ListPolicyEngineSummariesInputDict = {}
+_params_324: ListPolicyGenerationAssetsInputDict = {
     "policy_generation_id": _,
     "policy_engine_id": _,
 }
-_params_324: ListPolicyGenerationsInputDict = {"policy_engine_id": _}
-_params_325: ListPolicyGenerationSummariesInputDict = {"policy_engine_id": _}
-_params_326: ListPolicySummariesInputDict = {"policy_engine_id": _}
-_params_327: ListRegistriesInputDict = {}
-_params_328: ListRegistryRecordsInputDict = {"registry_id": _}
-_params_329: ListTagsForResourceInputDict = {"resource_arn": _}
-_params_330: ListWorkloadIdentitiesInputDict = {}
-_params_331: LlmAsAJudgeEvaluatorConfigDict = {
+_params_325: ListPolicyGenerationsInputDict = {"policy_engine_id": _}
+_params_326: ListPolicyGenerationSummariesInputDict = {"policy_engine_id": _}
+_params_327: ListPolicySummariesInputDict = {"policy_engine_id": _}
+_params_328: ListRegistriesInputDict = {}
+_params_329: ListRegistryRecordsInputDict = {"registry_id": _}
+_params_330: ListTagsForResourceInputDict = {"resource_arn": _}
+_params_331: ListWorkloadIdentitiesInputDict = {}
+_params_332: LlmAsAJudgeEvaluatorConfigDict = {
     "instructions": _,
     "rating_scale": _,
     "model_config": _,
 }
-_params_332: LlmExtractionConfigDict = {"definition": _}
-_params_333: ManagedVpcResourceDict = {
+_params_333: LlmExtractionConfigDict = {"definition": _}
+_params_334: ManagedVpcResourceDict = {
     "vpc_identifier": _,
     "subnet_ids": _,
     "endpoint_ip_address_type": _,
 }
-_params_334: MatchModelEntryDict = {"value": _}
-_params_335: MatchModelsDict = {"any_of": _}
-_params_336: MatchPathsDict = {"any_of": _}
-_params_337: MatchPrincipalEntryDict = {"iam_principal": _}
-_params_338: MatchPrincipalsDict = {"any_of": _}
-_params_339: McpDescriptorDict = {}
-_params_340: MCPGatewayConfigurationDict = {}
-_params_341: McpLambdaTargetConfigurationDict = {"lambda_arn": _, "tool_schema": _}
-_params_342: McpServerTargetConfigurationDict = {"endpoint": _}
-_params_343: McpTargetConfigurationDict = {"open_api_schema": _}
-_params_344: McpToolSchemaConfigurationDict = {"s3": _}
-_params_345: MemoryRecordSchemaDict = {}
-_params_346: MemoryStrategyInputDict = {"semantic_memory_strategy": _}
-_params_347: MessageBasedTriggerInputDict = {}
-_params_348: MetadataConfigurationDict = {}
-_params_349: MetadataSchemaEntryDict = {"key": _}
-_params_350: MicrosoftOauth2ProviderConfigInputDict = {"client_id": _}
-_params_351: ModelEntryDict = {"model": _}
-_params_352: ModelMappingDict = {}
-_params_353: ModifyConsolidationConfigurationDict = {
+_params_335: MatchModelEntryDict = {"value": _}
+_params_336: MatchModelsDict = {"any_of": _}
+_params_337: MatchPathsDict = {"any_of": _}
+_params_338: MatchPrincipalEntryDict = {"iam_principal": _}
+_params_339: MatchPrincipalsDict = {"any_of": _}
+_params_340: McpDescriptorDict = {}
+_params_341: MCPGatewayConfigurationDict = {}
+_params_342: McpLambdaTargetConfigurationDict = {"lambda_arn": _, "tool_schema": _}
+_params_343: McpServerTargetConfigurationDict = {"endpoint": _}
+_params_344: McpTargetConfigurationDict = {"open_api_schema": _}
+_params_345: McpToolSchemaConfigurationDict = {"s3": _}
+_params_346: MemoryRecordSchemaDict = {}
+_params_347: MemoryStrategyInputDict = {"semantic_memory_strategy": _}
+_params_348: MessageBasedTriggerInputDict = {}
+_params_349: MetadataConfigurationDict = {}
+_params_350: MetadataSchemaEntryDict = {"key": _}
+_params_351: MicrosoftOauth2ProviderConfigInputDict = {"client_id": _}
+_params_352: ModelEntryDict = {"model": _}
+_params_353: ModelMappingDict = {}
+_params_354: ModifyConsolidationConfigurationDict = {
     "custom_consolidation_configuration": _
 }
-_params_354: ModifyExtractionConfigurationDict = {"custom_extraction_configuration": _}
-_params_355: ModifyInvocationConfigurationInputDict = {}
-_params_356: ModifyMemoryStrategiesDict = {}
-_params_357: ModifyMemoryStrategyInputDict = {"memory_strategy_id": _}
-_params_358: ModifyReflectionConfigurationDict = {
+_params_355: ModifyExtractionConfigurationDict = {"custom_extraction_configuration": _}
+_params_356: ModifyInvocationConfigurationInputDict = {}
+_params_357: ModifyMemoryStrategiesDict = {}
+_params_358: ModifyMemoryStrategyInputDict = {"memory_strategy_id": _}
+_params_359: ModifyReflectionConfigurationDict = {
     "episodic_reflection_configuration": _
 }
-_params_359: ModifySelfManagedConfigurationDict = {}
-_params_360: ModifyStrategyConfigurationDict = {}
-_params_361: NamespaceKeyEntryDict = {"key": _}
-_params_362: NamespaceKeyValidationDict = {}
-_params_363: NetworkConfigurationDict = {"network_mode": _}
-_params_364: NumberValidationDict = {}
-_params_365: NumericalScaleDefinitionDict = {"definition": _, "value": _, "label": _}
-_params_366: Oauth2AuthorizationServerMetadataDict = {
+_params_360: ModifySelfManagedConfigurationDict = {}
+_params_361: ModifyStrategyConfigurationDict = {}
+_params_362: NamespaceKeyEntryDict = {"key": _}
+_params_363: NamespaceKeyValidationDict = {}
+_params_364: NetworkConfigurationDict = {"network_mode": _}
+_params_365: NumberValidationDict = {}
+_params_366: NumericalScaleDefinitionDict = {"definition": _, "value": _, "label": _}
+_params_367: Oauth2AuthorizationServerMetadataDict = {
     "issuer": _,
     "authorization_endpoint": _,
     "token_endpoint": _,
 }
-_params_367: Oauth2DiscoveryDict = {"discovery_url": _}
-_params_368: Oauth2ProviderConfigInputDict = {"custom_oauth2_provider_config": _}
-_params_369: OAuthCredentialProviderDict = {"provider_arn": _, "scopes": _}
-_params_370: OnBehalfOfAuthenticationConfigDict = {"client_authentication_method": _}
-_params_371: OnBehalfOfTokenExchangeConfigTypeDict = {"grant_type": _}
-_params_372: OpenResponsesEvaluatorModelConfigDict = {"model_id": _}
-_params_373: OutputConfigDict = {"cloud_watch_config": _}
-_params_374: PassthroughTargetConfigurationDict = {"endpoint": _, "protocol_type": _}
-_params_375: PaymentCredentialProviderConfigurationDict = {"credential_provider_arn": _}
-_params_376: PaymentProviderConfigurationInputDict = {"coinbase_cdp_configuration": _}
-_params_377: PermissionsConfigurationDict = {"capacity_provider_operator_role_arn": _}
-_params_378: PolicyDefinitionDict = {"cedar": _}
-_params_379: PolicyGenerationDetailsDict = {
+_params_368: Oauth2DiscoveryDict = {"discovery_url": _}
+_params_369: Oauth2ProviderConfigInputDict = {"custom_oauth2_provider_config": _}
+_params_370: OAuthCredentialProviderDict = {"provider_arn": _, "scopes": _}
+_params_371: OnBehalfOfAuthenticationConfigDict = {"client_authentication_method": _}
+_params_372: OnBehalfOfTokenExchangeConfigTypeDict = {"grant_type": _}
+_params_373: OpenResponsesEvaluatorModelConfigDict = {"model_id": _}
+_params_374: OperatingSystemConfigurationDict = {"linux": _}
+_params_375: OutputConfigDict = {"cloud_watch_config": _}
+_params_376: PassthroughTargetConfigurationDict = {"endpoint": _, "protocol_type": _}
+_params_377: PaymentCredentialProviderConfigurationDict = {"credential_provider_arn": _}
+_params_378: PaymentProviderConfigurationInputDict = {"coinbase_cdp_configuration": _}
+_params_379: PermissionsConfigurationDict = {"capacity_provider_operator_role_arn": _}
+_params_380: PolicyDefinitionDict = {"cedar": _}
+_params_381: PolicyGenerationDetailsDict = {
     "policy_generation_id": _,
     "policy_generation_asset_id": _,
 }
-_params_380: PolicyStatementDict = {"statement": _}
-_params_381: PortRangeDict = {"from_": _, "to": _}
-_params_382: PrivateEndpointDict = {"self_managed_lattice_resource": _}
-_params_383: PrivateEndpointOverrideDict = {"domain": _, "private_endpoint": _}
-_params_384: PrivateKeyJwtConfigDict = {}
-_params_385: PrivateKeySourceDict = {"kms_key_source": _}
-_params_386: ProtocolConfigurationDict = {"server_protocol": _}
-_params_387: ProviderPrefixDict = {}
-_params_388: PutResourcePolicyInputDict = {"resource_arn": _, "policy": _}
-_params_389: RateConfigDict = {"rate": _, "period": _}
-_params_390: RatingScaleDict = {"numerical": _}
-_params_391: ReasoningConfigurationDict = {}
-_params_392: RecordExpirySpecificationDict = {"record_expiry_duration_days": _}
-_params_393: RecordingConfigDict = {}
-_params_394: RegistryRecordCredentialProviderConfigurationDict = {
+_params_382: PolicyStatementDict = {"statement": _}
+_params_383: PortRangeDict = {"from_": _, "to": _}
+_params_384: PrivateEndpointDict = {"self_managed_lattice_resource": _}
+_params_385: PrivateEndpointOverrideDict = {"domain": _, "private_endpoint": _}
+_params_386: PrivateKeyJwtConfigDict = {}
+_params_387: PrivateKeySourceDict = {"kms_key_source": _}
+_params_388: ProtocolConfigurationDict = {"server_protocol": _}
+_params_389: ProviderPrefixDict = {}
+_params_390: PutResourcePolicyInputDict = {"resource_arn": _, "policy": _}
+_params_391: RateConfigDict = {"rate": _, "period": _}
+_params_392: RatingScaleDict = {"numerical": _}
+_params_393: ReasoningConfigurationDict = {}
+_params_394: RecordExpirySpecificationDict = {"record_expiry_duration_days": _}
+_params_395: RecordingConfigDict = {}
+_params_396: RegistryRecordCredentialProviderConfigurationDict = {
     "credential_provider_type": _,
     "credential_provider": _,
 }
-_params_395: RegistryRecordCredentialProviderUnionDict = {
+_params_397: RegistryRecordCredentialProviderUnionDict = {
     "oauth_credential_provider": _
 }
-_params_396: RegistryRecordIamCredentialProviderDict = {}
-_params_397: RegistryRecordOAuthCredentialProviderDict = {"provider_arn": _}
-_params_398: RequestHeaderConfigurationDict = {"request_header_allowlist": _}
-_params_399: ResetTokenVaultKeyMaterialInputDict = {"token_vault_id": _}
-_params_400: ResourceDict = {"arn": _}
-_params_401: ResourceConfigurationDict = {"minimum_memory_in_mi_b": _}
-_params_402: ResourceLocationDict = {"s3": _}
-_params_403: RootVolumeConfigurationDict = {}
-_params_404: RotatePaymentConnectorCredentialsInputDict = {
+_params_398: RegistryRecordIamCredentialProviderDict = {}
+_params_399: RegistryRecordOAuthCredentialProviderDict = {"provider_arn": _}
+_params_400: RequestHeaderConfigurationDict = {"request_header_allowlist": _}
+_params_401: ResetTokenVaultKeyMaterialInputDict = {"token_vault_id": _}
+_params_402: ResourceDict = {"arn": _}
+_params_403: ResourceConfigurationDict = {"minimum_memory_in_mi_b": _}
+_params_404: ResourceLocationDict = {"s3": _}
+_params_405: RootVolumeConfigurationDict = {}
+_params_406: RotatePaymentConnectorCredentialsInputDict = {
     "payment_manager_id": _,
     "payment_connector_id": _,
     "credentials_to_rotate": _,
 }
-_params_405: RouteToTargetActionDict = {"static_route": _}
-_params_406: RuleDict = {"sampling_config": _}
-_params_407: RuntimeHooksConfigurationDict = {}
-_params_408: RuntimeMetadataConfigurationDict = {"require_mmdsv2": _}
-_params_409: RuntimeTargetConfigurationDict = {"arn": _}
-_params_410: S3CertificateConfigurationDict = {"uri": _}
-_params_411: S3ConfigurationDict = {}
-_params_412: S3FilesAccessPointConfigurationDict = {
+_params_407: RouteToTargetActionDict = {"static_route": _}
+_params_408: RuleDict = {"sampling_config": _}
+_params_409: RuntimeHooksConfigurationDict = {}
+_params_410: RuntimeMetadataConfigurationDict = {"require_mmdsv2": _}
+_params_411: RuntimeTargetConfigurationDict = {"arn": _}
+_params_412: S3BucketMountConfigurationDict = {"bucket": _, "mount_path": _}
+_params_413: S3CertificateConfigurationDict = {"uri": _}
+_params_414: S3ConfigurationDict = {}
+_params_415: S3FilesAccessPointConfigurationDict = {
     "access_point_arn": _,
     "mount_path": _,
 }
-_params_413: S3FilesConfigurationDict = {
+_params_416: S3FilesConfigurationDict = {
     "access_point_arn": _,
     "mount_path": _,
     "file_system_arn": _,
 }
-_params_414: S3LocationDict = {"bucket": _, "prefix": _}
-_params_415: S3SourceDict = {"s3_uri": _}
-_params_416: SalesforceOauth2ProviderConfigInputDict = {"client_id": _}
-_params_417: SamplingConfigDict = {"sampling_percentage": _}
-_params_418: SchemaDefinitionDict = {"type": _}
-_params_419: SecretReferenceDict = {"secret_id": _, "json_key": _}
-_params_420: SecretsManagerCertificateConfigurationDict = {"secret_arn": _}
-_params_421: SecretsManagerLocationDict = {"secret_arn": _}
-_params_422: SelfManagedConfigurationInputDict = {"invocation_configuration": _}
-_params_423: SelfManagedLatticeResourceDict = {"resource_configuration_identifier": _}
-_params_424: SemanticMemoryStrategyInputDict = {"name": _}
-_params_425: SemanticOverrideConfigurationInputDict = {}
-_params_426: SemanticOverrideConsolidationConfigurationInputDict = {
+_params_417: S3LocationDict = {"bucket": _, "prefix": _}
+_params_418: S3SourceDict = {"s3_uri": _}
+_params_419: SalesforceOauth2ProviderConfigInputDict = {"client_id": _}
+_params_420: SamplingConfigDict = {"sampling_percentage": _}
+_params_421: SchemaDefinitionDict = {"type": _}
+_params_422: SecretReferenceDict = {"secret_id": _, "json_key": _}
+_params_423: SecretsManagerCertificateConfigurationDict = {"secret_arn": _}
+_params_424: SecretsManagerLocationDict = {"secret_arn": _}
+_params_425: SelfManagedConfigurationInputDict = {"invocation_configuration": _}
+_params_426: SelfManagedLatticeResourceDict = {"resource_configuration_identifier": _}
+_params_427: SemanticMemoryStrategyInputDict = {"name": _}
+_params_428: SemanticOverrideConfigurationInputDict = {}
+_params_429: SemanticOverrideConsolidationConfigurationInputDict = {
     "append_to_prompt": _,
     "model_id": _,
 }
-_params_427: SemanticOverrideExtractionConfigurationInputDict = {
+_params_430: SemanticOverrideExtractionConfigurationInputDict = {
     "append_to_prompt": _,
     "model_id": _,
 }
-_params_428: ServerDefinitionDict = {}
-_params_429: SessionConfigDict = {"session_timeout_minutes": _}
-_params_430: SessionConfigurationDict = {}
-_params_431: SessionStorageConfigurationDict = {"mount_path": _}
-_params_432: SetTokenVaultCMKInputDict = {"kms_configuration": _}
-_params_433: SkillDefinitionDict = {}
-_params_434: SkillMdDefinitionDict = {}
-_params_435: SlackOauth2ProviderConfigInputDict = {"client_id": _}
-_params_436: StartPolicyGenerationInputDict = {
+_params_431: ServerDefinitionDict = {}
+_params_432: SessionConfigDict = {"session_timeout_minutes": _}
+_params_433: SessionConfigurationDict = {}
+_params_434: SessionStorageConfigurationDict = {"mount_path": _}
+_params_435: SetTokenVaultCMKInputDict = {"kms_configuration": _}
+_params_436: SkillDefinitionDict = {}
+_params_437: SkillMdDefinitionDict = {}
+_params_438: SlackOauth2ProviderConfigInputDict = {"client_id": _}
+_params_439: StartPolicyGenerationInputDict = {
     "policy_engine_id": _,
     "resource": _,
     "content": _,
     "name": _,
 }
-_params_437: StaticOverrideDict = {"bundle_arn": _, "bundle_version": _}
-_params_438: StaticRouteDict = {"target_name": _}
-_params_439: StickinessConfigurationDict = {"identifier": _}
-_params_440: StreamDeliveryResourceDict = {"kinesis": _}
-_params_441: StreamDeliveryResourcesDict = {"resources": _}
-_params_442: StreamingConfigurationDict = {}
-_params_443: StringListValidationDict = {}
-_params_444: StringValidationDict = {"allowed_values": _}
-_params_445: StripePrivyConfigurationInputDict = {"app_id": _, "authorization_id": _}
-_params_446: SubmitRegistryRecordForApprovalInputDict = {
+_params_440: StaticOverrideDict = {"bundle_arn": _, "bundle_version": _}
+_params_441: StaticRouteDict = {"target_name": _}
+_params_442: StickinessConfigurationDict = {"identifier": _}
+_params_443: StreamDeliveryResourceDict = {"kinesis": _}
+_params_444: StreamDeliveryResourcesDict = {"resources": _}
+_params_445: StreamingConfigurationDict = {}
+_params_446: StringListValidationDict = {}
+_params_447: StringValidationDict = {"allowed_values": _}
+_params_448: StripePrivyConfigurationInputDict = {"app_id": _, "authorization_id": _}
+_params_449: SubmitRegistryRecordForApprovalInputDict = {
     "registry_id": _,
     "record_id": _,
 }
-_params_447: SummaryMemoryStrategyInputDict = {"name": _}
-_params_448: SummaryOverrideConfigurationInputDict = {}
-_params_449: SummaryOverrideConsolidationConfigurationInputDict = {
+_params_450: SummaryMemoryStrategyInputDict = {"name": _}
+_params_451: SummaryOverrideConfigurationInputDict = {}
+_params_452: SummaryOverrideConsolidationConfigurationInputDict = {
     "append_to_prompt": _,
     "model_id": _,
 }
-_params_450: SynchronizationConfigurationDict = {}
-_params_451: SynchronizeGatewayTargetsInputDict = {
+_params_453: SynchronizationConfigurationDict = {}
+_params_454: SynchronizeGatewayTargetsInputDict = {
     "gateway_identifier": _,
     "target_id_list": _,
 }
-_params_452: TagResourceInputDict = {"resource_arn": _, "tags": _}
-_params_453: TargetConfigurationDict = {"mcp": _}
-_params_454: TargetTrafficSplitEntryDict = {"target_name": _, "name": _, "weight": _}
-_params_455: TimeBasedTriggerInputDict = {}
-_params_456: TokenBasedTriggerInputDict = {}
-_params_457: TokenExchangeGrantTypeConfigTypeDict = {"actor_token_content": _}
-_params_458: ToolDefinitionDict = {"name": _, "description": _, "input_schema": _}
-_params_459: ToolSchemaDict = {"s3": _}
-_params_460: ToolsDefinitionDict = {}
-_params_461: ToolsFileSystemConfigurationDict = {"s3_files_configuration": _}
-_params_462: TrafficSplitEntryDict = {"name": _, "weight": _, "configuration_bundle": _}
-_params_463: TriggerConditionInputDict = {"message_based_trigger": _}
-_params_464: UntagResourceInputDict = {"resource_arn": _, "tag_keys": _}
-_params_465: UpdateAgentInsightStoreInputDict = {"agent_insight_store_id": _}
-_params_466: UpdateAgentRuntimeEndpointInputDict = {
+_params_455: TagResourceInputDict = {"resource_arn": _, "tags": _}
+_params_456: TargetConfigurationDict = {"mcp": _}
+_params_457: TargetTrafficSplitEntryDict = {"target_name": _, "name": _, "weight": _}
+_params_458: TimeBasedTriggerInputDict = {}
+_params_459: TokenBasedTriggerInputDict = {}
+_params_460: TokenExchangeGrantTypeConfigTypeDict = {"actor_token_content": _}
+_params_461: ToolDefinitionDict = {"name": _, "description": _, "input_schema": _}
+_params_462: ToolSchemaDict = {"s3": _}
+_params_463: ToolsDefinitionDict = {}
+_params_464: ToolsFileSystemConfigurationDict = {"s3_files_configuration": _}
+_params_465: TrafficSplitEntryDict = {"name": _, "weight": _, "configuration_bundle": _}
+_params_466: TriggerConditionInputDict = {"message_based_trigger": _}
+_params_467: UntagResourceInputDict = {"resource_arn": _, "tag_keys": _}
+_params_468: UpdateAgentInsightStoreInputDict = {"agent_insight_store_id": _}
+_params_469: UpdateAgentRuntimeEndpointInputDict = {
     "agent_runtime_id": _,
     "endpoint_name": _,
 }
-_params_467: UpdateAgentRuntimeInputDict = {
+_params_470: UpdateAgentRuntimeInputDict = {
     "agent_runtime_id": _,
     "agent_runtime_artifact": _,
     "role_arn": _,
 }
-_params_468: UpdateApiKeyCredentialProviderInputDict = {"name": _}
-_params_469: UpdateCapacityProviderInputDict = {"capacity_provider_id": _}
-_params_470: UpdateConfigurationBundleInputDict = {
+_params_471: UpdateApiKeyCredentialProviderInputDict = {"name": _}
+_params_472: UpdateCapacityProviderInputDict = {"capacity_provider_id": _}
+_params_473: UpdateConfigurationBundleInputDict = {
     "bundle_id": _,
     "parent_version_ids": _,
     "commit_message": _,
 }
-_params_471: UpdateConsentPortalInputDict = {"consent_portal_identifier": _}
-_params_472: UpdatedA2aDescriptorDict = {}
-_params_473: UpdatedAgentSkillsDescriptorDict = {}
-_params_474: UpdatedAgentSkillsDescriptorFieldsDict = {}
-_params_475: UpdatedApprovalConfigurationDict = {}
-_params_476: UpdateDatasetExamplesInputDict = {"dataset_id": _, "examples": _}
-_params_477: UpdateDatasetInputDict = {"dataset_id": _}
-_params_478: UpdatedAuthorizerConfigurationDict = {}
-_params_479: UpdatedCustomDescriptorDict = {}
-_params_480: UpdatedDescriptionDict = {}
-_params_481: UpdatedDescriptorsDict = {}
-_params_482: UpdatedDescriptorsUnionDict = {}
-_params_483: UpdatedHarnessEnvironmentArtifactDict = {}
-_params_484: UpdatedHarnessMemoryConfigurationDict = {}
-_params_485: UpdatedMcpDescriptorDict = {}
-_params_486: UpdatedMcpDescriptorFieldsDict = {}
-_params_487: UpdatedServerDefinitionDict = {}
-_params_488: UpdatedSkillDefinitionDict = {}
-_params_489: UpdatedSkillMdDefinitionDict = {}
-_params_490: UpdatedSynchronizationConfigurationDict = {}
-_params_491: UpdatedSynchronizationTypeDict = {}
-_params_492: UpdatedToolsDefinitionDict = {}
-_params_493: UpdateEvaluatorInputDict = {"evaluator_id": _}
-_params_494: UpdateGatewayInputDict = {
+_params_474: UpdateConsentPortalInputDict = {"consent_portal_identifier": _}
+_params_475: UpdatedA2aDescriptorDict = {}
+_params_476: UpdatedAgentSkillsDescriptorDict = {}
+_params_477: UpdatedAgentSkillsDescriptorFieldsDict = {}
+_params_478: UpdatedApprovalConfigurationDict = {}
+_params_479: UpdateDatasetExamplesInputDict = {"dataset_id": _, "examples": _}
+_params_480: UpdateDatasetInputDict = {"dataset_id": _}
+_params_481: UpdatedAuthorizerConfigurationDict = {}
+_params_482: UpdatedCustomDescriptorDict = {}
+_params_483: UpdatedDescriptionDict = {}
+_params_484: UpdatedDescriptorsDict = {}
+_params_485: UpdatedDescriptorsUnionDict = {}
+_params_486: UpdatedHarnessEnvironmentArtifactDict = {}
+_params_487: UpdatedHarnessMemoryConfigurationDict = {}
+_params_488: UpdatedMcpDescriptorDict = {}
+_params_489: UpdatedMcpDescriptorFieldsDict = {}
+_params_490: UpdatedServerDefinitionDict = {}
+_params_491: UpdatedSkillDefinitionDict = {}
+_params_492: UpdatedSkillMdDefinitionDict = {}
+_params_493: UpdatedSynchronizationConfigurationDict = {}
+_params_494: UpdatedSynchronizationTypeDict = {}
+_params_495: UpdatedToolsDefinitionDict = {}
+_params_496: UpdateEvaluatorInputDict = {"evaluator_id": _}
+_params_497: UpdateGatewayInputDict = {
     "gateway_identifier": _,
     "name": _,
     "role_arn": _,
     "authorizer_type": _,
 }
-_params_495: UpdateGatewayRateLimitInputDict = {
+_params_498: UpdateGatewayRateLimitInputDict = {
     "gateway_identifier": _,
     "rate_limit_id": _,
     "entries": _,
 }
-_params_496: UpdateGatewayRuleInputDict = {"gateway_identifier": _, "rule_id": _}
-_params_497: UpdateGatewayTargetInputDict = {
+_params_499: UpdateGatewayRuleInputDict = {"gateway_identifier": _, "rule_id": _}
+_params_500: UpdateGatewayTargetInputDict = {
     "gateway_identifier": _,
     "target_id": _,
     "target_configuration": _,
 }
-_params_498: UpdateHarnessEndpointInputDict = {"harness_id": _, "endpoint_name": _}
-_params_499: UpdateHarnessInputDict = {"harness_id": _}
-_params_500: UpdateMemoryInputDict = {"memory_id": _}
-_params_501: UpdateOauth2CredentialProviderInputDict = {
+_params_501: UpdateHarnessEndpointInputDict = {"harness_id": _, "endpoint_name": _}
+_params_502: UpdateHarnessInputDict = {"harness_id": _}
+_params_503: UpdateMemoryInputDict = {"memory_id": _}
+_params_504: UpdateOauth2CredentialProviderInputDict = {
     "name": _,
     "credential_provider_vendor": _,
     "oauth2_provider_config_input": _,
 }
-_params_502: UpdateOnlineEvaluationConfigInputDict = {"online_evaluation_config_id": _}
-_params_503: UpdatePaymentConnectorInputDict = {
+_params_505: UpdateOnlineEvaluationConfigInputDict = {"online_evaluation_config_id": _}
+_params_506: UpdatePaymentConnectorInputDict = {
     "payment_manager_id": _,
     "payment_connector_id": _,
 }
-_params_504: UpdatePaymentCredentialProviderInputDict = {
+_params_507: UpdatePaymentCredentialProviderInputDict = {
     "name": _,
     "credential_provider_vendor": _,
     "provider_configuration_input": _,
 }
-_params_505: UpdatePaymentManagerInputDict = {"payment_manager_id": _}
-_params_506: UpdatePolicyEngineInputDict = {"policy_engine_id": _}
-_params_507: UpdatePolicyInputDict = {"policy_engine_id": _, "policy_id": _}
-_params_508: UpdateRegistryInputDict = {"registry_id": _}
-_params_509: UpdateRegistryRecordInputDict = {"registry_id": _, "record_id": _}
-_params_510: UpdateRegistryRecordStatusInputDict = {
+_params_508: UpdatePaymentManagerInputDict = {"payment_manager_id": _}
+_params_509: UpdatePolicyEngineInputDict = {"policy_engine_id": _}
+_params_510: UpdatePolicyInputDict = {"policy_engine_id": _, "policy_id": _}
+_params_511: UpdateRegistryInputDict = {"registry_id": _}
+_params_512: UpdateRegistryRecordInputDict = {"registry_id": _, "record_id": _}
+_params_513: UpdateRegistryRecordStatusInputDict = {
     "registry_id": _,
     "record_id": _,
     "status": _,
     "status_reason": _,
 }
-_params_511: UpdateWorkloadIdentityInputDict = {"name": _}
-_params_512: UserPreferenceMemoryStrategyInputDict = {"name": _}
-_params_513: UserPreferenceOverrideConfigurationInputDict = {}
-_params_514: UserPreferenceOverrideConsolidationConfigurationInputDict = {
+_params_514: UpdateWorkloadIdentityInputDict = {"name": _}
+_params_515: UserPreferenceMemoryStrategyInputDict = {"name": _}
+_params_516: UserPreferenceOverrideConfigurationInputDict = {}
+_params_517: UserPreferenceOverrideConsolidationConfigurationInputDict = {
     "append_to_prompt": _,
     "model_id": _,
 }
-_params_515: UserPreferenceOverrideExtractionConfigurationInputDict = {
+_params_518: UserPreferenceOverrideExtractionConfigurationInputDict = {
     "append_to_prompt": _,
     "model_id": _,
 }
-_params_516: ValidationDict = {"string_validation": _}
-_params_517: VersionCreatedBySourceDict = {"name": _}
-_params_518: VersionFilterDict = {}
-_params_519: VolumeConfigurationDict = {"ebs_configuration": _}
-_params_520: VpcConfigDict = {"security_groups": _, "subnets": _}
-_params_521: VpcConfigurationDict = {"subnets": _, "security_groups": _}
-_params_522: WafConfigurationDict = {}
-_params_523: WeightedOverrideDict = {"traffic_split": _}
-_params_524: WeightedRouteDict = {"traffic_split": _}
-_params_525: UnitDict = {}
+_params_519: ValidationDict = {"string_validation": _}
+_params_520: VersionCreatedBySourceDict = {"name": _}
+_params_521: VersionFilterDict = {}
+_params_522: VolumeConfigurationDict = {"ebs_configuration": _}
+_params_523: VpcConfigDict = {"security_groups": _, "subnets": _}
+_params_524: VpcConfigurationDict = {"subnets": _, "security_groups": _}
+_params_525: WafConfigurationDict = {}
+_params_526: WeightedOverrideDict = {"traffic_split": _}
+_params_527: WeightedRouteDict = {"traffic_split": _}
+_params_528: UnitDict = {}
 
 
 def _request[T](form: type[T]) -> T:

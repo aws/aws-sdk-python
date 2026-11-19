@@ -52,6 +52,8 @@ from ..auth import HTTPAuthSchemeResolver
 if TYPE_CHECKING:
     from smithy_core.interceptors import Interceptor
     from ..models import (
+        BatchRevokeSessionsInput,
+        BatchRevokeSessionsOutput,
         CreateBearerTokenInput,
         CreateBearerTokenOutput,
         CreateOAuth2TokenInput,
@@ -68,10 +70,14 @@ if TYPE_CHECKING:
         GetConsoleAuthorizationConfigurationOutput,
         GetResourcePolicyInput,
         GetResourcePolicyOutput,
+        GetSessionInput,
+        GetSessionOutput,
         IntrospectOAuth2TokenWithIAMInput,
         IntrospectOAuth2TokenWithIAMOutput,
         ListResourcePermissionStatementsInput,
         ListResourcePermissionStatementsOutput,
+        ListSessionsInput,
+        ListSessionsOutput,
         PutConsoleAuthorizationConfigurationInput,
         PutConsoleAuthorizationConfigurationOutput,
         PutResourcePermissionStatementInput,
@@ -81,6 +87,7 @@ if TYPE_CHECKING:
     )
 
     _ServiceInterceptor = Union[
+        Interceptor[BatchRevokeSessionsInput, BatchRevokeSessionsOutput, Any, Any],
         Interceptor[CreateBearerTokenInput, CreateBearerTokenOutput, Any, Any],
         Interceptor[CreateOAuth2TokenInput, CreateOAuth2TokenOutput, Any, Any],
         Interceptor[
@@ -111,6 +118,7 @@ if TYPE_CHECKING:
             Any,
         ],
         Interceptor[GetResourcePolicyInput, GetResourcePolicyOutput, Any, Any],
+        Interceptor[GetSessionInput, GetSessionOutput, Any, Any],
         Interceptor[
             IntrospectOAuth2TokenWithIAMInput,
             IntrospectOAuth2TokenWithIAMOutput,
@@ -123,6 +131,7 @@ if TYPE_CHECKING:
             Any,
             Any,
         ],
+        Interceptor[ListSessionsInput, ListSessionsOutput, Any, Any],
         Interceptor[
             PutConsoleAuthorizationConfigurationInput,
             PutConsoleAuthorizationConfigurationOutput,

@@ -92,6 +92,7 @@ _ETnd = "EndTimestamp"
 _SDta = "StatusDetails"
 _Su = "Summaries"
 _STACK = "STACK"
+_RSMR = "ResourceScannerMaxResults"
 _RTP = "ResourceTypePrefix"
 _LRSRI = "ListResourceScanResourcesInput"
 _SRca = "ScannedResources"
@@ -161,8 +162,8 @@ _SSF = "StackStatusFilter"
 _LSIi = "ListStacksInput"
 _SDIS = "StackDriftInformationSummary"
 _TDe = "TemplateDescription"
-_SSta = "StackSummary"
-_SStac = "StackSummaries"
+_SStac = "StackSummary"
+_SStack = "StackSummaries"
 _LSO = "ListStacksOutput"
 _LS = "ListStacks"
 _LSSADTI = "ListStackSetAutoDeploymentTargetsInput"
@@ -199,6 +200,12 @@ _LTR = "ListTypeRegistrations"
 _TNP = "TypeNamePrefix"
 _TFy = "TypeFilters"
 
+RESOURCE_SCANNER_MAX_RESULTS: StaticSchema = (7, n0, _RSMR, 0)
+
+RESOURCE_IDENTIFIER: StaticSchema = (3, n0, _RI, 0)
+
+RESOURCE_TYPE_PREFIX: StaticSchema = (3, n0, _RTP, 0)
+
 LIST_RESOURCE_SCAN_RESOURCES_INPUT: StaticSchema = (
     18,
     n0,
@@ -207,12 +214,12 @@ LIST_RESOURCE_SCAN_RESOURCES_INPUT: StaticSchema = (
     (_RSI, _RI, _RTP, _TK, _TV, _NT, _MR),
     (
         (lambda: schemas.RESOURCE_SCAN_ID, {_sO: None, _smit: None}),
-        (lambda: schemas.RESOURCE_IDENTIFIER, 0),
-        (lambda: schemas.RESOURCE_TYPE_PREFIX, 0),
+        (RESOURCE_IDENTIFIER, 0),
+        (RESOURCE_TYPE_PREFIX, 0),
         (lambda: schemas.TAG_KEY, 0),
         (lambda: schemas.TAG_VALUE, 0),
         (lambda: schemas.NEXT_TOKEN, 0),
-        (lambda: schemas.RESOURCE_SCANNER_MAX_RESULTS, 0),
+        (RESOURCE_SCANNER_MAX_RESULTS, 0),
     ),
 )
 
@@ -264,7 +271,7 @@ LIST_RESOURCE_SCANS_INPUT: StaticSchema = (
     (_NT, _MR, _STF),
     (
         (lambda: schemas.NEXT_TOKEN, 0),
-        (lambda: schemas.RESOURCE_SCANNER_MAX_RESULTS, 0),
+        (RESOURCE_SCANNER_MAX_RESULTS, 0),
         (SCAN_TYPE, 0),
     ),
 )
@@ -755,7 +762,7 @@ LIST_STACKS_OUTPUT: StaticSchema = (
     n0,
     _LSO,
     {_sm: None},
-    (_SStac, _NT),
+    (_SStack, _NT),
     ((lambda: STACK_SUMMARIES, 0), (lambda: schemas.NEXT_TOKEN, 0)),
 )
 
@@ -786,7 +793,7 @@ TEMPLATE_DESCRIPTION: StaticSchema = (3, n0, _TDe, 0)
 STACK_SUMMARY: StaticSchema = (
     18,
     n0,
-    _SSta,
+    _SStac,
     0,
     (_SI, _SN, _TDe, _CTr, _LUT, _DTel, _SS, _SSR, _PIa, _RIo, _DI, _LO),
     (
@@ -805,7 +812,7 @@ STACK_SUMMARY: StaticSchema = (
     ),
 )
 
-STACK_SUMMARIES: StaticSchema = (16, n0, _SStac, 0, (_m,), ((STACK_SUMMARY, 0),))
+STACK_SUMMARIES: StaticSchema = (16, n0, _SStack, 0, (_m,), ((STACK_SUMMARY, 0),))
 
 LIST_STACK_SET_AUTO_DEPLOYMENT_TARGETS_INPUT: StaticSchema = (
     18,

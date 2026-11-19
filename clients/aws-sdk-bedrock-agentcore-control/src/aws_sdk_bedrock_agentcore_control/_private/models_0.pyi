@@ -115,6 +115,8 @@ from ..models import (
     Oauth2ProviderConfigOutput,
     OnBehalfOfTokenExchangeConfigType,
     OnBehalfOfTokenExchangeConfigTypeDict,
+    OperatingSystemConfiguration,
+    OperatingSystemConfigurationDict,
     OutputConfig,
     OutputConfigDict,
     PaymentCredentialProviderConfiguration,
@@ -1552,6 +1554,11 @@ class CapacityProviderConfiguration(_SerdeShape):
     The Amazon Resource Name (ARN) of the capacity provider to use for the
     AgentCore Runtime.
     """
+    operating_system_configuration: OperatingSystemConfiguration | None = ...
+    """
+    The operating system configuration of the agents that Amazon Bedrock
+    AgentCore Runtime runs on the capacity provider.
+    """
 
 class CapacityProviderConfigurationDict(TypedDict, total=False):
     """Dictionary form of `CapacityProviderConfiguration`."""
@@ -1560,6 +1567,13 @@ class CapacityProviderConfigurationDict(TypedDict, total=False):
     """
     The Amazon Resource Name (ARN) of the capacity provider to use for the
     AgentCore Runtime.
+    """
+    operating_system_configuration: (
+        OperatingSystemConfiguration | OperatingSystemConfigurationDict | None
+    )
+    """
+    The operating system configuration of the agents that Amazon Bedrock
+    AgentCore Runtime runs on the capacity provider.
     """
 
 class CapacityProviderStatus(UnknownEnumMixin, StrEnum):

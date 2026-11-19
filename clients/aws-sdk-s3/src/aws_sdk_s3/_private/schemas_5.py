@@ -96,6 +96,8 @@ _OLEHDD = "ObjectLockEventHoldDurationDays"
 _OLEHDY = "ObjectLockEventHoldDurationYears"
 _OLLHS = "ObjectLockLegalHoldStatus"
 _OLM = "ObjectLockMode"
+_GOVERNANCE = "GOVERNANCE"
+_COMPLIANCE = "COMPLIANCE"
 _OLRUD = "ObjectLockRetainUntilDate"
 _SC = "StorageClass"
 _WRL = "WebsiteRedirectLocation"
@@ -122,6 +124,7 @@ _TS = "TagSet"
 _SROSEBAS = "S3RegionalOrS3ExpressBucketArnString"
 _BA = "BucketArn"
 _xaba = "x-amz-bucket-arn"
+_Da = "Days"
 _vI = "versionId"
 _DM = "DeleteMarker"
 _xadm = "x-amz-delete-marker"
@@ -130,6 +133,7 @@ _xaovi = "x-amz-object-version-id"
 _Si = "Size"
 _Pr = "Prefix"
 _ACn = "AnalyticsConfiguration"
+_Rul = "Rule"
 _AA = "ARCHIVE_ACCESS"
 _DAA = "DEEP_ARCHIVE_ACCESS"
 _ITCn = "IntelligentTieringConfiguration"
@@ -176,8 +180,20 @@ _xars = "x-amz-replication-status"
 _xampc = "x-amz-mp-parts-count"
 _xatc = "x-amz-tagging-count"
 _ITs = "IsTruncated"
+_OLE = "ObjectLockEnabled"
+_Y = "Years"
+_EHD = "EventHoldDuration"
+_OLRM = "ObjectLockRetentionMode"
+_DRef = "DefaultRetention"
+_Mo = "Mode"
+_DEH = "DefaultEventHold"
+_OLR = "ObjectLockRule"
+_OLC = "ObjectLockConfiguration"
 _GORI = "GetObjectRetentionInput"
 _cGORR = "com.amazonaws.s3#GetObjectRetentionRequest"
+_OLRb = "ObjectLockRetention"
+_RUD = "RetainUntilDate"
+_EHv = "EventHold"
 _GORO = "GetObjectRetentionOutput"
 _Ret = "Retention"
 _GOR = "GetObjectRetention"
@@ -310,18 +326,42 @@ _OOA = "OptionalObjectAttributes"
 _RS_ = "RESTORE_STATUS"
 _RSe = "RestoreStatus"
 _OOAL = "OptionalObjectAttributesList"
-_LOI = "ListObjectsInput"
-_cLOR = "com.amazonaws.s3#ListObjectsRequest"
-_ma = "marker"
-_mk = "max-keys"
-_xaooa = "x-amz-optional-object-attributes"
-_NM = "NextMarker"
-_LOO = "ListObjectsOutput"
-_LBR = "ListBucketResult"
-_Cont = "Contents"
-_LO = "ListObjects"
 
 S3_REGIONAL_OR_S3_EXPRESS_BUCKET_ARN_STRING: StaticSchema = (3, n0, _SROSEBAS, 0)
+
+OBJECT_LOCK_RETENTION_MODE: StaticSchema = (
+    14,
+    n0,
+    _OLRM,
+    0,
+    (_GOVERNANCE, _COMPLIANCE),
+    ((-1, {_sV: _GOVERNANCE}), (-1, {_sV: _COMPLIANCE})),
+)
+
+DEFAULT_RETENTION: StaticSchema = (
+    18,
+    n0,
+    _DRef,
+    0,
+    (_Mo, _Da, _Y, _DEH),
+    (
+        (OBJECT_LOCK_RETENTION_MODE, 0),
+        (lambda: schemas.DAYS, 0),
+        (lambda: schemas.YEARS, 0),
+        (lambda: schemas.EVENT_HOLD_DURATION, 0),
+    ),
+)
+
+OBJECT_LOCK_RULE: StaticSchema = (18, n0, _OLR, 0, (_DRef,), ((DEFAULT_RETENTION, 0),))
+
+OBJECT_LOCK_CONFIGURATION: StaticSchema = (
+    18,
+    n0,
+    _OLC,
+    0,
+    (_OLE, _Rul),
+    ((lambda: schemas.OBJECT_LOCK_ENABLED, 0), (OBJECT_LOCK_RULE, 0)),
+)
 
 GET_OBJECT_RETENTION_INPUT: StaticSchema = (
     18,
@@ -347,7 +387,7 @@ GET_OBJECT_RETENTION_OUTPUT: StaticSchema = (
     _GORO,
     {_smi: None},
     (_Ret,),
-    ((lambda: schemas.OBJECT_LOCK_RETENTION, {_sN: _Ret, _sPm: None}),),
+    ((lambda: OBJECT_LOCK_RETENTION, {_sN: _Ret, _sPm: None}),),
 )
 
 GET_OBJECT_RETENTION: StaticOperationSchema = (
@@ -362,6 +402,20 @@ GET_OBJECT_RETENTION: StaticOperationSchema = (
     GET_OBJECT_RETENTION_INPUT,
     GET_OBJECT_RETENTION_OUTPUT,
     (),
+)
+
+OBJECT_LOCK_RETENTION: StaticSchema = (
+    18,
+    n0,
+    _OLRb,
+    0,
+    (_Mo, _RUD, _EHv, _EHD),
+    (
+        (OBJECT_LOCK_RETENTION_MODE, 0),
+        (lambda: schemas.DATE, 0),
+        (lambda: schemas.OBJECT_LOCK_EVENT_HOLD, 0),
+        (lambda: schemas.EVENT_HOLD_DURATION, 0),
+    ),
 )
 
 GET_OBJECT_TAGGING_INPUT: StaticSchema = (
@@ -1299,60 +1353,4 @@ OPTIONAL_OBJECT_ATTRIBUTES_LIST: StaticSchema = (
     0,
     (_m,),
     ((OPTIONAL_OBJECT_ATTRIBUTES, 0),),
-)
-
-LIST_OBJECTS_INPUT: StaticSchema = (
-    18,
-    n0,
-    _LOI,
-    {_sSI: _cLOR, _s: None},
-    (_B, _Deli, _ETnc, _Ma, _MKa, _Pr, _RP, _EBO, _OOA),
-    (
-        (
-            lambda: schemas.BUCKET_NAME,
-            {_sP: MappingProxyType({"name": "Bucket"}), _sm: None, _sL: None},
-        ),
-        (DELIMITER, {_sQ: _d}),
-        (ENCODING_TYPE, {_sQ: _et}),
-        (MARKER, {_sQ: _ma}),
-        (MAX_KEYS, {_sQ: _mk}),
-        (
-            lambda: schemas.PREFIX,
-            {_sP: MappingProxyType({"name": "Prefix"}), _sQ: _pre},
-        ),
-        (lambda: schemas.REQUEST_PAYER, {_sH: _xarp}),
-        (lambda: schemas.ACCOUNT_ID, {_sH: _xaebo}),
-        (OPTIONAL_OBJECT_ATTRIBUTES_LIST, {_sH: _xaooa}),
-    ),
-)
-
-LIST_OBJECTS_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _LOO,
-    {_sN: _LBR, _smi: None},
-    (_ITs, _Ma, _NM, _Cont, _N, _Pr, _Deli, _MKa, _CPom, _ETnc, _RC),
-    (
-        (lambda: schemas.IS_TRUNCATED, 0),
-        (MARKER, 0),
-        (lambda: schemas.NEXT_MARKER, 0),
-        (lambda: schemas.OBJECT_LIST, {_sFm: None}),
-        (lambda: schemas.BUCKET_NAME, 0),
-        (lambda: schemas.PREFIX, 0),
-        (DELIMITER, 0),
-        (MAX_KEYS, 0),
-        (COMMON_PREFIX_LIST, {_sFm: None}),
-        (ENCODING_TYPE, 0),
-        (lambda: schemas.REQUEST_CHARGED, {_sH: _xarc}),
-    ),
-)
-
-LIST_OBJECTS: StaticOperationSchema = (
-    23,
-    n0,
-    _LO,
-    {_smith: MappingProxyType({"method": "GET", "uri": "/", "code": 200})},
-    LIST_OBJECTS_INPUT,
-    LIST_OBJECTS_OUTPUT,
-    (lambda: schemas.NO_SUCH_BUCKET,),
 )

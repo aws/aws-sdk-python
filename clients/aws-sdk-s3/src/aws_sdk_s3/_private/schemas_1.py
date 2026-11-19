@@ -30,6 +30,9 @@ _smi = "smithy.api#output"
 _xarc = "x-amz-request-charged"
 _VI = "VersionId"
 _xavi = "x-amz-version-id"
+_smit = "smithy.api#error"
+_c = "client"
+_sE = "smithy.api#httpError"
 _smith = "smithy.api#http"
 _ARI = "AbortRuleId"
 _sN = "smithy.api#xmlName"
@@ -321,11 +324,7 @@ _cDBRR = "com.amazonaws.s3#DeleteBucketReplicationRequest"
 _DBRO = "DeleteBucketReplicationOutput"
 _DBR = "DeleteBucketReplication"
 _Dat = "Date"
-_EHD = "EventHoldDuration"
-_Mo = "Mode"
-_OLRb = "ObjectLockRetention"
-_RUD = "RetainUntilDate"
-_EHv = "EventHold"
+_IR = "InvalidRequest"
 
 BUCKET_LOCATION_CONSTRAINT: StaticSchema = (
     14,
@@ -1439,16 +1438,4 @@ DATE: StaticSchema = (4, n0, _Dat, {_sF: _dt})
 
 DAYS: StaticSchema = (7, n0, _Da, 0)
 
-OBJECT_LOCK_RETENTION: StaticSchema = (
-    18,
-    n0,
-    _OLRb,
-    0,
-    (_Mo, _RUD, _EHv, _EHD),
-    (
-        (lambda: schemas.OBJECT_LOCK_RETENTION_MODE, 0),
-        (DATE, 0),
-        (lambda: schemas.OBJECT_LOCK_EVENT_HOLD, 0),
-        (lambda: schemas.EVENT_HOLD_DURATION, 0),
-    ),
-)
+INVALID_REQUEST: StaticSchema = (18, n0, _IR, {_smit: _c, _sE: 400})

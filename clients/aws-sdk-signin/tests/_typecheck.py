@@ -6,6 +6,10 @@ from aws_sdk_signin.aio.client import AsyncSigninClient
 from aws_sdk_signin.client import SigninClient
 from aws_sdk_signin.models import (
     AccessToken,
+    BatchRevokeSessionError,
+    BatchRevokeSessionsInput,
+    BatchRevokeSessionsInputDict,
+    BatchRevokeSessionsOutput,
     CreateBearerTokenInput,
     CreateBearerTokenInputDict,
     CreateBearerTokenOutput,
@@ -33,12 +37,18 @@ from aws_sdk_signin.models import (
     GetResourcePolicyInput,
     GetResourcePolicyInputDict,
     GetResourcePolicyOutput,
+    GetSessionInput,
+    GetSessionInputDict,
+    GetSessionOutput,
     IntrospectOAuth2TokenWithIAMInput,
     IntrospectOAuth2TokenWithIAMInputDict,
     IntrospectOAuth2TokenWithIAMOutput,
     ListResourcePermissionStatementsInput,
     ListResourcePermissionStatementsInputDict,
     ListResourcePermissionStatementsOutput,
+    ListSessionsInput,
+    ListSessionsInputDict,
+    ListSessionsOutput,
     PermissionStatementSummary,
     PolicyStatement,
     PutConsoleAuthorizationConfigurationInput,
@@ -50,6 +60,8 @@ from aws_sdk_signin.models import (
     RevokeOAuth2TokenWithIAMInput,
     RevokeOAuth2TokenWithIAMInputDict,
     RevokeOAuth2TokenWithIAMOutput,
+    RevokedSession,
+    Session,
     SigninResourceBasedPolicy,
 )
 
@@ -61,6 +73,9 @@ from aws_sdk_signin.models import (
 _: Any = ...
 
 AccessToken(access_key_id=_, secret_access_key=_, session_token=_)
+BatchRevokeSessionError(session_arn=_, code=_, message=_)
+BatchRevokeSessionsInput()
+BatchRevokeSessionsOutput(revoked_sessions=_, errors=_)
 CreateBearerTokenInput()
 CreateBearerTokenOutput(access_token=_, token_type=_, expires_in=_)
 CreateOAuth2TokenInput()
@@ -85,10 +100,14 @@ GetConsoleAuthorizationConfigurationOutput(
 )
 GetResourcePolicyInput()
 GetResourcePolicyOutput(signin_resource_based_policy=_)
+GetSessionInput()
+GetSessionOutput(session_arn=_, principal_arn=_, issued_at=_, expires_at=_)
 IntrospectOAuth2TokenWithIAMInput()
 IntrospectOAuth2TokenWithIAMOutput(active=_)
 ListResourcePermissionStatementsInput()
 ListResourcePermissionStatementsOutput(permission_statements=_)
+ListSessionsInput()
+ListSessionsOutput(items=_)
 PermissionStatementSummary(sid=_)
 PolicyStatement()
 PutConsoleAuthorizationConfigurationInput()
@@ -97,23 +116,28 @@ PutConsoleAuthorizationConfigurationOutput(
 )
 PutResourcePermissionStatementInput()
 PutResourcePermissionStatementOutput(statement_id=_)
+RevokedSession(session_arn=_)
 RevokeOAuth2TokenWithIAMInput()
 RevokeOAuth2TokenWithIAMOutput()
+Session(session_arn=_, principal_arn=_, issued_at=_, expires_at=_)
 SigninResourceBasedPolicy()
-_params_0: CreateBearerTokenInputDict = {"grant_type": _, "resource": _}
-_params_1: CreateOAuth2TokenInputDict = {"token_input": _}
-_params_2: CreateOAuth2TokenRequestBodyDict = {"client_id": _, "grant_type": _}
-_params_3: CreateOAuth2TokenWithIAMInputDict = {"grant_type": _, "resource": _}
-_params_4: CreateOAuth2TokenWithTokenExchangeInputDict = {"grant_type": _}
-_params_5: DeleteConsoleAuthorizationConfigurationInputDict = {}
-_params_6: DeleteResourcePermissionStatementInputDict = {"statement_id": _}
-_params_7: GetConsoleAuthorizationConfigurationInputDict = {}
-_params_8: GetResourcePolicyInputDict = {}
-_params_9: IntrospectOAuth2TokenWithIAMInputDict = {"token": _}
-_params_10: ListResourcePermissionStatementsInputDict = {}
-_params_11: PutConsoleAuthorizationConfigurationInputDict = {}
-_params_12: PutResourcePermissionStatementInputDict = {}
-_params_13: RevokeOAuth2TokenWithIAMInputDict = {"token": _}
+_params_0: BatchRevokeSessionsInputDict = {"session_arns": _}
+_params_1: CreateBearerTokenInputDict = {"grant_type": _, "resource": _}
+_params_2: CreateOAuth2TokenInputDict = {"token_input": _}
+_params_3: CreateOAuth2TokenRequestBodyDict = {"client_id": _, "grant_type": _}
+_params_4: CreateOAuth2TokenWithIAMInputDict = {"grant_type": _, "resource": _}
+_params_5: CreateOAuth2TokenWithTokenExchangeInputDict = {"grant_type": _}
+_params_6: DeleteConsoleAuthorizationConfigurationInputDict = {}
+_params_7: DeleteResourcePermissionStatementInputDict = {"statement_id": _}
+_params_8: GetConsoleAuthorizationConfigurationInputDict = {}
+_params_9: GetResourcePolicyInputDict = {}
+_params_10: GetSessionInputDict = {"session_arn": _}
+_params_11: IntrospectOAuth2TokenWithIAMInputDict = {"token": _}
+_params_12: ListResourcePermissionStatementsInputDict = {}
+_params_13: ListSessionsInputDict = {}
+_params_14: PutConsoleAuthorizationConfigurationInputDict = {}
+_params_15: PutResourcePermissionStatementInputDict = {}
+_params_16: RevokeOAuth2TokenWithIAMInputDict = {"token": _}
 
 
 def _request[T](form: type[T]) -> T:
@@ -122,6 +146,10 @@ def _request[T](form: type[T]) -> T:
 
 async def check_async_calls(client: AsyncSigninClient) -> None:
     pass
+    await client.batch_revoke_sessions(session_arns=_)
+    await client.batch_revoke_sessions(**_request(BatchRevokeSessionsInputDict))
+    await client.batch_revoke_sessions(_request(BatchRevokeSessionsInput))
+    await client.batch_revoke_sessions(_request(BatchRevokeSessionsInputDict))
     await client.create_bearer_token(grant_type=_, resource=_)
     await client.create_bearer_token(**_request(CreateBearerTokenInputDict))
     await client.create_bearer_token(_request(CreateBearerTokenInput))
@@ -182,6 +210,10 @@ async def check_async_calls(client: AsyncSigninClient) -> None:
     await client.get_resource_policy(**_request(GetResourcePolicyInputDict))
     await client.get_resource_policy(_request(GetResourcePolicyInput))
     await client.get_resource_policy(_request(GetResourcePolicyInputDict))
+    await client.get_session(session_arn=_)
+    await client.get_session(**_request(GetSessionInputDict))
+    await client.get_session(_request(GetSessionInput))
+    await client.get_session(_request(GetSessionInputDict))
     await client.introspect_o_auth2_token_with_iam(token=_)
     await client.introspect_o_auth2_token_with_iam(
         **_request(IntrospectOAuth2TokenWithIAMInputDict)
@@ -202,6 +234,10 @@ async def check_async_calls(client: AsyncSigninClient) -> None:
     await client.list_resource_permission_statements(
         _request(ListResourcePermissionStatementsInputDict)
     )
+    await client.list_sessions()
+    await client.list_sessions(**_request(ListSessionsInputDict))
+    await client.list_sessions(_request(ListSessionsInput))
+    await client.list_sessions(_request(ListSessionsInputDict))
     await client.put_console_authorization_configuration()
     await client.put_console_authorization_configuration(
         **_request(PutConsoleAuthorizationConfigurationInputDict)
@@ -234,6 +270,10 @@ async def check_async_calls(client: AsyncSigninClient) -> None:
 
 def check_sync_calls(client: SigninClient) -> None:
     pass
+    client.batch_revoke_sessions(session_arns=_)
+    client.batch_revoke_sessions(**_request(BatchRevokeSessionsInputDict))
+    client.batch_revoke_sessions(_request(BatchRevokeSessionsInput))
+    client.batch_revoke_sessions(_request(BatchRevokeSessionsInputDict))
     client.create_bearer_token(grant_type=_, resource=_)
     client.create_bearer_token(**_request(CreateBearerTokenInputDict))
     client.create_bearer_token(_request(CreateBearerTokenInput))
@@ -290,6 +330,10 @@ def check_sync_calls(client: SigninClient) -> None:
     client.get_resource_policy(**_request(GetResourcePolicyInputDict))
     client.get_resource_policy(_request(GetResourcePolicyInput))
     client.get_resource_policy(_request(GetResourcePolicyInputDict))
+    client.get_session(session_arn=_)
+    client.get_session(**_request(GetSessionInputDict))
+    client.get_session(_request(GetSessionInput))
+    client.get_session(_request(GetSessionInputDict))
     client.introspect_o_auth2_token_with_iam(token=_)
     client.introspect_o_auth2_token_with_iam(
         **_request(IntrospectOAuth2TokenWithIAMInputDict)
@@ -310,6 +354,10 @@ def check_sync_calls(client: SigninClient) -> None:
     client.list_resource_permission_statements(
         _request(ListResourcePermissionStatementsInputDict)
     )
+    client.list_sessions()
+    client.list_sessions(**_request(ListSessionsInputDict))
+    client.list_sessions(_request(ListSessionsInput))
+    client.list_sessions(_request(ListSessionsInputDict))
     client.put_console_authorization_configuration()
     client.put_console_authorization_configuration(
         **_request(PutConsoleAuthorizationConfigurationInputDict)

@@ -22,6 +22,10 @@ _registry = ModelRegistry(
     index={
         "AccessDeniedException": "ACCESS_DENIED_EXCEPTION",
         "AccessToken": "ACCESS_TOKEN",
+        "BatchRevokeSessionError": "BATCH_REVOKE_SESSION_ERROR",
+        "BatchRevokeSessionsInput": "BATCH_REVOKE_SESSIONS_INPUT",
+        "BatchRevokeSessionsOutput": "BATCH_REVOKE_SESSIONS_OUTPUT",
+        "ClientType": "CLIENT_TYPE",
         "ConflictException": "CONFLICT_EXCEPTION",
         "CreateBearerTokenInput": "CREATE_BEARER_TOKEN_INPUT",
         "CreateBearerTokenOutput": "CREATE_BEARER_TOKEN_OUTPUT",
@@ -41,6 +45,8 @@ _registry = ModelRegistry(
         "GetConsoleAuthorizationConfigurationOutput": "GET_CONSOLE_AUTHORIZATION_CONFIGURATION_OUTPUT",
         "GetResourcePolicyInput": "GET_RESOURCE_POLICY_INPUT",
         "GetResourcePolicyOutput": "GET_RESOURCE_POLICY_OUTPUT",
+        "GetSessionInput": "GET_SESSION_INPUT",
+        "GetSessionOutput": "GET_SESSION_OUTPUT",
         "InternalServerException": "INTERNAL_SERVER_EXCEPTION",
         "IntrospectOAuth2TokenWithIAMInput": "INTROSPECT_O_AUTH2_TOKEN_WITH_IAM_INPUT",
         "IntrospectOAuth2TokenWithIAMOutput": "INTROSPECT_O_AUTH2_TOKEN_WITH_IAM_OUTPUT",
@@ -48,6 +54,8 @@ _registry = ModelRegistry(
         "InvalidScopeException": "INVALID_SCOPE_EXCEPTION",
         "ListResourcePermissionStatementsInput": "LIST_RESOURCE_PERMISSION_STATEMENTS_INPUT",
         "ListResourcePermissionStatementsOutput": "LIST_RESOURCE_PERMISSION_STATEMENTS_OUTPUT",
+        "ListSessionsInput": "LIST_SESSIONS_INPUT",
+        "ListSessionsOutput": "LIST_SESSIONS_OUTPUT",
         "OAuth2ErrorCode": "O_AUTH2_ERROR_CODE",
         "PermissionStatementSummary": "PERMISSION_STATEMENT_SUMMARY",
         "PolicyStatement": "POLICY_STATEMENT",
@@ -56,10 +64,13 @@ _registry = ModelRegistry(
         "PutResourcePermissionStatementInput": "PUT_RESOURCE_PERMISSION_STATEMENT_INPUT",
         "PutResourcePermissionStatementOutput": "PUT_RESOURCE_PERMISSION_STATEMENT_OUTPUT",
         "ResourceNotFoundException": "RESOURCE_NOT_FOUND_EXCEPTION",
+        "RevokedSession": "REVOKED_SESSION",
         "RevokeOAuth2TokenWithIAMInput": "REVOKE_O_AUTH2_TOKEN_WITH_IAM_INPUT",
         "RevokeOAuth2TokenWithIAMOutput": "REVOKE_O_AUTH2_TOKEN_WITH_IAM_OUTPUT",
         "ServiceQuotaExceededException": "SERVICE_QUOTA_EXCEEDED_EXCEPTION",
         "ServiceUnavailableException": "SERVICE_UNAVAILABLE_EXCEPTION",
+        "Session": "SESSION",
+        "SessionStatus": "SESSION_STATUS",
         "SigninResourceBasedPolicy": "SIGNIN_RESOURCE_BASED_POLICY",
         "TooManyRequestsError": "TOO_MANY_REQUESTS_ERROR",
         "ValidationException": "VALIDATION_EXCEPTION",
@@ -68,6 +79,10 @@ _registry = ModelRegistry(
         {
             "AccessDeniedException",
             "AccessToken",
+            "BatchRevokeSessionError",
+            "BatchRevokeSessionsInput",
+            "BatchRevokeSessionsOutput",
+            "ClientType",
             "ConflictException",
             "CreateBearerTokenInput",
             "CreateBearerTokenOutput",
@@ -87,6 +102,8 @@ _registry = ModelRegistry(
             "GetConsoleAuthorizationConfigurationOutput",
             "GetResourcePolicyInput",
             "GetResourcePolicyOutput",
+            "GetSessionInput",
+            "GetSessionOutput",
             "InternalServerException",
             "IntrospectOAuth2TokenWithIAMInput",
             "IntrospectOAuth2TokenWithIAMOutput",
@@ -94,6 +111,8 @@ _registry = ModelRegistry(
             "InvalidScopeException",
             "ListResourcePermissionStatementsInput",
             "ListResourcePermissionStatementsOutput",
+            "ListSessionsInput",
+            "ListSessionsOutput",
             "OAuth2ErrorCode",
             "PermissionStatementSummary",
             "PolicyStatement",
@@ -104,8 +123,11 @@ _registry = ModelRegistry(
             "ResourceNotFoundException",
             "RevokeOAuth2TokenWithIAMInput",
             "RevokeOAuth2TokenWithIAMOutput",
+            "RevokedSession",
             "ServiceQuotaExceededException",
             "ServiceUnavailableException",
+            "Session",
+            "SessionStatus",
             "SigninResourceBasedPolicy",
             "TooManyRequestsError",
             "ValidationException",
@@ -116,6 +138,7 @@ _registry = ModelRegistry(
 
 _operation_data = {}
 _operation_names = (
+    "BATCH_REVOKE_SESSIONS",
     "CREATE_BEARER_TOKEN",
     "CREATE_O_AUTH2_TOKEN",
     "CREATE_O_AUTH2_TOKEN_WITH_IAM",
@@ -124,8 +147,10 @@ _operation_names = (
     "DELETE_RESOURCE_PERMISSION_STATEMENT",
     "GET_CONSOLE_AUTHORIZATION_CONFIGURATION",
     "GET_RESOURCE_POLICY",
+    "GET_SESSION",
     "INTROSPECT_O_AUTH2_TOKEN_WITH_IAM",
     "LIST_RESOURCE_PERMISSION_STATEMENTS",
+    "LIST_SESSIONS",
     "PUT_CONSOLE_AUTHORIZATION_CONFIGURATION",
     "PUT_RESOURCE_PERMISSION_STATEMENT",
     "REVOKE_O_AUTH2_TOKEN_WITH_IAM",
@@ -153,6 +178,18 @@ def __getattr__(name: str):
 def __dir__():
     return sorted({*globals(), *_operation_names})
 
+
+_operation_data["BATCH_REVOKE_SESSIONS"] = (
+    "BATCH_REVOKE_SESSIONS",
+    (
+        "com.amazonaws.signin#AccessDeniedException",
+        "com.amazonaws.signin#InternalServerException",
+        "com.amazonaws.signin#ResourceNotFoundException",
+        "com.amazonaws.signin#TooManyRequestsError",
+        "com.amazonaws.signin#ValidationException",
+    ),
+    ("aws.auth#sigv4",),
+)
 
 _operation_data["CREATE_BEARER_TOKEN"] = (
     "CREATE_BEARER_TOKEN",
@@ -247,6 +284,18 @@ _operation_data["GET_RESOURCE_POLICY"] = (
     ("aws.auth#sigv4",),
 )
 
+_operation_data["GET_SESSION"] = (
+    "GET_SESSION",
+    (
+        "com.amazonaws.signin#AccessDeniedException",
+        "com.amazonaws.signin#InternalServerException",
+        "com.amazonaws.signin#ResourceNotFoundException",
+        "com.amazonaws.signin#TooManyRequestsError",
+        "com.amazonaws.signin#ValidationException",
+    ),
+    ("aws.auth#sigv4",),
+)
+
 _operation_data["INTROSPECT_O_AUTH2_TOKEN_WITH_IAM"] = (
     "INTROSPECT_O_AUTH2_TOKEN_WITH_IAM",
     (
@@ -264,6 +313,17 @@ _operation_data["LIST_RESOURCE_PERMISSION_STATEMENTS"] = (
         "com.amazonaws.signin#AccessDeniedException",
         "com.amazonaws.signin#InternalServerException",
         "com.amazonaws.signin#ResourceNotFoundException",
+        "com.amazonaws.signin#TooManyRequestsError",
+        "com.amazonaws.signin#ValidationException",
+    ),
+    ("aws.auth#sigv4",),
+)
+
+_operation_data["LIST_SESSIONS"] = (
+    "LIST_SESSIONS",
+    (
+        "com.amazonaws.signin#AccessDeniedException",
+        "com.amazonaws.signin#InternalServerException",
         "com.amazonaws.signin#TooManyRequestsError",
         "com.amazonaws.signin#ValidationException",
     ),

@@ -9697,6 +9697,102 @@ class RecordHandlerProgressOutput(_SerdeShape):
     optional.
     """
 
+@dataclass(kw_only=True)
+class RegionalStackInstancesDeployment(_SerdeShape):
+    """
+    Provides visibility into the stack instances deployment stage for a
+    single Region, including per-stack-instance progress counts and a
+    completion percentage for that Region.
+    """
+
+    status: str | None = ...
+    """
+    The status of the stack instances deployment stage can be one of the
+    following values:
+
+    - `NOT_APPLICABLE`: The operation does not deploy stack instances, such
+      as a drift detection operation.
+
+    - `NOT_STARTED`: Stack instances deployment has not started. The
+      operation is still provisioning roles, has not begun, or failed before
+      this stage was reached.
+
+    - `IN_PROGRESS`: At least one stack instance has started deploying.
+
+    - `SUCCEEDED`: Deployment finished and succeeded for all stack instances
+      that were not skipped.
+
+    - `PARTIAL_SUCCESS`: Deployment finished with a mix of succeeded,
+      failed, and canceled stack instances.
+
+    - `FAILED`: Deployment finished and every stack instance that was not
+      skipped failed or was canceled.
+    """
+    succeeded_stack_instances_count: int | None = ...
+    """The number of stack instances that deployed successfully in this Region."""
+    failed_stack_instances_count: int | None = ...
+    """The number of stack instances that failed to deploy in this Region."""
+    completed_stack_instances_count: int | None = ...
+    """
+    The number of stack instances in this Region that have reached a final
+    state. This count includes stack instances that succeeded, failed, were
+    skipped, or were canceled.
+    """
+    pending_stack_instances_count: int | None = ...
+    """
+    The number of stack instances in this Region that have not reached a
+    final state. This is the total number of stack instances in this Region
+    minus the completed count.
+    """
+    cancelled_stack_instances_count: int | None = ...
+    """
+    The number of stack instances in this Region that were canceled because
+    the operation exceeded its failure tolerance or was stopped.
+    """
+    skipped_stack_instances_count: int | None = ...
+    """
+    The number of stack instances in this Region that were skipped because
+    role provisioning failed for their target account.
+    """
+    total_stack_instances_count: int | None = ...
+    """
+    The total number of stack instances targeted by this operation in this
+    Region.
+    """
+    percentage_completed: float | None = ...
+    """
+    The percentage of stack instances in this Region that have reached a
+    final state.
+    """
+
+@dataclass(kw_only=True)
+class RegionalStages(_SerdeShape):
+    """
+    Contains the progress information for the individual stages of a
+    StackSet operation in a single Region. Currently reports the stack
+    instances deployment stage for the Region.
+    """
+
+    regional_stack_instances_deployment: RegionalStackInstancesDeployment | None = ...
+    """
+    The progress detail for the stack instances deployment stage in this
+    Region.
+    """
+
+@dataclass(kw_only=True)
+class RegionalStatusDetail(_SerdeShape):
+    """
+    Contains the progress detail for a single Region of a StackSet
+    operation. This information is returned only by
+    DescribeStackSetOperation.
+    """
+
+    stages: RegionalStages | None = ...
+    """
+    The progress information for the individual stages of the operation in
+    this Region.
+    """
+
 class RegionConcurrencyType(UnknownEnumMixin, StrEnum):
     SEQUENTIAL = "SEQUENTIAL"
     PARALLEL = "PARALLEL"
@@ -9768,199 +9864,3 @@ class RegisterPublisherOutput(_SerdeShape):
     to investigate a call. Members of the metadata are individually
     optional.
     """
-
-@dataclass(kw_only=True)
-class RegisterTypeInput(_SerdeShape):
-    """Dataclass for RegisterTypeInput structure."""
-
-    type: str | None = ...
-    """The kind of extension."""
-    type_name: str | None = ...
-    """
-    The name of the extension being registered.
-
-    We suggest that extension names adhere to the following patterns:
-
-    - For resource types, `company_or_organization::service::type`.
-
-    - For modules, `company_or_organization::service::type::MODULE`.
-
-    - For Hooks, `MyCompany::Testing::MyTestHook`.
-
-    Note:
-        The following organization namespaces are reserved and can't be used in
-        your extension names:
-
-        - `Alexa`
-
-        - `AMZN`
-
-        - `Amazon`
-
-        - `AWS`
-
-        - `Custom`
-
-        - `Dev`
-    """
-    schema_handler_package: str | None = ...
-    """
-    A URL to the S3 bucket that contains the extension project package that
-    contains the necessary files for the extension you want to register.
-
-    For information about generating a schema handler package for the
-    extension you want to register, see
-    [submit](https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-cli-submit.html)
-    in the *CloudFormation Command Line Interface (CLI) User Guide*.
-
-    Note:
-        The user registering the extension must be able to access the package in
-        the S3 bucket. That's, the user needs to have
-        [GetObject](https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObject.html)
-        permissions for the schema handler package. For more information, see
-        [Actions, Resources, and Condition Keys for Amazon
-        S3](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_amazons3.html)
-        in the *Identity and Access Management User Guide*.
-    """
-    logging_config: LoggingConfig | None = ...
-    """Specifies logging configuration information for an extension."""
-    execution_role_arn: str | None = ...
-    """
-    The Amazon Resource Name (ARN) of the IAM role for CloudFormation to
-    assume when invoking the extension.
-
-    For CloudFormation to assume the specified execution role, the role must
-    contain a trust relationship with the CloudFormation service principal
-    (`resources.cloudformation.amazonaws.com`). For more information about
-    adding trust relationships, see [Modifying a role trust
-    policy](https://docs.aws.amazon.com/IAM/latest/UserGuide/roles-managingrole-editing-console.html#roles-managingrole_edit-trust-policy)
-    in the *Identity and Access Management User Guide*.
-
-    If your extension calls Amazon Web Services APIs in any of its handlers,
-    you must create an *[IAM execution
-    role](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html)*
-    that includes the necessary permissions to call those Amazon Web
-    Services APIs, and provision that execution role in your account. When
-    CloudFormation needs to invoke the resource type handler, CloudFormation
-    assumes this execution role to create a temporary session token, which
-    it then passes to the resource type handler, thereby supplying your
-    resource type with the appropriate credentials.
-    """
-    client_request_token: str | None = ...
-    """
-    A unique identifier that acts as an idempotency key for this
-    registration request. Specifying a client request token prevents
-    CloudFormation from generating more than one version of an extension
-    from the same registration request, even if the request is submitted
-    multiple times.
-    """
-
-class RegisterTypeInputDict(TypedDict, total=False):
-    """Dictionary form of `RegisterTypeInput`."""
-
-    type: str | None
-    """The kind of extension."""
-    type_name: Required[str]
-    """
-    The name of the extension being registered.
-
-    We suggest that extension names adhere to the following patterns:
-
-    - For resource types, `company_or_organization::service::type`.
-
-    - For modules, `company_or_organization::service::type::MODULE`.
-
-    - For Hooks, `MyCompany::Testing::MyTestHook`.
-
-    Note:
-        The following organization namespaces are reserved and can't be used in
-        your extension names:
-
-        - `Alexa`
-
-        - `AMZN`
-
-        - `Amazon`
-
-        - `AWS`
-
-        - `Custom`
-
-        - `Dev`
-    """
-    schema_handler_package: Required[str]
-    """
-    A URL to the S3 bucket that contains the extension project package that
-    contains the necessary files for the extension you want to register.
-
-    For information about generating a schema handler package for the
-    extension you want to register, see
-    [submit](https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-cli-submit.html)
-    in the *CloudFormation Command Line Interface (CLI) User Guide*.
-
-    Note:
-        The user registering the extension must be able to access the package in
-        the S3 bucket. That's, the user needs to have
-        [GetObject](https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObject.html)
-        permissions for the schema handler package. For more information, see
-        [Actions, Resources, and Condition Keys for Amazon
-        S3](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_amazons3.html)
-        in the *Identity and Access Management User Guide*.
-    """
-    logging_config: LoggingConfig | LoggingConfigDict | None
-    """Specifies logging configuration information for an extension."""
-    execution_role_arn: str | None
-    """
-    The Amazon Resource Name (ARN) of the IAM role for CloudFormation to
-    assume when invoking the extension.
-
-    For CloudFormation to assume the specified execution role, the role must
-    contain a trust relationship with the CloudFormation service principal
-    (`resources.cloudformation.amazonaws.com`). For more information about
-    adding trust relationships, see [Modifying a role trust
-    policy](https://docs.aws.amazon.com/IAM/latest/UserGuide/roles-managingrole-editing-console.html#roles-managingrole_edit-trust-policy)
-    in the *Identity and Access Management User Guide*.
-
-    If your extension calls Amazon Web Services APIs in any of its handlers,
-    you must create an *[IAM execution
-    role](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html)*
-    that includes the necessary permissions to call those Amazon Web
-    Services APIs, and provision that execution role in your account. When
-    CloudFormation needs to invoke the resource type handler, CloudFormation
-    assumes this execution role to create a temporary session token, which
-    it then passes to the resource type handler, thereby supplying your
-    resource type with the appropriate credentials.
-    """
-    client_request_token: str | None
-    """
-    A unique identifier that acts as an idempotency key for this
-    registration request. Specifying a client request token prevents
-    CloudFormation from generating more than one version of an extension
-    from the same registration request, even if the request is submitted
-    multiple times.
-    """
-
-@dataclass(kw_only=True)
-class RegisterTypeOutput(_SerdeShape):
-    """Dataclass for RegisterTypeOutput structure."""
-
-    registration_token: str | None = ...
-    """
-    The identifier for this registration request.
-
-    Use this registration token when calling DescribeTypeRegistration, which
-    returns information about the status and IDs of the extension
-    registration.
-    """
-    response_metadata: ResponseMetadata = ...
-    """
-    Metadata about the response that produced this output. Use this to
-    recover the request identifiers a service's support team needs in order
-    to investigate a call. Members of the metadata are individually
-    optional.
-    """
-
-class RegistrationStatus(UnknownEnumMixin, StrEnum):
-    COMPLETE = "COMPLETE"
-    IN_PROGRESS = "IN_PROGRESS"
-    FAILED = "FAILED"

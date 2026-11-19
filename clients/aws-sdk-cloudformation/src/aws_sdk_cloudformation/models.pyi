@@ -334,17 +334,20 @@ from ._private.models_0 import (
     RecordHandlerProgressInput as RecordHandlerProgressInput,
     RecordHandlerProgressInputDict as RecordHandlerProgressInputDict,
     RecordHandlerProgressOutput as RecordHandlerProgressOutput,
+    RegionalStackInstancesDeployment as RegionalStackInstancesDeployment,
+    RegionalStages as RegionalStages,
+    RegionalStatusDetail as RegionalStatusDetail,
     RegionConcurrencyType as RegionConcurrencyType,
     RegisterPublisherInput as RegisterPublisherInput,
     RegisterPublisherInputDict as RegisterPublisherInputDict,
     RegisterPublisherOutput as RegisterPublisherOutput,
+)
+
+from ._private.models_1 import (
     RegisterTypeInput as RegisterTypeInput,
     RegisterTypeInputDict as RegisterTypeInputDict,
     RegisterTypeOutput as RegisterTypeOutput,
     RegistrationStatus as RegistrationStatus,
-)
-
-from ._private.models_1 import (
     RegistryType as RegistryType,
     RemoveAliasInput as RemoveAliasInput,
     RemoveAliasInputDict as RemoveAliasInputDict,
@@ -374,6 +377,7 @@ from ._private.models_1 import (
     ResourceTargetDefinition as ResourceTargetDefinition,
     ResourceToImport as ResourceToImport,
     ResourceToImportDict as ResourceToImportDict,
+    RoleProvisioning as RoleProvisioning,
     RollbackConfiguration as RollbackConfiguration,
     RollbackConfigurationDict as RollbackConfigurationDict,
     RollbackStackInput as RollbackStackInput,
@@ -418,6 +422,7 @@ from ._private.models_1 import (
     StackInstanceFilterName as StackInstanceFilterName,
     StackInstanceNotFoundException as StackInstanceNotFoundException,
     StackInstanceResourceDriftsSummary as StackInstanceResourceDriftsSummary,
+    StackInstancesDeployment as StackInstancesDeployment,
     StackInstanceStatus as StackInstanceStatus,
     StackInstanceSummary as StackInstanceSummary,
     StackNotFoundException as StackNotFoundException,
@@ -456,6 +461,8 @@ from ._private.models_1 import (
     StackSetSummary as StackSetSummary,
     StackStatus as StackStatus,
     StackSummary as StackSummary,
+    Stages as Stages,
+    StageStatus as StageStatus,
     StaleRequestException as StaleRequestException,
     StartResourceScanInput as StartResourceScanInput,
     StartResourceScanInputDict as StartResourceScanInputDict,

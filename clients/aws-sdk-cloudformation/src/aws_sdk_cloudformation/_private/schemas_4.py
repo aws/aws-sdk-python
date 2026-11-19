@@ -11,7 +11,6 @@ _SUCCEEDED = "SUCCEEDED"
 _FAILED = "FAILED"
 _S = "Status"
 _SR = "StatusReason"
-_V = "Value"
 _m = "member"
 _s = "smithy.api#input"
 _sm = "smithy.api#output"
@@ -29,21 +28,18 @@ _AN = "AliasName"
 _PASSED = "PASSED"
 _SSARN = "StackSetARN"
 _AD = "AutoDeployment"
-_TA = "TypeArn"
 _Ti = "Timestamp"
 _LU = "LastUpdated"
 _IP = "IN_PROGRESS"
 _CA = "CallAs"
+_CSIC = "CancelledStackInstancesCount"
 _SN = "StackName"
 _Cap = "Capabilities"
 _CSI = "ChangeSetId"
-_P = "Properties"
 _Ta = "Tags"
-_AVc = "ActualValue"
 _LRI = "LogicalResourceId"
 _MI = "ModuleInfo"
 _PRI = "PhysicalResourceId"
-_SRDS = "StackResourceDriftStatus"
 _IS = "IN_SYNC"
 _NC = "NOT_CHECKED"
 _RT = "ResourceType"
@@ -64,8 +60,9 @@ _DCe = "DeploymentConfig"
 _NARNo = "NotificationARNs"
 _DELETE = "DELETE"
 _Para = "Parameters"
+_k = "key"
+_v = "value"
 _RCo = "RollbackConfiguration"
-_K = "Key"
 _TB = "TemplateBody"
 _ETP = "EnableTerminationProtection"
 _REOC = "RetainExceptOnCreate"
@@ -107,33 +104,14 @@ _RC_ = "ROLLBACK_COMPLETE"
 _RF = "ROLLBACK_FAILED"
 _RSR = "ResourceStatusReason"
 _LUT = "LastUpdatedTime"
-_PPr = "PropertyPath"
+_PENDING = "PENDING"
+_PC = "PercentageCompleted"
 _RUNNING = "RUNNING"
 _DSr = "DriftStatus"
 _LDCT = "LastDriftCheckTimestamp"
 _LCT = "LastCheckTimestamp"
 _DI = "DriftInformation"
-_SRDSF = "StackResourceDriftStatusFilters"
-_DSRDI = "DescribeStackResourceDriftsInput"
-_MR = "MaxResults"
-_SRDSR = "StackResourceDriftStatusReason"
-_PRICKVP = "PhysicalResourceIdContextKeyValuePair"
-_PRIC = "PhysicalResourceIdContext"
-_PVr = "PropertyValue"
-_DTi = "DifferenceType"
-_ADD = "ADD"
-_REMOVE = "REMOVE"
-_NE = "NOT_EQUAL"
-_PDr = "PropertyDifference"
-_EV = "ExpectedValue"
-_PDro = "PropertyDifferences"
-_SRDt = "StackResourceDrift"
-_EPx = "ExpectedProperties"
-_AP = "ActualProperties"
-_DSRr = "DriftStatusReason"
 _SRDta = "StackResourceDrifts"
-_DSRDO = "DescribeStackResourceDriftsOutput"
-_DSRD = "DescribeStackResourceDrifts"
 _DSRIes = "DescribeStackResourcesInput"
 _SRt = "StackResource"
 _SRta = "StackResources"
@@ -179,10 +157,33 @@ _DSSe = "DescribeStackSet"
 _DSSOI = "DescribeStackSetOperationInput"
 _SSOA = "StackSetOperationAction"
 _DD = "DETECT_DRIFT"
+_CSICo = "CompletedStackInstancesCount"
+_SIDFSIC = "StackInstancesDeploymentFailedStackInstancesCount"
+_PSIC = "PendingStackInstancesCount"
+_SPC = "StagePercentageCompleted"
+_SSIC = "SkippedStackInstancesCount"
+_SSta = "StageStatus"
+_NA = "NOT_APPLICABLE"
+_NS = "NOT_STARTED"
+_SSICu = "SucceededStackInstancesCount"
+_RTSIC = "RegionalTotalStackInstancesCount"
+_RSID = "RegionalStackInstancesDeployment"
+_RSeg = "RegionalStages"
+_RSD = "RegionalStatusDetail"
+_Stag = "Stages"
+_RSDe = "RegionalStatusDetails"
 _RSN = "RetainStacksNullable"
 _SSOS = "StackSetOperationStatus"
 _STOPPING = "STOPPING"
 _QUEUED = "QUEUED"
+_CAC = "CompletedAccountsCount"
+_FAC = "FailedAccountsCount"
+_PAC = "PendingAccountsCount"
+_SAC = "SucceededAccountsCount"
+_RPo = "RoleProvisioning"
+_SID = "StackInstancesDeployment"
+_TAC = "TotalAccountsCount"
+_SSOTSIC = "StackSetOperationTotalStackInstancesCount"
 _SSOSD = "StackSetOperationStatusDetails"
 _SSOSR = "StackSetOperationStatusReason"
 _SSO = "StackSetOperation"
@@ -225,139 +226,6 @@ _TCi = "TimeCreated"
 _OTA = "OriginalTypeArn"
 _LPV = "LatestPublicVersion"
 _DTes = "DescribeType"
-_RTegi = "RegistrationToken"
-_DTRI = "DescribeTypeRegistrationInput"
-_DTRO = "DescribeTypeRegistrationOutput"
-_PSr = "ProgressStatus"
-_TVA = "TypeVersionArn"
-_DTR = "DescribeTypeRegistration"
-
-STACK_RESOURCE_DRIFT_STATUS_FILTERS: StaticSchema = (
-    16,
-    n0,
-    _SRDSF,
-    0,
-    (_m,),
-    ((lambda: schemas.STACK_RESOURCE_DRIFT_STATUS, 0),),
-)
-
-DESCRIBE_STACK_RESOURCE_DRIFTS_INPUT: StaticSchema = (
-    18,
-    n0,
-    _DSRDI,
-    {_s: None},
-    (_SN, _SRDSF, _NT, _MR),
-    (
-        (lambda: schemas.STACK_NAME_OR_ID, {_sO: None, _smit: None}),
-        (STACK_RESOURCE_DRIFT_STATUS_FILTERS, 0),
-        (lambda: schemas.NEXT_TOKEN, 0),
-        (lambda: schemas.BOXED_MAX_RESULTS, 0),
-    ),
-)
-
-DESCRIBE_STACK_RESOURCE_DRIFTS_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _DSRDO,
-    {_sm: None},
-    (_SRDta, _NT),
-    (
-        (lambda: STACK_RESOURCE_DRIFTS, {_sO: None, _smit: None}),
-        (lambda: schemas.NEXT_TOKEN, 0),
-    ),
-)
-
-DESCRIBE_STACK_RESOURCE_DRIFTS: StaticOperationSchema = (
-    23,
-    n0,
-    _DSRD,
-    0,
-    DESCRIBE_STACK_RESOURCE_DRIFTS_INPUT,
-    DESCRIBE_STACK_RESOURCE_DRIFTS_OUTPUT,
-    (),
-)
-
-PROPERTIES: StaticSchema = (3, n0, _P, 0)
-
-STACK_RESOURCE_DRIFT_STATUS_REASON: StaticSchema = (3, n0, _SRDSR, 0)
-
-KEY: StaticSchema = (3, n0, _K, 0)
-
-VALUE: StaticSchema = (3, n0, _V, 0)
-
-PHYSICAL_RESOURCE_ID_CONTEXT_KEY_VALUE_PAIR: StaticSchema = (
-    18,
-    n0,
-    _PRICKVP,
-    0,
-    (_K, _V),
-    ((KEY, {_sO: None, _smit: None}), (VALUE, {_sO: None, _smit: None})),
-)
-
-PHYSICAL_RESOURCE_ID_CONTEXT: StaticSchema = (
-    16,
-    n0,
-    _PRIC,
-    0,
-    (_m,),
-    ((PHYSICAL_RESOURCE_ID_CONTEXT_KEY_VALUE_PAIR, 0),),
-)
-
-PROPERTY_VALUE: StaticSchema = (3, n0, _PVr, 0)
-
-DIFFERENCE_TYPE: StaticSchema = (
-    14,
-    n0,
-    _DTi,
-    0,
-    (_ADD, _REMOVE, _NE),
-    ((-1, {_sV: _ADD}), (-1, {_sV: _REMOVE}), (-1, {_sV: _NE})),
-)
-
-PROPERTY_DIFFERENCE: StaticSchema = (
-    18,
-    n0,
-    _PDr,
-    0,
-    (_PPr, _EV, _AVc, _DTi),
-    (
-        (lambda: schemas.PROPERTY_PATH, {_sO: None, _smit: None}),
-        (PROPERTY_VALUE, {_sO: None, _smit: None}),
-        (PROPERTY_VALUE, {_sO: None, _smit: None}),
-        (DIFFERENCE_TYPE, {_sO: None, _smit: None}),
-    ),
-)
-
-PROPERTY_DIFFERENCES: StaticSchema = (
-    16,
-    n0,
-    _PDro,
-    0,
-    (_m,),
-    ((PROPERTY_DIFFERENCE, 0),),
-)
-
-STACK_RESOURCE_DRIFT: StaticSchema = (
-    18,
-    n0,
-    _SRDt,
-    0,
-    (_SI, _LRI, _PRI, _PRIC, _RT, _EPx, _AP, _PDro, _SRDS, _Ti, _MI, _DSRr),
-    (
-        (lambda: schemas.STACK_ID, {_sO: None, _smit: None}),
-        (lambda: schemas.LOGICAL_RESOURCE_ID, {_sO: None, _smit: None}),
-        (lambda: schemas.PHYSICAL_RESOURCE_ID, 0),
-        (PHYSICAL_RESOURCE_ID_CONTEXT, 0),
-        (lambda: schemas.RESOURCE_TYPE, {_sO: None, _smit: None}),
-        (PROPERTIES, 0),
-        (PROPERTIES, 0),
-        (PROPERTY_DIFFERENCES, 0),
-        (lambda: schemas.STACK_RESOURCE_DRIFT_STATUS, {_sO: None, _smit: None}),
-        (lambda: schemas.TIMESTAMP, {_sO: None, _smit: None}),
-        (lambda: schemas.MODULE_INFO, 0),
-        (STACK_RESOURCE_DRIFT_STATUS_REASON, 0),
-    ),
-)
 
 STACK_RESOURCE_DRIFTS: StaticSchema = (
     16,
@@ -365,7 +233,7 @@ STACK_RESOURCE_DRIFTS: StaticSchema = (
     _SRDta,
     0,
     (_m,),
-    ((STACK_RESOURCE_DRIFT, 0),),
+    ((lambda: schemas.STACK_RESOURCE_DRIFT, 0),),
 )
 
 DESCRIBE_STACK_RESOURCES_INPUT: StaticSchema = (
@@ -801,6 +669,88 @@ STACK_SET_OPERATION_ACTION: StaticSchema = (
     ),
 )
 
+COMPLETED_STACK_INSTANCES_COUNT: StaticSchema = (7, n0, _CSICo, 0)
+
+STACK_INSTANCES_DEPLOYMENT_FAILED_STACK_INSTANCES_COUNT: StaticSchema = (
+    7,
+    n0,
+    _SIDFSIC,
+    0,
+)
+
+PENDING_STACK_INSTANCES_COUNT: StaticSchema = (7, n0, _PSIC, 0)
+
+STAGE_PERCENTAGE_COMPLETED: StaticSchema = (10, n0, _SPC, 0)
+
+SKIPPED_STACK_INSTANCES_COUNT: StaticSchema = (7, n0, _SSIC, 0)
+
+STAGE_STATUS: StaticSchema = (
+    14,
+    n0,
+    _SSta,
+    0,
+    (_PENDING, _NA, _NS, _IP, _SUCCEEDED, _PS_, _FAILED),
+    (
+        (-1, {_sV: _PENDING}),
+        (-1, {_sV: _NA}),
+        (-1, {_sV: _NS}),
+        (-1, {_sV: _IP}),
+        (-1, {_sV: _SUCCEEDED}),
+        (-1, {_sV: _PS_}),
+        (-1, {_sV: _FAILED}),
+    ),
+)
+
+SUCCEEDED_STACK_INSTANCES_COUNT: StaticSchema = (7, n0, _SSICu, 0)
+
+REGIONAL_TOTAL_STACK_INSTANCES_COUNT: StaticSchema = (7, n0, _RTSIC, 0)
+
+REGIONAL_STACK_INSTANCES_DEPLOYMENT: StaticSchema = (
+    18,
+    n0,
+    _RSID,
+    0,
+    (_S, _SSICu, _FSIC, _CSICo, _PSIC, _CSIC, _SSIC, _TSIC, _PC),
+    (
+        (STAGE_STATUS, 0),
+        (SUCCEEDED_STACK_INSTANCES_COUNT, 0),
+        (STACK_INSTANCES_DEPLOYMENT_FAILED_STACK_INSTANCES_COUNT, 0),
+        (COMPLETED_STACK_INSTANCES_COUNT, 0),
+        (PENDING_STACK_INSTANCES_COUNT, 0),
+        (lambda: schemas.CANCELLED_STACK_INSTANCES_COUNT, 0),
+        (SKIPPED_STACK_INSTANCES_COUNT, 0),
+        (REGIONAL_TOTAL_STACK_INSTANCES_COUNT, 0),
+        (STAGE_PERCENTAGE_COMPLETED, 0),
+    ),
+)
+
+REGIONAL_STAGES: StaticSchema = (
+    18,
+    n0,
+    _RSeg,
+    0,
+    (_RSID,),
+    ((REGIONAL_STACK_INSTANCES_DEPLOYMENT, 0),),
+)
+
+REGIONAL_STATUS_DETAIL: StaticSchema = (
+    18,
+    n0,
+    _RSD,
+    0,
+    (_Stag,),
+    ((REGIONAL_STAGES, 0),),
+)
+
+REGIONAL_STATUS_DETAILS: StaticSchema = (
+    17,
+    n0,
+    _RSDe,
+    0,
+    (_k, _v),
+    ((lambda: schemas.REGION, 0), (REGIONAL_STATUS_DETAIL, 0)),
+)
+
 RETAIN_STACKS_NULLABLE: StaticSchema = (2, n0, _RSN, 0)
 
 STACK_SET_OPERATION_STATUS: StaticSchema = (
@@ -819,13 +769,73 @@ STACK_SET_OPERATION_STATUS: StaticSchema = (
     ),
 )
 
+COMPLETED_ACCOUNTS_COUNT: StaticSchema = (7, n0, _CAC, 0)
+
+FAILED_ACCOUNTS_COUNT: StaticSchema = (7, n0, _FAC, 0)
+
+PENDING_ACCOUNTS_COUNT: StaticSchema = (7, n0, _PAC, 0)
+
+SUCCEEDED_ACCOUNTS_COUNT: StaticSchema = (7, n0, _SAC, 0)
+
+ROLE_PROVISIONING: StaticSchema = (
+    18,
+    n0,
+    _RPo,
+    0,
+    (_S, _SAC, _FAC, _CAC, _PAC, _PC),
+    (
+        (STAGE_STATUS, 0),
+        (SUCCEEDED_ACCOUNTS_COUNT, 0),
+        (FAILED_ACCOUNTS_COUNT, 0),
+        (COMPLETED_ACCOUNTS_COUNT, 0),
+        (PENDING_ACCOUNTS_COUNT, 0),
+        (STAGE_PERCENTAGE_COMPLETED, 0),
+    ),
+)
+
+STACK_INSTANCES_DEPLOYMENT: StaticSchema = (
+    18,
+    n0,
+    _SID,
+    0,
+    (_S, _SSICu, _FSIC, _CSICo, _PSIC, _CSIC, _SSIC, _PC),
+    (
+        (STAGE_STATUS, 0),
+        (SUCCEEDED_STACK_INSTANCES_COUNT, 0),
+        (STACK_INSTANCES_DEPLOYMENT_FAILED_STACK_INSTANCES_COUNT, 0),
+        (COMPLETED_STACK_INSTANCES_COUNT, 0),
+        (PENDING_STACK_INSTANCES_COUNT, 0),
+        (lambda: schemas.CANCELLED_STACK_INSTANCES_COUNT, 0),
+        (SKIPPED_STACK_INSTANCES_COUNT, 0),
+        (STAGE_PERCENTAGE_COMPLETED, 0),
+    ),
+)
+
+STAGES: StaticSchema = (
+    18,
+    n0,
+    _Stag,
+    0,
+    (_RPo, _SID),
+    ((ROLE_PROVISIONING, 0), (STACK_INSTANCES_DEPLOYMENT, 0)),
+)
+
+TOTAL_ACCOUNTS_COUNT: StaticSchema = (7, n0, _TAC, 0)
+
+STACK_SET_OPERATION_TOTAL_STACK_INSTANCES_COUNT: StaticSchema = (7, n0, _SSOTSIC, 0)
+
 STACK_SET_OPERATION_STATUS_DETAILS: StaticSchema = (
     18,
     n0,
     _SSOSD,
     0,
-    (_FSIC,),
-    ((FAILED_STACK_INSTANCES_COUNT, 0),),
+    (_Stag, _TAC, _TSIC, _FSIC),
+    (
+        (STAGES, 0),
+        (TOTAL_ACCOUNTS_COUNT, 0),
+        (STACK_SET_OPERATION_TOTAL_STACK_INSTANCES_COUNT, 0),
+        (FAILED_STACK_INSTANCES_COUNT, 0),
+    ),
 )
 
 STACK_SET_OPERATION_STATUS_REASON: StaticSchema = (3, n0, _SSOSR, 0)
@@ -835,7 +845,23 @@ STACK_SET_OPERATION: StaticSchema = (
     n0,
     _SSO,
     0,
-    (_OI, _SSI, _Ac, _S, _OP, _RS, _ARARN, _ERN, _CTre, _ETnd, _DT, _SSDDD, _SR, _SDta),
+    (
+        _OI,
+        _SSI,
+        _Ac,
+        _S,
+        _OP,
+        _RS,
+        _ARARN,
+        _ERN,
+        _CTre,
+        _ETnd,
+        _DT,
+        _SSDDD,
+        _SR,
+        _SDta,
+        _RSDe,
+    ),
     (
         (lambda: schemas.CLIENT_REQUEST_TOKEN, 0),
         (lambda: schemas.STACK_SET_ID, 0),
@@ -851,6 +877,7 @@ STACK_SET_OPERATION: StaticSchema = (
         (STACK_SET_DRIFT_DETECTION_DETAILS, 0),
         (STACK_SET_OPERATION_STATUS_REASON, 0),
         (STACK_SET_OPERATION_STATUS_DETAILS, 0),
+        (REGIONAL_STATUS_DETAILS, 0),
     ),
 )
 
@@ -913,7 +940,7 @@ DESCRIBE_TYPE_OUTPUT: StaticSchema = (
         (lambda: schemas.TYPE_VERSION_ID, 0),
         (lambda: IS_DEFAULT_VERSION, 0),
         (lambda: TYPE_TESTS_STATUS, 0),
-        (lambda: TYPE_TESTS_STATUS_DESCRIPTION, 0),
+        (lambda: schemas.TYPE_TESTS_STATUS_DESCRIPTION, 0),
         (lambda: schemas.DESCRIPTION, 0),
         (lambda: TYPE_SCHEMA, 0),
         (lambda: PROVISIONING_TYPE, 0),
@@ -1018,8 +1045,6 @@ TYPE_TESTS_STATUS: StaticSchema = (
     ((-1, {_sV: _PASSED}), (-1, {_sV: _FAILED}), (-1, {_sV: _IP}), (-1, {_sV: _NT_})),
 )
 
-TYPE_TESTS_STATUS_DESCRIPTION: StaticSchema = (3, n0, _TTSD, 0)
-
 VISIBILITY: StaticSchema = (
     14,
     n0,
@@ -1027,37 +1052,4 @@ VISIBILITY: StaticSchema = (
     0,
     (_PUBLIC, _PRIVATE),
     ((-1, {_sV: _PUBLIC}), (-1, {_sV: _PRIVATE})),
-)
-
-DESCRIBE_TYPE_REGISTRATION_INPUT: StaticSchema = (
-    18,
-    n0,
-    _DTRI,
-    {_s: None},
-    (_RTegi,),
-    ((lambda: schemas.REGISTRATION_TOKEN, {_sO: None, _smit: None}),),
-)
-
-DESCRIBE_TYPE_REGISTRATION_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _DTRO,
-    {_sm: None},
-    (_PSr, _Des, _TA, _TVA),
-    (
-        (lambda: schemas.REGISTRATION_STATUS, 0),
-        (lambda: schemas.DESCRIPTION, 0),
-        (lambda: schemas.TYPE_ARN, 0),
-        (lambda: schemas.TYPE_ARN, 0),
-    ),
-)
-
-DESCRIBE_TYPE_REGISTRATION: StaticOperationSchema = (
-    23,
-    n0,
-    _DTR,
-    0,
-    DESCRIBE_TYPE_REGISTRATION_INPUT,
-    DESCRIBE_TYPE_REGISTRATION_OUTPUT,
-    (lambda: schemas.CFN_REGISTRY_EXCEPTION,),
 )

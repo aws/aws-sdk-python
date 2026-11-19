@@ -18,6 +18,8 @@ from ..models import (
     DeploymentTargets,
     DeploymentTargetsDict,
     LiveResourceDrift,
+    LoggingConfig,
+    LoggingConfigDict,
     ManagedExecution,
     ManagedExecutionDict,
     ModuleInfo,
@@ -27,9 +29,206 @@ from ..models import (
     ParameterDict,
     PhysicalResourceIdContextKeyValuePair,
     PropertyDifference,
+    RegionalStatusDetail,
     ServiceError,
     _SerdeShape,
 )
+
+@dataclass(kw_only=True)
+class RegisterTypeInput(_SerdeShape):
+    """Dataclass for RegisterTypeInput structure."""
+
+    type: str | None = ...
+    """The kind of extension."""
+    type_name: str | None = ...
+    """
+    The name of the extension being registered.
+
+    We suggest that extension names adhere to the following patterns:
+
+    - For resource types, `company_or_organization::service::type`.
+
+    - For modules, `company_or_organization::service::type::MODULE`.
+
+    - For Hooks, `MyCompany::Testing::MyTestHook`.
+
+    Note:
+        The following organization namespaces are reserved and can't be used in
+        your extension names:
+
+        - `Alexa`
+
+        - `AMZN`
+
+        - `Amazon`
+
+        - `AWS`
+
+        - `Custom`
+
+        - `Dev`
+    """
+    schema_handler_package: str | None = ...
+    """
+    A URL to the S3 bucket that contains the extension project package that
+    contains the necessary files for the extension you want to register.
+
+    For information about generating a schema handler package for the
+    extension you want to register, see
+    [submit](https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-cli-submit.html)
+    in the *CloudFormation Command Line Interface (CLI) User Guide*.
+
+    Note:
+        The user registering the extension must be able to access the package in
+        the S3 bucket. That's, the user needs to have
+        [GetObject](https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObject.html)
+        permissions for the schema handler package. For more information, see
+        [Actions, Resources, and Condition Keys for Amazon
+        S3](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_amazons3.html)
+        in the *Identity and Access Management User Guide*.
+    """
+    logging_config: LoggingConfig | None = ...
+    """Specifies logging configuration information for an extension."""
+    execution_role_arn: str | None = ...
+    """
+    The Amazon Resource Name (ARN) of the IAM role for CloudFormation to
+    assume when invoking the extension.
+
+    For CloudFormation to assume the specified execution role, the role must
+    contain a trust relationship with the CloudFormation service principal
+    (`resources.cloudformation.amazonaws.com`). For more information about
+    adding trust relationships, see [Modifying a role trust
+    policy](https://docs.aws.amazon.com/IAM/latest/UserGuide/roles-managingrole-editing-console.html#roles-managingrole_edit-trust-policy)
+    in the *Identity and Access Management User Guide*.
+
+    If your extension calls Amazon Web Services APIs in any of its handlers,
+    you must create an *[IAM execution
+    role](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html)*
+    that includes the necessary permissions to call those Amazon Web
+    Services APIs, and provision that execution role in your account. When
+    CloudFormation needs to invoke the resource type handler, CloudFormation
+    assumes this execution role to create a temporary session token, which
+    it then passes to the resource type handler, thereby supplying your
+    resource type with the appropriate credentials.
+    """
+    client_request_token: str | None = ...
+    """
+    A unique identifier that acts as an idempotency key for this
+    registration request. Specifying a client request token prevents
+    CloudFormation from generating more than one version of an extension
+    from the same registration request, even if the request is submitted
+    multiple times.
+    """
+
+class RegisterTypeInputDict(TypedDict, total=False):
+    """Dictionary form of `RegisterTypeInput`."""
+
+    type: str | None
+    """The kind of extension."""
+    type_name: Required[str]
+    """
+    The name of the extension being registered.
+
+    We suggest that extension names adhere to the following patterns:
+
+    - For resource types, `company_or_organization::service::type`.
+
+    - For modules, `company_or_organization::service::type::MODULE`.
+
+    - For Hooks, `MyCompany::Testing::MyTestHook`.
+
+    Note:
+        The following organization namespaces are reserved and can't be used in
+        your extension names:
+
+        - `Alexa`
+
+        - `AMZN`
+
+        - `Amazon`
+
+        - `AWS`
+
+        - `Custom`
+
+        - `Dev`
+    """
+    schema_handler_package: Required[str]
+    """
+    A URL to the S3 bucket that contains the extension project package that
+    contains the necessary files for the extension you want to register.
+
+    For information about generating a schema handler package for the
+    extension you want to register, see
+    [submit](https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-cli-submit.html)
+    in the *CloudFormation Command Line Interface (CLI) User Guide*.
+
+    Note:
+        The user registering the extension must be able to access the package in
+        the S3 bucket. That's, the user needs to have
+        [GetObject](https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObject.html)
+        permissions for the schema handler package. For more information, see
+        [Actions, Resources, and Condition Keys for Amazon
+        S3](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_amazons3.html)
+        in the *Identity and Access Management User Guide*.
+    """
+    logging_config: LoggingConfig | LoggingConfigDict | None
+    """Specifies logging configuration information for an extension."""
+    execution_role_arn: str | None
+    """
+    The Amazon Resource Name (ARN) of the IAM role for CloudFormation to
+    assume when invoking the extension.
+
+    For CloudFormation to assume the specified execution role, the role must
+    contain a trust relationship with the CloudFormation service principal
+    (`resources.cloudformation.amazonaws.com`). For more information about
+    adding trust relationships, see [Modifying a role trust
+    policy](https://docs.aws.amazon.com/IAM/latest/UserGuide/roles-managingrole-editing-console.html#roles-managingrole_edit-trust-policy)
+    in the *Identity and Access Management User Guide*.
+
+    If your extension calls Amazon Web Services APIs in any of its handlers,
+    you must create an *[IAM execution
+    role](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html)*
+    that includes the necessary permissions to call those Amazon Web
+    Services APIs, and provision that execution role in your account. When
+    CloudFormation needs to invoke the resource type handler, CloudFormation
+    assumes this execution role to create a temporary session token, which
+    it then passes to the resource type handler, thereby supplying your
+    resource type with the appropriate credentials.
+    """
+    client_request_token: str | None
+    """
+    A unique identifier that acts as an idempotency key for this
+    registration request. Specifying a client request token prevents
+    CloudFormation from generating more than one version of an extension
+    from the same registration request, even if the request is submitted
+    multiple times.
+    """
+
+@dataclass(kw_only=True)
+class RegisterTypeOutput(_SerdeShape):
+    """Dataclass for RegisterTypeOutput structure."""
+
+    registration_token: str | None = ...
+    """
+    The identifier for this registration request.
+
+    Use this registration token when calling DescribeTypeRegistration, which
+    returns information about the status and IDs of the extension
+    registration.
+    """
+    response_metadata: ResponseMetadata = ...
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+class RegistrationStatus(UnknownEnumMixin, StrEnum):
+    COMPLETE = "COMPLETE"
+    IN_PROGRESS = "IN_PROGRESS"
+    FAILED = "FAILED"
 
 class RegistryType(UnknownEnumMixin, StrEnum):
     RESOURCE = "RESOURCE"
@@ -765,6 +964,55 @@ class ResourceToImportDict(TypedDict, total=False):
     resources) and the value is the actual property value (for example,
     `MyS3Bucket`).
     """
+
+@dataclass(kw_only=True)
+class RoleProvisioning(_SerdeShape):
+    """
+    Provides visibility into the role provisioning stage of a StackSet
+    operation, including per-account progress counts and a completion
+    percentage. For operations that do not provision IAM roles in target
+    accounts, the `Status` is `NOT_APPLICABLE` and the progress counts are
+    omitted.
+    """
+
+    status: str | None = ...
+    """
+    The status of the role provisioning stage can be one of the following
+    values:
+
+    - `NOT_APPLICABLE`: The operation does not provision roles. This
+      includes self-managed operations and service-managed operations whose
+      configuration does not require role provisioning.
+
+    - `NOT_STARTED`: Role provisioning has not started. The operation has
+      not begun resolving target accounts, or it failed or stopped before
+      the total number of target accounts was resolved.
+
+    - `IN_PROGRESS`: Role provisioning is actively processing target
+      accounts.
+
+    - `SUCCEEDED`: Role provisioning finished and succeeded for all target
+      accounts.
+
+    - `PARTIAL_SUCCESS`: Role provisioning finished, but succeeded for only
+      a subset of target accounts; one or more accounts failed.
+
+    - `FAILED`: Role provisioning finished and failed for all target
+      accounts.
+    """
+    succeeded_accounts_count: int | None = ...
+    """The number of accounts for which role provisioning succeeded."""
+    failed_accounts_count: int | None = ...
+    """The number of accounts for which role provisioning failed."""
+    completed_accounts_count: int | None = ...
+    """
+    The number of accounts that have finished role provisioning, including
+    both succeeded and failed accounts.
+    """
+    pending_accounts_count: int | None = ...
+    """The number of accounts that are still awaiting role provisioning."""
+    percentage_completed: float | None = ...
+    """The percentage of accounts that have completed role provisioning."""
 
 @dataclass(kw_only=True)
 class RollbackConfiguration(_SerdeShape):
@@ -2074,6 +2322,66 @@ class StackInstanceResourceDriftsSummary(_SerdeShape):
     initiated.
     """
 
+@dataclass(kw_only=True)
+class StackInstancesDeployment(_SerdeShape):
+    """
+    Provides visibility into the stack instances deployment stage of a
+    StackSet operation, including per-stack-instance progress counts and a
+    completion percentage. For service-managed operations that provision
+    roles, this stage begins after role provisioning finishes.
+    """
+
+    status: str | None = ...
+    """
+    The status of the stack instances deployment stage can be one of the
+    following values:
+
+    - `NOT_APPLICABLE`: The operation does not deploy stack instances, such
+      as a drift detection operation.
+
+    - `NOT_STARTED`: Stack instances deployment has not started. The
+      operation is still provisioning roles, has not begun, or failed before
+      this stage was reached.
+
+    - `IN_PROGRESS`: At least one stack instance has started deploying.
+
+    - `SUCCEEDED`: Deployment finished and succeeded for all stack instances
+      that were not skipped.
+
+    - `PARTIAL_SUCCESS`: Deployment finished with a mix of succeeded,
+      failed, and canceled stack instances.
+
+    - `FAILED`: Deployment finished and every stack instance that was not
+      skipped failed or was canceled.
+    """
+    succeeded_stack_instances_count: int | None = ...
+    """The number of stack instances that deployed successfully."""
+    failed_stack_instances_count: int | None = ...
+    """The number of stack instances that failed to deploy."""
+    completed_stack_instances_count: int | None = ...
+    """
+    The number of stack instances that have reached a final state. This
+    count includes stack instances that succeeded, failed, were skipped, or
+    were canceled.
+    """
+    pending_stack_instances_count: int | None = ...
+    """
+    The number of stack instances that have not reached a final state. This
+    is the total number of stack instances minus the completed count.
+    """
+    cancelled_stack_instances_count: int | None = ...
+    """
+    The number of stack instances that were canceled because the operation
+    exceeded its failure tolerance or was stopped.
+    """
+    skipped_stack_instances_count: int | None = ...
+    """
+    The number of stack instances that were skipped because role
+    provisioning failed for their target account.
+    """
+    percentage_completed: float | None = ...
+    """The percentage of stack instances that have reached a final state."""
+
 class StackInstanceStatus(UnknownEnumMixin, StrEnum):
     CURRENT = "CURRENT"
     OUTDATED = "OUTDATED"
@@ -3001,6 +3309,13 @@ class StackSetOperation(_SerdeShape):
     """The status of the operation in details."""
     status_details: StackSetOperationStatusDetails | None = ...
     """Detailed information about the StackSet operation."""
+    regional_status_details: dict[str, RegionalStatusDetail] | None = ...
+    """
+    The progress detail for each Region of the operation, keyed by Region.
+    Each entry reports the stack instances deployment progress for that
+    Region. This field is returned only by DescribeStackSetOperation. It is
+    not included in the ListStackSetOperations summary.
+    """
 
 class StackSetOperationAction(UnknownEnumMixin, StrEnum):
     CREATE = "CREATE"
@@ -3282,6 +3597,26 @@ class StackSetOperationStatus(UnknownEnumMixin, StrEnum):
 class StackSetOperationStatusDetails(_SerdeShape):
     """Detailed information about the StackSet operation."""
 
+    stages: Stages | None = ...
+    """
+    The detailed progress information for the individual stages of the
+    StackSet operation: the role provisioning stage and the stack instances
+    deployment stage.
+    """
+    total_accounts_count: int | None = ...
+    """
+    The total number of accounts targeted by this StackSet operation.
+    Self-managed operations and service-managed operations that do not
+    provision roles also report this value when it is known. CloudFormation
+    populates this value after it resolves the target accounts. Until then,
+    this field is not present.
+    """
+    total_stack_instances_count: int | None = ...
+    """
+    The total number of stack instances targeted by this StackSet operation.
+    CloudFormation populates this value after it resolves the target stack
+    instances. Until then, this field is not present.
+    """
     failed_stack_instances_count: int | None = ...
     """The number of stack instances for which the StackSet operation failed."""
 
@@ -3512,6 +3847,36 @@ class StackSummary(_SerdeShape):
     """
     last_operations: list[OperationEntry] | None = ...
     """Information about the most recent operations performed on this stack."""
+
+@dataclass(kw_only=True)
+class Stages(_SerdeShape):
+    """
+    Contains detailed progress information for the individual stages of a
+    StackSet operation: the role provisioning stage and the stack instances
+    deployment stage.
+    """
+
+    role_provisioning: RoleProvisioning | None = ...
+    """
+    The progress detail for the role provisioning stage. For operations that
+    do not provision roles, this stage is present with a `Status` of
+    `NOT_APPLICABLE`.
+    """
+    stack_instances_deployment: StackInstancesDeployment | None = ...
+    """
+    The progress detail for the stack instances deployment stage. This stage
+    reports the deployment of stack instances to the target accounts and
+    Amazon Web Services Regions, after any role provisioning has finished.
+    """
+
+class StageStatus(UnknownEnumMixin, StrEnum):
+    PENDING = "PENDING"
+    NOT_APPLICABLE = "NOT_APPLICABLE"
+    NOT_STARTED = "NOT_STARTED"
+    IN_PROGRESS = "IN_PROGRESS"
+    SUCCEEDED = "SUCCEEDED"
+    PARTIAL_SUCCESS = "PARTIAL_SUCCESS"
+    FAILED = "FAILED"
 
 @dataclass(kw_only=True)
 class StaleRequestException(ServiceError, _SerdeShape):

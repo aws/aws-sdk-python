@@ -105,8 +105,6 @@ _OLEHDD = "ObjectLockEventHoldDurationDays"
 _OLEHDY = "ObjectLockEventHoldDurationYears"
 _OLLHS = "ObjectLockLegalHoldStatus"
 _OLM = "ObjectLockMode"
-_GOVERNANCE = "GOVERNANCE"
-_COMPLIANCE = "COMPLIANCE"
 _OLRUD = "ObjectLockRetainUntilDate"
 _SC = "StorageClass"
 _WRL = "WebsiteRedirectLocation"
@@ -130,6 +128,7 @@ _LM = "LastModified"
 _sCP = "smithy.rules#staticContextParams"
 _Tag = "Tag"
 _TS = "TagSet"
+_Tags = "Tags"
 _ENABLED = "ENABLED"
 _R = "Role"
 _Da = "Days"
@@ -150,6 +149,12 @@ _AT = "AccessTier"
 _RS = "ReplicationStatus"
 _DMR = "DeleteMarkerReplication"
 _EOR = "ExistingObjectReplication"
+_RROO = "ReplicationRuleOrOperator"
+_Pre = "Prefixes"
+_RRNO = "ReplicationRuleNotOperator"
+_Or = "Or"
+_RRAO = "ReplicationRuleAndOperator"
+_No = "Not"
 _RRF = "ReplicationRuleFilter"
 _Pri = "Priority"
 _RMS = "ReplicaModificationsStatus"
@@ -296,26 +301,59 @@ _cGOLCR = "com.amazonaws.s3#GetObjectLockConfigurationRequest"
 _OLE = "ObjectLockEnabled"
 _Y = "Years"
 _EHD = "EventHoldDuration"
-_OLRM = "ObjectLockRetentionMode"
-_DRef = "DefaultRetention"
-_Mo = "Mode"
-_DEH = "DefaultEventHold"
-_OLR = "ObjectLockRule"
 _OLC = "ObjectLockConfiguration"
 _GOLCO = "GetObjectLockConfigurationOutput"
 _GOLC = "GetObjectLockConfiguration"
-_OLT = "ObjectLockToken"
+
+REPLICATION_RULE_OR_OPERATOR: StaticSchema = (
+    18,
+    n0,
+    _RROO,
+    0,
+    (_Pre, _Tags),
+    (
+        (lambda: schemas.REPLICATION_PREFIX_LIST, {_sN: _Pr, _sFm: None}),
+        (lambda: schemas.TAG_SET, {_sN: _Tag, _sFm: None}),
+    ),
+)
+
+REPLICATION_RULE_NOT_OPERATOR: StaticSchema = (
+    18,
+    n0,
+    _RRNO,
+    0,
+    (_Pr, _Tag, _Or),
+    (
+        (lambda: schemas.PREFIX, 0),
+        (lambda: schemas.TAG, 0),
+        (REPLICATION_RULE_OR_OPERATOR, 0),
+    ),
+)
+
+REPLICATION_RULE_AND_OPERATOR: StaticSchema = (
+    18,
+    n0,
+    _RRAO,
+    0,
+    (_Pr, _Tags, _No),
+    (
+        (lambda: schemas.PREFIX, 0),
+        (lambda: schemas.TAG_SET, {_sN: _Tag, _sFm: None}),
+        (REPLICATION_RULE_NOT_OPERATOR, 0),
+    ),
+)
 
 REPLICATION_RULE_FILTER: StaticSchema = (
     18,
     n0,
     _RRF,
     0,
-    (_Pr, _Tag, _A),
+    (_Pr, _Tag, _A, _No),
     (
         (lambda: schemas.PREFIX, 0),
         (lambda: schemas.TAG, 0),
-        (lambda: schemas.REPLICATION_RULE_AND_OPERATOR, 0),
+        (REPLICATION_RULE_AND_OPERATOR, 0),
+        (REPLICATION_RULE_NOT_OPERATOR, 0),
     ),
 )
 
@@ -1318,7 +1356,7 @@ GET_OBJECT_LOCK_CONFIGURATION_OUTPUT: StaticSchema = (
     _GOLCO,
     {_smi: None},
     (_OLC,),
-    ((lambda: OBJECT_LOCK_CONFIGURATION, 16),),
+    ((lambda: schemas.OBJECT_LOCK_CONFIGURATION, 16),),
 )
 
 GET_OBJECT_LOCK_CONFIGURATION: StaticOperationSchema = (
@@ -1343,39 +1381,3 @@ EVENT_HOLD_DURATION: StaticSchema = (
     (_Da, _Y),
     ((lambda: schemas.DAYS, 0), (YEARS, 0)),
 )
-
-OBJECT_LOCK_RETENTION_MODE: StaticSchema = (
-    14,
-    n0,
-    _OLRM,
-    0,
-    (_GOVERNANCE, _COMPLIANCE),
-    ((-1, {_sV: _GOVERNANCE}), (-1, {_sV: _COMPLIANCE})),
-)
-
-DEFAULT_RETENTION: StaticSchema = (
-    18,
-    n0,
-    _DRef,
-    0,
-    (_Mo, _Da, _Y, _DEH),
-    (
-        (OBJECT_LOCK_RETENTION_MODE, 0),
-        (lambda: schemas.DAYS, 0),
-        (YEARS, 0),
-        (EVENT_HOLD_DURATION, 0),
-    ),
-)
-
-OBJECT_LOCK_RULE: StaticSchema = (18, n0, _OLR, 0, (_DRef,), ((DEFAULT_RETENTION, 0),))
-
-OBJECT_LOCK_CONFIGURATION: StaticSchema = (
-    18,
-    n0,
-    _OLC,
-    0,
-    (_OLE, _Rul),
-    ((OBJECT_LOCK_ENABLED, 0), (OBJECT_LOCK_RULE, 0)),
-)
-
-OBJECT_LOCK_TOKEN: StaticSchema = (3, n0, _OLT, 0)

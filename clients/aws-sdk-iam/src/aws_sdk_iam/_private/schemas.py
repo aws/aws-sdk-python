@@ -49,6 +49,7 @@ _PARTITION_NAMES: tuple[tuple[str, ...], ...] = (
         "POLICY_DOCUMENT_TYPE",
         "ROLE_DESCRIPTION_TYPE",
         "ROLE_MAX_SESSION_DURATION_TYPE",
+        "MAX_SIGNIN_SESSION_DURATION_TYPE",
         "PATH_TYPE",
         "PERMISSIONS_BOUNDARY_ATTACHMENT_TYPE",
         "ATTACHED_PERMISSIONS_BOUNDARY",
@@ -129,7 +130,6 @@ _PARTITION_NAMES: tuple[tuple[str, ...], ...] = (
         "SERIAL_NUMBER_TYPE",
         "SERVER_CERTIFICATE_NAME_TYPE",
         "DELETION_TASK_ID_TYPE",
-        "CERTIFICATE_ID_TYPE",
     ),
     (
         "ENTITY_TEMPORARILY_UNMODIFIABLE_MESSAGE",
@@ -223,7 +223,6 @@ _PARTITION_NAMES: tuple[tuple[str, ...], ...] = (
         "BOOLEAN_OBJECT_TYPE",
         "USER_LIST_TYPE",
         "POLICY_OWNER_ENTITY_TYPE",
-        "POLICY_NAME_LIST_TYPE",
         "PATH_PREFIX_TYPE",
     ),
     (
@@ -406,6 +405,7 @@ _PARTITION_NAMES: tuple[tuple[str, ...], ...] = (
         "GET_ACCOUNT_SUMMARY_OUTPUT",
         "GET_ACCOUNT_SUMMARY",
         "SUMMARY_KEY_TYPE",
+        "POLICY_NAME_LIST_TYPE",
     ),
     (
         "SUMMARY_VALUE_TYPE",
@@ -578,7 +578,6 @@ _PARTITION_NAMES: tuple[tuple[str, ...], ...] = (
         "LIST_ATTACHED_GROUP_POLICIES_INPUT",
         "LIST_ATTACHED_GROUP_POLICIES_OUTPUT",
         "LIST_ATTACHED_GROUP_POLICIES",
-        "SIGNING_CERTIFICATE",
     ),
     (
         "LIST_ATTACHED_ROLE_POLICIES_INPUT",
@@ -662,6 +661,7 @@ _PARTITION_NAMES: tuple[tuple[str, ...], ...] = (
         "LIST_POLICY_VERSIONS",
     ),
     (
+        "CERTIFICATE_ID_TYPE",
         "LIST_ROLE_POLICIES_INPUT",
         "LIST_ROLE_POLICIES_OUTPUT",
         "LIST_ROLE_POLICIES",
@@ -694,6 +694,7 @@ _PARTITION_NAMES: tuple[tuple[str, ...], ...] = (
         "LIST_SIGNING_CERTIFICATES_INPUT",
         "LIST_SIGNING_CERTIFICATES_OUTPUT",
         "LIST_SIGNING_CERTIFICATES",
+        "SIGNING_CERTIFICATE",
         "CERTIFICATE_LIST_TYPE",
         "LIST_SSH_PUBLIC_KEYS_INPUT",
         "LIST_SSH_PUBLIC_KEYS_OUTPUT",

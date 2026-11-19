@@ -47,7 +47,6 @@ _SAMLPA = "SAMLProviderArn"
 _Us = "User"
 _SCN = "ServerCertificateName"
 _DTI = "DeletionTaskId"
-_CI = "CertificateId"
 _pKIT = "publicKeyIdType"
 _SSHPKI = "SSHPublicKeyId"
 _JI = "JobId"
@@ -226,7 +225,6 @@ _LAGPO = "ListAttachedGroupPoliciesOutput"
 _cLAGPRo = "com.amazonaws.iam#ListAttachedGroupPoliciesResponse"
 _APt = "AttachedPolicies"
 _LAGP = "ListAttachedGroupPolicies"
-_SCi = "SigningCertificate"
 
 PUBLIC_KEY_ID_TYPE: StaticSchema = (3, n0, _pKIT, 0)
 
@@ -1003,20 +1001,5 @@ LIST_ATTACHED_GROUP_POLICIES: StaticOperationSchema = (
         lambda: schemas.INVALID_INPUT_EXCEPTION,
         lambda: schemas.NO_SUCH_ENTITY_EXCEPTION,
         lambda: schemas.SERVICE_FAILURE_EXCEPTION,
-    ),
-)
-
-SIGNING_CERTIFICATE: StaticSchema = (
-    18,
-    n0,
-    _SCi,
-    0,
-    (_UN, _CI, _CB, _S, _UDp),
-    (
-        (lambda: schemas.USER_NAME_TYPE, 1),
-        (lambda: schemas.CERTIFICATE_ID_TYPE, 1),
-        (CERTIFICATE_BODY_TYPE, 1),
-        (lambda: schemas.STATUS_TYPE, 1),
-        (lambda: schemas.DATE_TYPE, 0),
     ),
 )

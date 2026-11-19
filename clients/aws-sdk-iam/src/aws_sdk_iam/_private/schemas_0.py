@@ -91,6 +91,7 @@ _RV = "ReplacementValues"
 _pDT = "policyDocumentType"
 _rDT = "roleDescriptionType"
 _rMSDT = "roleMaxSessionDurationType"
+_mSSDT = "maxSigninSessionDurationType"
 _pT = "pathType"
 _PBAT = "PermissionsBoundaryAttachmentType"
 _P = "Policy"
@@ -116,6 +117,7 @@ _Ar = "Arn"
 _ARPD = "AssumeRolePolicyDocument"
 _D = "Description"
 _MSD = "MaxSessionDuration"
+_MSSD = "MaxSigninSessionDuration"
 _PB = "PermissionsBoundary"
 _Ta = "Tags"
 _ARO = "AcquireRoleOutput"
@@ -218,7 +220,6 @@ _PLU = "PasswordLastUsed"
 _sNTer = "serialNumberType"
 _sCNT = "serverCertificateNameType"
 _DTIT = "DeletionTaskIdType"
-_cIT = "certificateIdType"
 
 DELEGATION_REQUEST_ID_TYPE: StaticSchema = (3, n0, _dRIT, 0)
 
@@ -504,6 +505,8 @@ ROLE_DESCRIPTION_TYPE: StaticSchema = (3, n0, _rDT, 0)
 
 ROLE_MAX_SESSION_DURATION_TYPE: StaticSchema = (7, n0, _rMSDT, 0)
 
+MAX_SIGNIN_SESSION_DURATION_TYPE: StaticSchema = (7, n0, _mSSDT, 0)
+
 PATH_TYPE: StaticSchema = (3, n0, _pT, 0)
 
 PERMISSIONS_BOUNDARY_ATTACHMENT_TYPE: StaticSchema = (
@@ -559,7 +562,7 @@ ROLE: StaticSchema = (
     n0,
     _Ro,
     0,
-    (_Pa, _RN, _RI, _Ar, _CD, _ARPD, _D, _MSD, _PB, _Ta, _RLU, _SRT),
+    (_Pa, _RN, _RI, _Ar, _CD, _ARPD, _D, _MSD, _MSSD, _PB, _Ta, _RLU, _SRT),
     (
         (PATH_TYPE, 1),
         (ROLE_NAME_TYPE, 1),
@@ -569,6 +572,7 @@ ROLE: StaticSchema = (
         (POLICY_DOCUMENT_TYPE, 0),
         (ROLE_DESCRIPTION_TYPE, 0),
         (ROLE_MAX_SESSION_DURATION_TYPE, 0),
+        (MAX_SIGNIN_SESSION_DURATION_TYPE, 0),
         (ATTACHED_PERMISSIONS_BOUNDARY, 0),
         (TAG_LIST_TYPE, 0),
         (ROLE_LAST_USED, 0),
@@ -1054,5 +1058,3 @@ SERIAL_NUMBER_TYPE: StaticSchema = (3, n0, _sNTer, 0)
 SERVER_CERTIFICATE_NAME_TYPE: StaticSchema = (3, n0, _sCNT, 0)
 
 DELETION_TASK_ID_TYPE: StaticSchema = (3, n0, _DTIT, 0)
-
-CERTIFICATE_ID_TYPE: StaticSchema = (3, n0, _cIT, 0)

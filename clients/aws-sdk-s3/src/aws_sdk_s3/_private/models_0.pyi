@@ -66,6 +66,8 @@ from ..models import (
     Tiering,
     TieringDict,
     TopicConfiguration,
+    UseSourceMultiRegionKey,
+    UseSourceMultiRegionKeyDict,
     _SerdeShape,
 )
 
@@ -7487,9 +7489,10 @@ class DeleteMarkerReplication(_SerdeShape):
     Specifies whether Amazon S3 replicates delete markers. If you specify a
     `Filter` in your replication configuration, you must also include a
     `DeleteMarkerReplication` element. If your `Filter` includes a `Tag`
-    element, the `DeleteMarkerReplication` `Status` must be set to Disabled,
-    because Amazon S3 does not support replicating delete markers for
-    tag-based rules. For an example configuration, see [Basic Rule
+    element, including within a `Not` or `Or` element, the
+    `DeleteMarkerReplication` `Status` must be set to Disabled, because
+    Amazon S3 does not support replicating delete markers for tag-based
+    rules. For an example configuration, see [Basic Rule
     Configuration](https://docs.aws.amazon.com/AmazonS3/latest/dev/replication-add-config.html#replication-config-min-rule-config).
 
     For more information about delete marker replication, see [Basic Rule
@@ -8652,6 +8655,11 @@ class EncryptionConfiguration(_SerdeShape):
     KMS](https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html)
     in the *Amazon Web Services Key Management Service Developer Guide*.
     """
+    use_source_multi_region_key: UseSourceMultiRegionKey | None = ...
+    """
+    Specifies whether Amazon S3 uses the related multi-Region KMS key in the
+    destination Amazon Web Services Region to encrypt the replica.
+    """
 
 class EncryptionConfigurationDict(TypedDict, total=False):
     """Dictionary form of `EncryptionConfiguration`."""
@@ -8666,6 +8674,13 @@ class EncryptionConfigurationDict(TypedDict, total=False):
     Services
     KMS](https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html)
     in the *Amazon Web Services Key Management Service Developer Guide*.
+    """
+    use_source_multi_region_key: (
+        UseSourceMultiRegionKey | UseSourceMultiRegionKeyDict | None
+    )
+    """
+    Specifies whether Amazon S3 uses the related multi-Region KMS key in the
+    destination Amazon Web Services Region to encrypt the replica.
     """
 
 class EncryptionType(UnknownEnumMixin, StrEnum):

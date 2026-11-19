@@ -113,6 +113,8 @@ from ..models import (
     RuntimeMetadataConfiguration,
     RuntimeTargetConfiguration,
     RuntimeTargetConfigurationDict,
+    S3BucketMountConfiguration,
+    S3BucketMountConfigurationDict,
     S3FilesAccessPointConfiguration,
     S3FilesAccessPointConfigurationDict,
     Secret,
@@ -1891,6 +1893,12 @@ class FilesystemConfigurationCapacityProviderVolume(_SerdeShape):
     value: CapacityProviderVolumeConfiguration
 
 @dataclass
+class FilesystemConfigurationS3BucketMount(_SerdeShape):
+    """Mounts an Amazon S3 bucket as a file system in the AgentCore Runtime."""
+
+    value: S3BucketMountConfiguration
+
+@dataclass
 class FilesystemConfigurationUnknown(_SerdeShape):
     """
     Represents an unknown variant. If you receive this value, you will need
@@ -1905,6 +1913,7 @@ FilesystemConfiguration = Union[
     | FilesystemConfigurationS3FilesAccessPoint
     | FilesystemConfigurationEfsAccessPoint
     | FilesystemConfigurationCapacityProviderVolume
+    | FilesystemConfigurationS3BucketMount
     | FilesystemConfigurationUnknown
 ]
 """
@@ -1950,11 +1959,16 @@ class FilesystemConfigurationCapacityProviderVolumeDict(TypedDict):
     provider, referenced by its logical name.
     """
 
+class FilesystemConfigurationS3BucketMountDict(TypedDict):
+    s3_bucket_mount: S3BucketMountConfiguration | S3BucketMountConfigurationDict
+    """Mounts an Amazon S3 bucket as a file system in the AgentCore Runtime."""
+
 FilesystemConfigurationDict = Union[
     FilesystemConfigurationSessionStorageDict
     | FilesystemConfigurationS3FilesAccessPointDict
     | FilesystemConfigurationEfsAccessPointDict
     | FilesystemConfigurationCapacityProviderVolumeDict
+    | FilesystemConfigurationS3BucketMountDict
 ]
 """
 Dictionary form of `FilesystemConfiguration`, setting exactly one

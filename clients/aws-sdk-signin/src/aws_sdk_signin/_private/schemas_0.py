@@ -28,6 +28,8 @@ _OIS = "OAUTH_INVALID_SCOPE"
 _is = "invalid_scope"
 _OIT = "OAUTH_INVALID_TARGET"
 _it = "invalid_target"
+_OIC = "OAUTH_INVALID_CLIENT"
+_ic = "invalid_client"
 _ORE = "OAUTH_RATE_EXCEEDED"
 _re = "rate_exceeded"
 _OSU = "OAUTH_SERVICE_UNAVAILABLE"
@@ -45,57 +47,79 @@ _sN = "smithy.api#jsonName"
 _sAK = "secretAccessKey"
 _sT = "sessionToken"
 _AI = "AccountId"
+_A = "Assertion"
 _AC = "AuthorizationCode"
+_SA = "SessionArn"
+_BRSE = "BatchRevokeSessionError"
+_sA = "sessionArn"
+_co = "code"
+_BRSEL = "BatchRevokeSessionErrorList"
+_me = "member"
+_PAF = "PrincipalArnFilter"
+_RR = "RevocationReason"
+_SAL = "SessionArnList"
+_BRSI = "BatchRevokeSessionsInput"
+_smit = "smithy.api#input"
+_pA = "principalArn"
+_sAe = "sessionArns"
+_r = "reason"
+_RS = "RevokedSession"
+_RSL = "RevokedSessionList"
+_BRSO = "BatchRevokeSessionsOutput"
+_smith = "smithy.api#output"
+_rS = "revokedSessions"
+_er = "errors"
+_ISE = "InternalServerException"
+_ser = "server"
+_sE = "smithy.api#httpError"
+_RNFE = "ResourceNotFoundException"
+_TMRE = "TooManyRequestsError"
+_VE = "ValidationException"
+_BRS = "BatchRevokeSessions"
+_sCP = "smithy.rules#staticContextParams"
+_smithy = "smithy.api#http"
 _BTEI = "BearerTokenExpiresIn"
 _BTT = "BearerTokenType"
 _CCGT = "ClientCredentialsGrantType"
 _CI = "ClientId"
 _CT = "ClientToken"
+_CTl = "ClientType"
+_CLI = "CLI"
+_MCP = "MCP"
 _CV = "CodeVerifier"
 _CVo = "ConditionValues"
-_me = "member"
 _C = "Condition"
 _k = "key"
 _v = "value"
 _CTo = "ConditionType"
 _CB = "ConditionBlock"
 _CE = "ConflictException"
-_sE = "smithy.api#httpError"
 _CPMR = "ConsolePermissionMaxResults"
 _TD = "TokenDuration"
 _R = "Resource"
 _CBTI = "CreateBearerTokenInput"
 _sSI = "smithy.synthetic#originalShapeId"
 _cCBTR = "com.amazonaws.signin#CreateBearerTokenRequest"
-_smit = "smithy.api#input"
 _gT = "grantType"
 _gt = "grant_type"
-_r = "resource"
+_res = "resource"
 _dS = "durationSeconds"
 _d = "duration"
 _OAAT = "OAuthAccessToken"
 _CBTO = "CreateBearerTokenOutput"
 _cCBTRo = "com.amazonaws.signin#CreateBearerTokenResponse"
-_smith = "smithy.api#output"
 _aT = "accessToken"
 _at = "access_token"
 _tT = "tokenType"
 _tt = "token_type"
 _eI = "expiresIn"
 _ei = "expires_in"
-_ISE = "InternalServerException"
-_ser = "server"
-_TMRE = "TooManyRequestsError"
-_VE = "ValidationException"
 _CBT = "CreateBearerToken"
-_sCP = "smithy.rules#staticContextParams"
-_smithy = "smithy.api#http"
 _GT = "GrantType"
 _RU = "RedirectUri"
 _RT = "RefreshToken"
 _COATRB = "CreateOAuth2TokenRequestBody"
 _cI = "clientId"
-_co = "code"
 _rU = "redirectUri"
 _cV = "codeVerifier"
 _rT = "refreshToken"
@@ -118,6 +142,7 @@ _TEI = "TokenExpiresIn"
 _COATWIAMO = "CreateOAuth2TokenWithIAMOutput"
 _cCOATWIAMRo = "com.amazonaws.signin#CreateOAuth2TokenWithIAMResponse"
 _COATWIAM = "CreateOAuth2TokenWithIAM"
+_JBCI = "JwtBearerClientId"
 _TEGT = "TokenExchangeGrantType"
 _S = "Scope"
 _ST = "SubjectToken"
@@ -128,6 +153,8 @@ _sTu = "subjectToken"
 _st = "subject_token"
 _sTT = "subjectTokenType"
 _stt = "subject_token_type"
+_a = "assertion"
+_ci = "client_id"
 _sc = "scope"
 _IOAATT = "IssuedOAuthAccessTokenType"
 _COATWTEO = "CreateOAuth2TokenWithTokenExchangeOutput"
@@ -138,6 +165,7 @@ _IGE = "InvalidGrantException"
 _ISEn = "InvalidScopeException"
 _SUE = "ServiceUnavailableException"
 _COATWTE = "CreateOAuth2TokenWithTokenExchange"
+_TI = "TargetId"
 
 O_AUTH2_ERROR_CODE: StaticSchema = (
     14,
@@ -159,6 +187,7 @@ O_AUTH2_ERROR_CODE: StaticSchema = (
         _OIG,
         _OIS,
         _OIT,
+        _OIC,
         _ORE,
         _OSU,
     ),
@@ -177,6 +206,7 @@ O_AUTH2_ERROR_CODE: StaticSchema = (
         (-1, {_sV: _ig}),
         (-1, {_sV: _is}),
         (-1, {_sV: _it}),
+        (-1, {_sV: _ic}),
         (-1, {_sV: _re}),
         (-1, {_sV: _su}),
     ),
@@ -206,7 +236,112 @@ ACCESS_TOKEN: StaticSchema = (
 
 ACCOUNT_ID: StaticSchema = (3, n0, _AI, 0)
 
+ASSERTION: StaticSchema = (3, n0, _A, 4)
+
 AUTHORIZATION_CODE: StaticSchema = (3, n0, _AC, 0)
+
+SESSION_ARN: StaticSchema = (3, n0, _SA, 0)
+
+BATCH_REVOKE_SESSION_ERROR: StaticSchema = (
+    18,
+    n0,
+    _BRSE,
+    0,
+    (_sA, _co, _m),
+    ((SESSION_ARN, 1), (3, 1), (3, 1)),
+)
+
+BATCH_REVOKE_SESSION_ERROR_LIST: StaticSchema = (
+    16,
+    n0,
+    _BRSEL,
+    0,
+    (_me,),
+    ((BATCH_REVOKE_SESSION_ERROR, 0),),
+)
+
+PRINCIPAL_ARN_FILTER: StaticSchema = (3, n0, _PAF, 0)
+
+REVOCATION_REASON: StaticSchema = (3, n0, _RR, 0)
+
+SESSION_ARN_LIST: StaticSchema = (16, n0, _SAL, 0, (_me,), ((SESSION_ARN, 0),))
+
+BATCH_REVOKE_SESSIONS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _BRSI,
+    {_smit: None},
+    (_pA, _sAe, _r),
+    ((PRINCIPAL_ARN_FILTER, 0), (SESSION_ARN_LIST, 1), (REVOCATION_REASON, 0)),
+)
+
+BATCH_REVOKE_SESSIONS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _BRSO,
+    {_smith: None},
+    (_rS, _er),
+    ((lambda: REVOKED_SESSION_LIST, 1), (BATCH_REVOKE_SESSION_ERROR_LIST, 1)),
+)
+
+BATCH_REVOKE_SESSIONS: StaticOperationSchema = (
+    23,
+    n0,
+    _BRS,
+    {
+        _sCP: MappingProxyType({"IsControlPlane": MappingProxyType({"value": True})}),
+        _smithy: MappingProxyType({"method": "POST", "uri": "/batch-revoke-sessions"}),
+    },
+    BATCH_REVOKE_SESSIONS_INPUT,
+    BATCH_REVOKE_SESSIONS_OUTPUT,
+    (
+        ACCESS_DENIED_EXCEPTION,
+        lambda: INTERNAL_SERVER_EXCEPTION,
+        lambda: RESOURCE_NOT_FOUND_EXCEPTION,
+        lambda: TOO_MANY_REQUESTS_ERROR,
+        lambda: VALIDATION_EXCEPTION,
+    ),
+)
+
+REVOKED_SESSION: StaticSchema = (18, n0, _RS, 0, (_sA,), ((SESSION_ARN, 1),))
+
+REVOKED_SESSION_LIST: StaticSchema = (16, n0, _RSL, 0, (_me,), ((REVOKED_SESSION, 0),))
+
+INTERNAL_SERVER_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _ISE,
+    {_s: _ser, _sE: 500},
+    (_e, _m),
+    ((O_AUTH2_ERROR_CODE, 1), (3, 1)),
+)
+
+RESOURCE_NOT_FOUND_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _RNFE,
+    {_s: _c, _sE: 404},
+    (_e, _m),
+    ((O_AUTH2_ERROR_CODE, 1), (3, 1)),
+)
+
+TOO_MANY_REQUESTS_ERROR: StaticSchema = (
+    18,
+    n0,
+    _TMRE,
+    {_s: _c, _sE: 429},
+    (_e, _m),
+    ((O_AUTH2_ERROR_CODE, 1), (3, 1)),
+)
+
+VALIDATION_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _VE,
+    {_s: _c, _sE: 400},
+    (_e, _m),
+    ((O_AUTH2_ERROR_CODE, 1), (3, 1)),
+)
 
 BEARER_TOKEN_EXPIRES_IN: StaticSchema = (7, n0, _BTEI, 0)
 
@@ -217,6 +352,15 @@ CLIENT_CREDENTIALS_GRANT_TYPE: StaticSchema = (3, n0, _CCGT, 0)
 CLIENT_ID: StaticSchema = (3, n0, _CI, 0)
 
 CLIENT_TOKEN: StaticSchema = (3, n0, _CT, 0)
+
+CLIENT_TYPE: StaticSchema = (
+    14,
+    n0,
+    _CTl,
+    0,
+    (_CLI, _MCP),
+    ((-1, {_sV: _CLI}), (-1, {_sV: _MCP})),
+)
 
 CODE_VERIFIER: StaticSchema = (3, n0, _CV, 0)
 
@@ -255,7 +399,7 @@ CREATE_BEARER_TOKEN_INPUT: StaticSchema = (
     n0,
     _CBTI,
     {_sSI: _cCBTR, _smit: None},
-    (_gT, _r, _dS),
+    (_gT, _res, _dS),
     (
         (CLIENT_CREDENTIALS_GRANT_TYPE, {_sN: _gt, _sm: None}),
         (RESOURCE, 1),
@@ -290,40 +434,13 @@ CREATE_BEARER_TOKEN: StaticOperationSchema = (
     CREATE_BEARER_TOKEN_OUTPUT,
     (
         ACCESS_DENIED_EXCEPTION,
-        lambda: INTERNAL_SERVER_EXCEPTION,
-        lambda: TOO_MANY_REQUESTS_ERROR,
-        lambda: VALIDATION_EXCEPTION,
+        INTERNAL_SERVER_EXCEPTION,
+        TOO_MANY_REQUESTS_ERROR,
+        VALIDATION_EXCEPTION,
     ),
 )
 
 O_AUTH_ACCESS_TOKEN: StaticSchema = (3, n0, _OAAT, 4)
-
-INTERNAL_SERVER_EXCEPTION: StaticSchema = (
-    18,
-    n0,
-    _ISE,
-    {_s: _ser, _sE: 500},
-    (_e, _m),
-    ((O_AUTH2_ERROR_CODE, 1), (3, 1)),
-)
-
-TOO_MANY_REQUESTS_ERROR: StaticSchema = (
-    18,
-    n0,
-    _TMRE,
-    {_s: _c, _sE: 429},
-    (_e, _m),
-    ((O_AUTH2_ERROR_CODE, 1), (3, 1)),
-)
-
-VALIDATION_EXCEPTION: StaticSchema = (
-    18,
-    n0,
-    _VE,
-    {_s: _c, _sE: 400},
-    (_e, _m),
-    ((O_AUTH2_ERROR_CODE, 1), (3, 1)),
-)
 
 GRANT_TYPE: StaticSchema = (3, n0, _GT, 0)
 
@@ -409,7 +526,7 @@ CREATE_O_AUTH2_TOKEN_WITH_IAM_INPUT: StaticSchema = (
     n0,
     _COATWIAMI,
     {_sSI: _cCOATWIAMR, _smit: None},
-    (_gT, _r),
+    (_gT, _res),
     ((CLIENT_CREDENTIALS_GRANT_TYPE, {_sN: _gt, _sm: None}), (RESOURCE, 1)),
 )
 
@@ -448,6 +565,8 @@ CREATE_O_AUTH2_TOKEN_WITH_IAM: StaticOperationSchema = (
 
 TOKEN_EXPIRES_IN: StaticSchema = (7, n0, _TEI, 0)
 
+JWT_BEARER_CLIENT_ID: StaticSchema = (3, n0, _JBCI, 0)
+
 TOKEN_EXCHANGE_GRANT_TYPE: StaticSchema = (3, n0, _TEGT, 0)
 
 SCOPE: StaticSchema = (3, n0, _S, 0)
@@ -461,11 +580,13 @@ CREATE_O_AUTH2_TOKEN_WITH_TOKEN_EXCHANGE_INPUT: StaticSchema = (
     n0,
     _COATWTEI,
     {_sSI: _cCOATWTER, _smit: None},
-    (_gT, _sTu, _sTT, _r, _sc),
+    (_gT, _sTu, _sTT, _a, _cI, _res, _sc),
     (
         (TOKEN_EXCHANGE_GRANT_TYPE, {_sN: _gt, _sm: None}),
         (SUBJECT_TOKEN, {_sN: _st}),
         (SUBJECT_TOKEN_TYPE, {_sN: _stt}),
+        (ASSERTION, 0),
+        (JWT_BEARER_CLIENT_ID, {_sN: _ci}),
         (RESOURCE, 0),
         (SCOPE, 0),
     ),
@@ -476,12 +597,14 @@ CREATE_O_AUTH2_TOKEN_WITH_TOKEN_EXCHANGE_OUTPUT: StaticSchema = (
     n0,
     _COATWTEO,
     {_sSI: _cCOATWTERo, _smith: None},
-    (_aT, _iTT, _tT, _eI),
+    (_aT, _iTT, _tT, _eI, _res, _sc),
     (
         (O_AUTH_ACCESS_TOKEN, {_sN: _at, _sm: None}),
         (lambda: ISSUED_O_AUTH_ACCESS_TOKEN_TYPE, {_sN: _itt}),
         (BEARER_TOKEN_TYPE, {_sN: _tt, _sm: None}),
         (TOKEN_EXPIRES_IN, {_sN: _ei, _sm: None}),
+        (RESOURCE, 0),
+        (SCOPE, 0),
     ),
 )
 
@@ -538,3 +661,5 @@ SERVICE_UNAVAILABLE_EXCEPTION: StaticSchema = (
     (_e, _m),
     ((O_AUTH2_ERROR_CODE, 1), (3, 1)),
 )
+
+TARGET_ID: StaticSchema = (3, n0, _TI, 0)

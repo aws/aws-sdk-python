@@ -151,9 +151,17 @@ _cCe = "certificateConfigurations"
 _aWC = "allowedWorkloadConfiguration"
 _ACu = "AuthorizerConfiguration"
 _cJWTA = "customJWTAuthorizer"
+_PM = "PrivilegeMode"
+_STANDARD = "STANDARD"
+_PRIVILEGED = "PRIVILEGED"
+_LOSC = "LinuxOperatingSystemConfiguration"
+_pM = "privilegeMode"
+_OSC = "OperatingSystemConfiguration"
+_l = "linux"
 _CPC = "CapacityProviderConfiguration"
 _cPA = "capacityProviderArn"
 _sOm = "smithy.api#clientOptional"
+_oSC = "operatingSystemConfiguration"
 _D = "Description"
 _EVK = "EnvironmentVariableKey"
 _EVV = "EnvironmentVariableValue"
@@ -166,6 +174,9 @@ _mP = "mountPath"
 _EAPA = "EfsAccessPointArn"
 _EAPC = "EfsAccessPointConfiguration"
 _aPA = "accessPointArn"
+_SBMC = "S3BucketMountConfiguration"
+_sBO = "s3BucketOwner"
+_sBR = "s3BucketRegion"
 _SFAPA = "S3FilesAccessPointArn"
 _SFAPC = "S3FilesAccessPointConfiguration"
 _SSC = "SessionStorageConfiguration"
@@ -174,6 +185,7 @@ _sSe = "sessionStorage"
 _sFAP = "s3FilesAccessPoint"
 _eAP = "efsAccessPoint"
 _cPV = "capacityProviderVolume"
+_sBM = "s3BucketMount"
 _FCi = "FilesystemConfigurations"
 _LHP = "LifecycleHookPath"
 _SP = "ServerPort"
@@ -631,13 +643,43 @@ AUTHORIZER_CONFIGURATION: StaticSchema = (
     ((CUSTOM_JWT_AUTHORIZER_CONFIGURATION, 0),),
 )
 
+PRIVILEGE_MODE: StaticSchema = (
+    14,
+    n0,
+    _PM,
+    0,
+    (_STANDARD, _PRIVILEGED),
+    ((-1, {_sVm: _STANDARD}), (-1, {_sVm: _PRIVILEGED})),
+)
+
+LINUX_OPERATING_SYSTEM_CONFIGURATION: StaticSchema = (
+    18,
+    n0,
+    _LOSC,
+    0,
+    (_pM,),
+    ((PRIVILEGE_MODE, 0),),
+)
+
+OPERATING_SYSTEM_CONFIGURATION: StaticSchema = (
+    19,
+    n0,
+    _OSC,
+    0,
+    (_l,),
+    ((LINUX_OPERATING_SYSTEM_CONFIGURATION, 0),),
+)
+
 CAPACITY_PROVIDER_CONFIGURATION: StaticSchema = (
     18,
     n0,
     _CPC,
     0,
-    (_cPA,),
-    ((lambda: schemas.CAPACITY_PROVIDER_ARN, {_sOm: None, _sm: None}),),
+    (_cPA, _oSC),
+    (
+        (lambda: schemas.CAPACITY_PROVIDER_ARN, {_sOm: None, _sm: None}),
+        (OPERATING_SYSTEM_CONFIGURATION, 0),
+    ),
 )
 
 DESCRIPTION: StaticSchema = (3, n0, _D, 4)
@@ -679,6 +721,15 @@ EFS_ACCESS_POINT_CONFIGURATION: StaticSchema = (
     ((EFS_ACCESS_POINT_ARN, 1), (MOUNT_PATH, 1)),
 )
 
+S3_BUCKET_MOUNT_CONFIGURATION: StaticSchema = (
+    18,
+    n0,
+    _SBMC,
+    0,
+    (_b, _mP, _p, _sBO, _sBR),
+    ((3, 1), (MOUNT_PATH, 1), (3, 0), (3, 0), (3, 0)),
+)
+
 S3_FILES_ACCESS_POINT_ARN: StaticSchema = (3, n0, _SFAPA, 0)
 
 S3_FILES_ACCESS_POINT_CONFIGURATION: StaticSchema = (
@@ -704,12 +755,13 @@ FILESYSTEM_CONFIGURATION: StaticSchema = (
     n0,
     _FC,
     0,
-    (_sSe, _sFAP, _eAP, _cPV),
+    (_sSe, _sFAP, _eAP, _cPV, _sBM),
     (
         (SESSION_STORAGE_CONFIGURATION, 0),
         (S3_FILES_ACCESS_POINT_CONFIGURATION, 0),
         (EFS_ACCESS_POINT_CONFIGURATION, 0),
         (CAPACITY_PROVIDER_VOLUME_CONFIGURATION, 0),
+        (S3_BUCKET_MOUNT_CONFIGURATION, 0),
     ),
 )
 

@@ -268,6 +268,8 @@ _cGBLCR = "com.amazonaws.s3#GetBucketLifecycleConfigurationRequest"
 _Dat = "Date"
 _EODM = "ExpiredObjectDeleteMarker"
 _LE = "LifecycleExpiration"
+_OSGTB = "ObjectSizeGreaterThanBytes"
+_OSLTB = "ObjectSizeLessThanBytes"
 _TDMOS = "TransitionDefaultMinimumObjectSize"
 _GBLCO = "GetBucketLifecycleConfigurationOutput"
 _LCi = "LifecycleConfiguration"
@@ -280,7 +282,6 @@ _REPLICA = "REPLICA"
 _COMPLETED = "COMPLETED"
 _ITs = "IsTruncated"
 _Ini = "Initiator"
-_IR = "InvalidRequest"
 
 NO_SUCH_BUCKET: StaticSchema = (18, n0, _NSB, {_smit: _c, _sE: 404})
 
@@ -1459,6 +1460,10 @@ LIFECYCLE_EXPIRATION: StaticSchema = (
     ),
 )
 
+OBJECT_SIZE_GREATER_THAN_BYTES: StaticSchema = (8, n0, _OSGTB, 0)
+
+OBJECT_SIZE_LESS_THAN_BYTES: StaticSchema = (8, n0, _OSLTB, 0)
+
 REPLICATION_STATUS: StaticSchema = (
     14,
     n0,
@@ -1484,5 +1489,3 @@ INITIATOR: StaticSchema = (
     (_ID, _DN),
     ((lambda: schemas.ID, 0), (lambda: schemas.DISPLAY_NAME, 0)),
 )
-
-INVALID_REQUEST: StaticSchema = (18, n0, _IR, {_smit: _c, _sE: 400})

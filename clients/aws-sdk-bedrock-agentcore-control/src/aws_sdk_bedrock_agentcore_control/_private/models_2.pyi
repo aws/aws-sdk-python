@@ -109,6 +109,8 @@ from ..models import (
     LinkedinOauth2ProviderConfigInput,
     LinkedinOauth2ProviderConfigInputDict,
     LinkedinOauth2ProviderConfigOutput,
+    SecretReference,
+    SecretReferenceDict,
     SelfManagedLatticeResource,
     SelfManagedLatticeResourceDict,
     SemanticMemoryStrategyInput,
@@ -158,6 +160,44 @@ from ..models import (
     WorkloadIdentityType,
     _SerdeShape,
 )
+
+@dataclass(kw_only=True)
+class LinuxOperatingSystemConfiguration(_SerdeShape):
+    """
+    Contains the operating system configuration of agents that run on Linux
+    instances, such as the privilege mode.
+    """
+
+    privilege_mode: str | None = ...
+    """
+    The privilege mode of the agents. If you omit this field, the agents run
+    in `STANDARD` privilege mode. The following values are possible:
+
+    - `STANDARD` -- The agent runs without elevated privileges. This is the
+      default.
+
+    - `PRIVILEGED` -- The agent runs with elevated privileges on its
+      instance. Use this mode for agents that build container images, run
+      containers, or install system packages. A session that runs a
+      `PRIVILEGED` agent runs only that agent.
+    """
+
+class LinuxOperatingSystemConfigurationDict(TypedDict, total=False):
+    """Dictionary form of `LinuxOperatingSystemConfiguration`."""
+
+    privilege_mode: str | None
+    """
+    The privilege mode of the agents. If you omit this field, the agents run
+    in `STANDARD` privilege mode. The following values are possible:
+
+    - `STANDARD` -- The agent runs without elevated privileges. This is the
+      default.
+
+    - `PRIVILEGED` -- The agent runs with elevated privileges on its
+      instance. Use this mode for agents that build container images, run
+      containers, or install system packages. A session that runs a
+      `PRIVILEGED` agent runs only that agent.
+    """
 
 @dataclass(kw_only=True)
 class ListAgentInsightStoresInput(_SerdeShape):
@@ -4555,6 +4595,52 @@ class OperatingSystem(UnknownEnumMixin, StrEnum):
     LINUX_X86_64 = "LINUX_X86_64"
     LINUX_ARM64 = "LINUX_ARM64"
 
+@dataclass
+class OperatingSystemConfigurationLinux(_SerdeShape):
+    """
+    The operating system configuration of agents that run on Linux
+    instances.
+    """
+
+    value: LinuxOperatingSystemConfiguration
+
+@dataclass
+class OperatingSystemConfigurationUnknown(_SerdeShape):
+    """
+    Represents an unknown variant. If you receive this value, you will need
+    to update your library to receive the parsed value. This value may not
+    be deliberately sent.
+    """
+
+    tag: str
+
+OperatingSystemConfiguration = Union[
+    OperatingSystemConfigurationLinux | OperatingSystemConfigurationUnknown
+]
+"""
+Contains the operating system configuration of the agents that AgentCore
+Runtime runs on a capacity provider. Specify the member for the
+operating system of the capacity provider.
+"""
+
+class _OperatingSystemConfigurationDeserializer:
+    def deserialize(
+        self, deserializer: ShapeDeserializer
+    ) -> OperatingSystemConfiguration: ...
+
+class OperatingSystemConfigurationLinuxDict(TypedDict):
+    linux: LinuxOperatingSystemConfiguration | LinuxOperatingSystemConfigurationDict
+    """
+    The operating system configuration of agents that run on Linux
+    instances.
+    """
+
+OperatingSystemConfigurationDict = Union[OperatingSystemConfigurationLinuxDict]
+"""
+Dictionary form of `OperatingSystemConfiguration`, setting exactly one
+variant.
+"""
+
 @dataclass(kw_only=True)
 class OutputConfig(_SerdeShape):
     """
@@ -5673,6 +5759,15 @@ class PrivateKeySourceKmsKeySourceDict(TypedDict):
 
 PrivateKeySourceDict = Union[PrivateKeySourceKmsKeySourceDict]
 """Dictionary form of `PrivateKeySource`, setting exactly one variant."""
+
+class PrivilegeMode(UnknownEnumMixin, StrEnum):
+    """
+    The privilege mode of the agents, either `STANDARD` (the default) or
+    `PRIVILEGED`.
+    """
+
+    STANDARD = "STANDARD"
+    PRIVILEGED = "PRIVILEGED"
 
 @dataclass(kw_only=True)
 class ProtocolConfiguration(_SerdeShape):
@@ -6974,6 +7069,74 @@ class RuntimeTargetConfigurationDict(TypedDict, total=False):
     """
 
 @dataclass(kw_only=True)
+class S3BucketMountConfiguration(_SerdeShape):
+    """
+    Mounts an Amazon S3 bucket in the AgentCore Runtime with Mountpoint for
+    Amazon S3. Files under the mount path map to objects in the bucket.
+    """
+
+    bucket: str
+    """
+    The name of the S3 bucket to mount. You can specify a general purpose
+    bucket or a directory bucket.
+    """
+    mount_path: str
+    """
+    The mount path for the S3 bucket inside the AgentCore Runtime. The path
+    must be under `/mnt` with exactly one subdirectory level (for example,
+    `/mnt/data`).
+    """
+    prefix: str | None = ...
+    """
+    The key prefix to mount. Only objects under this prefix are visible at
+    the mount path. To give each session its own prefix, include
+    `{runtimeSessionId}` (for example, `data/{runtimeSessionId}/`). If you
+    omit the prefix, the whole bucket is mounted.
+    """
+    s3_bucket_owner: str | None = ...
+    """
+    The AWS account ID that must own the bucket. If you omit it, the bucket
+    must be owned by the account that owns the AgentCore Runtime.
+    """
+    s3_bucket_region: str | None = ...
+    """
+    The AWS Region of the S3 bucket. If you omit it, the bucket must be in
+    the same Region as the AgentCore Runtime.
+    """
+
+class S3BucketMountConfigurationDict(TypedDict, total=False):
+    """Dictionary form of `S3BucketMountConfiguration`."""
+
+    bucket: Required[str]
+    """
+    The name of the S3 bucket to mount. You can specify a general purpose
+    bucket or a directory bucket.
+    """
+    mount_path: Required[str]
+    """
+    The mount path for the S3 bucket inside the AgentCore Runtime. The path
+    must be under `/mnt` with exactly one subdirectory level (for example,
+    `/mnt/data`).
+    """
+    prefix: str | None
+    """
+    The key prefix to mount. Only objects under this prefix are visible at
+    the mount path. To give each session its own prefix, include
+    `{runtimeSessionId}` (for example, `data/{runtimeSessionId}/`). If you
+    omit the prefix, the whole bucket is mounted.
+    """
+    s3_bucket_owner: str | None
+    """
+    The AWS account ID that must own the bucket. If you omit it, the bucket
+    must be owned by the account that owns the AgentCore Runtime.
+    """
+    s3_bucket_region: str | None
+    """
+    The AWS Region of the S3 bucket. If you omit it, the bucket must be in
+    the same Region as the AgentCore Runtime.
+    """
+
+@dataclass(kw_only=True)
 class S3CertificateConfiguration(_SerdeShape):
     """
     A reference to a PEM-encoded private CA certificate stored as an Amazon
@@ -7330,80 +7493,3 @@ class Secret(_SerdeShape):
     The Amazon Resource Name (ARN) of the secret in Amazon Web Services
     Secrets Manager.
     """
-
-@dataclass(kw_only=True)
-class SecretReference(_SerdeShape):
-    """
-    Contains a reference to a secret stored in Amazon Web Services Secrets
-    Manager.
-    """
-
-    secret_id: str
-    """
-    The ID of the Amazon Web Services Secrets Manager secret that stores the
-    secret value.
-    """
-    json_key: str
-    """
-    The JSON key used to extract the secret value from the Amazon Web
-    Services Secrets Manager secret.
-    """
-
-class SecretReferenceDict(TypedDict, total=False):
-    """Dictionary form of `SecretReference`."""
-
-    secret_id: Required[str]
-    """
-    The ID of the Amazon Web Services Secrets Manager secret that stores the
-    secret value.
-    """
-    json_key: Required[str]
-    """
-    The JSON key used to extract the secret value from the Amazon Web
-    Services Secrets Manager secret.
-    """
-
-@dataclass(kw_only=True)
-class SecretsManagerCertificateConfiguration(_SerdeShape):
-    """
-    A reference to a PEM-encoded private CA certificate stored in an Amazon
-    Web Services Secrets Manager secret.
-    """
-
-    secret_arn: str
-    """
-    The Amazon Resource Name (ARN) of the Amazon Web Services Secrets
-    Manager secret that contains the PEM-encoded certificate.
-    """
-
-class SecretsManagerCertificateConfigurationDict(TypedDict, total=False):
-    """Dictionary form of `SecretsManagerCertificateConfiguration`."""
-
-    secret_arn: Required[str]
-    """
-    The Amazon Resource Name (ARN) of the Amazon Web Services Secrets
-    Manager secret that contains the PEM-encoded certificate.
-    """
-
-@dataclass(kw_only=True)
-class SecretsManagerLocation(_SerdeShape):
-    """The Amazon Web Services Secrets Manager location configuration."""
-
-    secret_arn: str
-    """
-    The ARN of the Amazon Web Services Secrets Manager secret containing the
-    certificate.
-    """
-
-class SecretsManagerLocationDict(TypedDict, total=False):
-    """Dictionary form of `SecretsManagerLocation`."""
-
-    secret_arn: Required[str]
-    """
-    The ARN of the Amazon Web Services Secrets Manager secret containing the
-    certificate.
-    """
-
-class SecretSourceType(UnknownEnumMixin, StrEnum):
-    MANAGED = "MANAGED"
-    EXTERNAL = "EXTERNAL"

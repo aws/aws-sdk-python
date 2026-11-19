@@ -175,11 +175,86 @@ from ..models import (
     SchemaDefinition,
     SchemaDefinitionDict,
     Secret,
-    SecretReference,
-    SecretReferenceDict,
     ServiceError,
     _SerdeShape,
 )
+
+@dataclass(kw_only=True)
+class SecretReference(_SerdeShape):
+    """
+    Contains a reference to a secret stored in Amazon Web Services Secrets
+    Manager.
+    """
+
+    secret_id: str
+    """
+    The ID of the Amazon Web Services Secrets Manager secret that stores the
+    secret value.
+    """
+    json_key: str
+    """
+    The JSON key used to extract the secret value from the Amazon Web
+    Services Secrets Manager secret.
+    """
+
+class SecretReferenceDict(TypedDict, total=False):
+    """Dictionary form of `SecretReference`."""
+
+    secret_id: Required[str]
+    """
+    The ID of the Amazon Web Services Secrets Manager secret that stores the
+    secret value.
+    """
+    json_key: Required[str]
+    """
+    The JSON key used to extract the secret value from the Amazon Web
+    Services Secrets Manager secret.
+    """
+
+@dataclass(kw_only=True)
+class SecretsManagerCertificateConfiguration(_SerdeShape):
+    """
+    A reference to a PEM-encoded private CA certificate stored in an Amazon
+    Web Services Secrets Manager secret.
+    """
+
+    secret_arn: str
+    """
+    The Amazon Resource Name (ARN) of the Amazon Web Services Secrets
+    Manager secret that contains the PEM-encoded certificate.
+    """
+
+class SecretsManagerCertificateConfigurationDict(TypedDict, total=False):
+    """Dictionary form of `SecretsManagerCertificateConfiguration`."""
+
+    secret_arn: Required[str]
+    """
+    The Amazon Resource Name (ARN) of the Amazon Web Services Secrets
+    Manager secret that contains the PEM-encoded certificate.
+    """
+
+@dataclass(kw_only=True)
+class SecretsManagerLocation(_SerdeShape):
+    """The Amazon Web Services Secrets Manager location configuration."""
+
+    secret_arn: str
+    """
+    The ARN of the Amazon Web Services Secrets Manager secret containing the
+    certificate.
+    """
+
+class SecretsManagerLocationDict(TypedDict, total=False):
+    """Dictionary form of `SecretsManagerLocation`."""
+
+    secret_arn: Required[str]
+    """
+    The ARN of the Amazon Web Services Secrets Manager secret containing the
+    certificate.
+    """
+
+class SecretSourceType(UnknownEnumMixin, StrEnum):
+    MANAGED = "MANAGED"
+    EXTERNAL = "EXTERNAL"
 
 @dataclass(kw_only=True)
 class SelfManagedConfiguration(_SerdeShape):

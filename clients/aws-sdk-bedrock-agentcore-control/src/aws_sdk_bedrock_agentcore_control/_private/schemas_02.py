@@ -194,7 +194,7 @@ _TSA = "ToolSecretArn"
 _SML = "SecretsManagerLocation"
 _CL = "CertificateLocation"
 _Ce = "Certificate"
-_l = "location"
+_lo = "location"
 _Cer = "Certificates"
 _RL = "ResourceLocation"
 _BEPT = "BrowserEnterprisePolicyType"
@@ -1049,7 +1049,7 @@ CERTIFICATE_LOCATION: StaticSchema = (
     ((SECRETS_MANAGER_LOCATION, 0),),
 )
 
-CERTIFICATE: StaticSchema = (18, n0, _Ce, 0, (_l,), ((CERTIFICATE_LOCATION, 1),))
+CERTIFICATE: StaticSchema = (18, n0, _Ce, 0, (_lo,), ((CERTIFICATE_LOCATION, 1),))
 
 CERTIFICATES: StaticSchema = (16, n0, _Cer, 0, (_mem,), ((CERTIFICATE, 0),))
 
@@ -1076,7 +1076,7 @@ BROWSER_ENTERPRISE_POLICY: StaticSchema = (
     n0,
     _BEP,
     0,
-    (_l, _ty),
+    (_lo, _ty),
     ((RESOURCE_LOCATION, 1), (BROWSER_ENTERPRISE_POLICY_TYPE, 0)),
 )
 
