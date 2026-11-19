@@ -15,7 +15,7 @@ from . import REGION
 
 async def test_describe_regions_filters_by_name_list(ec2: AsyncEC2Client) -> None:
     """A list of region names and a filter each narrow the result to the named regions."""
-    everything = await ec2.describe_regions(DescribeRegionsInput())
+    everything = await ec2.describe_regions()
     assert REGION in {r.region_name for r in everything.regions or []}
 
     by_names = await ec2.describe_regions(
