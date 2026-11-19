@@ -3,7 +3,6 @@
 
 """Secret versioning, binary values and deletion."""
 
-import pytest
 from aws_sdk_secrets_manager.aio.client import AsyncSecretsManagerClient
 from aws_sdk_secrets_manager.models import (
     CreateSecretInput,
@@ -14,15 +13,12 @@ from aws_sdk_secrets_manager.models import (
     ResourceNotFoundException,
 )
 
-from waiters import wait_until, wait_until_gone
+from waiters import wait_until
 
-from . import unique_name
+from . import unique_name, wait_until_secret_deleted
 from .conftest import SECRET_VALUE
 
 
-@pytest.mark.skip(
-    reason="TODO: ClientRequestToken is not auto-filled by smithy-core 0.10; needs the idempotency-token fill from smithy-python #913"
-)
 async def test_new_version_rotates_current_and_previous_stages(
     secrets: AsyncSecretsManagerClient, secret_name: str
 ) -> None:
@@ -59,9 +55,6 @@ async def test_new_version_rotates_current_and_previous_stages(
     assert by_id.secret_string == SECRET_VALUE
 
 
-@pytest.mark.skip(
-    reason="TODO: ClientRequestToken is not auto-filled by smithy-core 0.10; needs the idempotency-token fill from smithy-python #913"
-)
 async def test_list_versions_reports_stage_labels(
     secrets: AsyncSecretsManagerClient, secret_name: str
 ) -> None:
@@ -87,9 +80,6 @@ async def test_list_versions_reports_stage_labels(
     assert ["AWSPREVIOUS"] in stages.values()
 
 
-@pytest.mark.skip(
-    reason="TODO: ClientRequestToken is not auto-filled by smithy-core 0.10; needs the idempotency-token fill from smithy-python #913"
-)
 async def test_binary_secret_round_trip(secrets: AsyncSecretsManagerClient) -> None:
     """Bytes that are not valid UTF-8 survive a create and get round trip as a binary secret."""
     name = unique_name()
@@ -109,9 +99,6 @@ async def test_binary_secret_round_trip(secrets: AsyncSecretsManagerClient) -> N
         )
 
 
-@pytest.mark.skip(
-    reason="TODO: ClientRequestToken is not auto-filled by smithy-core 0.10; needs the idempotency-token fill from smithy-python #913"
-)
 async def test_force_deleted_secret_is_not_found(
     secrets: AsyncSecretsManagerClient,
 ) -> None:
@@ -127,8 +114,6 @@ async def test_force_deleted_secret_is_not_found(
         DeleteSecretInput(secret_id=name, force_delete_without_recovery=True)
     )
 
-    await wait_until_gone(
-        lambda: secrets.get_secret_value(GetSecretValueInput(secret_id=name)),
-        gone_on=(ResourceNotFoundException,),
-        interval=2,
+    await wait_until_secret_deleted(
+        lambda: secrets.get_secret_value(GetSecretValueInput(secret_id=name))
     )
