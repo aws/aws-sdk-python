@@ -95,6 +95,100 @@ from ..models import (
 )
 
 @dataclass(kw_only=True)
+class GatewayConnectorHealthCheck(_SerdeShape):
+    """
+    The health check configuration that a gateway uses to evaluate the
+    targets associated with a gateway connector.
+    """
+
+    health_check_protocol: str | None = ...
+    """
+    The protocol that the gateway uses to perform health checks.
+
+    Valid values:
+
+    - `HTTP` - Health checks are performed over HTTP.
+
+    - `HTTPS` - Health checks are performed over HTTPS.
+    """
+    health_check_port: int | None = ...
+    """The port that the gateway uses to perform health checks on the targets."""
+    health_check_path: str | None = ...
+    """The destination path for health check requests."""
+    health_check_timeout_seconds: int | None = ...
+    """
+    The amount of time, in seconds, during which no response from a target
+    means a failed health check.
+    """
+    health_check_interval_seconds: int | None = ...
+    """
+    The approximate amount of time, in seconds, between health checks of an
+    individual target.
+    """
+    healthy_threshold_count: int | None = ...
+    """
+    The number of consecutive successful health checks that a target must
+    pass before the gateway considers it healthy.
+    """
+    unhealthy_threshold_count: int | None = ...
+    """
+    The number of consecutive failed health checks that a target must fail
+    before the gateway considers it unhealthy.
+    """
+    matcher: GatewayConnectorHealthCheckMatcher | None = ...
+    """
+    The HTTP or gRPC codes that indicate a successful health check response
+    from a target.
+    """
+
+class GatewayConnectorHealthCheckDict(TypedDict, total=False):
+    """Dictionary form of `GatewayConnectorHealthCheck`."""
+
+    health_check_protocol: str | None
+    """
+    The protocol that the gateway uses to perform health checks.
+
+    Valid values:
+
+    - `HTTP` - Health checks are performed over HTTP.
+
+    - `HTTPS` - Health checks are performed over HTTPS.
+    """
+    health_check_port: int | None
+    """The port that the gateway uses to perform health checks on the targets."""
+    health_check_path: str | None
+    """The destination path for health check requests."""
+    health_check_timeout_seconds: int | None
+    """
+    The amount of time, in seconds, during which no response from a target
+    means a failed health check.
+    """
+    health_check_interval_seconds: int | None
+    """
+    The approximate amount of time, in seconds, between health checks of an
+    individual target.
+    """
+    healthy_threshold_count: int | None
+    """
+    The number of consecutive successful health checks that a target must
+    pass before the gateway considers it healthy.
+    """
+    unhealthy_threshold_count: int | None
+    """
+    The number of consecutive failed health checks that a target must fail
+    before the gateway considers it unhealthy.
+    """
+    matcher: (
+        GatewayConnectorHealthCheckMatcher
+        | GatewayConnectorHealthCheckMatcherDict
+        | None
+    )
+    """
+    The HTTP or gRPC codes that indicate a successful health check response
+    from a target.
+    """
+
+@dataclass(kw_only=True)
 class GatewayConnectorHealthCheckMatcher(_SerdeShape):
     """
     The codes that indicate a successful health check response from a
@@ -13388,8 +13482,3 @@ class TaskDefinition(_SerdeShape):
     Note:
         Trusted execution is supported only for Amazon ECS Managed Instances.
     """
-
-class TaskDefinitionFamilyStatus(UnknownEnumMixin, StrEnum):
-    ACTIVE = "ACTIVE"
-    INACTIVE = "INACTIVE"
-    ALL = "ALL"

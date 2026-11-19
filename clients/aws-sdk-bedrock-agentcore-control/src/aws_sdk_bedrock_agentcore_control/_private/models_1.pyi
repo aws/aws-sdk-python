@@ -15,14 +15,11 @@ from ..models import (
     A2aDescriptor,
     A2aDescriptorDict,
     Action,
-    AgentRuntime,
+    AgentInsightStoreEncryptionConfiguration,
     AgentRuntimeArtifact,
-    AgentRuntimeEndpoint,
-    AgentRuntimeVersionSummary,
     AgentSkillsDescriptor,
     AgentSkillsDescriptorDict,
     AllowedPort,
-    ApiKeyCredentialProviderItem,
     ApiSchemaConfiguration,
     ApiSchemaConfigurationDict,
     ApprovalConfiguration,
@@ -116,6 +113,8 @@ from ..models import (
     RuntimeMetadataConfiguration,
     RuntimeTargetConfiguration,
     RuntimeTargetConfigurationDict,
+    S3BucketMountConfiguration,
+    S3BucketMountConfigurationDict,
     S3FilesAccessPointConfiguration,
     S3FilesAccessPointConfigurationDict,
     Secret,
@@ -139,6 +138,74 @@ from ..models import (
     WorkloadIdentityDetails,
     _SerdeShape,
 )
+
+@dataclass(kw_only=True)
+class DeleteRegistryRecordOutput(_SerdeShape):
+    """Dataclass for DeleteRegistryRecordOutput structure."""
+
+    response_metadata: ResponseMetadata = ...
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+@dataclass(kw_only=True)
+class DeleteResourcePolicyInput(_SerdeShape):
+    """Dataclass for DeleteResourcePolicyInput structure."""
+
+    resource_arn: str | None = ...
+    """
+    The Amazon Resource Name (ARN) of the resource for which to delete the
+    resource policy.
+    """
+
+class DeleteResourcePolicyInputDict(TypedDict, total=False):
+    """Dictionary form of `DeleteResourcePolicyInput`."""
+
+    resource_arn: Required[str]
+    """
+    The Amazon Resource Name (ARN) of the resource for which to delete the
+    resource policy.
+    """
+
+@dataclass(kw_only=True)
+class DeleteResourcePolicyOutput(_SerdeShape):
+    """Dataclass for DeleteResourcePolicyOutput structure."""
+
+    response_metadata: ResponseMetadata = ...
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+@dataclass(kw_only=True)
+class DeleteWorkloadIdentityInput(_SerdeShape):
+    """Dataclass for DeleteWorkloadIdentityInput structure."""
+
+    name: str | None = ...
+    """The name of the workload identity to delete."""
+
+class DeleteWorkloadIdentityInputDict(TypedDict, total=False):
+    """Dictionary form of `DeleteWorkloadIdentityInput`."""
+
+    name: Required[str]
+    """The name of the workload identity to delete."""
+
+@dataclass(kw_only=True)
+class DeleteWorkloadIdentityOutput(_SerdeShape):
+    """Dataclass for DeleteWorkloadIdentityOutput structure."""
+
+    response_metadata: ResponseMetadata = ...
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
 @dataclass(kw_only=True)
 class DerivedEvaluatorConfig(_SerdeShape):
@@ -1404,6 +1471,75 @@ class EvaluatorType(UnknownEnumMixin, StrEnum):
     CODE = "CustomCode"
     CUSTOM_DERIVED = "CustomDerived"
 
+@dataclass(kw_only=True)
+class ExampleCountByField(_SerdeShape):
+    """
+    The number of examples that have each field. An example can have more
+    than one of these fields, so the counts can add up to more than
+    `exampleCount`.
+    """
+
+    turns: int
+    """The number of examples that have `turns`."""
+    input: int
+    """The number of examples that have `input`."""
+    actor_profile: int
+    """The number of examples that have `actor_profile`."""
+
+@dataclass(kw_only=True)
+class ExampleCountByFieldCondition(_SerdeShape):
+    """
+    A condition on the number of examples that have the given fields. The
+    count includes each example that has at least one of the fields in
+    `anyOf`.
+    """
+
+    any_of: list[str] | None = ...
+    """
+    The fields to count. An example counts if it has at least one of these
+    fields. Required.
+    """
+    min: int | None = ...
+    """The minimum count, inclusive."""
+    max: int | None = ...
+    """The maximum count, inclusive."""
+
+class ExampleCountByFieldConditionDict(TypedDict, total=False):
+    """Dictionary form of `ExampleCountByFieldCondition`."""
+
+    any_of: Sequence[str] | None
+    """
+    The fields to count. An example counts if it has at least one of these
+    fields. Required.
+    """
+    min: int | None
+    """The minimum count, inclusive."""
+    max: int | None
+    """The maximum count, inclusive."""
+
+class ExampleField(UnknownEnumMixin, StrEnum):
+    """A field that a dataset example can have."""
+
+    TURNS = "TURNS"
+    """The example has `turns`."""
+    INPUT = "INPUT"
+    """The example has `input`."""
+    ACTOR_PROFILE = "ACTOR_PROFILE"
+    """The example has `actor_profile`."""
+
+@dataclass(kw_only=True)
+class ExampleFieldCondition(_SerdeShape):
+    """A condition on the fields of an example."""
+
+    any_of: list[str] | None = ...
+    """Matches examples that have at least one of these fields. Required."""
+
+class ExampleFieldConditionDict(TypedDict, total=False):
+    """Dictionary form of `ExampleFieldCondition`."""
+
+    any_of: Sequence[str] | None
+    """Matches examples that have at least one of these fields. Required."""
+
 class ExceptionLevel(UnknownEnumMixin, StrEnum):
     DEBUG = "DEBUG"
 
@@ -1757,6 +1893,12 @@ class FilesystemConfigurationCapacityProviderVolume(_SerdeShape):
     value: CapacityProviderVolumeConfiguration
 
 @dataclass
+class FilesystemConfigurationS3BucketMount(_SerdeShape):
+    """Mounts an Amazon S3 bucket as a file system in the AgentCore Runtime."""
+
+    value: S3BucketMountConfiguration
+
+@dataclass
 class FilesystemConfigurationUnknown(_SerdeShape):
     """
     Represents an unknown variant. If you receive this value, you will need
@@ -1771,6 +1913,7 @@ FilesystemConfiguration = Union[
     | FilesystemConfigurationS3FilesAccessPoint
     | FilesystemConfigurationEfsAccessPoint
     | FilesystemConfigurationCapacityProviderVolume
+    | FilesystemConfigurationS3BucketMount
     | FilesystemConfigurationUnknown
 ]
 """
@@ -1816,11 +1959,16 @@ class FilesystemConfigurationCapacityProviderVolumeDict(TypedDict):
     provider, referenced by its logical name.
     """
 
+class FilesystemConfigurationS3BucketMountDict(TypedDict):
+    s3_bucket_mount: S3BucketMountConfiguration | S3BucketMountConfigurationDict
+    """Mounts an Amazon S3 bucket as a file system in the AgentCore Runtime."""
+
 FilesystemConfigurationDict = Union[
     FilesystemConfigurationSessionStorageDict
     | FilesystemConfigurationS3FilesAccessPointDict
     | FilesystemConfigurationEfsAccessPointDict
     | FilesystemConfigurationCapacityProviderVolumeDict
+    | FilesystemConfigurationS3BucketMountDict
 ]
 """
 Dictionary form of `FilesystemConfiguration`, setting exactly one
@@ -2362,6 +2510,74 @@ class GatewayTarget(_SerdeShape):
     """
     The private certificate authority (CA) configurations for the gateway
     target.
+    """
+
+@dataclass(kw_only=True)
+class GetAgentInsightStoreInput(_SerdeShape):
+    """Dataclass for GetAgentInsightStoreInput structure."""
+
+    agent_insight_store_id: str | None = ...
+    """Specifies the unique identifier of the Agent Insight Store to retrieve."""
+
+class GetAgentInsightStoreInputDict(TypedDict, total=False):
+    """Dictionary form of `GetAgentInsightStoreInput`."""
+
+    agent_insight_store_id: Required[str]
+    """Specifies the unique identifier of the Agent Insight Store to retrieve."""
+
+@dataclass(kw_only=True)
+class GetAgentInsightStoreOutput(_SerdeShape):
+    """Dataclass for GetAgentInsightStoreOutput structure."""
+
+    agent_insight_store_arn: str
+    """The Amazon Resource Name (ARN) of the Agent Insight Store."""
+    agent_insight_store_id: str
+    """The unique identifier of the Agent Insight Store."""
+    status: str
+    """
+    The current lifecycle status of the Agent Insight Store. Valid values:
+
+    ACTIVE
+
+    :   The store is available.
+
+    UPDATING
+
+    :   The service is applying a requested change.
+
+    INACTIVE
+
+    :   The store does not accept new Agent Insights.
+
+    ERROR
+
+    :   The store requires intervention.
+    """
+    enablement_status: str
+    """
+    Specifies whether the Agent Insight Store accepts new Agent Insights.
+    The default value is enabled.
+    """
+    encryption_configuration: AgentInsightStoreEncryptionConfiguration
+    """
+    Specifies the encryption mode and key configuration that encrypts new
+    Agent Insights and protects the data at rest.
+    """
+    created_at: datetime
+    """The date and time when the Agent Insight Store was created."""
+    updated_at: datetime
+    """The date and time when the Agent Insight Store was last updated."""
+    failure_reason: str | None = ...
+    """
+    Describes the failure that prevented the Agent Insight Store from
+    reaching its requested lifecycle status.
+    """
+    response_metadata: ResponseMetadata = ...
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
     """
 
 @dataclass(kw_only=True)
@@ -3027,7 +3243,7 @@ class GetDatasetOutput(_SerdeShape):
     Populated when status is CREATE_FAILED, UPDATE_FAILED, or DELETE_FAILED.
     Describes the reason for the failure.
     """
-    schema_type: str
+    schema_type: str | None = ...
     """The schema type declared at create time. Immutable after creation."""
     kms_key_arn: str | None = ...
     """
@@ -3036,6 +3252,11 @@ class GetDatasetOutput(_SerdeShape):
     """
     example_count: int
     """The number of examples in the DRAFT."""
+    example_count_by_field: ExampleCountByField | None = ...
+    """
+    The number of examples that have each field, for the resolved version.
+    Absent when the counts are unknown.
+    """
     download_url: str | None = ...
     """
     Presigned Amazon S3 URL to download the consolidated dataset file for
@@ -7869,229 +8090,3 @@ class LinkedinOauth2ProviderConfigOutput(_SerdeShape):
     """Contains the discovery information for an OAuth2 provider."""
     client_id: str | None = ...
     """The client ID for the LinkedIn OAuth2 provider."""
-
-@dataclass(kw_only=True)
-class ListAgentRuntimeEndpointsInput(_SerdeShape):
-    """Dataclass for ListAgentRuntimeEndpointsInput structure."""
-
-    agent_runtime_id: str | None = ...
-    """The unique identifier of the AgentCore Runtime to list endpoints for."""
-    max_results: int | None = ...
-    """The maximum number of results to return in the response."""
-    next_token: str | None = ...
-    """A token to retrieve the next page of results."""
-
-class ListAgentRuntimeEndpointsInputDict(TypedDict, total=False):
-    """Dictionary form of `ListAgentRuntimeEndpointsInput`."""
-
-    agent_runtime_id: Required[str]
-    """The unique identifier of the AgentCore Runtime to list endpoints for."""
-    max_results: int | None
-    """The maximum number of results to return in the response."""
-    next_token: str | None
-    """A token to retrieve the next page of results."""
-
-@dataclass(kw_only=True)
-class ListAgentRuntimeEndpointsOutput(_SerdeShape):
-    """Dataclass for ListAgentRuntimeEndpointsOutput structure."""
-
-    runtime_endpoints: list[AgentRuntimeEndpoint]
-    """The list of AgentCore Runtime endpoints."""
-    next_token: str | None = ...
-    """A token to retrieve the next page of results."""
-    response_metadata: ResponseMetadata = ...
-    """
-    Metadata about the response that produced this output. Use this to
-    recover the request identifiers a service's support team needs in order
-    to investigate a call. Members of the metadata are individually
-    optional.
-    """
-
-@dataclass(kw_only=True)
-class ListAgentRuntimesInput(_SerdeShape):
-    """Dataclass for ListAgentRuntimesInput structure."""
-
-    max_results: int | None = ...
-    """The maximum number of results to return in the response."""
-    next_token: str | None = ...
-    """A token to retrieve the next page of results."""
-
-class ListAgentRuntimesInputDict(TypedDict, total=False):
-    """Dictionary form of `ListAgentRuntimesInput`."""
-
-    max_results: int | None
-    """The maximum number of results to return in the response."""
-    next_token: str | None
-    """A token to retrieve the next page of results."""
-
-@dataclass(kw_only=True)
-class ListAgentRuntimesOutput(_SerdeShape):
-    """Dataclass for ListAgentRuntimesOutput structure."""
-
-    agent_runtimes: list[AgentRuntime]
-    """The list of AgentCore Runtime resources."""
-    next_token: str | None = ...
-    """A token to retrieve the next page of results."""
-    response_metadata: ResponseMetadata = ...
-    """
-    Metadata about the response that produced this output. Use this to
-    recover the request identifiers a service's support team needs in order
-    to investigate a call. Members of the metadata are individually
-    optional.
-    """
-
-@dataclass(kw_only=True)
-class ListAgentRuntimeVersionsByCapacityProviderInput(_SerdeShape):
-    """Dataclass for ListAgentRuntimeVersionsByCapacityProviderInput structure."""
-
-    capacity_provider_id: str | None = ...
-    """The unique identifier of the capacity provider."""
-    max_results: int | None = ...
-    """
-    The maximum number of results to return in the response. If the total
-    number of results is greater than this value, use the token returned in
-    the response in the `nextToken` field when making another request to
-    return the next batch of results.
-    """
-    next_token: str | None = ...
-    """
-    If the total number of results is greater than the `maxResults` value
-    provided in the request, enter the token returned in the `nextToken`
-    field in the response in this field to return the next batch of results.
-    """
-
-class ListAgentRuntimeVersionsByCapacityProviderInputDict(TypedDict, total=False):
-    """Dictionary form of `ListAgentRuntimeVersionsByCapacityProviderInput`."""
-
-    capacity_provider_id: Required[str]
-    """The unique identifier of the capacity provider."""
-    max_results: int | None
-    """
-    The maximum number of results to return in the response. If the total
-    number of results is greater than this value, use the token returned in
-    the response in the `nextToken` field when making another request to
-    return the next batch of results.
-    """
-    next_token: str | None
-    """
-    If the total number of results is greater than the `maxResults` value
-    provided in the request, enter the token returned in the `nextToken`
-    field in the response in this field to return the next batch of results.
-    """
-
-@dataclass(kw_only=True)
-class ListAgentRuntimeVersionsByCapacityProviderOutput(_SerdeShape):
-    """
-    Dataclass for ListAgentRuntimeVersionsByCapacityProviderOutput
-    structure.
-    """
-
-    agent_runtimes: list[AgentRuntimeVersionSummary]
-    """
-    The list of agent runtime versions that are associated with the capacity
-    provider.
-    """
-    next_token: str | None = ...
-    """
-    If the total number of results is greater than the `maxResults` value
-    provided in the request, use this token when making another request in
-    the `nextToken` field to return the next batch of results.
-    """
-    response_metadata: ResponseMetadata = ...
-    """
-    Metadata about the response that produced this output. Use this to
-    recover the request identifiers a service's support team needs in order
-    to investigate a call. Members of the metadata are individually
-    optional.
-    """
-
-@dataclass(kw_only=True)
-class ListAgentRuntimeVersionsInput(_SerdeShape):
-    """Dataclass for ListAgentRuntimeVersionsInput structure."""
-
-    agent_runtime_id: str | None = ...
-    """The unique identifier of the AgentCore Runtime to list versions for."""
-    max_results: int | None = ...
-    """The maximum number of results to return in the response."""
-    next_token: str | None = ...
-    """A token to retrieve the next page of results."""
-
-class ListAgentRuntimeVersionsInputDict(TypedDict, total=False):
-    """Dictionary form of `ListAgentRuntimeVersionsInput`."""
-
-    agent_runtime_id: Required[str]
-    """The unique identifier of the AgentCore Runtime to list versions for."""
-    max_results: int | None
-    """The maximum number of results to return in the response."""
-    next_token: str | None
-    """A token to retrieve the next page of results."""
-
-@dataclass(kw_only=True)
-class ListAgentRuntimeVersionsOutput(_SerdeShape):
-    """Dataclass for ListAgentRuntimeVersionsOutput structure."""
-
-    agent_runtimes: list[AgentRuntime]
-    """The list of AgentCore Runtime versions."""
-    next_token: str | None = ...
-    """A token to retrieve the next page of results."""
-    response_metadata: ResponseMetadata = ...
-    """
-    Metadata about the response that produced this output. Use this to
-    recover the request identifiers a service's support team needs in order
-    to investigate a call. Members of the metadata are individually
-    optional.
-    """
-
-@dataclass(kw_only=True)
-class ListApiKeyCredentialProvidersInput(_SerdeShape):
-    """Dataclass for ListApiKeyCredentialProvidersInput structure."""
-
-    next_token: str | None = ...
-    """Pagination token."""
-    max_results: int = ...
-    """Maximum number of results to return."""
-
-class ListApiKeyCredentialProvidersInputDict(TypedDict, total=False):
-    """Dictionary form of `ListApiKeyCredentialProvidersInput`."""
-
-    next_token: str | None
-    """Pagination token."""
-    max_results: int | None
-    """Maximum number of results to return."""
-
-@dataclass(kw_only=True)
-class ListApiKeyCredentialProvidersOutput(_SerdeShape):
-    """Dataclass for ListApiKeyCredentialProvidersOutput structure."""
-
-    credential_providers: list[ApiKeyCredentialProviderItem]
-    """The list of API key credential providers."""
-    next_token: str | None = ...
-    """Pagination token for the next page of results."""
-    response_metadata: ResponseMetadata = ...
-    """
-    Metadata about the response that produced this output. Use this to
-    recover the request identifiers a service's support team needs in order
-    to investigate a call. Members of the metadata are individually
-    optional.
-    """
-
-@dataclass(kw_only=True)
-class ListBrowserProfilesInput(_SerdeShape):
-    """Dataclass for ListBrowserProfilesInput structure."""
-
-    max_results: int | None = ...
-    """The maximum number of results to return in the response."""
-    next_token: str | None = ...
-    """A token to retrieve the next page of results."""
-    name: str | None = ...
-    """The name of the browser profile to filter results by."""
-
-class ListBrowserProfilesInputDict(TypedDict, total=False):
-    """Dictionary form of `ListBrowserProfilesInput`."""
-
-    max_results: int | None
-    """The maximum number of results to return in the response."""
-    next_token: str | None
-    """A token to retrieve the next page of results."""
-    name: str | None
-    """The name of the browser profile to filter results by."""

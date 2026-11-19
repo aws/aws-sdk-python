@@ -389,7 +389,7 @@ class CloudFormationClient(Client[CloudFormationConfig]):
         failed](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/troubleshooting.html#troubleshooting-errors-update-rollback-failed).
 
         `ForceRollback` and `ResourcesToSkip` are mutually exclusive. For
-        details, see ContinueUpdateRollbackInput$ForceRollback.
+        details, see the `ForceRollback` parameter.
 
         Args:
             plugins:
@@ -1977,6 +1977,10 @@ class CloudFormationClient(Client[CloudFormationConfig]):
         """
         Returns the description of the specified StackSet operation.
 
+        Reports role provisioning and stack instances deployment progress in
+        `StatusDetails.Stages`. A breakdown for each Amazon Web Services Region
+        is available in `RegionalStatusDetails`.
+
         Note:
             This API provides *strongly consistent* reads meaning it will always
             return the most up-to-date data.
@@ -3476,6 +3480,10 @@ class CloudFormationClient(Client[CloudFormationConfig]):
     ) -> ListStackSetOperationsOutput:
         """
         Returns summary information about operations performed on a StackSet.
+
+        Reports role provisioning and stack instances deployment progress in
+        `StatusDetails.Stages`. The breakdown for each Amazon Web Services
+        Region is available only from DescribeStackSetOperation.
 
         Note:
             This API provides *eventually consistent* reads meaning it may take some

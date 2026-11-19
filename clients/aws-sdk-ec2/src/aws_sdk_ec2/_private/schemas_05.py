@@ -28,7 +28,6 @@ _smit = "smithy.api#output"
 _R = "Return"
 _r = "return"
 _IC = "InstanceCount"
-_re = "rejected"
 _av = "available"
 _de = "deleting"
 _del = "deleted"
@@ -54,6 +53,7 @@ _E = "Error"
 _er = "error"
 _dRr = "dryRun"
 _act = "active"
+_ex = "expired"
 _P = "Protocol"
 _pro = "protocol"
 _N = "Name"
@@ -73,7 +73,6 @@ _sGI = "securityGroupId"
 _De = "Destination"
 _Sou = "Source"
 _so = "source"
-_IT = "InstanceType"
 _SIRI = "SpotInstanceRequestId"
 _sIRI = "spotInstanceRequestId"
 _Pri = "Principal"
@@ -84,21 +83,20 @@ _ipv = "ipv4"
 _ipv_ = "ipv6"
 _SMt = "StatusMessage"
 _sMt = "statusMessage"
-_def = "default"
 _OA = "OutpostArn"
 _CTl = "ClientToken"
 _cTl = "clientToken"
 _sT = "smithy.api#idempotencyToken"
-_ATl = "AllocationType"
-_us = "used"
-_fut = "future"
 _ca = "cancelling"
 _FAILED = "FAILED"
 _ASCI = "ApplicationStatusCheckId"
 _TTA = "TargetTagAssociations"
 _aSCI = "applicationStatusCheckId"
+_sU = "smithy.api#Unit"
 _cre = "creating"
 _ACTIVE = "ACTIVE"
+_KKI = "KmsKeyId"
+_SIn = "SnapshotId"
 _no = "none"
 _priv = "private"
 _IIm = "ImageId"
@@ -125,18 +123,92 @@ _eCI = "ebsCardIndex"
 _vIo = "volumeId"
 _ATtt = "AttachTime"
 _aTtt = "attachTime"
-_BB = "BoxedBoolean"
+_CRFI = "CapacityReservationFleetId"
+_CRFIS = "CapacityReservationFleetIdSet"
+_CCRFI = "CancelCapacityReservationFleetsInput"
+_cCCRFR = "com.amazonaws.ec2#CancelCapacityReservationFleetsRequest"
+_CRFIa = "CapacityReservationFleetIds"
+_CCRFEC = "CancelCapacityReservationFleetErrorCode"
+_CCRFEM = "CancelCapacityReservationFleetErrorMessage"
+_CCRFE = "CancelCapacityReservationFleetError"
+_FCRFCR = "FailedCapacityReservationFleetCancellationResult"
+_cRFI = "capacityReservationFleetId"
+_cCRFE = "cancelCapacityReservationFleetError"
+_FCRFCRS = "FailedCapacityReservationFleetCancellationResultSet"
+_CRFS = "CapacityReservationFleetState"
 _SUBMITTED = "SUBMITTED"
 _subm = "submitted"
 _MODIFYING = "MODIFYING"
+_PF__ = "PARTIALLY_FULFILLED"
+_pf___ = "partially_fulfilled"
+_EXPIRING = "EXPIRING"
+_exp = "expiring"
+_EXPIRED = "EXPIRED"
+_CANCELLING = "CANCELLING"
 _CANCELLED = "CANCELLED"
 _can = "cancelled"
+_CRFCS = "CapacityReservationFleetCancellationState"
+_CFS = "CurrentFleetState"
+_cFS = "currentFleetState"
+_PFS = "PreviousFleetState"
+_pFS = "previousFleetState"
+_CRFCSS = "CapacityReservationFleetCancellationStateSet"
+_CCRFO = "CancelCapacityReservationFleetsOutput"
+_cCCRFRo = "com.amazonaws.ec2#CancelCapacityReservationFleetsResult"
+_SFC = "SuccessfulFleetCancellations"
+_SFCS = "SuccessfulFleetCancellationSet"
+_sFCS = "successfulFleetCancellationSet"
+_FFC = "FailedFleetCancellations"
+_FFCS = "FailedFleetCancellationSet"
+_fFCS = "failedFleetCancellationSet"
+_CCRF = "CancelCapacityReservationFleets"
+_CTI = "ConversionTaskId"
+_CCTI = "CancelConversionTaskInput"
+_cCCR = "com.amazonaws.ec2#CancelConversionRequest"
+_cTI = "conversionTaskId"
+_RM = "ReasonMessage"
+_rM = "reasonMessage"
+_CCTO = "CancelConversionTaskOutput"
+_CCT = "CancelConversionTask"
+_DPRI = "DeclarativePoliciesReportId"
+_CDPRI = "CancelDeclarativePoliciesReportInput"
+_cCDPRR = "com.amazonaws.ec2#CancelDeclarativePoliciesReportRequest"
+_RIep = "ReportId"
+_CDPRO = "CancelDeclarativePoliciesReportOutput"
+_cCDPRRo = "com.amazonaws.ec2#CancelDeclarativePoliciesReportResult"
+_CDPR = "CancelDeclarativePoliciesReport"
+_EVTI = "ExportVmTaskId"
+_CETI = "CancelExportTaskInput"
+_cCETR = "com.amazonaws.ec2#CancelExportTaskRequest"
+_ETI = "ExportTaskId"
+_eTI = "exportTaskId"
+_CETO = "CancelExportTaskOutput"
+_CET = "CancelExportTask"
+_CILPI = "CancelImageLaunchPermissionInput"
+_cCILPR = "com.amazonaws.ec2#CancelImageLaunchPermissionRequest"
+_CILPO = "CancelImageLaunchPermissionOutput"
+_cCILPRo = "com.amazonaws.ec2#CancelImageLaunchPermissionResult"
+_CILP = "CancelImageLaunchPermission"
+_ITI = "ImportTaskId"
+_CITI = "CancelImportTaskInput"
+_cCITR = "com.amazonaws.ec2#CancelImportTaskRequest"
+_CRa = "CancelReason"
+_CITO = "CancelImportTaskOutput"
+_cCITRo = "com.amazonaws.ec2#CancelImportTaskResult"
+_iTI = "importTaskId"
+_PSre = "PreviousState"
+_pSre = "previousState"
+_CIT = "CancelImportTask"
 _RILI = "ReservedInstancesListingId"
+_CRILI = "CancelReservedInstancesListingInput"
+_cCRILR = "com.amazonaws.ec2#CancelReservedInstancesListingRequest"
 _rILI = "reservedInstancesListingId"
 _LSi = "ListingState"
 _sol = "sold"
 _iC = "instanceCount"
 _ICL = "InstanceCountList"
+_CCV = "CurrencyCodeValues"
+_USD = "USD"
 _Dou = "Double"
 _Lo = "Long"
 _PSri = "PriceSchedule"
@@ -162,6 +234,12 @@ _rII = "reservedInstancesId"
 _UD = "UpdateDate"
 _uD = "updateDate"
 _RILL = "ReservedInstancesListingList"
+_CRILO = "CancelReservedInstancesListingOutput"
+_cCRILRo = "com.amazonaws.ec2#CancelReservedInstancesListingResult"
+_RILe = "ReservedInstancesListings"
+_RILS = "ReservedInstancesListingsSet"
+_rILS = "reservedInstancesListingsSet"
+_CRIL = "CancelReservedInstancesListing"
 _SFRI = "SpotFleetRequestId"
 _SFRIL = "SpotFleetRequestIdList"
 _CSFRI = "CancelSpotFleetRequestsInput"
@@ -207,7 +285,7 @@ _CSIRI = "CancelSpotInstanceRequestsInput"
 _cCSIRR = "com.amazonaws.ec2#CancelSpotInstanceRequestsRequest"
 _SIRIp = "SpotInstanceRequestIds"
 _CSIRS = "CancelSpotInstanceRequestState"
-_op = "open"
+_ope = "open"
 _compl = "completed"
 _CSIR = "CancelledSpotInstanceRequest"
 _CSIRL = "CancelledSpotInstanceRequestList"
@@ -234,7 +312,6 @@ _fII = "fpgaImageId"
 _CFI = "CopyFpgaImage"
 _CICT = "CopyImageClientToken"
 _IDR = "ImageDescriptionRequest"
-_KKI = "KmsKeyId"
 _INR = "ImageNameRequest"
 _CII = "CopyImageInput"
 _cCIR = "com.amazonaws.ec2#CopyImageRequest"
@@ -263,7 +340,6 @@ _SSI = "SourceSnapshotId"
 _CDM = "CompletionDurationMinutes"
 _CSO = "CopySnapshotOutput"
 _cCSRo = "com.amazonaws.ec2#CopySnapshotResult"
-_SIn = "SnapshotId"
 _sIn = "snapshotId"
 _CSo = "CopySnapshot"
 _VT = "VolumeType"
@@ -307,7 +383,7 @@ _thr = "throughput"
 _STs = "SseType"
 _sTs = "sseType"
 _Op = "Operator"
-_ope = "operator"
+_oper = "operator"
 _VIR = "VolumeInitializationRate"
 _vIR = "volumeInitializationRate"
 _VAol = "VolumeArn"
@@ -396,112 +472,8 @@ _par = "parquet"
 _Sch = "Schedule"
 _HOURLY = "HOURLY"
 _hou = "hourly"
-_CCMDEI = "CreateCapacityManagerDataExportInput"
-_cCCMDER = "com.amazonaws.ec2#CreateCapacityManagerDataExportRequest"
-_SBN = "S3BucketName"
-_SBP = "S3BucketPrefix"
 _CMDEI = "CapacityManagerDataExportId"
-_CCMDEO = "CreateCapacityManagerDataExportOutput"
-_cCCMDERo = "com.amazonaws.ec2#CreateCapacityManagerDataExportResult"
-_cMDEI = "capacityManagerDataExportId"
-_CCMDE = "CreateCapacityManagerDataExport"
-_CRCD = "CapacityReservationCommitmentDuration"
-_CRDP = "CapacityReservationDeliveryPreference"
-_FIXED = "FIXED"
-_fix = "fixed"
-_INCREMENTAL = "INCREMENTAL"
-_incr = "incremental"
-_EDT = "EndDateType"
-_unl = "unlimited"
-_li = "limited"
-_IMC = "InstanceMatchCriteria"
-_ta = "targeted"
-_CRIP = "CapacityReservationInstancePlatform"
-_LU = "LINUX_UNIX"
-_LUNIX = "Linux/UNIX"
-_RHEL = "RED_HAT_ENTERPRISE_LINUX"
-_RHEL_ = "Red Hat Enterprise Linux"
-_SL_ = "SUSE_LINUX"
-_SL__ = "SUSE Linux"
-_WINDOWS = "WINDOWS"
 _W = "Windows"
-_WWSS = "WINDOWS_WITH_SQL_SERVER"
-_WwSS = "Windows with SQL Server"
-_WWSSE = "WINDOWS_WITH_SQL_SERVER_ENTERPRISE"
-_WwSSE = "Windows with SQL Server Enterprise"
-_WWSSS = "WINDOWS_WITH_SQL_SERVER_STANDARD"
-_WwSSS = "Windows with SQL Server Standard"
-_WWSSW = "WINDOWS_WITH_SQL_SERVER_WEB"
-_WwSSW = "Windows with SQL Server Web"
-_LWSSS = "LINUX_WITH_SQL_SERVER_STANDARD"
-_LwSSS = "Linux with SQL Server Standard"
-_LWSSW = "LINUX_WITH_SQL_SERVER_WEB"
-_LwSSW = "Linux with SQL Server Web"
-_LWSSE = "LINUX_WITH_SQL_SERVER_ENTERPRISE"
-_LwSSE = "Linux with SQL Server Enterprise"
-_RWSSS = "RHEL_WITH_SQL_SERVER_STANDARD"
-_RwSSS = "RHEL with SQL Server Standard"
-_RWSSE = "RHEL_WITH_SQL_SERVER_ENTERPRISE"
-_RwSSE = "RHEL with SQL Server Enterprise"
-_RWSSW = "RHEL_WITH_SQL_SERVER_WEB"
-_RwSSW = "RHEL with SQL Server Web"
-_RWH = "RHEL_WITH_HA"
-_RwH = "RHEL with HA"
-_RWHASSS = "RHEL_WITH_HA_AND_SQL_SERVER_STANDARD"
-_RwHaSSS = "RHEL with HA and SQL Server Standard"
-_RWHASSE = "RHEL_WITH_HA_AND_SQL_SERVER_ENTERPRISE"
-_RwHaSSE = "RHEL with HA and SQL Server Enterprise"
-_UPL = "UBUNTU_PRO_LINUX"
-_UP_ = "Ubuntu Pro"
-_PGA = "PlacementGroupArn"
-_CCRIr = "CreateCapacityReservationInput"
-_cCCRRom = "com.amazonaws.ec2#CreateCapacityReservationRequest"
-_IPns = "InstancePlatform"
-_Ten = "Tenancy"
-_EO = "EbsOptimized"
-_ESp = "EphemeralStorage"
-_ED = "EndDate"
-_SDt = "StartDate"
-_CDo = "CommitmentDuration"
-_DPel = "DeliveryPreference"
-_BL = "BoxedLong"
-_CRAD = "CapacityReservationAdjustmentDetails"
-_sDt = "startDate"
-_eD = "endDate"
-_CED = "CommitmentEndDate"
-_cED = "commitmentEndDate"
-_eDT = "endDateType"
-_cDo = "commitmentDuration"
-_CRAS = "CapacityReservationAdjustmentStatus"
-_req = "requested"
-_ap = "applied"
-_CAME = "CapacityAllocationMetadataEntry"
-_CAML = "CapacityAllocationMetadataList"
-_CAa = "CapacityAllocation"
-_aTl = "allocationType"
-_Cou = "Count"
-_cou = "count"
-_AMl = "AllocationMetadata"
-_AML = "AllocationMetadataList"
-_aML = "allocationMetadataList"
-_CAap = "CapacityAllocations"
-_CBI = "CapacityBlockId"
-_CRCI = "CapacityReservationCommitmentInfo"
-_CIC = "CommittedInstanceCount"
-_cIC = "committedInstanceCount"
-_ITnt = "InterruptionType"
-_adh = "adhoc"
-_ICRAS = "InterruptibleCapacityReservationAllocationStatus"
-_up = "updating"
-_canc = "canceling"
-_cance = "canceled"
-_ZSP = "ZeroSizePreference"
-_ret = "retain"
-_CRap = "CapacityReservation"
-_CCROr = "CreateCapacityReservationOutput"
-_cCCRRoma = "com.amazonaws.ec2#CreateCapacityReservationResult"
-_cRa = "capacityReservation"
-_CCRr = "CreateCapacityReservation"
 _LTI = "LaunchTemplateId"
 _LTN = "LaunchTemplateName"
 _TCUT = "TargetCapacityUnitType"
@@ -514,16 +486,11 @@ _uni = "units"
 _lTI = "launchTemplateId"
 _lTN = "launchTemplateName"
 _PV = "PlatformValues"
-_ue = "uefi"
 _SLE = "SnapshotLocationEnum"
 _REGIONAL = "REGIONAL"
 _regi = "regional"
 _LOCAL = "LOCAL"
 _lo = "local"
-_DIF = "DiskImageFormat"
-_VMDK = "VMDK"
-_RAW = "RAW"
-_VHD = "VHD"
 _ORper = "OperatorRequest"
 _LT = "LaunchTemplate"
 _CBr = "CreatedBy"
@@ -532,36 +499,6 @@ _DVN = "DefaultVersionNumber"
 _dVN = "defaultVersionNumber"
 _LVN = "LatestVersionNumber"
 _lVN = "latestVersionNumber"
-_SSn = "SnapshotState"
-_rec = "recoverable"
-_reco = "recovering"
-_STt = "StorageTier"
-_arc = "archive"
-_VISL = "VolumeIdStringList"
-_i__________________________________________________________________________ = "i386"
-_x______________________________________________________ = "x86_64"
-_arm = "arm64"
-_xm____________ = "x86_64_mac"
-_am______ = "arm64_mac"
-_BMV = "BootModeValues"
-_lb__ = "legacy_bios"
-_lb___ = "legacy-bios"
-_up__ = "uefi_preferred"
-_up___ = "uefi-preferred"
-_VTi = "VirtualizationType"
-_hv = "hvm"
-_para = "paravirtual"
-_ABV = "AttributeBooleanValue"
-_ATr = "ArchitectureType"
-
-ALLOCATION_TYPE: StaticSchema = (
-    14,
-    n0,
-    _ATl,
-    0,
-    (_us, _fut, _ca),
-    ((-1, {_sV: _us}), (-1, {_sV: _fut}), (-1, {_sV: _ca})),
-)
 
 VOLUME_ID: StaticSchema = (3, n0, _VIo, 0)
 
@@ -580,7 +517,324 @@ VOLUME_ATTACHMENT_STATE: StaticSchema = (
     ),
 )
 
-BOXED_BOOLEAN: StaticSchema = (2, n0, _BB, 0)
+CAPACITY_RESERVATION_FLEET_ID: StaticSchema = (3, n0, _CRFI, 0)
+
+CAPACITY_RESERVATION_FLEET_ID_SET: StaticSchema = (
+    16,
+    n0,
+    _CRFIS,
+    0,
+    (_me,),
+    ((CAPACITY_RESERVATION_FLEET_ID, {_sN: _i}),),
+)
+
+CANCEL_CAPACITY_RESERVATION_FLEETS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _CCRFI,
+    {_sSI: _cCCRFR, _sm: None},
+    (_DR, _CRFIa),
+    (
+        (lambda: schemas.BOOLEAN, 0),
+        (CAPACITY_RESERVATION_FLEET_ID_SET, {_sN: _CRFI, _sO: None, _smi: None}),
+    ),
+)
+
+CANCEL_CAPACITY_RESERVATION_FLEETS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _CCRFO,
+    {_sSI: _cCCRFRo, _smit: None},
+    (_SFC, _FFC),
+    (
+        (
+            lambda: CAPACITY_RESERVATION_FLEET_CANCELLATION_STATE_SET,
+            {_aQN: _SFCS, _sN: _sFCS},
+        ),
+        (
+            lambda: FAILED_CAPACITY_RESERVATION_FLEET_CANCELLATION_RESULT_SET,
+            {_aQN: _FFCS, _sN: _fFCS},
+        ),
+    ),
+)
+
+CANCEL_CAPACITY_RESERVATION_FLEETS: StaticOperationSchema = (
+    23,
+    n0,
+    _CCRF,
+    0,
+    CANCEL_CAPACITY_RESERVATION_FLEETS_INPUT,
+    CANCEL_CAPACITY_RESERVATION_FLEETS_OUTPUT,
+    (),
+)
+
+CANCEL_CAPACITY_RESERVATION_FLEET_ERROR_CODE: StaticSchema = (3, n0, _CCRFEC, 0)
+
+CANCEL_CAPACITY_RESERVATION_FLEET_ERROR_MESSAGE: StaticSchema = (3, n0, _CCRFEM, 0)
+
+CANCEL_CAPACITY_RESERVATION_FLEET_ERROR: StaticSchema = (
+    18,
+    n0,
+    _CCRFE,
+    0,
+    (_C, _Me),
+    (
+        (CANCEL_CAPACITY_RESERVATION_FLEET_ERROR_CODE, {_aQN: _C, _sN: _co}),
+        (CANCEL_CAPACITY_RESERVATION_FLEET_ERROR_MESSAGE, {_aQN: _Me, _sN: _mes}),
+    ),
+)
+
+FAILED_CAPACITY_RESERVATION_FLEET_CANCELLATION_RESULT: StaticSchema = (
+    18,
+    n0,
+    _FCRFCR,
+    0,
+    (_CRFI, _CCRFE),
+    (
+        (CAPACITY_RESERVATION_FLEET_ID, {_aQN: _CRFI, _sN: _cRFI}),
+        (CANCEL_CAPACITY_RESERVATION_FLEET_ERROR, {_aQN: _CCRFE, _sN: _cCRFE}),
+    ),
+)
+
+FAILED_CAPACITY_RESERVATION_FLEET_CANCELLATION_RESULT_SET: StaticSchema = (
+    16,
+    n0,
+    _FCRFCRS,
+    0,
+    (_me,),
+    ((FAILED_CAPACITY_RESERVATION_FLEET_CANCELLATION_RESULT, {_sN: _i}),),
+)
+
+CAPACITY_RESERVATION_FLEET_STATE: StaticSchema = (
+    14,
+    n0,
+    _CRFS,
+    0,
+    (
+        _SUBMITTED,
+        _MODIFYING,
+        _ACTIVE,
+        _PF__,
+        _EXPIRING,
+        _EXPIRED,
+        _CANCELLING,
+        _CANCELLED,
+        _FAILED,
+    ),
+    (
+        (-1, {_sV: _subm}),
+        (-1, {_sV: _mo}),
+        (-1, {_sV: _act}),
+        (-1, {_sV: _pf___}),
+        (-1, {_sV: _exp}),
+        (-1, {_sV: _ex}),
+        (-1, {_sV: _ca}),
+        (-1, {_sV: _can}),
+        (-1, {_sV: _fa}),
+    ),
+)
+
+CAPACITY_RESERVATION_FLEET_CANCELLATION_STATE: StaticSchema = (
+    18,
+    n0,
+    _CRFCS,
+    0,
+    (_CFS, _PFS, _CRFI),
+    (
+        (CAPACITY_RESERVATION_FLEET_STATE, {_aQN: _CFS, _sN: _cFS}),
+        (CAPACITY_RESERVATION_FLEET_STATE, {_aQN: _PFS, _sN: _pFS}),
+        (CAPACITY_RESERVATION_FLEET_ID, {_aQN: _CRFI, _sN: _cRFI}),
+    ),
+)
+
+CAPACITY_RESERVATION_FLEET_CANCELLATION_STATE_SET: StaticSchema = (
+    16,
+    n0,
+    _CRFCSS,
+    0,
+    (_me,),
+    ((CAPACITY_RESERVATION_FLEET_CANCELLATION_STATE, {_sN: _i}),),
+)
+
+CONVERSION_TASK_ID: StaticSchema = (3, n0, _CTI, 0)
+
+CANCEL_CONVERSION_TASK_INPUT: StaticSchema = (
+    18,
+    n0,
+    _CCTI,
+    {_sSI: _cCCR, _sm: None},
+    (_DR, _CTI, _RM),
+    (
+        (lambda: schemas.BOOLEAN, {_aQN: _DR, _sN: _dRr}),
+        (CONVERSION_TASK_ID, {_aQN: _CTI, _sN: _cTI, _sO: None, _smi: None}),
+        (lambda: schemas.STRING, {_aQN: _RM, _sN: _rM}),
+    ),
+)
+
+CANCEL_CONVERSION_TASK_OUTPUT: StaticSchema = (18, n0, _CCTO, {_sSI: _sU, _smit: None})
+
+CANCEL_CONVERSION_TASK: StaticOperationSchema = (
+    23,
+    n0,
+    _CCT,
+    0,
+    CANCEL_CONVERSION_TASK_INPUT,
+    CANCEL_CONVERSION_TASK_OUTPUT,
+    (),
+)
+
+DECLARATIVE_POLICIES_REPORT_ID: StaticSchema = (3, n0, _DPRI, 0)
+
+CANCEL_DECLARATIVE_POLICIES_REPORT_INPUT: StaticSchema = (
+    18,
+    n0,
+    _CDPRI,
+    {_sSI: _cCDPRR, _sm: None},
+    (_DR, _RIep),
+    (
+        (lambda: schemas.BOOLEAN, 0),
+        (DECLARATIVE_POLICIES_REPORT_ID, {_sO: None, _smi: None}),
+    ),
+)
+
+CANCEL_DECLARATIVE_POLICIES_REPORT_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _CDPRO,
+    {_sSI: _cCDPRRo, _smit: None},
+    (_R,),
+    ((lambda: schemas.BOOLEAN, {_aQN: _R, _sN: _r}),),
+)
+
+CANCEL_DECLARATIVE_POLICIES_REPORT: StaticOperationSchema = (
+    23,
+    n0,
+    _CDPR,
+    0,
+    CANCEL_DECLARATIVE_POLICIES_REPORT_INPUT,
+    CANCEL_DECLARATIVE_POLICIES_REPORT_OUTPUT,
+    (),
+)
+
+EXPORT_VM_TASK_ID: StaticSchema = (3, n0, _EVTI, 0)
+
+CANCEL_EXPORT_TASK_INPUT: StaticSchema = (
+    18,
+    n0,
+    _CETI,
+    {_sSI: _cCETR, _sm: None},
+    (_ETI,),
+    ((EXPORT_VM_TASK_ID, {_aQN: _ETI, _sN: _eTI, _sO: None, _smi: None}),),
+)
+
+CANCEL_EXPORT_TASK_OUTPUT: StaticSchema = (18, n0, _CETO, {_sSI: _sU, _smit: None})
+
+CANCEL_EXPORT_TASK: StaticOperationSchema = (
+    23,
+    n0,
+    _CET,
+    0,
+    CANCEL_EXPORT_TASK_INPUT,
+    CANCEL_EXPORT_TASK_OUTPUT,
+    (),
+)
+
+CANCEL_IMAGE_LAUNCH_PERMISSION_INPUT: StaticSchema = (
+    18,
+    n0,
+    _CILPI,
+    {_sSI: _cCILPR, _sm: None},
+    (_IIm, _DR),
+    ((lambda: schemas.IMAGE_ID, {_sO: None, _smi: None}), (lambda: schemas.BOOLEAN, 0)),
+)
+
+CANCEL_IMAGE_LAUNCH_PERMISSION_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _CILPO,
+    {_sSI: _cCILPRo, _smit: None},
+    (_R,),
+    ((lambda: schemas.BOOLEAN, {_aQN: _R, _sN: _r}),),
+)
+
+CANCEL_IMAGE_LAUNCH_PERMISSION: StaticOperationSchema = (
+    23,
+    n0,
+    _CILP,
+    0,
+    CANCEL_IMAGE_LAUNCH_PERMISSION_INPUT,
+    CANCEL_IMAGE_LAUNCH_PERMISSION_OUTPUT,
+    (),
+)
+
+IMPORT_TASK_ID: StaticSchema = (3, n0, _ITI, 0)
+
+CANCEL_IMPORT_TASK_INPUT: StaticSchema = (
+    18,
+    n0,
+    _CITI,
+    {_sSI: _cCITR, _sm: None},
+    (_CRa, _DR, _ITI),
+    ((lambda: schemas.STRING, 0), (lambda: schemas.BOOLEAN, 0), (IMPORT_TASK_ID, 0)),
+)
+
+CANCEL_IMPORT_TASK_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _CITO,
+    {_sSI: _cCITRo, _smit: None},
+    (_ITI, _PSre, _St),
+    (
+        (lambda: schemas.STRING, {_aQN: _ITI, _sN: _iTI}),
+        (lambda: schemas.STRING, {_aQN: _PSre, _sN: _pSre}),
+        (lambda: schemas.STRING, {_aQN: _St, _sN: _st}),
+    ),
+)
+
+CANCEL_IMPORT_TASK: StaticOperationSchema = (
+    23,
+    n0,
+    _CIT,
+    0,
+    CANCEL_IMPORT_TASK_INPUT,
+    CANCEL_IMPORT_TASK_OUTPUT,
+    (),
+)
+
+RESERVED_INSTANCES_LISTING_ID: StaticSchema = (3, n0, _RILI, 0)
+
+CANCEL_RESERVED_INSTANCES_LISTING_INPUT: StaticSchema = (
+    18,
+    n0,
+    _CRILI,
+    {_sSI: _cCRILR, _sm: None},
+    (_RILI,),
+    (
+        (
+            RESERVED_INSTANCES_LISTING_ID,
+            {_aQN: _RILI, _sN: _rILI, _sO: None, _smi: None},
+        ),
+    ),
+)
+
+CANCEL_RESERVED_INSTANCES_LISTING_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _CRILO,
+    {_sSI: _cCRILRo, _smit: None},
+    (_RILe,),
+    ((lambda: RESERVED_INSTANCES_LISTING_LIST, {_aQN: _RILS, _sN: _rILS}),),
+)
+
+CANCEL_RESERVED_INSTANCES_LISTING: StaticOperationSchema = (
+    23,
+    n0,
+    _CRIL,
+    0,
+    CANCEL_RESERVED_INSTANCES_LISTING_INPUT,
+    CANCEL_RESERVED_INSTANCES_LISTING_OUTPUT,
+    (),
+)
 
 LISTING_STATE: StaticSchema = (
     14,
@@ -612,6 +866,8 @@ INSTANCE_COUNT_LIST: StaticSchema = (
     ((INSTANCE_COUNT, {_sN: _i}),),
 )
 
+CURRENCY_CODE_VALUES: StaticSchema = (14, n0, _CCV, 0, (_USD,), ((-1, {_sV: _USD}),))
+
 DOUBLE: StaticSchema = (10, n0, _Dou, 0)
 
 LONG: StaticSchema = (8, n0, _Lo, 0)
@@ -624,7 +880,7 @@ PRICE_SCHEDULE: StaticSchema = (
     (_Act, _CC, _Pric, _Te),
     (
         (lambda: schemas.BOOLEAN, {_aQN: _Act, _sN: _act}),
-        (lambda: schemas.CURRENCY_CODE_VALUES, {_aQN: _CC, _sN: _cC}),
+        (CURRENCY_CODE_VALUES, {_aQN: _CC, _sN: _cC}),
         (DOUBLE, {_aQN: _Pric, _sN: _pric}),
         (LONG, {_aQN: _Te, _sN: _te}),
     ),
@@ -677,15 +933,13 @@ RESERVED_INSTANCES_LISTING_LIST: StaticSchema = (
     ((RESERVED_INSTANCES_LISTING, {_sN: _i}),),
 )
 
-SPOT_FLEET_REQUEST_ID: StaticSchema = (3, n0, _SFRI, 0)
-
 SPOT_FLEET_REQUEST_ID_LIST: StaticSchema = (
     16,
     n0,
     _SFRIL,
     0,
     (_me,),
-    ((SPOT_FLEET_REQUEST_ID, {_sN: _i}),),
+    ((lambda: schemas.SPOT_FLEET_REQUEST_ID, {_sN: _i}),),
 )
 
 CANCEL_SPOT_FLEET_REQUESTS_INPUT: StaticSchema = (
@@ -851,10 +1105,10 @@ CANCEL_SPOT_INSTANCE_REQUEST_STATE: StaticSchema = (
     n0,
     _CSIRS,
     0,
-    (_act, _op, _cl, _can, _compl),
+    (_act, _ope, _cl, _can, _compl),
     (
         (-1, {_sV: _act}),
-        (-1, {_sV: _op}),
+        (-1, {_sV: _ope}),
         (-1, {_sV: _cl}),
         (-1, {_sV: _can}),
         (-1, {_sV: _compl}),
@@ -956,8 +1210,6 @@ COPY_IMAGE_CLIENT_TOKEN: StaticSchema = (3, n0, _CICT, 0)
 
 IMAGE_DESCRIPTION_REQUEST: StaticSchema = (3, n0, _IDR, 0)
 
-KMS_KEY_ID: StaticSchema = (3, n0, _KKI, 0)
-
 IMAGE_NAME_REQUEST: StaticSchema = (3, n0, _INR, 0)
 
 COPY_IMAGE_INPUT: StaticSchema = (
@@ -985,7 +1237,7 @@ COPY_IMAGE_INPUT: StaticSchema = (
         (COPY_IMAGE_CLIENT_TOKEN, 2),
         (IMAGE_DESCRIPTION_REQUEST, 0),
         (lambda: schemas.BOOLEAN, {_aQN: _En, _sN: _enc}),
-        (KMS_KEY_ID, {_aQN: _KKI, _sN: _kKI}),
+        (lambda: schemas.KMS_KEY_ID, {_aQN: _KKI, _sN: _kKI}),
         (IMAGE_NAME_REQUEST, {_sO: None, _smi: None}),
         (lambda: schemas.STRING, {_sO: None, _smi: None}),
         (lambda: schemas.STRING, {_sO: None, _smi: None}),
@@ -1033,7 +1285,7 @@ COPY_SNAPSHOT_INPUT: StaticSchema = (
         (lambda: schemas.STRING, 0),
         (lambda: schemas.STRING, {_aQN: _DRe, _sN: _dRe}),
         (lambda: schemas.BOOLEAN, {_aQN: _En, _sN: _enc}),
-        (KMS_KEY_ID, {_aQN: _KKI, _sN: _kKI}),
+        (lambda: schemas.KMS_KEY_ID, {_aQN: _KKI, _sN: _kKI}),
         (COPY_SNAPSHOT_REQUEST_PSU, {_aQN: _PU, _sN: _pU}),
         (lambda: schemas.STRING, {_sO: None, _smi: None}),
         (lambda: schemas.STRING, {_sO: None, _smi: None}),
@@ -1100,7 +1352,7 @@ COPY_VOLUMES_INPUT: StaticSchema = (
         (lambda: schemas.INTEGER, 0),
         (lambda: schemas.STRING, 2),
         (lambda: schemas.BOOLEAN, 0),
-        (KMS_KEY_ID, 0),
+        (lambda: schemas.KMS_KEY_ID, 0),
     ),
 )
 
@@ -1230,7 +1482,7 @@ VOLUME: StaticSchema = (
         (lambda: schemas.BOOLEAN, {_aQN: _MAE, _sN: _mAE}),
         (lambda: schemas.INTEGER, {_aQN: _Th, _sN: _thr}),
         (SSE_TYPE, {_aQN: _STs, _sN: _sTs}),
-        (OPERATOR_RESPONSE, {_aQN: _Op, _sN: _ope}),
+        (OPERATOR_RESPONSE, {_aQN: _Op, _sN: _oper}),
         (lambda: schemas.INTEGER, {_aQN: _VIR, _sN: _vIR}),
         (lambda: schemas.STRING, {_aQN: _VAol, _sN: _vA}),
         (lambda: schemas.STRING, {_aQN: _OIw, _sN: _oI}),
@@ -1523,302 +1775,7 @@ OUTPUT_FORMAT: StaticSchema = (
 
 SCHEDULE: StaticSchema = (14, n0, _Sch, 0, (_HOURLY,), ((-1, {_sV: _hou}),))
 
-CREATE_CAPACITY_MANAGER_DATA_EXPORT_INPUT: StaticSchema = (
-    18,
-    n0,
-    _CCMDEI,
-    {_sSI: _cCCMDER, _sm: None},
-    (_SBN, _SBP, _Sch, _OF, _CTl, _DR, _TSa),
-    (
-        (lambda: schemas.STRING, {_sO: None, _smi: None}),
-        (lambda: schemas.STRING, 0),
-        (SCHEDULE, {_sO: None, _smi: None}),
-        (OUTPUT_FORMAT, {_sO: None, _smi: None}),
-        (lambda: schemas.STRING, 2),
-        (lambda: schemas.BOOLEAN, 0),
-        (lambda: schemas.TAG_SPECIFICATION_LIST, {_sN: _TS}),
-    ),
-)
-
-CREATE_CAPACITY_MANAGER_DATA_EXPORT_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _CCMDEO,
-    {_sSI: _cCCMDERo, _smit: None},
-    (_CMDEI,),
-    ((lambda: CAPACITY_MANAGER_DATA_EXPORT_ID, {_aQN: _CMDEI, _sN: _cMDEI}),),
-)
-
-CREATE_CAPACITY_MANAGER_DATA_EXPORT: StaticOperationSchema = (
-    23,
-    n0,
-    _CCMDE,
-    0,
-    CREATE_CAPACITY_MANAGER_DATA_EXPORT_INPUT,
-    CREATE_CAPACITY_MANAGER_DATA_EXPORT_OUTPUT,
-    (),
-)
-
 CAPACITY_MANAGER_DATA_EXPORT_ID: StaticSchema = (3, n0, _CMDEI, 0)
-
-CAPACITY_RESERVATION_COMMITMENT_DURATION: StaticSchema = (8, n0, _CRCD, 0)
-
-CAPACITY_RESERVATION_DELIVERY_PREFERENCE: StaticSchema = (
-    14,
-    n0,
-    _CRDP,
-    0,
-    (_FIXED, _INCREMENTAL),
-    ((-1, {_sV: _fix}), (-1, {_sV: _incr})),
-)
-
-END_DATE_TYPE: StaticSchema = (
-    14,
-    n0,
-    _EDT,
-    0,
-    (_unl, _li),
-    ((-1, {_sV: _unl}), (-1, {_sV: _li})),
-)
-
-INSTANCE_MATCH_CRITERIA: StaticSchema = (
-    14,
-    n0,
-    _IMC,
-    0,
-    (_op, _ta),
-    ((-1, {_sV: _op}), (-1, {_sV: _ta})),
-)
-
-CAPACITY_RESERVATION_INSTANCE_PLATFORM: StaticSchema = (
-    14,
-    n0,
-    _CRIP,
-    0,
-    (
-        _LU,
-        _RHEL,
-        _SL_,
-        _WINDOWS,
-        _WWSS,
-        _WWSSE,
-        _WWSSS,
-        _WWSSW,
-        _LWSSS,
-        _LWSSW,
-        _LWSSE,
-        _RWSSS,
-        _RWSSE,
-        _RWSSW,
-        _RWH,
-        _RWHASSS,
-        _RWHASSE,
-        _UPL,
-    ),
-    (
-        (-1, {_sV: _LUNIX}),
-        (-1, {_sV: _RHEL_}),
-        (-1, {_sV: _SL__}),
-        (-1, {_sV: _W}),
-        (-1, {_sV: _WwSS}),
-        (-1, {_sV: _WwSSE}),
-        (-1, {_sV: _WwSSS}),
-        (-1, {_sV: _WwSSW}),
-        (-1, {_sV: _LwSSS}),
-        (-1, {_sV: _LwSSW}),
-        (-1, {_sV: _LwSSE}),
-        (-1, {_sV: _RwSSS}),
-        (-1, {_sV: _RwSSE}),
-        (-1, {_sV: _RwSSW}),
-        (-1, {_sV: _RwH}),
-        (-1, {_sV: _RwHaSSS}),
-        (-1, {_sV: _RwHaSSE}),
-        (-1, {_sV: _UP_}),
-    ),
-)
-
-OUTPOST_ARN: StaticSchema = (3, n0, _OA, 0)
-
-PLACEMENT_GROUP_ARN: StaticSchema = (3, n0, _PGA, 0)
-
-CREATE_CAPACITY_RESERVATION_INPUT: StaticSchema = (
-    18,
-    n0,
-    _CCRIr,
-    {_sSI: _cCCRRom, _sm: None},
-    (
-        _CTl,
-        _IT,
-        _IPns,
-        _AZ,
-        _AZI,
-        _Ten,
-        _IC,
-        _EO,
-        _ESp,
-        _ED,
-        _EDT,
-        _IMC,
-        _TSa,
-        _DR,
-        _OA,
-        _PGA,
-        _SDt,
-        _CDo,
-        _DPel,
-    ),
-    (
-        (lambda: schemas.STRING, 0),
-        (lambda: schemas.STRING, {_sO: None, _smi: None}),
-        (CAPACITY_RESERVATION_INSTANCE_PLATFORM, {_sO: None, _smi: None}),
-        (lambda: schemas.AVAILABILITY_ZONE_NAME, 0),
-        (lambda: schemas.AVAILABILITY_ZONE_ID, 0),
-        (lambda: schemas.CAPACITY_RESERVATION_TENANCY, 0),
-        (lambda: schemas.INTEGER, {_sO: None, _smi: None}),
-        (lambda: schemas.BOOLEAN, 0),
-        (lambda: schemas.BOOLEAN, 0),
-        (lambda: schemas.DATE_TIME, 0),
-        (END_DATE_TYPE, 0),
-        (INSTANCE_MATCH_CRITERIA, 0),
-        (lambda: schemas.TAG_SPECIFICATION_LIST, 0),
-        (lambda: schemas.BOOLEAN, 0),
-        (OUTPOST_ARN, 0),
-        (PLACEMENT_GROUP_ARN, 0),
-        (lambda: schemas.MILLISECOND_DATE_TIME, 0),
-        (CAPACITY_RESERVATION_COMMITMENT_DURATION, 0),
-        (CAPACITY_RESERVATION_DELIVERY_PREFERENCE, 0),
-    ),
-)
-
-CREATE_CAPACITY_RESERVATION_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _CCROr,
-    {_sSI: _cCCRRoma, _smit: None},
-    (_CRap,),
-    ((lambda: schemas.CAPACITY_RESERVATION, {_aQN: _CRap, _sN: _cRa}),),
-)
-
-CREATE_CAPACITY_RESERVATION: StaticOperationSchema = (
-    23,
-    n0,
-    _CCRr,
-    0,
-    CREATE_CAPACITY_RESERVATION_INPUT,
-    CREATE_CAPACITY_RESERVATION_OUTPUT,
-    (),
-)
-
-BOXED_LONG: StaticSchema = (8, n0, _BL, 0)
-
-CAPACITY_RESERVATION_ADJUSTMENT_DETAILS: StaticSchema = (
-    18,
-    n0,
-    _CRAD,
-    0,
-    (_SDt, _ED, _CED, _EDT, _CDo),
-    (
-        (lambda: schemas.MILLISECOND_DATE_TIME, {_aQN: _SDt, _sN: _sDt}),
-        (lambda: schemas.MILLISECOND_DATE_TIME, {_aQN: _ED, _sN: _eD}),
-        (lambda: schemas.MILLISECOND_DATE_TIME, {_aQN: _CED, _sN: _cED}),
-        (lambda: schemas.STRING, {_aQN: _EDT, _sN: _eDT}),
-        (BOXED_LONG, {_aQN: _CDo, _sN: _cDo}),
-    ),
-)
-
-CAPACITY_RESERVATION_ADJUSTMENT_STATUS: StaticSchema = (
-    14,
-    n0,
-    _CRAS,
-    0,
-    (_req, _ap, _re),
-    ((-1, {_sV: _req}), (-1, {_sV: _ap}), (-1, {_sV: _re})),
-)
-
-CAPACITY_ALLOCATION_METADATA_ENTRY: StaticSchema = (
-    18,
-    n0,
-    _CAME,
-    0,
-    (_Ke, _Va),
-    (
-        (lambda: schemas.STRING, {_aQN: _Ke, _sN: _ke}),
-        (lambda: schemas.STRING, {_aQN: _Va, _sN: _va}),
-    ),
-)
-
-CAPACITY_ALLOCATION_METADATA_LIST: StaticSchema = (
-    16,
-    n0,
-    _CAML,
-    0,
-    (_me,),
-    ((CAPACITY_ALLOCATION_METADATA_ENTRY, {_sN: _i}),),
-)
-
-CAPACITY_ALLOCATION: StaticSchema = (
-    18,
-    n0,
-    _CAa,
-    0,
-    (_ATl, _Cou, _AMl),
-    (
-        (ALLOCATION_TYPE, {_aQN: _ATl, _sN: _aTl}),
-        (lambda: schemas.INTEGER, {_aQN: _Cou, _sN: _cou}),
-        (CAPACITY_ALLOCATION_METADATA_LIST, {_aQN: _AML, _sN: _aML}),
-    ),
-)
-
-CAPACITY_ALLOCATIONS: StaticSchema = (
-    16,
-    n0,
-    _CAap,
-    0,
-    (_me,),
-    ((CAPACITY_ALLOCATION, {_sN: _i}),),
-)
-
-CAPACITY_BLOCK_ID: StaticSchema = (3, n0, _CBI, 0)
-
-CAPACITY_RESERVATION_COMMITMENT_INFO: StaticSchema = (
-    18,
-    n0,
-    _CRCI,
-    0,
-    (_CIC, _CED, _CDo),
-    (
-        (lambda: schemas.INTEGER, {_aQN: _CIC, _sN: _cIC}),
-        (lambda: schemas.MILLISECOND_DATE_TIME, {_aQN: _CED, _sN: _cED}),
-        (BOXED_LONG, {_aQN: _CDo, _sN: _cDo}),
-    ),
-)
-
-INTERRUPTION_TYPE: StaticSchema = (14, n0, _ITnt, 0, (_adh,), ((-1, {_sV: _adh}),))
-
-INTERRUPTIBLE_CAPACITY_RESERVATION_ALLOCATION_STATUS: StaticSchema = (
-    14,
-    n0,
-    _ICRAS,
-    0,
-    (_p, _act, _up, _canc, _cance, _fa),
-    (
-        (-1, {_sV: _p}),
-        (-1, {_sV: _act}),
-        (-1, {_sV: _up}),
-        (-1, {_sV: _canc}),
-        (-1, {_sV: _cance}),
-        (-1, {_sV: _fa}),
-    ),
-)
-
-ZERO_SIZE_PREFERENCE: StaticSchema = (
-    14,
-    n0,
-    _ZSP,
-    0,
-    (_ret, _def),
-    ((-1, {_sV: _ret}), (-1, {_sV: _def})),
-)
 
 TARGET_CAPACITY_UNIT_TYPE: StaticSchema = (
     14,
@@ -1849,15 +1806,6 @@ SNAPSHOT_LOCATION_ENUM: StaticSchema = (
     ((-1, {_sV: _regi}), (-1, {_sV: _lo})),
 )
 
-DISK_IMAGE_FORMAT: StaticSchema = (
-    14,
-    n0,
-    _DIF,
-    0,
-    (_VMDK, _RAW, _VHD),
-    ((-1, {_sV: _VMDK}), (-1, {_sV: _RAW}), (-1, {_sV: _VHD})),
-)
-
 OPERATOR_REQUEST: StaticSchema = (
     18,
     n0,
@@ -1881,92 +1829,6 @@ LAUNCH_TEMPLATE: StaticSchema = (
         (LONG, {_aQN: _DVN, _sN: _dVN}),
         (LONG, {_aQN: _LVN, _sN: _lVN}),
         (lambda: schemas.TAG_LIST, {_aQN: _TSag, _sN: _tS}),
-        (OPERATOR_RESPONSE, {_aQN: _Op, _sN: _ope}),
-    ),
-)
-
-SNAPSHOT_STATE: StaticSchema = (
-    14,
-    n0,
-    _SSn,
-    0,
-    (_p, _compl, _er, _rec, _reco),
-    (
-        (-1, {_sV: _p}),
-        (-1, {_sV: _compl}),
-        (-1, {_sV: _er}),
-        (-1, {_sV: _rec}),
-        (-1, {_sV: _reco}),
-    ),
-)
-
-STORAGE_TIER: StaticSchema = (
-    14,
-    n0,
-    _STt,
-    0,
-    (_arc, _stan),
-    ((-1, {_sV: _arc}), (-1, {_sV: _stan})),
-)
-
-VOLUME_ID_STRING_LIST: StaticSchema = (
-    16,
-    n0,
-    _VISL,
-    0,
-    (_me,),
-    ((VOLUME_ID, {_sN: _VIo}),),
-)
-
-BOOT_MODE_VALUES: StaticSchema = (
-    14,
-    n0,
-    _BMV,
-    0,
-    (_lb__, _ue, _up__),
-    ((-1, {_sV: _lb___}), (-1, {_sV: _ue}), (-1, {_sV: _up___})),
-)
-
-VIRTUALIZATION_TYPE: StaticSchema = (
-    14,
-    n0,
-    _VTi,
-    0,
-    (_hv, _para),
-    ((-1, {_sV: _hv}), (-1, {_sV: _para})),
-)
-
-ATTRIBUTE_BOOLEAN_VALUE: StaticSchema = (
-    18,
-    n0,
-    _ABV,
-    0,
-    (_Va,),
-    ((lambda: schemas.BOOLEAN, {_aQN: _Va, _sN: _va}),),
-)
-
-ARCHITECTURE_TYPE: StaticSchema = (
-    14,
-    n0,
-    _ATr,
-    0,
-    (
-        _i__________________________________________________________________________,
-        _x______________________________________________________,
-        _arm,
-        _xm____________,
-        _am______,
-    ),
-    (
-        (
-            -1,
-            {
-                _sV: _i__________________________________________________________________________
-            },
-        ),
-        (-1, {_sV: _x______________________________________________________}),
-        (-1, {_sV: _arm}),
-        (-1, {_sV: _xm____________}),
-        (-1, {_sV: _am______}),
+        (OPERATOR_RESPONSE, {_aQN: _Op, _sN: _oper}),
     ),
 )

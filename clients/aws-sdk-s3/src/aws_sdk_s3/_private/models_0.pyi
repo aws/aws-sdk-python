@@ -66,6 +66,8 @@ from ..models import (
     Tiering,
     TieringDict,
     TopicConfiguration,
+    UseSourceMultiRegionKey,
+    UseSourceMultiRegionKeyDict,
     _SerdeShape,
 )
 
@@ -294,6 +296,16 @@ class AbortMultipartUploadOutput(_SerdeShape):
     storage transfers and
     usage](https://docs.aws.amazon.com/AmazonS3/latest/userguide/RequesterPaysBuckets.html)
     in the *Amazon Simple Storage Service user guide*.
+
+    Note:
+        This functionality is not supported for directory buckets.
+    """
+    version_id: str | None = ...
+    """
+    Version ID of the object.
+
+    Returns the Version ID of the object for the aborted multipart upload,
+    if bucket versioning is enabled.
 
     Note:
         This functionality is not supported for directory buckets.
@@ -6061,6 +6073,16 @@ class CreateMultipartUploadOutput(_SerdeShape):
     integrity in the Amazon S3 User
     Guide](https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html).
     """
+    version_id: str | None = ...
+    """
+    Version ID of the object.
+
+    Returns the Version ID of the object for the initiated multipart upload,
+    if bucket versioning is enabled.
+
+    Note:
+        This functionality is not supported for directory buckets.
+    """
     response_metadata: ResponseMetadata = ...
     """
     Metadata about the response that produced this output. Use this to
@@ -7467,9 +7489,10 @@ class DeleteMarkerReplication(_SerdeShape):
     Specifies whether Amazon S3 replicates delete markers. If you specify a
     `Filter` in your replication configuration, you must also include a
     `DeleteMarkerReplication` element. If your `Filter` includes a `Tag`
-    element, the `DeleteMarkerReplication` `Status` must be set to Disabled,
-    because Amazon S3 does not support replicating delete markers for
-    tag-based rules. For an example configuration, see [Basic Rule
+    element, including within a `Not` or `Or` element, the
+    `DeleteMarkerReplication` `Status` must be set to Disabled, because
+    Amazon S3 does not support replicating delete markers for tag-based
+    rules. For an example configuration, see [Basic Rule
     Configuration](https://docs.aws.amazon.com/AmazonS3/latest/dev/replication-add-config.html#replication-config-min-rule-config).
 
     For more information about delete marker replication, see [Basic Rule
@@ -8632,6 +8655,11 @@ class EncryptionConfiguration(_SerdeShape):
     KMS](https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html)
     in the *Amazon Web Services Key Management Service Developer Guide*.
     """
+    use_source_multi_region_key: UseSourceMultiRegionKey | None = ...
+    """
+    Specifies whether Amazon S3 uses the related multi-Region KMS key in the
+    destination Amazon Web Services Region to encrypt the replica.
+    """
 
 class EncryptionConfigurationDict(TypedDict, total=False):
     """Dictionary form of `EncryptionConfiguration`."""
@@ -8646,6 +8674,13 @@ class EncryptionConfigurationDict(TypedDict, total=False):
     Services
     KMS](https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html)
     in the *Amazon Web Services Key Management Service Developer Guide*.
+    """
+    use_source_multi_region_key: (
+        UseSourceMultiRegionKey | UseSourceMultiRegionKeyDict | None
+    )
+    """
+    Specifies whether Amazon S3 uses the related multi-Region KMS key in the
+    destination Amazon Web Services Region to encrypt the replica.
     """
 
 class EncryptionType(UnknownEnumMixin, StrEnum):
@@ -8710,8 +8745,6 @@ class Error(_SerdeShape):
 
       - *HTTP Status Code:* 403 Forbidden
 
-      - *SOAP Fault Code Prefix:* Client
-
     - - *Code:* AccountProblem
 
       - *Description:* There is a problem with your Amazon Web Services
@@ -8719,8 +8752,6 @@ class Error(_SerdeShape):
         Contact Amazon Web Services Support for further assistance.
 
       - *HTTP Status Code:* 403 Forbidden
-
-      - *SOAP Fault Code Prefix:* Client
 
     - - *Code:* AllAccessDisabled
 
@@ -8730,16 +8761,12 @@ class Error(_SerdeShape):
 
       - *HTTP Status Code:* 403 Forbidden
 
-      - *SOAP Fault Code Prefix:* Client
-
     - - *Code:* AmbiguousGrantByEmailAddress
 
       - *Description:* The email address you provided is associated with
         more than one account.
 
       - *HTTP Status Code:* 400 Bad Request
-
-      - *SOAP Fault Code Prefix:* Client
 
     - - *Code:* AuthorizationHeaderMalformed
 
@@ -8756,8 +8783,6 @@ class Error(_SerdeShape):
 
       - *HTTP Status Code:* 400 Bad Request
 
-      - *SOAP Fault Code Prefix:* Client
-
     - - *Code:* BucketAlreadyExists
 
       - *Description:* The requested bucket name is not available. The
@@ -8765,8 +8790,6 @@ class Error(_SerdeShape):
         a different name and try again.
 
       - *HTTP Status Code:* 409 Conflict
-
-      - *SOAP Fault Code Prefix:* Client
 
     - - *Code:* BucketAlreadyOwnedByYou
 
@@ -8780,23 +8803,17 @@ class Error(_SerdeShape):
       - *Code:* 409 Conflict (in all Regions except the North Virginia
         Region)
 
-      - *SOAP Fault Code Prefix:* Client
-
     - - *Code:* BucketNotEmpty
 
       - *Description:* The bucket you tried to delete is not empty.
 
       - *HTTP Status Code:* 409 Conflict
 
-      - *SOAP Fault Code Prefix:* Client
-
     - - *Code:* CredentialsNotSupported
 
       - *Description:* This request does not support credentials.
 
       - *HTTP Status Code:* 400 Bad Request
-
-      - *SOAP Fault Code Prefix:* Client
 
     - - *Code:* CrossLocationLoggingProhibited
 
@@ -8806,16 +8823,12 @@ class Error(_SerdeShape):
 
       - *HTTP Status Code:* 403 Forbidden
 
-      - *SOAP Fault Code Prefix:* Client
-
     - - *Code:* EntityTooSmall
 
       - *Description:* Your proposed upload is smaller than the minimum
         allowed object size.
 
       - *HTTP Status Code:* 400 Bad Request
-
-      - *SOAP Fault Code Prefix:* Client
 
     - - *Code:* EntityTooLarge
 
@@ -8824,15 +8837,11 @@ class Error(_SerdeShape):
 
       - *HTTP Status Code:* 400 Bad Request
 
-      - *SOAP Fault Code Prefix:* Client
-
     - - *Code:* ExpiredToken
 
       - *Description:* The provided token has expired.
 
       - *HTTP Status Code:* 400 Bad Request
-
-      - *SOAP Fault Code Prefix:* Client
 
     - - *Code:* IllegalVersioningConfigurationException
 
@@ -8841,8 +8850,6 @@ class Error(_SerdeShape):
 
       - *HTTP Status Code:* 400 Bad Request
 
-      - *SOAP Fault Code Prefix:* Client
-
     - - *Code:* IncompleteBody
 
       - *Description:* You did not provide the number of bytes specified by
@@ -8850,15 +8857,11 @@ class Error(_SerdeShape):
 
       - *HTTP Status Code:* 400 Bad Request
 
-      - *SOAP Fault Code Prefix:* Client
-
     - - *Code:* IncorrectNumberOfFilesInPostRequest
 
       - *Description:* POST requires exactly one file upload per request.
 
       - *HTTP Status Code:* 400 Bad Request
-
-      - *SOAP Fault Code Prefix:* Client
 
     - - *Code:* InlineDataTooLarge
 
@@ -8866,15 +8869,11 @@ class Error(_SerdeShape):
 
       - *HTTP Status Code:* 400 Bad Request
 
-      - *SOAP Fault Code Prefix:* Client
-
     - - *Code:* InternalError
 
       - *Description:* We encountered an internal error. Please try again.
 
       - *HTTP Status Code:* 500 Internal Server Error
-
-      - *SOAP Fault Code Prefix:* Server
 
     - - *Code:* InvalidAccessKeyId
 
@@ -8883,15 +8882,11 @@ class Error(_SerdeShape):
 
       - *HTTP Status Code:* 403 Forbidden
 
-      - *SOAP Fault Code Prefix:* Client
-
     - - *Code:* InvalidAddressingHeader
 
       - *Description:* You must specify the Anonymous role.
 
       - *HTTP Status Code:* N/A
-
-      - *SOAP Fault Code Prefix:* Client
 
     - - *Code:* InvalidArgument
 
@@ -8899,15 +8894,11 @@ class Error(_SerdeShape):
 
       - *HTTP Status Code:* 400 Bad Request
 
-      - *SOAP Fault Code Prefix:* Client
-
     - - *Code:* InvalidBucketName
 
       - *Description:* The specified bucket is not valid.
 
       - *HTTP Status Code:* 400 Bad Request
-
-      - *SOAP Fault Code Prefix:* Client
 
     - - *Code:* InvalidBucketState
 
@@ -8916,15 +8907,11 @@ class Error(_SerdeShape):
 
       - *HTTP Status Code:* 409 Conflict
 
-      - *SOAP Fault Code Prefix:* Client
-
     - - *Code:* InvalidDigest
 
       - *Description:* The Content-MD5 you specified is not valid.
 
       - *HTTP Status Code:* 400 Bad Request
-
-      - *SOAP Fault Code Prefix:* Client
 
     - - *Code:* InvalidEncryptionAlgorithmError
 
@@ -8932,8 +8919,6 @@ class Error(_SerdeShape):
         The valid value is AES256.
 
       - *HTTP Status Code:* 400 Bad Request
-
-      - *SOAP Fault Code Prefix:* Client
 
     - - *Code:* InvalidLocationConstraint
 
@@ -8943,16 +8928,12 @@ class Error(_SerdeShape):
 
       - *HTTP Status Code:* 400 Bad Request
 
-      - *SOAP Fault Code Prefix:* Client
-
     - - *Code:* InvalidObjectState
 
       - *Description:* The action is not valid for the current state of the
         object.
 
       - *HTTP Status Code:* 403 Forbidden
-
-      - *SOAP Fault Code Prefix:* Client
 
     - - *Code:* InvalidPart
 
@@ -8962,16 +8943,12 @@ class Error(_SerdeShape):
 
       - *HTTP Status Code:* 400 Bad Request
 
-      - *SOAP Fault Code Prefix:* Client
-
     - - *Code:* InvalidPartOrder
 
       - *Description:* The list of parts was not in ascending order. Parts
         list must be specified in order by part number.
 
       - *HTTP Status Code:* 400 Bad Request
-
-      - *SOAP Fault Code Prefix:* Client
 
     - - *Code:* InvalidPayer
 
@@ -8980,8 +8957,6 @@ class Error(_SerdeShape):
 
       - *HTTP Status Code:* 403 Forbidden
 
-      - *SOAP Fault Code Prefix:* Client
-
     - - *Code:* InvalidPolicyDocument
 
       - *Description:* The content of the form does not meet the conditions
@@ -8989,15 +8964,11 @@ class Error(_SerdeShape):
 
       - *HTTP Status Code:* 400 Bad Request
 
-      - *SOAP Fault Code Prefix:* Client
-
     - - *Code:* InvalidRange
 
       - *Description:* The requested range cannot be satisfied.
 
       - *HTTP Status Code:* 416 Requested Range Not Satisfiable
-
-      - *SOAP Fault Code Prefix:* Client
 
     - - *Code:* InvalidRequest
 
@@ -9006,14 +8977,6 @@ class Error(_SerdeShape):
       - *HTTP Status Code:* 400 Bad Request
 
       - *Code:* N/A
-
-    - - *Code:* InvalidRequest
-
-      - *Description:* SOAP requests must be made over an HTTPS connection.
-
-      - *HTTP Status Code:* 400 Bad Request
-
-      - *SOAP Fault Code Prefix:* Client
 
     - - *Code:* InvalidRequest
 
@@ -9086,23 +9049,11 @@ class Error(_SerdeShape):
 
       - *HTTP Status Code:* 403 Forbidden
 
-      - *SOAP Fault Code Prefix:* Client
-
-    - - *Code:* InvalidSOAPRequest
-
-      - *Description:* The SOAP request body is invalid.
-
-      - *HTTP Status Code:* 400 Bad Request
-
-      - *SOAP Fault Code Prefix:* Client
-
     - - *Code:* InvalidStorageClass
 
       - *Description:* The storage class you specified is not valid.
 
       - *HTTP Status Code:* 400 Bad Request
-
-      - *SOAP Fault Code Prefix:* Client
 
     - - *Code:* InvalidTargetBucketForLogging
 
@@ -9112,15 +9063,11 @@ class Error(_SerdeShape):
 
       - *HTTP Status Code:* 400 Bad Request
 
-      - *SOAP Fault Code Prefix:* Client
-
     - - *Code:* InvalidToken
 
       - *Description:* The provided token is malformed or otherwise invalid.
 
       - *HTTP Status Code:* 400 Bad Request
-
-      - *SOAP Fault Code Prefix:* Client
 
     - - *Code:* InvalidURI
 
@@ -9128,15 +9075,11 @@ class Error(_SerdeShape):
 
       - *HTTP Status Code:* 400 Bad Request
 
-      - *SOAP Fault Code Prefix:* Client
-
     - - *Code:* KeyTooLongError
 
       - *Description:* Your key is too long.
 
       - *HTTP Status Code:* 400 Bad Request
-
-      - *SOAP Fault Code Prefix:* Client
 
     - - *Code:* MalformedACLError
 
@@ -9145,16 +9088,12 @@ class Error(_SerdeShape):
 
       - *HTTP Status Code:* 400 Bad Request
 
-      - *SOAP Fault Code Prefix:* Client
-
     - - *Code:* MalformedPOSTRequest
 
       - *Description:* The body of your POST request is not well-formed
         multipart/form-data.
 
       - *HTTP Status Code:* 400 Bad Request
-
-      - *SOAP Fault Code Prefix:* Client
 
     - - *Code:* MalformedXML
 
@@ -9165,15 +9104,11 @@ class Error(_SerdeShape):
 
       - *HTTP Status Code:* 400 Bad Request
 
-      - *SOAP Fault Code Prefix:* Client
-
     - - *Code:* MaxMessageLengthExceeded
 
       - *Description:* Your request was too big.
 
       - *HTTP Status Code:* 400 Bad Request
-
-      - *SOAP Fault Code Prefix:* Client
 
     - - *Code:* MaxPostPreDataLengthExceededError
 
@@ -9182,16 +9117,12 @@ class Error(_SerdeShape):
 
       - *HTTP Status Code:* 400 Bad Request
 
-      - *SOAP Fault Code Prefix:* Client
-
     - - *Code:* MetadataTooLarge
 
       - *Description:* Your metadata headers exceed the maximum allowed
         metadata size.
 
       - *HTTP Status Code:* 400 Bad Request
-
-      - *SOAP Fault Code Prefix:* Client
 
     - - *Code:* MethodNotAllowed
 
@@ -9200,23 +9131,11 @@ class Error(_SerdeShape):
 
       - *HTTP Status Code:* 405 Method Not Allowed
 
-      - *SOAP Fault Code Prefix:* Client
-
-    - - *Code:* MissingAttachment
-
-      - *Description:* A SOAP attachment was expected, but none were found.
-
-      - *HTTP Status Code:* N/A
-
-      - *SOAP Fault Code Prefix:* Client
-
     - - *Code:* MissingContentLength
 
       - *Description:* You must provide the Content-Length HTTP header.
 
       - *HTTP Status Code:* 411 Length Required
-
-      - *SOAP Fault Code Prefix:* Client
 
     - - *Code:* MissingRequestBodyError
 
@@ -9226,23 +9145,11 @@ class Error(_SerdeShape):
 
       - *HTTP Status Code:* 400 Bad Request
 
-      - *SOAP Fault Code Prefix:* Client
-
-    - - *Code:* MissingSecurityElement
-
-      - *Description:* The SOAP 1.1 request is missing a security element.
-
-      - *HTTP Status Code:* 400 Bad Request
-
-      - *SOAP Fault Code Prefix:* Client
-
     - - *Code:* MissingSecurityHeader
 
       - *Description:* Your request is missing a required header.
 
       - *HTTP Status Code:* 400 Bad Request
-
-      - *SOAP Fault Code Prefix:* Client
 
     - - *Code:* NoLoggingStatusForKey
 
@@ -9251,15 +9158,11 @@ class Error(_SerdeShape):
 
       - *HTTP Status Code:* 400 Bad Request
 
-      - *SOAP Fault Code Prefix:* Client
-
     - - *Code:* NoSuchBucket
 
       - *Description:* The specified bucket does not exist.
 
       - *HTTP Status Code:* 404 Not Found
-
-      - *SOAP Fault Code Prefix:* Client
 
     - - *Code:* NoSuchBucketPolicy
 
@@ -9267,23 +9170,17 @@ class Error(_SerdeShape):
 
       - *HTTP Status Code:* 404 Not Found
 
-      - *SOAP Fault Code Prefix:* Client
-
     - - *Code:* NoSuchKey
 
       - *Description:* The specified key does not exist.
 
       - *HTTP Status Code:* 404 Not Found
 
-      - *SOAP Fault Code Prefix:* Client
-
     - - *Code:* NoSuchLifecycleConfiguration
 
       - *Description:* The lifecycle configuration does not exist.
 
       - *HTTP Status Code:* 404 Not Found
-
-      - *SOAP Fault Code Prefix:* Client
 
     - - *Code:* NoSuchUpload
 
@@ -9293,8 +9190,6 @@ class Error(_SerdeShape):
 
       - *HTTP Status Code:* 404 Not Found
 
-      - *SOAP Fault Code Prefix:* Client
-
     - - *Code:* NoSuchVersion
 
       - *Description:* Indicates that the version ID specified in the
@@ -9302,16 +9197,12 @@ class Error(_SerdeShape):
 
       - *HTTP Status Code:* 404 Not Found
 
-      - *SOAP Fault Code Prefix:* Client
-
     - - *Code:* NotImplemented
 
       - *Description:* A header you provided implies functionality that is
         not implemented.
 
       - *HTTP Status Code:* 501 Not Implemented
-
-      - *SOAP Fault Code Prefix:* Server
 
     - - *Code:* NotSignedUp
 
@@ -9321,16 +9212,12 @@ class Error(_SerdeShape):
 
       - *HTTP Status Code:* 403 Forbidden
 
-      - *SOAP Fault Code Prefix:* Client
-
     - - *Code:* OperationAborted
 
       - *Description:* A conflicting conditional action is currently in
         progress against this resource. Try again.
 
       - *HTTP Status Code:* 409 Conflict
-
-      - *SOAP Fault Code Prefix:* Client
 
     - - *Code:* PermanentRedirect
 
@@ -9340,8 +9227,6 @@ class Error(_SerdeShape):
 
       - *HTTP Status Code:* 301 Moved Permanently
 
-      - *SOAP Fault Code Prefix:* Client
-
     - - *Code:* PreconditionFailed
 
       - *Description:* At least one of the preconditions you specified did
@@ -9349,23 +9234,17 @@ class Error(_SerdeShape):
 
       - *HTTP Status Code:* 412 Precondition Failed
 
-      - *SOAP Fault Code Prefix:* Client
-
     - - *Code:* Redirect
 
       - *Description:* Temporary redirect.
 
       - *HTTP Status Code:* 307 Moved Temporarily
 
-      - *SOAP Fault Code Prefix:* Client
-
     - - *Code:* RestoreAlreadyInProgress
 
       - *Description:* Object restore is already in progress.
 
       - *HTTP Status Code:* 409 Conflict
-
-      - *SOAP Fault Code Prefix:* Client
 
     - - *Code:* RequestIsNotMultiPartContent
 
@@ -9374,16 +9253,12 @@ class Error(_SerdeShape):
 
       - *HTTP Status Code:* 400 Bad Request
 
-      - *SOAP Fault Code Prefix:* Client
-
     - - *Code:* RequestTimeout
 
       - *Description:* Your socket connection to the server was not read
         from or written to within the timeout period.
 
       - *HTTP Status Code:* 400 Bad Request
-
-      - *SOAP Fault Code Prefix:* Client
 
     - - *Code:* RequestTimeTooSkewed
 
@@ -9392,8 +9267,6 @@ class Error(_SerdeShape):
 
       - *HTTP Status Code:* 403 Forbidden
 
-      - *SOAP Fault Code Prefix:* Client
-
     - - *Code:* RequestTorrentOfBucketError
 
       - *Description:* Requesting the torrent file of a bucket is not
@@ -9401,21 +9274,15 @@ class Error(_SerdeShape):
 
       - *HTTP Status Code:* 400 Bad Request
 
-      - *SOAP Fault Code Prefix:* Client
-
     - - *Code:* SignatureDoesNotMatch
 
       - *Description:* The request signature we calculated does not match
         the signature you provided. Check your Amazon Web Services secret
         access key and signing method. For more information, see [REST
         Authentication](https://docs.aws.amazon.com/AmazonS3/latest/dev/RESTAuthentication.html)
-        and [SOAP
-        Authentication](https://docs.aws.amazon.com/AmazonS3/latest/dev/SOAPAuthentication.html)
         for details.
 
       - *HTTP Status Code:* 403 Forbidden
-
-      - *SOAP Fault Code Prefix:* Client
 
     - - *Code:* ServiceUnavailable
 
@@ -9423,15 +9290,11 @@ class Error(_SerdeShape):
 
       - *HTTP Status Code:* 503 Service Unavailable
 
-      - *SOAP Fault Code Prefix:* Server
-
     - - *Code:* SlowDown
 
       - *Description:* Reduce your request rate.
 
       - *HTTP Status Code:* 503 Slow Down
-
-      - *SOAP Fault Code Prefix:* Server
 
     - - *Code:* TemporaryRedirect
 
@@ -9440,15 +9303,11 @@ class Error(_SerdeShape):
 
       - *HTTP Status Code:* 307 Moved Temporarily
 
-      - *SOAP Fault Code Prefix:* Client
-
     - - *Code:* TokenRefreshRequired
 
       - *Description:* The provided token must be refreshed.
 
       - *HTTP Status Code:* 400 Bad Request
-
-      - *SOAP Fault Code Prefix:* Client
 
     - - *Code:* TooManyBuckets
 
@@ -9457,15 +9316,11 @@ class Error(_SerdeShape):
 
       - *HTTP Status Code:* 400 Bad Request
 
-      - *SOAP Fault Code Prefix:* Client
-
     - - *Code:* UnexpectedContent
 
       - *Description:* This request does not support content.
 
       - *HTTP Status Code:* 400 Bad Request
-
-      - *SOAP Fault Code Prefix:* Client
 
     - - *Code:* UnresolvableGrantByEmailAddress
 
@@ -9474,16 +9329,12 @@ class Error(_SerdeShape):
 
       - *HTTP Status Code:* 400 Bad Request
 
-      - *SOAP Fault Code Prefix:* Client
-
     - - *Code:* UserKeyMustBeSpecified
 
       - *Description:* The bucket POST must contain the specified field
         name. If it is specified, check the order of the fields.
 
       - *HTTP Status Code:* 400 Bad Request
-
-      - *SOAP Fault Code Prefix:* Client
     """
     message: str | None = ...
     """

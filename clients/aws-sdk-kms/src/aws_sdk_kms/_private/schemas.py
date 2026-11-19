@@ -100,6 +100,7 @@ _PARTITION_NAMES: tuple[tuple[str, ...], ...] = (
         "POLICY_TYPE",
         "INVALID_MARKER_EXCEPTION",
         "POLICY_NAME_TYPE",
+        "INVALID_GRANT_ID_EXCEPTION",
     ),
     (
         "KEY_SPEC",
@@ -258,7 +259,6 @@ _PARTITION_NAMES: tuple[tuple[str, ...], ...] = (
         "INCLUDE_KEY_MATERIAL",
     ),
     (
-        "INVALID_GRANT_ID_EXCEPTION",
         "KEY_LIST_ENTRY",
         "KEY_LIST",
         "KEY_MATERIAL_STATE",
@@ -280,6 +280,8 @@ _PARTITION_NAMES: tuple[tuple[str, ...], ...] = (
         "ROTATION_TYPE",
         "ROTATIONS_LIST_ENTRY",
         "ROTATIONS_LIST",
+        "RESOURCE_OWNER_TYPE",
+        "RESOURCE_OWNERS_LIST",
         "LIST_KEYS_INPUT",
         "LIST_KEYS_OUTPUT",
         "LIST_KEYS",

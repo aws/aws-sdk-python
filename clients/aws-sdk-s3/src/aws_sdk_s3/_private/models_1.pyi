@@ -2851,6 +2851,16 @@ class ListPartsOutput(_SerdeShape):
     object integrity in the Amazon S3 User
     Guide](https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html).
     """
+    version_id: str | None = ...
+    """
+    Version ID of the object.
+
+    Returns the Version ID of the object for the listed parts, if bucket
+    versioning is enabled.
+
+    Note:
+        This functionality is not supported for directory buckets.
+    """
     response_metadata: ResponseMetadata = ...
     """
     Metadata about the response that produced this output. Use this to
@@ -3402,6 +3412,16 @@ class MultipartUpload(_SerdeShape):
     For more information, see [Checking object
     integrity](https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html)
     in the *Amazon S3 User Guide*.
+    """
+    version_id: str | None = ...
+    """
+    Version ID of the object.
+
+    Returns the Version ID of the object for the multipart upload, if bucket
+    versioning is enabled.
+
+    Note:
+        This functionality is not supported for directory buckets.
     """
 
 @dataclass(kw_only=True)
@@ -10732,8 +10752,8 @@ class ReplicationRule(_SerdeShape):
     filter: ReplicationRuleFilter | None = ...
     """
     A filter that identifies the subset of objects to which the replication
-    rule applies. A `Filter` must specify exactly one `Prefix`, `Tag`, or an
-    `And` child element.
+    rule applies. A `Filter` must specify exactly one `Prefix`, `Tag`,
+    `And`, or `Not` child element.
     """
     status: str
     """Specifies whether the rule is enabled."""
@@ -10767,9 +10787,10 @@ class ReplicationRule(_SerdeShape):
     Specifies whether Amazon S3 replicates delete markers. If you specify a
     `Filter` in your replication configuration, you must also include a
     `DeleteMarkerReplication` element. If your `Filter` includes a `Tag`
-    element, the `DeleteMarkerReplication` `Status` must be set to Disabled,
-    because Amazon S3 does not support replicating delete markers for
-    tag-based rules. For an example configuration, see [Basic Rule
+    element, including within a `Not` or `Or` element, the
+    `DeleteMarkerReplication` `Status` must be set to Disabled, because
+    Amazon S3 does not support replicating delete markers for tag-based
+    rules. For an example configuration, see [Basic Rule
     Configuration](https://docs.aws.amazon.com/AmazonS3/latest/dev/replication-add-config.html#replication-config-min-rule-config).
 
     For more information about delete marker replication, see [Basic Rule
@@ -10815,8 +10836,8 @@ class ReplicationRuleDict(TypedDict, total=False):
     filter: ReplicationRuleFilter | ReplicationRuleFilterDict | None
     """
     A filter that identifies the subset of objects to which the replication
-    rule applies. A `Filter` must specify exactly one `Prefix`, `Tag`, or an
-    `And` child element.
+    rule applies. A `Filter` must specify exactly one `Prefix`, `Tag`,
+    `And`, or `Not` child element.
     """
     status: Required[str]
     """Specifies whether the rule is enabled."""
@@ -10856,9 +10877,10 @@ class ReplicationRuleDict(TypedDict, total=False):
     Specifies whether Amazon S3 replicates delete markers. If you specify a
     `Filter` in your replication configuration, you must also include a
     `DeleteMarkerReplication` element. If your `Filter` includes a `Tag`
-    element, the `DeleteMarkerReplication` `Status` must be set to Disabled,
-    because Amazon S3 does not support replicating delete markers for
-    tag-based rules. For an example configuration, see [Basic Rule
+    element, including within a `Not` or `Or` element, the
+    `DeleteMarkerReplication` `Status` must be set to Disabled, because
+    Amazon S3 does not support replicating delete markers for tag-based
+    rules. For an example configuration, see [Basic Rule
     Configuration](https://docs.aws.amazon.com/AmazonS3/latest/dev/replication-add-config.html#replication-config-min-rule-config).
 
     For more information about delete marker replication, see [Basic Rule
@@ -10894,6 +10916,11 @@ class ReplicationRuleAndOperator(_SerdeShape):
     """
     tags: list[Tag] | None = ...
     """An array of tags containing key and value pairs."""
+    not_: ReplicationRuleNotOperator | None = ...
+    """
+    A container for specifying filters that exclude matching objects from
+    the replication rule.
+    """
 
 class ReplicationRuleAndOperatorDict(TypedDict, total=False):
     """Dictionary form of `ReplicationRuleAndOperator`."""
@@ -10905,13 +10932,18 @@ class ReplicationRuleAndOperatorDict(TypedDict, total=False):
     """
     tags: Sequence[Tag | TagDict] | None
     """An array of tags containing key and value pairs."""
+    not_: ReplicationRuleNotOperator | ReplicationRuleNotOperatorDict | None
+    """
+    A container for specifying filters that exclude matching objects from
+    the replication rule.
+    """
 
 @dataclass(kw_only=True)
 class ReplicationRuleFilter(_SerdeShape):
     """
     A filter that identifies the subset of objects to which the replication
-    rule applies. A `Filter` must specify exactly one `Prefix`, `Tag`, or an
-    `And` child element.
+    rule applies. A `Filter` must specify exactly one `Prefix`, `Tag`,
+    `And`, or `Not` child element.
     """
 
     prefix: str | None = ...
@@ -10942,6 +10974,11 @@ class ReplicationRuleFilter(_SerdeShape):
 
     - If you specify a filter based on multiple tags, wrap the `Tag`
       elements in an `And` tag.
+    """
+    not_: ReplicationRuleNotOperator | None = ...
+    """
+    A container for specifying filters that exclude matching objects from
+    the replication rule.
     """
 
 class ReplicationRuleFilterDict(TypedDict, total=False):
@@ -10976,6 +11013,71 @@ class ReplicationRuleFilterDict(TypedDict, total=False):
     - If you specify a filter based on multiple tags, wrap the `Tag`
       elements in an `And` tag.
     """
+    not_: ReplicationRuleNotOperator | ReplicationRuleNotOperatorDict | None
+    """
+    A container for specifying filters that exclude matching objects from
+    the replication rule.
+    """
+
+@dataclass(kw_only=True)
+class ReplicationRuleNotOperator(_SerdeShape):
+    """
+    A container for specifying a filter that excludes matching objects from
+    the replication rule. Specify exactly one `Prefix`, `Tag`, or `Or` child
+    element.
+    """
+
+    prefix: str | None = ...
+    """
+    An object key name prefix that identifies objects to exclude from the
+    replication rule.
+    """
+    tag: Tag | None = ...
+    """
+    A tag key and value that identify objects to exclude from the
+    replication rule.
+    """
+    or_: ReplicationRuleOrOperator | None = ...
+    """
+    A container for specifying prefixes and tags. An object is excluded from
+    the replication rule if it matches any of the specified filters.
+    """
+
+class ReplicationRuleNotOperatorDict(TypedDict, total=False):
+    """Dictionary form of `ReplicationRuleNotOperator`."""
+
+    prefix: str | None
+    """
+    An object key name prefix that identifies objects to exclude from the
+    replication rule.
+    """
+    tag: Tag | TagDict | None
+    """
+    A tag key and value that identify objects to exclude from the
+    replication rule.
+    """
+    or_: ReplicationRuleOrOperator | ReplicationRuleOrOperatorDict | None
+    """
+    A container for specifying prefixes and tags. An object is excluded from
+    the replication rule if it matches any of the specified filters.
+    """
+
+@dataclass(kw_only=True)
+class ReplicationRuleOrOperator(_SerdeShape):
+    """A container for specifying one or more prefix or tag filters."""
+
+    prefixes: list[str] | None = ...
+    """An array of object key name prefixes."""
+    tags: list[Tag] | None = ...
+    """An array of tags containing key and value pairs."""
+
+class ReplicationRuleOrOperatorDict(TypedDict, total=False):
+    """Dictionary form of `ReplicationRuleOrOperator`."""
+
+    prefixes: Sequence[str] | None
+    """An array of object key name prefixes."""
+    tags: Sequence[Tag | TagDict] | None
+    """An array of tags containing key and value pairs."""
 
 class ReplicationRuleStatus(UnknownEnumMixin, StrEnum):
     ENABLED = "Enabled"
@@ -13848,6 +13950,16 @@ class UploadPartCopyOutput(_SerdeShape):
     Note:
         This functionality is not supported for directory buckets.
     """
+    version_id: str | None = ...
+    """
+    Version ID of the object.
+
+    Returns the Version ID of the object for the copied part, if bucket
+    versioning is enabled.
+
+    Note:
+        This functionality is not supported for directory buckets.
+    """
     response_metadata: ResponseMetadata = ...
     """
     Metadata about the response that produced this output. Use this to
@@ -14686,6 +14798,16 @@ class UploadPartOutput(_SerdeShape):
     Note:
         This functionality is not supported for directory buckets.
     """
+    version_id: str | None = ...
+    """
+    Version ID of the object.
+
+    Returns the Version ID of the object for the uploaded part, if bucket
+    versioning is enabled.
+
+    Note:
+        This functionality is not supported for directory buckets.
+    """
     response_metadata: ResponseMetadata = ...
     """
     Metadata about the response that produced this output. Use this to
@@ -14693,6 +14815,32 @@ class UploadPartOutput(_SerdeShape):
     to investigate a call. Members of the metadata are individually
     optional.
     """
+
+@dataclass(kw_only=True)
+class UseSourceMultiRegionKey(_SerdeShape):
+    """
+    A container for configuring the use of the related multi-Region KMS key
+    in the destination Amazon Web Services Region for replication.
+    """
+
+    status: str
+    """
+    Specifies whether Amazon S3 uses the related multi-Region KMS key in the
+    destination Amazon Web Services Region to encrypt the replica.
+    """
+
+class UseSourceMultiRegionKeyDict(TypedDict, total=False):
+    """Dictionary form of `UseSourceMultiRegionKey`."""
+
+    status: Required[str]
+    """
+    Specifies whether Amazon S3 uses the related multi-Region KMS key in the
+    destination Amazon Web Services Region to encrypt the replica.
+    """
+
+class UseSourceMultiRegionKeyStatus(UnknownEnumMixin, StrEnum):
+    ENABLED = "Enabled"
+    DISABLED = "Disabled"
 
 @dataclass(kw_only=True)
 class VersioningConfiguration(_SerdeShape):

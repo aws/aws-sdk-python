@@ -540,6 +540,10 @@ from aws_sdk_s3.models import (
     ReplicationRuleDict,
     ReplicationRuleFilter,
     ReplicationRuleFilterDict,
+    ReplicationRuleNotOperator,
+    ReplicationRuleNotOperatorDict,
+    ReplicationRuleOrOperator,
+    ReplicationRuleOrOperatorDict,
     ReplicationTime,
     ReplicationTimeDict,
     ReplicationTimeValue,
@@ -627,6 +631,8 @@ from aws_sdk_s3.models import (
     UploadPartInput,
     UploadPartInputDict,
     UploadPartOutput,
+    UseSourceMultiRegionKey,
+    UseSourceMultiRegionKeyDict,
     VersioningConfiguration,
     VersioningConfigurationDict,
     WebsiteConfiguration,
@@ -978,6 +984,8 @@ ReplicationConfiguration(role=_, rules=_)
 ReplicationRule(status=_, destination=_)
 ReplicationRuleAndOperator()
 ReplicationRuleFilter()
+ReplicationRuleNotOperator()
+ReplicationRuleOrOperator()
 ReplicationTime(status=_, time=_)
 ReplicationTimeValue()
 RequestPaymentConfiguration(payer=_)
@@ -1032,6 +1040,7 @@ UploadPartCopyInput()
 UploadPartCopyOutput()
 UploadPartInput()
 UploadPartOutput()
+UseSourceMultiRegionKey(status=_)
 VersioningConfiguration()
 WebsiteConfiguration()
 WriteGetObjectResponseInput()
@@ -1301,18 +1310,20 @@ _params_196: ReplicationConfigurationDict = {"role": _, "rules": _}
 _params_197: ReplicationRuleDict = {"status": _, "destination": _}
 _params_198: ReplicationRuleAndOperatorDict = {}
 _params_199: ReplicationRuleFilterDict = {}
-_params_200: ReplicationTimeDict = {"status": _, "time": _}
-_params_201: ReplicationTimeValueDict = {}
-_params_202: RequestPaymentConfigurationDict = {"payer": _}
-_params_203: RequestProgressDict = {}
-_params_204: RestoreObjectInputDict = {"bucket": _, "key": _}
-_params_205: RestoreRequestDict = {}
-_params_206: RoutingRuleDict = {"redirect": _}
-_params_207: S3KeyFilterDict = {}
-_params_208: S3LocationDict = {"bucket_name": _, "prefix": _}
-_params_209: S3TablesDestinationDict = {"table_bucket_arn": _, "table_name": _}
-_params_210: ScanRangeDict = {}
-_params_211: SelectObjectContentInputDict = {
+_params_200: ReplicationRuleNotOperatorDict = {}
+_params_201: ReplicationRuleOrOperatorDict = {}
+_params_202: ReplicationTimeDict = {"status": _, "time": _}
+_params_203: ReplicationTimeValueDict = {}
+_params_204: RequestPaymentConfigurationDict = {"payer": _}
+_params_205: RequestProgressDict = {}
+_params_206: RestoreObjectInputDict = {"bucket": _, "key": _}
+_params_207: RestoreRequestDict = {}
+_params_208: RoutingRuleDict = {"redirect": _}
+_params_209: S3KeyFilterDict = {}
+_params_210: S3LocationDict = {"bucket_name": _, "prefix": _}
+_params_211: S3TablesDestinationDict = {"table_bucket_arn": _, "table_name": _}
+_params_212: ScanRangeDict = {}
+_params_213: SelectObjectContentInputDict = {
     "bucket": _,
     "key": _,
     "expression": _,
@@ -1320,66 +1331,67 @@ _params_211: SelectObjectContentInputDict = {
     "input_serialization": _,
     "output_serialization": _,
 }
-_params_212: SelectParametersDict = {
+_params_214: SelectParametersDict = {
     "input_serialization": _,
     "expression_type": _,
     "expression": _,
     "output_serialization": _,
 }
-_params_213: ServerSideEncryptionByDefaultDict = {"sse_algorithm": _}
-_params_214: ServerSideEncryptionConfigurationDict = {"rules": _}
-_params_215: ServerSideEncryptionRuleDict = {}
-_params_216: SimplePrefixDict = {}
-_params_217: SourceSelectionCriteriaDict = {}
-_params_218: SSEKMSDict = {"key_id": _}
-_params_219: SseKmsEncryptedObjectsDict = {"status": _}
-_params_220: SSEKMSEncryptionDict = {"kms_key_arn": _}
-_params_221: SSES3Dict = {}
-_params_222: StorageClassAnalysisDict = {}
-_params_223: StorageClassAnalysisDataExportDict = {
+_params_215: ServerSideEncryptionByDefaultDict = {"sse_algorithm": _}
+_params_216: ServerSideEncryptionConfigurationDict = {"rules": _}
+_params_217: ServerSideEncryptionRuleDict = {}
+_params_218: SimplePrefixDict = {}
+_params_219: SourceSelectionCriteriaDict = {}
+_params_220: SSEKMSDict = {"key_id": _}
+_params_221: SseKmsEncryptedObjectsDict = {"status": _}
+_params_222: SSEKMSEncryptionDict = {"kms_key_arn": _}
+_params_223: SSES3Dict = {}
+_params_224: StorageClassAnalysisDict = {}
+_params_225: StorageClassAnalysisDataExportDict = {
     "output_schema_version": _,
     "destination": _,
 }
-_params_224: TagDict = {"key": _, "value": _}
-_params_225: TaggingDict = {"tag_set": _}
-_params_226: TargetGrantDict = {}
-_params_227: TargetObjectKeyFormatDict = {}
-_params_228: TieringDict = {"days": _, "access_tier": _}
-_params_229: TopicConfigurationDict = {"topic_arn": _, "events": _}
-_params_230: TransitionDict = {}
-_params_231: UpdateBucketMetadataAnnotationTableConfigurationInputDict = {
+_params_226: TagDict = {"key": _, "value": _}
+_params_227: TaggingDict = {"tag_set": _}
+_params_228: TargetGrantDict = {}
+_params_229: TargetObjectKeyFormatDict = {}
+_params_230: TieringDict = {"days": _, "access_tier": _}
+_params_231: TopicConfigurationDict = {"topic_arn": _, "events": _}
+_params_232: TransitionDict = {}
+_params_233: UpdateBucketMetadataAnnotationTableConfigurationInputDict = {
     "bucket": _,
     "annotation_table_configuration": _,
 }
-_params_232: UpdateBucketMetadataInventoryTableConfigurationInputDict = {
+_params_234: UpdateBucketMetadataInventoryTableConfigurationInputDict = {
     "bucket": _,
     "inventory_table_configuration": _,
 }
-_params_233: UpdateBucketMetadataJournalTableConfigurationInputDict = {
+_params_235: UpdateBucketMetadataJournalTableConfigurationInputDict = {
     "bucket": _,
     "journal_table_configuration": _,
 }
-_params_234: UpdateObjectEncryptionInputDict = {
+_params_236: UpdateObjectEncryptionInputDict = {
     "bucket": _,
     "key": _,
     "object_encryption": _,
 }
-_params_235: UploadPartCopyInputDict = {
+_params_237: UploadPartCopyInputDict = {
     "bucket": _,
     "copy_source": _,
     "key": _,
     "part_number": _,
     "upload_id": _,
 }
-_params_236: UploadPartInputDict = {
+_params_238: UploadPartInputDict = {
     "bucket": _,
     "key": _,
     "part_number": _,
     "upload_id": _,
 }
-_params_237: VersioningConfigurationDict = {}
-_params_238: WebsiteConfigurationDict = {}
-_params_239: WriteGetObjectResponseInputDict = {"request_route": _, "request_token": _}
+_params_239: UseSourceMultiRegionKeyDict = {"status": _}
+_params_240: VersioningConfigurationDict = {}
+_params_241: WebsiteConfigurationDict = {}
+_params_242: WriteGetObjectResponseInputDict = {"request_route": _, "request_token": _}
 
 
 def _request[T](form: type[T]) -> T:

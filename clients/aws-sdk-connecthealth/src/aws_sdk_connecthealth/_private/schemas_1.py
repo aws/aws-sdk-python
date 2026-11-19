@@ -8,10 +8,6 @@ from . import schemas
 
 
 n0 = "com.amazonaws.connecthealth"
-_s = "smithy.api#error"
-_c = "client"
-_sE = "smithy.api#httpError"
-_m = "message"
 _sm = "smithy.api#input"
 _dI = "domainId"
 _smi = "smithy.api#required"
@@ -26,15 +22,116 @@ _su = "subscription"
 _smith = "smithy.api#http"
 _IP = "IN_PROGRESS"
 _FAILED = "FAILED"
+_COMPLETED = "COMPLETED"
 _smithy = "smithy.api#sensitive"
 _me = "member"
+_i = "items"
+_sOP = "s3OutputPath"
+_mC = "medicalCoding"
 _n = "name"
-_t = "tags"
+_dIa = "datasetId"
+_t = "type"
+_kKA = "kmsKeyArn"
+_ta = "tags"
+_eC = "encryptionContext"
+_wAU = "webAppUrl"
+_wAC = "webAppConfiguration"
+_MCDA = "MedicalCodingDatasetArtifacts"
+_eSU = "evaluationS3Uri"
+_DAa = "DatasetArtifacts"
+_sD = "statusDetails"
+_uA = "updatedAt"
+_GDIe = "GetDomainInput"
+_GDOe = "GetDomainOutput"
+_GDe = "GetDomain"
+_JI = "JobId"
+_GMCJI = "GetMedicalCodingJobInput"
+_sSI = "smithy.synthetic#originalShapeId"
+_cGMCJR = "com.amazonaws.connecthealth#GetMedicalCodingJobRequest"
+_jI = "jobId"
+_SIDS = "SensitiveIsoDateString"
+_SNNI = "SensitiveNonNegativeInteger"
+_SNES = "SensitiveNonEmptyString"
+_ETn = "EncounterType"
+_TELEHEALTH = "TELEHEALTH"
+_IP_ = "IN_PERSON"
+_MCEC = "MedicalCodesEncounterContext"
+_eTn = "encounterType"
+_eRn = "encounterReason"
+_aH = "afterHours"
+_eD = "encounterDate"
+_eDM = "encounterDurationMinutes"
+_MCJA = "MedicalCodingJobArn"
+_JS = "JobStatus"
+_SUBMITTED = "SUBMITTED"
+_SUCCEEDED = "SUCCEEDED"
+_MCO = "MedicalCodingOutput"
+_u = "uri"
+_MCODC = "MedicalCodingOutputDataConfig"
+_S = "Sex"
+_MALE = "MALE"
+_FEMALE = "FEMALE"
+_NB = "NON_BINARY"
+_UNKNOWN = "UNKNOWN"
+_PSa = "PatientStatus"
+_NEW = "NEW"
+_ESTABLISHED = "ESTABLISHED"
+_MCPC = "MedicalCodesPatientContext"
+_sex = "sex"
+_dOB = "dateOfBirth"
+_in = "insurance"
+_NES = "NonEmptyString"
+_GMCJO = "GetMedicalCodingJobOutput"
+_cGMCJRo = "com.amazonaws.connecthealth#GetMedicalCodingJobResponse"
+_jA = "jobArn"
+_jS = "jobStatus"
+_cTr = "creationTime"
+_sF = "smithy.api#timestampFormat"
+_dt = "date-time"
+_uT = "updatedTime"
+_te = "text"
+_pC = "patientContext"
+_eCn = "encounterContext"
+_oDC = "outputDataConfig"
+_mCO = "medicalCodingOutput"
+_GMCJ = "GetMedicalCodingJob"
+_smithya = "smithy.api#endpoint"
+_SSI = "ScribeSessionId"
+_GMSLSI = "GetMedicalScribeListeningSessionInput"
 _sIes = "sessionId"
+_MSCI = "MedicalScribeChannelId"
+_MSPR = "MedicalScribeParticipantRole"
+_PATIENT = "PATIENT"
 _CLINICIAN = "CLINICIAN"
-_cI = "channelId"
+_MSCD = "MedicalScribeChannelDefinition"
+_cIh = "channelId"
+_pR = "participantRole"
+_MSCDe = "MedicalScribeChannelDefinitions"
+_NNB = "NonNullBoolean"
+_MSLC = "MedicalScribeLanguageCode"
+_EU = "EN_US"
+_eU = "en-US"
+_MULTI = "MULTI"
+_mu = "multi"
+_MSME = "MedicalScribeMediaEncoding"
+_PCM = "PCM"
+_p = "pcm"
+_FLAC = "FLAC"
+_f = "flac"
+_MSMSRH = "MedicalScribeMediaSampleRateHertz"
+_MCGR = "MedicalCodeGenerationResult"
+_mCR = "medicalCodesResult"
+_MSPSAR = "MedicalScribePostStreamActionsResult"
+_cNGR = "clinicalNoteGenerationResult"
+_mCGR = "medicalCodeGenerationResult"
+_MCGSR = "MedicalCodeGenerationSettingsResponse"
+_e = "enabled"
+_MSPSASR = "MedicalScribePostStreamActionSettingsResponse"
 _oSU = "outputS3Uri"
 _cNGS = "clinicalNoteGenerationSettings"
+_mCGS = "medicalCodeGenerationSettings"
+_MSSS = "MedicalScribeStreamStatus"
+_PAUSED = "PAUSED"
 _MSLSD = "MedicalScribeListeningSessionDetails"
 _lC = "languageCode"
 _mSRH = "mediaSampleRateHertz"
@@ -43,25 +140,20 @@ _cD = "channelDefinitions"
 _pSAS = "postStreamActionSettings"
 _pSAR = "postStreamActionResult"
 _eCP = "encounterContextProvided"
+_mCCP = "medicalCodingContextProvided"
 _sS = "streamStatus"
 _sCT = "streamCreationTime"
 _sET = "streamEndTime"
-_TE = "ThrottlingException"
-_smithya = "smithy.api#endpoint"
-_JI = "JobId"
+_GMSLSO = "GetMedicalScribeListeningSessionOutput"
+_mSLSD = "medicalScribeListeningSessionDetails"
+_GMSLS = "GetMedicalScribeListeningSession"
 _GPIJI = "GetPatientInsightsJobInput"
-_sSI = "smithy.synthetic#originalShapeId"
 _cGPIJR = "com.amazonaws.connecthealth#GetPatientInsightsJobRequest"
-_jI = "jobId"
-_SNES = "SensitiveNonEmptyString"
 _PIEC = "PatientInsightsEncounterContext"
-_eRn = "encounterReason"
-_NES = "NonEmptyString"
 _FHIRS = "FHIRServer"
 _fE = "fhirEndpoint"
 _oT = "oauthToken"
 _SSo = "S3Source"
-_u = "uri"
 _SSou = "S3Sources"
 _IDC = "InputDataConfig"
 _fS = "fhirServer"
@@ -72,22 +164,16 @@ _IC = "InsightsContext"
 _iT = "insightsType"
 _IO = "InsightsOutput"
 _JA = "JobArn"
-_JS = "JobStatus"
-_SUBMITTED = "SUBMITTED"
-_SUCCEEDED = "SUCCEEDED"
 _ODC = "OutputDataConfig"
-_sOP = "s3OutputPath"
-_SIDS = "SensitiveIsoDateString"
 _P = "Pronouns"
 _HH = "HE_HIM"
 _SH = "SHE_HER"
 _TT = "THEY_THEM"
 _PIPC = "PatientInsightsPatientContext"
 _pI = "patientId"
-_dOB = "dateOfBirth"
 _pr = "pronouns"
 _PR = "ProviderRole"
-_S = "Specialty"
+_Sp = "Specialty"
 _PC = "PRIMARY_CARE"
 _UC = "UserContext"
 _r = "role"
@@ -95,136 +181,419 @@ _uI = "userId"
 _sp = "specialty"
 _GPIJO = "GetPatientInsightsJobOutput"
 _cGPIJRo = "com.amazonaws.connecthealth#GetPatientInsightsJobResponse"
-_jA = "jobArn"
-_jS = "jobStatus"
-_cTr = "creationTime"
-_sF = "smithy.api#timestampFormat"
-_dt = "date-time"
-_uT = "updatedTime"
 _iO = "insightsOutput"
-_sD = "statusDetails"
-_pC = "patientContext"
 _iC = "insightsContext"
-_eCn = "encounterContext"
 _uC = "userContext"
 _iDC = "inputDataConfig"
-_oDC = "outputDataConfig"
 _GPIJ = "GetPatientInsightsJob"
 _GSI = "GetSubscriptionInput"
 _GSO = "GetSubscriptionOutput"
 _GS = "GetSubscription"
-_LDI = "ListDomainsInput"
+_LDI = "ListDatasetsInput"
 _sQ = "smithy.api#httpQuery"
-_mR = "maxResults"
 _nT = "nextToken"
-_DSo = "DomainSummary"
-_DSL = "DomainSummaryList"
-_LDO = "ListDomainsOutput"
+_mR = "maxResults"
+_DSa = "DatasetSummary"
+_DSL = "DatasetSummaryList"
+_LDO = "ListDatasetsOutput"
+_LD = "ListDatasets"
+_LDIi = "ListDomainsInput"
+_LDOi = "ListDomainsOutput"
 _d = "domains"
-_LD = "ListDomains"
-_LSI = "ListSubscriptionsInput"
-_SL = "SubscriptionList"
-_LSO = "ListSubscriptionsOutput"
-_sub = "subscriptions"
-_LS = "ListSubscriptions"
-_LTFRI = "ListTagsForResourceInput"
-_rA = "resourceArn"
-_LTFRO = "ListTagsForResourceOutput"
-_LTFR = "ListTagsForResource"
-_MSAE = "MedicalScribeAudioEvent"
-_aC = "audioChunk"
-_MSBAE = "MedicalScribeBinaryAudioEvent"
-_sP = "smithy.api#eventPayload"
-_ECn = "EncounterContext"
-_uCn = "unstructuredContext"
-_MSPSAS = "MedicalScribePostStreamActionSettings"
-_MSCE = "MedicalScribeConfigurationEvent"
-_MSSCET = "MedicalScribeSessionControlEventType"
-_EOS = "END_OF_SESSION"
-_MSSCE = "MedicalScribeSessionControlEvent"
-_ty = "type"
-_MSIS = "MedicalScribeInputStream"
-_smithyap = "smithy.api#streaming"
-_aE = "audioEvent"
-_bAE = "binaryAudioEvent"
-_sCE = "sessionControlEvent"
-_cE = "configurationEvent"
-_SMSLSI = "StartMedicalScribeListeningSessionInput"
-_sHm = "smithy.api#httpHeader"
-_xamsi = "x-amzn-medscribe-session-id"
-_xamdi = "x-amzn-medscribe-domain-id"
-_xamsi_ = "x-amzn-medscribe-subscription-id"
-_xamlc = "x-amzn-medscribe-language-code"
-_xamsr = "x-amzn-medscribe-sample-rate"
-_xamme = "x-amzn-medscribe-media-encoding"
-_iS = "inputStream"
-_sPm = "smithy.api#httpPayload"
-_RI = "RequestId"
-_MSTS = "MedicalScribeTranscriptSegment"
-_sIeg = "segmentId"
-_aBO = "audioBeginOffset"
-_aEO = "audioEndOffset"
-_iP = "isPartial"
-_co = "content"
-_MSTE = "MedicalScribeTranscriptEvent"
-_tS = "transcriptSegment"
-_MSOS = "MedicalScribeOutputStream"
-_tE = "transcriptEvent"
-_iFE = "internalFailureException"
-_vE = "validationException"
-_SMSLSO = "StartMedicalScribeListeningSessionOutput"
-_rI = "requestId"
-_xari = "x-amzn-request-id"
-_rS = "responseStream"
-_SMSLS = "StartMedicalScribeListeningSession"
-_SPIJI = "StartPatientInsightsJobInput"
-_cSPIJR = "com.amazonaws.connecthealth#StartPatientInsightsJobRequest"
-_cTl = "clientToken"
-_sT = "smithy.api#idempotencyToken"
-_SPIJO = "StartPatientInsightsJobOutput"
-_cSPIJRo = "com.amazonaws.connecthealth#StartPatientInsightsJobResponse"
-_SPIJ = "StartPatientInsightsJob"
-_TRI = "TagResourceInput"
-_TRO = "TagResourceOutput"
-_sU = "smithy.api#Unit"
-_TR = "TagResource"
-_TKL = "TagKeyList"
-_URI = "UntagResourceInput"
-_tK = "tagKeys"
-_URO = "UntagResourceOutput"
-_UR = "UntagResource"
-_CH = "ConnectHealth"
-_aw = "aws.auth#sigv4"
-_aws = "aws.api#service"
-_aJ = "aws.protocols#restJson1"
-_smithyapi = "smithy.api#cors"
+_LDi = "ListDomains"
+
+MEDICAL_CODING_DATASET_ARTIFACTS: StaticSchema = (
+    18,
+    n0,
+    _MCDA,
+    0,
+    (_eSU,),
+    ((lambda: schemas.S3_URI, 0),),
+)
+
+DATASET_ARTIFACTS: StaticSchema = (
+    19,
+    n0,
+    _DAa,
+    0,
+    (_mC,),
+    ((MEDICAL_CODING_DATASET_ARTIFACTS, 0),),
+)
+
+GET_DOMAIN_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GDIe,
+    {_sm: None},
+    (_dI,),
+    ((lambda: schemas.DOMAIN_ID, 9),),
+)
+
+GET_DOMAIN_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GDOe,
+    {_smit: None},
+    (_dI, _a, _n, _kKA, _eC, _st, _wAU, _wAC, _cA, _ta),
+    (
+        (lambda: schemas.DOMAIN_ID, 1),
+        (lambda: schemas.DOMAIN_ARN, 1),
+        (lambda: schemas.DOMAIN_NAME, 1),
+        (lambda: schemas.KMS_KEY_ARN, 0),
+        (lambda: schemas.ENCRYPTION_CONTEXT, 0),
+        (lambda: schemas.DOMAIN_STATUS, 1),
+        (lambda: schemas.WEB_APP_URL, 0),
+        (lambda: schemas.WEB_APP_CONFIGURATION, 0),
+        (4, 1),
+        (lambda: schemas.TAG_MAP, 0),
+    ),
+)
+
+GET_DOMAIN: StaticOperationSchema = (
+    23,
+    n0,
+    _GDe,
+    {_smith: MappingProxyType({"method": "GET", "uri": "/domain/{domainId}"})},
+    GET_DOMAIN_INPUT,
+    GET_DOMAIN_OUTPUT,
+    (lambda: schemas.RESOURCE_NOT_FOUND_EXCEPTION,),
+)
+
+JOB_ID: StaticSchema = (3, n0, _JI, 0)
+
+GET_MEDICAL_CODING_JOB_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GMCJI,
+    {_sSI: _cGMCJR, _sm: None},
+    (_dI, _jI),
+    ((lambda: schemas.DOMAIN_ID, 9), (JOB_ID, 9)),
+)
+
+GET_MEDICAL_CODING_JOB_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GMCJO,
+    {_sSI: _cGMCJRo, _smit: None},
+    (_jI, _jA, _jS, _cTr, _uT, _te, _pC, _eCn, _oDC, _dIa, _mCO, _sD),
+    (
+        (JOB_ID, 1),
+        (lambda: MEDICAL_CODING_JOB_ARN, 1),
+        (lambda: JOB_STATUS, 1),
+        (4, {_sF: _dt}),
+        (4, {_sF: _dt}),
+        (lambda: SENSITIVE_NON_EMPTY_STRING, 1),
+        (lambda: MEDICAL_CODES_PATIENT_CONTEXT, 0),
+        (lambda: MEDICAL_CODES_ENCOUNTER_CONTEXT, 0),
+        (lambda: MEDICAL_CODING_OUTPUT_DATA_CONFIG, 1),
+        (lambda: schemas.DATASET_ID, 0),
+        (lambda: MEDICAL_CODING_OUTPUT, 0),
+        (lambda: NON_EMPTY_STRING, 0),
+    ),
+)
+
+GET_MEDICAL_CODING_JOB: StaticOperationSchema = (
+    23,
+    n0,
+    _GMCJ,
+    {
+        _smithya: MappingProxyType({"hostPrefix": "runtime."}),
+        _smith: MappingProxyType(
+            {
+                "code": 200,
+                "method": "GET",
+                "uri": "/domain/{domainId}/medical-coding-job/{jobId}",
+            }
+        ),
+    },
+    GET_MEDICAL_CODING_JOB_INPUT,
+    GET_MEDICAL_CODING_JOB_OUTPUT,
+    (
+        lambda: schemas.ACCESS_DENIED_EXCEPTION,
+        lambda: schemas.INTERNAL_SERVER_EXCEPTION,
+        lambda: schemas.RESOURCE_NOT_FOUND_EXCEPTION,
+        lambda: schemas.THROTTLING_EXCEPTION,
+        lambda: schemas.VALIDATION_EXCEPTION,
+    ),
+)
+
+SENSITIVE_ISO_DATE_STRING: StaticSchema = (3, n0, _SIDS, 4)
+
+SENSITIVE_NON_NEGATIVE_INTEGER: StaticSchema = (7, n0, _SNNI, 4)
+
+SENSITIVE_NON_EMPTY_STRING: StaticSchema = (3, n0, _SNES, 4)
+
+ENCOUNTER_TYPE: StaticSchema = (
+    14,
+    n0,
+    _ETn,
+    0,
+    (_TELEHEALTH, _IP_),
+    ((-1, {_sV: _TELEHEALTH}), (-1, {_sV: _IP_})),
+)
+
+MEDICAL_CODES_ENCOUNTER_CONTEXT: StaticSchema = (
+    18,
+    n0,
+    _MCEC,
+    0,
+    (_eTn, _eRn, _aH, _eD, _eDM),
+    (
+        (ENCOUNTER_TYPE, 0),
+        (SENSITIVE_NON_EMPTY_STRING, 0),
+        (2, 0),
+        (SENSITIVE_ISO_DATE_STRING, 0),
+        (SENSITIVE_NON_NEGATIVE_INTEGER, 0),
+    ),
+)
+
+MEDICAL_CODING_JOB_ARN: StaticSchema = (3, n0, _MCJA, 0)
+
+JOB_STATUS: StaticSchema = (
+    14,
+    n0,
+    _JS,
+    0,
+    (_SUBMITTED, _IP, _FAILED, _SUCCEEDED),
+    (
+        (-1, {_sV: _SUBMITTED}),
+        (-1, {_sV: _IP}),
+        (-1, {_sV: _FAILED}),
+        (-1, {_sV: _SUCCEEDED}),
+    ),
+)
+
+MEDICAL_CODING_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _MCO,
+    0,
+    (_u,),
+    ((lambda: schemas.S3_URI, 1),),
+)
+
+MEDICAL_CODING_OUTPUT_DATA_CONFIG: StaticSchema = (
+    18,
+    n0,
+    _MCODC,
+    0,
+    (_sOP,),
+    ((lambda: schemas.S3_URI, 1),),
+)
+
+SEX: StaticSchema = (
+    14,
+    n0,
+    _S,
+    4,
+    (_MALE, _FEMALE, _NB, _UNKNOWN),
+    ((-1, {_sV: _MALE}), (-1, {_sV: _FEMALE}), (-1, {_sV: _NB}), (-1, {_sV: _UNKNOWN})),
+)
+
+PATIENT_STATUS: StaticSchema = (
+    14,
+    n0,
+    _PSa,
+    4,
+    (_NEW, _ESTABLISHED),
+    ((-1, {_sV: _NEW}), (-1, {_sV: _ESTABLISHED})),
+)
+
+MEDICAL_CODES_PATIENT_CONTEXT: StaticSchema = (
+    18,
+    n0,
+    _MCPC,
+    0,
+    (_sex, _st, _dOB, _in),
+    (
+        (SEX, 0),
+        (PATIENT_STATUS, 0),
+        (SENSITIVE_ISO_DATE_STRING, 0),
+        (SENSITIVE_NON_EMPTY_STRING, 0),
+    ),
+)
+
+NON_EMPTY_STRING: StaticSchema = (3, n0, _NES, 0)
+
+SCRIBE_SESSION_ID: StaticSchema = (3, n0, _SSI, 0)
+
+GET_MEDICAL_SCRIBE_LISTENING_SESSION_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GMSLSI,
+    {_sm: None},
+    (_sIes, _dI, _sI),
+    (
+        (SCRIBE_SESSION_ID, 9),
+        (lambda: schemas.DOMAIN_ID, 9),
+        (lambda: schemas.SUBSCRIPTION_ID, 9),
+    ),
+)
+
+GET_MEDICAL_SCRIBE_LISTENING_SESSION_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GMSLSO,
+    {_smit: None},
+    (_mSLSD,),
+    ((lambda: MEDICAL_SCRIBE_LISTENING_SESSION_DETAILS, 0),),
+)
+
+GET_MEDICAL_SCRIBE_LISTENING_SESSION: StaticOperationSchema = (
+    23,
+    n0,
+    _GMSLS,
+    {
+        _smithya: MappingProxyType({"hostPrefix": "streaming."}),
+        _smith: MappingProxyType(
+            {
+                "uri": "/medical-scribe-stream/domain/{domainId}/subscription/{subscriptionId}/session/{sessionId}",
+                "method": "GET",
+            }
+        ),
+    },
+    GET_MEDICAL_SCRIBE_LISTENING_SESSION_INPUT,
+    GET_MEDICAL_SCRIBE_LISTENING_SESSION_OUTPUT,
+    (
+        lambda: schemas.ACCESS_DENIED_EXCEPTION,
+        lambda: schemas.INTERNAL_SERVER_EXCEPTION,
+        lambda: schemas.RESOURCE_NOT_FOUND_EXCEPTION,
+        lambda: schemas.SERVICE_QUOTA_EXCEEDED_EXCEPTION,
+        lambda: schemas.THROTTLING_EXCEPTION,
+    ),
+)
+
+MEDICAL_SCRIBE_CHANNEL_ID: StaticSchema = (7, n0, _MSCI, 0)
+
+MEDICAL_SCRIBE_PARTICIPANT_ROLE: StaticSchema = (
+    14,
+    n0,
+    _MSPR,
+    0,
+    (_PATIENT, _CLINICIAN),
+    ((-1, {_sV: _PATIENT}), (-1, {_sV: _CLINICIAN})),
+)
+
+MEDICAL_SCRIBE_CHANNEL_DEFINITION: StaticSchema = (
+    18,
+    n0,
+    _MSCD,
+    0,
+    (_cIh, _pR),
+    ((MEDICAL_SCRIBE_CHANNEL_ID, 1), (MEDICAL_SCRIBE_PARTICIPANT_ROLE, 1)),
+)
+
+MEDICAL_SCRIBE_CHANNEL_DEFINITIONS: StaticSchema = (
+    16,
+    n0,
+    _MSCDe,
+    0,
+    (_me,),
+    ((MEDICAL_SCRIBE_CHANNEL_DEFINITION, 0),),
+)
+
+NON_NULL_BOOLEAN: StaticSchema = (2, n0, _NNB, 0)
+
+MEDICAL_SCRIBE_LANGUAGE_CODE: StaticSchema = (
+    14,
+    n0,
+    _MSLC,
+    0,
+    (_EU, _MULTI),
+    ((-1, {_sV: _eU}), (-1, {_sV: _mu})),
+)
+
+MEDICAL_SCRIBE_MEDIA_ENCODING: StaticSchema = (
+    14,
+    n0,
+    _MSME,
+    0,
+    (_PCM, _FLAC),
+    ((-1, {_sV: _p}), (-1, {_sV: _f})),
+)
+
+MEDICAL_SCRIBE_MEDIA_SAMPLE_RATE_HERTZ: StaticSchema = (7, n0, _MSMSRH, 0)
+
+MEDICAL_CODE_GENERATION_RESULT: StaticSchema = (
+    18,
+    n0,
+    _MCGR,
+    0,
+    (_mCR, _jI),
+    ((lambda: schemas.ARTIFACT_DETAILS, 0), (JOB_ID, 0)),
+)
+
+MEDICAL_SCRIBE_POST_STREAM_ACTIONS_RESULT: StaticSchema = (
+    18,
+    n0,
+    _MSPSAR,
+    0,
+    (_cNGR, _mCGR),
+    (
+        (lambda: schemas.CLINICAL_NOTE_GENERATION_RESULT, 0),
+        (MEDICAL_CODE_GENERATION_RESULT, 0),
+    ),
+)
+
+MEDICAL_CODE_GENERATION_SETTINGS_RESPONSE: StaticSchema = (
+    18,
+    n0,
+    _MCGSR,
+    0,
+    (_e,),
+    ((NON_NULL_BOOLEAN, 0),),
+)
+
+MEDICAL_SCRIBE_POST_STREAM_ACTION_SETTINGS_RESPONSE: StaticSchema = (
+    18,
+    n0,
+    _MSPSASR,
+    0,
+    (_oSU, _cNGS, _mCGS),
+    (
+        (lambda: schemas.S3_URI, 1),
+        (lambda: schemas.CLINICAL_NOTE_GENERATION_SETTINGS_RESPONSE, 1),
+        (MEDICAL_CODE_GENERATION_SETTINGS_RESPONSE, 0),
+    ),
+)
+
+MEDICAL_SCRIBE_STREAM_STATUS: StaticSchema = (
+    14,
+    n0,
+    _MSSS,
+    0,
+    (_IP, _PAUSED, _FAILED, _COMPLETED),
+    (
+        (-1, {_sV: _IP}),
+        (-1, {_sV: _PAUSED}),
+        (-1, {_sV: _FAILED}),
+        (-1, {_sV: _COMPLETED}),
+    ),
+)
 
 MEDICAL_SCRIBE_LISTENING_SESSION_DETAILS: StaticSchema = (
     18,
     n0,
     _MSLSD,
     0,
-    (_sIes, _dI, _sI, _lC, _mSRH, _mE, _cD, _pSAS, _pSAR, _eCP, _sS, _sCT, _sET),
+    (_sIes, _dI, _sI, _lC, _mSRH, _mE, _cD, _pSAS, _pSAR, _eCP, _mCCP, _sS, _sCT, _sET),
     (
-        (lambda: schemas.SCRIBE_SESSION_ID, 0),
+        (SCRIBE_SESSION_ID, 0),
         (lambda: schemas.DOMAIN_ID, 0),
         (lambda: schemas.SUBSCRIPTION_ID, 0),
-        (lambda: schemas.MEDICAL_SCRIBE_LANGUAGE_CODE, 0),
-        (lambda: schemas.MEDICAL_SCRIBE_MEDIA_SAMPLE_RATE_HERTZ, 0),
-        (lambda: schemas.MEDICAL_SCRIBE_MEDIA_ENCODING, 0),
-        (lambda: schemas.MEDICAL_SCRIBE_CHANNEL_DEFINITIONS, 0),
-        (lambda: schemas.MEDICAL_SCRIBE_POST_STREAM_ACTION_SETTINGS_RESPONSE, 0),
-        (lambda: schemas.MEDICAL_SCRIBE_POST_STREAM_ACTIONS_RESULT, 0),
-        (lambda: schemas.NON_NULL_BOOLEAN, 0),
-        (lambda: schemas.MEDICAL_SCRIBE_STREAM_STATUS, 0),
+        (MEDICAL_SCRIBE_LANGUAGE_CODE, 0),
+        (MEDICAL_SCRIBE_MEDIA_SAMPLE_RATE_HERTZ, 0),
+        (MEDICAL_SCRIBE_MEDIA_ENCODING, 0),
+        (MEDICAL_SCRIBE_CHANNEL_DEFINITIONS, 0),
+        (MEDICAL_SCRIBE_POST_STREAM_ACTION_SETTINGS_RESPONSE, 0),
+        (MEDICAL_SCRIBE_POST_STREAM_ACTIONS_RESULT, 0),
+        (NON_NULL_BOOLEAN, 0),
+        (NON_NULL_BOOLEAN, 0),
+        (MEDICAL_SCRIBE_STREAM_STATUS, 0),
         (4, 0),
         (4, 0),
     ),
 )
-
-THROTTLING_EXCEPTION: StaticSchema = (18, n0, _TE, {_s: _c, _sE: 429}, (_m,), ((3, 0),))
-
-JOB_ID: StaticSchema = (3, n0, _JI, 0)
 
 GET_PATIENT_INSIGHTS_JOB_INPUT: StaticSchema = (
     18,
@@ -244,11 +613,11 @@ GET_PATIENT_INSIGHTS_JOB_OUTPUT: StaticSchema = (
     (
         (JOB_ID, 1),
         (lambda: JOB_ARN, 1),
-        (lambda: JOB_STATUS, 1),
+        (JOB_STATUS, 1),
         (4, {_sF: _dt}),
         (4, {_sF: _dt}),
         (lambda: INSIGHTS_OUTPUT, 0),
-        (lambda: NON_EMPTY_STRING, 0),
+        (NON_EMPTY_STRING, 0),
         (lambda: PATIENT_INSIGHTS_PATIENT_CONTEXT, 1),
         (lambda: INSIGHTS_CONTEXT, 1),
         (lambda: PATIENT_INSIGHTS_ENCOUNTER_CONTEXT, 1),
@@ -278,12 +647,10 @@ GET_PATIENT_INSIGHTS_JOB: StaticOperationSchema = (
         lambda: schemas.ACCESS_DENIED_EXCEPTION,
         lambda: schemas.INTERNAL_SERVER_EXCEPTION,
         lambda: schemas.RESOURCE_NOT_FOUND_EXCEPTION,
-        THROTTLING_EXCEPTION,
+        lambda: schemas.THROTTLING_EXCEPTION,
         lambda: schemas.VALIDATION_EXCEPTION,
     ),
 )
-
-SENSITIVE_NON_EMPTY_STRING: StaticSchema = (3, n0, _SNES, 4)
 
 PATIENT_INSIGHTS_ENCOUNTER_CONTEXT: StaticSchema = (
     18,
@@ -293,8 +660,6 @@ PATIENT_INSIGHTS_ENCOUNTER_CONTEXT: StaticSchema = (
     (_eRn,),
     ((SENSITIVE_NON_EMPTY_STRING, 1),),
 )
-
-NON_EMPTY_STRING: StaticSchema = (3, n0, _NES, 0)
 
 FHIR_SERVER: StaticSchema = (
     18,
@@ -326,20 +691,6 @@ INSIGHTS_OUTPUT: StaticSchema = (18, n0, _IO, 0, (_u,), ((lambda: schemas.S3_URI
 
 JOB_ARN: StaticSchema = (3, n0, _JA, 0)
 
-JOB_STATUS: StaticSchema = (
-    14,
-    n0,
-    _JS,
-    0,
-    (_SUBMITTED, _IP, _FAILED, _SUCCEEDED),
-    (
-        (-1, {_sV: _SUBMITTED}),
-        (-1, {_sV: _IP}),
-        (-1, {_sV: _FAILED}),
-        (-1, {_sV: _SUCCEEDED}),
-    ),
-)
-
 OUTPUT_DATA_CONFIG: StaticSchema = (
     18,
     n0,
@@ -348,8 +699,6 @@ OUTPUT_DATA_CONFIG: StaticSchema = (
     (_sOP,),
     ((lambda: schemas.S3_URI, 1),),
 )
-
-SENSITIVE_ISO_DATE_STRING: StaticSchema = (3, n0, _SIDS, 4)
 
 PRONOUNS: StaticSchema = (
     14,
@@ -378,7 +727,7 @@ PROVIDER_ROLE: StaticSchema = (
     ((-1, {_sV: _CLINICIAN}),),
 )
 
-SPECIALTY: StaticSchema = (14, n0, _S, 0, (_PC,), ((-1, {_sV: _PC}),))
+SPECIALTY: StaticSchema = (14, n0, _Sp, 0, (_PC,), ((-1, {_sV: _PC}),))
 
 USER_CONTEXT: StaticSchema = (
     18,
@@ -429,10 +778,73 @@ GET_SUBSCRIPTION: StaticOperationSchema = (
     ),
 )
 
-LIST_DOMAINS_INPUT: StaticSchema = (
+LIST_DATASETS_INPUT: StaticSchema = (
     18,
     n0,
     _LDI,
+    {_sm: None},
+    (_dI, _t, _nT, _mR),
+    (
+        (lambda: schemas.DOMAIN_ID, 9),
+        (lambda: schemas.DATASET_TYPE, {_sQ: _t}),
+        (3, {_sQ: _nT}),
+        (7, {_sQ: _mR}),
+    ),
+)
+
+LIST_DATASETS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _LDO,
+    {_smit: None},
+    (_i, _nT),
+    ((lambda: DATASET_SUMMARY_LIST, 1), (3, 0)),
+)
+
+LIST_DATASETS: StaticOperationSchema = (
+    23,
+    n0,
+    _LD,
+    {
+        _smith: MappingProxyType(
+            {"code": 200, "method": "GET", "uri": "/domains/{domainId}/datasets"}
+        )
+    },
+    LIST_DATASETS_INPUT,
+    LIST_DATASETS_OUTPUT,
+    (
+        lambda: schemas.ACCESS_DENIED_EXCEPTION,
+        lambda: schemas.INTERNAL_SERVER_EXCEPTION,
+        lambda: schemas.RESOURCE_NOT_FOUND_EXCEPTION,
+        lambda: schemas.THROTTLING_EXCEPTION,
+        lambda: schemas.VALIDATION_EXCEPTION,
+    ),
+)
+
+DATASET_SUMMARY: StaticSchema = (
+    18,
+    n0,
+    _DSa,
+    0,
+    (_a, _dIa, _n, _t, _st, _sD, _cA, _uA),
+    (
+        (lambda: schemas.DATASET_ARN, 1),
+        (lambda: schemas.DATASET_ID, 1),
+        (lambda: schemas.BOUNDED_SAFE_STRING, 1),
+        (lambda: schemas.DATASET_TYPE, 1),
+        (lambda: schemas.DATASET_STATUS, 1),
+        (lambda: schemas.BOUNDED_SAFE_STRING, 0),
+        (4, 1),
+        (4, 1),
+    ),
+)
+
+DATASET_SUMMARY_LIST: StaticSchema = (16, n0, _DSL, 0, (_me,), ((DATASET_SUMMARY, 0),))
+
+LIST_DOMAINS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _LDIi,
     {_sm: None},
     (_st, _mR, _nT),
     ((lambda: schemas.DOMAIN_STATUS, {_sQ: _st}), (7, {_sQ: _mR}), (3, {_sQ: _nT})),
@@ -441,441 +853,18 @@ LIST_DOMAINS_INPUT: StaticSchema = (
 LIST_DOMAINS_OUTPUT: StaticSchema = (
     18,
     n0,
-    _LDO,
+    _LDOi,
     {_smit: None},
     (_d, _nT),
-    ((lambda: DOMAIN_SUMMARY_LIST, 1), (3, 0)),
+    ((lambda: schemas.DOMAIN_SUMMARY_LIST, 1), (3, 0)),
 )
 
 LIST_DOMAINS: StaticOperationSchema = (
     23,
     n0,
-    _LD,
+    _LDi,
     {_smith: MappingProxyType({"method": "GET", "uri": "/domain"})},
     LIST_DOMAINS_INPUT,
     LIST_DOMAINS_OUTPUT,
     (),
-)
-
-DOMAIN_SUMMARY: StaticSchema = (
-    18,
-    n0,
-    _DSo,
-    0,
-    (_dI, _a, _n, _st, _cA),
-    (
-        (lambda: schemas.DOMAIN_ID, 1),
-        (lambda: schemas.DOMAIN_ARN, 1),
-        (lambda: schemas.DOMAIN_NAME, 1),
-        (lambda: schemas.DOMAIN_STATUS, 1),
-        (4, 1),
-    ),
-)
-
-DOMAIN_SUMMARY_LIST: StaticSchema = (16, n0, _DSL, 0, (_me,), ((DOMAIN_SUMMARY, 0),))
-
-LIST_SUBSCRIPTIONS_INPUT: StaticSchema = (
-    18,
-    n0,
-    _LSI,
-    {_sm: None},
-    (_dI, _mR, _nT),
-    ((lambda: schemas.DOMAIN_ID, 9), (7, {_sQ: _mR}), (3, {_sQ: _nT})),
-)
-
-LIST_SUBSCRIPTIONS_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _LSO,
-    {_smit: None},
-    (_sub, _nT),
-    ((lambda: SUBSCRIPTION_LIST, 1), (3, 0)),
-)
-
-LIST_SUBSCRIPTIONS: StaticOperationSchema = (
-    23,
-    n0,
-    _LS,
-    {
-        _smith: MappingProxyType(
-            {"method": "GET", "uri": "/domains/{domainId}/subscriptions"}
-        )
-    },
-    LIST_SUBSCRIPTIONS_INPUT,
-    LIST_SUBSCRIPTIONS_OUTPUT,
-    (
-        lambda: schemas.ACCESS_DENIED_EXCEPTION,
-        lambda: schemas.INTERNAL_SERVER_EXCEPTION,
-        lambda: schemas.RESOURCE_NOT_FOUND_EXCEPTION,
-        lambda: schemas.VALIDATION_EXCEPTION,
-    ),
-)
-
-SUBSCRIPTION_LIST: StaticSchema = (
-    16,
-    n0,
-    _SL,
-    0,
-    (_me,),
-    ((lambda: schemas.SUBSCRIPTION_DESCRIPTION, 0),),
-)
-
-LIST_TAGS_FOR_RESOURCE_INPUT: StaticSchema = (
-    18,
-    n0,
-    _LTFRI,
-    {_sm: None},
-    (_rA,),
-    ((3, 9),),
-)
-
-LIST_TAGS_FOR_RESOURCE_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _LTFRO,
-    {_smit: None},
-    (_t,),
-    ((lambda: schemas.TAG_MAP, 0),),
-)
-
-LIST_TAGS_FOR_RESOURCE: StaticOperationSchema = (
-    23,
-    n0,
-    _LTFR,
-    {
-        _smith: MappingProxyType(
-            {"uri": "/tags/{resourceArn}", "method": "GET", "code": 200}
-        )
-    },
-    LIST_TAGS_FOR_RESOURCE_INPUT,
-    LIST_TAGS_FOR_RESOURCE_OUTPUT,
-    (),
-)
-
-MEDICAL_SCRIBE_AUDIO_EVENT: StaticSchema = (
-    18,
-    n0,
-    _MSAE,
-    0,
-    (_aC,),
-    ((lambda: schemas.AUDIO_CHUNK, 1),),
-)
-
-MEDICAL_SCRIBE_BINARY_AUDIO_EVENT: StaticSchema = (
-    18,
-    n0,
-    _MSBAE,
-    0,
-    (_aC,),
-    ((lambda: schemas.AUDIO_CHUNK, {_sP: None, _smi: None}),),
-)
-
-ENCOUNTER_CONTEXT: StaticSchema = (
-    18,
-    n0,
-    _ECn,
-    0,
-    (_uCn,),
-    ((lambda: schemas.SENSITIVE_MARKDOWN_STRING, 0),),
-)
-
-MEDICAL_SCRIBE_POST_STREAM_ACTION_SETTINGS: StaticSchema = (
-    18,
-    n0,
-    _MSPSAS,
-    0,
-    (_oSU, _cNGS),
-    (
-        (lambda: schemas.S3_URI, 1),
-        (lambda: schemas.CLINICAL_NOTE_GENERATION_SETTINGS, 1),
-    ),
-)
-
-MEDICAL_SCRIBE_CONFIGURATION_EVENT: StaticSchema = (
-    18,
-    n0,
-    _MSCE,
-    0,
-    (_pSAS, _cD, _eCn),
-    (
-        (MEDICAL_SCRIBE_POST_STREAM_ACTION_SETTINGS, 1),
-        (lambda: schemas.MEDICAL_SCRIBE_CHANNEL_DEFINITIONS, 0),
-        (ENCOUNTER_CONTEXT, 0),
-    ),
-)
-
-MEDICAL_SCRIBE_SESSION_CONTROL_EVENT_TYPE: StaticSchema = (
-    14,
-    n0,
-    _MSSCET,
-    0,
-    (_EOS,),
-    ((-1, {_sV: _EOS}),),
-)
-
-MEDICAL_SCRIBE_SESSION_CONTROL_EVENT: StaticSchema = (
-    18,
-    n0,
-    _MSSCE,
-    0,
-    (_ty,),
-    ((MEDICAL_SCRIBE_SESSION_CONTROL_EVENT_TYPE, 0),),
-)
-
-MEDICAL_SCRIBE_INPUT_STREAM: StaticSchema = (
-    19,
-    n0,
-    _MSIS,
-    {_smithyap: None},
-    (_aE, _bAE, _sCE, _cE),
-    (
-        (MEDICAL_SCRIBE_AUDIO_EVENT, 0),
-        (MEDICAL_SCRIBE_BINARY_AUDIO_EVENT, 0),
-        (MEDICAL_SCRIBE_SESSION_CONTROL_EVENT, 0),
-        (MEDICAL_SCRIBE_CONFIGURATION_EVENT, 0),
-    ),
-)
-
-START_MEDICAL_SCRIBE_LISTENING_SESSION_INPUT: StaticSchema = (
-    18,
-    n0,
-    _SMSLSI,
-    {_sm: None},
-    (_sIes, _dI, _sI, _lC, _mSRH, _mE, _iS),
-    (
-        (lambda: schemas.SCRIBE_SESSION_ID, {_sHm: _xamsi, _smi: None}),
-        (lambda: schemas.DOMAIN_ID, {_sHm: _xamdi, _smi: None}),
-        (lambda: schemas.SUBSCRIPTION_ID, {_sHm: _xamsi_, _smi: None}),
-        (lambda: schemas.MEDICAL_SCRIBE_LANGUAGE_CODE, {_sHm: _xamlc, _smi: None}),
-        (
-            lambda: schemas.MEDICAL_SCRIBE_MEDIA_SAMPLE_RATE_HERTZ,
-            {_sHm: _xamsr, _smi: None},
-        ),
-        (lambda: schemas.MEDICAL_SCRIBE_MEDIA_ENCODING, {_sHm: _xamme, _smi: None}),
-        (MEDICAL_SCRIBE_INPUT_STREAM, 16),
-    ),
-)
-
-START_MEDICAL_SCRIBE_LISTENING_SESSION_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _SMSLSO,
-    {_smit: None},
-    (_sIes, _dI, _sI, _rI, _lC, _mSRH, _mE, _rS),
-    (
-        (lambda: schemas.SCRIBE_SESSION_ID, {_sHm: _xamsi}),
-        (lambda: schemas.DOMAIN_ID, {_sHm: _xamdi}),
-        (lambda: schemas.SUBSCRIPTION_ID, {_sHm: _xamsi_}),
-        (lambda: REQUEST_ID, {_sHm: _xari}),
-        (lambda: schemas.MEDICAL_SCRIBE_LANGUAGE_CODE, {_sHm: _xamlc}),
-        (lambda: schemas.MEDICAL_SCRIBE_MEDIA_SAMPLE_RATE_HERTZ, {_sHm: _xamsr}),
-        (lambda: schemas.MEDICAL_SCRIBE_MEDIA_ENCODING, {_sHm: _xamme}),
-        (lambda: MEDICAL_SCRIBE_OUTPUT_STREAM, 16),
-    ),
-)
-
-START_MEDICAL_SCRIBE_LISTENING_SESSION: StaticOperationSchema = (
-    23,
-    n0,
-    _SMSLS,
-    {
-        _smithya: MappingProxyType({"hostPrefix": "streaming."}),
-        _smith: MappingProxyType({"uri": "/medical-scribe-stream/", "method": "POST"}),
-    },
-    START_MEDICAL_SCRIBE_LISTENING_SESSION_INPUT,
-    START_MEDICAL_SCRIBE_LISTENING_SESSION_OUTPUT,
-    (
-        lambda: schemas.ACCESS_DENIED_EXCEPTION,
-        lambda: schemas.INTERNAL_SERVER_EXCEPTION,
-        lambda: schemas.RESOURCE_NOT_FOUND_EXCEPTION,
-        lambda: schemas.SERVICE_QUOTA_EXCEEDED_EXCEPTION,
-        THROTTLING_EXCEPTION,
-        lambda: schemas.VALIDATION_EXCEPTION,
-    ),
-)
-
-REQUEST_ID: StaticSchema = (3, n0, _RI, 0)
-
-MEDICAL_SCRIBE_TRANSCRIPT_SEGMENT: StaticSchema = (
-    18,
-    n0,
-    _MSTS,
-    0,
-    (_sIeg, _aBO, _aEO, _iP, _cI, _co),
-    (
-        (3, 0),
-        (lambda: schemas.AUDIO_OFFSET, 0),
-        (lambda: schemas.AUDIO_OFFSET, 0),
-        (lambda: schemas.NON_NULL_BOOLEAN, 0),
-        (3, 0),
-        (3, 0),
-    ),
-)
-
-MEDICAL_SCRIBE_TRANSCRIPT_EVENT: StaticSchema = (
-    18,
-    n0,
-    _MSTE,
-    0,
-    (_tS,),
-    ((MEDICAL_SCRIBE_TRANSCRIPT_SEGMENT, 0),),
-)
-
-MEDICAL_SCRIBE_OUTPUT_STREAM: StaticSchema = (
-    19,
-    n0,
-    _MSOS,
-    {_smithyap: None},
-    (_tE, _iFE, _vE),
-    (
-        (MEDICAL_SCRIBE_TRANSCRIPT_EVENT, 0),
-        (lambda: schemas.INTERNAL_SERVER_EXCEPTION, 0),
-        (lambda: schemas.VALIDATION_EXCEPTION, 0),
-    ),
-)
-
-START_PATIENT_INSIGHTS_JOB_INPUT: StaticSchema = (
-    18,
-    n0,
-    _SPIJI,
-    {_sSI: _cSPIJR, _sm: None},
-    (_dI, _pC, _iC, _eCn, _uC, _iDC, _oDC, _cTl),
-    (
-        (lambda: schemas.DOMAIN_ID, 9),
-        (PATIENT_INSIGHTS_PATIENT_CONTEXT, 1),
-        (INSIGHTS_CONTEXT, 1),
-        (PATIENT_INSIGHTS_ENCOUNTER_CONTEXT, 1),
-        (USER_CONTEXT, 1),
-        (INPUT_DATA_CONFIG, 1),
-        (OUTPUT_DATA_CONFIG, 1),
-        (NON_EMPTY_STRING, 2),
-    ),
-)
-
-START_PATIENT_INSIGHTS_JOB_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _SPIJO,
-    {_sSI: _cSPIJRo, _smit: None},
-    (_jA, _jI, _cTr),
-    ((JOB_ARN, 1), (JOB_ID, 1), (4, {_sF: _dt})),
-)
-
-START_PATIENT_INSIGHTS_JOB: StaticOperationSchema = (
-    23,
-    n0,
-    _SPIJ,
-    {
-        _smithya: MappingProxyType({"hostPrefix": "runtime."}),
-        _smith: MappingProxyType(
-            {
-                "code": 200,
-                "method": "POST",
-                "uri": "/domain/{domainId}/patient-insights-job",
-            }
-        ),
-    },
-    START_PATIENT_INSIGHTS_JOB_INPUT,
-    START_PATIENT_INSIGHTS_JOB_OUTPUT,
-    (
-        lambda: schemas.ACCESS_DENIED_EXCEPTION,
-        lambda: schemas.CONFLICT_EXCEPTION,
-        lambda: schemas.INTERNAL_SERVER_EXCEPTION,
-        lambda: schemas.RESOURCE_NOT_FOUND_EXCEPTION,
-        THROTTLING_EXCEPTION,
-        lambda: schemas.VALIDATION_EXCEPTION,
-    ),
-)
-
-TAG_RESOURCE_INPUT: StaticSchema = (
-    18,
-    n0,
-    _TRI,
-    {_sm: None},
-    (_rA, _t),
-    ((3, 9), (lambda: schemas.TAG_MAP, 1)),
-)
-
-TAG_RESOURCE_OUTPUT: StaticSchema = (18, n0, _TRO, {_sSI: _sU, _smit: None})
-
-TAG_RESOURCE: StaticOperationSchema = (
-    23,
-    n0,
-    _TR,
-    {
-        _smith: MappingProxyType(
-            {"uri": "/tags/{resourceArn}", "method": "POST", "code": 204}
-        )
-    },
-    TAG_RESOURCE_INPUT,
-    TAG_RESOURCE_OUTPUT,
-    (),
-)
-
-TAG_KEY_LIST: StaticSchema = (16, n0, _TKL, 0, (_me,), ((lambda: schemas.TAG_KEY, 0),))
-
-UNTAG_RESOURCE_INPUT: StaticSchema = (
-    18,
-    n0,
-    _URI,
-    {_sm: None},
-    (_rA, _tK),
-    ((3, 9), (TAG_KEY_LIST, {_sQ: _tK, _smi: None})),
-)
-
-UNTAG_RESOURCE_OUTPUT: StaticSchema = (18, n0, _URO, {_sSI: _sU, _smit: None})
-
-UNTAG_RESOURCE: StaticOperationSchema = (
-    23,
-    n0,
-    _UR,
-    {
-        _smith: MappingProxyType(
-            {"uri": "/tags/{resourceArn}", "method": "DELETE", "code": 204}
-        )
-    },
-    UNTAG_RESOURCE_INPUT,
-    UNTAG_RESOURCE_OUTPUT,
-    (),
-)
-
-CONNECT_HEALTH: StaticSchema = (
-    21,
-    n0,
-    _CH,
-    {
-        _aw: MappingProxyType({"name": "health-agent"}),
-        _aws: MappingProxyType(
-            {
-                "sdkId": "ConnectHealth",
-                "arnNamespace": "health-agent",
-                "endpointPrefix": "health-agent",
-                "cloudTrailEventSource": "health-agent.amazonaws.com",
-            }
-        ),
-        _aJ: MappingProxyType({"http": ("h2", "http/1.1"), "eventStreamHttp": ("h2",)}),
-        _smithyapi: MappingProxyType(
-            {
-                "origin": "*",
-                "additionalAllowedHeaders": (
-                    "*",
-                    "content-type",
-                    "content-length",
-                    "authorization",
-                    "x-amz-date",
-                    "x-amz-security-token",
-                    "x-amz-content-sha256",
-                    "x-amz-user-agent",
-                    "x-api-key",
-                ),
-                "additionalExposedHeaders": (
-                    "x-amzn-errortype",
-                    "x-amzn-requestid",
-                    "x-amzn-trace-id",
-                    "Access-Control-Allow-Origin",
-                ),
-                "maxAge": 86400,
-            }
-        ),
-    },
 )

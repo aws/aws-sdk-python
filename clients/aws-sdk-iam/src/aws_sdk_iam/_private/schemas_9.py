@@ -28,6 +28,7 @@ _Pa = "Path"
 _RN = "RoleName"
 _D = "Description"
 _MSD = "MaxSessionDuration"
+_MSSD = "MaxSigninSessionDuration"
 _Ta = "Tags"
 _OIDCPA = "OpenIDConnectProviderArn"
 _GN = "GroupName"
@@ -115,6 +116,7 @@ _UGO = "UpdateGroupOutput"
 _UG = "UpdateGroup"
 _ULPI = "UpdateLoginProfileInput"
 _cULPR = "com.amazonaws.iam#UpdateLoginProfileRequest"
+_RMSSD = "ResetMaxSigninSessionDuration"
 _ULPO = "UpdateLoginProfileOutput"
 _ULP = "UpdateLoginProfile"
 _UOIDCPTI = "UpdateOpenIDConnectProviderThumbprintInput"
@@ -557,10 +559,12 @@ UPDATE_LOGIN_PROFILE_INPUT: StaticSchema = (
     n0,
     _ULPI,
     {_sSI: _cULPR, _s: None},
-    (_UN, _Pas, _PRR),
+    (_UN, _Pas, _PRR, _MSSD, _RMSSD),
     (
         (lambda: schemas.USER_NAME_TYPE, 1),
         (lambda: schemas.PASSWORD_TYPE, 0),
+        (lambda: schemas.BOOLEAN_OBJECT_TYPE, 0),
+        (lambda: schemas.MAX_SIGNIN_SESSION_DURATION_TYPE, 0),
         (lambda: schemas.BOOLEAN_OBJECT_TYPE, 0),
     ),
 )
@@ -576,6 +580,7 @@ UPDATE_LOGIN_PROFILE: StaticOperationSchema = (
     UPDATE_LOGIN_PROFILE_OUTPUT,
     (
         lambda: schemas.ENTITY_TEMPORARILY_UNMODIFIABLE_EXCEPTION,
+        lambda: schemas.INVALID_INPUT_EXCEPTION,
         lambda: schemas.LIMIT_EXCEEDED_EXCEPTION,
         lambda: schemas.NO_SUCH_ENTITY_EXCEPTION,
         lambda: schemas.PASSWORD_POLICY_VIOLATION_EXCEPTION,
@@ -619,11 +624,13 @@ UPDATE_ROLE_INPUT: StaticSchema = (
     n0,
     _URIp,
     {_sSI: _cURRo, _s: None},
-    (_RN, _D, _MSD),
+    (_RN, _D, _MSD, _MSSD, _RMSSD),
     (
         (lambda: schemas.ROLE_NAME_TYPE, 1),
         (lambda: schemas.ROLE_DESCRIPTION_TYPE, 0),
         (lambda: schemas.ROLE_MAX_SESSION_DURATION_TYPE, 0),
+        (lambda: schemas.MAX_SIGNIN_SESSION_DURATION_TYPE, 0),
+        (lambda: schemas.BOOLEAN_OBJECT_TYPE, 0),
     ),
 )
 
@@ -637,6 +644,7 @@ UPDATE_ROLE: StaticOperationSchema = (
     UPDATE_ROLE_INPUT,
     UPDATE_ROLE_OUTPUT,
     (
+        lambda: schemas.INVALID_INPUT_EXCEPTION,
         lambda: schemas.NO_SUCH_ENTITY_EXCEPTION,
         lambda: schemas.SERVICE_FAILURE_EXCEPTION,
         lambda: schemas.UNMODIFIABLE_ENTITY_EXCEPTION,

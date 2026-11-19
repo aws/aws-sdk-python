@@ -58,6 +58,7 @@ from ._private.models_00 import (
     AccountVpcEncryptionControlMode as AccountVpcEncryptionControlMode,
     AccountVpcEncryptionControlState as AccountVpcEncryptionControlState,
     ActiveInstance as ActiveInstance,
+    ActiveVpnTunnelAdditionalKeyExchange as ActiveVpnTunnelAdditionalKeyExchange,
     ActiveVpnTunnelStatus as ActiveVpnTunnelStatus,
     ActivityStatus as ActivityStatus,
     AddedPrincipal as AddedPrincipal,
@@ -66,6 +67,10 @@ from ._private.models_00 import (
     AddIpamOrganizationalUnitExclusion as AddIpamOrganizationalUnitExclusion,
     AddIpamOrganizationalUnitExclusionDict as AddIpamOrganizationalUnitExclusionDict,
     AdditionalDetail as AdditionalDetail,
+    AdditionalKeyExchangeMethodsListValue as AdditionalKeyExchangeMethodsListValue,
+    AdditionalKeyExchangeMethodsRequestListValue as AdditionalKeyExchangeMethodsRequestListValue,
+    AdditionalKeyExchangeMethodsRequestListValueDict as AdditionalKeyExchangeMethodsRequestListValueDict,
+    AdditionalKeyExchangeRequirement as AdditionalKeyExchangeRequirement,
     AddPrefixListEntry as AddPrefixListEntry,
     AddPrefixListEntryDict as AddPrefixListEntryDict,
     Address as Address,
@@ -153,6 +158,7 @@ from ._private.models_00 import (
     AssociateDhcpOptionsInput as AssociateDhcpOptionsInput,
     AssociateDhcpOptionsInputDict as AssociateDhcpOptionsInputDict,
     AssociateDhcpOptionsOutput as AssociateDhcpOptionsOutput,
+    AssociatedKmsKey as AssociatedKmsKey,
     AssociatedNetworkType as AssociatedNetworkType,
     AssociatedRole as AssociatedRole,
     AssociatedTargetNetwork as AssociatedTargetNetwork,
@@ -171,6 +177,9 @@ from ._private.models_00 import (
     AssociateIpamResourceDiscoveryInput as AssociateIpamResourceDiscoveryInput,
     AssociateIpamResourceDiscoveryInputDict as AssociateIpamResourceDiscoveryInputDict,
     AssociateIpamResourceDiscoveryOutput as AssociateIpamResourceDiscoveryOutput,
+    AssociateKmsKeyIdInput as AssociateKmsKeyIdInput,
+    AssociateKmsKeyIdInputDict as AssociateKmsKeyIdInputDict,
+    AssociateKmsKeyIdOutput as AssociateKmsKeyIdOutput,
     AssociateNatGatewayAddressInput as AssociateNatGatewayAddressInput,
     AssociateNatGatewayAddressInputDict as AssociateNatGatewayAddressInputDict,
     AssociateNatGatewayAddressOutput as AssociateNatGatewayAddressOutput,
@@ -328,6 +337,9 @@ from ._private.models_00 import (
     CancelledSpotInstanceRequest as CancelledSpotInstanceRequest,
     CancelReservedInstancesListingInput as CancelReservedInstancesListingInput,
     CancelReservedInstancesListingInputDict as CancelReservedInstancesListingInputDict,
+)
+
+from ._private.models_01 import (
     CancelReservedInstancesListingOutput as CancelReservedInstancesListingOutput,
     CancelSpotFleetRequestsError as CancelSpotFleetRequestsError,
     CancelSpotFleetRequestsErrorItem as CancelSpotFleetRequestsErrorItem,
@@ -337,9 +349,6 @@ from ._private.models_00 import (
     CancelSpotFleetRequestsSuccessItem as CancelSpotFleetRequestsSuccessItem,
     CancelSpotInstanceRequestsInput as CancelSpotInstanceRequestsInput,
     CancelSpotInstanceRequestsInputDict as CancelSpotInstanceRequestsInputDict,
-)
-
-from ._private.models_01 import (
     CancelSpotInstanceRequestsOutput as CancelSpotInstanceRequestsOutput,
     CancelSpotInstanceRequestState as CancelSpotInstanceRequestState,
     CapacityAllocation as CapacityAllocation,
@@ -348,8 +357,11 @@ from ._private.models_01 import (
     CapacityBlockExtension as CapacityBlockExtension,
     CapacityBlockExtensionOffering as CapacityBlockExtensionOffering,
     CapacityBlockExtensionStatus as CapacityBlockExtensionStatus,
+    CapacityBlockInstanceTypePreference as CapacityBlockInstanceTypePreference,
+    CapacityBlockInstanceTypePreferenceDict as CapacityBlockInstanceTypePreferenceDict,
     CapacityBlockInterconnectStatus as CapacityBlockInterconnectStatus,
     CapacityBlockOffering as CapacityBlockOffering,
+    CapacityBlockOfferingSegment as CapacityBlockOfferingSegment,
     CapacityBlockResourceState as CapacityBlockResourceState,
     CapacityBlockStatus as CapacityBlockStatus,
     CapacityManagerCondition as CapacityManagerCondition,
@@ -661,6 +673,9 @@ from ._private.models_01 import (
     CreateNetworkingFlexCostAllocationPolicyOutput as CreateNetworkingFlexCostAllocationPolicyOutput,
     CreateNetworkInsightsAccessScopeInput as CreateNetworkInsightsAccessScopeInput,
     CreateNetworkInsightsAccessScopeInputDict as CreateNetworkInsightsAccessScopeInputDict,
+)
+
+from ._private.models_02 import (
     CreateNetworkInsightsAccessScopeOutput as CreateNetworkInsightsAccessScopeOutput,
     CreateNetworkInsightsPathInput as CreateNetworkInsightsPathInput,
     CreateNetworkInsightsPathInputDict as CreateNetworkInsightsPathInputDict,
@@ -671,12 +686,11 @@ from ._private.models_01 import (
     CreateNetworkInterfacePermissionInput as CreateNetworkInterfacePermissionInput,
     CreateNetworkInterfacePermissionInputDict as CreateNetworkInterfacePermissionInputDict,
     CreateNetworkInterfacePermissionOutput as CreateNetworkInterfacePermissionOutput,
+    CreatePeeringConnectionOptionsRequest as CreatePeeringConnectionOptionsRequest,
+    CreatePeeringConnectionOptionsRequestDict as CreatePeeringConnectionOptionsRequestDict,
     CreatePlacementGroupInput as CreatePlacementGroupInput,
     CreatePlacementGroupInputDict as CreatePlacementGroupInputDict,
     CreatePlacementGroupOutput as CreatePlacementGroupOutput,
-)
-
-from ._private.models_02 import (
     CreatePublicIpv4PoolInput as CreatePublicIpv4PoolInput,
     CreatePublicIpv4PoolInputDict as CreatePublicIpv4PoolInputDict,
     CreatePublicIpv4PoolOutput as CreatePublicIpv4PoolOutput,
@@ -767,6 +781,9 @@ from ._private.models_02 import (
     CreateTransitGatewayMulticastDomainOutput as CreateTransitGatewayMulticastDomainOutput,
     CreateTransitGatewayMulticastDomainRequestOptions as CreateTransitGatewayMulticastDomainRequestOptions,
     CreateTransitGatewayMulticastDomainRequestOptionsDict as CreateTransitGatewayMulticastDomainRequestOptionsDict,
+    CreateTransitGatewayNetworkFunctionAttachmentInput as CreateTransitGatewayNetworkFunctionAttachmentInput,
+    CreateTransitGatewayNetworkFunctionAttachmentInputDict as CreateTransitGatewayNetworkFunctionAttachmentInputDict,
+    CreateTransitGatewayNetworkFunctionAttachmentOutput as CreateTransitGatewayNetworkFunctionAttachmentOutput,
     CreateTransitGatewayOutput as CreateTransitGatewayOutput,
     CreateTransitGatewayPeeringAttachmentInput as CreateTransitGatewayPeeringAttachmentInput,
     CreateTransitGatewayPeeringAttachmentInputDict as CreateTransitGatewayPeeringAttachmentInputDict,
@@ -1033,6 +1050,9 @@ from ._private.models_02 import (
     DeleteNetworkInsightsAnalysisOutput as DeleteNetworkInsightsAnalysisOutput,
     DeleteNetworkInsightsPathInput as DeleteNetworkInsightsPathInput,
     DeleteNetworkInsightsPathInputDict as DeleteNetworkInsightsPathInputDict,
+)
+
+from ._private.models_03 import (
     DeleteNetworkInsightsPathOutput as DeleteNetworkInsightsPathOutput,
     DeleteNetworkInterfaceInput as DeleteNetworkInterfaceInput,
     DeleteNetworkInterfaceInputDict as DeleteNetworkInterfaceInputDict,
@@ -1050,9 +1070,6 @@ from ._private.models_02 import (
     DeleteQueuedReservedInstancesErrorCode as DeleteQueuedReservedInstancesErrorCode,
     DeleteQueuedReservedInstancesInput as DeleteQueuedReservedInstancesInput,
     DeleteQueuedReservedInstancesInputDict as DeleteQueuedReservedInstancesInputDict,
-)
-
-from ._private.models_03 import (
     DeleteQueuedReservedInstancesOutput as DeleteQueuedReservedInstancesOutput,
     DeleteRouteInput as DeleteRouteInput,
     DeleteRouteInputDict as DeleteRouteInputDict,
@@ -1126,6 +1143,9 @@ from ._private.models_03 import (
     DeleteTransitGatewayMulticastDomainInput as DeleteTransitGatewayMulticastDomainInput,
     DeleteTransitGatewayMulticastDomainInputDict as DeleteTransitGatewayMulticastDomainInputDict,
     DeleteTransitGatewayMulticastDomainOutput as DeleteTransitGatewayMulticastDomainOutput,
+    DeleteTransitGatewayNetworkFunctionAttachmentInput as DeleteTransitGatewayNetworkFunctionAttachmentInput,
+    DeleteTransitGatewayNetworkFunctionAttachmentInputDict as DeleteTransitGatewayNetworkFunctionAttachmentInputDict,
+    DeleteTransitGatewayNetworkFunctionAttachmentOutput as DeleteTransitGatewayNetworkFunctionAttachmentOutput,
     DeleteTransitGatewayOutput as DeleteTransitGatewayOutput,
     DeleteTransitGatewayPeeringAttachmentInput as DeleteTransitGatewayPeeringAttachmentInput,
     DeleteTransitGatewayPeeringAttachmentInputDict as DeleteTransitGatewayPeeringAttachmentInputDict,
@@ -1405,6 +1425,9 @@ from ._private.models_03 import (
     DescribeImageReferencesOutput as DescribeImageReferencesOutput,
     DescribeImagesInput as DescribeImagesInput,
     DescribeImagesInputDict as DescribeImagesInputDict,
+)
+
+from ._private.models_04 import (
     DescribeImagesOutput as DescribeImagesOutput,
     DescribeImageUsageReportEntriesInput as DescribeImageUsageReportEntriesInput,
     DescribeImageUsageReportEntriesInputDict as DescribeImageUsageReportEntriesInputDict,
@@ -1426,9 +1449,6 @@ from ._private.models_03 import (
     DescribeInstanceConnectEndpointsOutput as DescribeInstanceConnectEndpointsOutput,
     DescribeInstanceCreditSpecificationsInput as DescribeInstanceCreditSpecificationsInput,
     DescribeInstanceCreditSpecificationsInputDict as DescribeInstanceCreditSpecificationsInputDict,
-)
-
-from ._private.models_04 import (
     DescribeInstanceCreditSpecificationsOutput as DescribeInstanceCreditSpecificationsOutput,
     DescribeInstanceEventNotificationAttributesInput as DescribeInstanceEventNotificationAttributesInput,
     DescribeInstanceEventNotificationAttributesInputDict as DescribeInstanceEventNotificationAttributesInputDict,
@@ -1721,6 +1741,9 @@ from ._private.models_04 import (
     DescribeTransitGatewayMulticastDomainsInput as DescribeTransitGatewayMulticastDomainsInput,
     DescribeTransitGatewayMulticastDomainsInputDict as DescribeTransitGatewayMulticastDomainsInputDict,
     DescribeTransitGatewayMulticastDomainsOutput as DescribeTransitGatewayMulticastDomainsOutput,
+    DescribeTransitGatewayNetworkFunctionAttachmentsInput as DescribeTransitGatewayNetworkFunctionAttachmentsInput,
+    DescribeTransitGatewayNetworkFunctionAttachmentsInputDict as DescribeTransitGatewayNetworkFunctionAttachmentsInputDict,
+    DescribeTransitGatewayNetworkFunctionAttachmentsOutput as DescribeTransitGatewayNetworkFunctionAttachmentsOutput,
     DescribeTransitGatewayPeeringAttachmentsInput as DescribeTransitGatewayPeeringAttachmentsInput,
     DescribeTransitGatewayPeeringAttachmentsInputDict as DescribeTransitGatewayPeeringAttachmentsInputDict,
     DescribeTransitGatewayPeeringAttachmentsOutput as DescribeTransitGatewayPeeringAttachmentsOutput,
@@ -1780,6 +1803,9 @@ from ._private.models_04 import (
     DescribeVpcBlockPublicAccessOptionsOutput as DescribeVpcBlockPublicAccessOptionsOutput,
     DescribeVpcClassicLinkDnsSupportInput as DescribeVpcClassicLinkDnsSupportInput,
     DescribeVpcClassicLinkDnsSupportInputDict as DescribeVpcClassicLinkDnsSupportInputDict,
+)
+
+from ._private.models_05 import (
     DescribeVpcClassicLinkDnsSupportOutput as DescribeVpcClassicLinkDnsSupportOutput,
     DescribeVpcClassicLinkInput as DescribeVpcClassicLinkInput,
     DescribeVpcClassicLinkInputDict as DescribeVpcClassicLinkInputDict,
@@ -1804,9 +1830,6 @@ from ._private.models_04 import (
     DescribeVpcEndpointServicePermissionsOutput as DescribeVpcEndpointServicePermissionsOutput,
     DescribeVpcEndpointServicesInput as DescribeVpcEndpointServicesInput,
     DescribeVpcEndpointServicesInputDict as DescribeVpcEndpointServicesInputDict,
-)
-
-from ._private.models_05 import (
     DescribeVpcEndpointServicesOutput as DescribeVpcEndpointServicesOutput,
     DescribeVpcEndpointsInput as DescribeVpcEndpointsInput,
     DescribeVpcEndpointsInputDict as DescribeVpcEndpointsInputDict,
@@ -1961,6 +1984,9 @@ from ._private.models_05 import (
     DisassociateIpamResourceDiscoveryInput as DisassociateIpamResourceDiscoveryInput,
     DisassociateIpamResourceDiscoveryInputDict as DisassociateIpamResourceDiscoveryInputDict,
     DisassociateIpamResourceDiscoveryOutput as DisassociateIpamResourceDiscoveryOutput,
+    DisassociateKmsKeyIdInput as DisassociateKmsKeyIdInput,
+    DisassociateKmsKeyIdInputDict as DisassociateKmsKeyIdInputDict,
+    DisassociateKmsKeyIdOutput as DisassociateKmsKeyIdOutput,
     DisassociateNatGatewayAddressInput as DisassociateNatGatewayAddressInput,
     DisassociateNatGatewayAddressInputDict as DisassociateNatGatewayAddressInputDict,
     DisassociateNatGatewayAddressOutput as DisassociateNatGatewayAddressOutput,
@@ -2136,6 +2162,9 @@ from ._private.models_05 import (
     EnclaveOptions as EnclaveOptions,
     EnclaveOptionsRequest as EnclaveOptionsRequest,
     EnclaveOptionsRequestDict as EnclaveOptionsRequestDict,
+)
+
+from ._private.models_06 import (
     EncryptionStateValue as EncryptionStateValue,
     EncryptionSupport as EncryptionSupport,
     EncryptionSupportOptionValue as EncryptionSupportOptionValue,
@@ -2157,9 +2186,6 @@ from ._private.models_05 import (
     ExportImageInput as ExportImageInput,
     ExportImageInputDict as ExportImageInputDict,
     ExportImageOutput as ExportImageOutput,
-)
-
-from ._private.models_06 import (
     ExportImageTask as ExportImageTask,
     ExportTask as ExportTask,
     ExportTaskS3Location as ExportTaskS3Location,
@@ -2489,6 +2515,9 @@ from ._private.models_06 import (
     GetTransitGatewayRouteTableAssociationsInput as GetTransitGatewayRouteTableAssociationsInput,
     GetTransitGatewayRouteTableAssociationsInputDict as GetTransitGatewayRouteTableAssociationsInputDict,
     GetTransitGatewayRouteTableAssociationsOutput as GetTransitGatewayRouteTableAssociationsOutput,
+)
+
+from ._private.models_07 import (
     GetTransitGatewayRouteTablePropagationsInput as GetTransitGatewayRouteTablePropagationsInput,
     GetTransitGatewayRouteTablePropagationsInputDict as GetTransitGatewayRouteTablePropagationsInputDict,
     GetTransitGatewayRouteTablePropagationsOutput as GetTransitGatewayRouteTablePropagationsOutput,
@@ -2515,9 +2544,6 @@ from ._private.models_06 import (
     GetVpnTunnelReplacementStatusOutput as GetVpnTunnelReplacementStatusOutput,
     GpuDeviceInfo as GpuDeviceInfo,
     GpuDeviceMemoryInfo as GpuDeviceMemoryInfo,
-)
-
-from ._private.models_07 import (
     GpuInfo as GpuInfo,
     GroupBy as GroupBy,
     GroupIdentifier as GroupIdentifier,
@@ -2796,6 +2822,9 @@ from ._private.models_07 import (
     IpamPoolSourceResource as IpamPoolSourceResource,
     IpamPoolSourceResourceRequest as IpamPoolSourceResourceRequest,
     IpamPoolSourceResourceRequestDict as IpamPoolSourceResourceRequestDict,
+)
+
+from ._private.models_08 import (
     IpamPoolSourceResourceType as IpamPoolSourceResourceType,
     IpamPoolState as IpamPoolState,
     IpamPrefixListResolver as IpamPrefixListResolver,
@@ -2816,9 +2845,6 @@ from ._private.models_07 import (
     IpamPublicAddressAssociationStatus as IpamPublicAddressAssociationStatus,
     IpamPublicAddressAwsService as IpamPublicAddressAwsService,
     IpamPublicAddressSecurityGroup as IpamPublicAddressSecurityGroup,
-)
-
-from ._private.models_08 import (
     IpamPublicAddressTag as IpamPublicAddressTag,
     IpamPublicAddressTags as IpamPublicAddressTags,
     IpamPublicAddressType as IpamPublicAddressType,
@@ -3123,6 +3149,9 @@ from ._private.models_08 import (
     ModifyInstancePlacementOutput as ModifyInstancePlacementOutput,
     ModifyIpamInput as ModifyIpamInput,
     ModifyIpamInputDict as ModifyIpamInputDict,
+)
+
+from ._private.models_09 import (
     ModifyIpamOutput as ModifyIpamOutput,
     ModifyIpamPolicyAllocationRulesInput as ModifyIpamPolicyAllocationRulesInput,
     ModifyIpamPolicyAllocationRulesInputDict as ModifyIpamPolicyAllocationRulesInputDict,
@@ -3150,9 +3179,6 @@ from ._private.models_08 import (
     ModifyIpamRoutingPolicyRegistrationOutput as ModifyIpamRoutingPolicyRegistrationOutput,
     ModifyIpamScopeInput as ModifyIpamScopeInput,
     ModifyIpamScopeInputDict as ModifyIpamScopeInputDict,
-)
-
-from ._private.models_09 import (
     ModifyIpamScopeOutput as ModifyIpamScopeOutput,
     ModifyLaunchTemplateInput as ModifyLaunchTemplateInput,
     ModifyLaunchTemplateInputDict as ModifyLaunchTemplateInputDict,
@@ -3219,9 +3245,17 @@ from ._private.models_09 import (
     ModifyTransitGatewayMeteringPolicyInput as ModifyTransitGatewayMeteringPolicyInput,
     ModifyTransitGatewayMeteringPolicyInputDict as ModifyTransitGatewayMeteringPolicyInputDict,
     ModifyTransitGatewayMeteringPolicyOutput as ModifyTransitGatewayMeteringPolicyOutput,
+    ModifyTransitGatewayNetworkFunctionAttachmentInput as ModifyTransitGatewayNetworkFunctionAttachmentInput,
+    ModifyTransitGatewayNetworkFunctionAttachmentInputDict as ModifyTransitGatewayNetworkFunctionAttachmentInputDict,
+    ModifyTransitGatewayNetworkFunctionAttachmentOutput as ModifyTransitGatewayNetworkFunctionAttachmentOutput,
     ModifyTransitGatewayOptions as ModifyTransitGatewayOptions,
     ModifyTransitGatewayOptionsDict as ModifyTransitGatewayOptionsDict,
     ModifyTransitGatewayOutput as ModifyTransitGatewayOutput,
+    ModifyTransitGatewayPeeringAttachmentInput as ModifyTransitGatewayPeeringAttachmentInput,
+    ModifyTransitGatewayPeeringAttachmentInputDict as ModifyTransitGatewayPeeringAttachmentInputDict,
+    ModifyTransitGatewayPeeringAttachmentOutput as ModifyTransitGatewayPeeringAttachmentOutput,
+    ModifyTransitGatewayPeeringAttachmentRequestOptions as ModifyTransitGatewayPeeringAttachmentRequestOptions,
+    ModifyTransitGatewayPeeringAttachmentRequestOptionsDict as ModifyTransitGatewayPeeringAttachmentRequestOptionsDict,
     ModifyTransitGatewayPolicyTableEntryInput as ModifyTransitGatewayPolicyTableEntryInput,
     ModifyTransitGatewayPolicyTableEntryInputDict as ModifyTransitGatewayPolicyTableEntryInputDict,
     ModifyTransitGatewayPolicyTableEntryOutput as ModifyTransitGatewayPolicyTableEntryOutput,
@@ -3343,6 +3377,8 @@ from ._private.models_09 import (
     MoveStatus as MoveStatus,
     MovingAddressStatus as MovingAddressStatus,
     MulticastSupportValue as MulticastSupportValue,
+    MultipathResilienceMode as MultipathResilienceMode,
+    MultipathResilienceStatus as MultipathResilienceStatus,
     NatFlexCostAllocationPolicyDocument as NatFlexCostAllocationPolicyDocument,
     NatFlexCostAllocationPolicyDocumentDict as NatFlexCostAllocationPolicyDocumentDict,
     NatGateway as NatGateway,
@@ -3442,6 +3478,7 @@ from ._private.models_09 import (
     PerformanceStatusSummary as PerformanceStatusSummary,
     PeriodType as PeriodType,
     PermissionGroup as PermissionGroup,
+    PermissionType as PermissionType,
     Phase1DHGroupNumbersListValue as Phase1DHGroupNumbersListValue,
     Phase1DHGroupNumbersRequestListValue as Phase1DHGroupNumbersRequestListValue,
     Phase1DHGroupNumbersRequestListValueDict as Phase1DHGroupNumbersRequestListValueDict,
@@ -3465,6 +3502,9 @@ from ._private.models_09 import (
     PlacementDict as PlacementDict,
     PlacementGroup as PlacementGroup,
     PlacementGroupInfo as PlacementGroupInfo,
+)
+
+from ._private.models_10 import (
     PlacementGroupState as PlacementGroupState,
     PlacementGroupStrategy as PlacementGroupStrategy,
     PlacementResponse as PlacementResponse,
@@ -3496,9 +3536,6 @@ from ._private.models_09 import (
     ProcessorInfo as ProcessorInfo,
     ProductCode as ProductCode,
     ProductCodeValues as ProductCodeValues,
-)
-
-from ._private.models_10 import (
     PropagatingVgw as PropagatingVgw,
     Protocol as Protocol,
     ProtocolValue as ProtocolValue,
@@ -3803,6 +3840,9 @@ from ._private.models_10 import (
     ScheduledInstancesEbsDict as ScheduledInstancesEbsDict,
     ScheduledInstancesIamInstanceProfile as ScheduledInstancesIamInstanceProfile,
     ScheduledInstancesIamInstanceProfileDict as ScheduledInstancesIamInstanceProfileDict,
+)
+
+from ._private.models_11 import (
     ScheduledInstancesIpv6Address as ScheduledInstancesIpv6Address,
     ScheduledInstancesIpv6AddressDict as ScheduledInstancesIpv6AddressDict,
     ScheduledInstancesLaunchSpecification as ScheduledInstancesLaunchSpecification,
@@ -3839,9 +3879,6 @@ from ._private.models_10 import (
     SecondaryNetworkState as SecondaryNetworkState,
     SecondaryNetworkType as SecondaryNetworkType,
     SecondarySubnet as SecondarySubnet,
-)
-
-from ._private.models_11 import (
     SecondarySubnetCidrBlockAssociationState as SecondarySubnetCidrBlockAssociationState,
     SecondarySubnetIpv4CidrBlockAssociation as SecondarySubnetIpv4CidrBlockAssociation,
     SecondarySubnetState as SecondarySubnetState,
@@ -4083,8 +4120,11 @@ from ._private.models_11 import (
     TransitGatewayNatRuleRequest as TransitGatewayNatRuleRequest,
     TransitGatewayNatRuleRequestDict as TransitGatewayNatRuleRequestDict,
     TransitGatewayNatRuleState as TransitGatewayNatRuleState,
+    TransitGatewayNetworkFunctionAttachment as TransitGatewayNetworkFunctionAttachment,
     TransitGatewayOptions as TransitGatewayOptions,
     TransitGatewayPeeringAttachment as TransitGatewayPeeringAttachment,
+    TransitGatewayPeeringAttachmentMultipathResilienceMode as TransitGatewayPeeringAttachmentMultipathResilienceMode,
+    TransitGatewayPeeringAttachmentMultipathResilienceStatus as TransitGatewayPeeringAttachmentMultipathResilienceStatus,
     TransitGatewayPeeringAttachmentOptions as TransitGatewayPeeringAttachmentOptions,
     TransitGatewayPolicyRule as TransitGatewayPolicyRule,
     TransitGatewayPolicyRuleMetaData as TransitGatewayPolicyRuleMetaData,
@@ -4108,6 +4148,9 @@ from ._private.models_11 import (
     TransitGatewayRouteAttachment as TransitGatewayRouteAttachment,
     TransitGatewayRouteState as TransitGatewayRouteState,
     TransitGatewayRouteTable as TransitGatewayRouteTable,
+)
+
+from ._private.models_12 import (
     TransitGatewayRouteTableAnnouncement as TransitGatewayRouteTableAnnouncement,
     TransitGatewayRouteTableAnnouncementDirection as TransitGatewayRouteTableAnnouncementDirection,
     TransitGatewayRouteTableAnnouncementState as TransitGatewayRouteTableAnnouncementState,
@@ -4142,9 +4185,6 @@ from ._private.models_11 import (
     UnmonitorInstancesOutput as UnmonitorInstancesOutput,
     UnsuccessfulAssociationResponseObject as UnsuccessfulAssociationResponseObject,
     UnsuccessfulInstanceCreditSpecificationErrorCode as UnsuccessfulInstanceCreditSpecificationErrorCode,
-)
-
-from ._private.models_12 import (
     UnsuccessfulInstanceCreditSpecificationItem as UnsuccessfulInstanceCreditSpecificationItem,
     UnsuccessfulInstanceCreditSpecificationItemError as UnsuccessfulInstanceCreditSpecificationItemError,
     UnsuccessfulItem as UnsuccessfulItem,
@@ -4278,6 +4318,9 @@ from ._private.models_12 import (
     VpcPeeringConnectionVpcInfo as VpcPeeringConnectionVpcInfo,
     VpcState as VpcState,
     VpcTenancy as VpcTenancy,
+    VpnAdditionalKeyExchange as VpnAdditionalKeyExchange,
+    VpnAdditionalKeyExchangeRequest as VpnAdditionalKeyExchangeRequest,
+    VpnAdditionalKeyExchangeRequestDict as VpnAdditionalKeyExchangeRequestDict,
     VpnConcentrator as VpnConcentrator,
     VpnConcentratorType as VpnConcentratorType,
     VpnConnection as VpnConnection,
@@ -4395,6 +4438,7 @@ ASSOCIATE_IPAM_BYOASN: APIOperation[AssociateIpamByoasnInput, AssociateIpamByoas
 ASSOCIATE_IPAM_RESOURCE_DISCOVERY: APIOperation[
     AssociateIpamResourceDiscoveryInput, AssociateIpamResourceDiscoveryOutput
 ]
+ASSOCIATE_KMS_KEY_ID: APIOperation[AssociateKmsKeyIdInput, AssociateKmsKeyIdOutput]
 ASSOCIATE_NAT_GATEWAY_ADDRESS: APIOperation[
     AssociateNatGatewayAddressInput, AssociateNatGatewayAddressOutput
 ]
@@ -4722,6 +4766,10 @@ CREATE_TRANSIT_GATEWAY_METERING_POLICY_ENTRY: APIOperation[
 CREATE_TRANSIT_GATEWAY_MULTICAST_DOMAIN: APIOperation[
     CreateTransitGatewayMulticastDomainInput, CreateTransitGatewayMulticastDomainOutput
 ]
+CREATE_TRANSIT_GATEWAY_NETWORK_FUNCTION_ATTACHMENT: APIOperation[
+    CreateTransitGatewayNetworkFunctionAttachmentInput,
+    CreateTransitGatewayNetworkFunctionAttachmentOutput,
+]
 CREATE_TRANSIT_GATEWAY_PEERING_ATTACHMENT: APIOperation[
     CreateTransitGatewayPeeringAttachmentInput,
     CreateTransitGatewayPeeringAttachmentOutput,
@@ -4987,6 +5035,10 @@ DELETE_TRANSIT_GATEWAY_METERING_POLICY_ENTRY: APIOperation[
 ]
 DELETE_TRANSIT_GATEWAY_MULTICAST_DOMAIN: APIOperation[
     DeleteTransitGatewayMulticastDomainInput, DeleteTransitGatewayMulticastDomainOutput
+]
+DELETE_TRANSIT_GATEWAY_NETWORK_FUNCTION_ATTACHMENT: APIOperation[
+    DeleteTransitGatewayNetworkFunctionAttachmentInput,
+    DeleteTransitGatewayNetworkFunctionAttachmentOutput,
 ]
 DELETE_TRANSIT_GATEWAY_PEERING_ATTACHMENT: APIOperation[
     DeleteTransitGatewayPeeringAttachmentInput,
@@ -5534,6 +5586,10 @@ DESCRIBE_TRANSIT_GATEWAY_MULTICAST_DOMAINS: APIOperation[
     DescribeTransitGatewayMulticastDomainsInput,
     DescribeTransitGatewayMulticastDomainsOutput,
 ]
+DESCRIBE_TRANSIT_GATEWAY_NETWORK_FUNCTION_ATTACHMENTS: APIOperation[
+    DescribeTransitGatewayNetworkFunctionAttachmentsInput,
+    DescribeTransitGatewayNetworkFunctionAttachmentsOutput,
+]
 DESCRIBE_TRANSIT_GATEWAY_PEERING_ATTACHMENTS: APIOperation[
     DescribeTransitGatewayPeeringAttachmentsInput,
     DescribeTransitGatewayPeeringAttachmentsOutput,
@@ -5747,6 +5803,9 @@ DISASSOCIATE_IPAM_BYOASN: APIOperation[
 ]
 DISASSOCIATE_IPAM_RESOURCE_DISCOVERY: APIOperation[
     DisassociateIpamResourceDiscoveryInput, DisassociateIpamResourceDiscoveryOutput
+]
+DISASSOCIATE_KMS_KEY_ID: APIOperation[
+    DisassociateKmsKeyIdInput, DisassociateKmsKeyIdOutput
 ]
 DISASSOCIATE_NAT_GATEWAY_ADDRESS: APIOperation[
     DisassociateNatGatewayAddressInput, DisassociateNatGatewayAddressOutput
@@ -6316,6 +6375,14 @@ MODIFY_TRANSIT_GATEWAY_ATTACHMENT_NAT_CONFIGURATION: APIOperation[
 ]
 MODIFY_TRANSIT_GATEWAY_METERING_POLICY: APIOperation[
     ModifyTransitGatewayMeteringPolicyInput, ModifyTransitGatewayMeteringPolicyOutput
+]
+MODIFY_TRANSIT_GATEWAY_NETWORK_FUNCTION_ATTACHMENT: APIOperation[
+    ModifyTransitGatewayNetworkFunctionAttachmentInput,
+    ModifyTransitGatewayNetworkFunctionAttachmentOutput,
+]
+MODIFY_TRANSIT_GATEWAY_PEERING_ATTACHMENT: APIOperation[
+    ModifyTransitGatewayPeeringAttachmentInput,
+    ModifyTransitGatewayPeeringAttachmentOutput,
 ]
 MODIFY_TRANSIT_GATEWAY_POLICY_TABLE_ENTRY: APIOperation[
     ModifyTransitGatewayPolicyTableEntryInput,

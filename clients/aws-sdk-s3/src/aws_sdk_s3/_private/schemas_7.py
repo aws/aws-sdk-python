@@ -29,8 +29,11 @@ _xarp = "x-amz-request-payer"
 _EBO = "ExpectedBucketOwner"
 _xaebo = "x-amz-expected-bucket-owner"
 _RC = "RequestCharged"
+_OVI = "ObjectVersionId"
 _smi = "smithy.api#output"
 _xarc = "x-amz-request-charged"
+_VI = "VersionId"
+_xavi = "x-amz-version-id"
 _smit = "smithy.api#error"
 _c = "client"
 _sE = "smithy.api#httpError"
@@ -77,11 +80,8 @@ _BKE = "BucketKeyEnabled"
 _Ex = "Expiration"
 _SSE = "ServerSideEncryption"
 _SSEKMSKI = "SSEKMSKeyId"
-_OVI = "ObjectVersionId"
 _xae = "x-amz-expiration"
 _xasse = "x-amz-server-side-encryption"
-_VI = "VersionId"
-_xavi = "x-amz-version-id"
 _xasseakki = "x-amz-server-side-encryption-aws-kms-key-id"
 _xassebke = "x-amz-server-side-encryption-bucket-key-enabled"
 _CC = "CacheControl"
@@ -154,6 +154,7 @@ _Si = "Size"
 _Pr = "Prefix"
 _ETn = "EncryptionType"
 _En = "Encryption"
+_RCe = "ReplicationConfiguration"
 _Pay = "Payer"
 _RPC = "RequestPaymentConfiguration"
 _VCe = "VersioningConfiguration"
@@ -177,7 +178,12 @@ _OLC = "ObjectLockConfiguration"
 _Ret = "Retention"
 _PABC = "PublicAccessBlockConfiguration"
 _Tok = "Token"
+_OLT = "ObjectLockToken"
+_PBRI = "PutBucketReplicationInput"
+_cPBRR = "com.amazonaws.s3#PutBucketReplicationRequest"
 _xabolt = "x-amz-bucket-object-lock-token"
+_PBRO = "PutBucketReplicationOutput"
+_PBR = "PutBucketReplication"
 _PBRPI = "PutBucketRequestPaymentInput"
 _cPBRPR = "com.amazonaws.s3#PutBucketRequestPaymentRequest"
 _PBRPO = "PutBucketRequestPaymentOutput"
@@ -276,11 +282,52 @@ _ME = "MetadataEntry"
 _UM = "UserMetadata"
 _SL = "S3Location"
 _CACL = "CannedACL"
-_OLu = "OutputLocation"
-_S_ = "S3"
-_Expr = "Expression"
-_ETx = "ExpressionType"
-_SQL = "SQL"
+
+OBJECT_LOCK_TOKEN: StaticSchema = (3, n0, _OLT, 0)
+
+PUT_BUCKET_REPLICATION_INPUT: StaticSchema = (
+    18,
+    n0,
+    _PBRI,
+    {_sSI: _cPBRR, _s: None},
+    (_B, _CMDo, _CA, _RCe, _Tok, _EBO),
+    (
+        (
+            lambda: schemas.BUCKET_NAME,
+            {_sP: MappingProxyType({"name": "Bucket"}), _sm: None, _sL: None},
+        ),
+        (lambda: schemas.CONTENT_MD5, {_sH: _CM}),
+        (lambda: schemas.CHECKSUM_ALGORITHM, {_sH: _xasca}),
+        (lambda: schemas.REPLICATION_CONFIGURATION, {_sN: _RCe, _sm: None, _sPm: None}),
+        (OBJECT_LOCK_TOKEN, {_sH: _xabolt}),
+        (lambda: schemas.ACCOUNT_ID, {_sH: _xaebo}),
+    ),
+)
+
+PUT_BUCKET_REPLICATION_OUTPUT: StaticSchema = (18, n0, _PBRO, {_sSI: _sU, _smi: None})
+
+PUT_BUCKET_REPLICATION: StaticOperationSchema = (
+    23,
+    n0,
+    _PBR,
+    {
+        _aC: MappingProxyType(
+            {
+                "requestAlgorithmMember": "ChecksumAlgorithm",
+                "requestChecksumRequired": True,
+            }
+        ),
+        _sCP: MappingProxyType(
+            {"UseS3ExpressControlEndpoint": MappingProxyType({"value": True})}
+        ),
+        _smith: MappingProxyType(
+            {"method": "PUT", "uri": "/?replication", "code": 200}
+        ),
+    },
+    PUT_BUCKET_REPLICATION_INPUT,
+    PUT_BUCKET_REPLICATION_OUTPUT,
+    (),
+)
 
 REQUEST_PAYMENT_CONFIGURATION: StaticSchema = (
     18,
@@ -948,7 +995,7 @@ PUT_OBJECT_LOCK_CONFIGURATION_INPUT: StaticSchema = (
         ),
         (lambda: schemas.OBJECT_LOCK_CONFIGURATION, {_sN: _OLC, _sPm: None}),
         (lambda: schemas.REQUEST_PAYER, {_sH: _xarp}),
-        (lambda: schemas.OBJECT_LOCK_TOKEN, {_sH: _xabolt}),
+        (OBJECT_LOCK_TOKEN, {_sH: _xabolt}),
         (lambda: schemas.CONTENT_MD5, {_sH: _CM}),
         (lambda: schemas.CHECKSUM_ALGORITHM, {_sH: _xasca}),
         (lambda: schemas.ACCOUNT_ID, {_sH: _xaebo}),
@@ -1254,9 +1301,3 @@ S3_LOCATION: StaticSchema = (
         (lambda: schemas.STORAGE_CLASS, 0),
     ),
 )
-
-OUTPUT_LOCATION: StaticSchema = (18, n0, _OLu, 0, (_S_,), ((S3_LOCATION, 0),))
-
-EXPRESSION: StaticSchema = (3, n0, _Expr, 0)
-
-EXPRESSION_TYPE: StaticSchema = (14, n0, _ETx, 0, (_SQL,), ((-1, {_sV: _SQL}),))

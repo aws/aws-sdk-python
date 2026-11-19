@@ -85,8 +85,14 @@ _MR = "MaxResults"
 _SRDt = "StackResourceDrift"
 _EN = "ExportName"
 _OTN = "OriginalTypeName"
+_TTSD = "TypeTestsStatusDescription"
 _RTegi = "RegistrationToken"
-_RSeg = "RegistrationStatus"
+_DTRI = "DescribeTypeRegistrationInput"
+_RSegi = "RegistrationStatus"
+_DTRO = "DescribeTypeRegistrationOutput"
+_PSr = "ProgressStatus"
+_TVA = "TypeVersionArn"
+_DTR = "DescribeTypeRegistration"
 _LRIo = "LogicalResourceIds"
 _DSDI = "DetectStackDriftInput"
 _DSDO = "DetectStackDriftOutput"
@@ -206,14 +212,48 @@ _SRc = "ScannedResource"
 _RRel = "RelatedResources"
 _LRSRRO = "ListResourceScanRelatedResourcesOutput"
 _LRSRR = "ListResourceScanRelatedResources"
-_RTP = "ResourceTypePrefix"
+
+TYPE_TESTS_STATUS_DESCRIPTION: StaticSchema = (3, n0, _TTSD, 0)
 
 REGISTRATION_TOKEN: StaticSchema = (3, n0, _RTegi, 0)
+
+DESCRIBE_TYPE_REGISTRATION_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DTRI,
+    {_s: None},
+    (_RTegi,),
+    ((REGISTRATION_TOKEN, {_sO: None, _smit: None}),),
+)
+
+DESCRIBE_TYPE_REGISTRATION_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DTRO,
+    {_sm: None},
+    (_PSr, _Des, _TA, _TVA),
+    (
+        (lambda: REGISTRATION_STATUS, 0),
+        (lambda: schemas.DESCRIPTION, 0),
+        (lambda: schemas.TYPE_ARN, 0),
+        (lambda: schemas.TYPE_ARN, 0),
+    ),
+)
+
+DESCRIBE_TYPE_REGISTRATION: StaticOperationSchema = (
+    23,
+    n0,
+    _DTR,
+    0,
+    DESCRIBE_TYPE_REGISTRATION_INPUT,
+    DESCRIBE_TYPE_REGISTRATION_OUTPUT,
+    (lambda: schemas.CFN_REGISTRY_EXCEPTION,),
+)
 
 REGISTRATION_STATUS: StaticSchema = (
     14,
     n0,
-    _RSeg,
+    _RSegi,
     0,
     (_COMPLETE, _IP, _FAILED),
     ((-1, {_sV: _COMPLETE}), (-1, {_sV: _IP}), (-1, {_sV: _FAILED})),
@@ -1153,7 +1193,3 @@ SCANNED_RESOURCE: StaticSchema = (
 )
 
 RELATED_RESOURCES: StaticSchema = (16, n0, _RRel, 0, (_m,), ((SCANNED_RESOURCE, 0),))
-
-RESOURCE_IDENTIFIER: StaticSchema = (3, n0, _RI, 0)
-
-RESOURCE_TYPE_PREFIX: StaticSchema = (3, n0, _RTP, 0)

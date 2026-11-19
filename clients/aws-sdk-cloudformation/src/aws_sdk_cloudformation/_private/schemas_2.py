@@ -30,6 +30,7 @@ _TN = "TypeName"
 _T = "Type"
 _Ar = "Arn"
 _AD = "AutoDeployment"
+_Ti = "Timestamp"
 _CA = "CallAs"
 _CRT = "ClientRequestToken"
 _SN = "StackName"
@@ -40,10 +41,14 @@ _CSI = "ChangeSetId"
 _Me = "Metadata"
 _Ta = "Tags"
 _LRI = "LogicalResourceId"
+_PRI = "PhysicalResourceId"
 _Rea = "Reason"
 _SRDS = "StackResourceDriftStatus"
 _DELETED = "DELETED"
+_RT = "ResourceType"
 _Cha = "Changes"
+_HFM = "HookFailureMode"
+_HIP = "HookInvocationPoint"
 _TVI = "TypeVersionId"
 _CSN = "ChangeSetName"
 _CIP = "CREATE_IN_PROGRESS"
@@ -71,21 +76,19 @@ _RCo = "RollbackConfiguration"
 _TB = "TemplateBody"
 _TURL = "TemplateURL"
 _GTN = "GeneratedTemplateName"
+_TCe = "TemplateConfiguration"
+_Reso = "Resources"
+_GTI = "GeneratedTemplateId"
 _OI = "OperationId"
 _DT = "DeploymentTargets"
 _Acc = "Accounts"
 _SSN = "StackSetName"
-_CSII = "CreateStackInstancesInput"
 _Regi = "Regions"
-_PO = "ParameterOverrides"
 _OP = "OperationPreferences"
 _sT = "smithy.api#idempotencyToken"
-_CSIO = "CreateStackInstancesOutput"
-_OIAEE = "OperationIdAlreadyExistsException"
 _OIPE = "OperationInProgressException"
 _SSNFE = "StackSetNotFoundException"
 _SRE = "StaleRequestException"
-_CSIre = "CreateStackInstances"
 _ESC = "EnableStackCreation"
 _RLes = "ResourceLocation"
 _RMe = "ResourceMapping"
@@ -216,10 +219,21 @@ _VN = "ValidationName"
 _VP = "ValidationPath"
 _VS = "ValidationStatus"
 _VSR = "ValidationStatusReason"
+_OE = "OperationEvent"
+_OS = "OperationStatus"
+_ST = "StartTime"
+_ETn = "EndTime"
+_VFM = "ValidationFailureMode"
 _OEp = "OperationEvents"
 _DEO = "DescribeEventsOutput"
 _DE = "DescribeEvents"
+_DGTIe = "DescribeGeneratedTemplateInput"
+_LUT = "LastUpdatedTime"
 _TSR = "TemplateStatusReason"
+_TW = "TotalWarnings"
+_DGTOe = "DescribeGeneratedTemplateOutput"
+_Pr = "Progress"
+_DGTe = "DescribeGeneratedTemplate"
 _HII = "HookInvocationId"
 _SINFE = "StackInstanceNotFoundException"
 _SRDI = "StackResourceDriftInformation"
@@ -229,68 +243,6 @@ _EN = "ExportName"
 _SSS = "StackSetStatus"
 _ACTIVE = "ACTIVE"
 _SSNOI = "StackSetNameOrId"
-_RSMR = "ResourceScannerMaxResults"
-
-STACK_SET_NAME: StaticSchema = (3, n0, _SSN, 0)
-
-CREATE_STACK_INSTANCES_INPUT: StaticSchema = (
-    18,
-    n0,
-    _CSII,
-    {_s: None},
-    (_SSN, _Acc, _DT, _Regi, _PO, _OP, _OI, _CA),
-    (
-        (STACK_SET_NAME, {_sO: None, _smit: None}),
-        (lambda: schemas.ACCOUNT_LIST, 0),
-        (lambda: schemas.DEPLOYMENT_TARGETS, 0),
-        (lambda: schemas.REGION_LIST, {_sO: None, _smit: None}),
-        (lambda: schemas.PARAMETERS, 0),
-        (lambda: schemas.STACK_SET_OPERATION_PREFERENCES, 0),
-        (lambda: schemas.CLIENT_REQUEST_TOKEN, 2),
-        (lambda: schemas.CALL_AS, 0),
-    ),
-)
-
-CREATE_STACK_INSTANCES_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _CSIO,
-    {_sm: None},
-    (_OI,),
-    ((lambda: schemas.CLIENT_REQUEST_TOKEN, 0),),
-)
-
-CREATE_STACK_INSTANCES: StaticOperationSchema = (
-    23,
-    n0,
-    _CSIre,
-    0,
-    CREATE_STACK_INSTANCES_INPUT,
-    CREATE_STACK_INSTANCES_OUTPUT,
-    (
-        lambda: schemas.INVALID_OPERATION_EXCEPTION,
-        lambda: schemas.LIMIT_EXCEEDED_EXCEPTION,
-        lambda: OPERATION_ID_ALREADY_EXISTS_EXCEPTION,
-        lambda: OPERATION_IN_PROGRESS_EXCEPTION,
-        lambda: STACK_SET_NOT_FOUND_EXCEPTION,
-        lambda: STALE_REQUEST_EXCEPTION,
-    ),
-)
-
-OPERATION_ID_ALREADY_EXISTS_EXCEPTION: StaticSchema = (
-    18,
-    n0,
-    _OIAEE,
-    {
-        _smi: _c,
-        _sE: 409,
-        _aQE: MappingProxyType(
-            {"code": "OperationIdAlreadyExistsException", "httpResponseCode": 409}
-        ),
-    },
-    (_M,),
-    ((lambda: schemas.ERROR_MESSAGE, 0),),
-)
 
 OPERATION_IN_PROGRESS_EXCEPTION: StaticSchema = (
     18,
@@ -473,7 +425,7 @@ CREATE_STACK_SET_INPUT: StaticSchema = (
         _ME,
     ),
     (
-        (STACK_SET_NAME, {_sO: None, _smit: None}),
+        (lambda: schemas.STACK_SET_NAME, {_sO: None, _smit: None}),
         (lambda: schemas.DESCRIPTION, 0),
         (lambda: schemas.TEMPLATE_BODY, 0),
         (lambda: schemas.TEMPLATE_URL, 0),
@@ -676,7 +628,7 @@ DELETE_STACK_INSTANCES_INPUT: StaticSchema = (
     {_s: None},
     (_SSN, _Acc, _DT, _Regi, _OP, _RS, _OI, _CA),
     (
-        (STACK_SET_NAME, {_sO: None, _smit: None}),
+        (lambda: schemas.STACK_SET_NAME, {_sO: None, _smit: None}),
         (lambda: schemas.ACCOUNT_LIST, 0),
         (lambda: schemas.DEPLOYMENT_TARGETS, 0),
         (lambda: schemas.REGION_LIST, {_sO: None, _smit: None}),
@@ -705,7 +657,7 @@ DELETE_STACK_INSTANCES: StaticOperationSchema = (
     DELETE_STACK_INSTANCES_OUTPUT,
     (
         lambda: schemas.INVALID_OPERATION_EXCEPTION,
-        OPERATION_ID_ALREADY_EXISTS_EXCEPTION,
+        lambda: schemas.OPERATION_ID_ALREADY_EXISTS_EXCEPTION,
         OPERATION_IN_PROGRESS_EXCEPTION,
         STACK_SET_NOT_FOUND_EXCEPTION,
         STALE_REQUEST_EXCEPTION,
@@ -718,7 +670,10 @@ DELETE_STACK_SET_INPUT: StaticSchema = (
     _DSSI,
     {_s: None},
     (_SSN, _CA),
-    ((STACK_SET_NAME, {_sO: None, _smit: None}), (lambda: schemas.CALL_AS, 0)),
+    (
+        (lambda: schemas.STACK_SET_NAME, {_sO: None, _smit: None}),
+        (lambda: schemas.CALL_AS, 0),
+    ),
 )
 
 DELETE_STACK_SET_OUTPUT: StaticSchema = (18, n0, _DSSO, {_sm: None})
@@ -966,7 +921,7 @@ DESCRIBE_EVENTS_OUTPUT: StaticSchema = (
     _DEO,
     {_sm: None},
     (_OEp, _NT),
-    ((lambda: schemas.OPERATION_EVENTS, 0), (NEXT_TOKEN, 0)),
+    ((lambda: OPERATION_EVENTS, 0), (NEXT_TOKEN, 0)),
 )
 
 DESCRIBE_EVENTS: StaticOperationSchema = (
@@ -1120,6 +1075,115 @@ VALIDATION_STATUS: StaticSchema = (
 
 VALIDATION_STATUS_REASON: StaticSchema = (3, n0, _VSR, 0)
 
+OPERATION_EVENT: StaticSchema = (
+    18,
+    n0,
+    _OE,
+    0,
+    (
+        _EI,
+        _SI,
+        _OI,
+        _OT,
+        _OS,
+        _ETv,
+        _LRI,
+        _PRI,
+        _RT,
+        _Ti,
+        _ST,
+        _ETn,
+        _RSe,
+        _RSR,
+        _RP,
+        _CRT,
+        _HT,
+        _HS,
+        _HSR,
+        _HIP,
+        _HFM,
+        _DSe,
+        _VFM,
+        _VN,
+        _VS,
+        _VSR,
+        _VP,
+    ),
+    (
+        (EVENT_ID, 0),
+        (lambda: schemas.STACK_ID, 0),
+        (lambda: schemas.OPERATION_ID, 0),
+        (OPERATION_TYPE, 0),
+        (lambda: schemas.BEACON_STACK_OPERATION_STATUS, 0),
+        (EVENT_TYPE, 0),
+        (lambda: schemas.LOGICAL_RESOURCE_ID, 0),
+        (lambda: schemas.PHYSICAL_RESOURCE_ID, 0),
+        (lambda: schemas.RESOURCE_TYPE, 0),
+        (lambda: schemas.TIMESTAMP, 0),
+        (lambda: schemas.TIMESTAMP, 0),
+        (lambda: schemas.TIMESTAMP, 0),
+        (RESOURCE_STATUS, 0),
+        (RESOURCE_STATUS_REASON, 0),
+        (RESOURCE_PROPERTIES, 0),
+        (lambda: schemas.CLIENT_REQUEST_TOKEN, 0),
+        (HOOK_TYPE, 0),
+        (HOOK_STATUS, 0),
+        (HOOK_STATUS_REASON, 0),
+        (lambda: schemas.HOOK_INVOCATION_POINT, 0),
+        (lambda: schemas.HOOK_FAILURE_MODE, 0),
+        (DETAILED_STATUS, 0),
+        (lambda: schemas.HOOK_FAILURE_MODE, 0),
+        (VALIDATION_NAME, 0),
+        (VALIDATION_STATUS, 0),
+        (VALIDATION_STATUS_REASON, 0),
+        (VALIDATION_PATH, 0),
+    ),
+)
+
+OPERATION_EVENTS: StaticSchema = (16, n0, _OEp, 0, (_m,), ((OPERATION_EVENT, 0),))
+
+DESCRIBE_GENERATED_TEMPLATE_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DGTIe,
+    {_s: None},
+    (_GTN,),
+    ((lambda: schemas.GENERATED_TEMPLATE_NAME, {_sO: None, _smit: None}),),
+)
+
+DESCRIBE_GENERATED_TEMPLATE_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DGTOe,
+    {_sm: None},
+    (_GTI, _GTN, _Reso, _S, _SR, _CTr, _LUT, _Pr, _SI, _TCe, _TW),
+    (
+        (lambda: schemas.GENERATED_TEMPLATE_ID, 0),
+        (lambda: schemas.GENERATED_TEMPLATE_NAME, 0),
+        (lambda: schemas.RESOURCE_DETAILS, 0),
+        (lambda: schemas.GENERATED_TEMPLATE_STATUS, 0),
+        (lambda: TEMPLATE_STATUS_REASON, 0),
+        (lambda: schemas.CREATION_TIME, 0),
+        (lambda: LAST_UPDATED_TIME, 0),
+        (lambda: schemas.TEMPLATE_PROGRESS, 0),
+        (lambda: schemas.STACK_ID, 0),
+        (lambda: schemas.TEMPLATE_CONFIGURATION, 0),
+        (lambda: schemas.TOTAL_WARNINGS, 0),
+    ),
+)
+
+DESCRIBE_GENERATED_TEMPLATE: StaticOperationSchema = (
+    23,
+    n0,
+    _DGTe,
+    0,
+    DESCRIBE_GENERATED_TEMPLATE_INPUT,
+    DESCRIBE_GENERATED_TEMPLATE_OUTPUT,
+    (lambda: schemas.GENERATED_TEMPLATE_NOT_FOUND_EXCEPTION,),
+)
+
+LAST_UPDATED_TIME: StaticSchema = (4, n0, _LUT, 0)
+
 TEMPLATE_STATUS_REASON: StaticSchema = (3, n0, _TSR, 0)
 
 HOOK_INVOCATION_ID: StaticSchema = (3, n0, _HII, 0)
@@ -1169,5 +1233,3 @@ STACK_SET_STATUS: StaticSchema = (
 STACK_SET_NAME_OR_ID: StaticSchema = (3, n0, _SSNOI, 0)
 
 MAX_RESULTS: StaticSchema = (7, n0, _MR, 0)
-
-RESOURCE_SCANNER_MAX_RESULTS: StaticSchema = (7, n0, _RSMR, 0)

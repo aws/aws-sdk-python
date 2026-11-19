@@ -21,18 +21,25 @@ from typing import TYPE_CHECKING
 if TYPE_CHECKING:
     from .models import (
         ActivateSubscriptionOutput,
+        CreateDatasetOutput,
         CreateDomainOutput,
         CreateSubscriptionOutput,
         DeactivateSubscriptionOutput,
+        DeleteDatasetOutput,
         DeleteDomainOutput,
+        GetDatasetOutput,
         GetDomainOutput,
+        GetMedicalCodingJobOutput,
         GetMedicalScribeListeningSessionOutput,
         GetPatientInsightsJobOutput,
         GetSubscriptionOutput,
+        ListDatasetsOutput,
         ListDomainsOutput,
         ListSubscriptionsOutput,
         ListTagsForResourceOutput,
+        StartMedicalCodingJobOutput,
         StartPatientInsightsJobOutput,
+        SubmitFeedbackOutput,
         TagResourceOutput,
         UntagResourceOutput,
     )
@@ -97,6 +104,64 @@ class ConnectHealthClient(Client[ConnectHealthConfig]):
         return self._invoke(
             self._select_input(_models.ACTIVATE_SUBSCRIPTION, args, kwargs),
             _models.ACTIVATE_SUBSCRIPTION,
+            [],
+            plugins,
+        )
+
+    @_overload
+    def create_dataset(
+        self,
+        request: _models.CreateDatasetInput | _models.CreateDatasetInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> CreateDatasetOutput: ...
+
+    @_overload
+    def create_dataset(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.CreateDatasetInputDict],
+    ) -> CreateDatasetOutput:
+        """
+        Creates a Dataset in a Domain and starts building it. A new dataset has
+        the status CREATING. When it's ready to use, its status changes to
+        ACTIVE, or to CREATE_FAILED if it fails to build. To check the status,
+        call GetDataset.
+
+        This operation is idempotent: if you retry a request with the same
+        clientToken, it returns the dataset that the first request created.
+
+        For a medical coding dataset, Amazon Connect Health uses the coded
+        examples that are in the s3InputPath when you create the dataset, and
+        writes evaluation scores to the s3OutputPath. Later changes to the
+        s3InputPath don't change the dataset. To use this operation, you must
+        have s3:GetObject and s3:ListBucket permissions for the input location
+        and s3:PutObject permission for the output location, and kms:Decrypt and
+        kms:GenerateDataKey permissions if you encrypt the locations with an AWS
+        KMS key.
+
+        Datasets are in preview release and are subject to change.
+
+        Args:
+            plugins:
+                A list of callables that modify the configuration dynamically.
+                Changes made by these plugins only apply for the duration of the
+                operation execution and will not affect any other operation
+                invocations.
+
+        Returns:
+            An instance of `CreateDatasetOutput`.
+        """
+
+    def create_dataset(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> CreateDatasetOutput:
+        return self._invoke(
+            self._select_input(_models.CREATE_DATASET, args, kwargs),
+            _models.CREATE_DATASET,
             [],
             plugins,
         )
@@ -227,6 +292,56 @@ class ConnectHealthClient(Client[ConnectHealthConfig]):
         )
 
     @_overload
+    def delete_dataset(
+        self,
+        request: _models.DeleteDatasetInput | _models.DeleteDatasetInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteDatasetOutput: ...
+
+    @_overload
+    def delete_dataset(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteDatasetInputDict],
+    ) -> DeleteDatasetOutput:
+        """
+        Starts deleting a Dataset and the resources that Amazon Connect Health
+        built for it. You can delete a dataset whose status is ACTIVE,
+        CREATE_FAILED, or DELETE_FAILED. The dataset moves to DELETING, and then
+        to DELETED. If the delete fails, the dataset moves to DELETE_FAILED, and
+        you can call DeleteDataset again.
+
+        Medical coding jobs that already use the dataset finish. Amazon Connect
+        Health rejects new requests that specify the dataset.
+
+        Datasets are in preview release and are subject to change.
+
+        Args:
+            plugins:
+                A list of callables that modify the configuration dynamically.
+                Changes made by these plugins only apply for the duration of the
+                operation execution and will not affect any other operation
+                invocations.
+
+        Returns:
+            An instance of `DeleteDatasetOutput`.
+        """
+
+    def delete_dataset(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteDatasetOutput:
+        return self._invoke(
+            self._select_input(_models.DELETE_DATASET, args, kwargs),
+            _models.DELETE_DATASET,
+            [],
+            plugins,
+        )
+
+    @_overload
     def delete_domain(
         self,
         request: _models.DeleteDomainInput | _models.DeleteDomainInputDict,
@@ -268,6 +383,51 @@ class ConnectHealthClient(Client[ConnectHealthConfig]):
         )
 
     @_overload
+    def get_dataset(
+        self,
+        request: _models.GetDatasetInput | _models.GetDatasetInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetDatasetOutput: ...
+
+    @_overload
+    def get_dataset(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetDatasetInputDict],
+    ) -> GetDatasetOutput:
+        """
+        Retrieves information about a Dataset, including its status and, after
+        it is built, its results. A dataset whose status is DELETED returns
+        ResourceNotFoundException.
+
+        Datasets are in preview release and are subject to change.
+
+        Args:
+            plugins:
+                A list of callables that modify the configuration dynamically.
+                Changes made by these plugins only apply for the duration of the
+                operation execution and will not affect any other operation
+                invocations.
+
+        Returns:
+            An instance of `GetDatasetOutput`.
+        """
+
+    def get_dataset(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetDatasetOutput:
+        return self._invoke(
+            self._select_input(_models.GET_DATASET, args, kwargs),
+            _models.GET_DATASET,
+            [],
+            plugins,
+        )
+
+    @_overload
     def get_domain(
         self,
         request: _models.GetDomainInput | _models.GetDomainInputDict,
@@ -304,6 +464,51 @@ class ConnectHealthClient(Client[ConnectHealthConfig]):
         return self._invoke(
             self._select_input(_models.GET_DOMAIN, args, kwargs),
             _models.GET_DOMAIN,
+            [],
+            plugins,
+        )
+
+    @_overload
+    def get_medical_coding_job(
+        self,
+        request: _models.GetMedicalCodingJobInput
+        | _models.GetMedicalCodingJobInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetMedicalCodingJobOutput: ...
+
+    @_overload
+    def get_medical_coding_job(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetMedicalCodingJobInputDict],
+    ) -> GetMedicalCodingJobOutput:
+        """
+        Retrieves information about a medical coding job, including its status
+        and, when it succeeds, the location of its results.
+
+        Medical coding jobs are in preview release and are subject to change.
+
+        Args:
+            plugins:
+                A list of callables that modify the configuration dynamically.
+                Changes made by these plugins only apply for the duration of the
+                operation execution and will not affect any other operation
+                invocations.
+
+        Returns:
+            An instance of `GetMedicalCodingJobOutput`.
+        """
+
+    def get_medical_coding_job(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetMedicalCodingJobOutput:
+        return self._invoke(
+            self._select_input(_models.GET_MEDICAL_CODING_JOB, args, kwargs),
+            _models.GET_MEDICAL_CODING_JOB,
             [],
             plugins,
         )
@@ -436,6 +641,53 @@ class ConnectHealthClient(Client[ConnectHealthConfig]):
         )
 
     @_overload
+    def list_datasets(
+        self,
+        request: _models.ListDatasetsInput | _models.ListDatasetsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListDatasetsOutput: ...
+
+    @_overload
+    def list_datasets(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListDatasetsInputDict],
+    ) -> ListDatasetsOutput:
+        """
+        Lists the Datasets in a Domain. You can list only the datasets of one
+        type. The operation doesn't return datasets whose status is DELETED,
+        and the order of the results isn't specified. We recommend using
+        pagination to ensure that the operation returns quickly and
+        successfully.
+
+        Datasets are in preview release and are subject to change.
+
+        Args:
+            plugins:
+                A list of callables that modify the configuration dynamically.
+                Changes made by these plugins only apply for the duration of the
+                operation execution and will not affect any other operation
+                invocations.
+
+        Returns:
+            An instance of `ListDatasetsOutput`.
+        """
+
+    def list_datasets(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListDatasetsOutput:
+        return self._invoke(
+            self._select_input(_models.LIST_DATASETS, args, kwargs),
+            _models.LIST_DATASETS,
+            [],
+            plugins,
+        )
+
+    @_overload
     def list_domains(
         self,
         request: _models.ListDomainsInput | _models.ListDomainsInputDict,
@@ -560,6 +812,57 @@ class ConnectHealthClient(Client[ConnectHealthConfig]):
         )
 
     @_overload
+    def start_medical_coding_job(
+        self,
+        request: _models.StartMedicalCodingJobInput
+        | _models.StartMedicalCodingJobInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> StartMedicalCodingJobOutput: ...
+
+    @_overload
+    def start_medical_coding_job(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.StartMedicalCodingJobInputDict],
+    ) -> StartMedicalCodingJobOutput:
+        """
+        Starts an asynchronous job that generates medical codes (ICD-10 and CPT)
+        for clinical text. Call GetMedicalCodingJob to check the status of the
+        job. When the job succeeds, Amazon Connect Health writes the results to
+        the output Amazon S3 location.
+
+        To tailor the codes to your organization, specify an ACTIVE medical
+        coding dataset in the Domain. If you don't specify a dataset, the job
+        uses the general medical coding knowledge base.
+
+        Medical coding jobs are in preview release and are subject to change.
+
+        Args:
+            plugins:
+                A list of callables that modify the configuration dynamically.
+                Changes made by these plugins only apply for the duration of the
+                operation execution and will not affect any other operation
+                invocations.
+
+        Returns:
+            An instance of `StartMedicalCodingJobOutput`.
+        """
+
+    def start_medical_coding_job(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> StartMedicalCodingJobOutput:
+        return self._invoke(
+            self._select_input(_models.START_MEDICAL_CODING_JOB, args, kwargs),
+            _models.START_MEDICAL_CODING_JOB,
+            [],
+            plugins,
+        )
+
+    @_overload
     def start_patient_insights_job(
         self,
         request: _models.StartPatientInsightsJobInput
@@ -597,6 +900,48 @@ class ConnectHealthClient(Client[ConnectHealthConfig]):
         return self._invoke(
             self._select_input(_models.START_PATIENT_INSIGHTS_JOB, args, kwargs),
             _models.START_PATIENT_INSIGHTS_JOB,
+            [],
+            plugins,
+        )
+
+    @_overload
+    def submit_feedback(
+        self,
+        request: _models.SubmitFeedbackInput | _models.SubmitFeedbackInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> SubmitFeedbackOutput: ...
+
+    @_overload
+    def submit_feedback(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.SubmitFeedbackInputDict],
+    ) -> SubmitFeedbackOutput:
+        """
+        Submits feedback on a clinical document or a set of medical codes that
+        Amazon Connect Health generated.
+
+        Args:
+            plugins:
+                A list of callables that modify the configuration dynamically.
+                Changes made by these plugins only apply for the duration of the
+                operation execution and will not affect any other operation
+                invocations.
+
+        Returns:
+            An instance of `SubmitFeedbackOutput`.
+        """
+
+    def submit_feedback(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> SubmitFeedbackOutput:
+        return self._invoke(
+            self._select_input(_models.SUBMIT_FEEDBACK, args, kwargs),
+            _models.SUBMIT_FEEDBACK,
             [],
             plugins,
         )

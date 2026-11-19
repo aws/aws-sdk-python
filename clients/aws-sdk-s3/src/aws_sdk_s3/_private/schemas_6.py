@@ -29,6 +29,8 @@ _xaebo = "x-amz-expected-bucket-owner"
 _RC = "RequestCharged"
 _smi = "smithy.api#output"
 _xarc = "x-amz-request-charged"
+_VI = "VersionId"
+_xavi = "x-amz-version-id"
 _smith = "smithy.api#http"
 _ARI = "AbortRuleId"
 _AC = "AccelerateConfiguration"
@@ -59,7 +61,6 @@ _sPm = "smithy.api#httpPayload"
 _xasseca = "x-amz-server-side-encryption-customer-algorithm"
 _xasseck = "x-amz-server-side-encryption-customer-key"
 _xasseckM = "x-amz-server-side-encryption-customer-key-MD5"
-_VI = "VersionId"
 _CA = "ChecksumAlgorithm"
 _GFC = "GrantFullControl"
 _GR = "GrantRead"
@@ -130,12 +131,10 @@ _LFCa = "LambdaFunctionConfigurations"
 _CFC = "CloudFunctionConfiguration"
 _OC = "OwnershipControls"
 _Po = "Policy"
-_RCe = "ReplicationConfiguration"
 _MP = "MaxParts"
 _PNM = "PartNumberMarker"
 _ITs = "IsTruncated"
 _NPNM = "NextPartNumberMarker"
-_Tok = "Token"
 _CTon = "ContinuationToken"
 _ct = "continuation-token"
 _NCT = "NextContinuationToken"
@@ -148,9 +147,13 @@ _km = "key-marker"
 _NKM = "NextKeyMarker"
 _Ini = "Initiator"
 _CPom = "CommonPrefixes"
+_Ma = "Marker"
 _MKa = "MaxKeys"
 _OOA = "OptionalObjectAttributes"
 _RSe = "RestoreStatus"
+_LOI = "ListObjectsInput"
+_cLOR = "com.amazonaws.s3#ListObjectsRequest"
+_ma = "marker"
 _mk = "max-keys"
 _xaooa = "x-amz-optional-object-attributes"
 _IRIP = "IsRestoreInProgress"
@@ -158,8 +161,10 @@ _REDe = "RestoreExpiryDate"
 _OSC = "ObjectStorageClass"
 _OL = "ObjectList"
 _NM = "NextMarker"
+_LOO = "ListObjectsOutput"
 _LBR = "ListBucketResult"
 _Cont = "Contents"
+_LO = "ListObjects"
 _FOe = "FetchOwner"
 _SAt = "StartAfter"
 _LOVI = "ListObjectsV2Input"
@@ -255,11 +260,62 @@ _cPBPR = "com.amazonaws.s3#PutBucketPolicyRequest"
 _xacrsba = "x-amz-confirm-remove-self-bucket-access"
 _PBPO = "PutBucketPolicyOutput"
 _PBP = "PutBucketPolicy"
-_PBRI = "PutBucketReplicationInput"
-_cPBRR = "com.amazonaws.s3#PutBucketReplicationRequest"
-_xabolt = "x-amz-bucket-object-lock-token"
-_PBRO = "PutBucketReplicationOutput"
-_PBR = "PutBucketReplication"
+
+LIST_OBJECTS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _LOI,
+    {_sSI: _cLOR, _s: None},
+    (_B, _Deli, _ETnc, _Ma, _MKa, _Pr, _RP, _EBO, _OOA),
+    (
+        (
+            lambda: schemas.BUCKET_NAME,
+            {_sP: MappingProxyType({"name": "Bucket"}), _sm: None, _sL: None},
+        ),
+        (lambda: schemas.DELIMITER, {_sQ: _d}),
+        (lambda: schemas.ENCODING_TYPE, {_sQ: _et}),
+        (lambda: schemas.MARKER, {_sQ: _ma}),
+        (lambda: schemas.MAX_KEYS, {_sQ: _mk}),
+        (
+            lambda: schemas.PREFIX,
+            {_sP: MappingProxyType({"name": "Prefix"}), _sQ: _pre},
+        ),
+        (lambda: schemas.REQUEST_PAYER, {_sH: _xarp}),
+        (lambda: schemas.ACCOUNT_ID, {_sH: _xaebo}),
+        (lambda: schemas.OPTIONAL_OBJECT_ATTRIBUTES_LIST, {_sH: _xaooa}),
+    ),
+)
+
+LIST_OBJECTS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _LOO,
+    {_sN: _LBR, _smi: None},
+    (_ITs, _Ma, _NM, _Cont, _N, _Pr, _Deli, _MKa, _CPom, _ETnc, _RC),
+    (
+        (lambda: schemas.IS_TRUNCATED, 0),
+        (lambda: schemas.MARKER, 0),
+        (lambda: NEXT_MARKER, 0),
+        (lambda: OBJECT_LIST, {_sFm: None}),
+        (lambda: schemas.BUCKET_NAME, 0),
+        (lambda: schemas.PREFIX, 0),
+        (lambda: schemas.DELIMITER, 0),
+        (lambda: schemas.MAX_KEYS, 0),
+        (lambda: schemas.COMMON_PREFIX_LIST, {_sFm: None}),
+        (lambda: schemas.ENCODING_TYPE, 0),
+        (lambda: schemas.REQUEST_CHARGED, {_sH: _xarc}),
+    ),
+)
+
+LIST_OBJECTS: StaticOperationSchema = (
+    23,
+    n0,
+    _LO,
+    {_smith: MappingProxyType({"method": "GET", "uri": "/", "code": 200})},
+    LIST_OBJECTS_INPUT,
+    LIST_OBJECTS_OUTPUT,
+    (lambda: schemas.NO_SUCH_BUCKET,),
+)
 
 IS_RESTORE_IN_PROGRESS: StaticSchema = (2, n0, _IRIP, 0)
 
@@ -550,7 +606,25 @@ LIST_PARTS_OUTPUT: StaticSchema = (
     n0,
     _LPO,
     {_sN: _LPR, _smi: None},
-    (_AD, _ARI, _B, _K, _UI, _PNM, _NPNM, _MP, _ITs, _Pa, _Ini, _O, _SC, _RC, _CA, _CT),
+    (
+        _AD,
+        _ARI,
+        _B,
+        _K,
+        _UI,
+        _PNM,
+        _NPNM,
+        _MP,
+        _ITs,
+        _Pa,
+        _Ini,
+        _O,
+        _SC,
+        _RC,
+        _CA,
+        _CT,
+        _VI,
+    ),
     (
         (lambda: schemas.ABORT_DATE, {_sH: _xaad}),
         (lambda: schemas.ABORT_RULE_ID, {_sH: _xaari}),
@@ -568,6 +642,7 @@ LIST_PARTS_OUTPUT: StaticSchema = (
         (lambda: schemas.REQUEST_CHARGED, {_sH: _xarc}),
         (lambda: schemas.CHECKSUM_ALGORITHM, 0),
         (lambda: schemas.CHECKSUM_TYPE, 0),
+        (lambda: schemas.OBJECT_VERSION_ID, {_sH: _xavi}),
     ),
 )
 
@@ -1254,49 +1329,5 @@ PUT_BUCKET_POLICY: StaticOperationSchema = (
     },
     PUT_BUCKET_POLICY_INPUT,
     PUT_BUCKET_POLICY_OUTPUT,
-    (),
-)
-
-PUT_BUCKET_REPLICATION_INPUT: StaticSchema = (
-    18,
-    n0,
-    _PBRI,
-    {_sSI: _cPBRR, _s: None},
-    (_B, _CMDo, _CA, _RCe, _Tok, _EBO),
-    (
-        (
-            lambda: schemas.BUCKET_NAME,
-            {_sP: MappingProxyType({"name": "Bucket"}), _sm: None, _sL: None},
-        ),
-        (lambda: schemas.CONTENT_MD5, {_sH: _CM}),
-        (lambda: schemas.CHECKSUM_ALGORITHM, {_sH: _xasca}),
-        (lambda: schemas.REPLICATION_CONFIGURATION, {_sN: _RCe, _sm: None, _sPm: None}),
-        (lambda: schemas.OBJECT_LOCK_TOKEN, {_sH: _xabolt}),
-        (lambda: schemas.ACCOUNT_ID, {_sH: _xaebo}),
-    ),
-)
-
-PUT_BUCKET_REPLICATION_OUTPUT: StaticSchema = (18, n0, _PBRO, {_sSI: _sU, _smi: None})
-
-PUT_BUCKET_REPLICATION: StaticOperationSchema = (
-    23,
-    n0,
-    _PBR,
-    {
-        _aC: MappingProxyType(
-            {
-                "requestAlgorithmMember": "ChecksumAlgorithm",
-                "requestChecksumRequired": True,
-            }
-        ),
-        _sCP: MappingProxyType(
-            {"UseS3ExpressControlEndpoint": MappingProxyType({"value": True})}
-        ),
-        _smith: MappingProxyType(
-            {"method": "PUT", "uri": "/?replication", "code": 200}
-        ),
-    },
-    PUT_BUCKET_REPLICATION_INPUT,
-    PUT_BUCKET_REPLICATION_OUTPUT,
     (),
 )

@@ -42,9 +42,12 @@ _EBO = "ExpectedBucketOwner"
 _xaebo = "x-amz-expected-bucket-owner"
 _xaimit = "x-amz-if-match-initiated-time"
 _RC = "RequestCharged"
+_OVI = "ObjectVersionId"
 _AMUO = "AbortMultipartUploadOutput"
 _smi = "smithy.api#output"
 _xarc = "x-amz-request-charged"
+_VI = "VersionId"
+_xavi = "x-amz-version-id"
 _NSU = "NoSuchUpload"
 _smit = "smithy.api#error"
 _c = "client"
@@ -159,13 +162,10 @@ _aws = "aws:kms"
 _akd = "aws_kms_dsse"
 _awsk = "aws:kms:dsse"
 _SSEKMSKI = "SSEKMSKeyId"
-_OVI = "ObjectVersionId"
 _CMUO = "CompleteMultipartUploadOutput"
 _CMUR = "CompleteMultipartUploadResult"
 _xae = "x-amz-expiration"
 _xasse = "x-amz-server-side-encryption"
-_VI = "VersionId"
-_xavi = "x-amz-version-id"
 _xasseakki = "x-amz-server-side-encryption-aws-kms-key-id"
 _xassebke = "x-amz-server-side-encryption-bucket-key-enabled"
 _OCACL = "ObjectCannedACL"
@@ -381,8 +381,11 @@ ABORT_MULTIPART_UPLOAD_OUTPUT: StaticSchema = (
     n0,
     _AMUO,
     {_smi: None},
-    (_RC,),
-    ((lambda: REQUEST_CHARGED, {_sH: _xarc}),),
+    (_RC, _VI),
+    (
+        (lambda: REQUEST_CHARGED, {_sH: _xarc}),
+        (lambda: OBJECT_VERSION_ID, {_sH: _xavi}),
+    ),
 )
 
 ABORT_MULTIPART_UPLOAD: StaticOperationSchema = (
@@ -404,6 +407,8 @@ ABORT_MULTIPART_UPLOAD: StaticOperationSchema = (
 )
 
 REQUEST_CHARGED: StaticSchema = (14, n0, _RC, 0, (_r,), ((-1, {_sV: _r}),))
+
+OBJECT_VERSION_ID: StaticSchema = (3, n0, _OVI, 0)
 
 NO_SUCH_UPLOAD: StaticSchema = (18, n0, _NSU, {_smit: _c, _sE: 404})
 
@@ -741,7 +746,7 @@ COMPLETE_MULTIPART_UPLOAD_OUTPUT: StaticSchema = (
         (CHECKSUM_XXHASH128, 0),
         (CHECKSUM_TYPE, 0),
         (lambda: SERVER_SIDE_ENCRYPTION, {_sH: _xasse}),
-        (lambda: OBJECT_VERSION_ID, {_sH: _xavi}),
+        (OBJECT_VERSION_ID, {_sH: _xavi}),
         (lambda: SSEKMS_KEY_ID, {_sH: _xasseakki}),
         (lambda: BUCKET_KEY_ENABLED, {_sH: _xassebke}),
         (REQUEST_CHARGED, {_sH: _xarc}),
@@ -780,8 +785,6 @@ SERVER_SIDE_ENCRYPTION: StaticSchema = (
 )
 
 SSEKMS_KEY_ID: StaticSchema = (3, n0, _SSEKMSKI, 4)
-
-OBJECT_VERSION_ID: StaticSchema = (3, n0, _OVI, 0)
 
 OBJECT_CANNED_ACL: StaticSchema = (
     14,

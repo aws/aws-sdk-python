@@ -108,7 +108,7 @@ _sIn = "snapshotId"
 _vIR = "volumeInitializationRate"
 _io = "iops"
 _thr = "throughput"
-_tS = "tagSpecifications"
+_tSa = "tagSpecifications"
 _fT = "filesystemType"
 _mEBSV = "managedEBSVolume"
 _lB = "loadBalancers"
@@ -124,8 +124,8 @@ _pF = "platformFamily"
 _fES = "fargateEphemeralStorage"
 _eI = "externalId"
 _sca = "scale"
-_tSa = "taskSets"
-_tSas = "taskSet"
+_tSas = "taskSets"
+_tSask = "taskSet"
 _SRerv = "ServiceRevision"
 _gDE = "guardDutyEnabled"
 _rCes = "resolvedConfiguration"
@@ -963,7 +963,7 @@ TASK_MANAGED_EBS_VOLUME_CONFIGURATION: StaticSchema = (
     n0,
     _TMEBSVC,
     0,
-    (_enc, _kKI, _vT, _sIGB, _sIn, _vIR, _io, _thr, _tS, _rA, _tP, _fT),
+    (_enc, _kKI, _vT, _sIGB, _sIn, _vIR, _io, _thr, _tSa, _rA, _tP, _fT),
     (
         (lambda: schemas.BOXED_BOOLEAN, 0),
         (lambda: schemas.EBSKMS_KEY_ID, 0),
@@ -1234,7 +1234,7 @@ CREATE_TASK_SET_OUTPUT: StaticSchema = (
     n0,
     _CTSO,
     {_sSI: _cCTSRo, _smith: None},
-    (_tSas,),
+    (_tSask,),
     ((lambda: schemas.TASK_SET, 0),),
 )
 
@@ -1266,7 +1266,7 @@ DELETE_TASK_SET_INPUT: StaticSchema = (
     n0,
     _DTSI,
     {_sSI: _cDTSR, _smit: None},
-    (_cl, _ser, _tSas, _fo),
+    (_cl, _ser, _tSask, _fo),
     (
         (lambda: schemas.STRING, 1),
         (lambda: schemas.STRING, 1),
@@ -1280,7 +1280,7 @@ DELETE_TASK_SET_OUTPUT: StaticSchema = (
     n0,
     _DTSO,
     {_sSI: _cDTSRo, _smith: None},
-    (_tSas,),
+    (_tSask,),
     ((lambda: schemas.TASK_SET, 0),),
 )
 
@@ -1314,7 +1314,7 @@ DESCRIBE_TASK_SETS_INPUT: StaticSchema = (
     n0,
     _DTSIe,
     {_sSI: _cDTSRom, _smit: None},
-    (_cl, _ser, _tSa, _incl),
+    (_cl, _ser, _tSas, _incl),
     (
         (lambda: schemas.STRING, 1),
         (lambda: schemas.STRING, 1),
@@ -1328,7 +1328,7 @@ DESCRIBE_TASK_SETS_OUTPUT: StaticSchema = (
     n0,
     _DTSOe,
     {_sSI: _cDTSRoma, _smith: None},
-    (_tSa, _fa),
+    (_tSas, _fa),
     ((lambda: schemas.TASK_SETS, 0), (lambda: schemas.FAILURES, 0)),
 )
 
@@ -1356,7 +1356,7 @@ UPDATE_TASK_SET_INPUT: StaticSchema = (
     n0,
     _UTSI,
     {_sSI: _cUTSR, _smit: None},
-    (_cl, _ser, _tSas, _sca),
+    (_cl, _ser, _tSask, _sca),
     (
         (lambda: schemas.STRING, 1),
         (lambda: schemas.STRING, 1),
@@ -1370,7 +1370,7 @@ UPDATE_TASK_SET_OUTPUT: StaticSchema = (
     n0,
     _UTSO,
     {_sSI: _cUTSRo, _smith: None},
-    (_tSas,),
+    (_tSask,),
     ((lambda: schemas.TASK_SET, 0),),
 )
 

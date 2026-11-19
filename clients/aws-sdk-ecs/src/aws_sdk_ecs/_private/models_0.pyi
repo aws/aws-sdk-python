@@ -12,8 +12,8 @@ from smithy_core.response import ResponseMetadata
 from smithy_core.types import UnknownEnumMixin
 
 from ..models import (
-    GatewayConnectorHealthCheckMatcher,
-    GatewayConnectorHealthCheckMatcherDict,
+    GatewayConnectorHealthCheck,
+    GatewayConnectorHealthCheckDict,
     GatewayElbAccessLogConfiguration,
     GatewayElbNetworkConfiguration,
     GatewayResourceFailure,
@@ -11664,6 +11664,8 @@ class GatewayConnector(_SerdeShape):
     The filters that control which gateway ingress paths the connector
     applies to.
     """
+    deregistration_delay: GatewayConnectorDeregistrationDelay | None = ...
+    """The deregistration delay settings for the targets of this connector."""
 
 class GatewayConnectorDict(TypedDict, total=False):
     """Dictionary form of `GatewayConnector`."""
@@ -11679,6 +11681,36 @@ class GatewayConnectorDict(TypedDict, total=False):
     """
     The filters that control which gateway ingress paths the connector
     applies to.
+    """
+    deregistration_delay: (
+        GatewayConnectorDeregistrationDelay
+        | GatewayConnectorDeregistrationDelayDict
+        | None
+    )
+    """The deregistration delay settings for the targets of this connector."""
+
+@dataclass(kw_only=True)
+class GatewayConnectorDeregistrationDelay(_SerdeShape):
+    """
+    The amount of time to allow in-flight requests to complete before a
+    deregistering target is removed.
+    """
+
+    timeout_seconds: int | None = ...
+    """
+    The amount of time, in seconds, to wait before a deregistering target is
+    removed. A value of `0` removes the target immediately. The valid range
+    is 0-3600 seconds. The default value is 300 seconds.
+    """
+
+class GatewayConnectorDeregistrationDelayDict(TypedDict, total=False):
+    """Dictionary form of `GatewayConnectorDeregistrationDelay`."""
+
+    timeout_seconds: int | None
+    """
+    The amount of time, in seconds, to wait before a deregistering target is
+    removed. A value of `0` removes the target immediately. The valid range
+    is 0-3600 seconds. The default value is 300 seconds.
     """
 
 @dataclass(kw_only=True)
@@ -11713,98 +11745,4 @@ class GatewayConnectorFiltersDict(TypedDict, total=False):
     - `PUBLIC` - The ingress path is publicly accessible.
 
     - `PRIVATE` - The ingress path is only accessible privately.
-    """
-
-@dataclass(kw_only=True)
-class GatewayConnectorHealthCheck(_SerdeShape):
-    """
-    The health check configuration that a gateway uses to evaluate the
-    targets associated with a gateway connector.
-    """
-
-    health_check_protocol: str | None = ...
-    """
-    The protocol that the gateway uses to perform health checks.
-
-    Valid values:
-
-    - `HTTP` - Health checks are performed over HTTP.
-
-    - `HTTPS` - Health checks are performed over HTTPS.
-    """
-    health_check_port: int | None = ...
-    """The port that the gateway uses to perform health checks on the targets."""
-    health_check_path: str | None = ...
-    """The destination path for health check requests."""
-    health_check_timeout_seconds: int | None = ...
-    """
-    The amount of time, in seconds, during which no response from a target
-    means a failed health check.
-    """
-    health_check_interval_seconds: int | None = ...
-    """
-    The approximate amount of time, in seconds, between health checks of an
-    individual target.
-    """
-    healthy_threshold_count: int | None = ...
-    """
-    The number of consecutive successful health checks that a target must
-    pass before the gateway considers it healthy.
-    """
-    unhealthy_threshold_count: int | None = ...
-    """
-    The number of consecutive failed health checks that a target must fail
-    before the gateway considers it unhealthy.
-    """
-    matcher: GatewayConnectorHealthCheckMatcher | None = ...
-    """
-    The HTTP or gRPC codes that indicate a successful health check response
-    from a target.
-    """
-
-class GatewayConnectorHealthCheckDict(TypedDict, total=False):
-    """Dictionary form of `GatewayConnectorHealthCheck`."""
-
-    health_check_protocol: str | None
-    """
-    The protocol that the gateway uses to perform health checks.
-
-    Valid values:
-
-    - `HTTP` - Health checks are performed over HTTP.
-
-    - `HTTPS` - Health checks are performed over HTTPS.
-    """
-    health_check_port: int | None
-    """The port that the gateway uses to perform health checks on the targets."""
-    health_check_path: str | None
-    """The destination path for health check requests."""
-    health_check_timeout_seconds: int | None
-    """
-    The amount of time, in seconds, during which no response from a target
-    means a failed health check.
-    """
-    health_check_interval_seconds: int | None
-    """
-    The approximate amount of time, in seconds, between health checks of an
-    individual target.
-    """
-    healthy_threshold_count: int | None
-    """
-    The number of consecutive successful health checks that a target must
-    pass before the gateway considers it healthy.
-    """
-    unhealthy_threshold_count: int | None
-    """
-    The number of consecutive failed health checks that a target must fail
-    before the gateway considers it unhealthy.
-    """
-    matcher: (
-        GatewayConnectorHealthCheckMatcher
-        | GatewayConnectorHealthCheckMatcherDict
-        | None
-    )
-    """
-    The HTTP or gRPC codes that indicate a successful health check response
-    from a target.
     """

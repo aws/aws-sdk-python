@@ -169,7 +169,7 @@ _cUSPTSR = "com.amazonaws.ecs#UpdateServicePrimaryTaskSetRequest"
 _pTS = "primaryTaskSet"
 _USPTSO = "UpdateServicePrimaryTaskSetOutput"
 _cUSPTSRo = "com.amazonaws.ecs#UpdateServicePrimaryTaskSetResponse"
-_tSas = "taskSet"
+_tSask = "taskSet"
 _USPTS = "UpdateServicePrimaryTaskSet"
 _DSRI = "DescribeServiceRevisionsInput"
 _cDSRR = "com.amazonaws.ecs#DescribeServiceRevisionsRequest"
@@ -761,7 +761,7 @@ UPDATE_SERVICE_PRIMARY_TASK_SET_OUTPUT: StaticSchema = (
     n0,
     _USPTSO,
     {_sSI: _cUSPTSRo, _smith: None},
-    (_tSas,),
+    (_tSask,),
     ((lambda: schemas.TASK_SET, 0),),
 )
 

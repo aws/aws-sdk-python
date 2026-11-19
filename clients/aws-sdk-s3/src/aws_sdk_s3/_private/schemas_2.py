@@ -30,8 +30,11 @@ _xarp = "x-amz-request-payer"
 _EBO = "ExpectedBucketOwner"
 _xaebo = "x-amz-expected-bucket-owner"
 _RC = "RequestCharged"
+_OVI = "ObjectVersionId"
 _smi = "smithy.api#output"
 _xarc = "x-amz-request-charged"
+_VI = "VersionId"
+_xavi = "x-amz-version-id"
 _smit = "smithy.api#error"
 _c = "client"
 _sE = "smithy.api#httpError"
@@ -58,9 +61,6 @@ _sFm = "smithy.api#xmlFlattened"
 _sPm = "smithy.api#httpPayload"
 _IM_ = "If-Match"
 _BKE = "BucketKeyEnabled"
-_OVI = "ObjectVersionId"
-_VI = "VersionId"
-_xavi = "x-amz-version-id"
 _CA = "ChecksumAlgorithm"
 _OLLHS = "ObjectLockLegalHoldStatus"
 _OLM = "ObjectLockMode"
@@ -268,6 +268,8 @@ _cGBLCR = "com.amazonaws.s3#GetBucketLifecycleConfigurationRequest"
 _Dat = "Date"
 _EODM = "ExpiredObjectDeleteMarker"
 _LE = "LifecycleExpiration"
+_OSGTB = "ObjectSizeGreaterThanBytes"
+_OSLTB = "ObjectSizeLessThanBytes"
 _TDMOS = "TransitionDefaultMinimumObjectSize"
 _GBLCO = "GetBucketLifecycleConfigurationOutput"
 _LCi = "LifecycleConfiguration"
@@ -1457,6 +1459,10 @@ LIFECYCLE_EXPIRATION: StaticSchema = (
         (EXPIRED_OBJECT_DELETE_MARKER, 0),
     ),
 )
+
+OBJECT_SIZE_GREATER_THAN_BYTES: StaticSchema = (8, n0, _OSGTB, 0)
+
+OBJECT_SIZE_LESS_THAN_BYTES: StaticSchema = (8, n0, _OSLTB, 0)
 
 REPLICATION_STATUS: StaticSchema = (
     14,

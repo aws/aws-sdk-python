@@ -9,19 +9,24 @@ from smithy_core.response import ResponseMetadata
 
 from ..models import (
     ActiveInstance,
-    AllowedPrincipal,
     AttributeBooleanValue,
     AttributeValue,
     Byoasn,
-    ClassicLinkDnsSupport,
-    ConnectionNotification,
     CreateVolumePermission,
+    Ec2InstanceConnectEndpoint,
+    EnclaveOptions,
     Filter,
     FilterDict,
     FlexCostAllocationPolicyAssociationDescription,
     FlexCostAllocationPolicyDescription,
     GroupIdentifier,
     HistoryRecord,
+    Image,
+    ImageUsageReport,
+    ImageUsageReportEntry,
+    ImportImageTask,
+    ImportSnapshotTask,
+    InstanceBlockDeviceMapping,
     InstanceCreditSpecification,
     InstanceEventWindow,
     InstanceImageMetadata,
@@ -96,7 +101,6 @@ from ..models import (
     SecurityGroupReference,
     SecurityGroupRule,
     SecurityGroupVpcAssociation,
-    ServiceConfiguration,
     ServiceLinkVirtualInterface,
     SlotDateTimeRangeRequest,
     SlotDateTimeRangeRequestDict,
@@ -122,6 +126,7 @@ from ..models import (
     TransitGatewayConnectPeer,
     TransitGatewayMeteringPolicy,
     TransitGatewayMulticastDomain,
+    TransitGatewayNetworkFunctionAttachment,
     TransitGatewayPeeringAttachment,
     TransitGatewayPolicyTable,
     TransitGatewayRouteTable,
@@ -138,12 +143,709 @@ from ..models import (
     VolumeStatusItem,
     VpcBlockPublicAccessExclusion,
     VpcBlockPublicAccessOptions,
-    VpcClassicLink,
-    VpcEncryptionControl,
-    VpcEndpointAssociation,
-    VpcEndpointConnection,
     _SerdeShape,
 )
+
+@dataclass(kw_only=True)
+class DescribeImagesOutput(_SerdeShape):
+    """Dataclass for DescribeImagesOutput structure."""
+
+    next_token: str | None = ...
+    """
+    The token to include in another request to get the next page of items.
+    This value is `null` when there are no more items to return.
+    """
+    images: list[Image] | None = ...
+    """Information about the images."""
+    response_metadata: ResponseMetadata = ...
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+@dataclass(kw_only=True)
+class DescribeImageUsageReportEntriesInput(_SerdeShape):
+    """Dataclass for DescribeImageUsageReportEntriesInput structure."""
+
+    image_ids: list[str] | None = ...
+    """
+    The IDs of the images for filtering the report entries. If specified,
+    only report entries containing these images are returned.
+    """
+    report_ids: list[str] | None = ...
+    """The IDs of the usage reports."""
+    next_token: str | None = ...
+    """
+    The token returned from a previous paginated request. Pagination
+    continues from the end of the items returned by the previous request.
+    """
+    filters: list[Filter] | None = ...
+    """
+    The filters.
+
+    - `account-id` - A 12-digit Amazon Web Services account ID.
+
+    - `creation-time` - The time when the report was created, in the ISO
+      8601 format in the UTC time zone (YYYY-MM-DDThh:mm:ss.sssZ), for
+      example, `2025-11-29T11:04:43.305Z`. You can use a wildcard (`*`), for
+      example, `2025-11-29T*`, which matches an entire day.
+
+    - `resource-type` - The resource type (`ec2:Instance` |
+      `ec2:LaunchTemplate` | `imagebuilder:ImageRecipe` |
+      `imagebuilder:ContainerRecipe`).
+    """
+    dry_run: bool | None = ...
+    """
+    Checks whether you have the required permissions for the action, without
+    actually making the request, and provides an error response. If you have
+    the required permissions, the error response is `DryRunOperation`.
+    Otherwise, it is `UnauthorizedOperation`.
+    """
+    max_results: int | None = ...
+    """
+    The maximum number of items to return for this request. To get the next
+    page of items, make another request with the token returned in the
+    output. For more information, see
+    [Pagination](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination).
+    """
+
+class DescribeImageUsageReportEntriesInputDict(TypedDict, total=False):
+    """Dictionary form of `DescribeImageUsageReportEntriesInput`."""
+
+    image_ids: Sequence[str] | None
+    """
+    The IDs of the images for filtering the report entries. If specified,
+    only report entries containing these images are returned.
+    """
+    report_ids: Sequence[str] | None
+    """The IDs of the usage reports."""
+    next_token: str | None
+    """
+    The token returned from a previous paginated request. Pagination
+    continues from the end of the items returned by the previous request.
+    """
+    filters: Sequence[Filter | FilterDict] | None
+    """
+    The filters.
+
+    - `account-id` - A 12-digit Amazon Web Services account ID.
+
+    - `creation-time` - The time when the report was created, in the ISO
+      8601 format in the UTC time zone (YYYY-MM-DDThh:mm:ss.sssZ), for
+      example, `2025-11-29T11:04:43.305Z`. You can use a wildcard (`*`), for
+      example, `2025-11-29T*`, which matches an entire day.
+
+    - `resource-type` - The resource type (`ec2:Instance` |
+      `ec2:LaunchTemplate` | `imagebuilder:ImageRecipe` |
+      `imagebuilder:ContainerRecipe`).
+    """
+    dry_run: bool | None
+    """
+    Checks whether you have the required permissions for the action, without
+    actually making the request, and provides an error response. If you have
+    the required permissions, the error response is `DryRunOperation`.
+    Otherwise, it is `UnauthorizedOperation`.
+    """
+    max_results: int | None
+    """
+    The maximum number of items to return for this request. To get the next
+    page of items, make another request with the token returned in the
+    output. For more information, see
+    [Pagination](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination).
+    """
+
+@dataclass(kw_only=True)
+class DescribeImageUsageReportEntriesOutput(_SerdeShape):
+    """Dataclass for DescribeImageUsageReportEntriesOutput structure."""
+
+    next_token: str | None = ...
+    """
+    The token to include in another request to get the next page of items.
+    This value is `null` when there are no more items to return.
+    """
+    image_usage_report_entries: list[ImageUsageReportEntry] | None = ...
+    """The content of the usage reports."""
+    response_metadata: ResponseMetadata = ...
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+@dataclass(kw_only=True)
+class DescribeImageUsageReportsInput(_SerdeShape):
+    """Dataclass for DescribeImageUsageReportsInput structure."""
+
+    image_ids: list[str] | None = ...
+    """
+    The IDs of the images for filtering the reports. If specified, only
+    reports containing these images are returned.
+    """
+    report_ids: list[str] | None = ...
+    """The IDs of the image usage reports."""
+    next_token: str | None = ...
+    """
+    The token returned from a previous paginated request. Pagination
+    continues from the end of the items returned by the previous request.
+    """
+    filters: list[Filter] | None = ...
+    """
+    The filters.
+
+    - `creation-time` - The time when the report was created, in the ISO
+      8601 format in the UTC time zone (YYYY-MM-DDThh:mm:ss.sssZ), for
+      example, `2025-11-29T11:04:43.305Z`. You can use a wildcard (`*`), for
+      example, `2025-11-29T*`, which matches an entire day.
+
+    - `state` - The state of the report (`available` | `pending` |
+      `error`).
+
+    - `tag:``<key>`{=html} - The key/value combination of a tag assigned to
+      the resource. Use the tag key in the filter name and the tag value as
+      the filter value. For example, to find all resources that have a tag
+      with the key `Owner` and the value `TeamA`, specify `tag:Owner` for
+      the filter name and `TeamA` for the filter value.
+
+    - `tag-key` - The key of a tag assigned to the resource. Use this filter
+      to find all resources assigned a tag with a specific key, regardless
+      of the tag value.
+    """
+    dry_run: bool | None = ...
+    """
+    Checks whether you have the required permissions for the action, without
+    actually making the request, and provides an error response. If you have
+    the required permissions, the error response is `DryRunOperation`.
+    Otherwise, it is `UnauthorizedOperation`.
+    """
+    max_results: int | None = ...
+    """
+    The maximum number of items to return for this request. To get the next
+    page of items, make another request with the token returned in the
+    output. For more information, see
+    [Pagination](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination).
+    """
+
+class DescribeImageUsageReportsInputDict(TypedDict, total=False):
+    """Dictionary form of `DescribeImageUsageReportsInput`."""
+
+    image_ids: Sequence[str] | None
+    """
+    The IDs of the images for filtering the reports. If specified, only
+    reports containing these images are returned.
+    """
+    report_ids: Sequence[str] | None
+    """The IDs of the image usage reports."""
+    next_token: str | None
+    """
+    The token returned from a previous paginated request. Pagination
+    continues from the end of the items returned by the previous request.
+    """
+    filters: Sequence[Filter | FilterDict] | None
+    """
+    The filters.
+
+    - `creation-time` - The time when the report was created, in the ISO
+      8601 format in the UTC time zone (YYYY-MM-DDThh:mm:ss.sssZ), for
+      example, `2025-11-29T11:04:43.305Z`. You can use a wildcard (`*`), for
+      example, `2025-11-29T*`, which matches an entire day.
+
+    - `state` - The state of the report (`available` | `pending` |
+      `error`).
+
+    - `tag:``<key>`{=html} - The key/value combination of a tag assigned to
+      the resource. Use the tag key in the filter name and the tag value as
+      the filter value. For example, to find all resources that have a tag
+      with the key `Owner` and the value `TeamA`, specify `tag:Owner` for
+      the filter name and `TeamA` for the filter value.
+
+    - `tag-key` - The key of a tag assigned to the resource. Use this filter
+      to find all resources assigned a tag with a specific key, regardless
+      of the tag value.
+    """
+    dry_run: bool | None
+    """
+    Checks whether you have the required permissions for the action, without
+    actually making the request, and provides an error response. If you have
+    the required permissions, the error response is `DryRunOperation`.
+    Otherwise, it is `UnauthorizedOperation`.
+    """
+    max_results: int | None
+    """
+    The maximum number of items to return for this request. To get the next
+    page of items, make another request with the token returned in the
+    output. For more information, see
+    [Pagination](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination).
+    """
+
+@dataclass(kw_only=True)
+class DescribeImageUsageReportsOutput(_SerdeShape):
+    """Dataclass for DescribeImageUsageReportsOutput structure."""
+
+    next_token: str | None = ...
+    """
+    The token to include in another request to get the next page of items.
+    This value is `null` when there are no more items to return.
+    """
+    image_usage_reports: list[ImageUsageReport] | None = ...
+    """The image usage reports."""
+    response_metadata: ResponseMetadata = ...
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+@dataclass(kw_only=True)
+class DescribeImportImageTasksInput(_SerdeShape):
+    """Dataclass for DescribeImportImageTasksInput structure."""
+
+    dry_run: bool | None = ...
+    """
+    Checks whether you have the required permissions for the action, without
+    actually making the request, and provides an error response. If you have
+    the required permissions, the error response is `DryRunOperation`.
+    Otherwise, it is `UnauthorizedOperation`.
+    """
+    filters: list[Filter] | None = ...
+    """
+    Filter tasks using the `task-state` filter and one of the following
+    values: `active`, `completed`, `deleting`, or `deleted`.
+    """
+    import_task_ids: list[str] | None = ...
+    """The IDs of the import image tasks."""
+    max_results: int | None = ...
+    """The maximum number of results to return in a single call."""
+    next_token: str | None = ...
+    """A token that indicates the next page of results."""
+
+class DescribeImportImageTasksInputDict(TypedDict, total=False):
+    """Dictionary form of `DescribeImportImageTasksInput`."""
+
+    dry_run: bool | None
+    """
+    Checks whether you have the required permissions for the action, without
+    actually making the request, and provides an error response. If you have
+    the required permissions, the error response is `DryRunOperation`.
+    Otherwise, it is `UnauthorizedOperation`.
+    """
+    filters: Sequence[Filter | FilterDict] | None
+    """
+    Filter tasks using the `task-state` filter and one of the following
+    values: `active`, `completed`, `deleting`, or `deleted`.
+    """
+    import_task_ids: Sequence[str] | None
+    """The IDs of the import image tasks."""
+    max_results: int | None
+    """The maximum number of results to return in a single call."""
+    next_token: str | None
+    """A token that indicates the next page of results."""
+
+@dataclass(kw_only=True)
+class DescribeImportImageTasksOutput(_SerdeShape):
+    """Dataclass for DescribeImportImageTasksOutput structure."""
+
+    import_image_tasks: list[ImportImageTask] | None = ...
+    """
+    A list of zero or more import image tasks that are currently active or
+    were completed or canceled in the previous 7 days.
+    """
+    next_token: str | None = ...
+    """
+    The token to use to get the next page of results. This value is `null`
+    when there are no more results to return.
+    """
+    response_metadata: ResponseMetadata = ...
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+@dataclass(kw_only=True)
+class DescribeImportSnapshotTasksInput(_SerdeShape):
+    """Dataclass for DescribeImportSnapshotTasksInput structure."""
+
+    dry_run: bool | None = ...
+    """
+    Checks whether you have the required permissions for the action, without
+    actually making the request, and provides an error response. If you have
+    the required permissions, the error response is `DryRunOperation`.
+    Otherwise, it is `UnauthorizedOperation`.
+    """
+    filters: list[Filter] | None = ...
+    """The filters."""
+    import_task_ids: list[str] | None = ...
+    """A list of import snapshot task IDs."""
+    max_results: int | None = ...
+    """
+    The maximum number of results to return in a single call. To retrieve
+    the remaining results, make another call with the returned `NextToken`
+    value.
+    """
+    next_token: str | None = ...
+    """A token that indicates the next page of results."""
+
+class DescribeImportSnapshotTasksInputDict(TypedDict, total=False):
+    """Dictionary form of `DescribeImportSnapshotTasksInput`."""
+
+    dry_run: bool | None
+    """
+    Checks whether you have the required permissions for the action, without
+    actually making the request, and provides an error response. If you have
+    the required permissions, the error response is `DryRunOperation`.
+    Otherwise, it is `UnauthorizedOperation`.
+    """
+    filters: Sequence[Filter | FilterDict] | None
+    """The filters."""
+    import_task_ids: Sequence[str] | None
+    """A list of import snapshot task IDs."""
+    max_results: int | None
+    """
+    The maximum number of results to return in a single call. To retrieve
+    the remaining results, make another call with the returned `NextToken`
+    value.
+    """
+    next_token: str | None
+    """A token that indicates the next page of results."""
+
+@dataclass(kw_only=True)
+class DescribeImportSnapshotTasksOutput(_SerdeShape):
+    """Dataclass for DescribeImportSnapshotTasksOutput structure."""
+
+    import_snapshot_tasks: list[ImportSnapshotTask] | None = ...
+    """
+    A list of zero or more import snapshot tasks that are currently active
+    or were completed or canceled in the previous 7 days.
+    """
+    next_token: str | None = ...
+    """
+    The token to use to get the next page of results. This value is `null`
+    when there are no more results to return.
+    """
+    response_metadata: ResponseMetadata = ...
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+@dataclass(kw_only=True)
+class DescribeInstanceAttributeInput(_SerdeShape):
+    """Dataclass for DescribeInstanceAttributeInput structure."""
+
+    dry_run: bool | None = ...
+    """
+    Checks whether you have the required permissions for the operation,
+    without actually making the request, and provides an error response. If
+    you have the required permissions, the error response is
+    `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    """
+    instance_id: str | None = ...
+    """The ID of the instance."""
+    attribute: str | None = ...
+    """
+    The instance attribute.
+
+    Note that the `enaSupport` attribute is not supported.
+    """
+
+class DescribeInstanceAttributeInputDict(TypedDict, total=False):
+    """Dictionary form of `DescribeInstanceAttributeInput`."""
+
+    dry_run: bool | None
+    """
+    Checks whether you have the required permissions for the operation,
+    without actually making the request, and provides an error response. If
+    you have the required permissions, the error response is
+    `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    """
+    instance_id: Required[str]
+    """The ID of the instance."""
+    attribute: Required[str]
+    """
+    The instance attribute.
+
+    Note that the `enaSupport` attribute is not supported.
+    """
+
+@dataclass(kw_only=True)
+class DescribeInstanceAttributeOutput(_SerdeShape):
+    """Describes an instance attribute."""
+
+    block_device_mappings: list[InstanceBlockDeviceMapping] | None = ...
+    """The block device mapping of the instance."""
+    disable_api_termination: AttributeBooleanValue | None = ...
+    """
+    Indicates whether termination protection is enabled. If the value is
+    `true`, you can't terminate the instance using the Amazon EC2 console,
+    command line tools, or API.
+    """
+    ena_support: AttributeBooleanValue | None = ...
+    """Indicates whether enhanced networking with ENA is enabled."""
+    enclave_options: EnclaveOptions | None = ...
+    """
+    Indicates whether the instance is enabled for Amazon Web Services Nitro
+    Enclaves.
+    """
+    ebs_optimized: AttributeBooleanValue | None = ...
+    """Indicates whether the instance is optimized for Amazon EBS I/O."""
+    instance_id: str | None = ...
+    """The ID of the instance."""
+    instance_initiated_shutdown_behavior: AttributeValue | None = ...
+    """
+    Indicates whether an instance stops or terminates when you initiate
+    shutdown from the instance (using the operating system command for
+    system shutdown).
+    """
+    instance_type: AttributeValue | None = ...
+    """The instance type."""
+    kernel_id: AttributeValue | None = ...
+    """The kernel ID."""
+    product_codes: list[ProductCode] | None = ...
+    """The product codes."""
+    ramdisk_id: AttributeValue | None = ...
+    """The RAM disk ID."""
+    root_device_name: AttributeValue | None = ...
+    """The device name of the root device volume (for example, `/dev/sda1`)."""
+    source_dest_check: AttributeBooleanValue | None = ...
+    """Indicates whether source/destination checks are enabled."""
+    sriov_net_support: AttributeValue | None = ...
+    """
+    Indicates whether enhanced networking with the Intel 82599 Virtual
+    Function interface is enabled.
+    """
+    user_data: AttributeValue | None = ...
+    """The user data."""
+    disable_api_stop: AttributeBooleanValue | None = ...
+    """Indicates whether stop protection is enabled for the instance."""
+    groups: list[GroupIdentifier] | None = ...
+    """The security groups associated with the instance."""
+    response_metadata: ResponseMetadata = ...
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+@dataclass(kw_only=True)
+class DescribeInstanceConnectEndpointsInput(_SerdeShape):
+    """Dataclass for DescribeInstanceConnectEndpointsInput structure."""
+
+    dry_run: bool | None = ...
+    """
+    Checks whether you have the required permissions for the action, without
+    actually making the request, and provides an error response. If you have
+    the required permissions, the error response is `DryRunOperation`.
+    Otherwise, it is `UnauthorizedOperation`.
+    """
+    max_results: int | None = ...
+    """
+    The maximum number of items to return for this request. To get the next
+    page of items, make another request with the token returned in the
+    output. For more information, see
+    [Pagination](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination).
+    """
+    next_token: str | None = ...
+    """
+    The token returned from a previous paginated request. Pagination
+    continues from the end of the items returned by the previous request.
+    """
+    filters: list[Filter] | None = ...
+    """
+    One or more filters.
+
+    - `instance-connect-endpoint-id` - The ID of the EC2 Instance Connect
+      Endpoint.
+
+    - `state` - The state of the EC2 Instance Connect Endpoint
+      (`create-in-progress` | `create-complete` | `create-failed` |
+      `delete-in-progress` | `delete-complete` | `delete-failed`).
+
+    - `subnet-id` - The ID of the subnet in which the EC2 Instance Connect
+      Endpoint was created.
+
+    - `tag`:`<key>`{=html} - The key/value combination of a tag assigned to
+      the resource. Use the tag key in the filter name and the tag value as
+      the filter value. For example, to find all resources that have a tag
+      with the key `Owner` and the value `TeamA`, specify `tag:Owner` for
+      the filter name and `TeamA` for the filter value.
+
+    - `tag-key` - The key of a tag assigned to the resource. Use this filter
+      to find all resources assigned a tag with a specific key, regardless
+      of the tag value.
+
+    - `tag-value` - The value of a tag assigned to the resource. Use this
+      filter to find all resources that have a tag with a specific value,
+      regardless of tag key.
+
+    - `vpc-id` - The ID of the VPC in which the EC2 Instance Connect
+      Endpoint was created.
+    """
+    instance_connect_endpoint_ids: list[str] | None = ...
+    """One or more EC2 Instance Connect Endpoint IDs."""
+
+class DescribeInstanceConnectEndpointsInputDict(TypedDict, total=False):
+    """Dictionary form of `DescribeInstanceConnectEndpointsInput`."""
+
+    dry_run: bool | None
+    """
+    Checks whether you have the required permissions for the action, without
+    actually making the request, and provides an error response. If you have
+    the required permissions, the error response is `DryRunOperation`.
+    Otherwise, it is `UnauthorizedOperation`.
+    """
+    max_results: int | None
+    """
+    The maximum number of items to return for this request. To get the next
+    page of items, make another request with the token returned in the
+    output. For more information, see
+    [Pagination](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination).
+    """
+    next_token: str | None
+    """
+    The token returned from a previous paginated request. Pagination
+    continues from the end of the items returned by the previous request.
+    """
+    filters: Sequence[Filter | FilterDict] | None
+    """
+    One or more filters.
+
+    - `instance-connect-endpoint-id` - The ID of the EC2 Instance Connect
+      Endpoint.
+
+    - `state` - The state of the EC2 Instance Connect Endpoint
+      (`create-in-progress` | `create-complete` | `create-failed` |
+      `delete-in-progress` | `delete-complete` | `delete-failed`).
+
+    - `subnet-id` - The ID of the subnet in which the EC2 Instance Connect
+      Endpoint was created.
+
+    - `tag`:`<key>`{=html} - The key/value combination of a tag assigned to
+      the resource. Use the tag key in the filter name and the tag value as
+      the filter value. For example, to find all resources that have a tag
+      with the key `Owner` and the value `TeamA`, specify `tag:Owner` for
+      the filter name and `TeamA` for the filter value.
+
+    - `tag-key` - The key of a tag assigned to the resource. Use this filter
+      to find all resources assigned a tag with a specific key, regardless
+      of the tag value.
+
+    - `tag-value` - The value of a tag assigned to the resource. Use this
+      filter to find all resources that have a tag with a specific value,
+      regardless of tag key.
+
+    - `vpc-id` - The ID of the VPC in which the EC2 Instance Connect
+      Endpoint was created.
+    """
+    instance_connect_endpoint_ids: Sequence[str] | None
+    """One or more EC2 Instance Connect Endpoint IDs."""
+
+@dataclass(kw_only=True)
+class DescribeInstanceConnectEndpointsOutput(_SerdeShape):
+    """Dataclass for DescribeInstanceConnectEndpointsOutput structure."""
+
+    instance_connect_endpoints: list[Ec2InstanceConnectEndpoint] | None = ...
+    """Information about the EC2 Instance Connect Endpoints."""
+    next_token: str | None = ...
+    """
+    The token to include in another request to get the next page of items.
+    This value is `null` when there are no more items to return.
+    """
+    response_metadata: ResponseMetadata = ...
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+@dataclass(kw_only=True)
+class DescribeInstanceCreditSpecificationsInput(_SerdeShape):
+    """Dataclass for DescribeInstanceCreditSpecificationsInput structure."""
+
+    dry_run: bool | None = ...
+    """
+    Checks whether you have the required permissions for the operation,
+    without actually making the request, and provides an error response. If
+    you have the required permissions, the error response is
+    `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    """
+    filters: list[Filter] | None = ...
+    """
+    The filters.
+
+    - `instance-id` - The ID of the instance.
+    """
+    instance_ids: list[str] | None = ...
+    """
+    The instance IDs.
+
+    Default: Describes all your instances.
+
+    Constraints: Maximum 1000 explicitly specified instance IDs.
+    """
+    max_results: int | None = ...
+    """
+    The maximum number of items to return for this request. To get the next
+    page of items, make another request with the token returned in the
+    output. For more information, see
+    [Pagination](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination).
+
+    You cannot specify this parameter and the instance IDs parameter in the
+    same call.
+    """
+    next_token: str | None = ...
+    """
+    The token returned from a previous paginated request. Pagination
+    continues from the end of the items returned by the previous request.
+    """
+
+class DescribeInstanceCreditSpecificationsInputDict(TypedDict, total=False):
+    """Dictionary form of `DescribeInstanceCreditSpecificationsInput`."""
+
+    dry_run: bool | None
+    """
+    Checks whether you have the required permissions for the operation,
+    without actually making the request, and provides an error response. If
+    you have the required permissions, the error response is
+    `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    """
+    filters: Sequence[Filter | FilterDict] | None
+    """
+    The filters.
+
+    - `instance-id` - The ID of the instance.
+    """
+    instance_ids: Sequence[str] | None
+    """
+    The instance IDs.
+
+    Default: Describes all your instances.
+
+    Constraints: Maximum 1000 explicitly specified instance IDs.
+    """
+    max_results: int | None
+    """
+    The maximum number of items to return for this request. To get the next
+    page of items, make another request with the token returned in the
+    output. For more information, see
+    [Pagination](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination).
+
+    You cannot specify this parameter and the instance IDs parameter in the
+    same call.
+    """
+    next_token: str | None
+    """
+    The token returned from a previous paginated request. Pagination
+    continues from the end of the items returned by the previous request.
+    """
 
 @dataclass(kw_only=True)
 class DescribeInstanceCreditSpecificationsOutput(_SerdeShape):
@@ -12308,6 +13010,108 @@ class DescribeTransitGatewayMulticastDomainsOutput(_SerdeShape):
     """
 
 @dataclass(kw_only=True)
+class DescribeTransitGatewayNetworkFunctionAttachmentsInput(_SerdeShape):
+    """
+    Dataclass for DescribeTransitGatewayNetworkFunctionAttachmentsInput
+    structure.
+    """
+
+    transit_gateway_attachment_ids: list[str] | None = ...
+    """The IDs of the network function attachments."""
+    filters: list[Filter] | None = ...
+    """
+    One or more filters. The possible values are:
+
+    - `service-name` - The name of the Gateway Load Balancer endpoint
+      service.
+
+    - `state` - The state of the attachment. Valid values are `available` |
+      `deleted` | `deleting` | `failed` | `failing` | `modifying` |
+      `pendingAcceptance` | `pending` | `rollingBack` | `rejected` |
+      `rejecting`.
+
+    - `transit-gateway-attachment-id` - The ID of the attachment.
+
+    - `transit-gateway-id` - The ID of the transit gateway.
+    """
+    max_results: int | None = ...
+    """
+    The maximum number of results to return with a single call. To retrieve
+    the remaining results, make another call with the returned `nextToken`
+    value.
+    """
+    next_token: str | None = ...
+    """The token for the next page of results."""
+    dry_run: bool | None = ...
+    """
+    Checks whether you have the required permissions for the action, without
+    actually making the request, and provides an error response. If you have
+    the required permissions, the error response is `DryRunOperation`.
+    Otherwise, it is `UnauthorizedOperation`.
+    """
+
+class DescribeTransitGatewayNetworkFunctionAttachmentsInputDict(TypedDict, total=False):
+    """Dictionary form of `DescribeTransitGatewayNetworkFunctionAttachmentsInput`."""
+
+    transit_gateway_attachment_ids: Sequence[str] | None
+    """The IDs of the network function attachments."""
+    filters: Sequence[Filter | FilterDict] | None
+    """
+    One or more filters. The possible values are:
+
+    - `service-name` - The name of the Gateway Load Balancer endpoint
+      service.
+
+    - `state` - The state of the attachment. Valid values are `available` |
+      `deleted` | `deleting` | `failed` | `failing` | `modifying` |
+      `pendingAcceptance` | `pending` | `rollingBack` | `rejected` |
+      `rejecting`.
+
+    - `transit-gateway-attachment-id` - The ID of the attachment.
+
+    - `transit-gateway-id` - The ID of the transit gateway.
+    """
+    max_results: int | None
+    """
+    The maximum number of results to return with a single call. To retrieve
+    the remaining results, make another call with the returned `nextToken`
+    value.
+    """
+    next_token: str | None
+    """The token for the next page of results."""
+    dry_run: bool | None
+    """
+    Checks whether you have the required permissions for the action, without
+    actually making the request, and provides an error response. If you have
+    the required permissions, the error response is `DryRunOperation`.
+    Otherwise, it is `UnauthorizedOperation`.
+    """
+
+@dataclass(kw_only=True)
+class DescribeTransitGatewayNetworkFunctionAttachmentsOutput(_SerdeShape):
+    """
+    Dataclass for DescribeTransitGatewayNetworkFunctionAttachmentsOutput
+    structure.
+    """
+
+    transit_gateway_network_function_attachments: (
+        list[TransitGatewayNetworkFunctionAttachment] | None
+    ) = ...
+    """Information about the network function attachments."""
+    next_token: str | None = ...
+    """
+    The token to use to retrieve the next page of results. This value is
+    `null` when there are no more results to return.
+    """
+    response_metadata: ResponseMetadata = ...
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+@dataclass(kw_only=True)
 class DescribeTransitGatewayPeeringAttachmentsInput(_SerdeShape):
     """Dataclass for DescribeTransitGatewayPeeringAttachmentsInput structure."""
 
@@ -14186,780 +14990,3 @@ class DescribeVpcClassicLinkDnsSupportInputDict(TypedDict, total=False):
     The token returned from a previous paginated request. Pagination
     continues from the end of the items returned by the previous request.
     """
-
-@dataclass(kw_only=True)
-class DescribeVpcClassicLinkDnsSupportOutput(_SerdeShape):
-    """Dataclass for DescribeVpcClassicLinkDnsSupportOutput structure."""
-
-    next_token: str | None = ...
-    """
-    The token to include in another request to get the next page of items.
-    This value is `null` when there are no more items to return.
-    """
-    vpcs: list[ClassicLinkDnsSupport] | None = ...
-    """Information about the ClassicLink DNS support status of the VPCs."""
-    response_metadata: ResponseMetadata = ...
-    """
-    Metadata about the response that produced this output. Use this to
-    recover the request identifiers a service's support team needs in order
-    to investigate a call. Members of the metadata are individually
-    optional.
-    """
-
-@dataclass(kw_only=True)
-class DescribeVpcClassicLinkInput(_SerdeShape):
-    """Dataclass for DescribeVpcClassicLinkInput structure."""
-
-    dry_run: bool | None = ...
-    """
-    Checks whether you have the required permissions for the action, without
-    actually making the request, and provides an error response. If you have
-    the required permissions, the error response is `DryRunOperation`.
-    Otherwise, it is `UnauthorizedOperation`.
-    """
-    vpc_ids: list[str] | None = ...
-    """The VPCs for which you want to describe the ClassicLink status."""
-    filters: list[Filter] | None = ...
-    """
-    The filters.
-
-    - `is-classic-link-enabled` - Whether the VPC is enabled for ClassicLink
-      (`true` | `false`).
-
-    - `tag` - The key/value combination of a tag assigned to the resource.
-      Use the tag key in the filter name and the tag value as the filter
-      value. For example, to find all resources that have a tag with the key
-      `Owner` and the value `TeamA`, specify `tag:Owner` for the filter name
-      and `TeamA` for the filter value.
-
-    - `tag-key` - The key of a tag assigned to the resource. Use this filter
-      to find all resources assigned a tag with a specific key, regardless
-      of the tag value.
-    """
-
-class DescribeVpcClassicLinkInputDict(TypedDict, total=False):
-    """Dictionary form of `DescribeVpcClassicLinkInput`."""
-
-    dry_run: bool | None
-    """
-    Checks whether you have the required permissions for the action, without
-    actually making the request, and provides an error response. If you have
-    the required permissions, the error response is `DryRunOperation`.
-    Otherwise, it is `UnauthorizedOperation`.
-    """
-    vpc_ids: Sequence[str] | None
-    """The VPCs for which you want to describe the ClassicLink status."""
-    filters: Sequence[Filter | FilterDict] | None
-    """
-    The filters.
-
-    - `is-classic-link-enabled` - Whether the VPC is enabled for ClassicLink
-      (`true` | `false`).
-
-    - `tag` - The key/value combination of a tag assigned to the resource.
-      Use the tag key in the filter name and the tag value as the filter
-      value. For example, to find all resources that have a tag with the key
-      `Owner` and the value `TeamA`, specify `tag:Owner` for the filter name
-      and `TeamA` for the filter value.
-
-    - `tag-key` - The key of a tag assigned to the resource. Use this filter
-      to find all resources assigned a tag with a specific key, regardless
-      of the tag value.
-    """
-
-@dataclass(kw_only=True)
-class DescribeVpcClassicLinkOutput(_SerdeShape):
-    """Dataclass for DescribeVpcClassicLinkOutput structure."""
-
-    vpcs: list[VpcClassicLink] | None = ...
-    """The ClassicLink status of the VPCs."""
-    response_metadata: ResponseMetadata = ...
-    """
-    Metadata about the response that produced this output. Use this to
-    recover the request identifiers a service's support team needs in order
-    to investigate a call. Members of the metadata are individually
-    optional.
-    """
-
-@dataclass(kw_only=True)
-class DescribeVpcEncryptionControlsInput(_SerdeShape):
-    """Dataclass for DescribeVpcEncryptionControlsInput structure."""
-
-    dry_run: bool | None = ...
-    """
-    Checks whether you have the required permissions for the action, without
-    actually making the request, and provides an error response. If you have
-    the required permissions, the error response is `DryRunOperation`.
-    Otherwise, it is `UnauthorizedOperation`.
-    """
-    filters: list[Filter] | None = ...
-    """The filters to apply to the request."""
-    vpc_encryption_control_ids: list[str] | None = ...
-    """The IDs of the VPC Encryption Control configurations to describe."""
-    vpc_ids: list[str] | None = ...
-    """The IDs of the VPCs to describe encryption control configurations for."""
-    next_token: str | None = ...
-    """
-    The token returned from a previous paginated request. Pagination
-    continues from the end of the items returned by the previous request.
-    """
-    max_results: int | None = ...
-    """
-    The maximum number of items to return for this request. To get the next
-    page of items, make another request with the token returned in the
-    output. For more information, see
-    [Pagination](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination).
-    """
-
-class DescribeVpcEncryptionControlsInputDict(TypedDict, total=False):
-    """Dictionary form of `DescribeVpcEncryptionControlsInput`."""
-
-    dry_run: bool | None
-    """
-    Checks whether you have the required permissions for the action, without
-    actually making the request, and provides an error response. If you have
-    the required permissions, the error response is `DryRunOperation`.
-    Otherwise, it is `UnauthorizedOperation`.
-    """
-    filters: Sequence[Filter | FilterDict] | None
-    """The filters to apply to the request."""
-    vpc_encryption_control_ids: Sequence[str] | None
-    """The IDs of the VPC Encryption Control configurations to describe."""
-    vpc_ids: Sequence[str] | None
-    """The IDs of the VPCs to describe encryption control configurations for."""
-    next_token: str | None
-    """
-    The token returned from a previous paginated request. Pagination
-    continues from the end of the items returned by the previous request.
-    """
-    max_results: int | None
-    """
-    The maximum number of items to return for this request. To get the next
-    page of items, make another request with the token returned in the
-    output. For more information, see
-    [Pagination](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination).
-    """
-
-@dataclass(kw_only=True)
-class DescribeVpcEncryptionControlsOutput(_SerdeShape):
-    """Dataclass for DescribeVpcEncryptionControlsOutput structure."""
-
-    vpc_encryption_controls: list[VpcEncryptionControl] | None = ...
-    """Information about the VPC Encryption Control configurations."""
-    next_token: str | None = ...
-    """
-    The token to include in another request to get the next page of items.
-    This value is `null` when there are no more items to return.
-    """
-    response_metadata: ResponseMetadata = ...
-    """
-    Metadata about the response that produced this output. Use this to
-    recover the request identifiers a service's support team needs in order
-    to investigate a call. Members of the metadata are individually
-    optional.
-    """
-
-@dataclass(kw_only=True)
-class DescribeVpcEndpointAssociationsInput(_SerdeShape):
-    """Dataclass for DescribeVpcEndpointAssociationsInput structure."""
-
-    dry_run: bool | None = ...
-    """
-    Checks whether you have the required permissions for the action, without
-    actually making the request, and provides an error response. If you have
-    the required permissions, the error response is `DryRunOperation`.
-    Otherwise, it is `UnauthorizedOperation`.
-    """
-    vpc_endpoint_ids: list[str] | None = ...
-    """The IDs of the VPC endpoints."""
-    filters: list[Filter] | None = ...
-    """
-    The filters.
-
-    - `vpc-endpoint-id` - The ID of the VPC endpoint.
-
-    - `associated-resource-accessibility` - The association state. When the
-      state is `accessible`, it returns `AVAILABLE`. When the state is
-      `inaccessible`, it returns `PENDING` or `FAILED`.
-
-    - `association-id` - The ID of the VPC endpoint association.
-
-    - `associated-resource-id` - The ID of the associated resource
-      configuration.
-
-    - `service-network-arn` - The Amazon Resource Name (ARN) of the
-      associated service network. Only VPC endpoints of type service network
-      will be returned.
-
-    - `resource-configuration-group-arn` - The Amazon Resource Name (ARN) of
-      the resource configuration of type GROUP.
-    """
-    max_results: int | None = ...
-    """The maximum page size."""
-    next_token: str | None = ...
-    """The pagination token."""
-
-class DescribeVpcEndpointAssociationsInputDict(TypedDict, total=False):
-    """Dictionary form of `DescribeVpcEndpointAssociationsInput`."""
-
-    dry_run: bool | None
-    """
-    Checks whether you have the required permissions for the action, without
-    actually making the request, and provides an error response. If you have
-    the required permissions, the error response is `DryRunOperation`.
-    Otherwise, it is `UnauthorizedOperation`.
-    """
-    vpc_endpoint_ids: Sequence[str] | None
-    """The IDs of the VPC endpoints."""
-    filters: Sequence[Filter | FilterDict] | None
-    """
-    The filters.
-
-    - `vpc-endpoint-id` - The ID of the VPC endpoint.
-
-    - `associated-resource-accessibility` - The association state. When the
-      state is `accessible`, it returns `AVAILABLE`. When the state is
-      `inaccessible`, it returns `PENDING` or `FAILED`.
-
-    - `association-id` - The ID of the VPC endpoint association.
-
-    - `associated-resource-id` - The ID of the associated resource
-      configuration.
-
-    - `service-network-arn` - The Amazon Resource Name (ARN) of the
-      associated service network. Only VPC endpoints of type service network
-      will be returned.
-
-    - `resource-configuration-group-arn` - The Amazon Resource Name (ARN) of
-      the resource configuration of type GROUP.
-    """
-    max_results: int | None
-    """The maximum page size."""
-    next_token: str | None
-    """The pagination token."""
-
-@dataclass(kw_only=True)
-class DescribeVpcEndpointAssociationsOutput(_SerdeShape):
-    """Dataclass for DescribeVpcEndpointAssociationsOutput structure."""
-
-    vpc_endpoint_associations: list[VpcEndpointAssociation] | None = ...
-    """Details of the endpoint associations."""
-    next_token: str | None = ...
-    """The pagination token."""
-    response_metadata: ResponseMetadata = ...
-    """
-    Metadata about the response that produced this output. Use this to
-    recover the request identifiers a service's support team needs in order
-    to investigate a call. Members of the metadata are individually
-    optional.
-    """
-
-@dataclass(kw_only=True)
-class DescribeVpcEndpointConnectionNotificationsInput(_SerdeShape):
-    """Dataclass for DescribeVpcEndpointConnectionNotificationsInput structure."""
-
-    dry_run: bool | None = ...
-    """
-    Checks whether you have the required permissions for the action, without
-    actually making the request, and provides an error response. If you have
-    the required permissions, the error response is `DryRunOperation`.
-    Otherwise, it is `UnauthorizedOperation`.
-    """
-    connection_notification_id: str | None = ...
-    """The ID of the notification."""
-    filters: list[Filter] | None = ...
-    """
-    The filters.
-
-    - `connection-notification-arn` - The ARN of the SNS topic for the
-      notification.
-
-    - `connection-notification-id` - The ID of the notification.
-
-    - `connection-notification-state` - The state of the notification
-      (`Enabled` | `Disabled`).
-
-    - `connection-notification-type` - The type of notification (`Topic`).
-
-    - `service-id` - The ID of the endpoint service.
-
-    - `vpc-endpoint-id` - The ID of the VPC endpoint.
-    """
-    max_results: int | None = ...
-    """
-    The maximum number of results to return in a single call. To retrieve
-    the remaining results, make another request with the returned
-    `NextToken` value.
-    """
-    next_token: str | None = ...
-    """The token to request the next page of results."""
-
-class DescribeVpcEndpointConnectionNotificationsInputDict(TypedDict, total=False):
-    """Dictionary form of `DescribeVpcEndpointConnectionNotificationsInput`."""
-
-    dry_run: bool | None
-    """
-    Checks whether you have the required permissions for the action, without
-    actually making the request, and provides an error response. If you have
-    the required permissions, the error response is `DryRunOperation`.
-    Otherwise, it is `UnauthorizedOperation`.
-    """
-    connection_notification_id: str | None
-    """The ID of the notification."""
-    filters: Sequence[Filter | FilterDict] | None
-    """
-    The filters.
-
-    - `connection-notification-arn` - The ARN of the SNS topic for the
-      notification.
-
-    - `connection-notification-id` - The ID of the notification.
-
-    - `connection-notification-state` - The state of the notification
-      (`Enabled` | `Disabled`).
-
-    - `connection-notification-type` - The type of notification (`Topic`).
-
-    - `service-id` - The ID of the endpoint service.
-
-    - `vpc-endpoint-id` - The ID of the VPC endpoint.
-    """
-    max_results: int | None
-    """
-    The maximum number of results to return in a single call. To retrieve
-    the remaining results, make another request with the returned
-    `NextToken` value.
-    """
-    next_token: str | None
-    """The token to request the next page of results."""
-
-@dataclass(kw_only=True)
-class DescribeVpcEndpointConnectionNotificationsOutput(_SerdeShape):
-    """
-    Dataclass for DescribeVpcEndpointConnectionNotificationsOutput
-    structure.
-    """
-
-    connection_notification_set: list[ConnectionNotification] | None = ...
-    """The notifications."""
-    next_token: str | None = ...
-    """
-    The token to use to retrieve the next page of results. This value is
-    `null` when there are no more results to return.
-    """
-    response_metadata: ResponseMetadata = ...
-    """
-    Metadata about the response that produced this output. Use this to
-    recover the request identifiers a service's support team needs in order
-    to investigate a call. Members of the metadata are individually
-    optional.
-    """
-
-@dataclass(kw_only=True)
-class DescribeVpcEndpointConnectionsInput(_SerdeShape):
-    """Dataclass for DescribeVpcEndpointConnectionsInput structure."""
-
-    dry_run: bool | None = ...
-    """
-    Checks whether you have the required permissions for the action, without
-    actually making the request, and provides an error response. If you have
-    the required permissions, the error response is `DryRunOperation`.
-    Otherwise, it is `UnauthorizedOperation`.
-    """
-    filters: list[Filter] | None = ...
-    """
-    The filters.
-
-    - `ip-address-type` - The IP address type (`ipv4` | `ipv6`).
-
-    - `service-id` - The ID of the service.
-
-    - `vpc-endpoint-owner` - The ID of the Amazon Web Services account ID
-      that owns the endpoint.
-
-    - `vpc-endpoint-region` - The Region of the endpoint or `cross-region`
-      to find endpoints for other Regions.
-
-    - `vpc-endpoint-state` - The state of the endpoint (`pendingAcceptance`
-      | `pending` | `available` | `deleting` | `deleted` | `rejected`
-      | `failed`).
-
-    - `vpc-endpoint-id` - The ID of the endpoint.
-    """
-    max_results: int | None = ...
-    """
-    The maximum number of results to return for the request in a single
-    page. The remaining results of the initial request can be seen by
-    sending another request with the returned `NextToken` value. This value
-    can be between 5 and 1,000; if `MaxResults` is given a value larger than
-    1,000, only 1,000 results are returned.
-    """
-    next_token: str | None = ...
-    """The token to retrieve the next page of results."""
-
-class DescribeVpcEndpointConnectionsInputDict(TypedDict, total=False):
-    """Dictionary form of `DescribeVpcEndpointConnectionsInput`."""
-
-    dry_run: bool | None
-    """
-    Checks whether you have the required permissions for the action, without
-    actually making the request, and provides an error response. If you have
-    the required permissions, the error response is `DryRunOperation`.
-    Otherwise, it is `UnauthorizedOperation`.
-    """
-    filters: Sequence[Filter | FilterDict] | None
-    """
-    The filters.
-
-    - `ip-address-type` - The IP address type (`ipv4` | `ipv6`).
-
-    - `service-id` - The ID of the service.
-
-    - `vpc-endpoint-owner` - The ID of the Amazon Web Services account ID
-      that owns the endpoint.
-
-    - `vpc-endpoint-region` - The Region of the endpoint or `cross-region`
-      to find endpoints for other Regions.
-
-    - `vpc-endpoint-state` - The state of the endpoint (`pendingAcceptance`
-      | `pending` | `available` | `deleting` | `deleted` | `rejected`
-      | `failed`).
-
-    - `vpc-endpoint-id` - The ID of the endpoint.
-    """
-    max_results: int | None
-    """
-    The maximum number of results to return for the request in a single
-    page. The remaining results of the initial request can be seen by
-    sending another request with the returned `NextToken` value. This value
-    can be between 5 and 1,000; if `MaxResults` is given a value larger than
-    1,000, only 1,000 results are returned.
-    """
-    next_token: str | None
-    """The token to retrieve the next page of results."""
-
-@dataclass(kw_only=True)
-class DescribeVpcEndpointConnectionsOutput(_SerdeShape):
-    """Dataclass for DescribeVpcEndpointConnectionsOutput structure."""
-
-    vpc_endpoint_connections: list[VpcEndpointConnection] | None = ...
-    """Information about the VPC endpoint connections."""
-    next_token: str | None = ...
-    """
-    The token to use to retrieve the next page of results. This value is
-    `null` when there are no more results to return.
-    """
-    response_metadata: ResponseMetadata = ...
-    """
-    Metadata about the response that produced this output. Use this to
-    recover the request identifiers a service's support team needs in order
-    to investigate a call. Members of the metadata are individually
-    optional.
-    """
-
-@dataclass(kw_only=True)
-class DescribeVpcEndpointServiceConfigurationsInput(_SerdeShape):
-    """Dataclass for DescribeVpcEndpointServiceConfigurationsInput structure."""
-
-    dry_run: bool | None = ...
-    """
-    Checks whether you have the required permissions for the action, without
-    actually making the request, and provides an error response. If you have
-    the required permissions, the error response is `DryRunOperation`.
-    Otherwise, it is `UnauthorizedOperation`.
-    """
-    service_ids: list[str] | None = ...
-    """The IDs of the endpoint services."""
-    filters: list[Filter] | None = ...
-    """
-    The filters.
-
-    - `service-name` - The name of the service.
-
-    - `service-id` - The ID of the service.
-
-    - `service-state` - The state of the service (`Pending` | `Available`
-      | `Deleting` | `Deleted` | `Failed`).
-
-    - `supported-ip-address-types` - The IP address type (`ipv4` | `ipv6`).
-
-    - `tag`:`<key>`{=html} - The key/value combination of a tag assigned to
-      the resource. Use the tag key in the filter name and the tag value as
-      the filter value. For example, to find all resources that have a tag
-      with the key `Owner` and the value `TeamA`, specify `tag:Owner` for
-      the filter name and `TeamA` for the filter value.
-
-    - `tag-key` - The key of a tag assigned to the resource. Use this filter
-      to find all resources assigned a tag with a specific key, regardless
-      of the tag value.
-    """
-    max_results: int | None = ...
-    """
-    The maximum number of results to return for the request in a single
-    page. The remaining results of the initial request can be seen by
-    sending another request with the returned `NextToken` value. This value
-    can be between 5 and 1,000; if `MaxResults` is given a value larger than
-    1,000, only 1,000 results are returned.
-    """
-    next_token: str | None = ...
-    """The token to retrieve the next page of results."""
-
-class DescribeVpcEndpointServiceConfigurationsInputDict(TypedDict, total=False):
-    """Dictionary form of `DescribeVpcEndpointServiceConfigurationsInput`."""
-
-    dry_run: bool | None
-    """
-    Checks whether you have the required permissions for the action, without
-    actually making the request, and provides an error response. If you have
-    the required permissions, the error response is `DryRunOperation`.
-    Otherwise, it is `UnauthorizedOperation`.
-    """
-    service_ids: Sequence[str] | None
-    """The IDs of the endpoint services."""
-    filters: Sequence[Filter | FilterDict] | None
-    """
-    The filters.
-
-    - `service-name` - The name of the service.
-
-    - `service-id` - The ID of the service.
-
-    - `service-state` - The state of the service (`Pending` | `Available`
-      | `Deleting` | `Deleted` | `Failed`).
-
-    - `supported-ip-address-types` - The IP address type (`ipv4` | `ipv6`).
-
-    - `tag`:`<key>`{=html} - The key/value combination of a tag assigned to
-      the resource. Use the tag key in the filter name and the tag value as
-      the filter value. For example, to find all resources that have a tag
-      with the key `Owner` and the value `TeamA`, specify `tag:Owner` for
-      the filter name and `TeamA` for the filter value.
-
-    - `tag-key` - The key of a tag assigned to the resource. Use this filter
-      to find all resources assigned a tag with a specific key, regardless
-      of the tag value.
-    """
-    max_results: int | None
-    """
-    The maximum number of results to return for the request in a single
-    page. The remaining results of the initial request can be seen by
-    sending another request with the returned `NextToken` value. This value
-    can be between 5 and 1,000; if `MaxResults` is given a value larger than
-    1,000, only 1,000 results are returned.
-    """
-    next_token: str | None
-    """The token to retrieve the next page of results."""
-
-@dataclass(kw_only=True)
-class DescribeVpcEndpointServiceConfigurationsOutput(_SerdeShape):
-    """Dataclass for DescribeVpcEndpointServiceConfigurationsOutput structure."""
-
-    service_configurations: list[ServiceConfiguration] | None = ...
-    """Information about the services."""
-    next_token: str | None = ...
-    """
-    The token to use to retrieve the next page of results. This value is
-    `null` when there are no more results to return.
-    """
-    response_metadata: ResponseMetadata = ...
-    """
-    Metadata about the response that produced this output. Use this to
-    recover the request identifiers a service's support team needs in order
-    to investigate a call. Members of the metadata are individually
-    optional.
-    """
-
-@dataclass(kw_only=True)
-class DescribeVpcEndpointServicePermissionsInput(_SerdeShape):
-    """Dataclass for DescribeVpcEndpointServicePermissionsInput structure."""
-
-    dry_run: bool | None = ...
-    """
-    Checks whether you have the required permissions for the action, without
-    actually making the request, and provides an error response. If you have
-    the required permissions, the error response is `DryRunOperation`.
-    Otherwise, it is `UnauthorizedOperation`.
-    """
-    service_id: str | None = ...
-    """The ID of the service."""
-    filters: list[Filter] | None = ...
-    """
-    The filters.
-
-    - `principal` - The ARN of the principal.
-
-    - `principal-type` - The principal type (`All` | `Service` |
-      `OrganizationUnit` | `Account` | `User` | `Role`).
-    """
-    max_results: int | None = ...
-    """
-    The maximum number of results to return for the request in a single
-    page. The remaining results of the initial request can be seen by
-    sending another request with the returned `NextToken` value. This value
-    can be between 5 and 1,000; if `MaxResults` is given a value larger than
-    1,000, only 1,000 results are returned.
-    """
-    next_token: str | None = ...
-    """The token to retrieve the next page of results."""
-
-class DescribeVpcEndpointServicePermissionsInputDict(TypedDict, total=False):
-    """Dictionary form of `DescribeVpcEndpointServicePermissionsInput`."""
-
-    dry_run: bool | None
-    """
-    Checks whether you have the required permissions for the action, without
-    actually making the request, and provides an error response. If you have
-    the required permissions, the error response is `DryRunOperation`.
-    Otherwise, it is `UnauthorizedOperation`.
-    """
-    service_id: Required[str]
-    """The ID of the service."""
-    filters: Sequence[Filter | FilterDict] | None
-    """
-    The filters.
-
-    - `principal` - The ARN of the principal.
-
-    - `principal-type` - The principal type (`All` | `Service` |
-      `OrganizationUnit` | `Account` | `User` | `Role`).
-    """
-    max_results: int | None
-    """
-    The maximum number of results to return for the request in a single
-    page. The remaining results of the initial request can be seen by
-    sending another request with the returned `NextToken` value. This value
-    can be between 5 and 1,000; if `MaxResults` is given a value larger than
-    1,000, only 1,000 results are returned.
-    """
-    next_token: str | None
-    """The token to retrieve the next page of results."""
-
-@dataclass(kw_only=True)
-class DescribeVpcEndpointServicePermissionsOutput(_SerdeShape):
-    """Dataclass for DescribeVpcEndpointServicePermissionsOutput structure."""
-
-    allowed_principals: list[AllowedPrincipal] | None = ...
-    """Information about the allowed principals."""
-    next_token: str | None = ...
-    """
-    The token to use to retrieve the next page of results. This value is
-    `null` when there are no more results to return.
-    """
-    response_metadata: ResponseMetadata = ...
-    """
-    Metadata about the response that produced this output. Use this to
-    recover the request identifiers a service's support team needs in order
-    to investigate a call. Members of the metadata are individually
-    optional.
-    """
-
-@dataclass(kw_only=True)
-class DescribeVpcEndpointServicesInput(_SerdeShape):
-    """Dataclass for DescribeVpcEndpointServicesInput structure."""
-
-    dry_run: bool | None = ...
-    """
-    Checks whether you have the required permissions for the action, without
-    actually making the request, and provides an error response. If you have
-    the required permissions, the error response is `DryRunOperation`.
-    Otherwise, it is `UnauthorizedOperation`.
-    """
-    service_names: list[str] | None = ...
-    """The service names."""
-    filters: list[Filter] | None = ...
-    """
-    The filters.
-
-    - `owner` - The ID or alias of the Amazon Web Services account that owns
-      the service.
-
-    - `service-name` - The name of the service.
-
-    - `service-region` - The Region of the service.
-
-    - `service-type` - The type of service (`Interface` | `Gateway` |
-      `GatewayLoadBalancer`).
-
-    - `supported-ip-address-types` - The IP address type (`ipv4` | `ipv6`).
-
-    - `tag`:`<key>`{=html} - The key/value combination of a tag assigned to
-      the resource. Use the tag key in the filter name and the tag value as
-      the filter value. For example, to find all resources that have a tag
-      with the key `Owner` and the value `TeamA`, specify `tag:Owner` for
-      the filter name and `TeamA` for the filter value.
-
-    - `tag-key` - The key of a tag assigned to the resource. Use this filter
-      to find all resources assigned a tag with a specific key, regardless
-      of the tag value.
-    """
-    max_results: int | None = ...
-    """
-    The maximum number of items to return for this request. The request
-    returns a token that you can specify in a subsequent call to get the
-    next set of results.
-
-    Constraint: If the value is greater than 1,000, we return only 1,000
-    items.
-    """
-    next_token: str | None = ...
-    """
-    The token for the next set of items to return. (You received this token
-    from a prior call.)
-    """
-    service_regions: list[str] | None = ...
-    """The service Regions."""
-
-class DescribeVpcEndpointServicesInputDict(TypedDict, total=False):
-    """Dictionary form of `DescribeVpcEndpointServicesInput`."""
-
-    dry_run: bool | None
-    """
-    Checks whether you have the required permissions for the action, without
-    actually making the request, and provides an error response. If you have
-    the required permissions, the error response is `DryRunOperation`.
-    Otherwise, it is `UnauthorizedOperation`.
-    """
-    service_names: Sequence[str] | None
-    """The service names."""
-    filters: Sequence[Filter | FilterDict] | None
-    """
-    The filters.
-
-    - `owner` - The ID or alias of the Amazon Web Services account that owns
-      the service.
-
-    - `service-name` - The name of the service.
-
-    - `service-region` - The Region of the service.
-
-    - `service-type` - The type of service (`Interface` | `Gateway` |
-      `GatewayLoadBalancer`).
-
-    - `supported-ip-address-types` - The IP address type (`ipv4` | `ipv6`).
-
-    - `tag`:`<key>`{=html} - The key/value combination of a tag assigned to
-      the resource. Use the tag key in the filter name and the tag value as
-      the filter value. For example, to find all resources that have a tag
-      with the key `Owner` and the value `TeamA`, specify `tag:Owner` for
-      the filter name and `TeamA` for the filter value.
-
-    - `tag-key` - The key of a tag assigned to the resource. Use this filter
-      to find all resources assigned a tag with a specific key, regardless
-      of the tag value.
-    """
-    max_results: int | None
-    """
-    The maximum number of items to return for this request. The request
-    returns a token that you can specify in a subsequent call to get the
-    next set of results.
-
-    Constraint: If the value is greater than 1,000, we return only 1,000
-    items.
-    """
-    next_token: str | None
-    """
-    The token for the next set of items to return. (You received this token
-    from a prior call.)
-    """
-    service_regions: Sequence[str] | None
-    """The service Regions."""

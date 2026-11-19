@@ -1,0 +1,4 @@
+{
+  "type": "feature",
+  "description": "Initial client release with support for current AWS SSO OIDC operations."
+}

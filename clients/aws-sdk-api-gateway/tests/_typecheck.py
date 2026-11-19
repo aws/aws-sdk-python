@@ -301,6 +301,14 @@ from aws_sdk_api_gateway.models import (
     ImportRestApiOutput,
     Integration,
     IntegrationResponse,
+    JwtAdditionalClaim,
+    JwtAdditionalClaimDict,
+    JwtConfiguration,
+    JwtConfigurationInput,
+    JwtConfigurationInputDict,
+    JwtIssuer,
+    JwtIssuerInput,
+    JwtIssuerInputDict,
     Method,
     MethodResponse,
     MethodSetting,
@@ -636,6 +644,11 @@ ImportRestApiInput()
 ImportRestApiOutput()
 Integration()
 IntegrationResponse()
+JwtAdditionalClaim(claim_name=_, format=_)
+JwtConfiguration()
+JwtConfigurationInput(issuers=_, default_algorithms=_)
+JwtIssuer()
+JwtIssuerInput(issuer=_, audiences=_)
 Method()
 MethodResponse()
 MethodSetting()
@@ -887,99 +900,102 @@ _params_92: GetVpcLinksInputDict = {}
 _params_93: ImportApiKeysInputDict = {"body": _, "format": _}
 _params_94: ImportDocumentationPartsInputDict = {"rest_api_id": _, "body": _}
 _params_95: ImportRestApiInputDict = {"body": _}
-_params_96: MutualTlsAuthenticationInputDict = {}
-_params_97: PatchOperationDict = {}
-_params_98: PutGatewayResponseInputDict = {"rest_api_id": _, "response_type": _}
-_params_99: PutIntegrationInputDict = {
+_params_96: JwtAdditionalClaimDict = {"claim_name": _, "format": _}
+_params_97: JwtConfigurationInputDict = {"issuers": _, "default_algorithms": _}
+_params_98: JwtIssuerInputDict = {"issuer": _, "audiences": _}
+_params_99: MutualTlsAuthenticationInputDict = {}
+_params_100: PatchOperationDict = {}
+_params_101: PutGatewayResponseInputDict = {"rest_api_id": _, "response_type": _}
+_params_102: PutIntegrationInputDict = {
     "rest_api_id": _,
     "resource_id": _,
     "http_method": _,
     "type": _,
 }
-_params_100: PutIntegrationResponseInputDict = {
+_params_103: PutIntegrationResponseInputDict = {
     "rest_api_id": _,
     "resource_id": _,
     "http_method": _,
     "status_code": _,
 }
-_params_101: PutMethodInputDict = {
+_params_104: PutMethodInputDict = {
     "rest_api_id": _,
     "resource_id": _,
     "http_method": _,
     "authorization_type": _,
 }
-_params_102: PutMethodResponseInputDict = {
+_params_105: PutMethodResponseInputDict = {
     "rest_api_id": _,
     "resource_id": _,
     "http_method": _,
     "status_code": _,
 }
-_params_103: PutRestApiInputDict = {"rest_api_id": _, "body": _}
-_params_104: QuotaSettingsDict = {}
-_params_105: RejectDomainNameAccessAssociationInputDict = {
+_params_106: PutRestApiInputDict = {"rest_api_id": _, "body": _}
+_params_107: QuotaSettingsDict = {}
+_params_108: RejectDomainNameAccessAssociationInputDict = {
     "domain_name_access_association_arn": _,
     "domain_name_arn": _,
 }
-_params_106: StageKeyDict = {}
-_params_107: TagResourceInputDict = {"resource_arn": _, "tags": _}
-_params_108: TestInvokeAuthorizerInputDict = {"rest_api_id": _, "authorizer_id": _}
-_params_109: TestInvokeMethodInputDict = {
+_params_109: StageKeyDict = {}
+_params_110: TagResourceInputDict = {"resource_arn": _, "tags": _}
+_params_111: TestInvokeAuthorizerInputDict = {"rest_api_id": _, "authorizer_id": _}
+_params_112: TestInvokeMethodInputDict = {
     "rest_api_id": _,
     "resource_id": _,
     "http_method": _,
 }
-_params_110: ThrottleSettingsDict = {}
-_params_111: TlsConfigDict = {}
-_params_112: UntagResourceInputDict = {"resource_arn": _, "tag_keys": _}
-_params_113: UpdateAccountInputDict = {}
-_params_114: UpdateApiKeyInputDict = {"api_key": _}
-_params_115: UpdateAuthorizerInputDict = {"rest_api_id": _, "authorizer_id": _}
-_params_116: UpdateBasePathMappingInputDict = {"domain_name": _, "base_path": _}
-_params_117: UpdateClientCertificateInputDict = {"client_certificate_id": _}
-_params_118: UpdateDeploymentInputDict = {"rest_api_id": _, "deployment_id": _}
-_params_119: UpdateDocumentationPartInputDict = {
+_params_113: ThrottleSettingsDict = {}
+_params_114: TlsConfigDict = {}
+_params_115: UntagResourceInputDict = {"resource_arn": _, "tag_keys": _}
+_params_116: UpdateAccountInputDict = {}
+_params_117: UpdateApiKeyInputDict = {"api_key": _}
+_params_118: UpdateAuthorizerInputDict = {"rest_api_id": _, "authorizer_id": _}
+_params_119: UpdateBasePathMappingInputDict = {"domain_name": _, "base_path": _}
+_params_120: UpdateClientCertificateInputDict = {"client_certificate_id": _}
+_params_121: UpdateDeploymentInputDict = {"rest_api_id": _, "deployment_id": _}
+_params_122: UpdateDocumentationPartInputDict = {
     "rest_api_id": _,
     "documentation_part_id": _,
 }
-_params_120: UpdateDocumentationVersionInputDict = {
+_params_123: UpdateDocumentationVersionInputDict = {
     "rest_api_id": _,
     "documentation_version": _,
 }
-_params_121: UpdateDomainNameInputDict = {"domain_name": _}
-_params_122: UpdateGatewayResponseInputDict = {"rest_api_id": _, "response_type": _}
-_params_123: UpdateIntegrationInputDict = {
+_params_124: UpdateDomainNameInputDict = {"domain_name": _}
+_params_125: UpdateGatewayResponseInputDict = {"rest_api_id": _, "response_type": _}
+_params_126: UpdateIntegrationInputDict = {
     "rest_api_id": _,
     "resource_id": _,
     "http_method": _,
 }
-_params_124: UpdateIntegrationResponseInputDict = {
-    "rest_api_id": _,
-    "resource_id": _,
-    "http_method": _,
-    "status_code": _,
-}
-_params_125: UpdateMethodInputDict = {
-    "rest_api_id": _,
-    "resource_id": _,
-    "http_method": _,
-}
-_params_126: UpdateMethodResponseInputDict = {
+_params_127: UpdateIntegrationResponseInputDict = {
     "rest_api_id": _,
     "resource_id": _,
     "http_method": _,
     "status_code": _,
 }
-_params_127: UpdateModelInputDict = {"rest_api_id": _, "model_name": _}
-_params_128: UpdateRequestValidatorInputDict = {
+_params_128: UpdateMethodInputDict = {
+    "rest_api_id": _,
+    "resource_id": _,
+    "http_method": _,
+}
+_params_129: UpdateMethodResponseInputDict = {
+    "rest_api_id": _,
+    "resource_id": _,
+    "http_method": _,
+    "status_code": _,
+}
+_params_130: UpdateModelInputDict = {"rest_api_id": _, "model_name": _}
+_params_131: UpdateRequestValidatorInputDict = {
     "rest_api_id": _,
     "request_validator_id": _,
 }
-_params_129: UpdateResourceInputDict = {"rest_api_id": _, "resource_id": _}
-_params_130: UpdateRestApiInputDict = {"rest_api_id": _}
-_params_131: UpdateStageInputDict = {"rest_api_id": _, "stage_name": _}
-_params_132: UpdateUsageInputDict = {"usage_plan_id": _, "key_id": _}
-_params_133: UpdateUsagePlanInputDict = {"usage_plan_id": _}
-_params_134: UpdateVpcLinkInputDict = {"vpc_link_id": _}
+_params_132: UpdateResourceInputDict = {"rest_api_id": _, "resource_id": _}
+_params_133: UpdateRestApiInputDict = {"rest_api_id": _}
+_params_134: UpdateStageInputDict = {"rest_api_id": _, "stage_name": _}
+_params_135: UpdateUsageInputDict = {"usage_plan_id": _, "key_id": _}
+_params_136: UpdateUsagePlanInputDict = {"usage_plan_id": _}
+_params_137: UpdateVpcLinkInputDict = {"vpc_link_id": _}
 
 
 def _request[T](form: type[T]) -> T:

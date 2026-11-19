@@ -9635,9 +9635,10 @@ class AsyncIAMClient(AsyncClient[AsyncIAMConfig]):
         **kwargs: _Unpack[_models.UpdateLoginProfileInputDict],
     ) -> UpdateLoginProfileOutput:
         """
-        Changes the password for the specified IAM user. You can use the CLI,
-        the Amazon Web Services API, or the **Users** page in the IAM console to
-        change the password for any IAM user. Use
+        Changes the password or the maximum sign-in session duration for the
+        specified IAM user. You can use the CLI, the Amazon Web Services API, or
+        the **Users** page in the IAM console to change the password for any IAM
+        user. Use
         [ChangePassword](https://docs.aws.amazon.com/IAM/latest/APIReference/API_ChangePassword.html)
         to change your own password in the **My Security Credentials** page in
         the Amazon Web Services Management Console.
@@ -9753,7 +9754,9 @@ class AsyncIAMClient(AsyncClient[AsyncIAMConfig]):
         **kwargs: _Unpack[_models.UpdateRoleInputDict],
     ) -> UpdateRoleOutput:
         """
-        Updates the description or maximum session duration setting of a role.
+        Updates the description, maximum session duration, or maximum sign-in
+        session duration of a role. You cannot change the maximum sign-in
+        session duration of a service-linked role.
 
         Args:
             plugins:

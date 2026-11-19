@@ -8,21 +8,19 @@ from . import schemas
 
 
 n0 = "com.amazonaws.lambda"
-_s = "smithy.api#default"
+_sV = "smithy.api#enumValue"
+_s = "smithy.api#required"
+_sm = "smithy.api#default"
 _k = "key"
 _v = "value"
 _sSI = "smithy.synthetic#originalShapeId"
-_sm = "smithy.api#input"
-_smi = "smithy.api#required"
+_smi = "smithy.api#input"
 _sL = "smithy.api#httpLabel"
 _sQ = "smithy.api#httpQuery"
 _smit = "smithy.api#output"
-_smith = "smithy.api#error"
-_c = "client"
-_sE = "smithy.api#httpError"
 _T = "Type"
-_M = "Message"
-_sV = "smithy.api#enumValue"
+_Me = "Message"
+_R = "Reason"
 _smithy = "smithy.api#http"
 _FN = "FunctionName"
 _FA = "FunctionArn"
@@ -53,24 +51,34 @@ _Mar = "Marker"
 _MI = "MaxItems"
 _NM = "NextMarker"
 _CT = "CheckpointToken"
+_CTl = "ClientToken"
 _DEA = "DurableExecutionArn"
+_TI = "TenantId"
+_smithya = "smithy.api#sensitive"
 _NADS = "NextAttemptDelaySeconds"
 _Id = "Id"
 _PI = "ParentId"
 _STu = "SubType"
+_Pa = "Payload"
+_sT = "smithy.api#idempotencyToken"
 _Re = "Result"
 _SET = "ScheduledEndTimestamp"
 _STt = "StartTimestamp"
 _ETn = "EndTimestamp"
 _Ope = "Operations"
 _ETxe = "ExecutionTimeout"
+_ETP = "ExecutionTimeoutPaused"
+_PRT = "PauseRequestTimestamp"
+_Tru = "Truncated"
 _CFD = "CallbackFailedDetails"
 _CSD = "CallbackStartedDetails"
 _CSDa = "CallbackSucceededDetails"
 _CTOD = "CallbackTimedOutDetails"
 _CIFD = "ChainedInvokeFailedDetails"
+_EI = "EventInput"
 _CISD = "ChainedInvokeStartedDetails"
 _Inp = "Input"
+_EV = "ExecutedVersion"
 _CISDh = "ChainedInvokeStoppedDetails"
 _CISDha = "ChainedInvokeSucceededDetails"
 _CITOD = "ChainedInvokeTimedOutDetails"
@@ -103,7 +111,15 @@ _CSal = "CallbackSucceeded"
 _CFa = "CallbackFailed"
 _CTO = "CallbackTimedOut"
 _ICn = "InvocationCompleted"
+_EP = "ExecutionPaused"
+_ERx = "ExecutionResumed"
 _EFD = "ExecutionFailedDetails"
+_EPR = "EventPauseReason"
+_EPD = "ExecutionPausedDetails"
+_RR = "ResumeReason"
+_ERR = "EventResumeReason"
+_ERD = "ExecutionResumedDetails"
+_RRT = "ResumeRequestTimestamp"
 _ESD = "ExecutionStartedDetails"
 _ESDx = "ExecutionStoppedDetails"
 _ESDxe = "ExecutionSucceededDetails"
@@ -127,6 +143,16 @@ _cGDESR = "com.amazonaws.lambda#GetDurableExecutionStateRequest"
 _GDESO = "GetDurableExecutionStateOutput"
 _cGDESRo = "com.amazonaws.lambda#GetDurableExecutionStateResponse"
 _GDES = "GetDurableExecutionState"
+_PDEI = "PauseDurableExecutionInput"
+_cPDER = "com.amazonaws.lambda#PauseDurableExecutionRequest"
+_PDEO = "PauseDurableExecutionOutput"
+_cPDERo = "com.amazonaws.lambda#PauseDurableExecutionResponse"
+_PDE = "PauseDurableExecution"
+_RDEI = "ResumeDurableExecutionInput"
+_cRDER = "com.amazonaws.lambda#ResumeDurableExecutionRequest"
+_RDEO = "ResumeDurableExecutionOutput"
+_cRDERo = "com.amazonaws.lambda#ResumeDurableExecutionResponse"
+_RDE = "ResumeDurableExecution"
 _SDEI = "StopDurableExecutionInput"
 _cSDER = "com.amazonaws.lambda#StopDurableExecutionRequest"
 _sP = "smithy.api#httpPayload"
@@ -167,7 +193,7 @@ _ECr = "ErrorCount"
 _KM = "KafkaMetrics"
 _ESMML = "EventSourceMappingMetricList"
 _ESMMC = "EventSourceMappingMetricsConfig"
-_Met = "Metrics"
+_Metr = "Metrics"
 _PF = "ParallelizationFactor"
 _MNOP = "MaximumNumberOfPollers"
 _MNOPi = "MinimumNumberOfPollers"
@@ -232,11 +258,39 @@ _UUID = "UUID"
 _LPR = "LastProcessingResult"
 _STR = "StateTransitionReason"
 _CESM = "CreateEventSourceMapping"
-_DESMI = "DeleteEventSourceMappingInput"
-_cDESMR = "com.amazonaws.lambda#DeleteEventSourceMappingRequest"
-_DESMO = "DeleteEventSourceMappingOutput"
-_RIUE = "ResourceInUseException"
-_DESM = "DeleteEventSourceMapping"
+
+EVENT_INPUT: StaticSchema = (
+    18,
+    n0,
+    _EI,
+    0,
+    (_Pa, _Tru),
+    ((lambda: schemas.INPUT_PAYLOAD, 0), (lambda: schemas.TRUNCATED, 0)),
+)
+
+CHAINED_INVOKE_STARTED_DETAILS: StaticSchema = (
+    18,
+    n0,
+    _CISD,
+    0,
+    (_FN, _TI, _Inp, _EV, _DEA),
+    (
+        (lambda: schemas.NAMESPACED_FUNCTION_NAME, 1),
+        (lambda: schemas.TENANT_ID, 0),
+        (EVENT_INPUT, 0),
+        (lambda: schemas.VERSION_WITH_LATEST_PUBLISHED, 0),
+        (lambda: schemas.DURABLE_EXECUTION_ARN, 0),
+    ),
+)
+
+CHAINED_INVOKE_STOPPED_DETAILS: StaticSchema = (
+    18,
+    n0,
+    _CISDh,
+    0,
+    (_E,),
+    ((lambda: schemas.EVENT_ERROR, 1),),
+)
 
 CHAINED_INVOKE_SUCCEEDED_DETAILS: StaticSchema = (
     18,
@@ -276,7 +330,7 @@ CONTEXT_SUCCEEDED_DETAILS: StaticSchema = (
     ((lambda: schemas.EVENT_RESULT, 1),),
 )
 
-EVENT_ID: StaticSchema = (7, n0, _EIv, {_s: 1})
+EVENT_ID: StaticSchema = (7, n0, _EIv, {_sm: 1})
 
 EVENT_TYPE: StaticSchema = (
     14,
@@ -308,6 +362,8 @@ EVENT_TYPE: StaticSchema = (
         _CFa,
         _CTO,
         _ICn,
+        _EP,
+        _ERx,
     ),
     (
         (-1, {_sV: _ESx}),
@@ -334,6 +390,8 @@ EVENT_TYPE: StaticSchema = (
         (-1, {_sV: _CFa}),
         (-1, {_sV: _CTO}),
         (-1, {_sV: _ICn}),
+        (-1, {_sV: _EP}),
+        (-1, {_sV: _ERx}),
     ),
 )
 
@@ -346,13 +404,55 @@ EXECUTION_FAILED_DETAILS: StaticSchema = (
     ((lambda: schemas.EVENT_ERROR, 1),),
 )
 
+EVENT_PAUSE_REASON: StaticSchema = (
+    18,
+    n0,
+    _EPR,
+    0,
+    (_Pa, _Tru),
+    ((lambda: schemas.PAUSE_REASON, 0), (lambda: schemas.TRUNCATED, 0)),
+)
+
+EXECUTION_PAUSED_DETAILS: StaticSchema = (
+    18,
+    n0,
+    _EPD,
+    0,
+    (_PRT, _R, _ETP),
+    (
+        (lambda: schemas.EXECUTION_TIMESTAMP, 1),
+        (EVENT_PAUSE_REASON, 0),
+        (lambda: schemas.EXECUTION_TIMEOUT_PAUSED, 1),
+    ),
+)
+
+RESUME_REASON: StaticSchema = (3, n0, _RR, 4)
+
+EVENT_RESUME_REASON: StaticSchema = (
+    18,
+    n0,
+    _ERR,
+    0,
+    (_Pa, _Tru),
+    ((RESUME_REASON, 0), (lambda: schemas.TRUNCATED, 0)),
+)
+
+EXECUTION_RESUMED_DETAILS: StaticSchema = (
+    18,
+    n0,
+    _ERD,
+    0,
+    (_RRT, _R),
+    ((lambda: schemas.EXECUTION_TIMESTAMP, 1), (EVENT_RESUME_REASON, 0)),
+)
+
 EXECUTION_STARTED_DETAILS: StaticSchema = (
     18,
     n0,
     _ESD,
     0,
     (_Inp, _ETxe),
-    ((lambda: schemas.EVENT_INPUT, 1), (lambda: schemas.DURATION_SECONDS, 1)),
+    ((EVENT_INPUT, 1), (lambda: schemas.DURATION_SECONDS, 1)),
 )
 
 EXECUTION_STOPPED_DETAILS: StaticSchema = (
@@ -402,7 +502,7 @@ RETRY_DETAILS: StaticSchema = (
     _RD,
     0,
     (_CA, _NADS),
-    ((lambda: schemas.ATTEMPT_COUNT, {_s: 0}), (lambda: schemas.DURATION_SECONDS, 0)),
+    ((lambda: schemas.ATTEMPT_COUNT, {_sm: 0}), (lambda: schemas.DURATION_SECONDS, 0)),
 )
 
 STEP_FAILED_DETAILS: StaticSchema = (
@@ -489,11 +589,13 @@ EVENT: StaticSchema = (
         _CFD,
         _CTOD,
         _ICD,
+        _EPD,
+        _ERD,
     ),
     (
         (EVENT_TYPE, 0),
         (lambda: schemas.OPERATION_SUB_TYPE, 0),
-        (EVENT_ID, {_s: 1}),
+        (EVENT_ID, {_sm: 1}),
         (lambda: schemas.OPERATION_ID, 0),
         (lambda: schemas.OPERATION_NAME, 0),
         (lambda: schemas.EXECUTION_TIMESTAMP, 0),
@@ -512,16 +614,18 @@ EVENT: StaticSchema = (
         (STEP_STARTED_DETAILS, 0),
         (STEP_SUCCEEDED_DETAILS, 0),
         (STEP_FAILED_DETAILS, 0),
-        (lambda: schemas.CHAINED_INVOKE_STARTED_DETAILS, 0),
+        (CHAINED_INVOKE_STARTED_DETAILS, 0),
         (CHAINED_INVOKE_SUCCEEDED_DETAILS, 0),
         (lambda: schemas.CHAINED_INVOKE_FAILED_DETAILS, 0),
         (CHAINED_INVOKE_TIMED_OUT_DETAILS, 0),
-        (lambda: schemas.CHAINED_INVOKE_STOPPED_DETAILS, 0),
+        (CHAINED_INVOKE_STOPPED_DETAILS, 0),
         (lambda: schemas.CALLBACK_STARTED_DETAILS, 0),
         (lambda: schemas.CALLBACK_SUCCEEDED_DETAILS, 0),
         (lambda: schemas.CALLBACK_FAILED_DETAILS, 0),
         (lambda: schemas.CALLBACK_TIMED_OUT_DETAILS, 0),
         (INVOCATION_COMPLETED_DETAILS, 0),
+        (EXECUTION_PAUSED_DETAILS, 0),
+        (EXECUTION_RESUMED_DETAILS, 0),
     ),
 )
 
@@ -531,13 +635,13 @@ GET_DURABLE_EXECUTION_STATE_INPUT: StaticSchema = (
     18,
     n0,
     _GDESI,
-    {_sSI: _cGDESR, _sm: None},
+    {_sSI: _cGDESR, _smi: None},
     (_DEA, _CT, _Mar, _MI),
     (
         (lambda: schemas.DURABLE_EXECUTION_ARN, 9),
-        (lambda: schemas.CHECKPOINT_TOKEN, {_sQ: _CT, _smi: None}),
+        (lambda: schemas.CHECKPOINT_TOKEN, {_sQ: _CT, _s: None}),
         (lambda: schemas.STRING, {_sQ: _Mar}),
-        (lambda: schemas.ITEM_COUNT, {_s: 0, _sQ: _MI}),
+        (lambda: schemas.ITEM_COUNT, {_sm: 0, _sQ: _MI}),
     ),
 )
 
@@ -576,11 +680,108 @@ GET_DURABLE_EXECUTION_STATE: StaticOperationSchema = (
     ),
 )
 
+PAUSE_DURABLE_EXECUTION_INPUT: StaticSchema = (
+    18,
+    n0,
+    _PDEI,
+    {_sSI: _cPDER, _smi: None},
+    (_DEA, _CTl, _R, _ETP),
+    (
+        (lambda: schemas.DURABLE_EXECUTION_ARN, 9),
+        (lambda: schemas.CLIENT_TOKEN, 2),
+        (lambda: schemas.PAUSE_REASON, 0),
+        (lambda: schemas.EXECUTION_TIMEOUT_PAUSED, {_sm: True}),
+    ),
+)
+
+PAUSE_DURABLE_EXECUTION_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _PDEO,
+    {_sSI: _cPDERo, _smit: None},
+)
+
+PAUSE_DURABLE_EXECUTION: StaticOperationSchema = (
+    23,
+    n0,
+    _PDE,
+    {
+        _smithy: MappingProxyType(
+            {
+                "method": "POST",
+                "uri": "/2025-12-01/durable-executions/{DurableExecutionArn}/pause",
+                "code": 202,
+            }
+        )
+    },
+    PAUSE_DURABLE_EXECUTION_INPUT,
+    PAUSE_DURABLE_EXECUTION_OUTPUT,
+    (
+        lambda: schemas.INVALID_PARAMETER_VALUE_EXCEPTION,
+        lambda: schemas.KMS_ACCESS_DENIED_EXCEPTION,
+        lambda: schemas.KMS_DISABLED_EXCEPTION,
+        lambda: schemas.KMS_INVALID_STATE_EXCEPTION,
+        lambda: schemas.KMS_NOT_FOUND_EXCEPTION,
+        lambda: schemas.RESOURCE_CONFLICT_EXCEPTION,
+        lambda: schemas.RESOURCE_NOT_FOUND_EXCEPTION,
+        lambda: schemas.SERVICE_EXCEPTION,
+        lambda: schemas.TOO_MANY_REQUESTS_EXCEPTION,
+    ),
+)
+
+RESUME_DURABLE_EXECUTION_INPUT: StaticSchema = (
+    18,
+    n0,
+    _RDEI,
+    {_sSI: _cRDER, _smi: None},
+    (_DEA, _CTl, _R),
+    (
+        (lambda: schemas.DURABLE_EXECUTION_ARN, 9),
+        (lambda: schemas.CLIENT_TOKEN, 2),
+        (RESUME_REASON, 0),
+    ),
+)
+
+RESUME_DURABLE_EXECUTION_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _RDEO,
+    {_sSI: _cRDERo, _smit: None},
+)
+
+RESUME_DURABLE_EXECUTION: StaticOperationSchema = (
+    23,
+    n0,
+    _RDE,
+    {
+        _smithy: MappingProxyType(
+            {
+                "method": "POST",
+                "uri": "/2025-12-01/durable-executions/{DurableExecutionArn}/resume",
+                "code": 202,
+            }
+        )
+    },
+    RESUME_DURABLE_EXECUTION_INPUT,
+    RESUME_DURABLE_EXECUTION_OUTPUT,
+    (
+        lambda: schemas.INVALID_PARAMETER_VALUE_EXCEPTION,
+        lambda: schemas.KMS_ACCESS_DENIED_EXCEPTION,
+        lambda: schemas.KMS_DISABLED_EXCEPTION,
+        lambda: schemas.KMS_INVALID_STATE_EXCEPTION,
+        lambda: schemas.KMS_NOT_FOUND_EXCEPTION,
+        lambda: schemas.RESOURCE_CONFLICT_EXCEPTION,
+        lambda: schemas.RESOURCE_NOT_FOUND_EXCEPTION,
+        lambda: schemas.SERVICE_EXCEPTION,
+        lambda: schemas.TOO_MANY_REQUESTS_EXCEPTION,
+    ),
+)
+
 STOP_DURABLE_EXECUTION_INPUT: StaticSchema = (
     18,
     n0,
     _SDEI,
-    {_sSI: _cSDER, _sm: None},
+    {_sSI: _cSDER, _smi: None},
     (_DEA, _E),
     ((lambda: schemas.DURABLE_EXECUTION_ARN, 9), (lambda: schemas.ERROR_OBJECT, 16)),
 )
@@ -737,7 +938,7 @@ EVENT_SOURCE_MAPPING_METRICS_CONFIG: StaticSchema = (
     n0,
     _ESMMC,
     0,
-    (_Met,),
+    (_Metr,),
     ((EVENT_SOURCE_MAPPING_METRIC_LIST, 0),),
 )
 
@@ -896,7 +1097,7 @@ CREATE_EVENT_SOURCE_MAPPING_INPUT: StaticSchema = (
     18,
     n0,
     _CESMI,
-    {_sSI: _cCESMR, _sm: None},
+    {_sSI: _cCESMR, _smi: None},
     (
         _ESA,
         _FN,
@@ -1067,128 +1268,8 @@ FILTER_CRITERIA_ERROR: StaticSchema = (
     n0,
     _FCE,
     0,
-    (_ECrr, _M),
+    (_ECrr, _Me),
     ((FILTER_CRITERIA_ERROR_CODE, 0), (FILTER_CRITERIA_ERROR_MESSAGE, 0)),
 )
 
 UUID_STRING: StaticSchema = (3, n0, _UUIDS, 0)
-
-DELETE_EVENT_SOURCE_MAPPING_INPUT: StaticSchema = (
-    18,
-    n0,
-    _DESMI,
-    {_sSI: _cDESMR, _sm: None},
-    (_UUID,),
-    ((UUID_STRING, 9),),
-)
-
-DELETE_EVENT_SOURCE_MAPPING_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _DESMO,
-    {_sSI: _cESMC, _smit: None},
-    (
-        _UUID,
-        _SPt,
-        _SPT,
-        _BS,
-        _MBWIS,
-        _PF,
-        _ESA,
-        _FCi,
-        _FCE,
-        _KMSKA,
-        _MCe,
-        _LC,
-        _SCc,
-        _FA,
-        _LM,
-        _LPR,
-        _Sta,
-        _STR,
-        _DCe,
-        _Top,
-        _Que,
-        _SACo,
-        _SMES,
-        _MRAIS,
-        _BBOFE,
-        _MRA,
-        _TWIS,
-        _FRTu,
-        _AMKESC,
-        _SMKESC,
-        _DDBESC,
-        _ESMA,
-        _PPC,
-    ),
-    (
-        (UUID_STRING, 0),
-        (EVENT_SOURCE_POSITION, 0),
-        (DATE, 0),
-        (BATCH_SIZE, 0),
-        (MAXIMUM_BATCHING_WINDOW_IN_SECONDS, 0),
-        (PARALLELIZATION_FACTOR, 0),
-        (lambda: schemas.ARN, 0),
-        (FILTER_CRITERIA, 0),
-        (FILTER_CRITERIA_ERROR, 0),
-        (lambda: schemas.KMS_KEY_ARN, 0),
-        (EVENT_SOURCE_MAPPING_METRICS_CONFIG, 0),
-        (EVENT_SOURCE_MAPPING_LOGGING_CONFIG, 0),
-        (SCALING_CONFIG, 0),
-        (lambda: schemas.FUNCTION_ARN, 0),
-        (DATE, 0),
-        (lambda: schemas.STRING, 0),
-        (lambda: schemas.STRING, 0),
-        (lambda: schemas.STRING, 0),
-        (DESTINATION_CONFIG, 0),
-        (TOPICS, 0),
-        (QUEUES, 0),
-        (SOURCE_ACCESS_CONFIGURATIONS, 0),
-        (SELF_MANAGED_EVENT_SOURCE, 0),
-        (MAXIMUM_RECORD_AGE_IN_SECONDS, 0),
-        (BISECT_BATCH_ON_FUNCTION_ERROR, 0),
-        (MAXIMUM_RETRY_ATTEMPTS_EVENT_SOURCE_MAPPING, 0),
-        (TUMBLING_WINDOW_IN_SECONDS, 0),
-        (FUNCTION_RESPONSE_TYPE_LIST, 0),
-        (lambda: schemas.AMAZON_MANAGED_KAFKA_EVENT_SOURCE_CONFIG, 0),
-        (SELF_MANAGED_KAFKA_EVENT_SOURCE_CONFIG, 0),
-        (DOCUMENT_DB_EVENT_SOURCE_CONFIG, 0),
-        (EVENT_SOURCE_MAPPING_ARN, 0),
-        (PROVISIONED_POLLER_CONFIG, 0),
-    ),
-)
-
-DELETE_EVENT_SOURCE_MAPPING: StaticOperationSchema = (
-    23,
-    n0,
-    _DESM,
-    {
-        _smithy: MappingProxyType(
-            {
-                "method": "DELETE",
-                "uri": "/2015-03-31/event-source-mappings/{UUID}",
-                "code": 202,
-            }
-        )
-    },
-    DELETE_EVENT_SOURCE_MAPPING_INPUT,
-    DELETE_EVENT_SOURCE_MAPPING_OUTPUT,
-    (
-        lambda: schemas.INVALID_PARAMETER_VALUE_EXCEPTION,
-        lambda: schemas.RESOURCE_CONFLICT_EXCEPTION,
-        lambda: RESOURCE_IN_USE_EXCEPTION,
-        lambda: schemas.RESOURCE_NOT_FOUND_EXCEPTION,
-        lambda: schemas.SERVICE_EXCEPTION,
-        lambda: schemas.TOO_MANY_REQUESTS_EXCEPTION,
-    ),
-)
-
-RESOURCE_IN_USE_EXCEPTION: StaticSchema = (
-    18,
-    n0,
-    _RIUE,
-    {_smith: _c, _sE: 400},
-    (_T, _M),
-    ((lambda: schemas.STRING, 0), (lambda: schemas.STRING, 0)),
-)

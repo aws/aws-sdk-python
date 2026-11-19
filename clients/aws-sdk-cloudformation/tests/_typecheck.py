@@ -264,6 +264,9 @@ from aws_sdk_cloudformation.models import (
     RecordHandlerProgressInput,
     RecordHandlerProgressInputDict,
     RecordHandlerProgressOutput,
+    RegionalStackInstancesDeployment,
+    RegionalStages,
+    RegionalStatusDetail,
     RegisterPublisherInput,
     RegisterPublisherInputDict,
     RegisterPublisherOutput,
@@ -289,6 +292,7 @@ from aws_sdk_cloudformation.models import (
     ResourceTargetDefinition,
     ResourceToImport,
     ResourceToImportDict,
+    RoleProvisioning,
     RollbackConfiguration,
     RollbackConfigurationDict,
     RollbackStackInput,
@@ -328,6 +332,7 @@ from aws_sdk_cloudformation.models import (
     StackInstanceFilterDict,
     StackInstanceResourceDriftsSummary,
     StackInstanceSummary,
+    StackInstancesDeployment,
     StackRefactorAction,
     StackRefactorSummary,
     StackResource,
@@ -347,6 +352,7 @@ from aws_sdk_cloudformation.models import (
     StackSetOperationSummary,
     StackSetSummary,
     StackSummary,
+    Stages,
     StartResourceScanInput,
     StartResourceScanInputDict,
     StartResourceScanOutput,
@@ -579,6 +585,9 @@ PublishTypeInput()
 PublishTypeOutput()
 RecordHandlerProgressInput()
 RecordHandlerProgressOutput()
+RegionalStackInstancesDeployment()
+RegionalStages()
+RegionalStatusDetail()
 RegisterPublisherInput()
 RegisterPublisherOutput()
 RegisterTypeInput()
@@ -597,6 +606,7 @@ ResourceMapping()
 ResourceScanSummary()
 ResourceTargetDefinition()
 ResourceToImport()
+RoleProvisioning()
 RollbackConfiguration()
 RollbackStackInput()
 RollbackStackOutput()
@@ -623,6 +633,7 @@ StackInstance()
 StackInstanceComprehensiveStatus()
 StackInstanceFilter()
 StackInstanceResourceDriftsSummary()
+StackInstancesDeployment()
 StackInstanceSummary()
 StackRefactorAction()
 StackRefactorSummary()
@@ -642,6 +653,7 @@ StackSetOperationStatusDetails()
 StackSetOperationSummary()
 StackSetSummary()
 StackSummary()
+Stages()
 StartResourceScanInput()
 StartResourceScanOutput()
 StopStackSetOperationInput()

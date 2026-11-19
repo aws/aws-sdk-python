@@ -46,7 +46,7 @@ _t = "traceparent"
 _smithyap = "smithy.api#default"
 _COMPLETED = "COMPLETED"
 _cTl = "clientToken"
-_BEA = "BatchEvaluationArn"
+_bEI = "batchEvaluationId"
 _bEA = "batchEvaluationArn"
 _k = "key"
 _va = "value"
@@ -56,14 +56,25 @@ _lUA = "lastUpdatedAt"
 _READY = "READY"
 _TERMINATED = "TERMINATED"
 _sSt = "streamStatus"
+_vP = "viewPort"
+_ext = "extensions"
+_ePn = "enterprisePolicies"
+_pCr = "profileConfiguration"
 _sTS = "sessionTimeoutSeconds"
 _stre = "streams"
+_pCro = "proxyConfiguration"
 _ce = "certificates"
 _fC = "filesystemConfigurations"
 _te = "text"
 _mR = "maxResults"
 _nT = "nextToken"
+_BSSrow = "BrowserSessionSummaries"
 _i = "items"
+_SBSI = "StartBrowserSessionInput"
+_cSBSR = "com.amazonaws.bedrockagentcore#StartBrowserSessionRequest"
+_SBSO = "StartBrowserSessionOutput"
+_cSBSRo = "com.amazonaws.bedrockagentcore#StartBrowserSessionResponse"
+_SBS = "StartBrowserSession"
 _SBSIt = "StopBrowserSessionInput"
 _cSBSRom = "com.amazonaws.bedrockagentcore#StopBrowserSessionRequest"
 _SBSOt = "StopBrowserSessionOutput"
@@ -170,18 +181,24 @@ _cDABTR = "com.amazonaws.bedrockagentcore#DeleteABTestRequest"
 _DABTO = "DeleteABTestOutput"
 _cDABTRo = "com.amazonaws.bedrockagentcore#DeleteABTestResponse"
 _DABT = "DeleteABTest"
-_BEI = "BatchEvaluationId"
 _DBEI = "DeleteBatchEvaluationInput"
 _cDBER = "com.amazonaws.bedrockagentcore#DeleteBatchEvaluationRequest"
-_bEI = "batchEvaluationId"
-_BES = "BatchEvaluationStatus"
 _PENDING = "PENDING"
 _IP = "IN_PROGRESS"
 _CWE = "COMPLETED_WITH_ERRORS"
-_STOPPING = "STOPPING"
 _DBEO = "DeleteBatchEvaluationOutput"
 _cDBERo = "com.amazonaws.bedrockagentcore#DeleteBatchEvaluationResponse"
 _DBE = "DeleteBatchEvaluation"
+_DI = "DatasetId"
+_DGI = "DatasetGenerationId"
+_DDGI = "DeleteDatasetGenerationInput"
+_cDDGR = "com.amazonaws.bedrockagentcore#DeleteDatasetGenerationRequest"
+_dI = "datasetId"
+_gI = "generationId"
+_DGS = "DatasetGenerationStatus"
+_DDGO = "DeleteDatasetGenerationOutput"
+_cDDGRo = "com.amazonaws.bedrockagentcore#DeleteDatasetGenerationResponse"
+_DDG = "DeleteDatasetGeneration"
 _RI = "RecommendationId"
 _DRI = "DeleteRecommendationInput"
 _cDRR = "com.amazonaws.bedrockagentcore#DeleteRecommendationRequest"
@@ -211,35 +228,78 @@ _SIp = "SpanId"
 _SIpa = "SpanIds"
 _TI = "TraceId"
 _TIr = "TraceIds"
-_ET = "EvaluationTarget"
-_sIp = "spanIds"
-_tIr = "traceIds"
-_EIv = "EvaluatorId"
-_EIva = "EvaluateInput"
-_cER = "com.amazonaws.bedrockagentcore#EvaluateRequest"
-_eI = "evaluatorId"
-_eIv = "evaluationInput"
-_eTv = "evaluationTarget"
-_eRI = "evaluationReferenceInputs"
-_EEC = "EvaluationErrorCode"
-_EEM = "EvaluationErrorMessage"
-_EDN = "EvaluationDimensionName"
-_EA = "EvaluatorArn"
-_EN = "EvaluatorName"
-_EE = "EvaluationExplanation"
-_IRIF = "IgnoredReferenceInputField"
-_IRIFg = "IgnoredReferenceInputFields"
-_TU = "TokenUsage"
-_iT = "inputTokens"
-_oT = "outputTokens"
-_tT = "totalTokens"
-_EO = "EvaluateOutput"
-_cERo = "com.amazonaws.bedrockagentcore#EvaluateResponse"
-_eRv = "evaluationResults"
-_Ev = "Evaluate"
-_BED = "BatchEvaluationDescription"
 
-BATCH_EVALUATION_ARN: StaticSchema = (3, n0, _BEA, 0)
+BROWSER_SESSION_SUMMARIES: StaticSchema = (
+    16,
+    n0,
+    _BSSrow,
+    0,
+    (_m,),
+    ((lambda: schemas.BROWSER_SESSION_SUMMARY, 0),),
+)
+
+START_BROWSER_SESSION_INPUT: StaticSchema = (
+    18,
+    n0,
+    _SBSI,
+    {_sSI: _cSBSR, _smit: None},
+    (_tI, _tP, _bI, _n, _sTS, _vP, _ext, _pCr, _pCro, _ePn, _ce, _fC, _cTl),
+    (
+        (3, {_sH: _XATI}),
+        (3, {_sH: _t}),
+        (3, 9),
+        (lambda: schemas.NAME, 0),
+        (lambda: schemas.BROWSER_SESSION_TIMEOUT, {_smithyap: 3600}),
+        (lambda: schemas.VIEW_PORT, 0),
+        (lambda: schemas.BROWSER_EXTENSIONS, 0),
+        (lambda: schemas.BROWSER_PROFILE_CONFIGURATION, 0),
+        (lambda: schemas.PROXY_CONFIGURATION, 0),
+        (lambda: schemas.BROWSER_ENTERPRISE_POLICIES, 0),
+        (lambda: schemas.CERTIFICATES, 0),
+        (lambda: schemas.TOOLS_FILE_SYSTEM_CONFIGURATIONS, 0),
+        (lambda: schemas.CLIENT_TOKEN, 2),
+    ),
+)
+
+START_BROWSER_SESSION_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _SBSO,
+    {_sSI: _cSBSRo, _smith: None},
+    (_bI, _sIe, _cA, _stre),
+    (
+        (3, 1),
+        (lambda: schemas.BROWSER_SESSION_ID, 1),
+        (lambda: schemas.DATE_TIMESTAMP, 1),
+        (lambda: schemas.BROWSER_SESSION_STREAM, 0),
+    ),
+)
+
+START_BROWSER_SESSION: StaticOperationSchema = (
+    23,
+    n0,
+    _SBS,
+    {
+        _smithy: MappingProxyType(
+            {
+                "method": "PUT",
+                "uri": "/browsers/{browserIdentifier}/sessions/start",
+                "code": 200,
+            }
+        )
+    },
+    START_BROWSER_SESSION_INPUT,
+    START_BROWSER_SESSION_OUTPUT,
+    (
+        lambda: schemas.ACCESS_DENIED_EXCEPTION,
+        lambda: schemas.CONFLICT_EXCEPTION,
+        lambda: schemas.INTERNAL_SERVER_EXCEPTION,
+        lambda: schemas.RESOURCE_NOT_FOUND_EXCEPTION,
+        lambda: schemas.SERVICE_QUOTA_EXCEEDED_EXCEPTION,
+        lambda: schemas.THROTTLING_EXCEPTION,
+        lambda: schemas.VALIDATION_EXCEPTION,
+    ),
+)
 
 STOP_BROWSER_SESSION_INPUT: StaticSchema = (
     18,
@@ -873,15 +933,13 @@ DELETE_AB_TEST: StaticOperationSchema = (
     ),
 )
 
-BATCH_EVALUATION_ID: StaticSchema = (3, n0, _BEI, 0)
-
 DELETE_BATCH_EVALUATION_INPUT: StaticSchema = (
     18,
     n0,
     _DBEI,
     {_sSI: _cDBER, _smit: None},
     (_bEI,),
-    ((BATCH_EVALUATION_ID, 9),),
+    ((lambda: schemas.BATCH_EVALUATION_ID, 9),),
 )
 
 DELETE_BATCH_EVALUATION_OUTPUT: StaticSchema = (
@@ -891,9 +949,9 @@ DELETE_BATCH_EVALUATION_OUTPUT: StaticSchema = (
     {_sSI: _cDBERo, _smith: None},
     (_bEI, _bEA, _st),
     (
-        (BATCH_EVALUATION_ID, 1),
-        (BATCH_EVALUATION_ARN, 1),
-        (lambda: BATCH_EVALUATION_STATUS, 1),
+        (lambda: schemas.BATCH_EVALUATION_ID, 1),
+        (lambda: schemas.BATCH_EVALUATION_ARN, 1),
+        (lambda: schemas.BATCH_EVALUATION_STATUS, 1),
     ),
 )
 
@@ -923,20 +981,65 @@ DELETE_BATCH_EVALUATION: StaticOperationSchema = (
     ),
 )
 
-BATCH_EVALUATION_STATUS: StaticSchema = (
+DATASET_ID: StaticSchema = (3, n0, _DI, 0)
+
+DATASET_GENERATION_ID: StaticSchema = (3, n0, _DGI, 0)
+
+DELETE_DATASET_GENERATION_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DDGI,
+    {_sSI: _cDDGR, _smit: None},
+    (_dI, _gI),
+    ((DATASET_ID, 9), (DATASET_GENERATION_ID, 9)),
+)
+
+DELETE_DATASET_GENERATION_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DDGO,
+    {_sSI: _cDDGRo, _smith: None},
+    (_gI, _st),
+    ((DATASET_GENERATION_ID, 1), (lambda: DATASET_GENERATION_STATUS, 1)),
+)
+
+DELETE_DATASET_GENERATION: StaticOperationSchema = (
+    23,
+    n0,
+    _DDG,
+    {
+        _smithy: MappingProxyType(
+            {
+                "method": "DELETE",
+                "uri": "/datasets/{datasetId}/generations/{generationId}",
+                "code": 202,
+            }
+        )
+    },
+    DELETE_DATASET_GENERATION_INPUT,
+    DELETE_DATASET_GENERATION_OUTPUT,
+    (
+        lambda: schemas.ACCESS_DENIED_EXCEPTION,
+        lambda: schemas.CONFLICT_EXCEPTION,
+        lambda: schemas.INTERNAL_SERVER_EXCEPTION,
+        lambda: schemas.RESOURCE_NOT_FOUND_EXCEPTION,
+        lambda: schemas.THROTTLING_EXCEPTION,
+        lambda: schemas.UNAUTHORIZED_EXCEPTION,
+        lambda: schemas.VALIDATION_EXCEPTION,
+    ),
+)
+
+DATASET_GENERATION_STATUS: StaticSchema = (
     14,
     n0,
-    _BES,
+    _DGS,
     0,
-    (_PENDING, _IP, _COMPLETED, _CWE, _FAILED, _STOPPING, _STOPPED, _DELETING),
+    (_IP, _COMPLETED, _CWE, _FAILED, _DELETING),
     (
-        (-1, {_sVm: _PENDING}),
         (-1, {_sVm: _IP}),
         (-1, {_sVm: _COMPLETED}),
         (-1, {_sVm: _CWE}),
         (-1, {_sVm: _FAILED}),
-        (-1, {_sVm: _STOPPING}),
-        (-1, {_sVm: _STOPPED}),
         (-1, {_sVm: _DELETING}),
     ),
 )
@@ -1091,88 +1194,3 @@ SPAN_IDS: StaticSchema = (16, n0, _SIpa, 0, (_m,), ((SPAN_ID, 0),))
 TRACE_ID: StaticSchema = (3, n0, _TI, 0)
 
 TRACE_IDS: StaticSchema = (16, n0, _TIr, 0, (_m,), ((TRACE_ID, 0),))
-
-EVALUATION_TARGET: StaticSchema = (
-    19,
-    n0,
-    _ET,
-    0,
-    (_sIp, _tIr),
-    ((SPAN_IDS, 0), (TRACE_IDS, 0)),
-)
-
-EVALUATOR_ID: StaticSchema = (3, n0, _EIv, 0)
-
-EVALUATE_INPUT: StaticSchema = (
-    18,
-    n0,
-    _EIva,
-    {_sSI: _cER, _smit: None},
-    (_eI, _eIv, _eTv, _eRI),
-    (
-        (EVALUATOR_ID, 9),
-        (EVALUATION_INPUT, 1),
-        (EVALUATION_TARGET, 0),
-        (EVALUATION_REFERENCE_INPUTS, 0),
-    ),
-)
-
-EVALUATE_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _EO,
-    {_sSI: _cERo, _smith: None},
-    (_eRv,),
-    ((lambda: schemas.EVALUATION_RESULTS, 1),),
-)
-
-EVALUATE: StaticOperationSchema = (
-    23,
-    n0,
-    _Ev,
-    {
-        _smithy: MappingProxyType(
-            {"method": "POST", "uri": "/evaluations/evaluate/{evaluatorId}"}
-        )
-    },
-    EVALUATE_INPUT,
-    EVALUATE_OUTPUT,
-    (
-        lambda: schemas.ACCESS_DENIED_EXCEPTION,
-        lambda: schemas.CONFLICT_EXCEPTION,
-        DUPLICATE_ID_EXCEPTION,
-        lambda: schemas.INTERNAL_SERVER_EXCEPTION,
-        lambda: schemas.RESOURCE_NOT_FOUND_EXCEPTION,
-        lambda: schemas.SERVICE_QUOTA_EXCEEDED_EXCEPTION,
-        lambda: schemas.THROTTLING_EXCEPTION,
-        lambda: schemas.UNAUTHORIZED_EXCEPTION,
-        lambda: schemas.VALIDATION_EXCEPTION,
-    ),
-)
-
-EVALUATION_ERROR_CODE: StaticSchema = (3, n0, _EEC, 0)
-
-EVALUATION_ERROR_MESSAGE: StaticSchema = (3, n0, _EEM, 0)
-
-EVALUATION_DIMENSION_NAME: StaticSchema = (3, n0, _EDN, 0)
-
-EVALUATOR_ARN: StaticSchema = (3, n0, _EA, 0)
-
-EVALUATOR_NAME: StaticSchema = (3, n0, _EN, 0)
-
-EVALUATION_EXPLANATION: StaticSchema = (3, n0, _EE, 4)
-
-IGNORED_REFERENCE_INPUT_FIELD: StaticSchema = (3, n0, _IRIF, 0)
-
-IGNORED_REFERENCE_INPUT_FIELDS: StaticSchema = (
-    16,
-    n0,
-    _IRIFg,
-    0,
-    (_m,),
-    ((IGNORED_REFERENCE_INPUT_FIELD, 0),),
-)
-
-TOKEN_USAGE: StaticSchema = (18, n0, _TU, 0, (_iT, _oT, _tT), ((7, 0), (7, 0), (7, 0)))
-
-BATCH_EVALUATION_DESCRIPTION: StaticSchema = (3, n0, _BED, 0)

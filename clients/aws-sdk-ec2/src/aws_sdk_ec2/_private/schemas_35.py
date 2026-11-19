@@ -13,10 +13,6 @@ _me = "member"
 _i = "item"
 _RT = "ResourceType"
 _Ta = "Tag"
-_Ke = "Key"
-_ke = "key"
-_Va = "Value"
-_va = "value"
 _TS = "TagSpecification"
 _rT = "resourceType"
 _Tag = "Tags"
@@ -26,17 +22,18 @@ _sO = "smithy.api#clientOptional"
 _smi = "smithy.api#required"
 _TSa = "TagSpecifications"
 _DR = "DryRun"
-_d = "disabled"
+_p = "pending"
 _smit = "smithy.api#output"
+_av = "available"
+_de = "deleting"
+_del = "deleted"
 _St = "State"
 _st = "state"
-_SI = "SubnetIds"
-_fa = "failed"
 _SIu = "SubnetId"
 _sI = "subnetId"
-_RIe = "ResourceId"
-_rI = "resourceId"
-_Su = "Subnets"
+_OIw = "OwnerId"
+_oI = "ownerId"
+_en = "enabled"
 _C = "Code"
 _co = "code"
 _Me = "Message"
@@ -47,8 +44,10 @@ _TSag = "TagSet"
 _tS = "tagSet"
 _VI = "VpcId"
 _vI = "vpcId"
+_VOI = "VpcOwnerId"
+_vOI = "vpcOwnerId"
+_er = "error"
 _dRr = "dryRun"
-_act = "active"
 _Ar = "Arn"
 _ar = "arn"
 _N = "Name"
@@ -59,23 +58,25 @@ _AZ = "AvailabilityZone"
 _aZ = "availabilityZone"
 _AZI = "AvailabilityZoneId"
 _aZI = "availabilityZoneId"
-_II = "InstanceId"
-_iI = "instanceId"
 _NII = "NetworkInterfaceId"
 _nII = "networkInterfaceId"
 _SGI = "SecurityGroupId"
+_SG = "SecurityGroup"
 _SGe = "SecurityGroups"
-_ena = "enabled"
 _IT = "InstanceType"
 _iT = "instanceType"
 _SIRI = "SpotInstanceRequestId"
-_sIRI = "spotInstanceRequestId"
+_AIS = "ActiveInstanceSet"
 _ASc = "ActivityStatus"
+_ERROR = "ERROR"
 _Des = "Description"
 _PIAr = "PrivateIpAddress"
 _pIAr = "privateIpAddress"
+_SMt = "StatusMessage"
+_sMt = "statusMessage"
 _desc = "description"
 _def = "default"
+_OA = "OutpostArn"
 _CTl = "ClientToken"
 _cTl = "clientToken"
 _ASll = "AllocationStrategy"
@@ -97,6 +98,8 @@ _IIP = "IamInstanceProfile"
 _iIP = "iamInstanceProfile"
 _Ti = "Timestamp"
 _ti = "timestamp"
+_KKI = "KmsKeyId"
+_SIn = "SnapshotId"
 _GIr = "GroupId"
 _gIr = "groupId"
 _G = "Groups"
@@ -106,41 +109,40 @@ _NCI = "NetworkCardIndex"
 _EQC = "EnaQueueCount"
 _DI = "DeviceIndex"
 _dI = "deviceIndex"
+_VIo = "VolumeId"
 _DOT = "DeleteOnTermination"
 _dOT = "deleteOnTermination"
+_vIo = "volumeId"
+_UIs = "UserId"
+_uI = "userId"
 _GN = "GroupName"
 _gN = "groupName"
-_IPpr = "IpProtocol"
-_iPpr = "ipProtocol"
-_FP = "FromPort"
-_fP = "fromPort"
-_TP = "ToPort"
-_tP = "toPort"
-_UIGPs = "UserIdGroupPairs"
-_gr = "groups"
-_IRpa = "IpRanges"
-_iRpa = "ipRanges"
-_PLIr = "PrefixListIds"
-_pLIr = "prefixListIds"
-_Bu = "Bucket"
-_buc = "bucket"
+_IPper = "IpPermissions"
+_iPpe = "ipPermissions"
+_GOI = "GroupOwnerId"
+_gOI = "groupOwnerId"
+_SMta = "StateMessage"
 _ST = "StartTime"
 _sTt = "startTime"
-_UT = "UpdateTime"
-_uT = "updateTime"
-_can = "cancelled"
-_cl = "closed"
+_Prog = "Progress"
+_prog = "progress"
 _SFRI = "SpotFleetRequestId"
+_SFRIp = "SpotFleetRequestIds"
 _sFRI = "spotFleetRequestId"
 _SIRIp = "SpotInstanceRequestIds"
-_op = "open"
 _SIRS = "SpotInstanceRequestSet"
 _sIRS = "spotInstanceRequestSet"
+_En = "Encrypted"
+_enc = "encrypted"
+_kKI = "kmsKeyId"
 _iIm = "imageId"
+_CDM = "CompletionDurationMinutes"
+_sIn = "snapshotId"
+_oAu = "outpostArn"
+_STs = "SseType"
+_sTs = "sseType"
 _CTr = "CreateTime"
 _cTr = "createTime"
-_LUNIX = "Linux/UNIX"
-_W = "Windows"
 _Ten = "Tenancy"
 _EO = "EbsOptimized"
 _DEFAULT = "DEFAULT"
@@ -154,6 +156,7 @@ _Ty = "Type"
 _Ena = "Enabled"
 _ty = "type"
 _NT = "NO_TERMINATION"
+_VSol = "VolumeSize"
 _BDM = "BlockDeviceMapping"
 _Pl = "Placement"
 _WC = "WeightedCapacity"
@@ -181,6 +184,7 @@ _VF = "ValidFrom"
 _VU = "ValidUntil"
 _RUI = "ReplaceUnhealthyInstances"
 _Con = "Context"
+_vSo = "volumeSize"
 _wC = "weightedCapacity"
 _pla = "placement"
 _iRn = "instanceRequirements"
@@ -188,7 +192,6 @@ _lTS = "launchTemplateSpecification"
 _ov = "overrides"
 _bDM = "blockDeviceMapping"
 _kN = "keyName"
-_BDMlo = "BlockDurationMinutes"
 _KI = "KernelId"
 _MCI = "MetricCategoryId"
 _MCIe = "MetricCategoryIds"
@@ -202,7 +205,6 @@ _RIa = "RamdiskId"
 _NIe = "NetworkInterfaces"
 _Mon = "Monitoring"
 _UDs = "UserData"
-_bDMl = "blockDurationMinutes"
 _vU = "validUntil"
 _iIB = "instanceInterruptionBehavior"
 _aPIA = "associatePublicIpAddress"
@@ -217,21 +219,69 @@ _monit = "monitoring"
 _uDs = "userData"
 _TSS = "TagSpecificationSet"
 _tSS = "tagSpecificationSet"
-_Fa = "Fault"
-_fau = "fault"
-_TMFRI = "TrafficMirrorFilterRuleId"
-_TMFI = "TrafficMirrorFilterId"
-_TMSI = "TrafficMirrorSessionId"
+_SRt = "StateReason"
+_sRt = "stateReason"
+_OLI = "OutpostLagId"
+_Vl = "Vlan"
+_LA = "LocalAddress"
+_PAe = "PeerAddress"
+_PBA = "PeerBgpAsn"
+_oLI = "outpostLagId"
+_vl = "vlan"
+_lA = "localAddress"
+_pAe = "peerAddress"
+_pBA = "peerBgpAsn"
+_CSon = "ConfigurationState"
+_cSo = "configurationState"
+_GD = "GroupDescription"
+_SGA = "SecurityGroupArn"
+_sGA = "securityGroupArn"
+_AKKS = "AssociatedKmsKeySet"
+_STt = "StorageTier"
+_TTra = "TransferType"
+_OAwn = "OwnerAlias"
+_oAw = "ownerAlias"
+_sTto = "storageTier"
+_RET = "RestoreExpiryTime"
+_rET = "restoreExpiryTime"
+_tTr = "transferType"
+_cDM = "completionDurationMinutes"
+_CTomp = "CompletionTime"
+_cTomp = "completionTime"
+_FSSIB = "FullSnapshotSizeInBytes"
+_fSSIB = "fullSnapshotSizeInBytes"
+_AKKs = "AssociatedKmsKeys"
+_aKKS = "associatedKmsKeySet"
+_DEKI = "DataEncryptionKeyId"
+_dEKI = "dataEncryptionKeyId"
+_SSna = "SnapshotSet"
+_Sn = "Snapshots"
+_sSn = "snapshotSet"
+_SISF = "SpotInstanceStateFault"
+_SDS = "SpotDatafeedSubscription"
+_sDS = "spotDatafeedSubscription"
+_Ow = "Owner"
 _tag = "tag"
 _Fi = "Filter"
 _Fil = "Filters"
 _NTex = "NextToken"
+_Attr = "Attribute"
 _MR = "MaxResults"
 _nT = "nextToken"
+_infor = "information"
 _mR = "maxResults"
-_ETnd = "EndTime"
-_eTnd = "endTime"
-_IIma = "ImageIds"
+_IC__ = "INSTANCE_CHANGE"
+_ETv = "EventType"
+_EIv = "EventInformation"
+_eIv = "eventInformation"
+_eTv = "eventType"
+_HRS = "HistoryRecordSet"
+_HRi = "HistoryRecords"
+_hRS = "historyRecordSet"
+_LET = "LastEvaluatedTime"
+_lET = "lastEvaluatedTime"
+_AIct = "ActiveInstances"
+_aIS = "activeInstanceSet"
 _rSepl = "replacementStrategy"
 _tDe = "terminationDelay"
 _cRap = "capacityRebalance"
@@ -245,16 +295,129 @@ _tIWE = "terminateInstancesWithExpiration"
 _vF = "validFrom"
 _rUI = "replaceUnhealthyInstances"
 _cont = "context"
-_ITnsta = "InstanceTypes"
+_pCr = "productCodes"
+_Gr = "Group"
+_gro = "group"
+_PCro = "ProductCodes"
 _rIa = "ramdiskId"
-_RIPD = "RIProductDescription"
-_LU___ = "Linux_UNIX"
-_LUAV = "Linux_UNIX_Amazon_VPC_"
-_LV_ = "Linux/UNIX (Amazon VPC)"
-_WAV = "Windows_Amazon_VPC_"
-_WV = "Windows (Amazon VPC)"
-_PDr = "ProductDescription"
-_pDr = "productDescription"
+_SInap = "SnapshotIds"
+_SLVII = "ServiceLinkVirtualInterfaceId"
+_SLVIIe = "ServiceLinkVirtualInterfaceIds"
+_GNSL = "GroupNameStringList"
+_IPE = "IpPermissionsEgress"
+_iPE = "ipPermissionsEgress"
+_gD = "groupDescription"
+_SGL = "SecurityGroupList"
+_DSGVAMR = "DescribeSecurityGroupVpcAssociationsMaxResults"
+_DSGVAI = "DescribeSecurityGroupVpcAssociationsInput"
+_cDSGVAR = "com.amazonaws.ec2#DescribeSecurityGroupVpcAssociationsRequest"
+_SGVA = "SecurityGroupVpcAssociation"
+_SGVAL = "SecurityGroupVpcAssociationList"
+_DSGVAO = "DescribeSecurityGroupVpcAssociationsOutput"
+_cDSGVARo = "com.amazonaws.ec2#DescribeSecurityGroupVpcAssociationsResult"
+_SGVAe = "SecurityGroupVpcAssociations"
+_SGVASe = "SecurityGroupVpcAssociationSet"
+_sGVAS = "securityGroupVpcAssociationSet"
+_DSGVA = "DescribeSecurityGroupVpcAssociations"
+_SLMR = "ServiceLinkMaxResults"
+_DSLVII = "DescribeServiceLinkVirtualInterfacesInput"
+_cDSLVIR = "com.amazonaws.ec2#DescribeServiceLinkVirtualInterfacesRequest"
+_SLVICS = "ServiceLinkVirtualInterfaceConfigurationState"
+_SLVI = "ServiceLinkVirtualInterface"
+_sLVII = "serviceLinkVirtualInterfaceId"
+_SLVIA = "ServiceLinkVirtualInterfaceArn"
+_sLVIA = "serviceLinkVirtualInterfaceArn"
+_OIu = "OutpostId"
+_oIu = "outpostId"
+_SLVIS = "ServiceLinkVirtualInterfaceSet"
+_DSLVIO = "DescribeServiceLinkVirtualInterfacesOutput"
+_cDSLVIRo = "com.amazonaws.ec2#DescribeServiceLinkVirtualInterfacesResult"
+_SLVIe = "ServiceLinkVirtualInterfaces"
+_sLVIS = "serviceLinkVirtualInterfaceSet"
+_DSLVI = "DescribeServiceLinkVirtualInterfaces"
+_cVP = "createVolumePermission"
+_DSAI = "DescribeSnapshotAttributeInput"
+_cDSAR = "com.amazonaws.ec2#DescribeSnapshotAttributeRequest"
+_CVP = "CreateVolumePermission"
+_CVPL = "CreateVolumePermissionList"
+_DSAO = "DescribeSnapshotAttributeOutput"
+_cDSARo = "com.amazonaws.ec2#DescribeSnapshotAttributeResult"
+_CVPr = "CreateVolumePermissions"
+_DSAe = "DescribeSnapshotAttribute"
+_RBSL = "RestorableByStringList"
+_DSIescr = "DescribeSnapshotsInput"
+_cDSRom = "com.amazonaws.ec2#DescribeSnapshotsRequest"
+_OIwn = "OwnerIds"
+_RBUI = "RestorableByUserIds"
+_RBe = "RestorableBy"
+_Sna = "Snapshot"
+_SLna = "SnapshotList"
+_DSOes = "DescribeSnapshotsOutput"
+_cDSRoma = "com.amazonaws.ec2#DescribeSnapshotsResult"
+_DSes = "DescribeSnapshots"
+_DSTSMR = "DescribeSnapshotTierStatusMaxResults"
+_DSTSI = "DescribeSnapshotTierStatusInput"
+_cDSTSR = "com.amazonaws.ec2#DescribeSnapshotTierStatusRequest"
+_TOSi = "TieringOperationStatus"
+_aip_ = "archival_in_progress"
+_aip__ = "archival-in-progress"
+_ac__ = "archival_completed"
+_ac___ = "archival-completed"
+_af____ = "archival_failed"
+_af_____ = "archival-failed"
+_trip = "temporary_restore_in_progress"
+_trip_ = "temporary-restore-in-progress"
+_trc = "temporary_restore_completed"
+_trc_ = "temporary-restore-completed"
+_trf = "temporary_restore_failed"
+_trf_ = "temporary-restore-failed"
+_prip = "permanent_restore_in_progress"
+_prip_ = "permanent-restore-in-progress"
+_prc = "permanent_restore_completed"
+_prc_ = "permanent-restore-completed"
+_prf = "permanent_restore_failed"
+_prf_ = "permanent-restore-failed"
+_STSn = "SnapshotTierStatus"
+_LTST = "LastTieringStartTime"
+_lTST = "lastTieringStartTime"
+_LTPa = "LastTieringProgress"
+_lTP = "lastTieringProgress"
+_LTOS = "LastTieringOperationStatus"
+_lTOS = "lastTieringOperationStatus"
+_LTOSD = "LastTieringOperationStatusDetail"
+_lTOSD = "lastTieringOperationStatusDetail"
+_ACT = "ArchivalCompleteTime"
+_aCT = "archivalCompleteTime"
+_sTSS = "snapshotTierStatusSet"
+_DSTSO = "DescribeSnapshotTierStatusOutput"
+_cDSTSRo = "com.amazonaws.ec2#DescribeSnapshotTierStatusResult"
+_STSna = "SnapshotTierStatuses"
+_STSS = "SnapshotTierStatusSet"
+_DSTS = "DescribeSnapshotTierStatus"
+_DSDSIe = "DescribeSpotDatafeedSubscriptionInput"
+_cDSDSRo = "com.amazonaws.ec2#DescribeSpotDatafeedSubscriptionRequest"
+_DSDSOe = "DescribeSpotDatafeedSubscriptionOutput"
+_cDSDSRom = "com.amazonaws.ec2#DescribeSpotDatafeedSubscriptionResult"
+_DSDSe = "DescribeSpotDatafeedSubscription"
+_DSFIMR = "DescribeSpotFleetInstancesMaxResults"
+_DSFII = "DescribeSpotFleetInstancesInput"
+_cDSFIR = "com.amazonaws.ec2#DescribeSpotFleetInstancesRequest"
+_DSFIO = "DescribeSpotFleetInstancesOutput"
+_cDSFIRo = "com.amazonaws.ec2#DescribeSpotFleetInstancesResponse"
+_DSFI = "DescribeSpotFleetInstances"
+_iCns = "instanceChange"
+_BC_ = "BATCH_CHANGE"
+_fRC = "fleetRequestChange"
+_INFORMATION = "INFORMATION"
+_DSFRHMR = "DescribeSpotFleetRequestHistoryMaxResults"
+_DSFRHI = "DescribeSpotFleetRequestHistoryInput"
+_cDSFRHR = "com.amazonaws.ec2#DescribeSpotFleetRequestHistoryRequest"
+_HRis = "HistoryRecord"
+_DSFRHO = "DescribeSpotFleetRequestHistoryOutput"
+_cDSFRHRo = "com.amazonaws.ec2#DescribeSpotFleetRequestHistoryResponse"
+_DSFRH = "DescribeSpotFleetRequestHistory"
+_DSFRI = "DescribeSpotFleetRequestsInput"
+_cDSFRR = "com.amazonaws.ec2#DescribeSpotFleetRequestsRequest"
 _nTo = "noTermination"
 _SFM = "SpotFleetMonitoring"
 _INISL = "InstanceNetworkInterfaceSpecificationList"
@@ -306,139 +469,652 @@ _sFRC = "spotFleetRequestConfig"
 _SFRSp = "SpotFleetRequestState"
 _sFRSp = "spotFleetRequestState"
 _SFRCS = "SpotFleetRequestConfigSet"
+_DSFRO = "DescribeSpotFleetRequestsOutput"
+_cDSFRRo = "com.amazonaws.ec2#DescribeSpotFleetRequestsResponse"
+_SFRCp = "SpotFleetRequestConfigs"
+_sFRCS = "spotFleetRequestConfigSet"
+_DSFR = "DescribeSpotFleetRequests"
 _DSIRI = "DescribeSpotInstanceRequestsInput"
 _cDSIRR = "com.amazonaws.ec2#DescribeSpotInstanceRequestsRequest"
 _RIME = "RunInstancesMonitoringEnabled"
-_LSaun = "LaunchSpecification"
-_SISp = "SpotInstanceState"
-_SISpo = "SpotInstanceStatus"
-_SIRp = "SpotInstanceRequest"
-_ABHP = "ActualBlockHourlyPrice"
-_aBHP = "actualBlockHourlyPrice"
-_AZGv = "AvailabilityZoneGroup"
-_aZG = "availabilityZoneGroup"
-_LGa = "LaunchGroup"
-_lG = "launchGroup"
-_lSau = "launchSpecification"
-_LAZ = "LaunchedAvailabilityZone"
-_lAZ = "launchedAvailabilityZone"
-_LAZI = "LaunchedAvailabilityZoneId"
-_lAZI = "launchedAvailabilityZoneId"
-_SIRL = "SpotInstanceRequestList"
 _DSIRO = "DescribeSpotInstanceRequestsOutput"
 _cDSIRRo = "com.amazonaws.ec2#DescribeSpotInstanceRequestsResult"
 _SIRpo = "SpotInstanceRequests"
 _DSIR = "DescribeSpotInstanceRequests"
-_ITLn = "InstanceTypeList"
-_PDLr = "ProductDescriptionList"
-_DSPHI = "DescribeSpotPriceHistoryInput"
-_cDSPHR = "com.amazonaws.ec2#DescribeSpotPriceHistoryRequest"
-_PDro = "ProductDescriptions"
-_SPHL = "SpotPriceHistoryList"
-_DSPHO = "DescribeSpotPriceHistoryOutput"
-_cDSPHRo = "com.amazonaws.ec2#DescribeSpotPriceHistoryResult"
-_SPH = "SpotPriceHistory"
-_SPHS = "SpotPriceHistorySet"
-_sPHS = "spotPriceHistorySet"
-_DSPH = "DescribeSpotPriceHistory"
-_DSSGMR = "DescribeStaleSecurityGroupsMaxResults"
-_DSSGNT = "DescribeStaleSecurityGroupsNextToken"
-_DSSGI = "DescribeStaleSecurityGroupsInput"
-_cDSSGR = "com.amazonaws.ec2#DescribeStaleSecurityGroupsRequest"
-_PLIS = "PrefixListIdSet"
-_UIGPS = "UserIdGroupPairSet"
-_SIPt = "StaleIpPermission"
-_SIPS = "StaleIpPermissionSet"
-_SSG = "StaleSecurityGroup"
-_SIPta = "StaleIpPermissions"
-_sIP = "staleIpPermissions"
-_SIPE = "StaleIpPermissionsEgress"
-_sIPE = "staleIpPermissionsEgress"
-_SSGS = "StaleSecurityGroupSet"
-_DSSGO = "DescribeStaleSecurityGroupsOutput"
-_cDSSGRo = "com.amazonaws.ec2#DescribeStaleSecurityGroupsResult"
-_sSGS = "staleSecurityGroupSet"
-_DSSG = "DescribeStaleSecurityGroups"
-_IILm = "ImageIdList"
-_DSITRMR = "DescribeStoreImageTasksRequestMaxResults"
-_DSITI = "DescribeStoreImageTasksInput"
-_cDSITR = "com.amazonaws.ec2#DescribeStoreImageTasksRequest"
-_SITR = "StoreImageTaskResult"
-_AIm = "AmiId"
-_aIm = "amiId"
-_TST = "TaskStartTime"
-_tST = "taskStartTime"
-_SKo = "S3objectKey"
-_sKo = "s3objectKey"
-_PPr = "ProgressPercentage"
-_pP = "progressPercentage"
-_STSt = "StoreTaskState"
-_sTSt = "storeTaskState"
-_STFR = "StoreTaskFailureReason"
-_sTFR = "storeTaskFailureReason"
-_SITRS = "StoreImageTaskResultSet"
-_DSITO = "DescribeStoreImageTasksOutput"
-_cDSITRo = "com.amazonaws.ec2#DescribeStoreImageTasksResult"
-_SITRt = "StoreImageTaskResults"
-_sITRS = "storeImageTaskResultSet"
-_DSIT = "DescribeStoreImageTasks"
-_DSMR = "DescribeSubnetsMaxResults"
-_SISLu = "SubnetIdStringList"
-_DSIescri = "DescribeSubnetsInput"
-_cDSRomam = "com.amazonaws.ec2#DescribeSubnetsRequest"
-_SLub = "SubnetList"
-_DSOesc = "DescribeSubnetsOutput"
-_cDSRomama = "com.amazonaws.ec2#DescribeSubnetsResult"
-_SSubn = "SubnetSet"
-_sSub = "subnetSet"
-_DSesc = "DescribeSubnets"
-_DTIes = "DescribeTagsInput"
-_cDTRo = "com.amazonaws.ec2#DescribeTagsRequest"
-_TDa = "TagDescription"
-_TDL = "TagDescriptionList"
-_DTOe = "DescribeTagsOutput"
-_cDTRom = "com.amazonaws.ec2#DescribeTagsResult"
-_DTes = "DescribeTags"
-_TMMR = "TrafficMirroringMaxResults"
-_TMFRIL = "TrafficMirrorFilterRuleIdList"
-_DTMFRIe = "DescribeTrafficMirrorFilterRulesInput"
-_cDTMFRRom = "com.amazonaws.ec2#DescribeTrafficMirrorFilterRulesRequest"
-_TMFRIr = "TrafficMirrorFilterRuleIds"
-_TMFRS = "TrafficMirrorFilterRuleSet"
-_DTMFROe = "DescribeTrafficMirrorFilterRulesOutput"
-_cDTMFRRoma = "com.amazonaws.ec2#DescribeTrafficMirrorFilterRulesResult"
-_TMFRr = "TrafficMirrorFilterRules"
-_tMFRS = "trafficMirrorFilterRuleSet"
-_DTMFRe = "DescribeTrafficMirrorFilterRules"
-_TMFIL = "TrafficMirrorFilterIdList"
-_DTMFIe = "DescribeTrafficMirrorFiltersInput"
-_cDTMFRom = "com.amazonaws.ec2#DescribeTrafficMirrorFiltersRequest"
-_TMFIr = "TrafficMirrorFilterIds"
-_TMFS = "TrafficMirrorFilterSet"
-_DTMFOe = "DescribeTrafficMirrorFiltersOutput"
-_cDTMFRoma = "com.amazonaws.ec2#DescribeTrafficMirrorFiltersResult"
-_TMFr = "TrafficMirrorFilters"
-_tMFS = "trafficMirrorFilterSet"
-_DTMFe = "DescribeTrafficMirrorFilters"
-_TMSIL = "TrafficMirrorSessionIdList"
-_DTMSIe = "DescribeTrafficMirrorSessionsInput"
-_cDTMSRom = "com.amazonaws.ec2#DescribeTrafficMirrorSessionsRequest"
-_TMSIr = "TrafficMirrorSessionIds"
-_TMSS = "TrafficMirrorSessionSet"
-_DTMSOe = "DescribeTrafficMirrorSessionsOutput"
-_cDTMSRoma = "com.amazonaws.ec2#DescribeTrafficMirrorSessionsResult"
-_TMSr = "TrafficMirrorSessions"
-_tMSS = "trafficMirrorSessionSet"
-_DTMSe = "DescribeTrafficMirrorSessions"
-_TMTIL = "TrafficMirrorTargetIdList"
 
-RI_PRODUCT_DESCRIPTION: StaticSchema = (
+SPOT_FLEET_REQUEST_ID: StaticSchema = (3, n0, _SFRI, 0)
+
+SPOT_INSTANCE_STATE_FAULT: StaticSchema = (
+    18,
+    n0,
+    _SISF,
+    0,
+    (_C, _Me),
+    (
+        (lambda: schemas.STRING, {_aQN: _C, _sN: _co}),
+        (lambda: schemas.STRING, {_aQN: _Me, _sN: _mes}),
+    ),
+)
+
+GROUP_NAME_STRING_LIST: StaticSchema = (
+    16,
+    n0,
+    _GNSL,
+    0,
+    (_me,),
+    ((lambda: schemas.SECURITY_GROUP_NAME, {_sN: _GN}),),
+)
+
+SECURITY_GROUP: StaticSchema = (
+    18,
+    n0,
+    _SG,
+    0,
+    (_GIr, _IPE, _Tag, _VI, _SGA, _OIw, _GN, _Des, _IPper),
+    (
+        (lambda: schemas.STRING, {_aQN: _GIr, _sN: _gIr}),
+        (lambda: schemas.IP_PERMISSION_LIST, {_aQN: _IPE, _sN: _iPE}),
+        (lambda: schemas.TAG_LIST, {_aQN: _TSag, _sN: _tS}),
+        (lambda: schemas.STRING, {_aQN: _VI, _sN: _vI}),
+        (lambda: schemas.STRING, {_aQN: _SGA, _sN: _sGA}),
+        (lambda: schemas.STRING, {_aQN: _OIw, _sN: _oI}),
+        (lambda: schemas.STRING, {_aQN: _GN, _sN: _gN}),
+        (lambda: schemas.STRING, {_aQN: _GD, _sN: _gD}),
+        (lambda: schemas.IP_PERMISSION_LIST, {_aQN: _IPper, _sN: _iPpe}),
+    ),
+)
+
+SECURITY_GROUP_LIST: StaticSchema = (
+    16,
+    n0,
+    _SGL,
+    0,
+    (_me,),
+    ((SECURITY_GROUP, {_sN: _i}),),
+)
+
+DESCRIBE_SECURITY_GROUP_VPC_ASSOCIATIONS_MAX_RESULTS: StaticSchema = (
+    7,
+    n0,
+    _DSGVAMR,
+    0,
+)
+
+DESCRIBE_SECURITY_GROUP_VPC_ASSOCIATIONS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DSGVAI,
+    {_sSI: _cDSGVAR, _sm: None},
+    (_Fil, _NTex, _MR, _DR),
+    (
+        (lambda: schemas.FILTER_LIST, {_sN: _Fi}),
+        (lambda: schemas.STRING, 0),
+        (DESCRIBE_SECURITY_GROUP_VPC_ASSOCIATIONS_MAX_RESULTS, 0),
+        (lambda: schemas.BOOLEAN, 0),
+    ),
+)
+
+DESCRIBE_SECURITY_GROUP_VPC_ASSOCIATIONS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DSGVAO,
+    {_sSI: _cDSGVARo, _smit: None},
+    (_SGVAe, _NTex),
+    (
+        (lambda: SECURITY_GROUP_VPC_ASSOCIATION_LIST, {_aQN: _SGVASe, _sN: _sGVAS}),
+        (lambda: schemas.STRING, {_aQN: _NTex, _sN: _nT}),
+    ),
+)
+
+DESCRIBE_SECURITY_GROUP_VPC_ASSOCIATIONS: StaticOperationSchema = (
+    23,
+    n0,
+    _DSGVA,
+    0,
+    DESCRIBE_SECURITY_GROUP_VPC_ASSOCIATIONS_INPUT,
+    DESCRIBE_SECURITY_GROUP_VPC_ASSOCIATIONS_OUTPUT,
+    (),
+)
+
+SECURITY_GROUP_VPC_ASSOCIATION: StaticSchema = (
+    18,
+    n0,
+    _SGVA,
+    0,
+    (_GIr, _VI, _VOI, _St, _SRt, _GOI),
+    (
+        (lambda: schemas.SECURITY_GROUP_ID, {_aQN: _GIr, _sN: _gIr}),
+        (lambda: schemas.VPC_ID, {_aQN: _VI, _sN: _vI}),
+        (lambda: schemas.STRING, {_aQN: _VOI, _sN: _vOI}),
+        (lambda: schemas.SECURITY_GROUP_VPC_ASSOCIATION_STATE, {_aQN: _St, _sN: _st}),
+        (lambda: schemas.STRING, {_aQN: _SRt, _sN: _sRt}),
+        (lambda: schemas.STRING, {_aQN: _GOI, _sN: _gOI}),
+    ),
+)
+
+SECURITY_GROUP_VPC_ASSOCIATION_LIST: StaticSchema = (
+    16,
+    n0,
+    _SGVAL,
+    0,
+    (_me,),
+    ((SECURITY_GROUP_VPC_ASSOCIATION, {_sN: _i}),),
+)
+
+SERVICE_LINK_MAX_RESULTS: StaticSchema = (7, n0, _SLMR, 0)
+
+DESCRIBE_SERVICE_LINK_VIRTUAL_INTERFACES_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DSLVII,
+    {_sSI: _cDSLVIR, _sm: None},
+    (_SLVIIe, _Fil, _MR, _NTex, _DR),
+    (
+        (lambda: schemas.SERVICE_LINK_VIRTUAL_INTERFACE_ID_SET, {_sN: _SLVII}),
+        (lambda: schemas.FILTER_LIST, {_sN: _Fi}),
+        (SERVICE_LINK_MAX_RESULTS, 0),
+        (lambda: schemas.STRING, 0),
+        (lambda: schemas.BOOLEAN, 0),
+    ),
+)
+
+DESCRIBE_SERVICE_LINK_VIRTUAL_INTERFACES_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DSLVIO,
+    {_sSI: _cDSLVIRo, _smit: None},
+    (_SLVIe, _NTex),
+    (
+        (lambda: SERVICE_LINK_VIRTUAL_INTERFACE_SET, {_aQN: _SLVIS, _sN: _sLVIS}),
+        (lambda: schemas.STRING, {_aQN: _NTex, _sN: _nT}),
+    ),
+)
+
+DESCRIBE_SERVICE_LINK_VIRTUAL_INTERFACES: StaticOperationSchema = (
+    23,
+    n0,
+    _DSLVI,
+    0,
+    DESCRIBE_SERVICE_LINK_VIRTUAL_INTERFACES_INPUT,
+    DESCRIBE_SERVICE_LINK_VIRTUAL_INTERFACES_OUTPUT,
+    (),
+)
+
+SERVICE_LINK_VIRTUAL_INTERFACE_CONFIGURATION_STATE: StaticSchema = (
     14,
     n0,
-    _RIPD,
+    _SLVICS,
     0,
-    (_LU___, _LUAV, _W, _WAV),
-    ((-1, {_sV: _LUNIX}), (-1, {_sV: _LV_}), (-1, {_sV: _W}), (-1, {_sV: _WV})),
+    (_p, _av, _de, _del),
+    ((-1, {_sV: _p}), (-1, {_sV: _av}), (-1, {_sV: _de}), (-1, {_sV: _del})),
+)
+
+SERVICE_LINK_VIRTUAL_INTERFACE: StaticSchema = (
+    18,
+    n0,
+    _SLVI,
+    0,
+    (_SLVII, _SLVIA, _OIu, _OA, _OIw, _LA, _PAe, _PBA, _Vl, _OLI, _Tag, _CSon),
+    (
+        (
+            lambda: schemas.SERVICE_LINK_VIRTUAL_INTERFACE_ID,
+            {_aQN: _SLVII, _sN: _sLVII},
+        ),
+        (lambda: schemas.RESOURCE_ARN, {_aQN: _SLVIA, _sN: _sLVIA}),
+        (lambda: schemas.STRING, {_aQN: _OIu, _sN: _oIu}),
+        (lambda: schemas.STRING, {_aQN: _OA, _sN: _oAu}),
+        (lambda: schemas.STRING, {_aQN: _OIw, _sN: _oI}),
+        (lambda: schemas.STRING, {_aQN: _LA, _sN: _lA}),
+        (lambda: schemas.STRING, {_aQN: _PAe, _sN: _pAe}),
+        (lambda: schemas.LONG, {_aQN: _PBA, _sN: _pBA}),
+        (lambda: schemas.INTEGER, {_aQN: _Vl, _sN: _vl}),
+        (lambda: schemas.OUTPOST_LAG_ID, {_aQN: _OLI, _sN: _oLI}),
+        (lambda: schemas.TAG_LIST, {_aQN: _TSag, _sN: _tS}),
+        (SERVICE_LINK_VIRTUAL_INTERFACE_CONFIGURATION_STATE, {_aQN: _CSon, _sN: _cSo}),
+    ),
+)
+
+SERVICE_LINK_VIRTUAL_INTERFACE_SET: StaticSchema = (
+    16,
+    n0,
+    _SLVIS,
+    0,
+    (_me,),
+    ((SERVICE_LINK_VIRTUAL_INTERFACE, {_sN: _i}),),
+)
+
+DESCRIBE_SNAPSHOT_ATTRIBUTE_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DSAI,
+    {_sSI: _cDSAR, _sm: None},
+    (_Attr, _SIn, _DR),
+    (
+        (lambda: schemas.SNAPSHOT_ATTRIBUTE_NAME, {_sO: None, _smi: None}),
+        (lambda: schemas.SNAPSHOT_ID, {_sO: None, _smi: None}),
+        (lambda: schemas.BOOLEAN, {_aQN: _DR, _sN: _dRr}),
+    ),
+)
+
+DESCRIBE_SNAPSHOT_ATTRIBUTE_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DSAO,
+    {_sSI: _cDSARo, _smit: None},
+    (_PCro, _SIn, _CVPr),
+    (
+        (lambda: schemas.PRODUCT_CODE_LIST, {_aQN: _PCro, _sN: _pCr}),
+        (lambda: schemas.STRING, {_aQN: _SIn, _sN: _sIn}),
+        (lambda: CREATE_VOLUME_PERMISSION_LIST, {_aQN: _CVP, _sN: _cVP}),
+    ),
+)
+
+DESCRIBE_SNAPSHOT_ATTRIBUTE: StaticOperationSchema = (
+    23,
+    n0,
+    _DSAe,
+    0,
+    DESCRIBE_SNAPSHOT_ATTRIBUTE_INPUT,
+    DESCRIBE_SNAPSHOT_ATTRIBUTE_OUTPUT,
+    (),
+)
+
+CREATE_VOLUME_PERMISSION: StaticSchema = (
+    18,
+    n0,
+    _CVP,
+    0,
+    (_UIs, _Gr),
+    (
+        (lambda: schemas.STRING, {_aQN: _UIs, _sN: _uI}),
+        (lambda: schemas.PERMISSION_GROUP, {_aQN: _Gr, _sN: _gro}),
+    ),
+)
+
+CREATE_VOLUME_PERMISSION_LIST: StaticSchema = (
+    16,
+    n0,
+    _CVPL,
+    0,
+    (_me,),
+    ((CREATE_VOLUME_PERMISSION, {_sN: _i}),),
+)
+
+RESTORABLE_BY_STRING_LIST: StaticSchema = (
+    16,
+    n0,
+    _RBSL,
+    0,
+    (_me,),
+    ((lambda: schemas.STRING, 0),),
+)
+
+DESCRIBE_SNAPSHOTS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DSIescr,
+    {_sSI: _cDSRom, _sm: None},
+    (_MR, _NTex, _OIwn, _RBUI, _SInap, _DR, _Fil),
+    (
+        (lambda: schemas.INTEGER, 0),
+        (lambda: schemas.STRING, 0),
+        (lambda: schemas.OWNER_STRING_LIST, {_sN: _Ow}),
+        (RESTORABLE_BY_STRING_LIST, {_sN: _RBe}),
+        (lambda: schemas.SNAPSHOT_ID_STRING_LIST, {_sN: _SIn}),
+        (lambda: schemas.BOOLEAN, {_aQN: _DR, _sN: _dRr}),
+        (lambda: schemas.FILTER_LIST, {_sN: _Fi}),
+    ),
+)
+
+DESCRIBE_SNAPSHOTS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DSOes,
+    {_sSI: _cDSRoma, _smit: None},
+    (_NTex, _Sn),
+    (
+        (lambda: schemas.STRING, {_aQN: _NTex, _sN: _nT}),
+        (lambda: SNAPSHOT_LIST, {_aQN: _SSna, _sN: _sSn}),
+    ),
+)
+
+DESCRIBE_SNAPSHOTS: StaticOperationSchema = (
+    23,
+    n0,
+    _DSes,
+    0,
+    DESCRIBE_SNAPSHOTS_INPUT,
+    DESCRIBE_SNAPSHOTS_OUTPUT,
+    (),
+)
+
+SNAPSHOT: StaticSchema = (
+    18,
+    n0,
+    _Sna,
+    0,
+    (
+        _OAwn,
+        _OA,
+        _Tag,
+        _STt,
+        _RET,
+        _STs,
+        _AZ,
+        _TTra,
+        _CDM,
+        _CTomp,
+        _FSSIB,
+        _AKKs,
+        _SIn,
+        _VIo,
+        _St,
+        _SMta,
+        _ST,
+        _Prog,
+        _OIw,
+        _Des,
+        _VSol,
+        _En,
+        _KKI,
+        _DEKI,
+    ),
+    (
+        (lambda: schemas.STRING, {_aQN: _OAwn, _sN: _oAw}),
+        (lambda: schemas.STRING, {_aQN: _OA, _sN: _oAu}),
+        (lambda: schemas.TAG_LIST, {_aQN: _TSag, _sN: _tS}),
+        (lambda: schemas.STORAGE_TIER, {_aQN: _STt, _sN: _sTto}),
+        (lambda: schemas.MILLISECOND_DATE_TIME, {_aQN: _RET, _sN: _rET}),
+        (lambda: schemas.SSE_TYPE, {_aQN: _STs, _sN: _sTs}),
+        (lambda: schemas.STRING, {_aQN: _AZ, _sN: _aZ}),
+        (lambda: schemas.TRANSFER_TYPE, {_aQN: _TTra, _sN: _tTr}),
+        (
+            lambda: schemas.SNAPSHOT_COMPLETION_DURATION_MINUTES_RESPONSE,
+            {_aQN: _CDM, _sN: _cDM},
+        ),
+        (lambda: schemas.MILLISECOND_DATE_TIME, {_aQN: _CTomp, _sN: _cTomp}),
+        (lambda: schemas.LONG, {_aQN: _FSSIB, _sN: _fSSIB}),
+        (lambda: schemas.ASSOCIATED_KMS_KEY_SET, {_aQN: _AKKS, _sN: _aKKS}),
+        (lambda: schemas.STRING, {_aQN: _SIn, _sN: _sIn}),
+        (lambda: schemas.STRING, {_aQN: _VIo, _sN: _vIo}),
+        (lambda: schemas.SNAPSHOT_STATE, {_aQN: _Sta, _sN: _sta}),
+        (lambda: schemas.STRING, {_aQN: _SMt, _sN: _sMt}),
+        (lambda: schemas.DATE_TIME, {_aQN: _ST, _sN: _sTt}),
+        (lambda: schemas.STRING, {_aQN: _Prog, _sN: _prog}),
+        (lambda: schemas.STRING, {_aQN: _OIw, _sN: _oI}),
+        (lambda: schemas.STRING, {_aQN: _Des, _sN: _desc}),
+        (lambda: schemas.INTEGER, {_aQN: _VSol, _sN: _vSo}),
+        (lambda: schemas.BOOLEAN, {_aQN: _En, _sN: _enc}),
+        (lambda: schemas.STRING, {_aQN: _KKI, _sN: _kKI}),
+        (lambda: schemas.STRING, {_aQN: _DEKI, _sN: _dEKI}),
+    ),
+)
+
+SNAPSHOT_LIST: StaticSchema = (16, n0, _SLna, 0, (_me,), ((SNAPSHOT, {_sN: _i}),))
+
+DESCRIBE_SNAPSHOT_TIER_STATUS_MAX_RESULTS: StaticSchema = (7, n0, _DSTSMR, 0)
+
+DESCRIBE_SNAPSHOT_TIER_STATUS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DSTSI,
+    {_sSI: _cDSTSR, _sm: None},
+    (_Fil, _DR, _NTex, _MR),
+    (
+        (lambda: schemas.FILTER_LIST, {_sN: _Fi}),
+        (lambda: schemas.BOOLEAN, 0),
+        (lambda: schemas.STRING, 0),
+        (DESCRIBE_SNAPSHOT_TIER_STATUS_MAX_RESULTS, 0),
+    ),
+)
+
+DESCRIBE_SNAPSHOT_TIER_STATUS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DSTSO,
+    {_sSI: _cDSTSRo, _smit: None},
+    (_STSna, _NTex),
+    (
+        (lambda: SNAPSHOT_TIER_STATUS_SET, {_aQN: _STSS, _sN: _sTSS}),
+        (lambda: schemas.STRING, {_aQN: _NTex, _sN: _nT}),
+    ),
+)
+
+DESCRIBE_SNAPSHOT_TIER_STATUS: StaticOperationSchema = (
+    23,
+    n0,
+    _DSTS,
+    0,
+    DESCRIBE_SNAPSHOT_TIER_STATUS_INPUT,
+    DESCRIBE_SNAPSHOT_TIER_STATUS_OUTPUT,
+    (),
+)
+
+TIERING_OPERATION_STATUS: StaticSchema = (
+    14,
+    n0,
+    _TOSi,
+    0,
+    (_aip_, _ac__, _af____, _trip, _trc, _trf, _prip, _prc, _prf),
+    (
+        (-1, {_sV: _aip__}),
+        (-1, {_sV: _ac___}),
+        (-1, {_sV: _af_____}),
+        (-1, {_sV: _trip_}),
+        (-1, {_sV: _trc_}),
+        (-1, {_sV: _trf_}),
+        (-1, {_sV: _prip_}),
+        (-1, {_sV: _prc_}),
+        (-1, {_sV: _prf_}),
+    ),
+)
+
+SNAPSHOT_TIER_STATUS: StaticSchema = (
+    18,
+    n0,
+    _STSn,
+    0,
+    (_SIn, _VIo, _Sta, _OIw, _Tag, _STt, _LTST, _LTPa, _LTOS, _LTOSD, _ACT, _RET),
+    (
+        (lambda: schemas.SNAPSHOT_ID, {_aQN: _SIn, _sN: _sIn}),
+        (lambda: schemas.VOLUME_ID, {_aQN: _VIo, _sN: _vIo}),
+        (lambda: schemas.SNAPSHOT_STATE, {_aQN: _Sta, _sN: _sta}),
+        (lambda: schemas.STRING, {_aQN: _OIw, _sN: _oI}),
+        (lambda: schemas.TAG_LIST, {_aQN: _TSag, _sN: _tS}),
+        (lambda: schemas.STORAGE_TIER, {_aQN: _STt, _sN: _sTto}),
+        (lambda: schemas.MILLISECOND_DATE_TIME, {_aQN: _LTST, _sN: _lTST}),
+        (lambda: schemas.INTEGER, {_aQN: _LTPa, _sN: _lTP}),
+        (TIERING_OPERATION_STATUS, {_aQN: _LTOS, _sN: _lTOS}),
+        (lambda: schemas.STRING, {_aQN: _LTOSD, _sN: _lTOSD}),
+        (lambda: schemas.MILLISECOND_DATE_TIME, {_aQN: _ACT, _sN: _aCT}),
+        (lambda: schemas.MILLISECOND_DATE_TIME, {_aQN: _RET, _sN: _rET}),
+    ),
+)
+
+SNAPSHOT_TIER_STATUS_SET: StaticSchema = (
+    16,
+    n0,
+    _sTSS,
+    0,
+    (_me,),
+    ((SNAPSHOT_TIER_STATUS, {_sN: _i}),),
+)
+
+DESCRIBE_SPOT_DATAFEED_SUBSCRIPTION_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DSDSIe,
+    {_sSI: _cDSDSRo, _sm: None},
+    (_DR,),
+    ((lambda: schemas.BOOLEAN, {_aQN: _DR, _sN: _dRr}),),
+)
+
+DESCRIBE_SPOT_DATAFEED_SUBSCRIPTION_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DSDSOe,
+    {_sSI: _cDSDSRom, _smit: None},
+    (_SDS,),
+    ((lambda: schemas.SPOT_DATAFEED_SUBSCRIPTION, {_aQN: _SDS, _sN: _sDS}),),
+)
+
+DESCRIBE_SPOT_DATAFEED_SUBSCRIPTION: StaticOperationSchema = (
+    23,
+    n0,
+    _DSDSe,
+    0,
+    DESCRIBE_SPOT_DATAFEED_SUBSCRIPTION_INPUT,
+    DESCRIBE_SPOT_DATAFEED_SUBSCRIPTION_OUTPUT,
+    (),
+)
+
+DESCRIBE_SPOT_FLEET_INSTANCES_MAX_RESULTS: StaticSchema = (7, n0, _DSFIMR, 0)
+
+DESCRIBE_SPOT_FLEET_INSTANCES_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DSFII,
+    {_sSI: _cDSFIR, _sm: None},
+    (_DR, _SFRI, _NTex, _MR),
+    (
+        (lambda: schemas.BOOLEAN, {_aQN: _DR, _sN: _dRr}),
+        (SPOT_FLEET_REQUEST_ID, {_aQN: _SFRI, _sN: _sFRI, _sO: None, _smi: None}),
+        (lambda: schemas.STRING, {_aQN: _NTex, _sN: _nT}),
+        (DESCRIBE_SPOT_FLEET_INSTANCES_MAX_RESULTS, {_aQN: _MR, _sN: _mR}),
+    ),
+)
+
+DESCRIBE_SPOT_FLEET_INSTANCES_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DSFIO,
+    {_sSI: _cDSFIRo, _smit: None},
+    (_AIct, _NTex, _SFRI),
+    (
+        (lambda: schemas.ACTIVE_INSTANCE_SET, {_aQN: _AIS, _sN: _aIS}),
+        (lambda: schemas.STRING, {_aQN: _NTex, _sN: _nT}),
+        (lambda: schemas.STRING, {_aQN: _SFRI, _sN: _sFRI}),
+    ),
+)
+
+DESCRIBE_SPOT_FLEET_INSTANCES: StaticOperationSchema = (
+    23,
+    n0,
+    _DSFI,
+    0,
+    DESCRIBE_SPOT_FLEET_INSTANCES_INPUT,
+    DESCRIBE_SPOT_FLEET_INSTANCES_OUTPUT,
+    (),
+)
+
+EVENT_TYPE: StaticSchema = (
+    14,
+    n0,
+    _ETv,
+    0,
+    (_IC__, _BC_, _ERROR, _INFORMATION),
+    ((-1, {_sV: _iCns}), (-1, {_sV: _fRC}), (-1, {_sV: _er}), (-1, {_sV: _infor})),
+)
+
+DESCRIBE_SPOT_FLEET_REQUEST_HISTORY_MAX_RESULTS: StaticSchema = (7, n0, _DSFRHMR, 0)
+
+DESCRIBE_SPOT_FLEET_REQUEST_HISTORY_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DSFRHI,
+    {_sSI: _cDSFRHR, _sm: None},
+    (_DR, _SFRI, _ETv, _ST, _NTex, _MR),
+    (
+        (lambda: schemas.BOOLEAN, {_aQN: _DR, _sN: _dRr}),
+        (SPOT_FLEET_REQUEST_ID, {_aQN: _SFRI, _sN: _sFRI, _sO: None, _smi: None}),
+        (EVENT_TYPE, {_aQN: _ETv, _sN: _eTv}),
+        (lambda: schemas.DATE_TIME, {_aQN: _ST, _sN: _sTt, _sO: None, _smi: None}),
+        (lambda: schemas.STRING, {_aQN: _NTex, _sN: _nT}),
+        (DESCRIBE_SPOT_FLEET_REQUEST_HISTORY_MAX_RESULTS, {_aQN: _MR, _sN: _mR}),
+    ),
+)
+
+DESCRIBE_SPOT_FLEET_REQUEST_HISTORY_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DSFRHO,
+    {_sSI: _cDSFRHRo, _smit: None},
+    (_HRi, _LET, _NTex, _SFRI, _ST),
+    (
+        (lambda: HISTORY_RECORDS, {_aQN: _HRS, _sN: _hRS}),
+        (lambda: schemas.DATE_TIME, {_aQN: _LET, _sN: _lET}),
+        (lambda: schemas.STRING, {_aQN: _NTex, _sN: _nT}),
+        (lambda: schemas.STRING, {_aQN: _SFRI, _sN: _sFRI}),
+        (lambda: schemas.DATE_TIME, {_aQN: _ST, _sN: _sTt}),
+    ),
+)
+
+DESCRIBE_SPOT_FLEET_REQUEST_HISTORY: StaticOperationSchema = (
+    23,
+    n0,
+    _DSFRH,
+    0,
+    DESCRIBE_SPOT_FLEET_REQUEST_HISTORY_INPUT,
+    DESCRIBE_SPOT_FLEET_REQUEST_HISTORY_OUTPUT,
+    (),
+)
+
+HISTORY_RECORD: StaticSchema = (
+    18,
+    n0,
+    _HRis,
+    0,
+    (_EIv, _ETv, _Ti),
+    (
+        (lambda: schemas.EVENT_INFORMATION, {_aQN: _EIv, _sN: _eIv}),
+        (EVENT_TYPE, {_aQN: _ETv, _sN: _eTv}),
+        (lambda: schemas.DATE_TIME, {_aQN: _Ti, _sN: _ti}),
+    ),
+)
+
+HISTORY_RECORDS: StaticSchema = (
+    16,
+    n0,
+    _HRi,
+    0,
+    (_me,),
+    ((HISTORY_RECORD, {_sN: _i}),),
+)
+
+DESCRIBE_SPOT_FLEET_REQUESTS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DSFRI,
+    {_sSI: _cDSFRR, _sm: None},
+    (_DR, _SFRIp, _NTex, _MR),
+    (
+        (lambda: schemas.BOOLEAN, {_aQN: _DR, _sN: _dRr}),
+        (lambda: schemas.SPOT_FLEET_REQUEST_ID_LIST, {_aQN: _SFRI, _sN: _sFRI}),
+        (lambda: schemas.STRING, {_aQN: _NTex, _sN: _nT}),
+        (lambda: schemas.INTEGER, {_aQN: _MR, _sN: _mR}),
+    ),
+)
+
+DESCRIBE_SPOT_FLEET_REQUESTS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DSFRO,
+    {_sSI: _cDSFRRo, _smit: None},
+    (_NTex, _SFRCp),
+    (
+        (lambda: schemas.STRING, {_aQN: _NTex, _sN: _nT}),
+        (lambda: SPOT_FLEET_REQUEST_CONFIG_SET, {_aQN: _SFRCS, _sN: _sFRCS}),
+    ),
+)
+
+DESCRIBE_SPOT_FLEET_REQUESTS: StaticOperationSchema = (
+    23,
+    n0,
+    _DSFR,
+    0,
+    DESCRIBE_SPOT_FLEET_REQUESTS_INPUT,
+    DESCRIBE_SPOT_FLEET_REQUESTS_OUTPUT,
+    (),
 )
 
 EXCESS_CAPACITY_TERMINATION_POLICY: StaticSchema = (
@@ -456,7 +1132,7 @@ SPOT_FLEET_MONITORING: StaticSchema = (
     _SFM,
     0,
     (_Ena,),
-    ((lambda: schemas.BOOLEAN, {_aQN: _Ena, _sN: _ena}),),
+    ((lambda: schemas.BOOLEAN, {_aQN: _Ena, _sN: _en}),),
 )
 
 INSTANCE_NETWORK_INTERFACE_SPECIFICATION: StaticSchema = (
@@ -877,7 +1553,7 @@ DESCRIBE_SPOT_INSTANCE_REQUESTS_OUTPUT: StaticSchema = (
     {_sSI: _cDSIRRo, _smit: None},
     (_SIRpo, _NTex),
     (
-        (lambda: SPOT_INSTANCE_REQUEST_LIST, {_aQN: _SIRS, _sN: _sIRS}),
+        (lambda: schemas.SPOT_INSTANCE_REQUEST_LIST, {_aQN: _SIRS, _sN: _sIRS}),
         (lambda: schemas.STRING, {_aQN: _NTex, _sN: _nT}),
     ),
 )
@@ -900,705 +1576,6 @@ RUN_INSTANCES_MONITORING_ENABLED: StaticSchema = (
     (_MCIe, _Ena),
     (
         (lambda: schemas.METRIC_CATEGORY_ID_LIST, {_sN: _MCI}),
-        (lambda: schemas.BOOLEAN, {_aQN: _Ena, _sN: _ena, _sO: None, _smi: None}),
+        (lambda: schemas.BOOLEAN, {_aQN: _Ena, _sN: _en, _sO: None, _smi: None}),
     ),
-)
-
-LAUNCH_SPECIFICATION: StaticSchema = (
-    18,
-    n0,
-    _LSaun,
-    0,
-    (
-        _UDs,
-        _ATddr,
-        _BDMl,
-        _EO,
-        _IIP,
-        _IIm,
-        _IT,
-        _KI,
-        _KN,
-        _NIe,
-        _Pl,
-        _RIa,
-        _SIu,
-        _SGe,
-        _Mon,
-    ),
-    (
-        (lambda: schemas.SENSITIVE_USER_DATA, {_aQN: _UDs, _sN: _uDs}),
-        (lambda: schemas.STRING, {_aQN: _ATddr, _sN: _aTdd}),
-        (lambda: schemas.BLOCK_DEVICE_MAPPING_LIST, {_aQN: _BDM, _sN: _bDM}),
-        (lambda: schemas.BOOLEAN, {_aQN: _EO, _sN: _eO}),
-        (lambda: schemas.IAM_INSTANCE_PROFILE_SPECIFICATION, {_aQN: _IIP, _sN: _iIP}),
-        (lambda: schemas.STRING, {_aQN: _IIm, _sN: _iIm}),
-        (lambda: schemas.INSTANCE_TYPE, {_aQN: _IT, _sN: _iT}),
-        (lambda: schemas.STRING, {_aQN: _KI, _sN: _kI}),
-        (lambda: schemas.STRING, {_aQN: _KN, _sN: _kN}),
-        (INSTANCE_NETWORK_INTERFACE_SPECIFICATION_LIST, {_aQN: _NIS, _sN: _nIS}),
-        (SPOT_PLACEMENT, {_aQN: _Pl, _sN: _pla}),
-        (lambda: schemas.STRING, {_aQN: _RIa, _sN: _rIa}),
-        (lambda: schemas.STRING, {_aQN: _SIu, _sN: _sI}),
-        (lambda: schemas.GROUP_IDENTIFIER_LIST, {_aQN: _GS, _sN: _gS}),
-        (RUN_INSTANCES_MONITORING_ENABLED, {_aQN: _Mon, _sN: _monit}),
-    ),
-)
-
-SPOT_INSTANCE_STATE: StaticSchema = (
-    14,
-    n0,
-    _SISp,
-    0,
-    (_op, _act, _cl, _can, _fa, _d),
-    (
-        (-1, {_sV: _op}),
-        (-1, {_sV: _act}),
-        (-1, {_sV: _cl}),
-        (-1, {_sV: _can}),
-        (-1, {_sV: _fa}),
-        (-1, {_sV: _d}),
-    ),
-)
-
-SPOT_INSTANCE_STATUS: StaticSchema = (
-    18,
-    n0,
-    _SISpo,
-    0,
-    (_C, _Me, _UT),
-    (
-        (lambda: schemas.STRING, {_aQN: _C, _sN: _co}),
-        (lambda: schemas.STRING, {_aQN: _Me, _sN: _mes}),
-        (lambda: schemas.DATE_TIME, {_aQN: _UT, _sN: _uT}),
-    ),
-)
-
-SPOT_INSTANCE_REQUEST: StaticSchema = (
-    18,
-    n0,
-    _SIRp,
-    0,
-    (
-        _ABHP,
-        _AZGv,
-        _BDMlo,
-        _CTr,
-        _Fa,
-        _II,
-        _LGa,
-        _LSaun,
-        _LAZ,
-        _LAZI,
-        _PDr,
-        _SIRI,
-        _SPpo,
-        _St,
-        _Sta,
-        _Tag,
-        _Ty,
-        _VF,
-        _VU,
-        _IIB,
-    ),
-    (
-        (lambda: schemas.STRING, {_aQN: _ABHP, _sN: _aBHP}),
-        (lambda: schemas.STRING, {_aQN: _AZGv, _sN: _aZG}),
-        (lambda: schemas.INTEGER, {_aQN: _BDMlo, _sN: _bDMl}),
-        (lambda: schemas.DATE_TIME, {_aQN: _CTr, _sN: _cTr}),
-        (lambda: schemas.SPOT_INSTANCE_STATE_FAULT, {_aQN: _Fa, _sN: _fau}),
-        (lambda: schemas.INSTANCE_ID, {_aQN: _II, _sN: _iI}),
-        (lambda: schemas.STRING, {_aQN: _LGa, _sN: _lG}),
-        (LAUNCH_SPECIFICATION, {_aQN: _LSaun, _sN: _lSau}),
-        (lambda: schemas.STRING, {_aQN: _LAZ, _sN: _lAZ}),
-        (lambda: schemas.STRING, {_aQN: _LAZI, _sN: _lAZI}),
-        (RI_PRODUCT_DESCRIPTION, {_aQN: _PDr, _sN: _pDr}),
-        (lambda: schemas.STRING, {_aQN: _SIRI, _sN: _sIRI}),
-        (lambda: schemas.STRING, {_aQN: _SPpo, _sN: _sPp}),
-        (SPOT_INSTANCE_STATE, {_aQN: _St, _sN: _st}),
-        (SPOT_INSTANCE_STATUS, {_aQN: _Sta, _sN: _sta}),
-        (lambda: schemas.TAG_LIST, {_aQN: _TSag, _sN: _tS}),
-        (lambda: schemas.SPOT_INSTANCE_TYPE, {_aQN: _Ty, _sN: _ty}),
-        (lambda: schemas.DATE_TIME, {_aQN: _VF, _sN: _vF}),
-        (lambda: schemas.DATE_TIME, {_aQN: _VU, _sN: _vU}),
-        (lambda: schemas.INSTANCE_INTERRUPTION_BEHAVIOR, {_aQN: _IIB, _sN: _iIB}),
-    ),
-)
-
-SPOT_INSTANCE_REQUEST_LIST: StaticSchema = (
-    16,
-    n0,
-    _SIRL,
-    0,
-    (_me,),
-    ((SPOT_INSTANCE_REQUEST, {_sN: _i}),),
-)
-
-INSTANCE_TYPE_LIST: StaticSchema = (
-    16,
-    n0,
-    _ITLn,
-    0,
-    (_me,),
-    ((lambda: schemas.INSTANCE_TYPE, 0),),
-)
-
-PRODUCT_DESCRIPTION_LIST: StaticSchema = (
-    16,
-    n0,
-    _PDLr,
-    0,
-    (_me,),
-    ((lambda: schemas.STRING, 0),),
-)
-
-DESCRIBE_SPOT_PRICE_HISTORY_INPUT: StaticSchema = (
-    18,
-    n0,
-    _DSPHI,
-    {_sSI: _cDSPHR, _sm: None},
-    (_AZI, _DR, _ST, _ETnd, _ITnsta, _PDro, _Fil, _AZ, _MR, _NTex),
-    (
-        (lambda: schemas.AVAILABILITY_ZONE_ID, 0),
-        (lambda: schemas.BOOLEAN, {_aQN: _DR, _sN: _dRr}),
-        (lambda: schemas.DATE_TIME, {_aQN: _ST, _sN: _sTt}),
-        (lambda: schemas.DATE_TIME, {_aQN: _ETnd, _sN: _eTnd}),
-        (INSTANCE_TYPE_LIST, {_sN: _IT}),
-        (PRODUCT_DESCRIPTION_LIST, {_sN: _PDr}),
-        (lambda: schemas.FILTER_LIST, {_sN: _Fi}),
-        (lambda: schemas.STRING, {_aQN: _AZ, _sN: _aZ}),
-        (lambda: schemas.INTEGER, {_aQN: _MR, _sN: _mR}),
-        (lambda: schemas.STRING, {_aQN: _NTex, _sN: _nT}),
-    ),
-)
-
-DESCRIBE_SPOT_PRICE_HISTORY_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _DSPHO,
-    {_sSI: _cDSPHRo, _smit: None},
-    (_NTex, _SPH),
-    (
-        (lambda: schemas.STRING, {_aQN: _NTex, _sN: _nT}),
-        (lambda: SPOT_PRICE_HISTORY_LIST, {_aQN: _SPHS, _sN: _sPHS}),
-    ),
-)
-
-DESCRIBE_SPOT_PRICE_HISTORY: StaticOperationSchema = (
-    23,
-    n0,
-    _DSPH,
-    0,
-    DESCRIBE_SPOT_PRICE_HISTORY_INPUT,
-    DESCRIBE_SPOT_PRICE_HISTORY_OUTPUT,
-    (),
-)
-
-SPOT_PRICE: StaticSchema = (
-    18,
-    n0,
-    _SPpo,
-    0,
-    (_AZ, _AZI, _IT, _PDr, _SPpo, _Ti),
-    (
-        (lambda: schemas.STRING, {_aQN: _AZ, _sN: _aZ}),
-        (lambda: schemas.STRING, {_aQN: _AZI, _sN: _aZI}),
-        (lambda: schemas.INSTANCE_TYPE, {_aQN: _IT, _sN: _iT}),
-        (RI_PRODUCT_DESCRIPTION, {_aQN: _PDr, _sN: _pDr}),
-        (lambda: schemas.STRING, {_aQN: _SPpo, _sN: _sPp}),
-        (lambda: schemas.DATE_TIME, {_aQN: _Ti, _sN: _ti}),
-    ),
-)
-
-SPOT_PRICE_HISTORY_LIST: StaticSchema = (
-    16,
-    n0,
-    _SPHL,
-    0,
-    (_me,),
-    ((SPOT_PRICE, {_sN: _i}),),
-)
-
-DESCRIBE_STALE_SECURITY_GROUPS_MAX_RESULTS: StaticSchema = (7, n0, _DSSGMR, 0)
-
-DESCRIBE_STALE_SECURITY_GROUPS_NEXT_TOKEN: StaticSchema = (3, n0, _DSSGNT, 0)
-
-DESCRIBE_STALE_SECURITY_GROUPS_INPUT: StaticSchema = (
-    18,
-    n0,
-    _DSSGI,
-    {_sSI: _cDSSGR, _sm: None},
-    (_DR, _MR, _NTex, _VI),
-    (
-        (lambda: schemas.BOOLEAN, 0),
-        (DESCRIBE_STALE_SECURITY_GROUPS_MAX_RESULTS, 0),
-        (DESCRIBE_STALE_SECURITY_GROUPS_NEXT_TOKEN, 0),
-        (lambda: schemas.VPC_ID, {_sO: None, _smi: None}),
-    ),
-)
-
-DESCRIBE_STALE_SECURITY_GROUPS_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _DSSGO,
-    {_sSI: _cDSSGRo, _smit: None},
-    (_NTex, _SSGS),
-    (
-        (lambda: schemas.STRING, {_aQN: _NTex, _sN: _nT}),
-        (lambda: STALE_SECURITY_GROUP_SET, {_aQN: _SSGS, _sN: _sSGS}),
-    ),
-)
-
-DESCRIBE_STALE_SECURITY_GROUPS: StaticOperationSchema = (
-    23,
-    n0,
-    _DSSG,
-    0,
-    DESCRIBE_STALE_SECURITY_GROUPS_INPUT,
-    DESCRIBE_STALE_SECURITY_GROUPS_OUTPUT,
-    (),
-)
-
-IP_RANGES: StaticSchema = (
-    16,
-    n0,
-    _IRpa,
-    0,
-    (_me,),
-    ((lambda: schemas.STRING, {_sN: _i}),),
-)
-
-PREFIX_LIST_ID_SET: StaticSchema = (
-    16,
-    n0,
-    _PLIS,
-    0,
-    (_me,),
-    ((lambda: schemas.STRING, {_sN: _i}),),
-)
-
-USER_ID_GROUP_PAIR_SET: StaticSchema = (
-    16,
-    n0,
-    _UIGPS,
-    0,
-    (_me,),
-    ((lambda: schemas.USER_ID_GROUP_PAIR, {_sN: _i}),),
-)
-
-STALE_IP_PERMISSION: StaticSchema = (
-    18,
-    n0,
-    _SIPt,
-    0,
-    (_FP, _IPpr, _IRpa, _PLIr, _TP, _UIGPs),
-    (
-        (lambda: schemas.INTEGER, {_aQN: _FP, _sN: _fP}),
-        (lambda: schemas.STRING, {_aQN: _IPpr, _sN: _iPpr}),
-        (IP_RANGES, {_aQN: _IRpa, _sN: _iRpa}),
-        (PREFIX_LIST_ID_SET, {_aQN: _PLIr, _sN: _pLIr}),
-        (lambda: schemas.INTEGER, {_aQN: _TP, _sN: _tP}),
-        (USER_ID_GROUP_PAIR_SET, {_aQN: _G, _sN: _gr}),
-    ),
-)
-
-STALE_IP_PERMISSION_SET: StaticSchema = (
-    16,
-    n0,
-    _SIPS,
-    0,
-    (_me,),
-    ((STALE_IP_PERMISSION, {_sN: _i}),),
-)
-
-STALE_SECURITY_GROUP: StaticSchema = (
-    18,
-    n0,
-    _SSG,
-    0,
-    (_Des, _GIr, _GN, _SIPta, _SIPE, _VI),
-    (
-        (lambda: schemas.STRING, {_aQN: _Des, _sN: _desc}),
-        (lambda: schemas.STRING, {_aQN: _GIr, _sN: _gIr}),
-        (lambda: schemas.STRING, {_aQN: _GN, _sN: _gN}),
-        (STALE_IP_PERMISSION_SET, {_aQN: _SIPta, _sN: _sIP}),
-        (STALE_IP_PERMISSION_SET, {_aQN: _SIPE, _sN: _sIPE}),
-        (lambda: schemas.STRING, {_aQN: _VI, _sN: _vI}),
-    ),
-)
-
-STALE_SECURITY_GROUP_SET: StaticSchema = (
-    16,
-    n0,
-    _SSGS,
-    0,
-    (_me,),
-    ((STALE_SECURITY_GROUP, {_sN: _i}),),
-)
-
-IMAGE_ID_LIST: StaticSchema = (
-    16,
-    n0,
-    _IILm,
-    0,
-    (_me,),
-    ((lambda: schemas.IMAGE_ID, {_sN: _i}),),
-)
-
-DESCRIBE_STORE_IMAGE_TASKS_REQUEST_MAX_RESULTS: StaticSchema = (7, n0, _DSITRMR, 0)
-
-DESCRIBE_STORE_IMAGE_TASKS_INPUT: StaticSchema = (
-    18,
-    n0,
-    _DSITI,
-    {_sSI: _cDSITR, _sm: None},
-    (_IIma, _DR, _Fil, _NTex, _MR),
-    (
-        (IMAGE_ID_LIST, {_sN: _IIm}),
-        (lambda: schemas.BOOLEAN, 0),
-        (lambda: schemas.FILTER_LIST, {_sN: _Fi}),
-        (lambda: schemas.STRING, 0),
-        (DESCRIBE_STORE_IMAGE_TASKS_REQUEST_MAX_RESULTS, 0),
-    ),
-)
-
-DESCRIBE_STORE_IMAGE_TASKS_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _DSITO,
-    {_sSI: _cDSITRo, _smit: None},
-    (_SITRt, _NTex),
-    (
-        (lambda: STORE_IMAGE_TASK_RESULT_SET, {_aQN: _SITRS, _sN: _sITRS}),
-        (lambda: schemas.STRING, {_aQN: _NTex, _sN: _nT}),
-    ),
-)
-
-DESCRIBE_STORE_IMAGE_TASKS: StaticOperationSchema = (
-    23,
-    n0,
-    _DSIT,
-    0,
-    DESCRIBE_STORE_IMAGE_TASKS_INPUT,
-    DESCRIBE_STORE_IMAGE_TASKS_OUTPUT,
-    (),
-)
-
-STORE_IMAGE_TASK_RESULT: StaticSchema = (
-    18,
-    n0,
-    _SITR,
-    0,
-    (_AIm, _TST, _Bu, _SKo, _PPr, _STSt, _STFR),
-    (
-        (lambda: schemas.STRING, {_aQN: _AIm, _sN: _aIm}),
-        (lambda: schemas.MILLISECOND_DATE_TIME, {_aQN: _TST, _sN: _tST}),
-        (lambda: schemas.STRING, {_aQN: _Bu, _sN: _buc}),
-        (lambda: schemas.STRING, {_aQN: _SKo, _sN: _sKo}),
-        (lambda: schemas.INTEGER, {_aQN: _PPr, _sN: _pP}),
-        (lambda: schemas.STRING, {_aQN: _STSt, _sN: _sTSt}),
-        (lambda: schemas.STRING, {_aQN: _STFR, _sN: _sTFR}),
-    ),
-)
-
-STORE_IMAGE_TASK_RESULT_SET: StaticSchema = (
-    16,
-    n0,
-    _SITRS,
-    0,
-    (_me,),
-    ((STORE_IMAGE_TASK_RESULT, {_sN: _i}),),
-)
-
-DESCRIBE_SUBNETS_MAX_RESULTS: StaticSchema = (7, n0, _DSMR, 0)
-
-SUBNET_ID_STRING_LIST: StaticSchema = (
-    16,
-    n0,
-    _SISLu,
-    0,
-    (_me,),
-    ((lambda: schemas.SUBNET_ID, {_sN: _SIu}),),
-)
-
-DESCRIBE_SUBNETS_INPUT: StaticSchema = (
-    18,
-    n0,
-    _DSIescri,
-    {_sSI: _cDSRomam, _sm: None},
-    (_Fil, _SI, _NTex, _MR, _DR),
-    (
-        (lambda: schemas.FILTER_LIST, {_sN: _Fi}),
-        (SUBNET_ID_STRING_LIST, {_sN: _SIu}),
-        (lambda: schemas.STRING, 0),
-        (DESCRIBE_SUBNETS_MAX_RESULTS, 0),
-        (lambda: schemas.BOOLEAN, {_aQN: _DR, _sN: _dRr}),
-    ),
-)
-
-DESCRIBE_SUBNETS_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _DSOesc,
-    {_sSI: _cDSRomama, _smit: None},
-    (_NTex, _Su),
-    (
-        (lambda: schemas.STRING, {_aQN: _NTex, _sN: _nT}),
-        (lambda: SUBNET_LIST, {_aQN: _SSubn, _sN: _sSub}),
-    ),
-)
-
-DESCRIBE_SUBNETS: StaticOperationSchema = (
-    23,
-    n0,
-    _DSesc,
-    0,
-    DESCRIBE_SUBNETS_INPUT,
-    DESCRIBE_SUBNETS_OUTPUT,
-    (),
-)
-
-SUBNET_LIST: StaticSchema = (
-    16,
-    n0,
-    _SLub,
-    0,
-    (_me,),
-    ((lambda: schemas.SUBNET, {_sN: _i}),),
-)
-
-DESCRIBE_TAGS_INPUT: StaticSchema = (
-    18,
-    n0,
-    _DTIes,
-    {_sSI: _cDTRo, _sm: None},
-    (_DR, _Fil, _MR, _NTex),
-    (
-        (lambda: schemas.BOOLEAN, {_aQN: _DR, _sN: _dRr}),
-        (lambda: schemas.FILTER_LIST, {_sN: _Fi}),
-        (lambda: schemas.INTEGER, {_aQN: _MR, _sN: _mR}),
-        (lambda: schemas.STRING, {_aQN: _NTex, _sN: _nT}),
-    ),
-)
-
-DESCRIBE_TAGS_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _DTOe,
-    {_sSI: _cDTRom, _smit: None},
-    (_NTex, _Tag),
-    (
-        (lambda: schemas.STRING, {_aQN: _NTex, _sN: _nT}),
-        (lambda: TAG_DESCRIPTION_LIST, {_aQN: _TSag, _sN: _tS}),
-    ),
-)
-
-DESCRIBE_TAGS: StaticOperationSchema = (
-    23,
-    n0,
-    _DTes,
-    0,
-    DESCRIBE_TAGS_INPUT,
-    DESCRIBE_TAGS_OUTPUT,
-    (),
-)
-
-TAG_DESCRIPTION: StaticSchema = (
-    18,
-    n0,
-    _TDa,
-    0,
-    (_Ke, _RIe, _RT, _Va),
-    (
-        (lambda: schemas.STRING, {_aQN: _Ke, _sN: _ke}),
-        (lambda: schemas.STRING, {_aQN: _RIe, _sN: _rI}),
-        (lambda: schemas.RESOURCE_TYPE, {_aQN: _RT, _sN: _rT}),
-        (lambda: schemas.STRING, {_aQN: _Va, _sN: _va}),
-    ),
-)
-
-TAG_DESCRIPTION_LIST: StaticSchema = (
-    16,
-    n0,
-    _TDL,
-    0,
-    (_me,),
-    ((TAG_DESCRIPTION, {_sN: _i}),),
-)
-
-TRAFFIC_MIRRORING_MAX_RESULTS: StaticSchema = (7, n0, _TMMR, 0)
-
-TRAFFIC_MIRROR_FILTER_RULE_ID_LIST: StaticSchema = (
-    16,
-    n0,
-    _TMFRIL,
-    0,
-    (_me,),
-    ((lambda: schemas.TRAFFIC_MIRROR_FILTER_RULE_ID_WITH_RESOLVER, {_sN: _i}),),
-)
-
-DESCRIBE_TRAFFIC_MIRROR_FILTER_RULES_INPUT: StaticSchema = (
-    18,
-    n0,
-    _DTMFRIe,
-    {_sSI: _cDTMFRRom, _sm: None},
-    (_TMFRIr, _TMFI, _DR, _Fil, _MR, _NTex),
-    (
-        (TRAFFIC_MIRROR_FILTER_RULE_ID_LIST, {_sN: _TMFRI}),
-        (lambda: schemas.TRAFFIC_MIRROR_FILTER_ID, 0),
-        (lambda: schemas.BOOLEAN, 0),
-        (lambda: schemas.FILTER_LIST, {_sN: _Fi}),
-        (TRAFFIC_MIRRORING_MAX_RESULTS, 0),
-        (lambda: schemas.NEXT_TOKEN, 0),
-    ),
-)
-
-DESCRIBE_TRAFFIC_MIRROR_FILTER_RULES_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _DTMFROe,
-    {_sSI: _cDTMFRRoma, _smit: None},
-    (_TMFRr, _NTex),
-    (
-        (lambda: TRAFFIC_MIRROR_FILTER_RULE_SET, {_aQN: _TMFRS, _sN: _tMFRS}),
-        (lambda: schemas.STRING, {_aQN: _NTex, _sN: _nT}),
-    ),
-)
-
-DESCRIBE_TRAFFIC_MIRROR_FILTER_RULES: StaticOperationSchema = (
-    23,
-    n0,
-    _DTMFRe,
-    0,
-    DESCRIBE_TRAFFIC_MIRROR_FILTER_RULES_INPUT,
-    DESCRIBE_TRAFFIC_MIRROR_FILTER_RULES_OUTPUT,
-    (),
-)
-
-TRAFFIC_MIRROR_FILTER_RULE_SET: StaticSchema = (
-    16,
-    n0,
-    _TMFRS,
-    0,
-    (_me,),
-    ((lambda: schemas.TRAFFIC_MIRROR_FILTER_RULE, {_sN: _i}),),
-)
-
-TRAFFIC_MIRROR_FILTER_ID_LIST: StaticSchema = (
-    16,
-    n0,
-    _TMFIL,
-    0,
-    (_me,),
-    ((lambda: schemas.TRAFFIC_MIRROR_FILTER_ID, {_sN: _i}),),
-)
-
-DESCRIBE_TRAFFIC_MIRROR_FILTERS_INPUT: StaticSchema = (
-    18,
-    n0,
-    _DTMFIe,
-    {_sSI: _cDTMFRom, _sm: None},
-    (_TMFIr, _DR, _Fil, _MR, _NTex),
-    (
-        (TRAFFIC_MIRROR_FILTER_ID_LIST, {_sN: _TMFI}),
-        (lambda: schemas.BOOLEAN, 0),
-        (lambda: schemas.FILTER_LIST, {_sN: _Fi}),
-        (TRAFFIC_MIRRORING_MAX_RESULTS, 0),
-        (lambda: schemas.NEXT_TOKEN, 0),
-    ),
-)
-
-DESCRIBE_TRAFFIC_MIRROR_FILTERS_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _DTMFOe,
-    {_sSI: _cDTMFRoma, _smit: None},
-    (_TMFr, _NTex),
-    (
-        (lambda: TRAFFIC_MIRROR_FILTER_SET, {_aQN: _TMFS, _sN: _tMFS}),
-        (lambda: schemas.STRING, {_aQN: _NTex, _sN: _nT}),
-    ),
-)
-
-DESCRIBE_TRAFFIC_MIRROR_FILTERS: StaticOperationSchema = (
-    23,
-    n0,
-    _DTMFe,
-    0,
-    DESCRIBE_TRAFFIC_MIRROR_FILTERS_INPUT,
-    DESCRIBE_TRAFFIC_MIRROR_FILTERS_OUTPUT,
-    (),
-)
-
-TRAFFIC_MIRROR_FILTER_SET: StaticSchema = (
-    16,
-    n0,
-    _TMFS,
-    0,
-    (_me,),
-    ((lambda: schemas.TRAFFIC_MIRROR_FILTER, {_sN: _i}),),
-)
-
-TRAFFIC_MIRROR_SESSION_ID_LIST: StaticSchema = (
-    16,
-    n0,
-    _TMSIL,
-    0,
-    (_me,),
-    ((lambda: schemas.TRAFFIC_MIRROR_SESSION_ID, {_sN: _i}),),
-)
-
-DESCRIBE_TRAFFIC_MIRROR_SESSIONS_INPUT: StaticSchema = (
-    18,
-    n0,
-    _DTMSIe,
-    {_sSI: _cDTMSRom, _sm: None},
-    (_TMSIr, _DR, _Fil, _MR, _NTex),
-    (
-        (TRAFFIC_MIRROR_SESSION_ID_LIST, {_sN: _TMSI}),
-        (lambda: schemas.BOOLEAN, 0),
-        (lambda: schemas.FILTER_LIST, {_sN: _Fi}),
-        (TRAFFIC_MIRRORING_MAX_RESULTS, 0),
-        (lambda: schemas.NEXT_TOKEN, 0),
-    ),
-)
-
-DESCRIBE_TRAFFIC_MIRROR_SESSIONS_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _DTMSOe,
-    {_sSI: _cDTMSRoma, _smit: None},
-    (_TMSr, _NTex),
-    (
-        (lambda: TRAFFIC_MIRROR_SESSION_SET, {_aQN: _TMSS, _sN: _tMSS}),
-        (lambda: schemas.STRING, {_aQN: _NTex, _sN: _nT}),
-    ),
-)
-
-DESCRIBE_TRAFFIC_MIRROR_SESSIONS: StaticOperationSchema = (
-    23,
-    n0,
-    _DTMSe,
-    0,
-    DESCRIBE_TRAFFIC_MIRROR_SESSIONS_INPUT,
-    DESCRIBE_TRAFFIC_MIRROR_SESSIONS_OUTPUT,
-    (),
-)
-
-TRAFFIC_MIRROR_SESSION_SET: StaticSchema = (
-    16,
-    n0,
-    _TMSS,
-    0,
-    (_me,),
-    ((lambda: schemas.TRAFFIC_MIRROR_SESSION, {_sN: _i}),),
-)
-
-TRAFFIC_MIRROR_TARGET_ID_LIST: StaticSchema = (
-    16,
-    n0,
-    _TMTIL,
-    0,
-    (_me,),
-    ((lambda: schemas.TRAFFIC_MIRROR_TARGET_ID, {_sN: _i}),),
 )

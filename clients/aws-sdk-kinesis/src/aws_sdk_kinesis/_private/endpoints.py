@@ -19,6 +19,8 @@ BDD = EndpointBdd(
         ("ConsumerARN", "string", False, None, None, None),
         ("ResourceARN", "string", False, None, None, None),
         ("ChannelARN", "string", False, None, None, None),
+        ("QueueARN", "string", False, None, None, None),
+        ("ResourceType", "string", True, "", None, None),
         ("AccountId", "string", False, None, "AWS::Auth::AccountId", None),
         ("AccountIdEndpointMode", "string", False, None, "AWS::Auth::AccountIdEndpointMode", None),
     ),
@@ -36,63 +38,80 @@ BDD = EndpointBdd(
         ((2, "isSet", (0, "Endpoint")), None),  # 9: isSet(Endpoint)
         ((2, "isSet", (0, "StreamARN")), None),  # 10: isSet(StreamARN)
         ((2, "isSet", (0, "ConsumerARN")), None),  # 11: isSet(ConsumerARN)
-        ((2, "aws.parseArn", (0, "ConsumerARN")), "arn_ssa_2"),  # 12: arn_ssa_2 = aws.parseArn(ConsumerARN)
-        ((2, "substring", (0, "Endpoint"), 15, 20, False), "HttpsCustomEndpointSuffixValue"),  # 13: HttpsCustomEndpointSuffixValue = substring(Endpoint, 15, 20, false)
-        ((2, "stringEquals", (2, "coalesce", (2, "substring", (0, "Endpoint"), 15, 16, False), ""), "-"), None),  # 14: stringEquals(coalesce(substring(Endpoint, 15, 16, false), ""), "-")
-        ((2, "stringEquals", (2, "coalesce", (2, "substring", (0, "Endpoint"), 20, 21, False), ""), "."), None),  # 15: stringEquals(coalesce(substring(Endpoint, 20, 21, false), ""), ".")
-        ((2, "substring", (0, "Endpoint"), 7, 12, False), "PlainCustomEndpointSuffixValue"),  # 16: PlainCustomEndpointSuffixValue = substring(Endpoint, 7, 12, false)
-        ((2, "isValidHostLabel", (1, (0, "arn_ssa_2"), "accountId"), False), None),  # 17: isValidHostLabel(arn_ssa_2#accountId, false)
-        ((2, "isValidHostLabel", (1, (0, "arn_ssa_2"), "region"), False), None),  # 18: isValidHostLabel(arn_ssa_2#region, false)
-        ((2, "stringEquals", (1, (0, "arn_ssa_2"), "service"), "kinesis"), None),  # 19: stringEquals(arn_ssa_2#service, "kinesis")
-        ((1, (0, "arn_ssa_2"), "resourceId[0]"), "arnType_ssa_2"),  # 20: arnType_ssa_2 = arn_ssa_2#resourceId[0]
-        ((2, "stringEquals", (0, "arnType_ssa_2"), ""), None),  # 21: stringEquals(arnType_ssa_2, "")
-        ((2, "aws.parseArn", (0, "StreamARN")), "arn_ssa_4"),  # 22: arn_ssa_4 = aws.parseArn(StreamARN)
-        ((2, "isValidHostLabel", (1, (0, "arn_ssa_4"), "accountId"), False), None),  # 23: isValidHostLabel(arn_ssa_4#accountId, false)
-        ((2, "stringEquals", (0, "arnType_ssa_2"), "stream"), None),  # 24: stringEquals(arnType_ssa_2, "stream")
-        ((2, "isValidHostLabel", (1, (0, "arn_ssa_4"), "region"), False), None),  # 25: isValidHostLabel(arn_ssa_4#region, false)
+        ((2, "isSet", (0, "ResourceARN")), None),  # 12: isSet(ResourceARN)
+        ((2, "aws.parseArn", (0, "ConsumerARN")), "arn_ssa_2"),  # 13: arn_ssa_2 = aws.parseArn(ConsumerARN)
+        ((2, "aws.parseArn", (0, "ResourceARN")), "arn_ssa_4"),  # 14: arn_ssa_4 = aws.parseArn(ResourceARN)
+        ((1, (0, "arn_ssa_4"), "resourceId[0]"), "isoArnType"),  # 15: isoArnType = arn_ssa_4#resourceId[0]
+        ((2, "isValidHostLabel", (1, (0, "arn_ssa_2"), "accountId"), False), None),  # 16: isValidHostLabel(arn_ssa_2#accountId, false)
+        ((2, "isValidHostLabel", (1, (0, "arn_ssa_2"), "region"), False), None),  # 17: isValidHostLabel(arn_ssa_2#region, false)
+        ((2, "stringEquals", (1, (0, "arn_ssa_2"), "service"), "kinesis"), None),  # 18: stringEquals(arn_ssa_2#service, "kinesis")
+        ((1, (0, "arn_ssa_2"), "resourceId[0]"), "arnType_ssa_2"),  # 19: arnType_ssa_2 = arn_ssa_2#resourceId[0]
+        ((2, "stringEquals", (0, "arnType_ssa_2"), ""), None),  # 20: stringEquals(arnType_ssa_2, "")
+        ((2, "substring", (0, "Endpoint"), 15, 20, False), "HttpsCustomEndpointSuffixValue"),  # 21: HttpsCustomEndpointSuffixValue = substring(Endpoint, 15, 20, false)
+        ((2, "stringEquals", (2, "coalesce", (2, "substring", (0, "Endpoint"), 20, 21, False), ""), "."), None),  # 22: stringEquals(coalesce(substring(Endpoint, 20, 21, false), ""), ".")
+        ((2, "stringEquals", (2, "coalesce", (2, "substring", (0, "Endpoint"), 15, 16, False), ""), "-"), None),  # 23: stringEquals(coalesce(substring(Endpoint, 15, 16, false), ""), "-")
+        ((2, "substring", (0, "Endpoint"), 7, 12, False), "PlainCustomEndpointSuffixValue"),  # 24: PlainCustomEndpointSuffixValue = substring(Endpoint, 7, 12, false)
+        ((2, "stringEquals", (0, "arnType_ssa_2"), "stream"), None),  # 25: stringEquals(arnType_ssa_2, "stream")
         ((2, "stringEquals", (1, (0, "PartitionResult"), "name"), (1, (0, "arn_ssa_2"), "partition")), None),  # 26: stringEquals(PartitionResult#name, arn_ssa_2#partition)
-        ((2, "stringEquals", (1, (0, "arn_ssa_4"), "service"), "kinesis"), None),  # 27: stringEquals(arn_ssa_4#service, "kinesis")
-        ((1, (0, "arn_ssa_4"), "resourceId[0]"), "arnType_ssa_1"),  # 28: arnType_ssa_1 = arn_ssa_4#resourceId[0]
-        ((2, "stringEquals", (0, "arnType_ssa_1"), ""), None),  # 29: stringEquals(arnType_ssa_1, "")
-        ((2, "isSet", (0, "ResourceARN")), None),  # 30: isSet(ResourceARN)
-        ((2, "isSet", (0, "ChannelARN")), None),  # 31: isSet(ChannelARN)
-        ((2, "isSet", (0, "AccountIdEndpointMode")), None),  # 32: isSet(AccountIdEndpointMode)
-        ((2, "isSet", (0, "AccountId")), None),  # 33: isSet(AccountId)
-        ((2, "aws.parseArn", (0, "ChannelARN")), "arn_ssa_1"),  # 34: arn_ssa_1 = aws.parseArn(ChannelARN)
-        ((2, "stringEquals", (0, "AccountIdEndpointMode"), "disabled"), None),  # 35: stringEquals(AccountIdEndpointMode, "disabled")
-        ((2, "isValidHostLabel", (0, "AccountId"), False), None),  # 36: isValidHostLabel(AccountId, false)
-        ((2, "isValidHostLabel", (1, (0, "arn_ssa_1"), "accountId"), False), None),  # 37: isValidHostLabel(arn_ssa_1#accountId, false)
-        ((2, "isValidHostLabel", (1, (0, "arn_ssa_1"), "region"), False), None),  # 38: isValidHostLabel(arn_ssa_1#region, false)
-        ((2, "stringEquals", (1, (0, "arn_ssa_1"), "service"), "kinesis"), None),  # 39: stringEquals(arn_ssa_1#service, "kinesis")
-        ((1, (0, "arn_ssa_1"), "resourceId[0]"), "arnType_ssa_4"),  # 40: arnType_ssa_4 = arn_ssa_1#resourceId[0]
-        ((2, "stringEquals", (0, "arnType_ssa_4"), ""), None),  # 41: stringEquals(arnType_ssa_4, "")
-        ((2, "stringEquals", (0, "arnType_ssa_4"), "channel"), None),  # 42: stringEquals(arnType_ssa_4, "channel")
-        ((2, "stringEquals", (1, (0, "PartitionResult"), "name"), (1, (0, "arn_ssa_1"), "partition")), None),  # 43: stringEquals(PartitionResult#name, arn_ssa_1#partition)
-        ((2, "aws.parseArn", (0, "ResourceARN")), "arn_ssa_3"),  # 44: arn_ssa_3 = aws.parseArn(ResourceARN)
-        ((2, "isValidHostLabel", (1, (0, "arn_ssa_3"), "accountId"), False), None),  # 45: isValidHostLabel(arn_ssa_3#accountId, false)
-        ((2, "isValidHostLabel", (1, (0, "arn_ssa_3"), "region"), False), None),  # 46: isValidHostLabel(arn_ssa_3#region, false)
-        ((2, "stringEquals", (1, (0, "arn_ssa_3"), "service"), "kinesis"), None),  # 47: stringEquals(arn_ssa_3#service, "kinesis")
-        ((1, (0, "arn_ssa_3"), "resourceId[0]"), "arnType_ssa_3"),  # 48: arnType_ssa_3 = arn_ssa_3#resourceId[0]
-        ((2, "stringEquals", (0, "arnType_ssa_3"), ""), None),  # 49: stringEquals(arnType_ssa_3, "")
-        ((2, "stringEquals", (0, "arnType_ssa_3"), "stream"), None),  # 50: stringEquals(arnType_ssa_3, "stream")
-        ((2, "stringEquals", (0, "arnType_ssa_3"), "channel"), None),  # 51: stringEquals(arnType_ssa_3, "channel")
-        ((2, "stringEquals", (1, (0, "PartitionResult"), "name"), (1, (0, "arn_ssa_3"), "partition")), None),  # 52: stringEquals(PartitionResult#name, arn_ssa_3#partition)
-        ((2, "stringEquals", (0, "arnType_ssa_1"), "stream"), None),  # 53: stringEquals(arnType_ssa_1, "stream")
-        ((2, "stringEquals", (1, (0, "PartitionResult"), "name"), (1, (0, "arn_ssa_4"), "partition")), None),  # 54: stringEquals(PartitionResult#name, arn_ssa_4#partition)
-        ((2, "stringEquals", (0, "AccountIdEndpointMode"), "required"), None),  # 55: stringEquals(AccountIdEndpointMode, "required")
-        ((2, "isSet", (0, "OperationType")), None),  # 56: isSet(OperationType)
-        ((1, (0, "arn_ssa_3"), "resourceId[1]"), "resourceId_ssa_1"),  # 57: resourceId_ssa_1 = arn_ssa_3#resourceId[1]
-        ((2, "isValidHostLabel", (0, "resourceId_ssa_1"), False), None),  # 58: isValidHostLabel(resourceId_ssa_1, false)
-        ((1, (0, "arn_ssa_1"), "resourceId[1]"), "resourceId_ssa_2"),  # 59: resourceId_ssa_2 = arn_ssa_1#resourceId[1]
-        ((2, "isValidHostLabel", (0, "resourceId_ssa_2"), False), None),  # 60: isValidHostLabel(resourceId_ssa_2, false)
-        ((2, "stringEquals", (0, "OperationType"), "data"), None),  # 61: stringEquals(OperationType, "data")
-        ((2, "stringEquals", (2, "coalesce", (2, "substring", (0, "Endpoint"), 7, 8, False), ""), "-"), None),  # 62: stringEquals(coalesce(substring(Endpoint, 7, 8, false), ""), "-")
-        ((2, "booleanEquals", (0, "UseFIPS"), True), None),  # 63: booleanEquals(UseFIPS, true)
-        ((2, "booleanEquals", (0, "UseDualStack"), True), None),  # 64: booleanEquals(UseDualStack, true)
-        ((2, "booleanEquals", (1, (0, "PartitionResult"), "supportsFIPS"), True), None),  # 65: booleanEquals(PartitionResult#supportsFIPS, true)
-        ((2, "booleanEquals", (1, (0, "PartitionResult"), "supportsDualStack"), True), None),  # 66: booleanEquals(PartitionResult#supportsDualStack, true)
-        ((2, "stringEquals", (1, (0, "PartitionResult"), "name"), "aws-us-gov"), None),  # 67: stringEquals(PartitionResult#name, "aws-us-gov")
-        ((2, "stringEquals", (2, "coalesce", (2, "substring", (0, "Endpoint"), 12, 13, False), ""), "."), None),  # 68: stringEquals(coalesce(substring(Endpoint, 12, 13, false), ""), ".")
+        ((2, "aws.parseArn", (0, "StreamARN")), "arn_ssa_5"),  # 27: arn_ssa_5 = aws.parseArn(StreamARN)
+        ((2, "isValidHostLabel", (1, (0, "arn_ssa_5"), "accountId"), False), None),  # 28: isValidHostLabel(arn_ssa_5#accountId, false)
+        ((2, "isValidHostLabel", (1, (0, "arn_ssa_5"), "region"), False), None),  # 29: isValidHostLabel(arn_ssa_5#region, false)
+        ((2, "stringEquals", (1, (0, "arn_ssa_5"), "service"), "kinesis"), None),  # 30: stringEquals(arn_ssa_5#service, "kinesis")
+        ((1, (0, "arn_ssa_5"), "resourceId[0]"), "arnType_ssa_1"),  # 31: arnType_ssa_1 = arn_ssa_5#resourceId[0]
+        ((2, "stringEquals", (0, "arnType_ssa_1"), ""), None),  # 32: stringEquals(arnType_ssa_1, "")
+        ((2, "stringEquals", (0, "isoArnType"), "queue"), None),  # 33: stringEquals(isoArnType, "queue")
+        ((2, "isValidHostLabel", (1, (0, "arn_ssa_4"), "accountId"), False), None),  # 34: isValidHostLabel(arn_ssa_4#accountId, false)
+        ((2, "stringEquals", (0, "arnType_ssa_1"), "stream"), None),  # 35: stringEquals(arnType_ssa_1, "stream")
+        ((2, "isValidHostLabel", (1, (0, "arn_ssa_4"), "region"), False), None),  # 36: isValidHostLabel(arn_ssa_4#region, false)
+        ((2, "stringEquals", (1, (0, "PartitionResult"), "name"), (1, (0, "arn_ssa_5"), "partition")), None),  # 37: stringEquals(PartitionResult#name, arn_ssa_5#partition)
+        ((2, "stringEquals", (1, (0, "arn_ssa_4"), "service"), "kinesis"), None),  # 38: stringEquals(arn_ssa_4#service, "kinesis")
+        ((1, (0, "arn_ssa_4"), "resourceId[0]"), "arnType_ssa_3"),  # 39: arnType_ssa_3 = arn_ssa_4#resourceId[0]
+        ((2, "stringEquals", (0, "arnType_ssa_3"), ""), None),  # 40: stringEquals(arnType_ssa_3, "")
+        ((2, "stringEquals", (0, "arnType_ssa_3"), "stream"), None),  # 41: stringEquals(arnType_ssa_3, "stream")
+        ((2, "stringEquals", (0, "arnType_ssa_3"), "channel"), None),  # 42: stringEquals(arnType_ssa_3, "channel")
+        ((2, "stringEquals", (0, "arnType_ssa_3"), "queue"), None),  # 43: stringEquals(arnType_ssa_3, "queue")
+        ((2, "stringEquals", (1, (0, "PartitionResult"), "name"), (1, (0, "arn_ssa_4"), "partition")), None),  # 44: stringEquals(PartitionResult#name, arn_ssa_4#partition)
+        ((2, "isSet", (0, "ChannelARN")), None),  # 45: isSet(ChannelARN)
+        ((1, (0, "arn_ssa_4"), "resourceId[1]"), "resourceId_ssa_1"),  # 46: resourceId_ssa_1 = arn_ssa_4#resourceId[1]
+        ((2, "isSet", (0, "QueueARN")), None),  # 47: isSet(QueueARN)
+        ((2, "aws.parseArn", (0, "ChannelARN")), "arn_ssa_1"),  # 48: arn_ssa_1 = aws.parseArn(ChannelARN)
+        ((2, "isSet", (0, "AccountIdEndpointMode")), None),  # 49: isSet(AccountIdEndpointMode)
+        ((2, "isValidHostLabel", (1, (0, "arn_ssa_1"), "accountId"), False), None),  # 50: isValidHostLabel(arn_ssa_1#accountId, false)
+        ((2, "isValidHostLabel", (1, (0, "arn_ssa_1"), "region"), False), None),  # 51: isValidHostLabel(arn_ssa_1#region, false)
+        ((2, "isSet", (0, "AccountId")), None),  # 52: isSet(AccountId)
+        ((2, "stringEquals", (0, "AccountIdEndpointMode"), "disabled"), None),  # 53: stringEquals(AccountIdEndpointMode, "disabled")
+        ((2, "stringEquals", (0, "AccountIdEndpointMode"), "required"), None),  # 54: stringEquals(AccountIdEndpointMode, "required")
+        ((2, "isValidHostLabel", (0, "AccountId"), False), None),  # 55: isValidHostLabel(AccountId, false)
+        ((2, "stringEquals", (1, (0, "arn_ssa_1"), "service"), "kinesis"), None),  # 56: stringEquals(arn_ssa_1#service, "kinesis")
+        ((1, (0, "arn_ssa_1"), "resourceId[0]"), "arnType_ssa_4"),  # 57: arnType_ssa_4 = arn_ssa_1#resourceId[0]
+        ((2, "stringEquals", (0, "arnType_ssa_4"), ""), None),  # 58: stringEquals(arnType_ssa_4, "")
+        ((2, "stringEquals", (0, "ResourceType"), "queue"), None),  # 59: stringEquals(ResourceType, "queue")
+        ((2, "aws.parseArn", (0, "QueueARN")), "arn_ssa_3"),  # 60: arn_ssa_3 = aws.parseArn(QueueARN)
+        ((2, "isValidHostLabel", (1, (0, "arn_ssa_3"), "accountId"), False), None),  # 61: isValidHostLabel(arn_ssa_3#accountId, false)
+        ((2, "isValidHostLabel", (1, (0, "arn_ssa_3"), "region"), False), None),  # 62: isValidHostLabel(arn_ssa_3#region, false)
+        ((2, "stringEquals", (1, (0, "arn_ssa_3"), "service"), "kinesis"), None),  # 63: stringEquals(arn_ssa_3#service, "kinesis")
+        ((1, (0, "arn_ssa_3"), "resourceId[0]"), "arnType_ssa_5"),  # 64: arnType_ssa_5 = arn_ssa_3#resourceId[0]
+        ((2, "stringEquals", (0, "arnType_ssa_5"), ""), None),  # 65: stringEquals(arnType_ssa_5, "")
+        ((2, "stringEquals", (0, "arnType_ssa_5"), "queue"), None),  # 66: stringEquals(arnType_ssa_5, "queue")
+        ((2, "stringEquals", (1, (0, "PartitionResult"), "name"), (1, (0, "arn_ssa_3"), "partition")), None),  # 67: stringEquals(PartitionResult#name, arn_ssa_3#partition)
+        ((2, "isValidHostLabel", (0, "resourceId_ssa_1"), False), None),  # 68: isValidHostLabel(resourceId_ssa_1, false)
+        ((2, "stringEquals", (0, "arnType_ssa_4"), "channel"), None),  # 69: stringEquals(arnType_ssa_4, "channel")
+        ((2, "stringEquals", (1, (0, "PartitionResult"), "name"), (1, (0, "arn_ssa_1"), "partition")), None),  # 70: stringEquals(PartitionResult#name, arn_ssa_1#partition)
+        ((2, "isSet", (0, "OperationType")), None),  # 71: isSet(OperationType)
+        ((1, (0, "arn_ssa_1"), "resourceId[1]"), "resourceId_ssa_2"),  # 72: resourceId_ssa_2 = arn_ssa_1#resourceId[1]
+        ((1, (0, "arn_ssa_3"), "resourceId[1]"), "resourceId_ssa_3"),  # 73: resourceId_ssa_3 = arn_ssa_3#resourceId[1]
+        ((2, "isValidHostLabel", (0, "resourceId_ssa_3"), False), None),  # 74: isValidHostLabel(resourceId_ssa_3, false)
+        ((2, "isValidHostLabel", (0, "resourceId_ssa_2"), False), None),  # 75: isValidHostLabel(resourceId_ssa_2, false)
+        ((1, (0, "arn_ssa_4"), "resourceId[1]"), "isoResourceId"),  # 76: isoResourceId = arn_ssa_4#resourceId[1]
+        ((2, "isValidHostLabel", (0, "isoResourceId"), False), None),  # 77: isValidHostLabel(isoResourceId, false)
+        ((2, "stringEquals", (0, "OperationType"), "data"), None),  # 78: stringEquals(OperationType, "data")
+        ((2, "booleanEquals", (0, "UseFIPS"), True), None),  # 79: booleanEquals(UseFIPS, true)
+        ((2, "booleanEquals", (0, "UseDualStack"), True), None),  # 80: booleanEquals(UseDualStack, true)
+        ((2, "booleanEquals", (1, (0, "PartitionResult"), "supportsFIPS"), True), None),  # 81: booleanEquals(PartitionResult#supportsFIPS, true)
+        ((2, "booleanEquals", (1, (0, "PartitionResult"), "supportsDualStack"), True), None),  # 82: booleanEquals(PartitionResult#supportsDualStack, true)
+        ((2, "stringEquals", (1, (0, "PartitionResult"), "name"), "aws-us-gov"), None),  # 83: stringEquals(PartitionResult#name, "aws-us-gov")
+        ((2, "stringEquals", (2, "coalesce", (2, "substring", (0, "Endpoint"), 12, 13, False), ""), "."), None),  # 84: stringEquals(coalesce(substring(Endpoint, 12, 13, false), ""), ".")
+        ((2, "stringEquals", (2, "coalesce", (2, "substring", (0, "Endpoint"), 7, 8, False), ""), "-"), None),  # 85: stringEquals(coalesce(substring(Endpoint, 7, 8, false), ""), "-")
     ),
     results=(
         None,  # 0: no match
@@ -113,14 +132,14 @@ BDD = EndpointBdd(
         (6, "https://{StreamIdPrefixValue}.{StreamIdSuffixValue}.{OperationType}-kinesis.{Region}.{PartitionResult#dualStackDnsSuffix}", None, ()),  # 15
         (6, "https://{StreamIdPrefixValue}.{StreamIdSuffixValue}.{OperationType}-kinesis.{Region}.{PartitionResult#dnsSuffix}", None, ()),  # 16
         (5, "Operation Type is not set. Please contact service team for resolution."),  # 17
-        (6, "https://{arn_ssa_4#accountId}.{OperationType}-kinesis-fips.{Region}.{PartitionResult#dualStackDnsSuffix}", None, ()),  # 18
-        (6, "https://{arn_ssa_4#accountId}.{OperationType}-kinesis-fips.{Region}.{PartitionResult#dnsSuffix}", None, ()),  # 19
-        (6, "https://{arn_ssa_4#accountId}.{OperationType}-kinesis.{Region}.{PartitionResult#dualStackDnsSuffix}", None, ()),  # 20
-        (6, "https://{arn_ssa_4#accountId}.{OperationType}-kinesis.{Region}.{PartitionResult#dnsSuffix}", None, ()),  # 21
-        (5, "Partition: {arn_ssa_4#partition} from ARN doesn't match with partition name: {PartitionResult#name}."),  # 22
+        (6, "https://{arn_ssa_5#accountId}.{OperationType}-kinesis-fips.{Region}.{PartitionResult#dualStackDnsSuffix}", None, ()),  # 18
+        (6, "https://{arn_ssa_5#accountId}.{OperationType}-kinesis-fips.{Region}.{PartitionResult#dnsSuffix}", None, ()),  # 19
+        (6, "https://{arn_ssa_5#accountId}.{OperationType}-kinesis.{Region}.{PartitionResult#dualStackDnsSuffix}", None, ()),  # 20
+        (6, "https://{arn_ssa_5#accountId}.{OperationType}-kinesis.{Region}.{PartitionResult#dnsSuffix}", None, ()),  # 21
+        (5, "Partition: {arn_ssa_5#partition} from ARN doesn't match with partition name: {PartitionResult#name}."),  # 22
         (5, "Invalid ARN: Kinesis ARNs don't support `{arnType_ssa_1}` arn types."),  # 23
         (5, "Invalid ARN: No ARN type specified"),  # 24
-        (5, "Invalid ARN: The ARN was not for the Kinesis service, found: {arn_ssa_4#service}."),  # 25
+        (5, "Invalid ARN: The ARN was not for the Kinesis service, found: {arn_ssa_5#service}."),  # 25
         (5, "Invalid ARN: Invalid region."),  # 26
         (5, "Invalid ARN: Invalid account id."),  # 27
         (5, "Invalid ARN: Failed to parse ARN."),  # 28
@@ -131,44 +150,66 @@ BDD = EndpointBdd(
         (5, "Partition: {arn_ssa_2#partition} from ARN doesn't match with partition name: {PartitionResult#name}."),  # 33
         (5, "Invalid ARN: Kinesis ARNs don't support `{arnType_ssa_2}` arn types."),  # 34
         (5, "Invalid ARN: The ARN was not for the Kinesis service, found: {arn_ssa_2#service}."),  # 35
-        (5, "Invalid ARN: Unsupported resource type `{arnType_ssa_3}`. Expected: stream or channel"),  # 36
-        (6, "https://{arn_ssa_3#accountId}.{OperationType}-kinesis-fips.{Region}.{PartitionResult#dualStackDnsSuffix}", None, ()),  # 37
-        (6, "https://{arn_ssa_3#accountId}.{OperationType}-kinesis-fips.{Region}.{PartitionResult#dnsSuffix}", None, ()),  # 38
-        (6, "https://{arn_ssa_3#accountId}.{OperationType}-kinesis.{Region}.{PartitionResult#dualStackDnsSuffix}", None, ()),  # 39
-        (6, "https://{arn_ssa_3#accountId}.{OperationType}-kinesis.{Region}.{PartitionResult#dnsSuffix}", None, ()),  # 40
+        (5, "Invalid ARN: Unsupported resource type `{arnType_ssa_3}`. Expected: stream, channel, or queue."),  # 36
+        (6, "https://{arn_ssa_4#accountId}.{OperationType}-kinesis-fips.{Region}.{PartitionResult#dualStackDnsSuffix}", None, ()),  # 37
+        (6, "https://{arn_ssa_4#accountId}.{OperationType}-kinesis-fips.{Region}.{PartitionResult#dnsSuffix}", None, ()),  # 38
+        (6, "https://{arn_ssa_4#accountId}.{OperationType}-kinesis.{Region}.{PartitionResult#dualStackDnsSuffix}", None, ()),  # 39
+        (6, "https://{arn_ssa_4#accountId}.{OperationType}-kinesis.{Region}.{PartitionResult#dnsSuffix}", None, ()),  # 40
         (6, "https://{resourceId_ssa_1}.{OperationType}-kinesis-fips.{Region}.{PartitionResult#dualStackDnsSuffix}", None, ()),  # 41
         (6, "https://{resourceId_ssa_1}.{OperationType}-kinesis-fips.{Region}.{PartitionResult#dnsSuffix}", None, ()),  # 42
         (6, "https://{resourceId_ssa_1}.{OperationType}-kinesis.{Region}.{PartitionResult#dualStackDnsSuffix}", None, ()),  # 43
         (6, "https://{resourceId_ssa_1}.{OperationType}-kinesis.{Region}.{PartitionResult#dnsSuffix}", None, ()),  # 44
         (5, "Invalid ARN: Invalid channel id."),  # 45
         (5, "Invalid ARN: Missing channel id."),  # 46
-        (5, "Partition: {arn_ssa_3#partition} from ARN doesn't match with partition name: {PartitionResult#name}."),  # 47
-        (5, "Invalid ARN: The ARN was not for the Kinesis service, found: {arn_ssa_3#service}."),  # 48
-        (6, "https://{resourceId_ssa_2}.{OperationType}-kinesis-fips.{Region}.{PartitionResult#dualStackDnsSuffix}", None, ()),  # 49
-        (6, "https://{resourceId_ssa_2}.{OperationType}-kinesis-fips.{Region}.{PartitionResult#dnsSuffix}", None, ()),  # 50
-        (6, "https://{resourceId_ssa_2}.{OperationType}-kinesis.{Region}.{PartitionResult#dualStackDnsSuffix}", None, ()),  # 51
-        (6, "https://{resourceId_ssa_2}.{OperationType}-kinesis.{Region}.{PartitionResult#dnsSuffix}", None, ()),  # 52
-        (5, "ChannelARN does not support the `data` operation type."),  # 53
-        (5, "Partition: {arn_ssa_1#partition} from ARN doesn't match with partition name: {PartitionResult#name}."),  # 54
-        (5, "Invalid ARN: ChannelARN only supports `channel` arn types, found: `{arnType_ssa_4}`."),  # 55
-        (5, "Invalid ARN: The ARN was not for the Kinesis service, found: {arn_ssa_1#service}."),  # 56
-        (6, "https://{AccountId}.{OperationType}-kinesis-fips.{Region}.{PartitionResult#dualStackDnsSuffix}", (4, ("metricValues",), (3, "O")), ()),  # 57
-        (6, "https://{AccountId}.{OperationType}-kinesis-fips.{Region}.{PartitionResult#dnsSuffix}", (4, ("metricValues",), (3, "O")), ()),  # 58
-        (6, "https://{AccountId}.{OperationType}-kinesis.{Region}.{PartitionResult#dualStackDnsSuffix}", (4, ("metricValues",), (3, "O")), ()),  # 59
-        (6, "https://{AccountId}.{OperationType}-kinesis.{Region}.{PartitionResult#dnsSuffix}", (4, ("metricValues",), (3, "O")), ()),  # 60
-        (5, "Invalid account id."),  # 61
-        (5, "AccountIdEndpointMode is required but no AccountID was provided or able to be loaded"),  # 62
-        (5, "Invalid Configuration: AccountIdEndpointMode is required but account endpoints are not supported in this partition"),  # 63
-        (5, "Invalid Configuration: FIPS and custom endpoint are not supported"),  # 64
-        (5, "Invalid Configuration: Dualstack and custom endpoint are not supported"),  # 65
-        (6, (0, "Endpoint"), None, ()),  # 66
-        (6, "https://kinesis-fips.{Region}.{PartitionResult#dualStackDnsSuffix}", None, ()),  # 67
-        (5, "FIPS and DualStack are enabled, but this partition does not support one or both"),  # 68
-        (6, "https://kinesis.{Region}.amazonaws.com", None, ()),  # 69
-        (6, "https://kinesis-fips.{Region}.{PartitionResult#dnsSuffix}", None, ()),  # 70
-        (6, "https://kinesis.{Region}.{PartitionResult#dualStackDnsSuffix}", None, ()),  # 71
-        (6, "https://kinesis.{Region}.{PartitionResult#dnsSuffix}", None, ()),  # 72
-        (5, "Invalid Configuration: Missing Region"),  # 73
+        (6, "https://{resourceId_ssa_1}.{OperationType}-kinesis-queues-fips.{Region}.{PartitionResult#dualStackDnsSuffix}", None, ()),  # 47
+        (6, "https://{resourceId_ssa_1}.{OperationType}-kinesis-queues-fips.{Region}.{PartitionResult#dnsSuffix}", None, ()),  # 48
+        (6, "https://{resourceId_ssa_1}.{OperationType}-kinesis-queues.{Region}.{PartitionResult#dualStackDnsSuffix}", None, ()),  # 49
+        (6, "https://{resourceId_ssa_1}.{OperationType}-kinesis-queues.{Region}.{PartitionResult#dnsSuffix}", None, ()),  # 50
+        (5, "Invalid ARN: Invalid queue id."),  # 51
+        (5, "Invalid ARN: Missing queue id."),  # 52
+        (5, "Partition: {arn_ssa_4#partition} from ARN doesn't match with partition name: {PartitionResult#name}."),  # 53
+        (5, "Invalid ARN: The ARN was not for the Kinesis service, found: {arn_ssa_4#service}."),  # 54
+        (6, "https://kinesis-queues-fips.{Region}.{PartitionResult#dualStackDnsSuffix}", None, ()),  # 55
+        (6, "https://kinesis-queues-fips.{Region}.{PartitionResult#dnsSuffix}", None, ()),  # 56
+        (6, "https://kinesis-queues.{Region}.{PartitionResult#dualStackDnsSuffix}", None, ()),  # 57
+        (6, "https://kinesis-queues.{Region}.{PartitionResult#dnsSuffix}", None, ()),  # 58
+        (6, "https://{resourceId_ssa_2}.{OperationType}-kinesis-fips.{Region}.{PartitionResult#dualStackDnsSuffix}", None, ()),  # 59
+        (6, "https://{resourceId_ssa_2}.{OperationType}-kinesis-fips.{Region}.{PartitionResult#dnsSuffix}", None, ()),  # 60
+        (6, "https://{resourceId_ssa_2}.{OperationType}-kinesis.{Region}.{PartitionResult#dualStackDnsSuffix}", None, ()),  # 61
+        (6, "https://{resourceId_ssa_2}.{OperationType}-kinesis.{Region}.{PartitionResult#dnsSuffix}", None, ()),  # 62
+        (5, "ChannelARN does not support the `data` operation type."),  # 63
+        (5, "Partition: {arn_ssa_1#partition} from ARN doesn't match with partition name: {PartitionResult#name}."),  # 64
+        (5, "Invalid ARN: ChannelARN only supports `channel` arn types, found: `{arnType_ssa_4}`."),  # 65
+        (5, "Invalid ARN: The ARN was not for the Kinesis service, found: {arn_ssa_1#service}."),  # 66
+        (6, "https://{resourceId_ssa_3}.{OperationType}-kinesis-queues-fips.{Region}.{PartitionResult#dualStackDnsSuffix}", None, ()),  # 67
+        (6, "https://{resourceId_ssa_3}.{OperationType}-kinesis-queues-fips.{Region}.{PartitionResult#dnsSuffix}", None, ()),  # 68
+        (6, "https://{resourceId_ssa_3}.{OperationType}-kinesis-queues.{Region}.{PartitionResult#dualStackDnsSuffix}", None, ()),  # 69
+        (6, "https://{resourceId_ssa_3}.{OperationType}-kinesis-queues.{Region}.{PartitionResult#dnsSuffix}", None, ()),  # 70
+        (5, "Partition: {arn_ssa_3#partition} from ARN doesn't match with partition name: {PartitionResult#name}."),  # 71
+        (5, "Invalid ARN: QueueARN only supports `queue` ARN types, found: `{arnType_ssa_5}`."),  # 72
+        (5, "Invalid ARN: The ARN was not for the Kinesis service, found: {arn_ssa_3#service}."),  # 73
+        (5, "Invalid Configuration: ResourceType must be \"queue\" when QueueARN is set."),  # 74
+        (6, "https://{AccountId}.{OperationType}-kinesis-queues-fips.{Region}.{PartitionResult#dualStackDnsSuffix}", (4, ("metricValues",), (3, "O")), ()),  # 75
+        (6, "https://{AccountId}.{OperationType}-kinesis-queues-fips.{Region}.{PartitionResult#dnsSuffix}", (4, ("metricValues",), (3, "O")), ()),  # 76
+        (6, "https://{AccountId}.{OperationType}-kinesis-queues.{Region}.{PartitionResult#dualStackDnsSuffix}", (4, ("metricValues",), (3, "O")), ()),  # 77
+        (6, "https://{AccountId}.{OperationType}-kinesis-queues.{Region}.{PartitionResult#dnsSuffix}", (4, ("metricValues",), (3, "O")), ()),  # 78
+        (6, "https://{AccountId}.{OperationType}-kinesis-fips.{Region}.{PartitionResult#dualStackDnsSuffix}", (4, ("metricValues",), (3, "O")), ()),  # 79
+        (6, "https://{AccountId}.{OperationType}-kinesis-fips.{Region}.{PartitionResult#dnsSuffix}", (4, ("metricValues",), (3, "O")), ()),  # 80
+        (6, "https://{AccountId}.{OperationType}-kinesis.{Region}.{PartitionResult#dualStackDnsSuffix}", (4, ("metricValues",), (3, "O")), ()),  # 81
+        (6, "https://{AccountId}.{OperationType}-kinesis.{Region}.{PartitionResult#dnsSuffix}", (4, ("metricValues",), (3, "O")), ()),  # 82
+        (5, "Invalid account id."),  # 83
+        (5, "AccountIdEndpointMode is required but no AccountID was provided or able to be loaded"),  # 84
+        (5, "Invalid Configuration: AccountIdEndpointMode is required but account endpoints are not supported in this partition"),  # 85
+        (5, "Invalid Configuration: FIPS and custom endpoint are not supported"),  # 86
+        (5, "Invalid Configuration: Dualstack and custom endpoint are not supported"),  # 87
+        (6, (0, "Endpoint"), None, ()),  # 88
+        (6, "https://kinesis-fips.{Region}.{PartitionResult#dualStackDnsSuffix}", None, ()),  # 89
+        (5, "FIPS and DualStack are enabled, but this partition does not support one or both"),  # 90
+        (6, "https://kinesis.{Region}.amazonaws.com", None, ()),  # 91
+        (6, "https://kinesis-fips.{Region}.{PartitionResult#dnsSuffix}", None, ()),  # 92
+        (6, "https://kinesis.{Region}.{PartitionResult#dualStackDnsSuffix}", None, ()),  # 93
+        (6, "https://kinesis.{Region}.{PartitionResult#dnsSuffix}", None, ()),  # 94
+        (5, "Invalid Configuration: Missing Region"),  # 95
     ),
     root=2,
     # (condition, high, low); 1 and -1 are terminals, a negative reference is a
@@ -176,159 +217,241 @@ BDD = EndpointBdd(
     nodes=(
         -1, 1, -1,
         0, 3, 4,
-        1, 5, 4,
-        9, 154, 100_000_073,
-        2, 143, 6,
-        3, 143, 7,
-        4, 8, 12,
-        5, 9, 12,
-        6, 10, 12,
-        7, 11, 12,
-        8, 109, 12,
-        9, 154, 13,
-        10, 93, 14,
-        11, 77, 15,
-        30, 49, 16,
-        31, 30, 17,
-        32, 18, 146,
-        33, 19, 29,
-        35, 29, 20,
-        36, 21, 100_000_061,
-        56, 22, 100_000_017,
-        63, 25, 23,
-        64, 24, 100_000_060,
-        66, 100_000_059, 100_000_007,
-        64, 27, 26,
-        65, 100_000_058, 100_000_005,
-        65, 28, 100_000_003,
-        66, 100_000_057, 100_000_002,
-        55, 100_000_062, 146,
-        34, 31, 100_000_028,
-        37, 32, 100_000_027,
-        38, 33, 100_000_026,
-        39, 34, 100_000_056,
-        40, 35, 100_000_024,
-        41, 100_000_024, 36,
-        42, 37, 100_000_055,
-        43, 38, 100_000_054,
-        56, 39, 100_000_017,
-        59, 40, 100_000_046,
-        60, 41, 100_000_045,
-        61, 100_000_053, 42,
-        63, 45, 43,
-        64, 44, 100_000_052,
-        66, 100_000_051, 100_000_007,
-        64, 47, 46,
-        65, 100_000_050, 100_000_005,
-        65, 48, 100_000_003,
-        66, 100_000_049, 100_000_002,
-        44, 50, 100_000_028,
-        45, 51, 100_000_027,
-        46, 52, 100_000_026,
-        47, 53, 100_000_048,
-        48, 54, 100_000_024,
-        49, 100_000_024, 55,
-        50, 68, 56,
-        51, 57, 100_000_036,
-        52, 58, 100_000_047,
-        56, 59, 100_000_017,
-        57, 60, 100_000_046,
-        58, 61, 100_000_045,
-        63, 64, 62,
-        64, 63, 100_000_044,
-        66, 100_000_043, 100_000_007,
-        64, 66, 65,
-        65, 100_000_042, 100_000_005,
-        65, 67, 100_000_003,
-        66, 100_000_041, 100_000_002,
-        52, 69, 100_000_047,
-        56, 70, 100_000_017,
-        63, 73, 71,
-        64, 72, 100_000_040,
-        66, 100_000_039, 100_000_007,
-        64, 75, 74,
-        65, 100_000_038, 100_000_005,
-        65, 76, 100_000_003,
-        66, 100_000_037, 100_000_002,
-        12, 78, 100_000_028,
-        17, 79, 100_000_027,
-        18, 80, 100_000_026,
-        19, 81, 100_000_035,
-        20, 82, 100_000_024,
-        21, 100_000_024, 83,
-        24, 84, 100_000_034,
-        26, 85, 100_000_033,
-        56, 86, 100_000_017,
-        63, 89, 87,
-        64, 88, 100_000_032,
-        66, 100_000_031, 100_000_007,
-        64, 91, 90,
-        65, 100_000_030, 100_000_005,
-        65, 92, 100_000_003,
-        66, 100_000_029, 100_000_002,
-        22, 94, 100_000_028,
-        23, 95, 100_000_027,
-        25, 96, 100_000_026,
-        27, 97, 100_000_025,
-        28, 98, 100_000_024,
-        29, 100_000_024, 99,
-        53, 100, 100_000_023,
-        54, 101, 100_000_022,
-        56, 102, 100_000_017,
-        63, 105, 103,
-        64, 104, 100_000_021,
-        66, 100_000_020, 100_000_007,
-        64, 107, 106,
-        65, 100_000_019, 100_000_005,
-        65, 108, 100_000_003,
-        66, 100_000_018, 100_000_002,
-        9, 110, 114,
-        13, 111, 113,
-        14, 112, 113,
-        15, 135, 113,
-        16, 115, 114,
-        56, 117, 100_000_017,
-        56, 116, 100_000_017,
-        62, 124, 117,
-        63, 120, 118,
-        64, 119, 100_000_016,
-        66, 100_000_015, 100_000_007,
-        64, 122, 121,
-        65, 100_000_014, 100_000_005,
-        65, 123, 100_000_003,
-        66, 100_000_013, 100_000_002,
-        63, 129, 125,
-        64, 127, 126,
-        68, 100_000_012, 100_000_016,
-        66, 128, 100_000_007,
-        68, 100_000_011, 100_000_015,
-        64, 132, 130,
-        65, 131, 100_000_005,
-        68, 100_000_010, 100_000_014,
-        65, 133, 100_000_003,
-        66, 134, 100_000_002,
-        68, 100_000_009, 100_000_013,
-        56, 136, 100_000_017,
-        63, 139, 137,
-        64, 138, 100_000_008,
-        66, 100_000_006, 100_000_007,
-        64, 141, 140,
-        65, 100_000_004, 100_000_005,
-        65, 142, 100_000_003,
-        66, 100_000_001, 100_000_002,
-        9, 154, 144,
-        32, 145, 146,
-        55, 100_000_063, 146,
-        63, 149, 147,
-        64, 148, 100_000_072,
-        66, 100_000_071, 100_000_007,
-        64, 152, 150,
-        65, 151, 100_000_005,
-        67, 100_000_069, 100_000_070,
-        65, 153, 100_000_068,
-        66, 100_000_067, 100_000_068,
-        63, 100_000_064, 155,
-        64, 100_000_065, 100_000_066,
+        1, 7, 4,
+        9, 236, 5,
+        47, 6, 100_000_095,
+        59, 100_000_095, 100_000_074,
+        2, 193, 8,
+        3, 193, 9,
+        4, 10, 14,
+        5, 11, 14,
+        6, 12, 14,
+        7, 13, 14,
+        8, 156, 14,
+        9, 236, 15,
+        10, 140, 16,
+        11, 124, 17,
+        12, 80, 18,
+        45, 61, 19,
+        47, 42, 20,
+        49, 21, 201,
+        52, 22, 41,
+        53, 41, 23,
+        55, 24, 100_000_083,
+        59, 33, 25,
+        71, 26, 100_000_017,
+        79, 29, 27,
+        80, 28, 100_000_082,
+        82, 100_000_081, 100_000_007,
+        80, 31, 30,
+        81, 100_000_080, 100_000_005,
+        81, 32, 100_000_003,
+        82, 100_000_079, 100_000_002,
+        71, 34, 100_000_017,
+        79, 37, 35,
+        80, 36, 100_000_078,
+        82, 100_000_077, 100_000_007,
+        80, 39, 38,
+        81, 100_000_076, 100_000_005,
+        81, 40, 100_000_003,
+        82, 100_000_075, 100_000_002,
+        54, 100_000_084, 201,
+        59, 43, 100_000_074,
+        60, 44, 100_000_028,
+        61, 45, 100_000_027,
+        62, 46, 100_000_026,
+        63, 47, 100_000_073,
+        64, 48, 100_000_024,
+        65, 100_000_024, 49,
+        66, 50, 100_000_072,
+        67, 51, 100_000_071,
+        71, 52, 100_000_017,
+        73, 53, 100_000_052,
+        74, 54, 100_000_051,
+        79, 57, 55,
+        80, 56, 100_000_070,
+        82, 100_000_069, 100_000_007,
+        80, 59, 58,
+        81, 100_000_068, 100_000_005,
+        81, 60, 100_000_003,
+        82, 100_000_067, 100_000_002,
+        48, 62, 100_000_028,
+        50, 63, 100_000_027,
+        51, 64, 100_000_026,
+        56, 65, 100_000_066,
+        57, 66, 100_000_024,
+        58, 100_000_024, 67,
+        69, 68, 100_000_065,
+        70, 69, 100_000_064,
+        71, 70, 100_000_017,
+        72, 71, 100_000_046,
+        75, 72, 100_000_045,
+        78, 100_000_063, 73,
+        79, 76, 74,
+        80, 75, 100_000_062,
+        82, 100_000_061, 100_000_007,
+        80, 78, 77,
+        81, 100_000_060, 100_000_005,
+        81, 79, 100_000_003,
+        82, 100_000_059, 100_000_002,
+        14, 81, 100_000_028,
+        34, 82, 100_000_027,
+        36, 83, 100_000_026,
+        38, 84, 100_000_054,
+        39, 85, 100_000_024,
+        40, 100_000_024, 86,
+        41, 115, 87,
+        42, 102, 88,
+        43, 89, 100_000_036,
+        44, 90, 100_000_053,
+        46, 92, 91,
+        71, 100_000_052, 100_000_017,
+        68, 94, 93,
+        71, 100_000_051, 100_000_017,
+        71, 95, 100_000_017,
+        79, 98, 96,
+        80, 97, 100_000_050,
+        82, 100_000_049, 100_000_007,
+        80, 100, 99,
+        81, 100_000_048, 100_000_005,
+        81, 101, 100_000_003,
+        82, 100_000_047, 100_000_002,
+        44, 103, 100_000_053,
+        46, 105, 104,
+        71, 100_000_046, 100_000_017,
+        68, 107, 106,
+        71, 100_000_045, 100_000_017,
+        71, 108, 100_000_017,
+        79, 111, 109,
+        80, 110, 100_000_044,
+        82, 100_000_043, 100_000_007,
+        80, 113, 112,
+        81, 100_000_042, 100_000_005,
+        81, 114, 100_000_003,
+        82, 100_000_041, 100_000_002,
+        44, 116, 100_000_053,
+        71, 117, 100_000_017,
+        79, 120, 118,
+        80, 119, 100_000_040,
+        82, 100_000_039, 100_000_007,
+        80, 122, 121,
+        81, 100_000_038, 100_000_005,
+        81, 123, 100_000_003,
+        82, 100_000_037, 100_000_002,
+        13, 125, 100_000_028,
+        16, 126, 100_000_027,
+        17, 127, 100_000_026,
+        18, 128, 100_000_035,
+        19, 129, 100_000_024,
+        20, 100_000_024, 130,
+        25, 131, 100_000_034,
+        26, 132, 100_000_033,
+        71, 133, 100_000_017,
+        79, 136, 134,
+        80, 135, 100_000_032,
+        82, 100_000_031, 100_000_007,
+        80, 138, 137,
+        81, 100_000_030, 100_000_005,
+        81, 139, 100_000_003,
+        82, 100_000_029, 100_000_002,
+        27, 141, 100_000_028,
+        28, 142, 100_000_027,
+        29, 143, 100_000_026,
+        30, 144, 100_000_025,
+        31, 145, 100_000_024,
+        32, 100_000_024, 146,
+        35, 147, 100_000_023,
+        37, 148, 100_000_022,
+        71, 149, 100_000_017,
+        79, 152, 150,
+        80, 151, 100_000_021,
+        82, 100_000_020, 100_000_007,
+        80, 154, 153,
+        81, 100_000_019, 100_000_005,
+        81, 155, 100_000_003,
+        82, 100_000_018, 100_000_002,
+        9, 157, 161,
+        21, 158, 160,
+        22, 159, 160,
+        23, 185, 160,
+        24, 169, 161,
+        71, 162, 100_000_017,
+        79, 165, 163,
+        80, 164, 100_000_016,
+        82, 100_000_015, 100_000_007,
+        80, 167, 166,
+        81, 100_000_014, 100_000_005,
+        81, 168, 100_000_003,
+        82, 100_000_013, 100_000_002,
+        71, 170, 100_000_017,
+        79, 177, 171,
+        80, 174, 172,
+        84, 173, 100_000_016,
+        85, 100_000_012, 100_000_016,
+        82, 175, 100_000_007,
+        84, 176, 100_000_015,
+        85, 100_000_011, 100_000_015,
+        80, 181, 178,
+        81, 179, 100_000_005,
+        84, 180, 100_000_014,
+        85, 100_000_010, 100_000_014,
+        81, 182, 100_000_003,
+        82, 183, 100_000_002,
+        84, 184, 100_000_013,
+        85, 100_000_009, 100_000_013,
+        71, 186, 100_000_017,
+        79, 189, 187,
+        80, 188, 100_000_008,
+        82, 100_000_006, 100_000_007,
+        80, 191, 190,
+        81, 100_000_004, 100_000_005,
+        81, 192, 100_000_003,
+        82, 100_000_001, 100_000_002,
+        9, 236, 194,
+        12, 195, 198,
+        14, 196, 198,
+        15, 197, 198,
+        33, 222, 198,
+        47, 210, 199,
+        49, 200, 201,
+        54, 100_000_085, 201,
+        59, 229, 202,
+        79, 205, 203,
+        80, 204, 100_000_094,
+        82, 100_000_093, 100_000_007,
+        80, 208, 206,
+        81, 207, 100_000_005,
+        83, 100_000_091, 100_000_092,
+        81, 209, 100_000_090,
+        82, 100_000_089, 100_000_090,
+        59, 211, 100_000_074,
+        60, 212, 100_000_028,
+        61, 213, 100_000_027,
+        62, 214, 100_000_026,
+        63, 215, 100_000_073,
+        64, 216, 100_000_024,
+        65, 100_000_024, 217,
+        66, 218, 100_000_072,
+        67, 219, 100_000_071,
+        71, 220, 100_000_017,
+        73, 221, 100_000_052,
+        74, 229, 100_000_051,
+        34, 223, 100_000_027,
+        36, 224, 100_000_026,
+        38, 225, 100_000_054,
+        44, 226, 100_000_053,
+        71, 227, 100_000_017,
+        76, 228, 100_000_052,
+        77, 229, 100_000_051,
+        79, 232, 230,
+        80, 231, 100_000_058,
+        82, 100_000_057, 100_000_007,
+        80, 234, 233,
+        81, 100_000_056, 100_000_005,
+        81, 235, 100_000_003,
+        82, 100_000_055, 100_000_002,
+        79, 100_000_086, 237,
+        80, 100_000_087, 100_000_088,
     ),
 )
 # fmt: on

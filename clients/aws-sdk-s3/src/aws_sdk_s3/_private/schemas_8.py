@@ -28,6 +28,8 @@ _xaebo = "x-amz-expected-bucket-owner"
 _RC = "RequestCharged"
 _smi = "smithy.api#output"
 _xarc = "x-amz-request-charged"
+_VI = "VersionId"
+_xavi = "x-amz-version-id"
 _smith = "smithy.api#http"
 _AR = "AcceptRanges"
 _T = "Type"
@@ -69,7 +71,6 @@ _Ex = "Expiration"
 _SSE = "ServerSideEncryption"
 _SSEKMSKI = "SSEKMSKeyId"
 _xasse = "x-amz-server-side-encryption"
-_VI = "VersionId"
 _xasseakki = "x-amz-server-side-encryption-aws-kms-key-id"
 _xassebke = "x-amz-server-side-encryption-bucket-key-enabled"
 _CC = "CacheControl"
@@ -147,8 +148,10 @@ _Des = "Description"
 _Tier = "Tier"
 _GJP = "GlacierJobParameters"
 _OLu = "OutputLocation"
+_S_ = "S3"
 _Expr = "Expression"
 _ETx = "ExpressionType"
+_SQL = "SQL"
 _CTom = "CompressionType"
 _GZIP = "GZIP"
 _BZIP = "BZIP2"
@@ -303,6 +306,19 @@ _awsa = "aws.auth#sigv4"
 _aX = "aws.protocols#restXml"
 _awsap = "aws.api#service"
 
+OUTPUT_LOCATION: StaticSchema = (
+    18,
+    n0,
+    _OLu,
+    0,
+    (_S_,),
+    ((lambda: schemas.S3_LOCATION, 0),),
+)
+
+EXPRESSION: StaticSchema = (3, n0, _Expr, 0)
+
+EXPRESSION_TYPE: StaticSchema = (14, n0, _ETx, 0, (_SQL,), ((-1, {_sV: _SQL}),))
+
 COMPRESSION_TYPE: StaticSchema = (
     14,
     n0,
@@ -413,8 +429,8 @@ SELECT_PARAMETERS: StaticSchema = (
     (_ISn, _ETx, _Expr, _OSu),
     (
         (INPUT_SERIALIZATION, 1),
-        (lambda: schemas.EXPRESSION_TYPE, 1),
-        (lambda: schemas.EXPRESSION, 1),
+        (EXPRESSION_TYPE, 1),
+        (EXPRESSION, 1),
         (OUTPUT_SERIALIZATION, 1),
     ),
 )
@@ -441,7 +457,7 @@ RESTORE_REQUEST: StaticSchema = (
         (lambda: schemas.TIER, 0),
         (lambda: schemas.DESCRIPTION, 0),
         (SELECT_PARAMETERS, 0),
-        (lambda: schemas.OUTPUT_LOCATION, 0),
+        (OUTPUT_LOCATION, 0),
     ),
 )
 
@@ -526,8 +542,8 @@ SELECT_OBJECT_CONTENT_INPUT: StaticSchema = (
         (lambda: schemas.SSE_CUSTOMER_ALGORITHM, {_sH: _xasseca}),
         (lambda: schemas.SSE_CUSTOMER_KEY, {_sH: _xasseck}),
         (lambda: schemas.SSE_CUSTOMER_KEY_MD5, {_sH: _xasseckM}),
-        (lambda: schemas.EXPRESSION, 1),
-        (lambda: schemas.EXPRESSION_TYPE, 1),
+        (EXPRESSION, 1),
+        (EXPRESSION_TYPE, 1),
         (REQUEST_PROGRESS, 0),
         (INPUT_SERIALIZATION, 1),
         (OUTPUT_SERIALIZATION, 1),
@@ -948,6 +964,7 @@ UPLOAD_PART_OUTPUT: StaticSchema = (
         _SSEKMSKI,
         _BKE,
         _RC,
+        _VI,
     ),
     (
         (lambda: schemas.SERVER_SIDE_ENCRYPTION, {_sH: _xasse}),
@@ -967,6 +984,7 @@ UPLOAD_PART_OUTPUT: StaticSchema = (
         (lambda: schemas.SSEKMS_KEY_ID, {_sH: _xasseakki}),
         (lambda: schemas.BUCKET_KEY_ENABLED, {_sH: _xassebke}),
         (lambda: schemas.REQUEST_CHARGED, {_sH: _xarc}),
+        (lambda: schemas.OBJECT_VERSION_ID, {_sH: _xavi}),
     ),
 )
 
@@ -1044,7 +1062,7 @@ UPLOAD_PART_COPY_OUTPUT: StaticSchema = (
     n0,
     _UPCO,
     {_smi: None},
-    (_CSVI, _CPR, _SSE, _SSECA, _SSECKMD, _SSEKMSKI, _BKE, _RC),
+    (_CSVI, _CPR, _SSE, _SSECA, _SSECKMD, _SSEKMSKI, _BKE, _RC, _VI),
     (
         (lambda: schemas.COPY_SOURCE_VERSION_ID, {_sH: _xacsvi}),
         (lambda: COPY_PART_RESULT, 16),
@@ -1054,6 +1072,7 @@ UPLOAD_PART_COPY_OUTPUT: StaticSchema = (
         (lambda: schemas.SSEKMS_KEY_ID, {_sH: _xasseakki}),
         (lambda: schemas.BUCKET_KEY_ENABLED, {_sH: _xassebke}),
         (lambda: schemas.REQUEST_CHARGED, {_sH: _xarc}),
+        (lambda: schemas.OBJECT_VERSION_ID, {_sH: _xavi}),
     ),
 )
 

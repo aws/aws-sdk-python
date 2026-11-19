@@ -8,6 +8,7 @@ from . import schemas
 
 
 n0 = "com.amazonaws.signin"
+_sV = "smithy.api#enumValue"
 _s = "smithy.api#error"
 _c = "client"
 _e = "error"
@@ -15,28 +16,29 @@ _sm = "smithy.api#required"
 _m = "message"
 _smi = "smithy.api#sensitive"
 _sN = "smithy.api#jsonName"
+_sA = "sessionArn"
 _me = "member"
+_smit = "smithy.api#input"
+_pA = "principalArn"
+_smith = "smithy.api#output"
+_sE = "smithy.api#httpError"
+_sCP = "smithy.rules#staticContextParams"
+_smithy = "smithy.api#http"
 _C = "Condition"
 _k = "key"
 _v = "value"
-_sE = "smithy.api#httpError"
 _R = "Resource"
 _sSI = "smithy.synthetic#originalShapeId"
-_smit = "smithy.api#input"
-_r = "resource"
-_smith = "smithy.api#output"
+_res = "resource"
 _tT = "tokenType"
 _tt = "token_type"
-_sCP = "smithy.rules#staticContextParams"
-_smithy = "smithy.api#http"
 _cI = "clientId"
+_ci = "client_id"
 _sc = "scope"
-_TI = "TargetId"
 _DCACI = "DeleteConsoleAuthorizationConfigurationInput"
 _tIa = "targetId"
 _DCACO = "DeleteConsoleAuthorizationConfigurationOutput"
 _cAE = "consoleAuthorizationEnabled"
-_RNFE = "ResourceNotFoundException"
 _DCAC = "DeleteConsoleAuthorizationConfiguration"
 _SI = "StatementId"
 _DRPSI = "DeleteResourcePermissionStatementInput"
@@ -56,8 +58,8 @@ _PS = "PolicyStatement"
 _ef = "effect"
 _E = "Effect"
 _p = "principal"
-_a = "action"
-_A = "Action"
+_ac = "action"
+_Ac = "Action"
 _con = "condition"
 _PSo = "PolicyStatements"
 _SRBP = "SigninResourceBasedPolicy"
@@ -68,6 +70,22 @@ _St = "Statement"
 _GRPO = "GetResourcePolicyOutput"
 _sRBP = "signinResourceBasedPolicy"
 _GRP = "GetResourcePolicy"
+_GSI = "GetSessionInput"
+_PAr = "PrincipalArn"
+_SS = "SessionStatus"
+_ACTIVE = "ACTIVE"
+_REVOKED = "REVOKED"
+_GSO = "GetSessionOutput"
+_ro = "role"
+_stat = "status"
+_cTl = "clientType"
+_iA = "issuedAt"
+_eA = "expiresAt"
+_lUA = "lastUsedAt"
+_iIR = "issuedInRegion"
+_oSA = "originSessionArn"
+_uA = "userAgent"
+_GS = "GetSession"
 _ITT = "IntrospectedTokenType"
 _ITn = "IntrospectionToken"
 _TTH = "TokenTypeHint"
@@ -78,8 +96,7 @@ _tTH = "tokenTypeHint"
 _tth = "token_type_hint"
 _IOATWIAMO = "IntrospectOAuth2TokenWithIAMOutput"
 _cIOATWIAMRo = "com.amazonaws.signin#IntrospectOAuth2TokenWithIAMResponse"
-_ac = "active"
-_ci = "client_id"
+_act = "active"
 _uI = "userId"
 _ui = "user_id"
 _ex = "exp"
@@ -104,11 +121,20 @@ _PSSe = "PermissionStatementSummaries"
 _LRPSO = "ListResourcePermissionStatementsOutput"
 _pS = "permissionStatements"
 _LRPS = "ListResourcePermissionStatements"
+_SMR = "SessionsMaxResults"
+_LSI = "ListSessionsInput"
+_iAs = "issuedAfter"
+_iB = "issuedBefore"
+_Se = "Session"
+_SSL = "SessionSummaryList"
+_LSO = "ListSessionsOutput"
+_ite = "items"
+_LS = "ListSessions"
 _PCACI = "PutConsoleAuthorizationConfigurationInput"
 _PCACO = "PutConsoleAuthorizationConfigurationOutput"
 _PCAC = "PutConsoleAuthorizationConfiguration"
 _SV = "SourceVpce"
-_RR = "RequestedRegion"
+_RRe = "RequestedRegion"
 _SIo = "SourceIp"
 _SVo = "SourceVpc"
 _VSI = "VpcSourceIp"
@@ -134,15 +160,13 @@ _aw = "aws.auth#sigv4"
 _aws = "aws.api#service"
 _aJ = "aws.protocols#restJson1"
 
-TARGET_ID: StaticSchema = (3, n0, _TI, 0)
-
 DELETE_CONSOLE_AUTHORIZATION_CONFIGURATION_INPUT: StaticSchema = (
     18,
     n0,
     _DCACI,
     {_smit: None},
     (_tIa,),
-    ((TARGET_ID, 0),),
+    ((lambda: schemas.TARGET_ID, 0),),
 )
 
 DELETE_CONSOLE_AUTHORIZATION_CONFIGURATION_OUTPUT: StaticSchema = (
@@ -151,7 +175,7 @@ DELETE_CONSOLE_AUTHORIZATION_CONFIGURATION_OUTPUT: StaticSchema = (
     _DCACO,
     {_smith: None},
     (_tIa, _sc, _cAE),
-    ((TARGET_ID, 1), (3, 1), (2, 1)),
+    ((lambda: schemas.TARGET_ID, 1), (3, 1), (2, 1)),
 )
 
 DELETE_CONSOLE_AUTHORIZATION_CONFIGURATION: StaticOperationSchema = (
@@ -169,19 +193,10 @@ DELETE_CONSOLE_AUTHORIZATION_CONFIGURATION: StaticOperationSchema = (
     (
         lambda: schemas.ACCESS_DENIED_EXCEPTION,
         lambda: schemas.INTERNAL_SERVER_EXCEPTION,
-        lambda: RESOURCE_NOT_FOUND_EXCEPTION,
+        lambda: schemas.RESOURCE_NOT_FOUND_EXCEPTION,
         lambda: schemas.TOO_MANY_REQUESTS_ERROR,
         lambda: schemas.VALIDATION_EXCEPTION,
     ),
-)
-
-RESOURCE_NOT_FOUND_EXCEPTION: StaticSchema = (
-    18,
-    n0,
-    _RNFE,
-    {_s: _c, _sE: 404},
-    (_e, _m),
-    ((lambda: schemas.O_AUTH2_ERROR_CODE, 1), (3, 1)),
 )
 
 STATEMENT_ID: StaticSchema = (3, n0, _SI, 0)
@@ -217,7 +232,7 @@ DELETE_RESOURCE_PERMISSION_STATEMENT: StaticOperationSchema = (
     (
         lambda: schemas.ACCESS_DENIED_EXCEPTION,
         lambda: schemas.INTERNAL_SERVER_EXCEPTION,
-        RESOURCE_NOT_FOUND_EXCEPTION,
+        lambda: schemas.RESOURCE_NOT_FOUND_EXCEPTION,
         lambda: schemas.TOO_MANY_REQUESTS_ERROR,
         lambda: schemas.VALIDATION_EXCEPTION,
     ),
@@ -231,7 +246,7 @@ GET_CONSOLE_AUTHORIZATION_CONFIGURATION_INPUT: StaticSchema = (
     _GCACI,
     {_smit: None},
     (_tIa,),
-    ((TARGET_ID, 0),),
+    ((lambda: schemas.TARGET_ID, 0),),
 )
 
 GET_CONSOLE_AUTHORIZATION_CONFIGURATION_OUTPUT: StaticSchema = (
@@ -240,7 +255,7 @@ GET_CONSOLE_AUTHORIZATION_CONFIGURATION_OUTPUT: StaticSchema = (
     _GCACO,
     {_smith: None},
     (_tIa, _sc, _cAE),
-    ((TARGET_ID, 1), (3, 1), (2, 1)),
+    ((lambda: schemas.TARGET_ID, 1), (3, 1), (2, 1)),
 )
 
 GET_CONSOLE_AUTHORIZATION_CONFIGURATION: StaticOperationSchema = (
@@ -258,7 +273,7 @@ GET_CONSOLE_AUTHORIZATION_CONFIGURATION: StaticOperationSchema = (
     (
         lambda: schemas.ACCESS_DENIED_EXCEPTION,
         lambda: schemas.INTERNAL_SERVER_EXCEPTION,
-        RESOURCE_NOT_FOUND_EXCEPTION,
+        lambda: schemas.RESOURCE_NOT_FOUND_EXCEPTION,
         lambda: schemas.TOO_MANY_REQUESTS_ERROR,
         lambda: schemas.VALIDATION_EXCEPTION,
     ),
@@ -288,7 +303,7 @@ GET_RESOURCE_POLICY: StaticOperationSchema = (
     (
         lambda: schemas.ACCESS_DENIED_EXCEPTION,
         lambda: schemas.INTERNAL_SERVER_EXCEPTION,
-        RESOURCE_NOT_FOUND_EXCEPTION,
+        lambda: schemas.RESOURCE_NOT_FOUND_EXCEPTION,
         lambda: schemas.TOO_MANY_REQUESTS_ERROR,
     ),
 )
@@ -302,11 +317,11 @@ POLICY_STATEMENT: StaticSchema = (
     n0,
     _PS,
     0,
-    (_ef, _p, _a, _r, _con),
+    (_ef, _p, _ac, _res, _con),
     (
         (3, {_sN: _E}),
         (PRINCIPAL, {_sN: _P}),
-        (POLICY_ACTIONS, {_sN: _A}),
+        (POLICY_ACTIONS, {_sN: _Ac}),
         (3, {_sN: _R}),
         (lambda: schemas.CONDITION_BLOCK, {_sN: _C}),
     ),
@@ -321,6 +336,68 @@ SIGNIN_RESOURCE_BASED_POLICY: StaticSchema = (
     0,
     (_ve, _sta),
     ((3, {_sN: _V}), (POLICY_STATEMENTS, {_sN: _St})),
+)
+
+GET_SESSION_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GSI,
+    {_smit: None},
+    (_sA, _pA),
+    ((lambda: schemas.SESSION_ARN, 1), (lambda: schemas.PRINCIPAL_ARN_FILTER, 0)),
+)
+
+GET_SESSION_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GSO,
+    {_smith: None},
+    (_sA, _pA, _ro, _stat, _cI, _cTl, _res, _iA, _eA, _lUA, _iIR, _oSA, _uA),
+    (
+        (lambda: schemas.SESSION_ARN, 1),
+        (lambda: PRINCIPAL_ARN, 1),
+        (lambda: PRINCIPAL_ARN, 0),
+        (lambda: SESSION_STATUS, 0),
+        (3, 0),
+        (lambda: schemas.CLIENT_TYPE, 0),
+        (3, 0),
+        (8, 1),
+        (8, 1),
+        (8, 0),
+        (3, 0),
+        (lambda: schemas.SESSION_ARN, 0),
+        (3, 0),
+    ),
+)
+
+GET_SESSION: StaticOperationSchema = (
+    23,
+    n0,
+    _GS,
+    {
+        _sCP: MappingProxyType({"IsControlPlane": MappingProxyType({"value": True})}),
+        _smithy: MappingProxyType({"method": "POST", "uri": "/get-session"}),
+    },
+    GET_SESSION_INPUT,
+    GET_SESSION_OUTPUT,
+    (
+        lambda: schemas.ACCESS_DENIED_EXCEPTION,
+        lambda: schemas.INTERNAL_SERVER_EXCEPTION,
+        lambda: schemas.RESOURCE_NOT_FOUND_EXCEPTION,
+        lambda: schemas.TOO_MANY_REQUESTS_ERROR,
+        lambda: schemas.VALIDATION_EXCEPTION,
+    ),
+)
+
+PRINCIPAL_ARN: StaticSchema = (3, n0, _PAr, 0)
+
+SESSION_STATUS: StaticSchema = (
+    14,
+    n0,
+    _SS,
+    0,
+    (_ACTIVE, _REVOKED),
+    ((-1, {_sV: _ACTIVE}), (-1, {_sV: _REVOKED})),
 )
 
 INTROSPECTED_TOKEN_TYPE: StaticSchema = (3, n0, _ITT, 0)
@@ -343,7 +420,7 @@ INTROSPECT_O_AUTH2_TOKEN_WITH_IAM_OUTPUT: StaticSchema = (
     n0,
     _IOATWIAMO,
     {_sSI: _cIOATWIAMRo, _smith: None},
-    (_ac, _cI, _uI, _tT, _ex, _i, _n, _sub, _au, _iss, _j, _aI, _sS, _r),
+    (_act, _cI, _uI, _tT, _ex, _i, _n, _sub, _au, _iss, _j, _aI, _sS, _res),
     (
         (2, 1),
         (3, {_sN: _ci}),
@@ -358,7 +435,7 @@ INTROSPECT_O_AUTH2_TOKEN_WITH_IAM_OUTPUT: StaticSchema = (
         (3, {_sN: _j}),
         (lambda: schemas.ACCOUNT_ID, {_sN: _ai}),
         (3, {_sN: _ss}),
-        (lambda: schemas.RESOURCE, {_sN: _r}),
+        (lambda: schemas.RESOURCE, {_sN: _res}),
     ),
 )
 
@@ -417,7 +494,7 @@ LIST_RESOURCE_PERMISSION_STATEMENTS: StaticOperationSchema = (
     (
         lambda: schemas.ACCESS_DENIED_EXCEPTION,
         lambda: schemas.INTERNAL_SERVER_EXCEPTION,
-        RESOURCE_NOT_FOUND_EXCEPTION,
+        lambda: schemas.RESOURCE_NOT_FOUND_EXCEPTION,
         lambda: schemas.TOO_MANY_REQUESTS_ERROR,
         lambda: schemas.VALIDATION_EXCEPTION,
     ),
@@ -441,13 +518,80 @@ PERMISSION_STATEMENT_SUMMARIES: StaticSchema = (
     ((PERMISSION_STATEMENT_SUMMARY, 0),),
 )
 
+SESSIONS_MAX_RESULTS: StaticSchema = (7, n0, _SMR, 0)
+
+LIST_SESSIONS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _LSI,
+    {_smit: None},
+    (_pA, _mR, _nT, _stat, _cI, _iAs, _iB),
+    (
+        (lambda: schemas.PRINCIPAL_ARN_FILTER, 0),
+        (SESSIONS_MAX_RESULTS, 0),
+        (NEXT_TOKEN, 0),
+        (SESSION_STATUS, 0),
+        (3, 0),
+        (8, 0),
+        (8, 0),
+    ),
+)
+
+LIST_SESSIONS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _LSO,
+    {_smith: None},
+    (_ite, _nT),
+    ((lambda: SESSION_SUMMARY_LIST, 1), (NEXT_TOKEN, 0)),
+)
+
+LIST_SESSIONS: StaticOperationSchema = (
+    23,
+    n0,
+    _LS,
+    {
+        _sCP: MappingProxyType({"IsControlPlane": MappingProxyType({"value": True})}),
+        _smithy: MappingProxyType({"method": "POST", "uri": "/list-sessions"}),
+    },
+    LIST_SESSIONS_INPUT,
+    LIST_SESSIONS_OUTPUT,
+    (
+        lambda: schemas.ACCESS_DENIED_EXCEPTION,
+        lambda: schemas.INTERNAL_SERVER_EXCEPTION,
+        lambda: schemas.TOO_MANY_REQUESTS_ERROR,
+        lambda: schemas.VALIDATION_EXCEPTION,
+    ),
+)
+
+SESSION: StaticSchema = (
+    18,
+    n0,
+    _Se,
+    0,
+    (_sA, _pA, _ro, _stat, _iA, _eA, _cI, _cTl, _res),
+    (
+        (lambda: schemas.SESSION_ARN, 1),
+        (PRINCIPAL_ARN, 1),
+        (PRINCIPAL_ARN, 0),
+        (SESSION_STATUS, 0),
+        (8, 1),
+        (8, 1),
+        (3, 0),
+        (lambda: schemas.CLIENT_TYPE, 0),
+        (3, 0),
+    ),
+)
+
+SESSION_SUMMARY_LIST: StaticSchema = (16, n0, _SSL, 0, (_me,), ((SESSION, 0),))
+
 PUT_CONSOLE_AUTHORIZATION_CONFIGURATION_INPUT: StaticSchema = (
     18,
     n0,
     _PCACI,
     {_smit: None},
     (_tIa,),
-    ((TARGET_ID, 0),),
+    ((lambda: schemas.TARGET_ID, 0),),
 )
 
 PUT_CONSOLE_AUTHORIZATION_CONFIGURATION_OUTPUT: StaticSchema = (
@@ -456,7 +600,7 @@ PUT_CONSOLE_AUTHORIZATION_CONFIGURATION_OUTPUT: StaticSchema = (
     _PCACO,
     {_smith: None},
     (_tIa, _sc, _cAE),
-    ((TARGET_ID, 1), (3, 1), (2, 1)),
+    ((lambda: schemas.TARGET_ID, 1), (3, 1), (2, 1)),
 )
 
 PUT_CONSOLE_AUTHORIZATION_CONFIGURATION: StaticOperationSchema = (
@@ -475,7 +619,7 @@ PUT_CONSOLE_AUTHORIZATION_CONFIGURATION: StaticOperationSchema = (
         lambda: schemas.ACCESS_DENIED_EXCEPTION,
         lambda: schemas.CONFLICT_EXCEPTION,
         lambda: schemas.INTERNAL_SERVER_EXCEPTION,
-        RESOURCE_NOT_FOUND_EXCEPTION,
+        lambda: schemas.RESOURCE_NOT_FOUND_EXCEPTION,
         lambda: schemas.TOO_MANY_REQUESTS_ERROR,
         lambda: schemas.VALIDATION_EXCEPTION,
     ),
@@ -483,7 +627,7 @@ PUT_CONSOLE_AUTHORIZATION_CONFIGURATION: StaticOperationSchema = (
 
 SOURCE_VPCE: StaticSchema = (3, n0, _SV, 0)
 
-REQUESTED_REGION: StaticSchema = (3, n0, _RR, 0)
+REQUESTED_REGION: StaticSchema = (3, n0, _RRe, 0)
 
 SOURCE_IP: StaticSchema = (3, n0, _SIo, 0)
 

@@ -41,6 +41,7 @@ _OIw = "OwnerId"
 _oI = "ownerId"
 _e = "enable"
 _disa = "disable"
+_en = "enabled"
 _C = "Code"
 _co = "code"
 _Me = "Message"
@@ -80,7 +81,6 @@ _Sub = "Subnet"
 _Vp = "Vpc"
 _tc = "tcp"
 _ud = "udp"
-_ena = "enabled"
 _EOIG = "EgressOnlyInternetGateway"
 _eOIG = "egressOnlyInternetGateway"
 _VPG = "VirtualPrivateGateway"
@@ -234,7 +234,7 @@ _CCVEI = "CreateClientVpnEndpointInput"
 _cCCVER = "com.amazonaws.ec2#CreateClientVpnEndpointRequest"
 _CCB = "ClientCidrBlock"
 _SCA = "ServerCertificateArn"
-_AO = "AuthenticationOptions"
+_AOu = "AuthenticationOptions"
 _Au = "Authentication"
 _DSn = "DnsServers"
 _VPp = "VpnPort"
@@ -289,7 +289,14 @@ _cCCGRom = "com.amazonaws.ec2#CreateCustomerGatewayRequest"
 _BA = "BgpAsn"
 _DNe = "DeviceName"
 _BAE = "BgpAsnExtended"
+_cAe = "certificateArn"
+_dNe = "deviceName"
+_bAE = "bgpAsnExtended"
+_CGIu = "CustomerGatewayId"
+_cGIu = "customerGatewayId"
 _ty = "type"
+_iApd = "ipAddress"
+_bA = "bgpAsn"
 _CCGOr = "CreateCustomerGatewayOutput"
 _cCCGRoma = "com.amazonaws.ec2#CreateCustomerGatewayResult"
 _CCGr = "CreateCustomerGateway"
@@ -402,7 +409,6 @@ _cCDMVOTRo = "com.amazonaws.ec2#CreateDelegateMacVolumeOwnershipTaskResult"
 _mMT = "macModificationTask"
 _CDMVOT = "CreateDelegateMacVolumeOwnershipTask"
 _VECESI = "VpcEncryptionControlExclusionStateInput"
-_VISLp = "VpcIdStringList"
 
 INTEGER_WITH_CONSTRAINTS: StaticSchema = (7, n0, _IWC, 0)
 
@@ -743,8 +749,8 @@ SELF_SERVICE_PORTAL: StaticSchema = (
     n0,
     _SSP,
     0,
-    (_ena, _d),
-    ((-1, {_sV: _ena}), (-1, {_sV: _d})),
+    (_en, _d),
+    ((-1, {_sV: _en}), (-1, {_sV: _d})),
 )
 
 TRAFFIC_IP_ADDRESS_TYPE: StaticSchema = (
@@ -804,7 +810,7 @@ CREATE_CLIENT_VPN_ENDPOINT_INPUT: StaticSchema = (
     (
         _CCB,
         _SCA,
-        _AO,
+        _AOu,
         _CLO,
         _DSn,
         _TPra,
@@ -1080,7 +1086,7 @@ CREATE_CUSTOMER_GATEWAY_OUTPUT: StaticSchema = (
     _CCGOr,
     {_sSI: _cCCGRoma, _smit: None},
     (_CG,),
-    ((lambda: schemas.CUSTOMER_GATEWAY, {_aQN: _CG, _sN: _cG}),),
+    ((lambda: CUSTOMER_GATEWAY, {_aQN: _CG, _sN: _cG}),),
 )
 
 CREATE_CUSTOMER_GATEWAY: StaticOperationSchema = (
@@ -1091,6 +1097,25 @@ CREATE_CUSTOMER_GATEWAY: StaticOperationSchema = (
     CREATE_CUSTOMER_GATEWAY_INPUT,
     CREATE_CUSTOMER_GATEWAY_OUTPUT,
     (),
+)
+
+CUSTOMER_GATEWAY: StaticSchema = (
+    18,
+    n0,
+    _CG,
+    0,
+    (_CAe, _DNe, _Tag, _BAE, _CGIu, _St, _Ty, _IA, _BA),
+    (
+        (lambda: schemas.STRING, {_aQN: _CAe, _sN: _cAe}),
+        (lambda: schemas.STRING, {_aQN: _DNe, _sN: _dNe}),
+        (lambda: schemas.TAG_LIST, {_aQN: _TSag, _sN: _tS}),
+        (lambda: schemas.STRING, {_aQN: _BAE, _sN: _bAE}),
+        (lambda: schemas.STRING, {_aQN: _CGIu, _sN: _cGIu}),
+        (lambda: schemas.STRING, {_aQN: _St, _sN: _st}),
+        (lambda: schemas.STRING, {_aQN: _Ty, _sN: _ty}),
+        (lambda: schemas.STRING, {_aQN: _IA, _sN: _iApd}),
+        (lambda: schemas.STRING, {_aQN: _BA, _sN: _bA}),
+    ),
 )
 
 CREATE_DEFAULT_SUBNET_INPUT: StaticSchema = (
@@ -1437,8 +1462,8 @@ MAC_SYSTEM_INTEGRITY_PROTECTION_SETTING_STATUS: StaticSchema = (
     n0,
     _MSIPSS,
     0,
-    (_ena, _d),
-    ((-1, {_sV: _ena}), (-1, {_sV: _d})),
+    (_en, _d),
+    ((-1, {_sV: _en}), (-1, {_sV: _d})),
 )
 
 MAC_SYSTEM_INTEGRITY_PROTECTION_CONFIGURATION: StaticSchema = (
@@ -1466,13 +1491,4 @@ VPC_ENCRYPTION_CONTROL_EXCLUSION_STATE_INPUT: StaticSchema = (
     0,
     (_e, _disa),
     ((-1, {_sV: _e}), (-1, {_sV: _disa})),
-)
-
-VPC_ID_STRING_LIST: StaticSchema = (
-    16,
-    n0,
-    _VISLp,
-    0,
-    (_me,),
-    ((lambda: schemas.VPC_ID, {_sN: _VI}),),
 )

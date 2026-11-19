@@ -18,11 +18,11 @@ _sO = "smithy.api#clientOptional"
 _smi = "smithy.api#required"
 _DR = "DryRun"
 _smit = "smithy.api#output"
-_RIOI = "ReservedInstancesOfferingId"
 _IC = "InstanceCount"
-_TCa = "TargetConfiguration"
 _St = "State"
 _st = "state"
+_OIw = "OwnerId"
+_oI = "ownerId"
 _Re = "Region"
 _Sta = "Status"
 _sta = "status"
@@ -38,12 +38,21 @@ _AZ = "AvailabilityZone"
 _aZ = "availabilityZone"
 _AZI = "AvailabilityZoneId"
 _aZI = "availabilityZoneId"
+_NII = "NetworkInterfaceId"
+_nII = "networkInterfaceId"
 _PLI = "PrefixListId"
 _pLI = "prefixListId"
 _Cid = "Cidrs"
 _CS = "CidrSet"
 _cS = "cidrSet"
 _PL = "PrefixList"
+_Exp = "Explanations"
+_ES = "ExplanationSet"
+_eS = "explanationSet"
+_NIASAI = "NetworkInsightsAccessScopeAnalysisId"
+_NIASI = "NetworkInsightsAccessScopeId"
+_nIASAI = "networkInsightsAccessScopeAnalysisId"
+_nIASI = "networkInsightsAccessScopeId"
 _Res = "Resources"
 _Reso = "Resource"
 _IT = "InstanceType"
@@ -59,55 +68,64 @@ _sMt = "statusMessage"
 _desc = "description"
 _PIo = "PoolId"
 _pIo = "poolId"
-_CTl = "ClientToken"
-_cTl = "clientToken"
+_OA = "OutpostArn"
 _sc = "scope"
-_RSI = "RouteServerId"
-_RTIo = "RouteTableId"
+_GIr = "GroupId"
+_G = "Groups"
 _Sc = "Scope"
+_At = "Attachment"
+_atta = "attachment"
+_GN = "GroupName"
+_gN = "groupName"
 _PLIr = "PrefixListIds"
-_RILI = "ReservedInstancesListingId"
-_rILI = "reservedInstancesListingId"
 _iC = "instanceCount"
 _CC = "CurrencyCode"
 _cC = "currencyCode"
-_Pric = "Price"
-_pric = "price"
-_CD = "CreateDate"
-_cD = "createDate"
 _RIIes = "ReservedInstancesId"
 _rII = "reservedInstancesId"
-_UD = "UpdateDate"
-_uD = "updateDate"
-_RILe = "ReservedInstancesListings"
-_RILS = "ReservedInstancesListingsSet"
-_rILS = "reservedInstancesListingsSet"
-_Int = "Interval"
-_int = "interval"
-_Cou = "Count"
-_cou = "count"
+_oAu = "outpostArn"
+_ED = "EndDate"
+_SDt = "StartDate"
+_sDt = "startDate"
+_eD = "endDate"
 _pp__ = "payment_pending"
 _pp___ = "payment-pending"
 _pf____ = "payment_failed"
 _pf_____ = "payment-failed"
-_AIC = "AvailableInstanceCount"
-_aIC = "availableInstanceCount"
 _ITnst = "InstanceTenancy"
 _iTns = "instanceTenancy"
 _Pla = "Platform"
 _plat = "platform"
 _REGIONAL = "REGIONAL"
+_NIIe = "NetworkInterfaceIds"
 _rNe = "regionName"
+_APIAsso = "AssociatePublicIpAddress"
+_NIe = "NetworkInterfaces"
+_aPIA = "associatePublicIpAddress"
+_GS = "GroupSet"
+_gS = "groupSet"
+_NIS = "NetworkInterfaceSet"
+_nIS = "networkInterfaceSet"
+_OLI = "OutpostLagId"
+_oLI = "outpostLagId"
+_LGVIIS = "LocalGatewayVirtualInterfaceIdSet"
+_LGVIIo = "LocalGatewayVirtualInterfaceIds"
+_lGVIIS = "localGatewayVirtualInterfaceIdSet"
 _PLN = "PrefixListName"
 _pLN = "prefixListName"
+_NIPI = "NetworkInsightsPathId"
+_nIPI = "networkInsightsPathId"
+_SDC = "SourceDestCheck"
+_sDC = "sourceDestCheck"
+_NIPIe = "NetworkInterfacePermissionId"
 _RRVTI = "ReplaceRootVolumeTaskId"
-_RSEI = "RouteServerEndpointId"
-_RSPI = "RouteServerPeerId"
-_RTIou = "RouteTableIds"
+_NIAI = "NetworkInsightsAnalysisId"
+_nIAI = "networkInsightsAnalysisId"
 _RIIese = "ReservedInstancesIds"
 _Fi = "Filter"
 _Fil = "Filters"
 _NTex = "NextToken"
+_Attr = "Attribute"
 _MR = "MaxResults"
 _nT = "nextToken"
 _Statu = "Statuses"
@@ -118,24 +136,160 @@ _oIS = "optInStatus"
 _Ge = "Geography"
 _GSe = "GeographySet"
 _gSe = "geographySet"
-_mR = "maxResults"
 _PIoo = "PoolIds"
-_mar = "marketplace"
-_MDa = "MaxDuration"
-_MDi = "MinDuration"
 _Dur = "Duration"
 _dur = "duration"
-_HP = "HourlyPrice"
-_hP = "hourlyPrice"
 _reti = "retired"
 _End = "End"
 _end = "end"
 _Star = "Start"
 _star = "start"
+_filt = "filter"
+_attr = "attribute"
+_IMR = "IncludeManagedResources"
+_GNr = "GroupNames"
 _PLre = "PrefixLists"
 _PLSr = "PrefixListSet"
 _pLSr = "prefixListSet"
+_DNIASAIe = "DescribeNetworkInsightsAccessScopeAnalysesInput"
+_cDNIASARom = "com.amazonaws.ec2#DescribeNetworkInsightsAccessScopeAnalysesRequest"
+_NIASAIe = "NetworkInsightsAccessScopeAnalysisIds"
+_ASTB = "AnalysisStartTimeBegin"
+_ASTE = "AnalysisStartTimeEnd"
+_FFi = "FindingsFound"
+_true = "true"
+_fal = "false"
+_unk = "unknown"
+_NIASAe = "NetworkInsightsAccessScopeAnalysis"
+_NIASAA = "NetworkInsightsAccessScopeAnalysisArn"
+_nIASAA = "networkInsightsAccessScopeAnalysisArn"
+_WM = "WarningMessage"
+_wM = "warningMessage"
+_fFi = "findingsFound"
+_AEC = "AnalyzedEniCount"
+_aEC = "analyzedEniCount"
+_NIASAL = "NetworkInsightsAccessScopeAnalysisList"
+_DNIASAOe = "DescribeNetworkInsightsAccessScopeAnalysesOutput"
+_cDNIASARoma = "com.amazonaws.ec2#DescribeNetworkInsightsAccessScopeAnalysesResult"
+_NIASAet = "NetworkInsightsAccessScopeAnalyses"
+_NIASAS = "NetworkInsightsAccessScopeAnalysisSet"
+_nIASAS = "networkInsightsAccessScopeAnalysisSet"
+_DNIASAe = "DescribeNetworkInsightsAccessScopeAnalyses"
+_NIASIL = "NetworkInsightsAccessScopeIdList"
+_DNIASIe = "DescribeNetworkInsightsAccessScopesInput"
+_cDNIASRom = "com.amazonaws.ec2#DescribeNetworkInsightsAccessScopesRequest"
+_NIASIe = "NetworkInsightsAccessScopeIds"
+_NIASL = "NetworkInsightsAccessScopeList"
+_DNIASOe = "DescribeNetworkInsightsAccessScopesOutput"
+_cDNIASRoma = "com.amazonaws.ec2#DescribeNetworkInsightsAccessScopesResult"
+_NIASe = "NetworkInsightsAccessScopes"
+_NIASS = "NetworkInsightsAccessScopeSet"
+_nIASS = "networkInsightsAccessScopeSet"
+_DNIASe = "DescribeNetworkInsightsAccessScopes"
+_NIAIL = "NetworkInsightsAnalysisIdList"
+_DNIAIe = "DescribeNetworkInsightsAnalysesInput"
+_cDNIARom = "com.amazonaws.ec2#DescribeNetworkInsightsAnalysesRequest"
+_NIAIe = "NetworkInsightsAnalysisIds"
+_AST = "AnalysisStartTime"
+_AET = "AnalysisEndTime"
+_ALr = "ArnList"
+_NIAet = "NetworkInsightsAnalysis"
+_NIAA = "NetworkInsightsAnalysisArn"
+_nIAA = "networkInsightsAnalysisArn"
+_AAdd = "AdditionalAccounts"
+_AASd = "AdditionalAccountSet"
+_aASd = "additionalAccountSet"
+_FIAi = "FilterInArns"
+_FIAS = "FilterInArnSet"
+_fIAS = "filterInArnSet"
+_FOA = "FilterOutArns"
+_FOAS = "FilterOutArnSet"
+_fOAS = "filterOutArnSet"
+_NPF = "NetworkPathFound"
+_nPF = "networkPathFound"
+_FPC = "ForwardPathComponents"
+_FPCS = "ForwardPathComponentSet"
+_fPCS = "forwardPathComponentSet"
+_RPC = "ReturnPathComponents"
+_RPCS = "ReturnPathComponentSet"
+_rPCS = "returnPathComponentSet"
+_APHlt = "AlternatePathHints"
+_APHS = "AlternatePathHintSet"
+_aPHS = "alternatePathHintSet"
+_SAug = "SuggestedAccounts"
+_SASu = "SuggestedAccountSet"
+_sASu = "suggestedAccountSet"
+_NIAL = "NetworkInsightsAnalysisList"
+_DNIAOe = "DescribeNetworkInsightsAnalysesOutput"
+_cDNIARoma = "com.amazonaws.ec2#DescribeNetworkInsightsAnalysesResult"
+_NIAetw = "NetworkInsightsAnalyses"
+_NIASet = "NetworkInsightsAnalysisSet"
+_nIASe = "networkInsightsAnalysisSet"
+_DNIAe = "DescribeNetworkInsightsAnalyses"
+_NIPIL = "NetworkInsightsPathIdList"
+_DNIPIes = "DescribeNetworkInsightsPathsInput"
+_cDNIPRomam = "com.amazonaws.ec2#DescribeNetworkInsightsPathsRequest"
+_NIPIet = "NetworkInsightsPathIds"
+_NIPL = "NetworkInsightsPathList"
+_DNIPOes = "DescribeNetworkInsightsPathsOutput"
+_cDNIPRomama = "com.amazonaws.ec2#DescribeNetworkInsightsPathsResult"
+_NIPet = "NetworkInsightsPaths"
+_NIPSe = "NetworkInsightsPathSet"
+_nIPS = "networkInsightsPathSet"
+_DNIPes = "DescribeNetworkInsightsPaths"
+_NIAetwo = "NetworkInterfaceAttribute"
+_DNIAIes = "DescribeNetworkInterfaceAttributeInput"
+_cDNIARomam = "com.amazonaws.ec2#DescribeNetworkInterfaceAttributeRequest"
+_DNIAOes = "DescribeNetworkInterfaceAttributeOutput"
+_cDNIARomama = "com.amazonaws.ec2#DescribeNetworkInterfaceAttributeResult"
+_DNIAes = "DescribeNetworkInterfaceAttribute"
+_DNIPMR = "DescribeNetworkInterfacePermissionsMaxResults"
+_NIPILe = "NetworkInterfacePermissionIdList"
+_DNIPIesc = "DescribeNetworkInterfacePermissionsInput"
+_cDNIPRomamaz = "com.amazonaws.ec2#DescribeNetworkInterfacePermissionsRequest"
+_NIPIetw = "NetworkInterfacePermissionIds"
+_NIPLe = "NetworkInterfacePermissionList"
+_DNIPOesc = "DescribeNetworkInterfacePermissionsOutput"
+_cDNIPRomamazo = "com.amazonaws.ec2#DescribeNetworkInterfacePermissionsResult"
+_NIPetw = "NetworkInterfacePermissions"
+_nIPe = "networkInterfacePermissions"
+_DNIPesc = "DescribeNetworkInterfacePermissions"
+_DNIMR = "DescribeNetworkInterfacesMaxResults"
+_NIIL = "NetworkInterfaceIdList"
+_DNIIes = "DescribeNetworkInterfacesInput"
+_cDNIRo = "com.amazonaws.ec2#DescribeNetworkInterfacesRequest"
+_NIL = "NetworkInterfaceList"
+_DNIOe = "DescribeNetworkInterfacesOutput"
+_cDNIRom = "com.amazonaws.ec2#DescribeNetworkInterfacesResult"
+_DNIe = "DescribeNetworkInterfaces"
+_OLMR = "OutpostLagMaxResults"
+_OLIS = "OutpostLagIdSet"
+_DOLI = "DescribeOutpostLagsInput"
+_cDOLR = "com.amazonaws.ec2#DescribeOutpostLagsRequest"
+_OLIu = "OutpostLagIds"
+_SLVII = "ServiceLinkVirtualInterfaceId"
+_SLVIIS = "ServiceLinkVirtualInterfaceIdSet"
+_OL = "OutpostLag"
+_SLVIIe = "ServiceLinkVirtualInterfaceIds"
+_sLVIIS = "serviceLinkVirtualInterfaceIdSet"
+_OLS = "OutpostLagSet"
+_DOLO = "DescribeOutpostLagsOutput"
+_cDOLRo = "com.amazonaws.ec2#DescribeOutpostLagsResult"
+_OLu = "OutpostLags"
+_oLS = "outpostLagSet"
+_DOLe = "DescribeOutpostLags"
+_PGISL = "PlacementGroupIdStringList"
+_PGSLl = "PlacementGroupStringList"
+_DPGIe = "DescribePlacementGroupsInput"
+_cDPGRo = "com.amazonaws.ec2#DescribePlacementGroupsRequest"
+_GIrou = "GroupIds"
 _PGL = "PlacementGroupList"
+_DPGOe = "DescribePlacementGroupsOutput"
+_cDPGRom = "com.amazonaws.ec2#DescribePlacementGroupsResult"
+_PGl = "PlacementGroups"
+_PGSla = "PlacementGroupSet"
+_pGS = "placementGroupSet"
+_DPGe = "DescribePlacementGroups"
 _PLRISL = "PrefixListResourceIdStringList"
 _DPLIe = "DescribePrefixListsInput"
 _cDPLR = "com.amazonaws.ec2#DescribePrefixListsRequest"
@@ -262,154 +416,620 @@ _cDRIRo = "com.amazonaws.ec2#DescribeReservedInstancesResult"
 _RISe = "ReservedInstancesSet"
 _rIS = "reservedInstancesSet"
 _DRIes = "DescribeReservedInstances"
-_DRILI = "DescribeReservedInstancesListingsInput"
-_cDRILR = "com.amazonaws.ec2#DescribeReservedInstancesListingsRequest"
-_DRILO = "DescribeReservedInstancesListingsOutput"
-_cDRILRo = "com.amazonaws.ec2#DescribeReservedInstancesListingsResult"
-_DRIL = "DescribeReservedInstancesListings"
-_RIMI = "ReservedInstancesModificationId"
-_RIMISL = "ReservedInstancesModificationIdStringList"
-_DRIMI = "DescribeReservedInstancesModificationsInput"
-_cDRIMR = "com.amazonaws.ec2#DescribeReservedInstancesModificationsRequest"
-_RIMIe = "ReservedInstancesModificationIds"
 _RIC = "ReservedInstancesConfiguration"
-_RIMR = "ReservedInstancesModificationResult"
-_tCa = "targetConfiguration"
-_RIMRL = "ReservedInstancesModificationResultList"
-_RIIeser = "ReservedIntancesIds"
-_RIM = "ReservedInstancesModification"
-_EDf = "EffectiveDate"
-_eDf = "effectiveDate"
-_MRo = "ModificationResults"
-_MRS = "ModificationResultSet"
-_mRS = "modificationResultSet"
-_rIMI = "reservedInstancesModificationId"
-_RIML = "ReservedInstancesModificationList"
-_DRIMO = "DescribeReservedInstancesModificationsOutput"
-_cDRIMRo = "com.amazonaws.ec2#DescribeReservedInstancesModificationsResult"
-_RIMe = "ReservedInstancesModifications"
-_RIMS = "ReservedInstancesModificationsSet"
-_rIMS = "reservedInstancesModificationsSet"
-_DRIM = "DescribeReservedInstancesModifications"
-_RIOISL = "ReservedInstancesOfferingIdStringList"
-_DRIOI = "DescribeReservedInstancesOfferingsInput"
-_cDRIOR = "com.amazonaws.ec2#DescribeReservedInstancesOfferingsRequest"
-_IMn = "IncludeMarketplace"
-_MIC = "MaxInstanceCount"
-_RIOIe = "ReservedInstancesOfferingIds"
-_PDri = "PricingDetail"
-_PDL = "PricingDetailsList"
-_RIO = "ReservedInstancesOffering"
-_Mar = "Marketplace"
-_PDric = "PricingDetails"
-_PDS = "PricingDetailsSet"
-_pDS = "pricingDetailsSet"
-_rIOI = "reservedInstancesOfferingId"
-_RIOL = "ReservedInstancesOfferingList"
-_DRIOO = "DescribeReservedInstancesOfferingsOutput"
-_cDRIORo = "com.amazonaws.ec2#DescribeReservedInstancesOfferingsResult"
-_RIOe = "ReservedInstancesOfferings"
-_RIOS = "ReservedInstancesOfferingsSet"
-_rIOS = "reservedInstancesOfferingsSet"
-_DRIOe = "DescribeReservedInstancesOfferings"
-_RSEIL = "RouteServerEndpointIdsList"
-_DRSEIe = "DescribeRouteServerEndpointsInput"
-_cDRSERom = "com.amazonaws.ec2#DescribeRouteServerEndpointsRequest"
-_RSEIo = "RouteServerEndpointIds"
-_RSEL = "RouteServerEndpointsList"
-_DRSEOe = "DescribeRouteServerEndpointsOutput"
-_cDRSERoma = "com.amazonaws.ec2#DescribeRouteServerEndpointsResult"
-_RSEo = "RouteServerEndpoints"
-_RSESo = "RouteServerEndpointSet"
-_rSES = "routeServerEndpointSet"
-_DRSEe = "DescribeRouteServerEndpoints"
-_RSPIL = "RouteServerPeerIdsList"
-_DRSPIe = "DescribeRouteServerPeersInput"
-_cDRSPRom = "com.amazonaws.ec2#DescribeRouteServerPeersRequest"
-_RSPIo = "RouteServerPeerIds"
-_RSPL = "RouteServerPeersList"
-_DRSPOe = "DescribeRouteServerPeersOutput"
-_cDRSPRoma = "com.amazonaws.ec2#DescribeRouteServerPeersResult"
-_RSPo = "RouteServerPeers"
-_RSPSo = "RouteServerPeerSet"
-_rSPS = "routeServerPeerSet"
-_DRSPe = "DescribeRouteServerPeers"
-_RSIL = "RouteServerIdsList"
-_DRSIe = "DescribeRouteServersInput"
-_cDRSRom = "com.amazonaws.ec2#DescribeRouteServersRequest"
-_RSIo = "RouteServerIds"
-_RSL = "RouteServersList"
-_DRSOe = "DescribeRouteServersOutput"
-_cDRSRoma = "com.amazonaws.ec2#DescribeRouteServersResult"
-_RSoute = "RouteServers"
-_RSSo = "RouteServerSet"
-_rSS = "routeServerSet"
-_DRSe = "DescribeRouteServers"
-_DRTMR = "DescribeRouteTablesMaxResults"
-_RTISL = "RouteTableIdStringList"
-_DRTIe = "DescribeRouteTablesInput"
-_cDRTRo = "com.amazonaws.ec2#DescribeRouteTablesRequest"
-_RTLo = "RouteTableList"
-_DRTOe = "DescribeRouteTablesOutput"
-_cDRTRom = "com.amazonaws.ec2#DescribeRouteTablesResult"
-_RTou = "RouteTables"
-_RTSo = "RouteTableSet"
-_rTSo = "routeTableSet"
-_DRTe = "DescribeRouteTables"
-_SDTRR = "SlotDateTimeRangeRequest"
-_ETa = "EarliestTime"
-_LTat = "LatestTime"
-_DSIAMR = "DescribeScheduledInstanceAvailabilityMaxResults"
-_ODRS = "OccurrenceDayRequestSet"
-_ODc = "OccurenceDay"
-_SIRR = "ScheduledInstanceRecurrenceRequest"
-_ODcc = "OccurrenceDays"
-_ODccu = "OccurrenceDay"
-_ORTE = "OccurrenceRelativeToEnd"
-_OUc = "OccurrenceUnit"
-_DSIAI = "DescribeScheduledInstanceAvailabilityInput"
-_cDSIAR = "com.amazonaws.ec2#DescribeScheduledInstanceAvailabilityRequest"
-_FSSTR = "FirstSlotStartTimeRange"
-_MSDIH = "MaxSlotDurationInHours"
-_MSDIHi = "MinSlotDurationInHours"
-_Rec = "Recurrence"
-_ODS = "OccurrenceDaySet"
-_SIRc = "ScheduledInstanceRecurrence"
-_oDS = "occurrenceDaySet"
-_oRTE = "occurrenceRelativeToEnd"
-_oU = "occurrenceUnit"
-_SIA = "ScheduledInstanceAvailability"
-_FSST = "FirstSlotStartTime"
-_fSST = "firstSlotStartTime"
-_MTDID = "MaxTermDurationInDays"
-_mTDID = "maxTermDurationInDays"
-_MTDIDi = "MinTermDurationInDays"
-_mTDIDi = "minTermDurationInDays"
-_NPet = "NetworkPlatform"
-_nPet = "networkPlatform"
-_PTu = "PurchaseToken"
-_pTu = "purchaseToken"
-_recu = "recurrence"
-_SDIH = "SlotDurationInHours"
-_sDIH = "slotDurationInHours"
-_TSIH = "TotalScheduledInstanceHours"
-_tSIH = "totalScheduledInstanceHours"
-_SIAS = "ScheduledInstanceAvailabilitySet"
-_DSIAO = "DescribeScheduledInstanceAvailabilityOutput"
-_cDSIARo = "com.amazonaws.ec2#DescribeScheduledInstanceAvailabilityResult"
-_sIAS = "scheduledInstanceAvailabilitySet"
-_DSIA = "DescribeScheduledInstanceAvailability"
-_SIIc = "ScheduledInstanceId"
-_SIc = "ScheduledInstance"
-_NSST = "NextSlotStartTime"
-_nSST = "nextSlotStartTime"
-_PSET = "PreviousSlotEndTime"
-_pSET = "previousSlotEndTime"
-_sIIc = "scheduledInstanceId"
-_TED = "TermEndDate"
-_tED = "termEndDate"
-_TSD = "TermStartDate"
-_tSD = "termStartDate"
+
+DESCRIBE_NETWORK_INSIGHTS_ACCESS_SCOPE_ANALYSES_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DNIASAIe,
+    {_sSI: _cDNIASARom, _sm: None},
+    (_NIASAIe, _NIASI, _ASTB, _ASTE, _Fil, _MR, _DR, _NTex),
+    (
+        (
+            lambda: schemas.NETWORK_INSIGHTS_ACCESS_SCOPE_ANALYSIS_ID_LIST,
+            {_sN: _NIASAI},
+        ),
+        (lambda: schemas.NETWORK_INSIGHTS_ACCESS_SCOPE_ID, 0),
+        (lambda: schemas.MILLISECOND_DATE_TIME, 0),
+        (lambda: schemas.MILLISECOND_DATE_TIME, 0),
+        (lambda: schemas.FILTER_LIST, {_sN: _Fi}),
+        (lambda: schemas.NETWORK_INSIGHTS_MAX_RESULTS, 0),
+        (lambda: schemas.BOOLEAN, 0),
+        (lambda: schemas.NEXT_TOKEN, 0),
+    ),
+)
+
+DESCRIBE_NETWORK_INSIGHTS_ACCESS_SCOPE_ANALYSES_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DNIASAOe,
+    {_sSI: _cDNIASARoma, _smit: None},
+    (_NIASAet, _NTex),
+    (
+        (
+            lambda: NETWORK_INSIGHTS_ACCESS_SCOPE_ANALYSIS_LIST,
+            {_aQN: _NIASAS, _sN: _nIASAS},
+        ),
+        (lambda: schemas.STRING, {_aQN: _NTex, _sN: _nT}),
+    ),
+)
+
+DESCRIBE_NETWORK_INSIGHTS_ACCESS_SCOPE_ANALYSES: StaticOperationSchema = (
+    23,
+    n0,
+    _DNIASAe,
+    0,
+    DESCRIBE_NETWORK_INSIGHTS_ACCESS_SCOPE_ANALYSES_INPUT,
+    DESCRIBE_NETWORK_INSIGHTS_ACCESS_SCOPE_ANALYSES_OUTPUT,
+    (),
+)
+
+FINDINGS_FOUND: StaticSchema = (
+    14,
+    n0,
+    _FFi,
+    0,
+    (_true, _fal, _unk),
+    ((-1, {_sV: _true}), (-1, {_sV: _fal}), (-1, {_sV: _unk})),
+)
+
+NETWORK_INSIGHTS_ACCESS_SCOPE_ANALYSIS: StaticSchema = (
+    18,
+    n0,
+    _NIASAe,
+    0,
+    (_NIASAI, _NIASAA, _NIASI, _Sta, _SMt, _WM, _SDt, _ED, _FFi, _AEC, _Tag),
+    (
+        (
+            lambda: schemas.NETWORK_INSIGHTS_ACCESS_SCOPE_ANALYSIS_ID,
+            {_aQN: _NIASAI, _sN: _nIASAI},
+        ),
+        (lambda: schemas.RESOURCE_ARN, {_aQN: _NIASAA, _sN: _nIASAA}),
+        (lambda: schemas.NETWORK_INSIGHTS_ACCESS_SCOPE_ID, {_aQN: _NIASI, _sN: _nIASI}),
+        (lambda: schemas.ANALYSIS_STATUS, {_aQN: _Sta, _sN: _sta}),
+        (lambda: schemas.STRING, {_aQN: _SMt, _sN: _sMt}),
+        (lambda: schemas.STRING, {_aQN: _WM, _sN: _wM}),
+        (lambda: schemas.MILLISECOND_DATE_TIME, {_aQN: _SDt, _sN: _sDt}),
+        (lambda: schemas.MILLISECOND_DATE_TIME, {_aQN: _ED, _sN: _eD}),
+        (FINDINGS_FOUND, {_aQN: _FFi, _sN: _fFi}),
+        (lambda: schemas.INTEGER, {_aQN: _AEC, _sN: _aEC}),
+        (lambda: schemas.TAG_LIST, {_aQN: _TSag, _sN: _tS}),
+    ),
+)
+
+NETWORK_INSIGHTS_ACCESS_SCOPE_ANALYSIS_LIST: StaticSchema = (
+    16,
+    n0,
+    _NIASAL,
+    0,
+    (_me,),
+    ((NETWORK_INSIGHTS_ACCESS_SCOPE_ANALYSIS, {_sN: _i}),),
+)
+
+NETWORK_INSIGHTS_ACCESS_SCOPE_ID_LIST: StaticSchema = (
+    16,
+    n0,
+    _NIASIL,
+    0,
+    (_me,),
+    ((lambda: schemas.NETWORK_INSIGHTS_ACCESS_SCOPE_ID, {_sN: _i}),),
+)
+
+DESCRIBE_NETWORK_INSIGHTS_ACCESS_SCOPES_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DNIASIe,
+    {_sSI: _cDNIASRom, _sm: None},
+    (_NIASIe, _Fil, _MR, _DR, _NTex),
+    (
+        (NETWORK_INSIGHTS_ACCESS_SCOPE_ID_LIST, {_sN: _NIASI}),
+        (lambda: schemas.FILTER_LIST, {_sN: _Fi}),
+        (lambda: schemas.NETWORK_INSIGHTS_MAX_RESULTS, 0),
+        (lambda: schemas.BOOLEAN, 0),
+        (lambda: schemas.NEXT_TOKEN, 0),
+    ),
+)
+
+DESCRIBE_NETWORK_INSIGHTS_ACCESS_SCOPES_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DNIASOe,
+    {_sSI: _cDNIASRoma, _smit: None},
+    (_NIASe, _NTex),
+    (
+        (lambda: NETWORK_INSIGHTS_ACCESS_SCOPE_LIST, {_aQN: _NIASS, _sN: _nIASS}),
+        (lambda: schemas.STRING, {_aQN: _NTex, _sN: _nT}),
+    ),
+)
+
+DESCRIBE_NETWORK_INSIGHTS_ACCESS_SCOPES: StaticOperationSchema = (
+    23,
+    n0,
+    _DNIASe,
+    0,
+    DESCRIBE_NETWORK_INSIGHTS_ACCESS_SCOPES_INPUT,
+    DESCRIBE_NETWORK_INSIGHTS_ACCESS_SCOPES_OUTPUT,
+    (),
+)
+
+NETWORK_INSIGHTS_ACCESS_SCOPE_LIST: StaticSchema = (
+    16,
+    n0,
+    _NIASL,
+    0,
+    (_me,),
+    ((lambda: schemas.NETWORK_INSIGHTS_ACCESS_SCOPE, {_sN: _i}),),
+)
+
+NETWORK_INSIGHTS_ANALYSIS_ID_LIST: StaticSchema = (
+    16,
+    n0,
+    _NIAIL,
+    0,
+    (_me,),
+    ((lambda: schemas.NETWORK_INSIGHTS_ANALYSIS_ID, {_sN: _i}),),
+)
+
+DESCRIBE_NETWORK_INSIGHTS_ANALYSES_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DNIAIe,
+    {_sSI: _cDNIARom, _sm: None},
+    (_NIAIe, _NIPI, _AST, _AET, _Fil, _MR, _DR, _NTex),
+    (
+        (NETWORK_INSIGHTS_ANALYSIS_ID_LIST, {_sN: _NIAI}),
+        (lambda: schemas.NETWORK_INSIGHTS_PATH_ID, 0),
+        (lambda: schemas.MILLISECOND_DATE_TIME, 0),
+        (lambda: schemas.MILLISECOND_DATE_TIME, 0),
+        (lambda: schemas.FILTER_LIST, {_sN: _Fi}),
+        (lambda: schemas.NETWORK_INSIGHTS_MAX_RESULTS, 0),
+        (lambda: schemas.BOOLEAN, 0),
+        (lambda: schemas.NEXT_TOKEN, 0),
+    ),
+)
+
+DESCRIBE_NETWORK_INSIGHTS_ANALYSES_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DNIAOe,
+    {_sSI: _cDNIARoma, _smit: None},
+    (_NIAetw, _NTex),
+    (
+        (lambda: NETWORK_INSIGHTS_ANALYSIS_LIST, {_aQN: _NIASet, _sN: _nIASe}),
+        (lambda: schemas.STRING, {_aQN: _NTex, _sN: _nT}),
+    ),
+)
+
+DESCRIBE_NETWORK_INSIGHTS_ANALYSES: StaticOperationSchema = (
+    23,
+    n0,
+    _DNIAe,
+    0,
+    DESCRIBE_NETWORK_INSIGHTS_ANALYSES_INPUT,
+    DESCRIBE_NETWORK_INSIGHTS_ANALYSES_OUTPUT,
+    (),
+)
+
+ARN_LIST: StaticSchema = (
+    16,
+    n0,
+    _ALr,
+    0,
+    (_me,),
+    ((lambda: schemas.RESOURCE_ARN, {_sN: _i}),),
+)
+
+NETWORK_INSIGHTS_ANALYSIS: StaticSchema = (
+    18,
+    n0,
+    _NIAet,
+    0,
+    (
+        _NIAI,
+        _NIAA,
+        _NIPI,
+        _AAdd,
+        _FIAi,
+        _FOA,
+        _SDt,
+        _Sta,
+        _SMt,
+        _WM,
+        _NPF,
+        _FPC,
+        _RPC,
+        _Exp,
+        _APHlt,
+        _SAug,
+        _Tag,
+    ),
+    (
+        (lambda: schemas.NETWORK_INSIGHTS_ANALYSIS_ID, {_aQN: _NIAI, _sN: _nIAI}),
+        (lambda: schemas.RESOURCE_ARN, {_aQN: _NIAA, _sN: _nIAA}),
+        (lambda: schemas.NETWORK_INSIGHTS_PATH_ID, {_aQN: _NIPI, _sN: _nIPI}),
+        (lambda: schemas.VALUE_STRING_LIST, {_aQN: _AASd, _sN: _aASd}),
+        (ARN_LIST, {_aQN: _FIAS, _sN: _fIAS}),
+        (ARN_LIST, {_aQN: _FOAS, _sN: _fOAS}),
+        (lambda: schemas.MILLISECOND_DATE_TIME, {_aQN: _SDt, _sN: _sDt}),
+        (lambda: schemas.ANALYSIS_STATUS, {_aQN: _Sta, _sN: _sta}),
+        (lambda: schemas.STRING, {_aQN: _SMt, _sN: _sMt}),
+        (lambda: schemas.STRING, {_aQN: _WM, _sN: _wM}),
+        (lambda: schemas.BOOLEAN, {_aQN: _NPF, _sN: _nPF}),
+        (lambda: schemas.PATH_COMPONENT_LIST, {_aQN: _FPCS, _sN: _fPCS}),
+        (lambda: schemas.PATH_COMPONENT_LIST, {_aQN: _RPCS, _sN: _rPCS}),
+        (lambda: schemas.EXPLANATION_LIST, {_aQN: _ES, _sN: _eS}),
+        (lambda: schemas.ALTERNATE_PATH_HINT_LIST, {_aQN: _APHS, _sN: _aPHS}),
+        (lambda: schemas.VALUE_STRING_LIST, {_aQN: _SASu, _sN: _sASu}),
+        (lambda: schemas.TAG_LIST, {_aQN: _TSag, _sN: _tS}),
+    ),
+)
+
+NETWORK_INSIGHTS_ANALYSIS_LIST: StaticSchema = (
+    16,
+    n0,
+    _NIAL,
+    0,
+    (_me,),
+    ((NETWORK_INSIGHTS_ANALYSIS, {_sN: _i}),),
+)
+
+NETWORK_INSIGHTS_PATH_ID_LIST: StaticSchema = (
+    16,
+    n0,
+    _NIPIL,
+    0,
+    (_me,),
+    ((lambda: schemas.NETWORK_INSIGHTS_PATH_ID, {_sN: _i}),),
+)
+
+DESCRIBE_NETWORK_INSIGHTS_PATHS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DNIPIes,
+    {_sSI: _cDNIPRomam, _sm: None},
+    (_NIPIet, _Fil, _MR, _DR, _NTex),
+    (
+        (NETWORK_INSIGHTS_PATH_ID_LIST, {_sN: _NIPI}),
+        (lambda: schemas.FILTER_LIST, {_sN: _Fi}),
+        (lambda: schemas.NETWORK_INSIGHTS_MAX_RESULTS, 0),
+        (lambda: schemas.BOOLEAN, 0),
+        (lambda: schemas.NEXT_TOKEN, 0),
+    ),
+)
+
+DESCRIBE_NETWORK_INSIGHTS_PATHS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DNIPOes,
+    {_sSI: _cDNIPRomama, _smit: None},
+    (_NIPet, _NTex),
+    (
+        (lambda: NETWORK_INSIGHTS_PATH_LIST, {_aQN: _NIPSe, _sN: _nIPS}),
+        (lambda: schemas.STRING, {_aQN: _NTex, _sN: _nT}),
+    ),
+)
+
+DESCRIBE_NETWORK_INSIGHTS_PATHS: StaticOperationSchema = (
+    23,
+    n0,
+    _DNIPes,
+    0,
+    DESCRIBE_NETWORK_INSIGHTS_PATHS_INPUT,
+    DESCRIBE_NETWORK_INSIGHTS_PATHS_OUTPUT,
+    (),
+)
+
+NETWORK_INSIGHTS_PATH_LIST: StaticSchema = (
+    16,
+    n0,
+    _NIPL,
+    0,
+    (_me,),
+    ((lambda: schemas.NETWORK_INSIGHTS_PATH, {_sN: _i}),),
+)
+
+NETWORK_INTERFACE_ATTRIBUTE: StaticSchema = (
+    14,
+    n0,
+    _NIAetwo,
+    0,
+    (_desc, _gS, _sDC, _atta, _aPIA),
+    (
+        (-1, {_sV: _desc}),
+        (-1, {_sV: _gS}),
+        (-1, {_sV: _sDC}),
+        (-1, {_sV: _atta}),
+        (-1, {_sV: _aPIA}),
+    ),
+)
+
+DESCRIBE_NETWORK_INTERFACE_ATTRIBUTE_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DNIAIes,
+    {_sSI: _cDNIARomam, _sm: None},
+    (_DR, _NII, _Attr),
+    (
+        (lambda: schemas.BOOLEAN, {_aQN: _DR, _sN: _dRr}),
+        (
+            lambda: schemas.NETWORK_INTERFACE_ID,
+            {_aQN: _NII, _sN: _nII, _sO: None, _smi: None},
+        ),
+        (NETWORK_INTERFACE_ATTRIBUTE, {_aQN: _Attr, _sN: _attr}),
+    ),
+)
+
+DESCRIBE_NETWORK_INTERFACE_ATTRIBUTE_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DNIAOes,
+    {_sSI: _cDNIARomama, _smit: None},
+    (_At, _Des, _G, _NII, _SDC, _APIAsso),
+    (
+        (lambda: schemas.NETWORK_INTERFACE_ATTACHMENT, {_aQN: _At, _sN: _atta}),
+        (lambda: schemas.ATTRIBUTE_VALUE, {_aQN: _Des, _sN: _desc}),
+        (lambda: schemas.GROUP_IDENTIFIER_LIST, {_aQN: _GS, _sN: _gS}),
+        (lambda: schemas.STRING, {_aQN: _NII, _sN: _nII}),
+        (lambda: schemas.ATTRIBUTE_BOOLEAN_VALUE, {_aQN: _SDC, _sN: _sDC}),
+        (lambda: schemas.BOOLEAN, {_aQN: _APIAsso, _sN: _aPIA}),
+    ),
+)
+
+DESCRIBE_NETWORK_INTERFACE_ATTRIBUTE: StaticOperationSchema = (
+    23,
+    n0,
+    _DNIAes,
+    0,
+    DESCRIBE_NETWORK_INTERFACE_ATTRIBUTE_INPUT,
+    DESCRIBE_NETWORK_INTERFACE_ATTRIBUTE_OUTPUT,
+    (),
+)
+
+DESCRIBE_NETWORK_INTERFACE_PERMISSIONS_MAX_RESULTS: StaticSchema = (7, n0, _DNIPMR, 0)
+
+NETWORK_INTERFACE_PERMISSION_ID_LIST: StaticSchema = (
+    16,
+    n0,
+    _NIPILe,
+    0,
+    (_me,),
+    ((lambda: schemas.NETWORK_INTERFACE_PERMISSION_ID, 0),),
+)
+
+DESCRIBE_NETWORK_INTERFACE_PERMISSIONS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DNIPIesc,
+    {_sSI: _cDNIPRomamaz, _sm: None},
+    (_NIPIetw, _Fil, _NTex, _MR),
+    (
+        (NETWORK_INTERFACE_PERMISSION_ID_LIST, {_sN: _NIPIe}),
+        (lambda: schemas.FILTER_LIST, {_sN: _Fi}),
+        (lambda: schemas.STRING, 0),
+        (DESCRIBE_NETWORK_INTERFACE_PERMISSIONS_MAX_RESULTS, 0),
+    ),
+)
+
+DESCRIBE_NETWORK_INTERFACE_PERMISSIONS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DNIPOesc,
+    {_sSI: _cDNIPRomamazo, _smit: None},
+    (_NIPetw, _NTex),
+    (
+        (lambda: NETWORK_INTERFACE_PERMISSION_LIST, {_aQN: _NIPetw, _sN: _nIPe}),
+        (lambda: schemas.STRING, {_aQN: _NTex, _sN: _nT}),
+    ),
+)
+
+DESCRIBE_NETWORK_INTERFACE_PERMISSIONS: StaticOperationSchema = (
+    23,
+    n0,
+    _DNIPesc,
+    0,
+    DESCRIBE_NETWORK_INTERFACE_PERMISSIONS_INPUT,
+    DESCRIBE_NETWORK_INTERFACE_PERMISSIONS_OUTPUT,
+    (),
+)
+
+NETWORK_INTERFACE_PERMISSION_LIST: StaticSchema = (
+    16,
+    n0,
+    _NIPLe,
+    0,
+    (_me,),
+    ((lambda: schemas.NETWORK_INTERFACE_PERMISSION, {_sN: _i}),),
+)
+
+DESCRIBE_NETWORK_INTERFACES_MAX_RESULTS: StaticSchema = (7, n0, _DNIMR, 0)
+
+NETWORK_INTERFACE_ID_LIST: StaticSchema = (
+    16,
+    n0,
+    _NIIL,
+    0,
+    (_me,),
+    ((lambda: schemas.NETWORK_INTERFACE_ID, {_sN: _i}),),
+)
+
+DESCRIBE_NETWORK_INTERFACES_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DNIIes,
+    {_sSI: _cDNIRo, _sm: None},
+    (_NTex, _MR, _IMR, _DR, _NIIe, _Fil),
+    (
+        (lambda: schemas.STRING, 0),
+        (DESCRIBE_NETWORK_INTERFACES_MAX_RESULTS, 0),
+        (lambda: schemas.BOOLEAN, 0),
+        (lambda: schemas.BOOLEAN, {_aQN: _DR, _sN: _dRr}),
+        (NETWORK_INTERFACE_ID_LIST, {_sN: _NII}),
+        (lambda: schemas.FILTER_LIST, {_aQN: _Fi, _sN: _filt}),
+    ),
+)
+
+DESCRIBE_NETWORK_INTERFACES_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DNIOe,
+    {_sSI: _cDNIRom, _smit: None},
+    (_NIe, _NTex),
+    (
+        (lambda: NETWORK_INTERFACE_LIST, {_aQN: _NIS, _sN: _nIS}),
+        (lambda: schemas.STRING, {_aQN: _NTex, _sN: _nT}),
+    ),
+)
+
+DESCRIBE_NETWORK_INTERFACES: StaticOperationSchema = (
+    23,
+    n0,
+    _DNIe,
+    0,
+    DESCRIBE_NETWORK_INTERFACES_INPUT,
+    DESCRIBE_NETWORK_INTERFACES_OUTPUT,
+    (),
+)
+
+NETWORK_INTERFACE_LIST: StaticSchema = (
+    16,
+    n0,
+    _NIL,
+    0,
+    (_me,),
+    ((lambda: schemas.NETWORK_INTERFACE, {_sN: _i}),),
+)
+
+OUTPOST_LAG_MAX_RESULTS: StaticSchema = (7, n0, _OLMR, 0)
+
+OUTPOST_LAG_ID_SET: StaticSchema = (
+    16,
+    n0,
+    _OLIS,
+    0,
+    (_me,),
+    ((lambda: schemas.OUTPOST_LAG_ID, {_sN: _i}),),
+)
+
+DESCRIBE_OUTPOST_LAGS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DOLI,
+    {_sSI: _cDOLR, _sm: None},
+    (_OLIu, _Fil, _MR, _NTex, _DR),
+    (
+        (OUTPOST_LAG_ID_SET, {_sN: _OLI}),
+        (lambda: schemas.FILTER_LIST, {_sN: _Fi}),
+        (OUTPOST_LAG_MAX_RESULTS, 0),
+        (lambda: schemas.STRING, 0),
+        (lambda: schemas.BOOLEAN, 0),
+    ),
+)
+
+DESCRIBE_OUTPOST_LAGS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DOLO,
+    {_sSI: _cDOLRo, _smit: None},
+    (_OLu, _NTex),
+    (
+        (lambda: OUTPOST_LAG_SET, {_aQN: _OLS, _sN: _oLS}),
+        (lambda: schemas.STRING, {_aQN: _NTex, _sN: _nT}),
+    ),
+)
+
+DESCRIBE_OUTPOST_LAGS: StaticOperationSchema = (
+    23,
+    n0,
+    _DOLe,
+    0,
+    DESCRIBE_OUTPOST_LAGS_INPUT,
+    DESCRIBE_OUTPOST_LAGS_OUTPUT,
+    (),
+)
+
+SERVICE_LINK_VIRTUAL_INTERFACE_ID: StaticSchema = (3, n0, _SLVII, 0)
+
+SERVICE_LINK_VIRTUAL_INTERFACE_ID_SET: StaticSchema = (
+    16,
+    n0,
+    _SLVIIS,
+    0,
+    (_me,),
+    ((SERVICE_LINK_VIRTUAL_INTERFACE_ID, {_sN: _i}),),
+)
+
+OUTPOST_LAG: StaticSchema = (
+    18,
+    n0,
+    _OL,
+    0,
+    (_OA, _OIw, _St, _OLI, _LGVIIo, _SLVIIe, _Tag),
+    (
+        (lambda: schemas.STRING, {_aQN: _OA, _sN: _oAu}),
+        (lambda: schemas.STRING, {_aQN: _OIw, _sN: _oI}),
+        (lambda: schemas.STRING, {_aQN: _St, _sN: _st}),
+        (lambda: schemas.OUTPOST_LAG_ID, {_aQN: _OLI, _sN: _oLI}),
+        (
+            lambda: schemas.LOCAL_GATEWAY_VIRTUAL_INTERFACE_ID_SET,
+            {_aQN: _LGVIIS, _sN: _lGVIIS},
+        ),
+        (SERVICE_LINK_VIRTUAL_INTERFACE_ID_SET, {_aQN: _SLVIIS, _sN: _sLVIIS}),
+        (lambda: schemas.TAG_LIST, {_aQN: _TSag, _sN: _tS}),
+    ),
+)
+
+OUTPOST_LAG_SET: StaticSchema = (16, n0, _OLS, 0, (_me,), ((OUTPOST_LAG, {_sN: _i}),))
+
+PLACEMENT_GROUP_ID_STRING_LIST: StaticSchema = (
+    16,
+    n0,
+    _PGISL,
+    0,
+    (_me,),
+    ((lambda: schemas.PLACEMENT_GROUP_ID, {_sN: _GIr}),),
+)
+
+PLACEMENT_GROUP_STRING_LIST: StaticSchema = (
+    16,
+    n0,
+    _PGSLl,
+    0,
+    (_me,),
+    ((lambda: schemas.PLACEMENT_GROUP_NAME, 0),),
+)
+
+DESCRIBE_PLACEMENT_GROUPS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DPGIe,
+    {_sSI: _cDPGRo, _sm: None},
+    (_GIrou, _DR, _GNr, _Fil),
+    (
+        (PLACEMENT_GROUP_ID_STRING_LIST, {_sN: _GIr}),
+        (lambda: schemas.BOOLEAN, {_aQN: _DR, _sN: _dRr}),
+        (PLACEMENT_GROUP_STRING_LIST, {_aQN: _GN, _sN: _gN}),
+        (lambda: schemas.FILTER_LIST, {_sN: _Fi}),
+    ),
+)
+
+DESCRIBE_PLACEMENT_GROUPS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DPGOe,
+    {_sSI: _cDPGRom, _smit: None},
+    (_PGl,),
+    ((lambda: PLACEMENT_GROUP_LIST, {_aQN: _PGSla, _sN: _pGS}),),
+)
+
+DESCRIBE_PLACEMENT_GROUPS: StaticOperationSchema = (
+    23,
+    n0,
+    _DPGe,
+    0,
+    DESCRIBE_PLACEMENT_GROUPS_INPUT,
+    DESCRIBE_PLACEMENT_GROUPS_OUTPUT,
+    (),
+)
 
 PLACEMENT_GROUP_LIST: StaticSchema = (
     16,
@@ -961,84 +1581,6 @@ RESERVED_INSTANCES_LIST: StaticSchema = (
     ((RESERVED_INSTANCES, {_sN: _i}),),
 )
 
-DESCRIBE_RESERVED_INSTANCES_LISTINGS_INPUT: StaticSchema = (
-    18,
-    n0,
-    _DRILI,
-    {_sSI: _cDRILR, _sm: None},
-    (_RIIes, _RILI, _Fil),
-    (
-        (lambda: schemas.RESERVATION_ID, {_aQN: _RIIes, _sN: _rII}),
-        (lambda: schemas.RESERVED_INSTANCES_LISTING_ID, {_aQN: _RILI, _sN: _rILI}),
-        (lambda: schemas.FILTER_LIST, {_sN: _Fi}),
-    ),
-)
-
-DESCRIBE_RESERVED_INSTANCES_LISTINGS_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _DRILO,
-    {_sSI: _cDRILRo, _smit: None},
-    (_RILe,),
-    ((lambda: schemas.RESERVED_INSTANCES_LISTING_LIST, {_aQN: _RILS, _sN: _rILS}),),
-)
-
-DESCRIBE_RESERVED_INSTANCES_LISTINGS: StaticOperationSchema = (
-    23,
-    n0,
-    _DRIL,
-    0,
-    DESCRIBE_RESERVED_INSTANCES_LISTINGS_INPUT,
-    DESCRIBE_RESERVED_INSTANCES_LISTINGS_OUTPUT,
-    (),
-)
-
-RESERVED_INSTANCES_MODIFICATION_ID: StaticSchema = (3, n0, _RIMI, 0)
-
-RESERVED_INSTANCES_MODIFICATION_ID_STRING_LIST: StaticSchema = (
-    16,
-    n0,
-    _RIMISL,
-    0,
-    (_me,),
-    ((RESERVED_INSTANCES_MODIFICATION_ID, {_sN: _RIMI}),),
-)
-
-DESCRIBE_RESERVED_INSTANCES_MODIFICATIONS_INPUT: StaticSchema = (
-    18,
-    n0,
-    _DRIMI,
-    {_sSI: _cDRIMR, _sm: None},
-    (_RIMIe, _NTex, _Fil),
-    (
-        (RESERVED_INSTANCES_MODIFICATION_ID_STRING_LIST, {_sN: _RIMI}),
-        (lambda: schemas.STRING, {_aQN: _NTex, _sN: _nT}),
-        (lambda: schemas.FILTER_LIST, {_sN: _Fi}),
-    ),
-)
-
-DESCRIBE_RESERVED_INSTANCES_MODIFICATIONS_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _DRIMO,
-    {_sSI: _cDRIMRo, _smit: None},
-    (_NTex, _RIMe),
-    (
-        (lambda: schemas.STRING, {_aQN: _NTex, _sN: _nT}),
-        (lambda: RESERVED_INSTANCES_MODIFICATION_LIST, {_aQN: _RIMS, _sN: _rIMS}),
-    ),
-)
-
-DESCRIBE_RESERVED_INSTANCES_MODIFICATIONS: StaticOperationSchema = (
-    23,
-    n0,
-    _DRIM,
-    0,
-    DESCRIBE_RESERVED_INSTANCES_MODIFICATIONS_INPUT,
-    DESCRIBE_RESERVED_INSTANCES_MODIFICATIONS_OUTPUT,
-    (),
-)
-
 RESERVED_INSTANCES_CONFIGURATION: StaticSchema = (
     18,
     n0,
@@ -1052,624 +1594,5 @@ RESERVED_INSTANCES_CONFIGURATION: StaticSchema = (
         (lambda: schemas.STRING, {_aQN: _Pla, _sN: _plat}),
         (SCOPE, {_aQN: _Sc, _sN: _sc}),
         (lambda: schemas.STRING, {_aQN: _AZI, _sN: _aZI}),
-    ),
-)
-
-RESERVED_INSTANCES_MODIFICATION_RESULT: StaticSchema = (
-    18,
-    n0,
-    _RIMR,
-    0,
-    (_RIIes, _TCa),
-    (
-        (lambda: schemas.STRING, {_aQN: _RIIes, _sN: _rII}),
-        (RESERVED_INSTANCES_CONFIGURATION, {_aQN: _TCa, _sN: _tCa}),
-    ),
-)
-
-RESERVED_INSTANCES_MODIFICATION_RESULT_LIST: StaticSchema = (
-    16,
-    n0,
-    _RIMRL,
-    0,
-    (_me,),
-    ((RESERVED_INSTANCES_MODIFICATION_RESULT, {_sN: _i}),),
-)
-
-RESERVED_INSTANCES_ID: StaticSchema = (
-    18,
-    n0,
-    _RIIes,
-    0,
-    (_RIIes,),
-    ((lambda: schemas.STRING, {_aQN: _RIIes, _sN: _rII}),),
-)
-
-RESERVED_INTANCES_IDS: StaticSchema = (
-    16,
-    n0,
-    _RIIeser,
-    0,
-    (_me,),
-    ((RESERVED_INSTANCES_ID, {_sN: _i}),),
-)
-
-RESERVED_INSTANCES_MODIFICATION: StaticSchema = (
-    18,
-    n0,
-    _RIM,
-    0,
-    (_CTl, _CD, _EDf, _MRo, _RIIese, _RIMI, _Sta, _SMt, _UD),
-    (
-        (lambda: schemas.STRING, {_aQN: _CTl, _sN: _cTl}),
-        (lambda: schemas.DATE_TIME, {_aQN: _CD, _sN: _cD}),
-        (lambda: schemas.DATE_TIME, {_aQN: _EDf, _sN: _eDf}),
-        (RESERVED_INSTANCES_MODIFICATION_RESULT_LIST, {_aQN: _MRS, _sN: _mRS}),
-        (RESERVED_INTANCES_IDS, {_aQN: _RISe, _sN: _rIS}),
-        (lambda: schemas.STRING, {_aQN: _RIMI, _sN: _rIMI}),
-        (lambda: schemas.STRING, {_aQN: _Sta, _sN: _sta}),
-        (lambda: schemas.STRING, {_aQN: _SMt, _sN: _sMt}),
-        (lambda: schemas.DATE_TIME, {_aQN: _UD, _sN: _uD}),
-    ),
-)
-
-RESERVED_INSTANCES_MODIFICATION_LIST: StaticSchema = (
-    16,
-    n0,
-    _RIML,
-    0,
-    (_me,),
-    ((RESERVED_INSTANCES_MODIFICATION, {_sN: _i}),),
-)
-
-RESERVED_INSTANCES_OFFERING_ID_STRING_LIST: StaticSchema = (
-    16,
-    n0,
-    _RIOISL,
-    0,
-    (_me,),
-    ((lambda: schemas.RESERVED_INSTANCES_OFFERING_ID, 0),),
-)
-
-DESCRIBE_RESERVED_INSTANCES_OFFERINGS_INPUT: StaticSchema = (
-    18,
-    n0,
-    _DRIOI,
-    {_sSI: _cDRIOR, _sm: None},
-    (
-        _AZ,
-        _IMn,
-        _IT,
-        _MDa,
-        _MIC,
-        _MDi,
-        _OC,
-        _PDr,
-        _RIOIe,
-        _AZI,
-        _DR,
-        _Fil,
-        _ITnst,
-        _OTf,
-        _NTex,
-        _MR,
-    ),
-    (
-        (lambda: schemas.STRING, 0),
-        (lambda: schemas.BOOLEAN, 0),
-        (lambda: schemas.INSTANCE_TYPE, 0),
-        (lambda: schemas.LONG, 0),
-        (lambda: schemas.INTEGER, 0),
-        (lambda: schemas.LONG, 0),
-        (OFFERING_CLASS_TYPE, 0),
-        (lambda: schemas.RI_PRODUCT_DESCRIPTION, 0),
-        (RESERVED_INSTANCES_OFFERING_ID_STRING_LIST, {_sN: _RIOI}),
-        (lambda: schemas.AVAILABILITY_ZONE_ID, 0),
-        (lambda: schemas.BOOLEAN, {_aQN: _DR, _sN: _dRr}),
-        (lambda: schemas.FILTER_LIST, {_sN: _Fi}),
-        (lambda: schemas.TENANCY, {_aQN: _ITnst, _sN: _iTns}),
-        (OFFERING_TYPE_VALUES, {_aQN: _OTf, _sN: _oTf}),
-        (lambda: schemas.STRING, {_aQN: _NTex, _sN: _nT}),
-        (lambda: schemas.INTEGER, {_aQN: _MR, _sN: _mR}),
-    ),
-)
-
-DESCRIBE_RESERVED_INSTANCES_OFFERINGS_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _DRIOO,
-    {_sSI: _cDRIORo, _smit: None},
-    (_NTex, _RIOe),
-    (
-        (lambda: schemas.STRING, {_aQN: _NTex, _sN: _nT}),
-        (lambda: RESERVED_INSTANCES_OFFERING_LIST, {_aQN: _RIOS, _sN: _rIOS}),
-    ),
-)
-
-DESCRIBE_RESERVED_INSTANCES_OFFERINGS: StaticOperationSchema = (
-    23,
-    n0,
-    _DRIOe,
-    0,
-    DESCRIBE_RESERVED_INSTANCES_OFFERINGS_INPUT,
-    DESCRIBE_RESERVED_INSTANCES_OFFERINGS_OUTPUT,
-    (),
-)
-
-PRICING_DETAIL: StaticSchema = (
-    18,
-    n0,
-    _PDri,
-    0,
-    (_Cou, _Pric),
-    (
-        (lambda: schemas.INTEGER, {_aQN: _Cou, _sN: _cou}),
-        (lambda: schemas.DOUBLE, {_aQN: _Pric, _sN: _pric}),
-    ),
-)
-
-PRICING_DETAILS_LIST: StaticSchema = (
-    16,
-    n0,
-    _PDL,
-    0,
-    (_me,),
-    ((PRICING_DETAIL, {_sN: _i}),),
-)
-
-RESERVED_INSTANCES_OFFERING: StaticSchema = (
-    18,
-    n0,
-    _RIO,
-    0,
-    (
-        _CC,
-        _ITnst,
-        _Mar,
-        _OC,
-        _OTf,
-        _PDric,
-        _RCecu,
-        _Sc,
-        _AZI,
-        _RIOI,
-        _IT,
-        _AZ,
-        _Dur,
-        _UPs,
-        _FPix,
-        _PDr,
-    ),
-    (
-        (lambda: schemas.CURRENCY_CODE_VALUES, {_aQN: _CC, _sN: _cC}),
-        (lambda: schemas.TENANCY, {_aQN: _ITnst, _sN: _iTns}),
-        (lambda: schemas.BOOLEAN, {_aQN: _Mar, _sN: _mar}),
-        (OFFERING_CLASS_TYPE, {_aQN: _OC, _sN: _oC}),
-        (OFFERING_TYPE_VALUES, {_aQN: _OTf, _sN: _oTf}),
-        (PRICING_DETAILS_LIST, {_aQN: _PDS, _sN: _pDS}),
-        (RECURRING_CHARGES_LIST, {_aQN: _RCecu, _sN: _rCe}),
-        (SCOPE, {_aQN: _Sc, _sN: _sc}),
-        (lambda: schemas.AVAILABILITY_ZONE_ID, {_aQN: _AZI, _sN: _aZI}),
-        (lambda: schemas.STRING, {_aQN: _RIOI, _sN: _rIOI}),
-        (lambda: schemas.INSTANCE_TYPE, {_aQN: _IT, _sN: _iT}),
-        (lambda: schemas.STRING, {_aQN: _AZ, _sN: _aZ}),
-        (lambda: schemas.LONG, {_aQN: _Dur, _sN: _dur}),
-        (FLOAT, {_aQN: _UPs, _sN: _uPs}),
-        (FLOAT, {_aQN: _FPix, _sN: _fPix}),
-        (lambda: schemas.RI_PRODUCT_DESCRIPTION, {_aQN: _PDr, _sN: _pDr}),
-    ),
-)
-
-RESERVED_INSTANCES_OFFERING_LIST: StaticSchema = (
-    16,
-    n0,
-    _RIOL,
-    0,
-    (_me,),
-    ((RESERVED_INSTANCES_OFFERING, {_sN: _i}),),
-)
-
-ROUTE_SERVER_ENDPOINT_IDS_LIST: StaticSchema = (
-    16,
-    n0,
-    _RSEIL,
-    0,
-    (_me,),
-    ((lambda: schemas.ROUTE_SERVER_ENDPOINT_ID, 0),),
-)
-
-DESCRIBE_ROUTE_SERVER_ENDPOINTS_INPUT: StaticSchema = (
-    18,
-    n0,
-    _DRSEIe,
-    {_sSI: _cDRSERom, _sm: None},
-    (_RSEIo, _NTex, _MR, _Fil, _DR),
-    (
-        (ROUTE_SERVER_ENDPOINT_IDS_LIST, {_sN: _RSEI}),
-        (lambda: schemas.STRING, 0),
-        (lambda: schemas.ROUTE_SERVER_MAX_RESULTS, 0),
-        (lambda: schemas.FILTER_LIST, {_sN: _Fi}),
-        (lambda: schemas.BOOLEAN, 0),
-    ),
-)
-
-DESCRIBE_ROUTE_SERVER_ENDPOINTS_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _DRSEOe,
-    {_sSI: _cDRSERoma, _smit: None},
-    (_RSEo, _NTex),
-    (
-        (lambda: ROUTE_SERVER_ENDPOINTS_LIST, {_aQN: _RSESo, _sN: _rSES}),
-        (lambda: schemas.STRING, {_aQN: _NTex, _sN: _nT}),
-    ),
-)
-
-DESCRIBE_ROUTE_SERVER_ENDPOINTS: StaticOperationSchema = (
-    23,
-    n0,
-    _DRSEe,
-    0,
-    DESCRIBE_ROUTE_SERVER_ENDPOINTS_INPUT,
-    DESCRIBE_ROUTE_SERVER_ENDPOINTS_OUTPUT,
-    (),
-)
-
-ROUTE_SERVER_ENDPOINTS_LIST: StaticSchema = (
-    16,
-    n0,
-    _RSEL,
-    0,
-    (_me,),
-    ((lambda: schemas.ROUTE_SERVER_ENDPOINT, {_sN: _i}),),
-)
-
-ROUTE_SERVER_PEER_IDS_LIST: StaticSchema = (
-    16,
-    n0,
-    _RSPIL,
-    0,
-    (_me,),
-    ((lambda: schemas.ROUTE_SERVER_PEER_ID, 0),),
-)
-
-DESCRIBE_ROUTE_SERVER_PEERS_INPUT: StaticSchema = (
-    18,
-    n0,
-    _DRSPIe,
-    {_sSI: _cDRSPRom, _sm: None},
-    (_RSPIo, _NTex, _MR, _Fil, _DR),
-    (
-        (ROUTE_SERVER_PEER_IDS_LIST, {_sN: _RSPI}),
-        (lambda: schemas.STRING, 0),
-        (lambda: schemas.ROUTE_SERVER_MAX_RESULTS, 0),
-        (lambda: schemas.FILTER_LIST, {_sN: _Fi}),
-        (lambda: schemas.BOOLEAN, 0),
-    ),
-)
-
-DESCRIBE_ROUTE_SERVER_PEERS_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _DRSPOe,
-    {_sSI: _cDRSPRoma, _smit: None},
-    (_RSPo, _NTex),
-    (
-        (lambda: ROUTE_SERVER_PEERS_LIST, {_aQN: _RSPSo, _sN: _rSPS}),
-        (lambda: schemas.STRING, {_aQN: _NTex, _sN: _nT}),
-    ),
-)
-
-DESCRIBE_ROUTE_SERVER_PEERS: StaticOperationSchema = (
-    23,
-    n0,
-    _DRSPe,
-    0,
-    DESCRIBE_ROUTE_SERVER_PEERS_INPUT,
-    DESCRIBE_ROUTE_SERVER_PEERS_OUTPUT,
-    (),
-)
-
-ROUTE_SERVER_PEERS_LIST: StaticSchema = (
-    16,
-    n0,
-    _RSPL,
-    0,
-    (_me,),
-    ((lambda: schemas.ROUTE_SERVER_PEER, {_sN: _i}),),
-)
-
-ROUTE_SERVER_IDS_LIST: StaticSchema = (
-    16,
-    n0,
-    _RSIL,
-    0,
-    (_me,),
-    ((lambda: schemas.ROUTE_SERVER_ID, 0),),
-)
-
-DESCRIBE_ROUTE_SERVERS_INPUT: StaticSchema = (
-    18,
-    n0,
-    _DRSIe,
-    {_sSI: _cDRSRom, _sm: None},
-    (_RSIo, _NTex, _MR, _Fil, _DR),
-    (
-        (ROUTE_SERVER_IDS_LIST, {_sN: _RSI}),
-        (lambda: schemas.STRING, 0),
-        (lambda: schemas.ROUTE_SERVER_MAX_RESULTS, 0),
-        (lambda: schemas.FILTER_LIST, {_sN: _Fi}),
-        (lambda: schemas.BOOLEAN, 0),
-    ),
-)
-
-DESCRIBE_ROUTE_SERVERS_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _DRSOe,
-    {_sSI: _cDRSRoma, _smit: None},
-    (_RSoute, _NTex),
-    (
-        (lambda: ROUTE_SERVERS_LIST, {_aQN: _RSSo, _sN: _rSS}),
-        (lambda: schemas.STRING, {_aQN: _NTex, _sN: _nT}),
-    ),
-)
-
-DESCRIBE_ROUTE_SERVERS: StaticOperationSchema = (
-    23,
-    n0,
-    _DRSe,
-    0,
-    DESCRIBE_ROUTE_SERVERS_INPUT,
-    DESCRIBE_ROUTE_SERVERS_OUTPUT,
-    (),
-)
-
-ROUTE_SERVERS_LIST: StaticSchema = (
-    16,
-    n0,
-    _RSL,
-    0,
-    (_me,),
-    ((lambda: schemas.ROUTE_SERVER, {_sN: _i}),),
-)
-
-DESCRIBE_ROUTE_TABLES_MAX_RESULTS: StaticSchema = (7, n0, _DRTMR, 0)
-
-ROUTE_TABLE_ID_STRING_LIST: StaticSchema = (
-    16,
-    n0,
-    _RTISL,
-    0,
-    (_me,),
-    ((lambda: schemas.ROUTE_TABLE_ID, {_sN: _i}),),
-)
-
-DESCRIBE_ROUTE_TABLES_INPUT: StaticSchema = (
-    18,
-    n0,
-    _DRTIe,
-    {_sSI: _cDRTRo, _sm: None},
-    (_NTex, _MR, _DR, _RTIou, _Fil),
-    (
-        (lambda: schemas.STRING, 0),
-        (DESCRIBE_ROUTE_TABLES_MAX_RESULTS, 0),
-        (lambda: schemas.BOOLEAN, {_aQN: _DR, _sN: _dRr}),
-        (ROUTE_TABLE_ID_STRING_LIST, {_sN: _RTIo}),
-        (lambda: schemas.FILTER_LIST, {_sN: _Fi}),
-    ),
-)
-
-DESCRIBE_ROUTE_TABLES_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _DRTOe,
-    {_sSI: _cDRTRom, _smit: None},
-    (_RTou, _NTex),
-    (
-        (lambda: ROUTE_TABLE_LIST, {_aQN: _RTSo, _sN: _rTSo}),
-        (lambda: schemas.STRING, {_aQN: _NTex, _sN: _nT}),
-    ),
-)
-
-DESCRIBE_ROUTE_TABLES: StaticOperationSchema = (
-    23,
-    n0,
-    _DRTe,
-    0,
-    DESCRIBE_ROUTE_TABLES_INPUT,
-    DESCRIBE_ROUTE_TABLES_OUTPUT,
-    (),
-)
-
-ROUTE_TABLE_LIST: StaticSchema = (
-    16,
-    n0,
-    _RTLo,
-    0,
-    (_me,),
-    ((lambda: schemas.ROUTE_TABLE, {_sN: _i}),),
-)
-
-SLOT_DATE_TIME_RANGE_REQUEST: StaticSchema = (
-    18,
-    n0,
-    _SDTRR,
-    0,
-    (_ETa, _LTat),
-    (
-        (lambda: schemas.DATE_TIME, {_sO: None, _smi: None}),
-        (lambda: schemas.DATE_TIME, {_sO: None, _smi: None}),
-    ),
-)
-
-DESCRIBE_SCHEDULED_INSTANCE_AVAILABILITY_MAX_RESULTS: StaticSchema = (7, n0, _DSIAMR, 0)
-
-OCCURRENCE_DAY_REQUEST_SET: StaticSchema = (
-    16,
-    n0,
-    _ODRS,
-    0,
-    (_me,),
-    ((lambda: schemas.INTEGER, {_sN: _ODc}),),
-)
-
-SCHEDULED_INSTANCE_RECURRENCE_REQUEST: StaticSchema = (
-    18,
-    n0,
-    _SIRR,
-    0,
-    (_Fr, _Int, _ODcc, _ORTE, _OUc),
-    (
-        (lambda: schemas.STRING, 0),
-        (lambda: schemas.INTEGER, 0),
-        (OCCURRENCE_DAY_REQUEST_SET, {_sN: _ODccu}),
-        (lambda: schemas.BOOLEAN, 0),
-        (lambda: schemas.STRING, 0),
-    ),
-)
-
-DESCRIBE_SCHEDULED_INSTANCE_AVAILABILITY_INPUT: StaticSchema = (
-    18,
-    n0,
-    _DSIAI,
-    {_sSI: _cDSIAR, _sm: None},
-    (_DR, _Fil, _FSSTR, _MR, _MSDIH, _MSDIHi, _NTex, _Rec),
-    (
-        (lambda: schemas.BOOLEAN, 0),
-        (lambda: schemas.FILTER_LIST, {_sN: _Fi}),
-        (SLOT_DATE_TIME_RANGE_REQUEST, {_sO: None, _smi: None}),
-        (DESCRIBE_SCHEDULED_INSTANCE_AVAILABILITY_MAX_RESULTS, 0),
-        (lambda: schemas.INTEGER, 0),
-        (lambda: schemas.INTEGER, 0),
-        (lambda: schemas.STRING, 0),
-        (SCHEDULED_INSTANCE_RECURRENCE_REQUEST, {_sO: None, _smi: None}),
-    ),
-)
-
-DESCRIBE_SCHEDULED_INSTANCE_AVAILABILITY_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _DSIAO,
-    {_sSI: _cDSIARo, _smit: None},
-    (_NTex, _SIAS),
-    (
-        (lambda: schemas.STRING, {_aQN: _NTex, _sN: _nT}),
-        (
-            lambda: schemas.SCHEDULED_INSTANCE_AVAILABILITY_SET,
-            {_aQN: _SIAS, _sN: _sIAS},
-        ),
-    ),
-)
-
-DESCRIBE_SCHEDULED_INSTANCE_AVAILABILITY: StaticOperationSchema = (
-    23,
-    n0,
-    _DSIA,
-    0,
-    DESCRIBE_SCHEDULED_INSTANCE_AVAILABILITY_INPUT,
-    DESCRIBE_SCHEDULED_INSTANCE_AVAILABILITY_OUTPUT,
-    (),
-)
-
-OCCURRENCE_DAY_SET: StaticSchema = (
-    16,
-    n0,
-    _ODS,
-    0,
-    (_me,),
-    ((lambda: schemas.INTEGER, {_sN: _i}),),
-)
-
-SCHEDULED_INSTANCE_RECURRENCE: StaticSchema = (
-    18,
-    n0,
-    _SIRc,
-    0,
-    (_Fr, _Int, _ODS, _ORTE, _OUc),
-    (
-        (lambda: schemas.STRING, {_aQN: _Fr, _sN: _freq}),
-        (lambda: schemas.INTEGER, {_aQN: _Int, _sN: _int}),
-        (OCCURRENCE_DAY_SET, {_aQN: _ODS, _sN: _oDS}),
-        (lambda: schemas.BOOLEAN, {_aQN: _ORTE, _sN: _oRTE}),
-        (lambda: schemas.STRING, {_aQN: _OUc, _sN: _oU}),
-    ),
-)
-
-SCHEDULED_INSTANCE_AVAILABILITY: StaticSchema = (
-    18,
-    n0,
-    _SIA,
-    0,
-    (
-        _AZ,
-        _AIC,
-        _FSST,
-        _HP,
-        _IT,
-        _MTDID,
-        _MTDIDi,
-        _NPet,
-        _Pla,
-        _PTu,
-        _Rec,
-        _SDIH,
-        _TSIH,
-    ),
-    (
-        (lambda: schemas.STRING, {_aQN: _AZ, _sN: _aZ}),
-        (lambda: schemas.INTEGER, {_aQN: _AIC, _sN: _aIC}),
-        (lambda: schemas.DATE_TIME, {_aQN: _FSST, _sN: _fSST}),
-        (lambda: schemas.STRING, {_aQN: _HP, _sN: _hP}),
-        (lambda: schemas.STRING, {_aQN: _IT, _sN: _iT}),
-        (lambda: schemas.INTEGER, {_aQN: _MTDID, _sN: _mTDID}),
-        (lambda: schemas.INTEGER, {_aQN: _MTDIDi, _sN: _mTDIDi}),
-        (lambda: schemas.STRING, {_aQN: _NPet, _sN: _nPet}),
-        (lambda: schemas.STRING, {_aQN: _Pla, _sN: _plat}),
-        (lambda: schemas.STRING, {_aQN: _PTu, _sN: _pTu}),
-        (SCHEDULED_INSTANCE_RECURRENCE, {_aQN: _Rec, _sN: _recu}),
-        (lambda: schemas.INTEGER, {_aQN: _SDIH, _sN: _sDIH}),
-        (lambda: schemas.INTEGER, {_aQN: _TSIH, _sN: _tSIH}),
-    ),
-)
-
-SCHEDULED_INSTANCE: StaticSchema = (
-    18,
-    n0,
-    _SIc,
-    0,
-    (
-        _AZ,
-        _CD,
-        _HP,
-        _IC,
-        _IT,
-        _NPet,
-        _NSST,
-        _Pla,
-        _PSET,
-        _Rec,
-        _SIIc,
-        _SDIH,
-        _TED,
-        _TSD,
-        _TSIH,
-    ),
-    (
-        (lambda: schemas.STRING, {_aQN: _AZ, _sN: _aZ}),
-        (lambda: schemas.DATE_TIME, {_aQN: _CD, _sN: _cD}),
-        (lambda: schemas.STRING, {_aQN: _HP, _sN: _hP}),
-        (lambda: schemas.INTEGER, {_aQN: _IC, _sN: _iC}),
-        (lambda: schemas.STRING, {_aQN: _IT, _sN: _iT}),
-        (lambda: schemas.STRING, {_aQN: _NPet, _sN: _nPet}),
-        (lambda: schemas.DATE_TIME, {_aQN: _NSST, _sN: _nSST}),
-        (lambda: schemas.STRING, {_aQN: _Pla, _sN: _plat}),
-        (lambda: schemas.DATE_TIME, {_aQN: _PSET, _sN: _pSET}),
-        (SCHEDULED_INSTANCE_RECURRENCE, {_aQN: _Rec, _sN: _recu}),
-        (lambda: schemas.STRING, {_aQN: _SIIc, _sN: _sIIc}),
-        (lambda: schemas.INTEGER, {_aQN: _SDIH, _sN: _sDIH}),
-        (lambda: schemas.DATE_TIME, {_aQN: _TED, _sN: _tED}),
-        (lambda: schemas.DATE_TIME, {_aQN: _TSD, _sN: _tSD}),
-        (lambda: schemas.INTEGER, {_aQN: _TSIH, _sN: _tSIH}),
     ),
 )

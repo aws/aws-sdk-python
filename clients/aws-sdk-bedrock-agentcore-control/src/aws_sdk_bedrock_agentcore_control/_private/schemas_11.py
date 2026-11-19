@@ -42,6 +42,7 @@ _sQ = "smithy.api#httpQuery"
 _fR = "failureReason"
 _mR = "maxResults"
 _nT = "nextToken"
+_ERROR = "ERROR"
 _EQUALS = "EQUALS"
 _CONTAINS = "CONTAINS"
 _pE = "privateEndpoint"
@@ -55,38 +56,26 @@ _cP = "credentialProviders"
 _eIv = "evaluatorId"
 _ev = "evaluators"
 _op = "operator"
-_CPVT = "CredentialProviderVendorType"
-_GO = "GoogleOauth2"
-_GOi = "GithubOauth2"
-_SOl = "SlackOauth2"
-_SOa = "SalesforceOauth2"
-_MOi = "MicrosoftOauth2"
-_COu = "CustomOauth2"
-_AOt = "AtlassianOauth2"
-_LOi = "LinkedinOauth2"
-_XO = "XOauth2"
-_OO = "OktaOauth2"
-_OLO = "OneLoginOauth2"
-_POO = "PingOneOauth2"
-_FOa = "FacebookOauth2"
-_YO = "YandexOauth2"
-_RO = "RedditOauth2"
-_ZO = "ZoomOauth2"
-_TO = "TwitchOauth2"
-_SOp = "SpotifyOauth2"
-_DOr = "DropboxOauth2"
-_NO = "NotionOauth2"
-_HO = "HubspotOauth2"
-_CAO = "CyberArkOauth2"
-_FAO = "FusionAuthOauth2"
-_AOu = "Auth0Oauth2"
-_COo = "CognitoOauth2"
 _cIl = "clientId"
+_cS = "clientSecret"
+_cSC = "clientSecretConfig"
 _cSS = "clientSecretSource"
+_is = "issuer"
+_aE = "authorizationEndpoint"
+_tE = "tokenEndpoint"
 _cAM = "clientAuthenticationMethod"
 _oD = "oauthDiscovery"
 _oBOTEC = "onBehalfOfTokenExchangeConfig"
 _pKJC = "privateKeyJwtConfig"
+_GOPCI = "GithubOauth2ProviderConfigInput"
+_GOPCIo = "GoogleOauth2ProviderConfigInput"
+_IOPCI = "IncludedOauth2ProviderConfigInput"
+_LOPCI = "LinkedinOauth2ProviderConfigInput"
+_TIT = "TenantIdType"
+_MOPCI = "MicrosoftOauth2ProviderConfigInput"
+_tIe = "tenantId"
+_SOPCI = "SalesforceOauth2ProviderConfigInput"
+_SOPCIl = "SlackOauth2ProviderConfigInput"
 _OPCI = "Oauth2ProviderConfigInput"
 _cOPC = "customOauth2ProviderConfig"
 _gOPC = "googleOauth2ProviderConfig"
@@ -221,7 +210,7 @@ _cCOECR = "com.amazonaws.bedrockagentcorecontrol#CreateOnlineEvaluationConfigReq
 _oECN = "onlineEvaluationConfigName"
 _rul = "rule"
 _dSC = "dataSourceConfig"
-_ins = "insights"
+_insi = "insights"
 _cCl = "clusteringConfig"
 _oC = "outputConfig"
 _eERA = "evaluationExecutionRoleArn"
@@ -230,12 +219,11 @@ _OEES = "OnlineEvaluationExecutionStatus"
 _OECA = "OnlineEvaluationConfigArn"
 _OECI = "OnlineEvaluationConfigId"
 _OECS = "OnlineEvaluationConfigStatus"
-_ERROR = "ERROR"
 _COECO = "CreateOnlineEvaluationConfigOutput"
 _cCOECRo = "com.amazonaws.bedrockagentcorecontrol#CreateOnlineEvaluationConfigResponse"
 _oECA = "onlineEvaluationConfigArn"
 _oECI = "onlineEvaluationConfigId"
-_eS = "executionStatus"
+_eSx = "executionStatus"
 _COEC = "CreateOnlineEvaluationConfig"
 _DOECI = "DeleteOnlineEvaluationConfigInput"
 _cDOECR = "com.amazonaws.bedrockagentcorecontrol#DeleteOnlineEvaluationConfigRequest"
@@ -249,76 +237,112 @@ _cGOECRo = "com.amazonaws.bedrockagentcorecontrol#GetOnlineEvaluationConfigRespo
 _GOEC = "GetOnlineEvaluationConfig"
 _LOECI = "ListOnlineEvaluationConfigsInput"
 _cLOECR = "com.amazonaws.bedrockagentcorecontrol#ListOnlineEvaluationConfigsRequest"
-_OECSn = "OnlineEvaluationConfigSummary"
-_OECSL = "OnlineEvaluationConfigSummaryList"
 _LOECO = "ListOnlineEvaluationConfigsOutput"
 _cLOECRo = "com.amazonaws.bedrockagentcorecontrol#ListOnlineEvaluationConfigsResponse"
 _oEC = "onlineEvaluationConfigs"
 _LOEC = "ListOnlineEvaluationConfigs"
-_UOECI = "UpdateOnlineEvaluationConfigInput"
-_cUOECR = "com.amazonaws.bedrockagentcorecontrol#UpdateOnlineEvaluationConfigRequest"
-_UOECO = "UpdateOnlineEvaluationConfigOutput"
-_cUOECRo = "com.amazonaws.bedrockagentcorecontrol#UpdateOnlineEvaluationConfigResponse"
-_UOEC = "UpdateOnlineEvaluationConfig"
 
-CREDENTIAL_PROVIDER_VENDOR_TYPE: StaticSchema = (
-    14,
+GITHUB_OAUTH2_PROVIDER_CONFIG_INPUT: StaticSchema = (
+    18,
     n0,
-    _CPVT,
+    _GOPCI,
     0,
+    (_cIl, _cS, _cSC, _cSS),
     (
-        _GO,
-        _GOi,
-        _SOl,
-        _SOa,
-        _MOi,
-        _COu,
-        _AOt,
-        _LOi,
-        _XO,
-        _OO,
-        _OLO,
-        _POO,
-        _FOa,
-        _YO,
-        _RO,
-        _ZO,
-        _TO,
-        _SOp,
-        _DOr,
-        _NO,
-        _HO,
-        _CAO,
-        _FAO,
-        _AOu,
-        _COo,
+        (lambda: schemas.CLIENT_ID_TYPE, 1),
+        (lambda: schemas.DEFAULT_CLIENT_SECRET_TYPE, {_smi: _v_}),
+        (lambda: schemas.SECRET_REFERENCE, 0),
+        (lambda: schemas.SECRET_SOURCE_TYPE, 0),
     ),
+)
+
+GOOGLE_OAUTH2_PROVIDER_CONFIG_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GOPCIo,
+    0,
+    (_cIl, _cS, _cSC, _cSS),
     (
-        (-1, {_sVm: _GO}),
-        (-1, {_sVm: _GOi}),
-        (-1, {_sVm: _SOl}),
-        (-1, {_sVm: _SOa}),
-        (-1, {_sVm: _MOi}),
-        (-1, {_sVm: _COu}),
-        (-1, {_sVm: _AOt}),
-        (-1, {_sVm: _LOi}),
-        (-1, {_sVm: _XO}),
-        (-1, {_sVm: _OO}),
-        (-1, {_sVm: _OLO}),
-        (-1, {_sVm: _POO}),
-        (-1, {_sVm: _FOa}),
-        (-1, {_sVm: _YO}),
-        (-1, {_sVm: _RO}),
-        (-1, {_sVm: _ZO}),
-        (-1, {_sVm: _TO}),
-        (-1, {_sVm: _SOp}),
-        (-1, {_sVm: _DOr}),
-        (-1, {_sVm: _NO}),
-        (-1, {_sVm: _HO}),
-        (-1, {_sVm: _CAO}),
-        (-1, {_sVm: _FAO}),
-        (-1, {_sVm: _AOu}),
-        (-1, {_sVm: _COo}),
+        (lambda: schemas.CLIENT_ID_TYPE, 1),
+        (lambda: schemas.DEFAULT_CLIENT_SECRET_TYPE, {_smi: _v_}),
+        (lambda: schemas.SECRET_REFERENCE, 0),
+        (lambda: schemas.SECRET_SOURCE_TYPE, 0),
+    ),
+)
+
+INCLUDED_OAUTH2_PROVIDER_CONFIG_INPUT: StaticSchema = (
+    18,
+    n0,
+    _IOPCI,
+    0,
+    (_cIl, _cS, _cSC, _cSS, _is, _aE, _tE),
+    (
+        (lambda: schemas.CLIENT_ID_TYPE, 1),
+        (lambda: schemas.DEFAULT_CLIENT_SECRET_TYPE, {_smi: _v_}),
+        (lambda: schemas.SECRET_REFERENCE, 0),
+        (lambda: schemas.SECRET_SOURCE_TYPE, 0),
+        (lambda: schemas.ISSUER_URL_TYPE, 0),
+        (lambda: schemas.AUTHORIZATION_ENDPOINT_TYPE, 0),
+        (lambda: schemas.TOKEN_ENDPOINT_TYPE, 0),
+    ),
+)
+
+LINKEDIN_OAUTH2_PROVIDER_CONFIG_INPUT: StaticSchema = (
+    18,
+    n0,
+    _LOPCI,
+    0,
+    (_cIl, _cS, _cSC, _cSS),
+    (
+        (lambda: schemas.CLIENT_ID_TYPE, 1),
+        (lambda: schemas.DEFAULT_CLIENT_SECRET_TYPE, {_smi: _v_}),
+        (lambda: schemas.SECRET_REFERENCE, 0),
+        (lambda: schemas.SECRET_SOURCE_TYPE, 0),
+    ),
+)
+
+TENANT_ID_TYPE: StaticSchema = (3, n0, _TIT, 0)
+
+MICROSOFT_OAUTH2_PROVIDER_CONFIG_INPUT: StaticSchema = (
+    18,
+    n0,
+    _MOPCI,
+    0,
+    (_cIl, _cS, _cSC, _cSS, _tIe),
+    (
+        (lambda: schemas.CLIENT_ID_TYPE, 1),
+        (lambda: schemas.DEFAULT_CLIENT_SECRET_TYPE, {_smi: _v_}),
+        (lambda: schemas.SECRET_REFERENCE, 0),
+        (lambda: schemas.SECRET_SOURCE_TYPE, 0),
+        (TENANT_ID_TYPE, 0),
+    ),
+)
+
+SALESFORCE_OAUTH2_PROVIDER_CONFIG_INPUT: StaticSchema = (
+    18,
+    n0,
+    _SOPCI,
+    0,
+    (_cIl, _cS, _cSC, _cSS),
+    (
+        (lambda: schemas.CLIENT_ID_TYPE, 1),
+        (lambda: schemas.DEFAULT_CLIENT_SECRET_TYPE, {_smi: _v_}),
+        (lambda: schemas.SECRET_REFERENCE, 0),
+        (lambda: schemas.SECRET_SOURCE_TYPE, 0),
+    ),
+)
+
+SLACK_OAUTH2_PROVIDER_CONFIG_INPUT: StaticSchema = (
+    18,
+    n0,
+    _SOPCIl,
+    0,
+    (_cIl, _cS, _cSC, _cSS),
+    (
+        (lambda: schemas.CLIENT_ID_TYPE, 1),
+        (lambda: schemas.DEFAULT_CLIENT_SECRET_TYPE, {_smi: _v_}),
+        (lambda: schemas.SECRET_REFERENCE, 0),
+        (lambda: schemas.SECRET_SOURCE_TYPE, 0),
     ),
 )
 
@@ -330,14 +354,14 @@ OAUTH2_PROVIDER_CONFIG_INPUT: StaticSchema = (
     (_cOPC, _gOPC, _gOPCi, _sOPC, _sOPCa, _mOPC, _aOPC, _lOPC, _iOPC),
     (
         (lambda: schemas.CUSTOM_OAUTH2_PROVIDER_CONFIG_INPUT, 0),
-        (lambda: schemas.GOOGLE_OAUTH2_PROVIDER_CONFIG_INPUT, 0),
-        (lambda: schemas.GITHUB_OAUTH2_PROVIDER_CONFIG_INPUT, 0),
-        (lambda: schemas.SLACK_OAUTH2_PROVIDER_CONFIG_INPUT, 0),
-        (lambda: schemas.SALESFORCE_OAUTH2_PROVIDER_CONFIG_INPUT, 0),
-        (lambda: schemas.MICROSOFT_OAUTH2_PROVIDER_CONFIG_INPUT, 0),
+        (GOOGLE_OAUTH2_PROVIDER_CONFIG_INPUT, 0),
+        (GITHUB_OAUTH2_PROVIDER_CONFIG_INPUT, 0),
+        (SLACK_OAUTH2_PROVIDER_CONFIG_INPUT, 0),
+        (SALESFORCE_OAUTH2_PROVIDER_CONFIG_INPUT, 0),
+        (MICROSOFT_OAUTH2_PROVIDER_CONFIG_INPUT, 0),
         (lambda: schemas.ATLASSIAN_OAUTH2_PROVIDER_CONFIG_INPUT, 0),
-        (lambda: schemas.LINKEDIN_OAUTH2_PROVIDER_CONFIG_INPUT, 0),
-        (lambda: schemas.INCLUDED_OAUTH2_PROVIDER_CONFIG_INPUT, 0),
+        (LINKEDIN_OAUTH2_PROVIDER_CONFIG_INPUT, 0),
+        (INCLUDED_OAUTH2_PROVIDER_CONFIG_INPUT, 0),
     ),
 )
 
@@ -349,7 +373,7 @@ CREATE_OAUTH2_CREDENTIAL_PROVIDER_INPUT: StaticSchema = (
     (_n, _cPVr, _oPCI, _t),
     (
         (lambda: schemas.CREDENTIAL_PROVIDER_NAME, 1),
-        (CREDENTIAL_PROVIDER_VENDOR_TYPE, 1),
+        (lambda: schemas.CREDENTIAL_PROVIDER_VENDOR_TYPE, 1),
         (OAUTH2_PROVIDER_CONFIG_INPUT, 1),
         (lambda: schemas.TAGS_MAP, 0),
     ),
@@ -594,7 +618,7 @@ GET_OAUTH2_CREDENTIAL_PROVIDER_OUTPUT: StaticSchema = (
         (lambda: schemas.SECRET_SOURCE_TYPE, 0),
         (lambda: schemas.CREDENTIAL_PROVIDER_NAME, 1),
         (CREDENTIAL_PROVIDER_ARN_TYPE, 1),
-        (CREDENTIAL_PROVIDER_VENDOR_TYPE, 1),
+        (lambda: schemas.CREDENTIAL_PROVIDER_VENDOR_TYPE, 1),
         (3, 0),
         (OAUTH2_PROVIDER_CONFIG_OUTPUT, 1),
         (4, 1),
@@ -673,7 +697,7 @@ OAUTH2_CREDENTIAL_PROVIDER_ITEM: StaticSchema = (
     (_n, _cPVr, _cPAr, _cTr, _lUT),
     (
         (lambda: schemas.CREDENTIAL_PROVIDER_NAME, 1),
-        (CREDENTIAL_PROVIDER_VENDOR_TYPE, 1),
+        (lambda: schemas.CREDENTIAL_PROVIDER_VENDOR_TYPE, 1),
         (CREDENTIAL_PROVIDER_ARN_TYPE, 1),
         (4, 1),
         (4, 1),
@@ -697,7 +721,7 @@ UPDATE_OAUTH2_CREDENTIAL_PROVIDER_INPUT: StaticSchema = (
     (_n, _cPVr, _oPCI),
     (
         (lambda: schemas.CREDENTIAL_PROVIDER_NAME, 1),
-        (CREDENTIAL_PROVIDER_VENDOR_TYPE, 1),
+        (lambda: schemas.CREDENTIAL_PROVIDER_VENDOR_TYPE, 1),
         (OAUTH2_PROVIDER_CONFIG_INPUT, 1),
     ),
 )
@@ -713,7 +737,7 @@ UPDATE_OAUTH2_CREDENTIAL_PROVIDER_OUTPUT: StaticSchema = (
         (lambda: schemas.SECRET_JSON_KEY_TYPE, 0),
         (lambda: schemas.SECRET_SOURCE_TYPE, 0),
         (lambda: schemas.CREDENTIAL_PROVIDER_NAME, 1),
-        (CREDENTIAL_PROVIDER_VENDOR_TYPE, 1),
+        (lambda: schemas.CREDENTIAL_PROVIDER_VENDOR_TYPE, 1),
         (CREDENTIAL_PROVIDER_ARN_TYPE, 1),
         (3, 0),
         (OAUTH2_PROVIDER_CONFIG_OUTPUT, 1),
@@ -930,7 +954,7 @@ CREATE_ONLINE_EVALUATION_CONFIG_INPUT: StaticSchema = (
     n0,
     _COECI,
     {_sSI: _cCOECR, _smith: None},
-    (_cT, _oECN, _d, _rul, _dSC, _ev, _ins, _cCl, _oC, _eERA, _eOC, _t),
+    (_cT, _oECN, _d, _rul, _dSC, _ev, _insi, _cCl, _oC, _eERA, _eOC, _t),
     (
         (lambda: schemas.CLIENT_TOKEN, 2),
         (EVALUATION_CONFIG_NAME, 1),
@@ -952,7 +976,7 @@ CREATE_ONLINE_EVALUATION_CONFIG_OUTPUT: StaticSchema = (
     n0,
     _COECO,
     {_sSI: _cCOECRo, _smithy: None},
-    (_oECA, _oECI, _cA, _oC, _st, _eS, _fR),
+    (_oECA, _oECI, _cA, _oC, _st, _eSx, _fR),
     (
         (lambda: ONLINE_EVALUATION_CONFIG_ARN, 1),
         (lambda: ONLINE_EVALUATION_CONFIG_ID, 1),
@@ -1084,12 +1108,12 @@ GET_ONLINE_EVALUATION_CONFIG_OUTPUT: StaticSchema = (
         _rul,
         _dSC,
         _ev,
-        _ins,
+        _insi,
         _cCl,
         _oC,
         _eERA,
         _st,
-        _eS,
+        _eSx,
         _cA,
         _uA,
         _fR,
@@ -1152,7 +1176,7 @@ LIST_ONLINE_EVALUATION_CONFIGS_OUTPUT: StaticSchema = (
     _LOECO,
     {_sSI: _cLOECRo, _smithy: None},
     (_oEC, _nT),
-    ((lambda: ONLINE_EVALUATION_CONFIG_SUMMARY_LIST, 1), (3, 0)),
+    ((lambda: schemas.ONLINE_EVALUATION_CONFIG_SUMMARY_LIST, 1), (3, 0)),
 )
 
 LIST_ONLINE_EVALUATION_CONFIGS: StaticOperationSchema = (
@@ -1169,99 +1193,6 @@ LIST_ONLINE_EVALUATION_CONFIGS: StaticOperationSchema = (
     (
         lambda: schemas.ACCESS_DENIED_EXCEPTION,
         lambda: schemas.INTERNAL_SERVER_EXCEPTION,
-        lambda: schemas.THROTTLING_EXCEPTION,
-        lambda: schemas.VALIDATION_EXCEPTION,
-    ),
-)
-
-ONLINE_EVALUATION_CONFIG_SUMMARY: StaticSchema = (
-    18,
-    n0,
-    _OECSn,
-    0,
-    (_oECA, _oECI, _oECN, _d, _st, _eS, _cA, _uA, _fR, _ins, _cCl),
-    (
-        (ONLINE_EVALUATION_CONFIG_ARN, 1),
-        (ONLINE_EVALUATION_CONFIG_ID, 1),
-        (EVALUATION_CONFIG_NAME, 1),
-        (EVALUATION_CONFIG_DESCRIPTION, 0),
-        (ONLINE_EVALUATION_CONFIG_STATUS, 1),
-        (ONLINE_EVALUATION_EXECUTION_STATUS, 1),
-        (4, 1),
-        (4, 1),
-        (3, 0),
-        (INSIGHT_LIST, 0),
-        (CLUSTERING_CONFIG, 0),
-    ),
-)
-
-ONLINE_EVALUATION_CONFIG_SUMMARY_LIST: StaticSchema = (
-    16,
-    n0,
-    _OECSL,
-    0,
-    (_mem,),
-    ((ONLINE_EVALUATION_CONFIG_SUMMARY, 0),),
-)
-
-UPDATE_ONLINE_EVALUATION_CONFIG_INPUT: StaticSchema = (
-    18,
-    n0,
-    _UOECI,
-    {_sSI: _cUOECR, _smith: None},
-    (_cT, _oECI, _d, _rul, _dSC, _ev, _ins, _cCl, _oC, _eERA, _eS),
-    (
-        (lambda: schemas.CLIENT_TOKEN, 2),
-        (ONLINE_EVALUATION_CONFIG_ID, 9),
-        (EVALUATION_CONFIG_DESCRIPTION, 0),
-        (RULE, 0),
-        (DATA_SOURCE_CONFIG, 0),
-        (EVALUATOR_LIST, 0),
-        (INSIGHT_LIST, 0),
-        (CLUSTERING_CONFIG, 0),
-        (OUTPUT_CONFIG, 0),
-        (lambda: schemas.ROLE_ARN, 0),
-        (ONLINE_EVALUATION_EXECUTION_STATUS, 0),
-    ),
-)
-
-UPDATE_ONLINE_EVALUATION_CONFIG_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _UOECO,
-    {_sSI: _cUOECRo, _smithy: None},
-    (_oECA, _oECI, _uA, _st, _eS, _fR),
-    (
-        (ONLINE_EVALUATION_CONFIG_ARN, 1),
-        (ONLINE_EVALUATION_CONFIG_ID, 1),
-        (4, 1),
-        (ONLINE_EVALUATION_CONFIG_STATUS, 1),
-        (ONLINE_EVALUATION_EXECUTION_STATUS, 1),
-        (3, 0),
-    ),
-)
-
-UPDATE_ONLINE_EVALUATION_CONFIG: StaticOperationSchema = (
-    23,
-    n0,
-    _UOEC,
-    {
-        _smithya: MappingProxyType(
-            {
-                "method": "PUT",
-                "uri": "/online-evaluation-configs/{onlineEvaluationConfigId}",
-                "code": 202,
-            }
-        )
-    },
-    UPDATE_ONLINE_EVALUATION_CONFIG_INPUT,
-    UPDATE_ONLINE_EVALUATION_CONFIG_OUTPUT,
-    (
-        lambda: schemas.ACCESS_DENIED_EXCEPTION,
-        lambda: schemas.CONFLICT_EXCEPTION,
-        lambda: schemas.INTERNAL_SERVER_EXCEPTION,
-        lambda: schemas.RESOURCE_NOT_FOUND_EXCEPTION,
-        lambda: schemas.SERVICE_QUOTA_EXCEEDED_EXCEPTION,
         lambda: schemas.THROTTLING_EXCEPTION,
         lambda: schemas.VALIDATION_EXCEPTION,
     ),

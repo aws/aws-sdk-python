@@ -2898,6 +2898,15 @@ class LoginProfile(_SerdeShape):
     Specifies whether the user is required to set a new password on next
     sign-in.
     """
+    max_signin_session_duration: int | None = ...
+    """
+    The maximum duration (in seconds) of an Amazon Web Services Sign-In
+    session for the user.
+
+    This member is omitted when the setting is unset. In that case, no
+    default value is returned and the existing sign-in session behavior
+    applies.
+    """
 
 @dataclass(kw_only=True)
 class MalformedCertificateException(ServiceError, _SerdeShape):
@@ -4842,6 +4851,16 @@ class Role(_SerdeShape):
     who uses the CLI, or API to assume the role can specify the duration
     using the optional `DurationSeconds` API parameter or `duration-seconds`
     CLI parameter.
+    """
+    max_signin_session_duration: int | None = ...
+    """
+    The maximum duration (in seconds) of an Amazon Web Services Sign-In
+    session for users who sign in with this role. This value is independent
+    of `MaxSessionDuration`.
+
+    This member is omitted when the setting is unset. In that case, no
+    default value is returned and the existing sign-in session behavior
+    applies.
     """
     permissions_boundary: AttachedPermissionsBoundary | None = ...
     """
@@ -8302,6 +8321,38 @@ class UpdateLoginProfileInput(_SerdeShape):
     Allows this new password to be used only once by requiring the specified
     IAM user to set a new password on next sign-in.
     """
+    max_signin_session_duration: int | None = ...
+    """
+    The maximum duration (in seconds) of an Amazon Web Services Sign-In
+    session for the specified IAM user. This setting can have a value from 1
+    hour (3600 seconds) to 90 days (7776000 seconds), inclusive, and
+    replaces any value currently configured for the user.
+
+    If you omit both this parameter and `ResetMaxSigninSessionDuration`, the
+    current setting is unchanged. You cannot specify this parameter and set
+    `ResetMaxSigninSessionDuration` to `true` in the same request. If you
+    update only the sign-in session duration, the user's password and
+    `PasswordResetRequired` setting do not change.
+
+    Changes to this setting apply to new sign-in sessions. Sessions that are
+    already established are not affected.
+
+    Note:
+        This setting is not supported for the root user.
+    """
+    reset_max_signin_session_duration: bool | None = ...
+    """
+    Specifies whether to clear the maximum sign-in session duration for the
+    specified IAM user. Set this value to `true` to return the setting to
+    its unset state, so that the existing sign-in session behavior applies.
+    When the setting is unset, the user's `MaxSigninSessionDuration` is
+    omitted from responses.
+
+    If you set this value to `false` or omit it, the current setting is not
+    cleared. You cannot set this value to `true` and specify
+    `MaxSigninSessionDuration` in the same request. Clearing a setting that
+    is already unset has no effect.
+    """
 
 class UpdateLoginProfileInputDict(TypedDict, total=False):
     """Dictionary form of `UpdateLoginProfileInput`."""
@@ -8340,6 +8391,38 @@ class UpdateLoginProfileInputDict(TypedDict, total=False):
     """
     Allows this new password to be used only once by requiring the specified
     IAM user to set a new password on next sign-in.
+    """
+    max_signin_session_duration: int | None
+    """
+    The maximum duration (in seconds) of an Amazon Web Services Sign-In
+    session for the specified IAM user. This setting can have a value from 1
+    hour (3600 seconds) to 90 days (7776000 seconds), inclusive, and
+    replaces any value currently configured for the user.
+
+    If you omit both this parameter and `ResetMaxSigninSessionDuration`, the
+    current setting is unchanged. You cannot specify this parameter and set
+    `ResetMaxSigninSessionDuration` to `true` in the same request. If you
+    update only the sign-in session duration, the user's password and
+    `PasswordResetRequired` setting do not change.
+
+    Changes to this setting apply to new sign-in sessions. Sessions that are
+    already established are not affected.
+
+    Note:
+        This setting is not supported for the root user.
+    """
+    reset_max_signin_session_duration: bool | None
+    """
+    Specifies whether to clear the maximum sign-in session duration for the
+    specified IAM user. Set this value to `true` to return the setting to
+    its unset state, so that the existing sign-in session behavior applies.
+    When the setting is unset, the user's `MaxSigninSessionDuration` is
+    omitted from responses.
+
+    If you set this value to `false` or omit it, the current setting is not
+    cleared. You cannot set this value to `true` and specify
+    `MaxSigninSessionDuration` in the same request. Clearing a setting that
+    is already unset has no effect.
     """
 
 @dataclass(kw_only=True)
@@ -8473,6 +8556,39 @@ class UpdateRoleInput(_SerdeShape):
         IAM role credentials provided by Amazon EC2 instances assigned to the
         role are not subject to the specified maximum session duration.
     """
+    max_signin_session_duration: int | None = ...
+    """
+    The maximum duration (in seconds) of an Amazon Web Services Sign-In
+    session for users who sign in with the specified role. This setting can
+    have a value from 1 hour (3600 seconds) to 90 days (7776000 seconds),
+    inclusive, and replaces any value currently configured for the role.
+    This setting is independent of `MaxSessionDuration`.
+
+    If you omit both this parameter and `ResetMaxSigninSessionDuration`, the
+    current setting is unchanged. You cannot specify this parameter and set
+    `ResetMaxSigninSessionDuration` to `true` in the same request.
+
+    Changes to this setting apply to new sign-in sessions. Sessions that are
+    already established are not affected.
+
+    Note:
+        You cannot set this value on a service-linked role.
+    """
+    reset_max_signin_session_duration: bool | None = ...
+    """
+    Specifies whether to clear the role's maximum sign-in session duration.
+    Set this value to `true` to return the setting to its unset state, so
+    that the existing sign-in session behavior applies. When the setting is
+    unset, the role's `MaxSigninSessionDuration` is omitted from responses.
+
+    If you set this value to `false` or omit it, the current setting is not
+    cleared. You cannot set this value to `true` and specify
+    `MaxSigninSessionDuration` in the same request. Clearing a setting that
+    is already unset has no effect.
+
+    Note:
+        You cannot reset this value on a service-linked role.
+    """
 
 class UpdateRoleInputDict(TypedDict, total=False):
     """Dictionary form of `UpdateRoleInput`."""
@@ -8503,6 +8619,39 @@ class UpdateRoleInputDict(TypedDict, total=False):
     Note:
         IAM role credentials provided by Amazon EC2 instances assigned to the
         role are not subject to the specified maximum session duration.
+    """
+    max_signin_session_duration: int | None
+    """
+    The maximum duration (in seconds) of an Amazon Web Services Sign-In
+    session for users who sign in with the specified role. This setting can
+    have a value from 1 hour (3600 seconds) to 90 days (7776000 seconds),
+    inclusive, and replaces any value currently configured for the role.
+    This setting is independent of `MaxSessionDuration`.
+
+    If you omit both this parameter and `ResetMaxSigninSessionDuration`, the
+    current setting is unchanged. You cannot specify this parameter and set
+    `ResetMaxSigninSessionDuration` to `true` in the same request.
+
+    Changes to this setting apply to new sign-in sessions. Sessions that are
+    already established are not affected.
+
+    Note:
+        You cannot set this value on a service-linked role.
+    """
+    reset_max_signin_session_duration: bool | None
+    """
+    Specifies whether to clear the role's maximum sign-in session duration.
+    Set this value to `true` to return the setting to its unset state, so
+    that the existing sign-in session behavior applies. When the setting is
+    unset, the role's `MaxSigninSessionDuration` is omitted from responses.
+
+    If you set this value to `false` or omit it, the current setting is not
+    cleared. You cannot set this value to `true` and specify
+    `MaxSigninSessionDuration` in the same request. Clearing a setting that
+    is already unset has no effect.
+
+    Note:
+        You cannot reset this value on a service-linked role.
     """
 
 @dataclass(kw_only=True)

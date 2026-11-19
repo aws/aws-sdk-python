@@ -17,6 +17,7 @@ from ..models import (
     EndpointConfiguration,
     Integration,
     IntegrationResponse,
+    JwtConfiguration,
     Method,
     MethodResponse,
     MethodSetting,
@@ -24,10 +25,120 @@ from ..models import (
     MutualTlsAuthentication,
     PatchOperation,
     PatchOperationDict,
-    QuotaSettings,
     ServiceError,
     _SerdeShape,
 )
+
+class QuotaPeriodType(UnknownEnumMixin, StrEnum):
+    DAY = "DAY"
+    WEEK = "WEEK"
+    MONTH = "MONTH"
+
+@dataclass(kw_only=True)
+class QuotaSettings(_SerdeShape):
+    """Quotas configured for a usage plan."""
+
+    limit: int = ...
+    """
+    The target maximum number of requests that can be made in a given time
+    period.
+    """
+    offset: int = ...
+    """
+    The number of requests subtracted from the given limit in the initial
+    time period.
+    """
+    period: str | None = ...
+    """
+    The time period in which the limit applies. Valid values are \"DAY\",
+    \"WEEK\" or \"MONTH\".
+    """
+
+class QuotaSettingsDict(TypedDict, total=False):
+    """Dictionary form of `QuotaSettings`."""
+
+    limit: int | None
+    """
+    The target maximum number of requests that can be made in a given time
+    period.
+    """
+    offset: int | None
+    """
+    The number of requests subtracted from the given limit in the initial
+    time period.
+    """
+    period: str | None
+    """
+    The time period in which the limit applies. Valid values are \"DAY\",
+    \"WEEK\" or \"MONTH\".
+    """
+
+@dataclass(kw_only=True)
+class RejectDomainNameAccessAssociationInput(_SerdeShape):
+    """Dataclass for RejectDomainNameAccessAssociationInput structure."""
+
+    domain_name_access_association_arn: str | None = ...
+    """The ARN of the domain name access association resource."""
+    domain_name_arn: str | None = ...
+    """The ARN of the domain name."""
+
+class RejectDomainNameAccessAssociationInputDict(TypedDict, total=False):
+    """Dictionary form of `RejectDomainNameAccessAssociationInput`."""
+
+    domain_name_access_association_arn: Required[str]
+    """The ARN of the domain name access association resource."""
+    domain_name_arn: Required[str]
+    """The ARN of the domain name."""
+
+@dataclass(kw_only=True)
+class RejectDomainNameAccessAssociationOutput(_SerdeShape):
+    """Dataclass for RejectDomainNameAccessAssociationOutput structure."""
+
+    response_metadata: ResponseMetadata = ...
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+@dataclass(kw_only=True)
+class RequestValidator(_SerdeShape):
+    """A set of validation rules for incoming Method requests."""
+
+    id: str | None = ...
+    """The identifier of this RequestValidator."""
+    name: str | None = ...
+    """The name of this RequestValidator"""
+    validate_request_body: bool = ...
+    """
+    A Boolean flag to indicate whether to validate a request body according
+    to the configured Model schema.
+    """
+    validate_request_parameters: bool = ...
+    """
+    A Boolean flag to indicate whether to validate request parameters
+    (`true`) or not (`false`).
+    """
+
+@dataclass(kw_only=True)
+class Resource(_SerdeShape):
+    """Represents an API resource."""
+
+    id: str | None = ...
+    """The resource's identifier."""
+    parent_id: str | None = ...
+    """The parent resource's identifier."""
+    path_part: str | None = ...
+    """The last path segment for this resource."""
+    path: str | None = ...
+    """The full path for this resource."""
+    resource_methods: dict[str, Method] | None = ...
+    """Gets an API resource's method of a given HTTP verb."""
+
+class ResourceOwner(UnknownEnumMixin, StrEnum):
+    SELF = "SELF"
+    OTHER_ACCOUNTS = "OTHER_ACCOUNTS"
 
 class ResponseTransferMode(UnknownEnumMixin, StrEnum):
     BUFFERED = "BUFFERED"
@@ -673,7 +784,10 @@ class UpdateAccountInputDict(TypedDict, total=False):
 
 @dataclass(kw_only=True)
 class UpdateAccountOutput(_SerdeShape):
-    """Represents an AWS account that is associated with API Gateway."""
+    """
+    Represents an Amazon Web Services account that is associated with API
+    Gateway.
+    """
 
     cloudwatch_role_arn: str | None = ...
     """The ARN of an Amazon CloudWatch role for the current Account."""
@@ -802,15 +916,18 @@ class UpdateAuthorizerOutput(_SerdeShape):
     """
     The authorizer type. Valid values are `TOKEN` for a Lambda function
     using a single authorization token submitted in a custom header,
-    `REQUEST` for a Lambda function using incoming request parameters, and
-    `COGNITO_USER_POOLS` for using an Amazon Cognito user pool.
+    `REQUEST` for a Lambda function using incoming request parameters,
+    `COGNITO_USER_POOLS` for using an Amazon Cognito user pool, and `JWT`
+    for using a native JWT authorizer with the trusted issuers, audiences,
+    and signing algorithms that you declare.
     """
     provider_ar_ns: list[str] | None = ...
     """
     A list of the Amazon Cognito user pool ARNs for the `COGNITO_USER_POOLS`
     authorizer. Each element is of this format:
     `arn:aws:cognito-idp:{region}:{account_id}:userpool/{user_pool_id}`. For
-    a `TOKEN` or `REQUEST` authorizer, this is not defined.
+    a `TOKEN` or `REQUEST` authorizer, this is not defined. This property is
+    not supported for `JWT` authorizers.
     """
     auth_type: str | None = ...
     """
@@ -829,14 +946,16 @@ class UpdateAuthorizerOutput(_SerdeShape):
     indicates that the remaining substring in the URI should be treated as
     the path to the resource, including the initial `/`. For Lambda
     functions, this is usually of the form
-    `/2015-03-31/functions/[FunctionARN]/invocations`.
+    `/2015-03-31/functions/[FunctionARN]/invocations`. This property is not
+    supported for `JWT` authorizers.
     """
     authorizer_credentials: str | None = ...
     """
     Specifies the required credentials as an IAM role for API Gateway to
     invoke the authorizer. To specify an IAM role for API Gateway to assume,
     use the role's Amazon Resource Name (ARN). To use resource-based
-    permissions on the Lambda function, specify null.
+    permissions on the Lambda function, specify null. This property is not
+    supported for `JWT` authorizers.
     """
     identity_source: str | None = ...
     """
@@ -859,7 +978,11 @@ class UpdateAuthorizerOutput(_SerdeShape):
     response without calling the Lambda function. The valid value is a
     string of comma-separated mapping expressions of the specified request
     parameters. When the authorization caching is not enabled, this property
-    is optional.
+    is optional. For a `JWT` authorizer, this is required and must be a
+    single request-header mapping expression,
+    `method.request.header.``<name>`{=html}, for example,
+    `method.request.header.Authorization`. Query string parameters are not
+    supported, and there is no default.
     """
     identity_validation_expression: str | None = ...
     """
@@ -870,14 +993,20 @@ class UpdateAuthorizerOutput(_SerdeShape):
     expression. It will invoke the authorizer's Lambda function when there
     is a match. Otherwise, it will return a 401 Unauthorized response
     without calling the Lambda function. The validation expression does not
-    apply to the `REQUEST` authorizer.
+    apply to the `REQUEST` or `JWT` authorizer.
     """
     authorizer_result_ttl_in_seconds: int | None = ...
     """
     The TTL in seconds of cached authorizer results. If it equals 0,
     authorization caching is disabled. If it is greater than 0, API Gateway
     will cache authorizer responses. If this field is not set, the default
-    value is 300. The maximum value is 3600, or 1 hour.
+    value is 300. The maximum value is 3600, or 1 hour. This property is not
+    supported for `JWT` authorizers.
+    """
+    jwt_configuration: JwtConfiguration | None = ...
+    """
+    The configuration returned for a JWT authorizer. This field is present
+    only when `type` is `JWT`.
     """
     response_metadata: ResponseMetadata = ...
     """
@@ -1259,7 +1388,7 @@ class UpdateDomainNameOutput(_SerdeShape):
     """
     The region-specific Amazon Route 53 Hosted Zone ID of the regional
     endpoint. For more information, see Set up a Regional Custom Domain Name
-    and AWS Regions and Endpoints for API Gateway.
+    and Amazon Web Services Regions and Endpoints for API Gateway.
     """
     regional_certificate_name: str | None = ...
     """
@@ -1284,8 +1413,8 @@ class UpdateDomainNameOutput(_SerdeShape):
     """
     The region-agnostic Amazon Route 53 Hosted Zone ID of the edge-optimized
     endpoint. The valid value is `Z2FDTNDATAQYW2` for all the regions. For
-    more information, see Set up a Regional Custom Domain Name and AWS
-    Regions and Endpoints for API Gateway.
+    more information, see Set up a Regional Custom Domain Name and Amazon
+    Web Services Regions and Endpoints for API Gateway.
     """
     endpoint_configuration: EndpointConfiguration | None = ...
     """
@@ -1520,12 +1649,13 @@ class UpdateIntegrationOutput(_SerdeShape):
     """
     credentials: str | None = ...
     """
-    Specifies the credentials required for the integration, if any. For AWS
-    integrations, three options are available. To specify an IAM Role for
-    API Gateway to assume, use the role's Amazon Resource Name (ARN). To
-    require that the caller's identity be passed through from the request,
-    specify the string `arn:aws:iam::\\*:user/\\*`. To use resource-based
-    permissions on supported Amazon Web Services services, specify null.
+    Specifies the credentials required for the integration, if any. For
+    Amazon Web Services integrations, three options are available. To
+    specify an IAM Role for API Gateway to assume, use the role's Amazon
+    Resource Name (ARN). To require that the caller's identity be passed
+    through from the request, specify the string `arn:aws:iam::\\*:user/\\*`.
+    To use resource-based permissions on supported Amazon Web Services
+    services, specify null.
     """
     request_parameters: dict[str, str] | None = ...
     """
@@ -1604,7 +1734,7 @@ class UpdateIntegrationOutput(_SerdeShape):
     response_transfer_mode: str | None = ...
     """The response transfer mode of the integration."""
     integration_target: str | None = ...
-    """The ALB or NLB listener to send the request to."""
+    """The ALB or NLB ARN to send the request to."""
     response_metadata: ResponseMetadata = ...
     """
     Metadata about the response that produced this output. Use this to
@@ -1762,9 +1892,9 @@ class UpdateMethodOutput(_SerdeShape):
     authorization_type: str | None = ...
     """
     The method's authorization type. Valid values are `NONE` for open
-    access, `AWS_IAM` for using AWS IAM permissions, `CUSTOM` for using a
-    custom authorizer, or `COGNITO_USER_POOLS` for using a Cognito user
-    pool.
+    access, `AWS_IAM` for using Amazon Web Services IAM permissions,
+    `CUSTOM` for using a custom authorizer, `COGNITO_USER_POOLS` for using a
+    Cognito user pool, or `JWT` for using a JWT authorizer.
     """
     authorizer_id: str | None = ...
     """
@@ -1820,6 +1950,9 @@ class UpdateMethodOutput(_SerdeShape):
     claimed scope in the access token. Otherwise, the invocation is not
     authorized. When the method scope is configured, the client must provide
     an access token instead of an identity token for authorization purposes.
+    The scopes are also used with a `JWT` authorizer. When scopes are
+    configured, the `scope` (or `scp`) claim of the token must contain at
+    least one of the configured scopes.
     """
     response_metadata: ResponseMetadata = ...
     """

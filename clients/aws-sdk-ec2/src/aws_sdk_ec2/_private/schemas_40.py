@@ -11,142 +11,147 @@ _sN = "smithy.api#xmlName"
 _sV = "smithy.api#enumValue"
 _me = "member"
 _i = "item"
-_Va = "Value"
-_va = "value"
-_TS = "TagSpecification"
-_Tag = "Tags"
+_RT = "ResourceType"
+_rT = "resourceType"
 _sSI = "smithy.synthetic#originalShapeId"
 _sm = "smithy.api#input"
 _sO = "smithy.api#clientOptional"
 _smi = "smithy.api#required"
-_TSa = "TagSpecifications"
 _DR = "DryRun"
-_p = "pending"
+_ATd = "AddressTransfer"
+_AI = "AllocationId"
+_TAI = "TransferAccountId"
 _smit = "smithy.api#output"
+_aT = "addressTransfer"
 _R = "Return"
 _r = "return"
 _TGAI = "TransitGatewayAttachmentId"
-_CVEI = "ClientVpnEndpointId"
 _St = "State"
 _st = "state"
-_Re = "Region"
-_reg = "region"
+_TGMDI = "TransitGatewayMulticastDomainId"
+_SI = "SubnetIds"
+_SIu = "SubnetId"
+_sI = "subnetId"
+_As = "Associations"
+_asso = "associations"
+_OIw = "OwnerId"
+_oI = "ownerId"
 _C = "Code"
 _co = "code"
 _Me = "Message"
 _mes = "message"
-_Sta = "Status"
-_sta = "status"
-_TSag = "TagSet"
-_tS = "tagSet"
 _VI = "VpcId"
 _vI = "vpcId"
+_E = "Error"
+_er = "error"
+_Un = "Unsuccessful"
+_un = "unsuccessful"
 _dRr = "dryRun"
-_act = "active"
-_Ci = "Cidr"
-_ci = "cidr"
-_Id = "Id"
-_GI = "GatewayId"
+_AZ = "AvailabilityZone"
+_aZ = "availabilityZone"
+_AZI = "AvailabilityZoneId"
+_aZI = "availabilityZoneId"
 _II = "InstanceId"
+_NGI = "NatGatewayId"
+_nGI = "natGatewayId"
+_AZv = "AvailabilityZones"
+_AZIv = "AvailabilityZoneIds"
 _De = "Destination"
 _Sou = "Source"
-_MB = "ManagedBy"
-_mB = "managedBy"
-_AVTS = "ActiveVpnTunnelStatus"
-_Des = "Description"
-_SMt = "StatusMessage"
-_sMt = "statusMessage"
-_desc = "description"
-_PIo = "PoolId"
+_AIs = "AssociationId"
+_aIs = "associationId"
 _CTl = "ClientToken"
+_cTl = "clientToken"
 _sT = "smithy.api#idempotencyToken"
+_NGAa = "NatGatewayAddresses"
+_NGASa = "NatGatewayAddressSet"
+_nGAS = "natGatewayAddressSet"
 _IIn = "InstanceIds"
+_SR = "SuccessfulResults"
+_SRS = "SuccessfulResultSet"
+_sRS = "successfulResultSet"
+_UR = "UnsuccessfulResults"
+_URS = "UnsuccessfulResultSet"
+_uRS = "unsuccessfulResultSet"
 _sU = "smithy.api#Unit"
-_CAe = "CertificateArn"
-_CSBN = "CertificateS3BucketName"
-_cSBN = "certificateS3BucketName"
-_CSOK = "CertificateS3ObjectKey"
-_cSOK = "certificateS3ObjectKey"
-_EKKI = "EncryptionKmsKeyId"
-_eKKI = "encryptionKmsKeyId"
+_KKI = "KmsKeyId"
+_SIn = "SnapshotId"
 _RSI = "RouteServerId"
+_RSA = "RouteServerAssociation"
+_rSA = "routeServerAssociation"
 _RTIo = "RouteTableId"
+_GIr = "GroupId"
+_ICBA = "Ipv6CidrBlockAssociation"
+_iCBA = "ipv6CidrBlockAssociation"
+_TGPTI = "TransitGatewayPolicyTableId"
+_Ass = "Association"
+_assoc = "association"
 _TGRTI = "TransitGatewayRouteTableId"
+_CBA = "CidrBlockAssociation"
+_cBA = "cidrBlockAssociation"
 _IIm = "ImageId"
-_WK = "WatermarkKey"
-_wK = "watermarkKey"
-_VAII = "VerifiedAccessInstanceId"
-_vAII = "verifiedAccessInstanceId"
-_PSKE = "PublicSigningKeyEndpoint"
-_pSKE = "publicSigningKeyEndpoint"
-_Is = "Issuer"
-_iss = "issuer"
-_AE = "AuthorizationEndpoint"
-_aE = "authorizationEndpoint"
-_TE = "TokenEndpoint"
-_tE = "tokenEndpoint"
-_UIEs = "UserInfoEndpoint"
-_uIE = "userInfoEndpoint"
-_CIl = "ClientId"
-_cIl = "clientId"
-_CSl = "ClientSecret"
-_cSl = "clientSecret"
-_VIo = "VolumeId"
-_ARs = "AssociatedResource"
-_aRs = "associatedResource"
-_vIo = "volumeId"
 _IIRAI = "IpamInternetRegistryAssociationId"
-_ST = "StartTime"
-_Prog = "Progress"
-_prog = "progress"
 _iIm = "imageId"
-_ED = "EndDate"
-_SDt = "StartDate"
-_sDt = "startDate"
-_eD = "endDate"
-_Ty = "Type"
-_ty = "type"
+_SSI = "SourceSnapshotId"
+_sIn = "snapshotId"
+_succ = "successful"
+_LTI = "LaunchTemplateId"
+_LTN = "LaunchTemplateName"
 _Ve = "Version"
-_ver = "version"
 _Ins = "Instances"
-_DIF = "DiskImageFormat"
-_dIF = "diskImageFormat"
-_SBu = "S3Bucket"
-_SPr = "S3Prefix"
 _IIRA = "IpamInternetRegistryAssociation"
 _iIRA = "ipamInternetRegistryAssociation"
 _IPIp = "IpamPolicyId"
 _iPIp = "ipamPolicyId"
 _succe = "success"
+_LT = "LaunchTemplate"
+_lT = "launchTemplate"
 _Metr = "Metric"
-_EVRP = "EnableVgwRoutePropagation"
-_Rout = "Routes"
-_RSout = "RouteSet"
-_rSou = "routeSet"
-_TGRTAI = "TransitGatewayRouteTableAnnouncementId"
-_VCIp = "VpnConnectionId"
+_RTAI = "RouteTableAssociationId"
+_OAwn = "OwnerAlias"
+_oAw = "ownerAlias"
+_Suc = "Successful"
 _RV = "ReturnValue"
 _rV = "returnValue"
-_Fi = "Filter"
-_Fil = "Filters"
-_NTex = "NextToken"
-_MR = "MaxResults"
-_nT = "nextToken"
 _ISns = "InstanceSet"
 _iSn = "instanceSet"
 _Stati = "Statistic"
-_Per = "Period"
-_ETnd = "EndTime"
-_EITI = "ExportImageTaskId"
-_eITI = "exportImageTaskId"
-_SEL = "S3ExportLocation"
-_sEL = "s3ExportLocation"
-_SIR = "SourceImageRegion"
-_sIR = "sourceImageRegion"
-_IWm = "ImageWatermarks"
-_IWS = "ImageWatermarkSet"
-_iWS = "imageWatermarkSet"
+_AIsso = "AssociationIds"
+_TRC = "TargetResourceCount"
+_SCn = "SnapshotConfiguration"
+_sCn = "snapshotConfiguration"
+_MPLa = "MaxParallelLaunches"
+_mPL = "maxParallelLaunches"
+_STR = "StateTransitionReason"
+_sTR = "stateTransitionReason"
+_STT = "StateTransitionTime"
+_sTT = "stateTransitionTime"
+_ETna = "EnablingTime"
+_eTna = "enablingTime"
+_OT = "OptimizingTime"
+_oT = "optimizingTime"
+_ETnab = "EnabledTime"
+_eTnab = "enabledTime"
+_DTi = "DisablingTime"
+_dTi = "disablingTime"
+_DTis = "DisabledTime"
+_dTis = "disabledTime"
 _SSC = "SqlServerCredentials"
+_FPAIc = "FcaPolicyAssociationIds"
+_AISS = "AllowedImagesSettingsState"
+_aISS = "allowedImagesSettingsState"
+_Ou = "Output"
+_outp = "output"
+_CMSa = "CapacityManagerStatus"
+_cMSa = "capacityManagerStatus"
+_OArg = "OrganizationsAccess"
+_oArg = "organizationsAccess"
+_EEBD = "EbsEncryptionByDefault"
+_eEBD = "ebsEncryptionByDefault"
+_SSIo = "SourceSnapshotIds"
+_FSRSE = "FastSnapshotRestoreStateErrors"
+_FSRSES = "FastSnapshotRestoreStateErrorSet"
+_fSRSES = "fastSnapshotRestoreStateErrorSet"
 _IBPAS = "ImageBlockPublicAccessState"
 _iBPAS = "imageBlockPublicAccessState"
 _DAAIel = "DelegatedAdminAccountId"
@@ -158,8 +163,129 @@ _SCAE = "SerialConsoleAccessEnabled"
 _sCAE = "serialConsoleAccessEnabled"
 _bns = "block_new_sharing"
 _bns_ = "block-new-sharing"
-_Prop = "Propagation"
-_propa = "propagation"
+_DKKII = "DisassociateKmsKeyIdInput"
+_cDKKIR = "com.amazonaws.ec2#DisassociateKmsKeyIdRequest"
+_DKKIO = "DisassociateKmsKeyIdOutput"
+_cDKKIRo = "com.amazonaws.ec2#DisassociateKmsKeyIdResult"
+_DKKI = "DisassociateKmsKeyId"
+_EAIL = "EipAssociationIdList"
+_DSr = "DrainSeconds"
+_DNGAI = "DisassociateNatGatewayAddressInput"
+_cDNGAR = "com.amazonaws.ec2#DisassociateNatGatewayAddressRequest"
+_MDDS = "MaxDrainDurationSeconds"
+_DNGAO = "DisassociateNatGatewayAddressOutput"
+_cDNGARo = "com.amazonaws.ec2#DisassociateNatGatewayAddressResult"
+_DNGA = "DisassociateNatGatewayAddress"
+_FCAPDAIL = "FlexCostAllocationPolicyDisassociateAssociationIdList"
+_DNFCAPIi = "DisassociateNetworkingFlexCostAllocationPolicyInput"
+_cDNFCAPRomam = (
+    "com.amazonaws.ec2#DisassociateNetworkingFlexCostAllocationPolicyRequest"
+)
+_DNFCAPOi = "DisassociateNetworkingFlexCostAllocationPolicyOutput"
+_cDNFCAPRomama = (
+    "com.amazonaws.ec2#DisassociateNetworkingFlexCostAllocationPolicyResult"
+)
+_FPD = "FcaPolicyDisassociations"
+_fPD = "fcaPolicyDisassociations"
+_FPDF = "FcaPolicyDisassociationFailures"
+_fPDF = "fcaPolicyDisassociationFailures"
+_DNFCAPi = "DisassociateNetworkingFlexCostAllocationPolicy"
+_DRSIi = "DisassociateRouteServerInput"
+_cDRSRomam = "com.amazonaws.ec2#DisassociateRouteServerRequest"
+_DRSOi = "DisassociateRouteServerOutput"
+_cDRSRomama = "com.amazonaws.ec2#DisassociateRouteServerResult"
+_DRSi = "DisassociateRouteServer"
+_DRTIi = "DisassociateRouteTableInput"
+_cDRTRoma = "com.amazonaws.ec2#DisassociateRouteTableRequest"
+_DRTOi = "DisassociateRouteTableOutput"
+_DRTi = "DisassociateRouteTable"
+_DSGVSGI = "DisassociateSecurityGroupVpcSecurityGroupId"
+_DSGVI = "DisassociateSecurityGroupVpcInput"
+_cDSGVR = "com.amazonaws.ec2#DisassociateSecurityGroupVpcRequest"
+_DSGVO = "DisassociateSecurityGroupVpcOutput"
+_cDSGVRo = "com.amazonaws.ec2#DisassociateSecurityGroupVpcResult"
+_DSGV = "DisassociateSecurityGroupVpc"
+_DSCBI = "DisassociateSubnetCidrBlockInput"
+_cDSCBR = "com.amazonaws.ec2#DisassociateSubnetCidrBlockRequest"
+_DSCBO = "DisassociateSubnetCidrBlockOutput"
+_cDSCBRo = "com.amazonaws.ec2#DisassociateSubnetCidrBlockResult"
+_DSCB = "DisassociateSubnetCidrBlock"
+_DTGMDIi = "DisassociateTransitGatewayMulticastDomainInput"
+_cDTGMDRomam = "com.amazonaws.ec2#DisassociateTransitGatewayMulticastDomainRequest"
+_DTGMDOi = "DisassociateTransitGatewayMulticastDomainOutput"
+_cDTGMDRomama = "com.amazonaws.ec2#DisassociateTransitGatewayMulticastDomainResult"
+_DTGMDi = "DisassociateTransitGatewayMulticastDomain"
+_DTGPTIi = "DisassociateTransitGatewayPolicyTableInput"
+_cDTGPTRomam = "com.amazonaws.ec2#DisassociateTransitGatewayPolicyTableRequest"
+_DTGPTOi = "DisassociateTransitGatewayPolicyTableOutput"
+_cDTGPTRomama = "com.amazonaws.ec2#DisassociateTransitGatewayPolicyTableResult"
+_DTGPTi = "DisassociateTransitGatewayPolicyTable"
+_DTGRTIi = "DisassociateTransitGatewayRouteTableInput"
+_cDTGRTRomam = "com.amazonaws.ec2#DisassociateTransitGatewayRouteTableRequest"
+_DTGRTOi = "DisassociateTransitGatewayRouteTableOutput"
+_cDTGRTRomama = "com.amazonaws.ec2#DisassociateTransitGatewayRouteTableResult"
+_DTGRTi = "DisassociateTransitGatewayRouteTable"
+_DTII = "DisassociateTrunkInterfaceInput"
+_cDTIR = "com.amazonaws.ec2#DisassociateTrunkInterfaceRequest"
+_DTIO = "DisassociateTrunkInterfaceOutput"
+_cDTIRo = "com.amazonaws.ec2#DisassociateTrunkInterfaceResult"
+_DTIi = "DisassociateTrunkInterface"
+_VCAI = "VpcCidrAssociationId"
+_DVCBI = "DisassociateVpcCidrBlockInput"
+_cDVCBR = "com.amazonaws.ec2#DisassociateVpcCidrBlockRequest"
+_DVCBO = "DisassociateVpcCidrBlockOutput"
+_cDVCBRo = "com.amazonaws.ec2#DisassociateVpcCidrBlockResult"
+_DVCB = "DisassociateVpcCidrBlock"
+_EATI = "EnableAddressTransferInput"
+_cEATR = "com.amazonaws.ec2#EnableAddressTransferRequest"
+_EATO = "EnableAddressTransferOutput"
+_cEATRo = "com.amazonaws.ec2#EnableAddressTransferResult"
+_EAT = "EnableAddressTransfer"
+_EAISI = "EnableAllowedImagesSettingsInput"
+_cEAISR = "com.amazonaws.ec2#EnableAllowedImagesSettingsRequest"
+_EAISO = "EnableAllowedImagesSettingsOutput"
+_cEAISRo = "com.amazonaws.ec2#EnableAllowedImagesSettingsResult"
+_EAIS = "EnableAllowedImagesSettings"
+_EASCSI = "EnableApplicationStatusCheckSuppressionInput"
+_cEASCSR = "com.amazonaws.ec2#EnableApplicationStatusCheckSuppressionRequest"
+_DSu = "DurationSeconds"
+_EASCSO = "EnableApplicationStatusCheckSuppressionOutput"
+_cEASCSRo = "com.amazonaws.ec2#EnableApplicationStatusCheckSuppressionResult"
+_EASCS = "EnableApplicationStatusCheckSuppression"
+_EANPMSI = "EnableAwsNetworkPerformanceMetricSubscriptionInput"
+_cEANPMSR = "com.amazonaws.ec2#EnableAwsNetworkPerformanceMetricSubscriptionRequest"
+_EANPMSO = "EnableAwsNetworkPerformanceMetricSubscriptionOutput"
+_cEANPMSRo = "com.amazonaws.ec2#EnableAwsNetworkPerformanceMetricSubscriptionResult"
+_EANPMS = "EnableAwsNetworkPerformanceMetricSubscription"
+_ECMI = "EnableCapacityManagerInput"
+_cECMR = "com.amazonaws.ec2#EnableCapacityManagerRequest"
+_ECMO = "EnableCapacityManagerOutput"
+_cECMRo = "com.amazonaws.ec2#EnableCapacityManagerResult"
+_ECM = "EnableCapacityManager"
+_EEEBDI = "EnableEbsEncryptionByDefaultInput"
+_cEEEBDR = "com.amazonaws.ec2#EnableEbsEncryptionByDefaultRequest"
+_EEEBDO = "EnableEbsEncryptionByDefaultOutput"
+_cEEEBDRo = "com.amazonaws.ec2#EnableEbsEncryptionByDefaultResult"
+_EEEBD = "EnableEbsEncryptionByDefault"
+_FLLTSRa = "FastLaunchLaunchTemplateSpecificationRequest"
+_FLSCRa = "FastLaunchSnapshotConfigurationRequest"
+_EFLI = "EnableFastLaunchInput"
+_cEFLR = "com.amazonaws.ec2#EnableFastLaunchRequest"
+_EFLO = "EnableFastLaunchOutput"
+_cEFLRo = "com.amazonaws.ec2#EnableFastLaunchResult"
+_EFL = "EnableFastLaunch"
+_EFSRI = "EnableFastSnapshotRestoresInput"
+_cEFSRR = "com.amazonaws.ec2#EnableFastSnapshotRestoresRequest"
+_EFSRSI = "EnableFastSnapshotRestoreSuccessItem"
+_EFSRSS = "EnableFastSnapshotRestoreSuccessSet"
+_EFSRSE = "EnableFastSnapshotRestoreStateError"
+_EFSRSEI = "EnableFastSnapshotRestoreStateErrorItem"
+_EFSRSES = "EnableFastSnapshotRestoreStateErrorSet"
+_EFSREI = "EnableFastSnapshotRestoreErrorItem"
+_EFSRES = "EnableFastSnapshotRestoreErrorSet"
+_EFSRO = "EnableFastSnapshotRestoresOutput"
+_cEFSRRo = "com.amazonaws.ec2#EnableFastSnapshotRestoresResult"
+_EFSR = "EnableFastSnapshotRestores"
 _EII = "EnableImageInput"
 _cEIR = "com.amazonaws.ec2#EnableImageRequest"
 _EIO = "EnableImageOutput"
@@ -229,185 +355,848 @@ _cESBPAR = "com.amazonaws.ec2#EnableSnapshotBlockPublicAccessRequest"
 _ESBPAO = "EnableSnapshotBlockPublicAccessOutput"
 _cESBPARo = "com.amazonaws.ec2#EnableSnapshotBlockPublicAccessResult"
 _ESBPA = "EnableSnapshotBlockPublicAccess"
-_ETGRTPI = "EnableTransitGatewayRouteTablePropagationInput"
-_cETGRTPR = "com.amazonaws.ec2#EnableTransitGatewayRouteTablePropagationRequest"
-_ETGRTPO = "EnableTransitGatewayRouteTablePropagationOutput"
-_cETGRTPRo = "com.amazonaws.ec2#EnableTransitGatewayRouteTablePropagationResult"
-_ETGRTP = "EnableTransitGatewayRouteTablePropagation"
-_EVRPI = "EnableVgwRoutePropagationInput"
-_cEVRPR = "com.amazonaws.ec2#EnableVgwRoutePropagationRequest"
-_EVRPO = "EnableVgwRoutePropagationOutput"
-_EVIOI = "EnableVolumeIOInput"
-_cEVIOR = "com.amazonaws.ec2#EnableVolumeIORequest"
-_EVIOO = "EnableVolumeIOOutput"
-_EVIO = "EnableVolumeIO"
-_EVCLI = "EnableVpcClassicLinkInput"
-_cEVCLR = "com.amazonaws.ec2#EnableVpcClassicLinkRequest"
-_EVCLO = "EnableVpcClassicLinkOutput"
-_cEVCLRo = "com.amazonaws.ec2#EnableVpcClassicLinkResult"
-_EVCL = "EnableVpcClassicLink"
-_EVCLDSI = "EnableVpcClassicLinkDnsSupportInput"
-_cEVCLDSR = "com.amazonaws.ec2#EnableVpcClassicLinkDnsSupportRequest"
-_EVCLDSO = "EnableVpcClassicLinkDnsSupportOutput"
-_cEVCLDSRo = "com.amazonaws.ec2#EnableVpcClassicLinkDnsSupportResult"
-_EVCLDS = "EnableVpcClassicLinkDnsSupport"
-_ECVCCRLI = "ExportClientVpnClientCertificateRevocationListInput"
-_cECVCCRLR = "com.amazonaws.ec2#ExportClientVpnClientCertificateRevocationListRequest"
-_CCRLSC = "ClientCertificateRevocationListStatusCode"
-_CCRLS = "ClientCertificateRevocationListStatus"
-_ECVCCRLO = "ExportClientVpnClientCertificateRevocationListOutput"
-_cECVCCRLRo = "com.amazonaws.ec2#ExportClientVpnClientCertificateRevocationListResult"
-_CRL = "CertificateRevocationList"
-_cRL = "certificateRevocationList"
-_ECVCCRL = "ExportClientVpnClientCertificateRevocationList"
-_ECVCCI = "ExportClientVpnClientConfigurationInput"
-_cECVCCR = "com.amazonaws.ec2#ExportClientVpnClientConfigurationRequest"
-_ECVCCO = "ExportClientVpnClientConfigurationOutput"
-_cECVCCRo = "com.amazonaws.ec2#ExportClientVpnClientConfigurationResult"
-_CCl = "ClientConfiguration"
-_cCl = "clientConfiguration"
-_ECVCC = "ExportClientVpnClientConfiguration"
-_ETSLR = "ExportTaskS3LocationRequest"
-_EIIx = "ExportImageInput"
-_cEIRom = "com.amazonaws.ec2#ExportImageRequest"
-_RNo = "RoleName"
-_EIOx = "ExportImageOutput"
-_cEIRoma = "com.amazonaws.ec2#ExportImageResult"
-_rNo = "roleName"
-_EIxp = "ExportImage"
-_ETGRI = "ExportTransitGatewayRoutesInput"
-_cETGRR = "com.amazonaws.ec2#ExportTransitGatewayRoutesRequest"
-_ETGRO = "ExportTransitGatewayRoutesOutput"
-_cETGRRo = "com.amazonaws.ec2#ExportTransitGatewayRoutesResult"
-_SLo = "S3Location"
-_sLo = "s3Location"
-_ETGR = "ExportTransitGatewayRoutes"
-_EVAICCI = "ExportVerifiedAccessInstanceClientConfigurationInput"
-_cEVAICCR = "com.amazonaws.ec2#ExportVerifiedAccessInstanceClientConfigurationRequest"
-_DTPTL = "DeviceTrustProviderTypeList"
-_VAIOVCCR = "VerifiedAccessInstanceOpenVpnClientConfigurationRoute"
-_VAIOVCCRL = "VerifiedAccessInstanceOpenVpnClientConfigurationRouteList"
-_VAIOVCC = "VerifiedAccessInstanceOpenVpnClientConfiguration"
-_Confi = "Config"
-_confi = "config"
-_VAIOVCCL = "VerifiedAccessInstanceOpenVpnClientConfigurationList"
-_VAIUTPCC = "VerifiedAccessInstanceUserTrustProviderClientConfiguration"
-_Sco = "Scopes"
-_sco = "scopes"
-_PE = "PkceEnabled"
-_pE = "pkceEnabled"
-_EVAICCO = "ExportVerifiedAccessInstanceClientConfigurationOutput"
-_cEVAICCRo = "com.amazonaws.ec2#ExportVerifiedAccessInstanceClientConfigurationResult"
-_DTP = "DeviceTrustProviders"
-_DTPS = "DeviceTrustProviderSet"
-_dTPS = "deviceTrustProviderSet"
-_UTP = "UserTrustProvider"
-_uTP = "userTrustProvider"
-_OVC = "OpenVpnConfigurations"
-_OVCS = "OpenVpnConfigurationSet"
-_oVCS = "openVpnConfigurationSet"
-_EVAICC = "ExportVerifiedAccessInstanceClientConfiguration"
-_GAVTSI = "GetActiveVpnTunnelStatusInput"
-_cGAVTSR = "com.amazonaws.ec2#GetActiveVpnTunnelStatusRequest"
-_VTOIA = "VpnTunnelOutsideIpAddress"
-_GAVTSO = "GetActiveVpnTunnelStatusOutput"
-_cGAVTSRo = "com.amazonaws.ec2#GetActiveVpnTunnelStatusResult"
-_aVTS = "activeVpnTunnelStatus"
-_GAVTS = "GetActiveVpnTunnelStatus"
-_GAISI = "GetAllowedImagesSettingsInput"
-_cGAISR = "com.amazonaws.ec2#GetAllowedImagesSettingsRequest"
-_MDSCV = "MaximumDaysSinceCreatedValue"
-_CDC = "CreationDateCondition"
-_MDSC = "MaximumDaysSinceCreated"
-_mDSC = "maximumDaysSinceCreated"
-_MDSDV = "MaximumDaysSinceDeprecatedValue"
-_DTC = "DeprecationTimeCondition"
-_MDSD = "MaximumDaysSinceDeprecated"
-_mDSD = "maximumDaysSinceDeprecated"
-_INm = "ImageName"
-_INLm = "ImageNameList"
-_IPm = "ImageProvider"
-_IPLm = "ImageProviderList"
-_IWFR = "ImageWatermarkFilterResponse"
-_MDSSIC = "MaximumDaysSinceSourceImageCreated"
-_mDSSIC = "maximumDaysSinceSourceImageCreated"
-_MDSWC = "MaximumDaysSinceWatermarkCreated"
-_mDSWC = "maximumDaysSinceWatermarkCreated"
-_IWFRL = "ImageWatermarkFilterResponseList"
-_MPC = "MarketplaceProductCode"
-_MPCL = "MarketplaceProductCodeList"
-_MDSFAV = "MaxDaysSinceFixAvailableValue"
-_MDSLFSV = "MaxDaysSinceLastFindingScanValue"
-_SRCc = "ScanResultCondition"
-_MDSLFS = "MaxDaysSinceLastFindingScan"
-_mDSLFS = "maxDaysSinceLastFindingScan"
-_MSL = "MaximumSeverityLabel"
-_mSL = "maximumSeverityLabel"
-_MDSIFA = "MaxDaysSinceInformationalFixAvailable"
-_mDSIFA = "maxDaysSinceInformationalFixAvailable"
-_MDSLFA = "MaxDaysSinceLowFixAvailable"
-_mDSLFA = "maxDaysSinceLowFixAvailable"
-_MDSMFA = "MaxDaysSinceMediumFixAvailable"
-_mDSMFA = "maxDaysSinceMediumFixAvailable"
-_MDSHFA = "MaxDaysSinceHighFixAvailable"
-_mDSHFA = "maxDaysSinceHighFixAvailable"
-_MDSCFA = "MaxDaysSinceCriticalFixAvailable"
-_mDSCFA = "maxDaysSinceCriticalFixAvailable"
-_ICm = "ImageCriterion"
-_IPma = "ImageProviders"
-_IPSm = "ImageProviderSet"
-_iPSm = "imageProviderSet"
-_MPCa = "MarketplaceProductCodes"
-_MPCS = "MarketplaceProductCodeSet"
-_mPCS = "marketplaceProductCodeSet"
-_INma = "ImageNames"
-_INS = "ImageNameSet"
-_iNS = "imageNameSet"
-_dTC = "deprecationTimeCondition"
-_cDC = "creationDateCondition"
-_sRC = "scanResultCondition"
-_ICLm = "ImageCriterionList"
-_GAISO = "GetAllowedImagesSettingsOutput"
-_cGAISRo = "com.amazonaws.ec2#GetAllowedImagesSettingsResult"
-_ICma = "ImageCriteria"
-_ICSm = "ImageCriterionSet"
-_iCS = "imageCriterionSet"
-_GAIS = "GetAllowedImagesSettings"
-_GAECIRI = "GetAssociatedEnclaveCertificateIamRolesInput"
-_cGAECIRR = "com.amazonaws.ec2#GetAssociatedEnclaveCertificateIamRolesRequest"
-_ARss = "AssociatedRole"
-_ARAss = "AssociatedRoleArn"
-_aRAss = "associatedRoleArn"
-_ARL = "AssociatedRolesList"
-_GAECIRO = "GetAssociatedEnclaveCertificateIamRolesOutput"
-_cGAECIRRo = "com.amazonaws.ec2#GetAssociatedEnclaveCertificateIamRolesResult"
-_ARsso = "AssociatedRoles"
-_ARSs = "AssociatedRoleSet"
-_aRSs = "associatedRoleSet"
-_GAECIR = "GetAssociatedEnclaveCertificateIamRoles"
-_GAIPCI = "GetAssociatedIpv6PoolCidrsInput"
-_cGAIPCR = "com.amazonaws.ec2#GetAssociatedIpv6PoolCidrsRequest"
-_ICAp = "Ipv6CidrAssociation"
-_ICp = "Ipv6Cidr"
-_iCp = "ipv6Cidr"
-_ICAS = "Ipv6CidrAssociationSet"
-_GAIPCO = "GetAssociatedIpv6PoolCidrsOutput"
-_cGAIPCRo = "com.amazonaws.ec2#GetAssociatedIpv6PoolCidrsResult"
-_ICApv = "Ipv6CidrAssociations"
-_iCAS = "ipv6CidrAssociationSet"
-_GAIPC = "GetAssociatedIpv6PoolCidrs"
-_DQ = "DataQuery"
-_DQa = "DataQueries"
-_GANPDI = "GetAwsNetworkPerformanceDataInput"
-_cGANPDR = "com.amazonaws.ec2#GetAwsNetworkPerformanceDataRequest"
-_MPe = "MetricPoint"
-_MPet = "MetricPoints"
-_DRat = "DataResponses"
-_GANPDO = "GetAwsNetworkPerformanceDataOutput"
-_cGANPDRo = "com.amazonaws.ec2#GetAwsNetworkPerformanceDataResult"
-_DRSat = "DataResponseSet"
-_dRSa = "dataResponseSet"
-_GANPD = "GetAwsNetworkPerformanceData"
+
+DISASSOCIATE_KMS_KEY_ID_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DKKII,
+    {_sSI: _cDKKIR, _sm: None},
+    (_SIn, _KKI, _DR),
+    (
+        (lambda: schemas.SNAPSHOT_ID, 0),
+        (lambda: schemas.KMS_KEY_ID, {_sO: None, _smi: None}),
+        (lambda: schemas.BOOLEAN, 0),
+    ),
+)
+
+DISASSOCIATE_KMS_KEY_ID_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DKKIO,
+    {_sSI: _cDKKIRo, _smit: None},
+    (_R,),
+    ((lambda: schemas.BOOLEAN, {_aQN: _R, _sN: _r}),),
+)
+
+DISASSOCIATE_KMS_KEY_ID: StaticOperationSchema = (
+    23,
+    n0,
+    _DKKI,
+    0,
+    DISASSOCIATE_KMS_KEY_ID_INPUT,
+    DISASSOCIATE_KMS_KEY_ID_OUTPUT,
+    (),
+)
+
+EIP_ASSOCIATION_ID_LIST: StaticSchema = (
+    16,
+    n0,
+    _EAIL,
+    0,
+    (_me,),
+    ((lambda: schemas.ELASTIC_IP_ASSOCIATION_ID, {_sN: _i}),),
+)
+
+DRAIN_SECONDS: StaticSchema = (7, n0, _DSr, 0)
+
+DISASSOCIATE_NAT_GATEWAY_ADDRESS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DNGAI,
+    {_sSI: _cDNGAR, _sm: None},
+    (_NGI, _AIsso, _MDDS, _DR),
+    (
+        (lambda: schemas.NAT_GATEWAY_ID, {_sO: None, _smi: None}),
+        (EIP_ASSOCIATION_ID_LIST, {_sN: _AIs, _sO: None, _smi: None}),
+        (DRAIN_SECONDS, 0),
+        (lambda: schemas.BOOLEAN, 0),
+    ),
+)
+
+DISASSOCIATE_NAT_GATEWAY_ADDRESS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DNGAO,
+    {_sSI: _cDNGARo, _smit: None},
+    (_NGI, _NGAa),
+    (
+        (lambda: schemas.NAT_GATEWAY_ID, {_aQN: _NGI, _sN: _nGI}),
+        (lambda: schemas.NAT_GATEWAY_ADDRESS_LIST, {_aQN: _NGASa, _sN: _nGAS}),
+    ),
+)
+
+DISASSOCIATE_NAT_GATEWAY_ADDRESS: StaticOperationSchema = (
+    23,
+    n0,
+    _DNGA,
+    0,
+    DISASSOCIATE_NAT_GATEWAY_ADDRESS_INPUT,
+    DISASSOCIATE_NAT_GATEWAY_ADDRESS_OUTPUT,
+    (),
+)
+
+FLEX_COST_ALLOCATION_POLICY_DISASSOCIATE_ASSOCIATION_ID_LIST: StaticSchema = (
+    16,
+    n0,
+    _FCAPDAIL,
+    0,
+    (_me,),
+    ((lambda: schemas.FLEX_COST_ALLOCATION_POLICY_ASSOCIATION_ID, {_sN: _i}),),
+)
+
+DISASSOCIATE_NETWORKING_FLEX_COST_ALLOCATION_POLICY_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DNFCAPIi,
+    {_sSI: _cDNFCAPRomam, _sm: None},
+    (_FPAIc, _DR),
+    (
+        (
+            FLEX_COST_ALLOCATION_POLICY_DISASSOCIATE_ASSOCIATION_ID_LIST,
+            {_sO: None, _smi: None},
+        ),
+        (lambda: schemas.BOOLEAN, 0),
+    ),
+)
+
+DISASSOCIATE_NETWORKING_FLEX_COST_ALLOCATION_POLICY_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DNFCAPOi,
+    {_sSI: _cDNFCAPRomama, _smit: None},
+    (_FPD, _FPDF),
+    (
+        (
+            lambda: schemas.FLEX_COST_ALLOCATION_POLICY_ASSOCIATION_ID_LIST,
+            {_aQN: _FPD, _sN: _fPD},
+        ),
+        (
+            lambda: schemas.FLEX_COST_ALLOCATION_OPERATION_FAILURE_LIST,
+            {_aQN: _FPDF, _sN: _fPDF},
+        ),
+    ),
+)
+
+DISASSOCIATE_NETWORKING_FLEX_COST_ALLOCATION_POLICY: StaticOperationSchema = (
+    23,
+    n0,
+    _DNFCAPi,
+    0,
+    DISASSOCIATE_NETWORKING_FLEX_COST_ALLOCATION_POLICY_INPUT,
+    DISASSOCIATE_NETWORKING_FLEX_COST_ALLOCATION_POLICY_OUTPUT,
+    (),
+)
+
+DISASSOCIATE_ROUTE_SERVER_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DRSIi,
+    {_sSI: _cDRSRomam, _sm: None},
+    (_RSI, _VI, _DR),
+    (
+        (lambda: schemas.ROUTE_SERVER_ID, {_sO: None, _smi: None}),
+        (lambda: schemas.VPC_ID, {_sO: None, _smi: None}),
+        (lambda: schemas.BOOLEAN, 0),
+    ),
+)
+
+DISASSOCIATE_ROUTE_SERVER_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DRSOi,
+    {_sSI: _cDRSRomama, _smit: None},
+    (_RSA,),
+    ((lambda: schemas.ROUTE_SERVER_ASSOCIATION, {_aQN: _RSA, _sN: _rSA}),),
+)
+
+DISASSOCIATE_ROUTE_SERVER: StaticOperationSchema = (
+    23,
+    n0,
+    _DRSi,
+    0,
+    DISASSOCIATE_ROUTE_SERVER_INPUT,
+    DISASSOCIATE_ROUTE_SERVER_OUTPUT,
+    (),
+)
+
+ROUTE_TABLE_ASSOCIATION_ID: StaticSchema = (3, n0, _RTAI, 0)
+
+DISASSOCIATE_ROUTE_TABLE_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DRTIi,
+    {_sSI: _cDRTRoma, _sm: None},
+    (_DR, _AIs),
+    (
+        (lambda: schemas.BOOLEAN, {_aQN: _DR, _sN: _dRr}),
+        (ROUTE_TABLE_ASSOCIATION_ID, {_aQN: _AIs, _sN: _aIs, _sO: None, _smi: None}),
+    ),
+)
+
+DISASSOCIATE_ROUTE_TABLE_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DRTOi,
+    {_sSI: _sU, _smit: None},
+)
+
+DISASSOCIATE_ROUTE_TABLE: StaticOperationSchema = (
+    23,
+    n0,
+    _DRTi,
+    0,
+    DISASSOCIATE_ROUTE_TABLE_INPUT,
+    DISASSOCIATE_ROUTE_TABLE_OUTPUT,
+    (),
+)
+
+DISASSOCIATE_SECURITY_GROUP_VPC_SECURITY_GROUP_ID: StaticSchema = (3, n0, _DSGVSGI, 0)
+
+DISASSOCIATE_SECURITY_GROUP_VPC_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DSGVI,
+    {_sSI: _cDSGVR, _sm: None},
+    (_GIr, _VI, _DR),
+    (
+        (DISASSOCIATE_SECURITY_GROUP_VPC_SECURITY_GROUP_ID, {_sO: None, _smi: None}),
+        (lambda: schemas.STRING, {_sO: None, _smi: None}),
+        (lambda: schemas.BOOLEAN, 0),
+    ),
+)
+
+DISASSOCIATE_SECURITY_GROUP_VPC_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DSGVO,
+    {_sSI: _cDSGVRo, _smit: None},
+    (_St,),
+    ((lambda: schemas.SECURITY_GROUP_VPC_ASSOCIATION_STATE, {_aQN: _St, _sN: _st}),),
+)
+
+DISASSOCIATE_SECURITY_GROUP_VPC: StaticOperationSchema = (
+    23,
+    n0,
+    _DSGV,
+    0,
+    DISASSOCIATE_SECURITY_GROUP_VPC_INPUT,
+    DISASSOCIATE_SECURITY_GROUP_VPC_OUTPUT,
+    (),
+)
+
+DISASSOCIATE_SUBNET_CIDR_BLOCK_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DSCBI,
+    {_sSI: _cDSCBR, _sm: None},
+    (_AIs,),
+    (
+        (
+            lambda: schemas.SUBNET_CIDR_ASSOCIATION_ID,
+            {_aQN: _AIs, _sN: _aIs, _sO: None, _smi: None},
+        ),
+    ),
+)
+
+DISASSOCIATE_SUBNET_CIDR_BLOCK_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DSCBO,
+    {_sSI: _cDSCBRo, _smit: None},
+    (_ICBA, _SIu),
+    (
+        (lambda: schemas.SUBNET_IPV6_CIDR_BLOCK_ASSOCIATION, {_aQN: _ICBA, _sN: _iCBA}),
+        (lambda: schemas.STRING, {_aQN: _SIu, _sN: _sI}),
+    ),
+)
+
+DISASSOCIATE_SUBNET_CIDR_BLOCK: StaticOperationSchema = (
+    23,
+    n0,
+    _DSCB,
+    0,
+    DISASSOCIATE_SUBNET_CIDR_BLOCK_INPUT,
+    DISASSOCIATE_SUBNET_CIDR_BLOCK_OUTPUT,
+    (),
+)
+
+DISASSOCIATE_TRANSIT_GATEWAY_MULTICAST_DOMAIN_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DTGMDIi,
+    {_sSI: _cDTGMDRomam, _sm: None},
+    (_TGMDI, _TGAI, _SI, _DR),
+    (
+        (lambda: schemas.TRANSIT_GATEWAY_MULTICAST_DOMAIN_ID, {_sO: None, _smi: None}),
+        (lambda: schemas.TRANSIT_GATEWAY_ATTACHMENT_ID, {_sO: None, _smi: None}),
+        (lambda: schemas.TRANSIT_GATEWAY_SUBNET_ID_LIST, {_sO: None, _smi: None}),
+        (lambda: schemas.BOOLEAN, 0),
+    ),
+)
+
+DISASSOCIATE_TRANSIT_GATEWAY_MULTICAST_DOMAIN_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DTGMDOi,
+    {_sSI: _cDTGMDRomama, _smit: None},
+    (_As,),
+    (
+        (
+            lambda: schemas.TRANSIT_GATEWAY_MULTICAST_DOMAIN_ASSOCIATIONS,
+            {_aQN: _As, _sN: _asso},
+        ),
+    ),
+)
+
+DISASSOCIATE_TRANSIT_GATEWAY_MULTICAST_DOMAIN: StaticOperationSchema = (
+    23,
+    n0,
+    _DTGMDi,
+    0,
+    DISASSOCIATE_TRANSIT_GATEWAY_MULTICAST_DOMAIN_INPUT,
+    DISASSOCIATE_TRANSIT_GATEWAY_MULTICAST_DOMAIN_OUTPUT,
+    (),
+)
+
+DISASSOCIATE_TRANSIT_GATEWAY_POLICY_TABLE_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DTGPTIi,
+    {_sSI: _cDTGPTRomam, _sm: None},
+    (_TGPTI, _TGAI, _DR),
+    (
+        (lambda: schemas.TRANSIT_GATEWAY_POLICY_TABLE_ID, {_sO: None, _smi: None}),
+        (lambda: schemas.TRANSIT_GATEWAY_ATTACHMENT_ID, {_sO: None, _smi: None}),
+        (lambda: schemas.BOOLEAN, 0),
+    ),
+)
+
+DISASSOCIATE_TRANSIT_GATEWAY_POLICY_TABLE_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DTGPTOi,
+    {_sSI: _cDTGPTRomama, _smit: None},
+    (_Ass,),
+    (
+        (
+            lambda: schemas.TRANSIT_GATEWAY_POLICY_TABLE_ASSOCIATION,
+            {_aQN: _Ass, _sN: _assoc},
+        ),
+    ),
+)
+
+DISASSOCIATE_TRANSIT_GATEWAY_POLICY_TABLE: StaticOperationSchema = (
+    23,
+    n0,
+    _DTGPTi,
+    0,
+    DISASSOCIATE_TRANSIT_GATEWAY_POLICY_TABLE_INPUT,
+    DISASSOCIATE_TRANSIT_GATEWAY_POLICY_TABLE_OUTPUT,
+    (),
+)
+
+DISASSOCIATE_TRANSIT_GATEWAY_ROUTE_TABLE_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DTGRTIi,
+    {_sSI: _cDTGRTRomam, _sm: None},
+    (_TGRTI, _TGAI, _DR),
+    (
+        (lambda: schemas.TRANSIT_GATEWAY_ROUTE_TABLE_ID, {_sO: None, _smi: None}),
+        (lambda: schemas.TRANSIT_GATEWAY_ATTACHMENT_ID, {_sO: None, _smi: None}),
+        (lambda: schemas.BOOLEAN, 0),
+    ),
+)
+
+DISASSOCIATE_TRANSIT_GATEWAY_ROUTE_TABLE_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DTGRTOi,
+    {_sSI: _cDTGRTRomama, _smit: None},
+    (_Ass,),
+    ((lambda: schemas.TRANSIT_GATEWAY_ASSOCIATION, {_aQN: _Ass, _sN: _assoc}),),
+)
+
+DISASSOCIATE_TRANSIT_GATEWAY_ROUTE_TABLE: StaticOperationSchema = (
+    23,
+    n0,
+    _DTGRTi,
+    0,
+    DISASSOCIATE_TRANSIT_GATEWAY_ROUTE_TABLE_INPUT,
+    DISASSOCIATE_TRANSIT_GATEWAY_ROUTE_TABLE_OUTPUT,
+    (),
+)
+
+DISASSOCIATE_TRUNK_INTERFACE_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DTII,
+    {_sSI: _cDTIR, _sm: None},
+    (_AIs, _CTl, _DR),
+    (
+        (lambda: schemas.TRUNK_INTERFACE_ASSOCIATION_ID, {_sO: None, _smi: None}),
+        (lambda: schemas.STRING, 2),
+        (lambda: schemas.BOOLEAN, 0),
+    ),
+)
+
+DISASSOCIATE_TRUNK_INTERFACE_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DTIO,
+    {_sSI: _cDTIRo, _smit: None},
+    (_R, _CTl),
+    (
+        (lambda: schemas.BOOLEAN, {_aQN: _R, _sN: _r}),
+        (lambda: schemas.STRING, {_aQN: _CTl, _sN: _cTl}),
+    ),
+)
+
+DISASSOCIATE_TRUNK_INTERFACE: StaticOperationSchema = (
+    23,
+    n0,
+    _DTIi,
+    0,
+    DISASSOCIATE_TRUNK_INTERFACE_INPUT,
+    DISASSOCIATE_TRUNK_INTERFACE_OUTPUT,
+    (),
+)
+
+VPC_CIDR_ASSOCIATION_ID: StaticSchema = (3, n0, _VCAI, 0)
+
+DISASSOCIATE_VPC_CIDR_BLOCK_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DVCBI,
+    {_sSI: _cDVCBR, _sm: None},
+    (_AIs,),
+    ((VPC_CIDR_ASSOCIATION_ID, {_aQN: _AIs, _sN: _aIs, _sO: None, _smi: None}),),
+)
+
+DISASSOCIATE_VPC_CIDR_BLOCK_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DVCBO,
+    {_sSI: _cDVCBRo, _smit: None},
+    (_ICBA, _CBA, _VI),
+    (
+        (lambda: schemas.VPC_IPV6_CIDR_BLOCK_ASSOCIATION, {_aQN: _ICBA, _sN: _iCBA}),
+        (lambda: schemas.VPC_CIDR_BLOCK_ASSOCIATION, {_aQN: _CBA, _sN: _cBA}),
+        (lambda: schemas.STRING, {_aQN: _VI, _sN: _vI}),
+    ),
+)
+
+DISASSOCIATE_VPC_CIDR_BLOCK: StaticOperationSchema = (
+    23,
+    n0,
+    _DVCB,
+    0,
+    DISASSOCIATE_VPC_CIDR_BLOCK_INPUT,
+    DISASSOCIATE_VPC_CIDR_BLOCK_OUTPUT,
+    (),
+)
+
+ENABLE_ADDRESS_TRANSFER_INPUT: StaticSchema = (
+    18,
+    n0,
+    _EATI,
+    {_sSI: _cEATR, _sm: None},
+    (_AI, _TAI, _DR),
+    (
+        (lambda: schemas.ALLOCATION_ID, {_sO: None, _smi: None}),
+        (lambda: schemas.STRING, {_sO: None, _smi: None}),
+        (lambda: schemas.BOOLEAN, 0),
+    ),
+)
+
+ENABLE_ADDRESS_TRANSFER_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _EATO,
+    {_sSI: _cEATRo, _smit: None},
+    (_ATd,),
+    ((lambda: schemas.ADDRESS_TRANSFER, {_aQN: _ATd, _sN: _aT}),),
+)
+
+ENABLE_ADDRESS_TRANSFER: StaticOperationSchema = (
+    23,
+    n0,
+    _EAT,
+    0,
+    ENABLE_ADDRESS_TRANSFER_INPUT,
+    ENABLE_ADDRESS_TRANSFER_OUTPUT,
+    (),
+)
+
+ENABLE_ALLOWED_IMAGES_SETTINGS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _EAISI,
+    {_sSI: _cEAISR, _sm: None},
+    (_AISS, _DR),
+    (
+        (
+            lambda: schemas.ALLOWED_IMAGES_SETTINGS_ENABLED_STATE,
+            {_sO: None, _smi: None},
+        ),
+        (lambda: schemas.BOOLEAN, 0),
+    ),
+)
+
+ENABLE_ALLOWED_IMAGES_SETTINGS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _EAISO,
+    {_sSI: _cEAISRo, _smit: None},
+    (_AISS,),
+    (
+        (
+            lambda: schemas.ALLOWED_IMAGES_SETTINGS_ENABLED_STATE,
+            {_aQN: _AISS, _sN: _aISS},
+        ),
+    ),
+)
+
+ENABLE_ALLOWED_IMAGES_SETTINGS: StaticOperationSchema = (
+    23,
+    n0,
+    _EAIS,
+    0,
+    ENABLE_ALLOWED_IMAGES_SETTINGS_INPUT,
+    ENABLE_ALLOWED_IMAGES_SETTINGS_OUTPUT,
+    (),
+)
+
+ENABLE_APPLICATION_STATUS_CHECK_SUPPRESSION_INPUT: StaticSchema = (
+    18,
+    n0,
+    _EASCSI,
+    {_sSI: _cEASCSR, _sm: None},
+    (_IIn, _DSu, _CTl, _DR),
+    (
+        (lambda: schemas.INSTANCE_ID_LIST, {_sN: _II}),
+        (lambda: schemas.BOXED_INTEGER, 0),
+        (lambda: schemas.STRING, 2),
+        (lambda: schemas.BOOLEAN, 0),
+    ),
+)
+
+ENABLE_APPLICATION_STATUS_CHECK_SUPPRESSION_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _EASCSO,
+    {_sSI: _cEASCSRo, _smit: None},
+    (_SR, _UR),
+    (
+        (lambda: schemas.SUCCESSFUL_SUPPRESSION_RESPONSE_SET, {_aQN: _SRS, _sN: _sRS}),
+        (
+            lambda: schemas.UNSUCCESSFUL_SUPPRESSION_RESPONSE_SET,
+            {_aQN: _URS, _sN: _uRS},
+        ),
+    ),
+)
+
+ENABLE_APPLICATION_STATUS_CHECK_SUPPRESSION: StaticOperationSchema = (
+    23,
+    n0,
+    _EASCS,
+    0,
+    ENABLE_APPLICATION_STATUS_CHECK_SUPPRESSION_INPUT,
+    ENABLE_APPLICATION_STATUS_CHECK_SUPPRESSION_OUTPUT,
+    (),
+)
+
+ENABLE_AWS_NETWORK_PERFORMANCE_METRIC_SUBSCRIPTION_INPUT: StaticSchema = (
+    18,
+    n0,
+    _EANPMSI,
+    {_sSI: _cEANPMSR, _sm: None},
+    (_Sou, _De, _Metr, _Stati, _DR),
+    (
+        (lambda: schemas.STRING, 0),
+        (lambda: schemas.STRING, 0),
+        (lambda: schemas.METRIC_TYPE, 0),
+        (lambda: schemas.STATISTIC_TYPE, 0),
+        (lambda: schemas.BOOLEAN, 0),
+    ),
+)
+
+ENABLE_AWS_NETWORK_PERFORMANCE_METRIC_SUBSCRIPTION_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _EANPMSO,
+    {_sSI: _cEANPMSRo, _smit: None},
+    (_Ou,),
+    ((lambda: schemas.BOOLEAN, {_aQN: _Ou, _sN: _outp}),),
+)
+
+ENABLE_AWS_NETWORK_PERFORMANCE_METRIC_SUBSCRIPTION: StaticOperationSchema = (
+    23,
+    n0,
+    _EANPMS,
+    0,
+    ENABLE_AWS_NETWORK_PERFORMANCE_METRIC_SUBSCRIPTION_INPUT,
+    ENABLE_AWS_NETWORK_PERFORMANCE_METRIC_SUBSCRIPTION_OUTPUT,
+    (),
+)
+
+ENABLE_CAPACITY_MANAGER_INPUT: StaticSchema = (
+    18,
+    n0,
+    _ECMI,
+    {_sSI: _cECMR, _sm: None},
+    (_OArg, _DR, _CTl),
+    (
+        (lambda: schemas.BOOLEAN, 0),
+        (lambda: schemas.BOOLEAN, 0),
+        (lambda: schemas.STRING, 2),
+    ),
+)
+
+ENABLE_CAPACITY_MANAGER_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _ECMO,
+    {_sSI: _cECMRo, _smit: None},
+    (_CMSa, _OArg),
+    (
+        (lambda: schemas.CAPACITY_MANAGER_STATUS, {_aQN: _CMSa, _sN: _cMSa}),
+        (lambda: schemas.BOOLEAN, {_aQN: _OArg, _sN: _oArg}),
+    ),
+)
+
+ENABLE_CAPACITY_MANAGER: StaticOperationSchema = (
+    23,
+    n0,
+    _ECM,
+    0,
+    ENABLE_CAPACITY_MANAGER_INPUT,
+    ENABLE_CAPACITY_MANAGER_OUTPUT,
+    (),
+)
+
+ENABLE_EBS_ENCRYPTION_BY_DEFAULT_INPUT: StaticSchema = (
+    18,
+    n0,
+    _EEEBDI,
+    {_sSI: _cEEEBDR, _sm: None},
+    (_DR,),
+    ((lambda: schemas.BOOLEAN, 0),),
+)
+
+ENABLE_EBS_ENCRYPTION_BY_DEFAULT_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _EEEBDO,
+    {_sSI: _cEEEBDRo, _smit: None},
+    (_EEBD,),
+    ((lambda: schemas.BOOLEAN, {_aQN: _EEBD, _sN: _eEBD}),),
+)
+
+ENABLE_EBS_ENCRYPTION_BY_DEFAULT: StaticOperationSchema = (
+    23,
+    n0,
+    _EEEBD,
+    0,
+    ENABLE_EBS_ENCRYPTION_BY_DEFAULT_INPUT,
+    ENABLE_EBS_ENCRYPTION_BY_DEFAULT_OUTPUT,
+    (),
+)
+
+FAST_LAUNCH_LAUNCH_TEMPLATE_SPECIFICATION_REQUEST: StaticSchema = (
+    18,
+    n0,
+    _FLLTSRa,
+    0,
+    (_LTI, _LTN, _Ve),
+    (
+        (lambda: schemas.LAUNCH_TEMPLATE_ID, 0),
+        (lambda: schemas.STRING, 0),
+        (lambda: schemas.STRING, {_sO: None, _smi: None}),
+    ),
+)
+
+FAST_LAUNCH_SNAPSHOT_CONFIGURATION_REQUEST: StaticSchema = (
+    18,
+    n0,
+    _FLSCRa,
+    0,
+    (_TRC,),
+    ((lambda: schemas.INTEGER, 0),),
+)
+
+ENABLE_FAST_LAUNCH_INPUT: StaticSchema = (
+    18,
+    n0,
+    _EFLI,
+    {_sSI: _cEFLR, _sm: None},
+    (_IIm, _RT, _SCn, _LT, _MPLa, _DR),
+    (
+        (lambda: schemas.IMAGE_ID, {_sO: None, _smi: None}),
+        (lambda: schemas.STRING, 0),
+        (FAST_LAUNCH_SNAPSHOT_CONFIGURATION_REQUEST, 0),
+        (FAST_LAUNCH_LAUNCH_TEMPLATE_SPECIFICATION_REQUEST, 0),
+        (lambda: schemas.INTEGER, 0),
+        (lambda: schemas.BOOLEAN, 0),
+    ),
+)
+
+ENABLE_FAST_LAUNCH_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _EFLO,
+    {_sSI: _cEFLRo, _smit: None},
+    (_IIm, _RT, _SCn, _LT, _MPLa, _OIw, _St, _STR, _STT),
+    (
+        (lambda: schemas.IMAGE_ID, {_aQN: _IIm, _sN: _iIm}),
+        (lambda: schemas.FAST_LAUNCH_RESOURCE_TYPE, {_aQN: _RT, _sN: _rT}),
+        (
+            lambda: schemas.FAST_LAUNCH_SNAPSHOT_CONFIGURATION_RESPONSE,
+            {_aQN: _SCn, _sN: _sCn},
+        ),
+        (
+            lambda: schemas.FAST_LAUNCH_LAUNCH_TEMPLATE_SPECIFICATION_RESPONSE,
+            {_aQN: _LT, _sN: _lT},
+        ),
+        (lambda: schemas.INTEGER, {_aQN: _MPLa, _sN: _mPL}),
+        (lambda: schemas.STRING, {_aQN: _OIw, _sN: _oI}),
+        (lambda: schemas.FAST_LAUNCH_STATE_CODE, {_aQN: _St, _sN: _st}),
+        (lambda: schemas.STRING, {_aQN: _STR, _sN: _sTR}),
+        (lambda: schemas.MILLISECOND_DATE_TIME, {_aQN: _STT, _sN: _sTT}),
+    ),
+)
+
+ENABLE_FAST_LAUNCH: StaticOperationSchema = (
+    23,
+    n0,
+    _EFL,
+    0,
+    ENABLE_FAST_LAUNCH_INPUT,
+    ENABLE_FAST_LAUNCH_OUTPUT,
+    (),
+)
+
+ENABLE_FAST_SNAPSHOT_RESTORES_INPUT: StaticSchema = (
+    18,
+    n0,
+    _EFSRI,
+    {_sSI: _cEFSRR, _sm: None},
+    (_AZv, _AZIv, _SSIo, _DR),
+    (
+        (lambda: schemas.AVAILABILITY_ZONE_STRING_LIST, {_sN: _AZ}),
+        (lambda: schemas.AVAILABILITY_ZONE_ID_STRING_LIST, {_sN: _AZI}),
+        (lambda: schemas.SNAPSHOT_ID_STRING_LIST, {_sN: _SSI, _sO: None, _smi: None}),
+        (lambda: schemas.BOOLEAN, 0),
+    ),
+)
+
+ENABLE_FAST_SNAPSHOT_RESTORES_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _EFSRO,
+    {_sSI: _cEFSRRo, _smit: None},
+    (_Suc, _Un),
+    (
+        (lambda: ENABLE_FAST_SNAPSHOT_RESTORE_SUCCESS_SET, {_aQN: _Suc, _sN: _succ}),
+        (lambda: ENABLE_FAST_SNAPSHOT_RESTORE_ERROR_SET, {_aQN: _Un, _sN: _un}),
+    ),
+)
+
+ENABLE_FAST_SNAPSHOT_RESTORES: StaticOperationSchema = (
+    23,
+    n0,
+    _EFSR,
+    0,
+    ENABLE_FAST_SNAPSHOT_RESTORES_INPUT,
+    ENABLE_FAST_SNAPSHOT_RESTORES_OUTPUT,
+    (),
+)
+
+ENABLE_FAST_SNAPSHOT_RESTORE_SUCCESS_ITEM: StaticSchema = (
+    18,
+    n0,
+    _EFSRSI,
+    0,
+    (_SIn, _AZ, _AZI, _St, _STR, _OIw, _OAwn, _ETna, _OT, _ETnab, _DTi, _DTis),
+    (
+        (lambda: schemas.STRING, {_aQN: _SIn, _sN: _sIn}),
+        (lambda: schemas.STRING, {_aQN: _AZ, _sN: _aZ}),
+        (lambda: schemas.STRING, {_aQN: _AZI, _sN: _aZI}),
+        (lambda: schemas.FAST_SNAPSHOT_RESTORE_STATE_CODE, {_aQN: _St, _sN: _st}),
+        (lambda: schemas.STRING, {_aQN: _STR, _sN: _sTR}),
+        (lambda: schemas.STRING, {_aQN: _OIw, _sN: _oI}),
+        (lambda: schemas.STRING, {_aQN: _OAwn, _sN: _oAw}),
+        (lambda: schemas.MILLISECOND_DATE_TIME, {_aQN: _ETna, _sN: _eTna}),
+        (lambda: schemas.MILLISECOND_DATE_TIME, {_aQN: _OT, _sN: _oT}),
+        (lambda: schemas.MILLISECOND_DATE_TIME, {_aQN: _ETnab, _sN: _eTnab}),
+        (lambda: schemas.MILLISECOND_DATE_TIME, {_aQN: _DTi, _sN: _dTi}),
+        (lambda: schemas.MILLISECOND_DATE_TIME, {_aQN: _DTis, _sN: _dTis}),
+    ),
+)
+
+ENABLE_FAST_SNAPSHOT_RESTORE_SUCCESS_SET: StaticSchema = (
+    16,
+    n0,
+    _EFSRSS,
+    0,
+    (_me,),
+    ((ENABLE_FAST_SNAPSHOT_RESTORE_SUCCESS_ITEM, {_sN: _i}),),
+)
+
+ENABLE_FAST_SNAPSHOT_RESTORE_STATE_ERROR: StaticSchema = (
+    18,
+    n0,
+    _EFSRSE,
+    0,
+    (_C, _Me),
+    (
+        (lambda: schemas.STRING, {_aQN: _C, _sN: _co}),
+        (lambda: schemas.STRING, {_aQN: _Me, _sN: _mes}),
+    ),
+)
+
+ENABLE_FAST_SNAPSHOT_RESTORE_STATE_ERROR_ITEM: StaticSchema = (
+    18,
+    n0,
+    _EFSRSEI,
+    0,
+    (_AZ, _AZI, _E),
+    (
+        (lambda: schemas.STRING, {_aQN: _AZ, _sN: _aZ}),
+        (lambda: schemas.STRING, {_aQN: _AZI, _sN: _aZI}),
+        (ENABLE_FAST_SNAPSHOT_RESTORE_STATE_ERROR, {_aQN: _E, _sN: _er}),
+    ),
+)
+
+ENABLE_FAST_SNAPSHOT_RESTORE_STATE_ERROR_SET: StaticSchema = (
+    16,
+    n0,
+    _EFSRSES,
+    0,
+    (_me,),
+    ((ENABLE_FAST_SNAPSHOT_RESTORE_STATE_ERROR_ITEM, {_sN: _i}),),
+)
+
+ENABLE_FAST_SNAPSHOT_RESTORE_ERROR_ITEM: StaticSchema = (
+    18,
+    n0,
+    _EFSREI,
+    0,
+    (_SIn, _FSRSE),
+    (
+        (lambda: schemas.STRING, {_aQN: _SIn, _sN: _sIn}),
+        (ENABLE_FAST_SNAPSHOT_RESTORE_STATE_ERROR_SET, {_aQN: _FSRSES, _sN: _fSRSES}),
+    ),
+)
+
+ENABLE_FAST_SNAPSHOT_RESTORE_ERROR_SET: StaticSchema = (
+    16,
+    n0,
+    _EFSRES,
+    0,
+    (_me,),
+    ((ENABLE_FAST_SNAPSHOT_RESTORE_ERROR_ITEM, {_sN: _i}),),
+)
 
 ENABLE_IMAGE_INPUT: StaticSchema = (
     18,
@@ -796,805 +1585,3 @@ ENABLE_SNAPSHOT_BLOCK_PUBLIC_ACCESS: StaticOperationSchema = (
     ENABLE_SNAPSHOT_BLOCK_PUBLIC_ACCESS_OUTPUT,
     (),
 )
-
-ENABLE_TRANSIT_GATEWAY_ROUTE_TABLE_PROPAGATION_INPUT: StaticSchema = (
-    18,
-    n0,
-    _ETGRTPI,
-    {_sSI: _cETGRTPR, _sm: None},
-    (_TGRTI, _TGAI, _DR, _TGRTAI),
-    (
-        (lambda: schemas.TRANSIT_GATEWAY_ROUTE_TABLE_ID, {_sO: None, _smi: None}),
-        (lambda: schemas.TRANSIT_GATEWAY_ATTACHMENT_ID, 0),
-        (lambda: schemas.BOOLEAN, 0),
-        (lambda: schemas.TRANSIT_GATEWAY_ROUTE_TABLE_ANNOUNCEMENT_ID, 0),
-    ),
-)
-
-ENABLE_TRANSIT_GATEWAY_ROUTE_TABLE_PROPAGATION_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _ETGRTPO,
-    {_sSI: _cETGRTPRo, _smit: None},
-    (_Prop,),
-    ((lambda: schemas.TRANSIT_GATEWAY_PROPAGATION, {_aQN: _Prop, _sN: _propa}),),
-)
-
-ENABLE_TRANSIT_GATEWAY_ROUTE_TABLE_PROPAGATION: StaticOperationSchema = (
-    23,
-    n0,
-    _ETGRTP,
-    0,
-    ENABLE_TRANSIT_GATEWAY_ROUTE_TABLE_PROPAGATION_INPUT,
-    ENABLE_TRANSIT_GATEWAY_ROUTE_TABLE_PROPAGATION_OUTPUT,
-    (),
-)
-
-ENABLE_VGW_ROUTE_PROPAGATION_INPUT: StaticSchema = (
-    18,
-    n0,
-    _EVRPI,
-    {_sSI: _cEVRPR, _sm: None},
-    (_GI, _RTIo, _DR),
-    (
-        (lambda: schemas.VPN_GATEWAY_ID, {_sO: None, _smi: None}),
-        (lambda: schemas.ROUTE_TABLE_ID, {_sO: None, _smi: None}),
-        (lambda: schemas.BOOLEAN, 0),
-    ),
-)
-
-ENABLE_VGW_ROUTE_PROPAGATION_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _EVRPO,
-    {_sSI: _sU, _smit: None},
-)
-
-ENABLE_VGW_ROUTE_PROPAGATION: StaticOperationSchema = (
-    23,
-    n0,
-    _EVRP,
-    0,
-    ENABLE_VGW_ROUTE_PROPAGATION_INPUT,
-    ENABLE_VGW_ROUTE_PROPAGATION_OUTPUT,
-    (),
-)
-
-ENABLE_VOLUME_IO_INPUT: StaticSchema = (
-    18,
-    n0,
-    _EVIOI,
-    {_sSI: _cEVIOR, _sm: None},
-    (_DR, _VIo),
-    (
-        (lambda: schemas.BOOLEAN, {_aQN: _DR, _sN: _dRr}),
-        (lambda: schemas.VOLUME_ID, {_aQN: _VIo, _sN: _vIo, _sO: None, _smi: None}),
-    ),
-)
-
-ENABLE_VOLUME_IO_OUTPUT: StaticSchema = (18, n0, _EVIOO, {_sSI: _sU, _smit: None})
-
-ENABLE_VOLUME_IO: StaticOperationSchema = (
-    23,
-    n0,
-    _EVIO,
-    0,
-    ENABLE_VOLUME_IO_INPUT,
-    ENABLE_VOLUME_IO_OUTPUT,
-    (),
-)
-
-ENABLE_VPC_CLASSIC_LINK_INPUT: StaticSchema = (
-    18,
-    n0,
-    _EVCLI,
-    {_sSI: _cEVCLR, _sm: None},
-    (_DR, _VI),
-    (
-        (lambda: schemas.BOOLEAN, {_aQN: _DR, _sN: _dRr}),
-        (lambda: schemas.VPC_ID, {_aQN: _VI, _sN: _vI, _sO: None, _smi: None}),
-    ),
-)
-
-ENABLE_VPC_CLASSIC_LINK_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _EVCLO,
-    {_sSI: _cEVCLRo, _smit: None},
-    (_R,),
-    ((lambda: schemas.BOOLEAN, {_aQN: _R, _sN: _r}),),
-)
-
-ENABLE_VPC_CLASSIC_LINK: StaticOperationSchema = (
-    23,
-    n0,
-    _EVCL,
-    0,
-    ENABLE_VPC_CLASSIC_LINK_INPUT,
-    ENABLE_VPC_CLASSIC_LINK_OUTPUT,
-    (),
-)
-
-ENABLE_VPC_CLASSIC_LINK_DNS_SUPPORT_INPUT: StaticSchema = (
-    18,
-    n0,
-    _EVCLDSI,
-    {_sSI: _cEVCLDSR, _sm: None},
-    (_VI,),
-    ((lambda: schemas.VPC_ID, {_sN: _VI}),),
-)
-
-ENABLE_VPC_CLASSIC_LINK_DNS_SUPPORT_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _EVCLDSO,
-    {_sSI: _cEVCLDSRo, _smit: None},
-    (_R,),
-    ((lambda: schemas.BOOLEAN, {_aQN: _R, _sN: _r}),),
-)
-
-ENABLE_VPC_CLASSIC_LINK_DNS_SUPPORT: StaticOperationSchema = (
-    23,
-    n0,
-    _EVCLDS,
-    0,
-    ENABLE_VPC_CLASSIC_LINK_DNS_SUPPORT_INPUT,
-    ENABLE_VPC_CLASSIC_LINK_DNS_SUPPORT_OUTPUT,
-    (),
-)
-
-EXPORT_CLIENT_VPN_CLIENT_CERTIFICATE_REVOCATION_LIST_INPUT: StaticSchema = (
-    18,
-    n0,
-    _ECVCCRLI,
-    {_sSI: _cECVCCRLR, _sm: None},
-    (_CVEI, _DR),
-    (
-        (lambda: schemas.CLIENT_VPN_ENDPOINT_ID, {_sO: None, _smi: None}),
-        (lambda: schemas.BOOLEAN, 0),
-    ),
-)
-
-EXPORT_CLIENT_VPN_CLIENT_CERTIFICATE_REVOCATION_LIST_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _ECVCCRLO,
-    {_sSI: _cECVCCRLRo, _smit: None},
-    (_CRL, _Sta),
-    (
-        (lambda: schemas.STRING, {_aQN: _CRL, _sN: _cRL}),
-        (lambda: CLIENT_CERTIFICATE_REVOCATION_LIST_STATUS, {_aQN: _Sta, _sN: _sta}),
-    ),
-)
-
-EXPORT_CLIENT_VPN_CLIENT_CERTIFICATE_REVOCATION_LIST: StaticOperationSchema = (
-    23,
-    n0,
-    _ECVCCRL,
-    0,
-    EXPORT_CLIENT_VPN_CLIENT_CERTIFICATE_REVOCATION_LIST_INPUT,
-    EXPORT_CLIENT_VPN_CLIENT_CERTIFICATE_REVOCATION_LIST_OUTPUT,
-    (),
-)
-
-CLIENT_CERTIFICATE_REVOCATION_LIST_STATUS_CODE: StaticSchema = (
-    14,
-    n0,
-    _CCRLSC,
-    0,
-    (_p, _act),
-    ((-1, {_sV: _p}), (-1, {_sV: _act})),
-)
-
-CLIENT_CERTIFICATE_REVOCATION_LIST_STATUS: StaticSchema = (
-    18,
-    n0,
-    _CCRLS,
-    0,
-    (_C, _Me),
-    (
-        (CLIENT_CERTIFICATE_REVOCATION_LIST_STATUS_CODE, {_aQN: _C, _sN: _co}),
-        (lambda: schemas.STRING, {_aQN: _Me, _sN: _mes}),
-    ),
-)
-
-EXPORT_CLIENT_VPN_CLIENT_CONFIGURATION_INPUT: StaticSchema = (
-    18,
-    n0,
-    _ECVCCI,
-    {_sSI: _cECVCCR, _sm: None},
-    (_CVEI, _DR),
-    (
-        (lambda: schemas.CLIENT_VPN_ENDPOINT_ID, {_sO: None, _smi: None}),
-        (lambda: schemas.BOOLEAN, 0),
-    ),
-)
-
-EXPORT_CLIENT_VPN_CLIENT_CONFIGURATION_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _ECVCCO,
-    {_sSI: _cECVCCRo, _smit: None},
-    (_CCl,),
-    ((lambda: schemas.STRING, {_aQN: _CCl, _sN: _cCl}),),
-)
-
-EXPORT_CLIENT_VPN_CLIENT_CONFIGURATION: StaticOperationSchema = (
-    23,
-    n0,
-    _ECVCC,
-    0,
-    EXPORT_CLIENT_VPN_CLIENT_CONFIGURATION_INPUT,
-    EXPORT_CLIENT_VPN_CLIENT_CONFIGURATION_OUTPUT,
-    (),
-)
-
-EXPORT_TASK_S3_LOCATION_REQUEST: StaticSchema = (
-    18,
-    n0,
-    _ETSLR,
-    0,
-    (_SBu, _SPr),
-    ((lambda: schemas.STRING, {_sO: None, _smi: None}), (lambda: schemas.STRING, 0)),
-)
-
-EXPORT_IMAGE_INPUT: StaticSchema = (
-    18,
-    n0,
-    _EIIx,
-    {_sSI: _cEIRom, _sm: None},
-    (_CTl, _Des, _DIF, _DR, _IIm, _SEL, _RNo, _TSa),
-    (
-        (lambda: schemas.STRING, 2),
-        (lambda: schemas.STRING, 0),
-        (lambda: schemas.DISK_IMAGE_FORMAT, {_sO: None, _smi: None}),
-        (lambda: schemas.BOOLEAN, 0),
-        (lambda: schemas.IMAGE_ID, {_sO: None, _smi: None}),
-        (EXPORT_TASK_S3_LOCATION_REQUEST, {_sO: None, _smi: None}),
-        (lambda: schemas.STRING, 0),
-        (lambda: schemas.TAG_SPECIFICATION_LIST, {_sN: _TS}),
-    ),
-)
-
-EXPORT_IMAGE_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _EIOx,
-    {_sSI: _cEIRoma, _smit: None},
-    (_Des, _DIF, _EITI, _IIm, _RNo, _Prog, _SEL, _Sta, _SMt, _Tag),
-    (
-        (lambda: schemas.STRING, {_aQN: _Des, _sN: _desc}),
-        (lambda: schemas.DISK_IMAGE_FORMAT, {_aQN: _DIF, _sN: _dIF}),
-        (lambda: schemas.STRING, {_aQN: _EITI, _sN: _eITI}),
-        (lambda: schemas.STRING, {_aQN: _IIm, _sN: _iIm}),
-        (lambda: schemas.STRING, {_aQN: _RNo, _sN: _rNo}),
-        (lambda: schemas.STRING, {_aQN: _Prog, _sN: _prog}),
-        (lambda: schemas.EXPORT_TASK_S3_LOCATION, {_aQN: _SEL, _sN: _sEL}),
-        (lambda: schemas.STRING, {_aQN: _Sta, _sN: _sta}),
-        (lambda: schemas.STRING, {_aQN: _SMt, _sN: _sMt}),
-        (lambda: schemas.TAG_LIST, {_aQN: _TSag, _sN: _tS}),
-    ),
-)
-
-EXPORT_IMAGE: StaticOperationSchema = (
-    23,
-    n0,
-    _EIxp,
-    0,
-    EXPORT_IMAGE_INPUT,
-    EXPORT_IMAGE_OUTPUT,
-    (),
-)
-
-EXPORT_TRANSIT_GATEWAY_ROUTES_INPUT: StaticSchema = (
-    18,
-    n0,
-    _ETGRI,
-    {_sSI: _cETGRR, _sm: None},
-    (_TGRTI, _Fil, _SBu, _DR),
-    (
-        (lambda: schemas.TRANSIT_GATEWAY_ROUTE_TABLE_ID, {_sO: None, _smi: None}),
-        (lambda: schemas.FILTER_LIST, {_sN: _Fi}),
-        (lambda: schemas.STRING, {_sO: None, _smi: None}),
-        (lambda: schemas.BOOLEAN, 0),
-    ),
-)
-
-EXPORT_TRANSIT_GATEWAY_ROUTES_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _ETGRO,
-    {_sSI: _cETGRRo, _smit: None},
-    (_SLo,),
-    ((lambda: schemas.STRING, {_aQN: _SLo, _sN: _sLo}),),
-)
-
-EXPORT_TRANSIT_GATEWAY_ROUTES: StaticOperationSchema = (
-    23,
-    n0,
-    _ETGR,
-    0,
-    EXPORT_TRANSIT_GATEWAY_ROUTES_INPUT,
-    EXPORT_TRANSIT_GATEWAY_ROUTES_OUTPUT,
-    (),
-)
-
-EXPORT_VERIFIED_ACCESS_INSTANCE_CLIENT_CONFIGURATION_INPUT: StaticSchema = (
-    18,
-    n0,
-    _EVAICCI,
-    {_sSI: _cEVAICCR, _sm: None},
-    (_VAII, _DR),
-    (
-        (lambda: schemas.VERIFIED_ACCESS_INSTANCE_ID, {_sO: None, _smi: None}),
-        (lambda: schemas.BOOLEAN, 0),
-    ),
-)
-
-EXPORT_VERIFIED_ACCESS_INSTANCE_CLIENT_CONFIGURATION_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _EVAICCO,
-    {_sSI: _cEVAICCRo, _smit: None},
-    (_Ve, _VAII, _Re, _DTP, _UTP, _OVC),
-    (
-        (lambda: schemas.STRING, {_aQN: _Ve, _sN: _ver}),
-        (lambda: schemas.STRING, {_aQN: _VAII, _sN: _vAII}),
-        (lambda: schemas.STRING, {_aQN: _Re, _sN: _reg}),
-        (lambda: DEVICE_TRUST_PROVIDER_TYPE_LIST, {_aQN: _DTPS, _sN: _dTPS}),
-        (
-            lambda: VERIFIED_ACCESS_INSTANCE_USER_TRUST_PROVIDER_CLIENT_CONFIGURATION,
-            {_aQN: _UTP, _sN: _uTP},
-        ),
-        (
-            lambda: VERIFIED_ACCESS_INSTANCE_OPEN_VPN_CLIENT_CONFIGURATION_LIST,
-            {_aQN: _OVCS, _sN: _oVCS},
-        ),
-    ),
-)
-
-EXPORT_VERIFIED_ACCESS_INSTANCE_CLIENT_CONFIGURATION: StaticOperationSchema = (
-    23,
-    n0,
-    _EVAICC,
-    0,
-    EXPORT_VERIFIED_ACCESS_INSTANCE_CLIENT_CONFIGURATION_INPUT,
-    EXPORT_VERIFIED_ACCESS_INSTANCE_CLIENT_CONFIGURATION_OUTPUT,
-    (),
-)
-
-DEVICE_TRUST_PROVIDER_TYPE_LIST: StaticSchema = (
-    16,
-    n0,
-    _DTPTL,
-    0,
-    (_me,),
-    ((lambda: schemas.DEVICE_TRUST_PROVIDER_TYPE, {_sN: _i}),),
-)
-
-VERIFIED_ACCESS_INSTANCE_OPEN_VPN_CLIENT_CONFIGURATION_ROUTE: StaticSchema = (
-    18,
-    n0,
-    _VAIOVCCR,
-    0,
-    (_Ci,),
-    ((lambda: schemas.STRING, {_aQN: _Ci, _sN: _ci}),),
-)
-
-VERIFIED_ACCESS_INSTANCE_OPEN_VPN_CLIENT_CONFIGURATION_ROUTE_LIST: StaticSchema = (
-    16,
-    n0,
-    _VAIOVCCRL,
-    0,
-    (_me,),
-    ((VERIFIED_ACCESS_INSTANCE_OPEN_VPN_CLIENT_CONFIGURATION_ROUTE, {_sN: _i}),),
-)
-
-VERIFIED_ACCESS_INSTANCE_OPEN_VPN_CLIENT_CONFIGURATION: StaticSchema = (
-    18,
-    n0,
-    _VAIOVCC,
-    0,
-    (_Confi, _Rout),
-    (
-        (lambda: schemas.STRING, {_aQN: _Confi, _sN: _confi}),
-        (
-            VERIFIED_ACCESS_INSTANCE_OPEN_VPN_CLIENT_CONFIGURATION_ROUTE_LIST,
-            {_aQN: _RSout, _sN: _rSou},
-        ),
-    ),
-)
-
-VERIFIED_ACCESS_INSTANCE_OPEN_VPN_CLIENT_CONFIGURATION_LIST: StaticSchema = (
-    16,
-    n0,
-    _VAIOVCCL,
-    0,
-    (_me,),
-    ((VERIFIED_ACCESS_INSTANCE_OPEN_VPN_CLIENT_CONFIGURATION, {_sN: _i}),),
-)
-
-VERIFIED_ACCESS_INSTANCE_USER_TRUST_PROVIDER_CLIENT_CONFIGURATION: StaticSchema = (
-    18,
-    n0,
-    _VAIUTPCC,
-    0,
-    (_Ty, _Sco, _Is, _AE, _PSKE, _TE, _UIEs, _CIl, _CSl, _PE),
-    (
-        (lambda: schemas.USER_TRUST_PROVIDER_TYPE, {_aQN: _Ty, _sN: _ty}),
-        (lambda: schemas.STRING, {_aQN: _Sco, _sN: _sco}),
-        (lambda: schemas.STRING, {_aQN: _Is, _sN: _iss}),
-        (lambda: schemas.STRING, {_aQN: _AE, _sN: _aE}),
-        (lambda: schemas.STRING, {_aQN: _PSKE, _sN: _pSKE}),
-        (lambda: schemas.STRING, {_aQN: _TE, _sN: _tE}),
-        (lambda: schemas.STRING, {_aQN: _UIEs, _sN: _uIE}),
-        (lambda: schemas.STRING, {_aQN: _CIl, _sN: _cIl}),
-        (lambda: schemas.CLIENT_SECRET_TYPE, {_aQN: _CSl, _sN: _cSl}),
-        (lambda: schemas.BOOLEAN, {_aQN: _PE, _sN: _pE}),
-    ),
-)
-
-GET_ACTIVE_VPN_TUNNEL_STATUS_INPUT: StaticSchema = (
-    18,
-    n0,
-    _GAVTSI,
-    {_sSI: _cGAVTSR, _sm: None},
-    (_VCIp, _VTOIA, _DR),
-    (
-        (lambda: schemas.VPN_CONNECTION_ID, {_sO: None, _smi: None}),
-        (lambda: schemas.STRING, {_sO: None, _smi: None}),
-        (lambda: schemas.BOOLEAN, 0),
-    ),
-)
-
-GET_ACTIVE_VPN_TUNNEL_STATUS_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _GAVTSO,
-    {_sSI: _cGAVTSRo, _smit: None},
-    (_AVTS,),
-    ((lambda: schemas.ACTIVE_VPN_TUNNEL_STATUS, {_aQN: _AVTS, _sN: _aVTS}),),
-)
-
-GET_ACTIVE_VPN_TUNNEL_STATUS: StaticOperationSchema = (
-    23,
-    n0,
-    _GAVTS,
-    0,
-    GET_ACTIVE_VPN_TUNNEL_STATUS_INPUT,
-    GET_ACTIVE_VPN_TUNNEL_STATUS_OUTPUT,
-    (),
-)
-
-GET_ALLOWED_IMAGES_SETTINGS_INPUT: StaticSchema = (
-    18,
-    n0,
-    _GAISI,
-    {_sSI: _cGAISR, _sm: None},
-    (_DR,),
-    ((lambda: schemas.BOOLEAN, 0),),
-)
-
-GET_ALLOWED_IMAGES_SETTINGS_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _GAISO,
-    {_sSI: _cGAISRo, _smit: None},
-    (_St, _ICma, _MB),
-    (
-        (lambda: schemas.STRING, {_aQN: _St, _sN: _st}),
-        (lambda: IMAGE_CRITERION_LIST, {_aQN: _ICSm, _sN: _iCS}),
-        (lambda: schemas.MANAGED_BY, {_aQN: _MB, _sN: _mB}),
-    ),
-)
-
-GET_ALLOWED_IMAGES_SETTINGS: StaticOperationSchema = (
-    23,
-    n0,
-    _GAIS,
-    0,
-    GET_ALLOWED_IMAGES_SETTINGS_INPUT,
-    GET_ALLOWED_IMAGES_SETTINGS_OUTPUT,
-    (),
-)
-
-MAXIMUM_DAYS_SINCE_CREATED_VALUE: StaticSchema = (7, n0, _MDSCV, 0)
-
-CREATION_DATE_CONDITION: StaticSchema = (
-    18,
-    n0,
-    _CDC,
-    0,
-    (_MDSC,),
-    ((MAXIMUM_DAYS_SINCE_CREATED_VALUE, {_aQN: _MDSC, _sN: _mDSC}),),
-)
-
-MAXIMUM_DAYS_SINCE_DEPRECATED_VALUE: StaticSchema = (7, n0, _MDSDV, 0)
-
-DEPRECATION_TIME_CONDITION: StaticSchema = (
-    18,
-    n0,
-    _DTC,
-    0,
-    (_MDSD,),
-    ((MAXIMUM_DAYS_SINCE_DEPRECATED_VALUE, {_aQN: _MDSD, _sN: _mDSD}),),
-)
-
-IMAGE_NAME: StaticSchema = (3, n0, _INm, 0)
-
-IMAGE_NAME_LIST: StaticSchema = (16, n0, _INLm, 0, (_me,), ((IMAGE_NAME, {_sN: _i}),))
-
-IMAGE_PROVIDER: StaticSchema = (3, n0, _IPm, 0)
-
-IMAGE_PROVIDER_LIST: StaticSchema = (
-    16,
-    n0,
-    _IPLm,
-    0,
-    (_me,),
-    ((IMAGE_PROVIDER, {_sN: _i}),),
-)
-
-IMAGE_WATERMARK_FILTER_RESPONSE: StaticSchema = (
-    18,
-    n0,
-    _IWFR,
-    0,
-    (_WK, _SIR, _MDSSIC, _MDSWC),
-    (
-        (lambda: schemas.STRING, {_aQN: _WK, _sN: _wK}),
-        (lambda: schemas.STRING, {_aQN: _SIR, _sN: _sIR}),
-        (lambda: schemas.INTEGER, {_aQN: _MDSSIC, _sN: _mDSSIC}),
-        (lambda: schemas.INTEGER, {_aQN: _MDSWC, _sN: _mDSWC}),
-    ),
-)
-
-IMAGE_WATERMARK_FILTER_RESPONSE_LIST: StaticSchema = (
-    16,
-    n0,
-    _IWFRL,
-    0,
-    (_me,),
-    ((IMAGE_WATERMARK_FILTER_RESPONSE, {_sN: _i}),),
-)
-
-MARKETPLACE_PRODUCT_CODE: StaticSchema = (3, n0, _MPC, 0)
-
-MARKETPLACE_PRODUCT_CODE_LIST: StaticSchema = (
-    16,
-    n0,
-    _MPCL,
-    0,
-    (_me,),
-    ((MARKETPLACE_PRODUCT_CODE, {_sN: _i}),),
-)
-
-MAX_DAYS_SINCE_FIX_AVAILABLE_VALUE: StaticSchema = (7, n0, _MDSFAV, 0)
-
-MAX_DAYS_SINCE_LAST_FINDING_SCAN_VALUE: StaticSchema = (7, n0, _MDSLFSV, 0)
-
-SCAN_RESULT_CONDITION: StaticSchema = (
-    18,
-    n0,
-    _SRCc,
-    0,
-    (_MDSLFS, _MSL, _MDSIFA, _MDSLFA, _MDSMFA, _MDSHFA, _MDSCFA),
-    (
-        (MAX_DAYS_SINCE_LAST_FINDING_SCAN_VALUE, {_aQN: _MDSLFS, _sN: _mDSLFS}),
-        (lambda: schemas.SEVERITY_LABEL, {_aQN: _MSL, _sN: _mSL}),
-        (MAX_DAYS_SINCE_FIX_AVAILABLE_VALUE, {_aQN: _MDSIFA, _sN: _mDSIFA}),
-        (MAX_DAYS_SINCE_FIX_AVAILABLE_VALUE, {_aQN: _MDSLFA, _sN: _mDSLFA}),
-        (MAX_DAYS_SINCE_FIX_AVAILABLE_VALUE, {_aQN: _MDSMFA, _sN: _mDSMFA}),
-        (MAX_DAYS_SINCE_FIX_AVAILABLE_VALUE, {_aQN: _MDSHFA, _sN: _mDSHFA}),
-        (MAX_DAYS_SINCE_FIX_AVAILABLE_VALUE, {_aQN: _MDSCFA, _sN: _mDSCFA}),
-    ),
-)
-
-IMAGE_CRITERION: StaticSchema = (
-    18,
-    n0,
-    _ICm,
-    0,
-    (_IPma, _MPCa, _INma, _DTC, _CDC, _IWm, _SRCc),
-    (
-        (IMAGE_PROVIDER_LIST, {_aQN: _IPSm, _sN: _iPSm}),
-        (MARKETPLACE_PRODUCT_CODE_LIST, {_aQN: _MPCS, _sN: _mPCS}),
-        (IMAGE_NAME_LIST, {_aQN: _INS, _sN: _iNS}),
-        (DEPRECATION_TIME_CONDITION, {_aQN: _DTC, _sN: _dTC}),
-        (CREATION_DATE_CONDITION, {_aQN: _CDC, _sN: _cDC}),
-        (IMAGE_WATERMARK_FILTER_RESPONSE_LIST, {_aQN: _IWS, _sN: _iWS}),
-        (SCAN_RESULT_CONDITION, {_aQN: _SRCc, _sN: _sRC}),
-    ),
-)
-
-IMAGE_CRITERION_LIST: StaticSchema = (
-    16,
-    n0,
-    _ICLm,
-    0,
-    (_me,),
-    ((IMAGE_CRITERION, {_sN: _i}),),
-)
-
-GET_ASSOCIATED_ENCLAVE_CERTIFICATE_IAM_ROLES_INPUT: StaticSchema = (
-    18,
-    n0,
-    _GAECIRI,
-    {_sSI: _cGAECIRR, _sm: None},
-    (_CAe, _DR),
-    (
-        (lambda: schemas.CERTIFICATE_ID, {_sO: None, _smi: None}),
-        (lambda: schemas.BOOLEAN, 0),
-    ),
-)
-
-GET_ASSOCIATED_ENCLAVE_CERTIFICATE_IAM_ROLES_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _GAECIRO,
-    {_sSI: _cGAECIRRo, _smit: None},
-    (_ARsso,),
-    ((lambda: ASSOCIATED_ROLES_LIST, {_aQN: _ARSs, _sN: _aRSs}),),
-)
-
-GET_ASSOCIATED_ENCLAVE_CERTIFICATE_IAM_ROLES: StaticOperationSchema = (
-    23,
-    n0,
-    _GAECIR,
-    0,
-    GET_ASSOCIATED_ENCLAVE_CERTIFICATE_IAM_ROLES_INPUT,
-    GET_ASSOCIATED_ENCLAVE_CERTIFICATE_IAM_ROLES_OUTPUT,
-    (),
-)
-
-ASSOCIATED_ROLE: StaticSchema = (
-    18,
-    n0,
-    _ARss,
-    0,
-    (_ARAss, _CSBN, _CSOK, _EKKI),
-    (
-        (lambda: schemas.RESOURCE_ARN, {_aQN: _ARAss, _sN: _aRAss}),
-        (lambda: schemas.STRING, {_aQN: _CSBN, _sN: _cSBN}),
-        (lambda: schemas.STRING, {_aQN: _CSOK, _sN: _cSOK}),
-        (lambda: schemas.STRING, {_aQN: _EKKI, _sN: _eKKI}),
-    ),
-)
-
-ASSOCIATED_ROLES_LIST: StaticSchema = (
-    16,
-    n0,
-    _ARL,
-    0,
-    (_me,),
-    ((ASSOCIATED_ROLE, {_sN: _i}),),
-)
-
-GET_ASSOCIATED_IPV6_POOL_CIDRS_INPUT: StaticSchema = (
-    18,
-    n0,
-    _GAIPCI,
-    {_sSI: _cGAIPCR, _sm: None},
-    (_PIo, _NTex, _MR, _DR),
-    (
-        (lambda: schemas.IPV6_POOL_EC2_ID, {_sO: None, _smi: None}),
-        (lambda: schemas.NEXT_TOKEN, 0),
-        (lambda: schemas.IPV6_POOL_MAX_RESULTS, 0),
-        (lambda: schemas.BOOLEAN, 0),
-    ),
-)
-
-GET_ASSOCIATED_IPV6_POOL_CIDRS_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _GAIPCO,
-    {_sSI: _cGAIPCRo, _smit: None},
-    (_ICApv, _NTex),
-    (
-        (lambda: IPV6_CIDR_ASSOCIATION_SET, {_aQN: _ICAS, _sN: _iCAS}),
-        (lambda: schemas.STRING, {_aQN: _NTex, _sN: _nT}),
-    ),
-)
-
-GET_ASSOCIATED_IPV6_POOL_CIDRS: StaticOperationSchema = (
-    23,
-    n0,
-    _GAIPC,
-    0,
-    GET_ASSOCIATED_IPV6_POOL_CIDRS_INPUT,
-    GET_ASSOCIATED_IPV6_POOL_CIDRS_OUTPUT,
-    (),
-)
-
-IPV6_CIDR_ASSOCIATION: StaticSchema = (
-    18,
-    n0,
-    _ICAp,
-    0,
-    (_ICp, _ARs),
-    (
-        (lambda: schemas.STRING, {_aQN: _ICp, _sN: _iCp}),
-        (lambda: schemas.STRING, {_aQN: _ARs, _sN: _aRs}),
-    ),
-)
-
-IPV6_CIDR_ASSOCIATION_SET: StaticSchema = (
-    16,
-    n0,
-    _ICAS,
-    0,
-    (_me,),
-    ((IPV6_CIDR_ASSOCIATION, {_sN: _i}),),
-)
-
-DATA_QUERY: StaticSchema = (
-    18,
-    n0,
-    _DQ,
-    0,
-    (_Id, _Sou, _De, _Metr, _Stati, _Per),
-    (
-        (lambda: schemas.STRING, 0),
-        (lambda: schemas.STRING, 0),
-        (lambda: schemas.STRING, 0),
-        (lambda: schemas.METRIC_TYPE, 0),
-        (lambda: schemas.STATISTIC_TYPE, 0),
-        (lambda: schemas.PERIOD_TYPE, 0),
-    ),
-)
-
-DATA_QUERIES: StaticSchema = (16, n0, _DQa, 0, (_me,), ((DATA_QUERY, 0),))
-
-GET_AWS_NETWORK_PERFORMANCE_DATA_INPUT: StaticSchema = (
-    18,
-    n0,
-    _GANPDI,
-    {_sSI: _cGANPDR, _sm: None},
-    (_DQa, _ST, _ETnd, _MR, _NTex, _DR),
-    (
-        (DATA_QUERIES, {_sN: _DQ}),
-        (lambda: schemas.MILLISECOND_DATE_TIME, 0),
-        (lambda: schemas.MILLISECOND_DATE_TIME, 0),
-        (lambda: schemas.INTEGER, 0),
-        (lambda: schemas.STRING, 0),
-        (lambda: schemas.BOOLEAN, 0),
-    ),
-)
-
-GET_AWS_NETWORK_PERFORMANCE_DATA_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _GANPDO,
-    {_sSI: _cGANPDRo, _smit: None},
-    (_DRat, _NTex),
-    (
-        (lambda: schemas.DATA_RESPONSES, {_aQN: _DRSat, _sN: _dRSa}),
-        (lambda: schemas.STRING, {_aQN: _NTex, _sN: _nT}),
-    ),
-)
-
-GET_AWS_NETWORK_PERFORMANCE_DATA: StaticOperationSchema = (
-    23,
-    n0,
-    _GANPD,
-    0,
-    GET_AWS_NETWORK_PERFORMANCE_DATA_INPUT,
-    GET_AWS_NETWORK_PERFORMANCE_DATA_OUTPUT,
-    (),
-)
-
-METRIC_POINT: StaticSchema = (
-    18,
-    n0,
-    _MPe,
-    0,
-    (_SDt, _ED, _Va, _Sta),
-    (
-        (lambda: schemas.MILLISECOND_DATE_TIME, {_aQN: _SDt, _sN: _sDt}),
-        (lambda: schemas.MILLISECOND_DATE_TIME, {_aQN: _ED, _sN: _eD}),
-        (lambda: schemas.FLOAT, {_aQN: _Va, _sN: _va}),
-        (lambda: schemas.STRING, {_aQN: _Sta, _sN: _sta}),
-    ),
-)
-
-METRIC_POINTS: StaticSchema = (16, n0, _MPet, 0, (_me,), ((METRIC_POINT, {_sN: _i}),))

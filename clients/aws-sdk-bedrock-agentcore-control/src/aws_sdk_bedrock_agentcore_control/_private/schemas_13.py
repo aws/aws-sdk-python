@@ -13,7 +13,6 @@ _n = "name"
 _d = "description"
 _mem = "member"
 _sVm = "smithy.api#enumValue"
-_smi = "smithy.api#default"
 _sSI = "smithy.synthetic#originalShapeId"
 _smith = "smithy.api#input"
 _sL = "smithy.api#httpLabel"
@@ -36,23 +35,33 @@ _sQ = "smithy.api#httpQuery"
 _lUA = "lastUpdatedAt"
 _mR = "maxResults"
 _nT = "nextToken"
+_kKA = "kmsKeyArn"
 _a = "arn"
 _rA = "roleArn"
 _aCu = "authorizerConfiguration"
 _wID = "workloadIdentityDetails"
 _ty = "type"
-_kKA = "kmsKeyArn"
 _de = "definition"
-_LO = "LOG_ONLY"
 _aT = "authorizerType"
 _sRta = "statusReasons"
+_AK = "API_KEY"
 _aU = "authorizationUrl"
 _pol = "policy"
 _eKA = "encryptionKeyArn"
 _pMA = "paymentManagerArn"
 _pMI = "paymentManagerId"
+_cCDP = "coinbaseCDP"
 _cPCr = "credentialProviderConfigurations"
+_pMr = "provisionMode"
 _pCIa = "paymentConnectorId"
+_PCSa = "PaymentConnectorSummary"
+_PCSay = "PaymentConnectorSummaries"
+_CCS = "CoinbaseCdpSecret"
+_WS = "WALLET_SECRET"
+_CCSo = "CoinbaseCdpSecrets"
+_CCRT = "CoinbaseCdpRotationTargets"
+_secr = "secrets"
+_CRCr = "CredentialRotationConfig"
 _RPCCI = "RotatePaymentConnectorCredentialsInput"
 _cRPCCR = (
     "com.amazonaws.bedrockagentcorecontrol#RotatePaymentConnectorCredentialsRequest"
@@ -194,11 +203,67 @@ _cont = "content"
 _SPGO = "StartPolicyGenerationOutput"
 _cSPGRo = "com.amazonaws.bedrockagentcorecontrol#StartPolicyGenerationResponse"
 _SPG = "StartPolicyGeneration"
-_EM = "EnforcementMode"
-_PN = "PolicyName"
-_PVM = "PolicyValidationMode"
-_FOAF = "FAIL_ON_ANY_FINDINGS"
-_IAF = "IGNORE_ALL_FINDINGS"
+
+PAYMENT_CONNECTOR_SUMMARY: StaticSchema = (
+    18,
+    n0,
+    _PCSa,
+    0,
+    (_pCIa, _n, _ty, _pMr, _st, _lUA),
+    (
+        (lambda: schemas.PAYMENT_CONNECTOR_ID, 1),
+        (lambda: schemas.PAYMENT_CONNECTOR_NAME, 1),
+        (lambda: schemas.PAYMENT_CONNECTOR_TYPE, 1),
+        (lambda: schemas.PAYMENT_CONNECTOR_PROVISION_MODE, 0),
+        (lambda: schemas.PAYMENT_CONNECTOR_STATUS, 1),
+        (lambda: schemas.DATE_TIMESTAMP, 1),
+    ),
+)
+
+PAYMENT_CONNECTOR_SUMMARIES: StaticSchema = (
+    16,
+    n0,
+    _PCSay,
+    0,
+    (_mem,),
+    ((PAYMENT_CONNECTOR_SUMMARY, 0),),
+)
+
+COINBASE_CDP_SECRET: StaticSchema = (
+    14,
+    n0,
+    _CCS,
+    0,
+    (_AK, _WS),
+    ((-1, {_sVm: _AK}), (-1, {_sVm: _WS})),
+)
+
+COINBASE_CDP_SECRETS: StaticSchema = (
+    16,
+    n0,
+    _CCSo,
+    0,
+    (_mem,),
+    ((COINBASE_CDP_SECRET, 0),),
+)
+
+COINBASE_CDP_ROTATION_TARGETS: StaticSchema = (
+    18,
+    n0,
+    _CCRT,
+    0,
+    (_secr,),
+    ((COINBASE_CDP_SECRETS, 1),),
+)
+
+CREDENTIAL_ROTATION_CONFIG: StaticSchema = (
+    19,
+    n0,
+    _CRCr,
+    0,
+    (_cCDP,),
+    ((COINBASE_CDP_ROTATION_TARGETS, 0),),
+)
 
 ROTATE_PAYMENT_CONNECTOR_CREDENTIALS_INPUT: StaticSchema = (
     18,
@@ -209,7 +274,7 @@ ROTATE_PAYMENT_CONNECTOR_CREDENTIALS_INPUT: StaticSchema = (
     (
         (lambda: schemas.PAYMENT_MANAGER_ID, 9),
         (lambda: schemas.PAYMENT_CONNECTOR_ID, 9),
-        (lambda: schemas.CREDENTIAL_ROTATION_CONFIG, 1),
+        (CREDENTIAL_ROTATION_CONFIG, 1),
         (lambda: schemas.CLIENT_TOKEN, 2),
     ),
 )
@@ -1225,24 +1290,4 @@ START_POLICY_GENERATION: StaticOperationSchema = (
         lambda: schemas.THROTTLING_EXCEPTION,
         lambda: schemas.VALIDATION_EXCEPTION,
     ),
-)
-
-ENFORCEMENT_MODE: StaticSchema = (
-    14,
-    n0,
-    _EM,
-    {_smi: _ACTIVE},
-    (_ACTIVE, _LO),
-    ((-1, {_sVm: _ACTIVE}), (-1, {_sVm: _LO})),
-)
-
-POLICY_NAME: StaticSchema = (3, n0, _PN, 0)
-
-POLICY_VALIDATION_MODE: StaticSchema = (
-    14,
-    n0,
-    _PVM,
-    {_smi: _FOAF},
-    (_FOAF, _IAF),
-    ((-1, {_sVm: _FOAF}), (-1, {_sVm: _IAF})),
 )

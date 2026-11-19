@@ -29,8 +29,7 @@ _RESOURCE = "RESOURCE"
 _TN = "TypeName"
 _T = "Type"
 _Ar = "Arn"
-_AC = "AfterContext"
-_BC = "BeforeContext"
+_CA = "CallAs"
 _CRT = "ClientRequestToken"
 _SN = "StackName"
 _Cap = "Capabilities"
@@ -40,21 +39,11 @@ _DP = "DeletionPolicy"
 _URP = "UpdateReplacePolicy"
 _Ta = "Tags"
 _LRI = "LogicalResourceId"
-_MI = "ModuleInfo"
-_PRI = "PhysicalResourceId"
-_PA = "PolicyAction"
-_PDC = "PreviousDeploymentContext"
-_Rep = "Replacement"
-_RDIAe = "ResourceDriftIgnoredAttributes"
 _IS = "IN_SYNC"
 _NC = "NOT_CHECKED"
 _UNKNOWN = "UNKNOWN"
 _RT = "ResourceType"
-_Sc = "Scope"
 _RC = "ResourceChange"
-_Ac = "Action"
-_RDS = "ResourceDriftStatus"
-_Det = "Details"
 _CT = "ChangeType"
 _Res = "Resource"
 _Ch = "Change"
@@ -170,6 +159,7 @@ _CCSI = "CreateChangeSetInput"
 _CCSO = "CreateChangeSetOutput"
 _Id = "Id"
 _ICE = "InsufficientCapabilitiesException"
+_LEE = "LimitExceededException"
 _CCS = "CreateChangeSet"
 _CRLEE = "ConcurrentResourcesLimitExceededException"
 _GTN = "GeneratedTemplateName"
@@ -214,59 +204,25 @@ _Reg = "Region"
 _RLe = "RegionList"
 _SSOP = "StackSetOperationPreferences"
 _RO = "RegionOrder"
+_SSN = "StackSetName"
+_CSII = "CreateStackInstancesInput"
+_Regi = "Regions"
+_PO = "ParameterOverrides"
+_OP = "OperationPreferences"
+_sT = "smithy.api#idempotencyToken"
+_CSIO = "CreateStackInstancesOutput"
+_OIAEE = "OperationIdAlreadyExistsException"
+_CSIre = "CreateStackInstances"
 _SRI = "StackRefactorId"
 _ICSSE = "InvalidChangeSetStatusException"
 _GTNFE = "GeneratedTemplateNotFoundException"
 _SDS = "StackDriftStatus"
 _DRIFTED = "DRIFTED"
 _UIP = "UPDATE_IN_PROGRESS"
-_LUT = "LastUpdatedTime"
 _COMPLETE = "COMPLETE"
-_PPr = "PropertyPath"
 _GTS = "GeneratedTemplateStatus"
 _UP__ = "UPDATE_PENDING"
 _SDDI = "StackDriftDetectionId"
-
-RESOURCE_CHANGE: StaticSchema = (
-    18,
-    n0,
-    _RC,
-    0,
-    (
-        _PA,
-        _Ac,
-        _LRI,
-        _PRI,
-        _RT,
-        _Rep,
-        _Sc,
-        _RDS,
-        _RDIAe,
-        _Det,
-        _CSI,
-        _MI,
-        _BC,
-        _AC,
-        _PDC,
-    ),
-    (
-        (lambda: schemas.POLICY_ACTION, 0),
-        (lambda: schemas.CHANGE_ACTION, 0),
-        (lambda: schemas.LOGICAL_RESOURCE_ID, 0),
-        (lambda: schemas.PHYSICAL_RESOURCE_ID, 0),
-        (lambda: schemas.RESOURCE_TYPE, 0),
-        (lambda: schemas.REPLACEMENT, 0),
-        (lambda: schemas.SCOPE, 0),
-        (lambda: schemas.STACK_RESOURCE_DRIFT_STATUS, 0),
-        (lambda: schemas.RESOURCE_DRIFT_IGNORED_ATTRIBUTES, 0),
-        (lambda: schemas.RESOURCE_CHANGE_DETAILS, 0),
-        (lambda: schemas.CHANGE_SET_ID, 0),
-        (lambda: schemas.MODULE_INFO, 0),
-        (lambda: schemas.BEFORE_CONTEXT, 0),
-        (lambda: schemas.AFTER_CONTEXT, 0),
-        (lambda: schemas.PREVIOUS_DEPLOYMENT_CONTEXT, 0),
-    ),
-)
 
 CHANGE_TYPE: StaticSchema = (14, n0, _CT, 0, (_Res,), ((-1, {_sV: _Res}),))
 
@@ -279,7 +235,7 @@ CHANGE: StaticSchema = (
     (
         (CHANGE_TYPE, 0),
         (lambda: schemas.HOOK_INVOCATION_COUNT, 0),
-        (RESOURCE_CHANGE, 0),
+        (lambda: schemas.RESOURCE_CHANGE, 0),
     ),
 )
 
@@ -716,7 +672,7 @@ CREATE_CHANGE_SET: StaticOperationSchema = (
     (
         lambda: schemas.ALREADY_EXISTS_EXCEPTION,
         lambda: INSUFFICIENT_CAPABILITIES_EXCEPTION,
-        lambda: schemas.LIMIT_EXCEEDED_EXCEPTION,
+        lambda: LIMIT_EXCEEDED_EXCEPTION,
     ),
 )
 
@@ -729,6 +685,21 @@ INSUFFICIENT_CAPABILITIES_EXCEPTION: StaticSchema = (
         _sE: 400,
         _aQE: MappingProxyType(
             {"code": "InsufficientCapabilitiesException", "httpResponseCode": 400}
+        ),
+    },
+    (_M,),
+    ((lambda: schemas.ERROR_MESSAGE, 0),),
+)
+
+LIMIT_EXCEEDED_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _LEE,
+    {
+        _smi: _c,
+        _sE: 400,
+        _aQE: MappingProxyType(
+            {"code": "LimitExceededException", "httpResponseCode": 400}
         ),
     },
     (_M,),
@@ -837,7 +808,7 @@ CREATE_GENERATED_TEMPLATE: StaticOperationSchema = (
     (
         lambda: schemas.ALREADY_EXISTS_EXCEPTION,
         CONCURRENT_RESOURCES_LIMIT_EXCEEDED_EXCEPTION,
-        lambda: schemas.LIMIT_EXCEEDED_EXCEPTION,
+        LIMIT_EXCEEDED_EXCEPTION,
     ),
 )
 
@@ -855,6 +826,8 @@ ON_FAILURE: StaticSchema = (
 )
 
 RETAIN_EXCEPT_ON_CREATE: StaticSchema = (2, n0, _REOC, 0)
+
+STACK_POLICY_BODY: StaticSchema = (3, n0, _SPB, 0)
 
 STACK_POLICY_URL: StaticSchema = (3, n0, _SPURL, 0)
 
@@ -900,7 +873,7 @@ CREATE_STACK_INPUT: StaticSchema = (
         (lambda: schemas.RESOURCE_TYPES, 0),
         (ROLE_ARN, 0),
         (ON_FAILURE, 0),
-        (lambda: schemas.STACK_POLICY_BODY, 0),
+        (STACK_POLICY_BODY, 0),
         (STACK_POLICY_URL, 0),
         (TAGS, 0),
         (lambda: schemas.CLIENT_REQUEST_TOKEN, 0),
@@ -930,7 +903,7 @@ CREATE_STACK: StaticOperationSchema = (
     (
         lambda: schemas.ALREADY_EXISTS_EXCEPTION,
         INSUFFICIENT_CAPABILITIES_EXCEPTION,
-        lambda: schemas.LIMIT_EXCEEDED_EXCEPTION,
+        LIMIT_EXCEEDED_EXCEPTION,
         lambda: schemas.TOKEN_ALREADY_EXISTS_EXCEPTION,
     ),
 )
@@ -1009,6 +982,67 @@ STACK_SET_OPERATION_PREFERENCES: StaticSchema = (
     ),
 )
 
+STACK_SET_NAME: StaticSchema = (3, n0, _SSN, 0)
+
+CREATE_STACK_INSTANCES_INPUT: StaticSchema = (
+    18,
+    n0,
+    _CSII,
+    {_s: None},
+    (_SSN, _Acc, _DT, _Regi, _PO, _OP, _OI, _CA),
+    (
+        (STACK_SET_NAME, {_sO: None, _smit: None}),
+        (lambda: schemas.ACCOUNT_LIST, 0),
+        (DEPLOYMENT_TARGETS, 0),
+        (REGION_LIST, {_sO: None, _smit: None}),
+        (PARAMETERS, 0),
+        (STACK_SET_OPERATION_PREFERENCES, 0),
+        (lambda: schemas.CLIENT_REQUEST_TOKEN, 2),
+        (lambda: schemas.CALL_AS, 0),
+    ),
+)
+
+CREATE_STACK_INSTANCES_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _CSIO,
+    {_sm: None},
+    (_OI,),
+    ((lambda: schemas.CLIENT_REQUEST_TOKEN, 0),),
+)
+
+CREATE_STACK_INSTANCES: StaticOperationSchema = (
+    23,
+    n0,
+    _CSIre,
+    0,
+    CREATE_STACK_INSTANCES_INPUT,
+    CREATE_STACK_INSTANCES_OUTPUT,
+    (
+        lambda: schemas.INVALID_OPERATION_EXCEPTION,
+        LIMIT_EXCEEDED_EXCEPTION,
+        lambda: OPERATION_ID_ALREADY_EXISTS_EXCEPTION,
+        lambda: schemas.OPERATION_IN_PROGRESS_EXCEPTION,
+        lambda: schemas.STACK_SET_NOT_FOUND_EXCEPTION,
+        lambda: schemas.STALE_REQUEST_EXCEPTION,
+    ),
+)
+
+OPERATION_ID_ALREADY_EXISTS_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _OIAEE,
+    {
+        _smi: _c,
+        _sE: 409,
+        _aQE: MappingProxyType(
+            {"code": "OperationIdAlreadyExistsException", "httpResponseCode": 409}
+        ),
+    },
+    (_M,),
+    ((lambda: schemas.ERROR_MESSAGE, 0),),
+)
+
 STACK_REFACTOR_ID: StaticSchema = (3, n0, _SRI, 0)
 
 INVALID_CHANGE_SET_STATUS_EXCEPTION: StaticSchema = (
@@ -1049,10 +1083,6 @@ STACK_DRIFT_STATUS: StaticSchema = (
     (_DRIFTED, _IS, _UNKNOWN, _NC),
     ((-1, {_sV: _DRIFTED}), (-1, {_sV: _IS}), (-1, {_sV: _UNKNOWN}), (-1, {_sV: _NC})),
 )
-
-LAST_UPDATED_TIME: StaticSchema = (4, n0, _LUT, 0)
-
-PROPERTY_PATH: StaticSchema = (3, n0, _PPr, 0)
 
 GENERATED_TEMPLATE_STATUS: StaticSchema = (
     14,

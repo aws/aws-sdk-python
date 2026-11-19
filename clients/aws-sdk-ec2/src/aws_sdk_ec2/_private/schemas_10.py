@@ -57,11 +57,14 @@ _iI = "instanceId"
 _SGI = "SecurityGroupId"
 _IG = "InternetGateway"
 _iG = "internetGateway"
+_NI = "NetworkInterface"
+_Sub = "Subnet"
+_TGr = "TransitGateway"
+_TGA = "TransitGatewayAttachment"
 _RTe = "ResourceTypes"
 _RNe = "RegionName"
 _Des = "Description"
 _ipv = "ipv4"
-_ipv_ = "ipv6"
 _SMt = "StatusMessage"
 _sMt = "statusMessage"
 _desc = "description"
@@ -88,6 +91,9 @@ _IApa = "IpamArn"
 _iAp = "ipamArn"
 _IR = "IpamRegion"
 _iRp = "ipamRegion"
+_KKI = "KmsKeyId"
+_SIn = "SnapshotId"
+_VPC_ = "VPC"
 _RIes = "ResourceIds"
 _IIm = "ImageId"
 _ECI = "EbsCardIndex"
@@ -104,12 +110,10 @@ _eTI = "exportTaskId"
 _compl = "completed"
 _FII = "FpgaImageId"
 _fII = "fpgaImageId"
-_KKI = "KmsKeyId"
 _En = "Encrypted"
 _enc = "encrypted"
 _kKI = "kmsKeyId"
 _iIm = "imageId"
-_SIn = "SnapshotId"
 _sIn = "snapshotId"
 _VT = "VolumeType"
 _Io = "Iops"
@@ -143,6 +147,11 @@ _vN = "virtualName"
 _eb = "ebs"
 _nD = "noDevice"
 _LDT = "LogDestinationType"
+_FLRT = "FlowLogsResourceType"
+_RNG = "RegionalNatGateway"
+_CN = "CoreNetwork"
+_CNE = "CoreNetworkEdge"
+_CNAo = "CoreNetworkAttachment"
 _TRT = "TaggableResourceType"
 _asg = "auto_scaling_group"
 _asg_ = "auto-scaling-group"
@@ -395,34 +404,33 @@ _cCIERVTRo = "com.amazonaws.ec2#CreateIpamExternalResourceVerificationTokenResul
 _iERVT = "ipamExternalResourceVerificationToken"
 _CIERVT = "CreateIpamExternalResourceVerificationToken"
 _Ri = "Rir"
-_ripe = "ripe"
-_apn = "apnic"
-_ari = "arin"
-_lac = "lacnic"
-_nic = "nicbr"
 _CIIRAI = "CreateIpamInternetRegistryAssociationInput"
 _cCIIRAR = "com.amazonaws.ec2#CreateIpamInternetRegistryAssociationRequest"
 _OHr = "OrganizationHandle"
-_IIRAS = "IpamInternetRegistryAssociationState"
-_pe_ = "pending_enable"
-_pe__ = "pending-enable"
-_eip___ = "enable_in_progress"
-_eip____ = "enable-in-progress"
-_ec = "enable_complete"
-_ec_ = "enable-complete"
-_ef__ = "enable_failed"
-_ef___ = "enable-failed"
-_dip___ = "disable_in_progress"
-_dip____ = "disable-in-progress"
-_dc___ = "disable_complete"
-_dc____ = "disable-complete"
-_df_____ = "disable_failed"
-_df______ = "disable-failed"
 _IIRA = "IpamInternetRegistryAssociation"
 _CIIRAO = "CreateIpamInternetRegistryAssociationOutput"
 _cCIIRARo = "com.amazonaws.ec2#CreateIpamInternetRegistryAssociationResult"
 _iIRA = "ipamInternetRegistryAssociation"
 _CIIRA = "CreateIpamInternetRegistryAssociation"
+
+FLOW_LOGS_RESOURCE_TYPE: StaticSchema = (
+    14,
+    n0,
+    _FLRT,
+    0,
+    (_VPC_, _Sub, _NI, _TGr, _TGA, _RNG, _CN, _CNE, _CNAo),
+    (
+        (-1, {_sV: _VPC_}),
+        (-1, {_sV: _Sub}),
+        (-1, {_sV: _NI}),
+        (-1, {_sV: _TGr}),
+        (-1, {_sV: _TGA}),
+        (-1, {_sV: _RNG}),
+        (-1, {_sV: _CN}),
+        (-1, {_sV: _CNE}),
+        (-1, {_sV: _CNAo}),
+    ),
+)
 
 TAGGABLE_RESOURCE_TYPE: StaticSchema = (
     14,
@@ -493,7 +501,7 @@ CREATE_FLOW_LOGS_INPUT: StaticSchema = (
         (lambda: schemas.STRING, 0),
         (lambda: schemas.STRING, 0),
         (lambda: schemas.FLOW_LOG_RESOURCE_IDS, {_sN: _RIe, _sO: None, _smi: None}),
-        (lambda: schemas.FLOW_LOGS_RESOURCE_TYPE, {_sO: None, _smi: None}),
+        (FLOW_LOGS_RESOURCE_TYPE, {_sO: None, _smi: None}),
         (TRAFFIC_TYPE, 0),
         (lambda: schemas.LOG_DESTINATION_TYPE, 0),
         (lambda: schemas.STRING, 0),
@@ -775,15 +783,6 @@ CREATE_IMAGE_USAGE_REPORT: StaticOperationSchema = (
 
 IMAGE_USAGE_REPORT_ID: StaticSchema = (3, n0, _IURI, 0)
 
-IP_ADDRESS_TYPE: StaticSchema = (
-    14,
-    n0,
-    _IAT,
-    0,
-    (_ipv, _du, _ipv_),
-    ((-1, {_sV: _ipv}), (-1, {_sV: _du}), (-1, {_sV: _ipv_})),
-)
-
 SECURITY_GROUP_ID_STRING_LIST_REQUEST: StaticSchema = (
     16,
     n0,
@@ -806,7 +805,7 @@ CREATE_INSTANCE_CONNECT_ENDPOINT_INPUT: StaticSchema = (
         (lambda: schemas.BOOLEAN, 0),
         (lambda: schemas.STRING, 2),
         (lambda: schemas.TAG_SPECIFICATION_LIST, {_sN: _TS}),
-        (IP_ADDRESS_TYPE, 0),
+        (lambda: schemas.IP_ADDRESS_TYPE, 0),
     ),
 )
 
@@ -936,7 +935,7 @@ EC2_INSTANCE_CONNECT_ENDPOINT: StaticSchema = (
         (lambda: schemas.BOOLEAN, {_aQN: _PCI, _sN: _pCI}),
         (SECURITY_GROUP_ID_SET, {_aQN: _SGIS, _sN: _sGIS}),
         (lambda: schemas.TAG_LIST, {_aQN: _TSag, _sN: _tS}),
-        (IP_ADDRESS_TYPE, {_aQN: _IAT, _sN: _iAT}),
+        (lambda: schemas.IP_ADDRESS_TYPE, {_aQN: _IAT, _sN: _iAT}),
         (INSTANCE_CONNECT_ENDPOINT_PUBLIC_DNS_NAMES, {_aQN: _PDN, _sN: _pDN}),
         (lambda: schemas.AVAILABILITY_ZONE_ID, {_aQN: _AZI, _sN: _aZI}),
     ),
@@ -1426,21 +1425,6 @@ IPAM_EXTERNAL_RESOURCE_VERIFICATION_TOKEN: StaticSchema = (
     ),
 )
 
-RIR: StaticSchema = (
-    14,
-    n0,
-    _Ri,
-    0,
-    (_ripe, _apn, _ari, _lac, _nic),
-    (
-        (-1, {_sV: _ripe}),
-        (-1, {_sV: _apn}),
-        (-1, {_sV: _ari}),
-        (-1, {_sV: _lac}),
-        (-1, {_sV: _nic}),
-    ),
-)
-
 CREATE_IPAM_INTERNET_REGISTRY_ASSOCIATION_INPUT: StaticSchema = (
     18,
     n0,
@@ -1450,7 +1434,7 @@ CREATE_IPAM_INTERNET_REGISTRY_ASSOCIATION_INPUT: StaticSchema = (
     (
         (lambda: schemas.BOOLEAN, 0),
         (lambda: schemas.IPAM_ID, {_sO: None, _smi: None}),
-        (RIR, {_sO: None, _smi: None}),
+        (lambda: schemas.RIR, {_sO: None, _smi: None}),
         (lambda: schemas.STRING, {_sO: None, _smi: None}),
         (lambda: schemas.STRING, 0),
         (lambda: schemas.TAG_SPECIFICATION_LIST, {_sN: _TS}),
@@ -1475,39 +1459,4 @@ CREATE_IPAM_INTERNET_REGISTRY_ASSOCIATION: StaticOperationSchema = (
     CREATE_IPAM_INTERNET_REGISTRY_ASSOCIATION_INPUT,
     CREATE_IPAM_INTERNET_REGISTRY_ASSOCIATION_OUTPUT,
     (),
-)
-
-IPAM_INTERNET_REGISTRY_ASSOCIATION_STATE: StaticSchema = (
-    14,
-    n0,
-    _IIRAS,
-    0,
-    (
-        _pe_,
-        _cip,
-        _cf________________________,
-        _eip___,
-        _ec,
-        _ef__,
-        _dip___,
-        _dc___,
-        _df_____,
-        _dip_,
-        _dc_,
-        _df___,
-    ),
-    (
-        (-1, {_sV: _pe__}),
-        (-1, {_sV: _cip_}),
-        (-1, {_sV: _cf_________________________}),
-        (-1, {_sV: _eip____}),
-        (-1, {_sV: _ec_}),
-        (-1, {_sV: _ef___}),
-        (-1, {_sV: _dip____}),
-        (-1, {_sV: _dc____}),
-        (-1, {_sV: _df______}),
-        (-1, {_sV: _dip__}),
-        (-1, {_sV: _dc__}),
-        (-1, {_sV: _df____}),
-    ),
 )

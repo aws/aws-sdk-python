@@ -20,6 +20,7 @@ from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
     from ..models import (
+        BatchRevokeSessionsOutput,
         CreateBearerTokenOutput,
         CreateOAuth2TokenOutput,
         CreateOAuth2TokenWithIAMOutput,
@@ -28,8 +29,10 @@ if TYPE_CHECKING:
         DeleteResourcePermissionStatementOutput,
         GetConsoleAuthorizationConfigurationOutput,
         GetResourcePolicyOutput,
+        GetSessionOutput,
         IntrospectOAuth2TokenWithIAMOutput,
         ListResourcePermissionStatementsOutput,
+        ListSessionsOutput,
         PutConsoleAuthorizationConfigurationOutput,
         PutResourcePermissionStatementOutput,
         RevokeOAuth2TokenWithIAMOutput,
@@ -46,6 +49,52 @@ class AsyncSigninClient(AsyncClient[AsyncSigninConfig]):
     """
 
     _client_plugins = (aws_user_agent_plugin, user_agent_plugin)
+
+    @_overload
+    async def batch_revoke_sessions(
+        self,
+        request: _models.BatchRevokeSessionsInput
+        | _models.BatchRevokeSessionsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> BatchRevokeSessionsOutput: ...
+
+    @_overload
+    async def batch_revoke_sessions(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.BatchRevokeSessionsInputDict],
+    ) -> BatchRevokeSessionsOutput:
+        """
+        Revokes up to five sign-in sessions. A revoked session can no longer be
+        refreshed. Revoking a session that is already revoked succeeds. Each
+        session must belong to the identity specified by principalArn, or to the
+        caller if principalArn is omitted. Failures for individual sessions are
+        returned in the errors list and do not fail the whole request.
+
+        Args:
+            plugins:
+                A list of callables that modify the configuration dynamically.
+                Changes made by these plugins only apply for the duration of the
+                operation execution and will not affect any other operation
+                invocations.
+
+        Returns:
+            An instance of `BatchRevokeSessionsOutput`.
+        """
+
+    async def batch_revoke_sessions(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> BatchRevokeSessionsOutput:
+        return await self._invoke(
+            self._select_input(_models.BATCH_REVOKE_SESSIONS, args, kwargs),
+            _models.BATCH_REVOKE_SESSIONS,
+            [],
+            plugins,
+        )
 
     @_overload
     async def create_bearer_token(
@@ -396,6 +445,50 @@ class AsyncSigninClient(AsyncClient[AsyncSigninConfig]):
         )
 
     @_overload
+    async def get_session(
+        self,
+        request: _models.GetSessionInput | _models.GetSessionInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetSessionOutput: ...
+
+    @_overload
+    async def get_session(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetSessionInputDict],
+    ) -> GetSessionOutput:
+        """
+        Returns the details of a single sign-in session. The session must belong
+        to the identity specified by principalArn, or to the caller if
+        principalArn is omitted. A session that belongs to a different identity
+        or account is reported as not found.
+
+        Args:
+            plugins:
+                A list of callables that modify the configuration dynamically.
+                Changes made by these plugins only apply for the duration of the
+                operation execution and will not affect any other operation
+                invocations.
+
+        Returns:
+            An instance of `GetSessionOutput`.
+        """
+
+    async def get_session(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetSessionOutput:
+        return await self._invoke(
+            self._select_input(_models.GET_SESSION, args, kwargs),
+            _models.GET_SESSION,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def introspect_o_auth2_token_with_iam(
         self,
         request: _models.IntrospectOAuth2TokenWithIAMInput
@@ -481,6 +574,51 @@ class AsyncSigninClient(AsyncClient[AsyncSigninConfig]):
                 _models.LIST_RESOURCE_PERMISSION_STATEMENTS, args, kwargs
             ),
             _models.LIST_RESOURCE_PERMISSION_STATEMENTS,
+            [],
+            plugins,
+        )
+
+    @_overload
+    async def list_sessions(
+        self,
+        request: _models.ListSessionsInput | _models.ListSessionsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListSessionsOutput: ...
+
+    @_overload
+    async def list_sessions(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListSessionsInputDict],
+    ) -> ListSessionsOutput:
+        """
+        Lists sign-in sessions for an IAM identity in your account. If you omit
+        principalArn, the operation lists the caller's own sessions. Specify a
+        user or role ARN to list that identity's sessions, or specify
+        arn:aws:iam::{account-id}:* to list all sessions in the account.
+        Filters are combined with a logical AND.
+
+        Args:
+            plugins:
+                A list of callables that modify the configuration dynamically.
+                Changes made by these plugins only apply for the duration of the
+                operation execution and will not affect any other operation
+                invocations.
+
+        Returns:
+            An instance of `ListSessionsOutput`.
+        """
+
+    async def list_sessions(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListSessionsOutput:
+        return await self._invoke(
+            self._select_input(_models.LIST_SESSIONS, args, kwargs),
+            _models.LIST_SESSIONS,
             [],
             plugins,
         )

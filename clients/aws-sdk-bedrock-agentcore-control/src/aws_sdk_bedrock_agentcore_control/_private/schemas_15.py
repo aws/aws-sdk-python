@@ -56,7 +56,7 @@ _sRt = "statusReason"
 _oV = "optionalValue"
 _rAe = "resourceArn"
 _lA = "lambdaArn"
-_gI = "gatewayIdentifier"
+_gIa = "gatewayIdentifier"
 _CJ = "CUSTOM_JWT"
 _AI = "AWS_IAM"
 _lam = "lambda"
@@ -75,7 +75,6 @@ _tVI = "tokenVaultId"
 _kC = "kmsConfiguration"
 _lMD = "lastModifiedDate"
 _iS = "inputSchema"
-_TRA = "TaggableResourcesArn"
 _cPCr = "credentialProviderConfigurations"
 _rIe = "registryId"
 _dT = "descriptorType"
@@ -224,8 +223,6 @@ _aw = "aws.auth#sigv4"
 _aws = "aws.api#service"
 _aJ = "aws.protocols#restJson1"
 _smithyap = "smithy.api#cors"
-
-TAGGABLE_RESOURCES_ARN: StaticSchema = (3, n0, _TRA, 0)
 
 UPDATE_REGISTRY_RECORD_INPUT: StaticSchema = (
     18,
@@ -751,7 +748,7 @@ TAG_RESOURCE_INPUT: StaticSchema = (
     _TRI,
     {_sSI: _cTRR, _smith: None},
     (_rAe, _t),
-    ((TAGGABLE_RESOURCES_ARN, 9), (lambda: schemas.TAGS_MAP, 1)),
+    ((lambda: schemas.TAGGABLE_RESOURCES_ARN, 9), (lambda: schemas.TAGS_MAP, 1)),
 )
 
 TAG_RESOURCE_OUTPUT: StaticSchema = (18, n0, _TRO, {_sSI: _cTRRo, _smithy: None})
@@ -785,7 +782,10 @@ UNTAG_RESOURCE_INPUT: StaticSchema = (
     _URIn,
     {_sSI: _cURRom, _smith: None},
     (_rAe, _tKa),
-    ((TAGGABLE_RESOURCES_ARN, 9), (TAG_KEY_LIST, {_sQ: _tKa, _sm: None})),
+    (
+        (lambda: schemas.TAGGABLE_RESOURCES_ARN, 9),
+        (TAG_KEY_LIST, {_sQ: _tKa, _sm: None}),
+    ),
 )
 
 UNTAG_RESOURCE_OUTPUT: StaticSchema = (18, n0, _UROn, {_sSI: _cURRoma, _smithy: None})
@@ -1146,7 +1146,7 @@ CREATE_GATEWAY_TARGET_INPUT: StaticSchema = (
     n0,
     _CGTI,
     {_sSI: _cCGTR, _smith: None},
-    (_gI, _n, _d, _cT, _tCa, _cPCr, _mC, _pE, _cCe),
+    (_gIa, _n, _d, _cT, _tCa, _cPCr, _mC, _pE, _cCe),
     (
         (lambda: schemas.GATEWAY_IDENTIFIER, 9),
         (lambda: schemas.TARGET_NAME, 0),
@@ -1281,7 +1281,7 @@ UPDATE_GATEWAY_TARGET_INPUT: StaticSchema = (
     n0,
     _UGTI,
     {_sSI: _cUGTR, _smith: None},
-    (_gI, _tI, _n, _d, _tCa, _cPCr, _mC, _pE, _cCe),
+    (_gIa, _tI, _n, _d, _tCa, _cPCr, _mC, _pE, _cCe),
     (
         (lambda: schemas.GATEWAY_IDENTIFIER, 9),
         (lambda: schemas.TARGET_ID, 9),

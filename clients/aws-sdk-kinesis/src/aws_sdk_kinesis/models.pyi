@@ -43,6 +43,176 @@ class AccessDeniedException(ServiceError, _SerdeShape):
     """
 
 @dataclass(kw_only=True)
+class AcknowledgeDeadLetterQueueRecordsErrorEntry(_SerdeShape):
+    """A dead-letter record that was not acknowledged, and why."""
+
+    receipt_handle: str
+    """The receipt handle of the record that was not acknowledged."""
+    error_code: str
+    """
+    A code identifying the type of failure. One of
+    `ResourceNotFoundException`, `InvalidArgumentException`,
+    `ThrottlingException`, or `InternalFailureException`.
+    """
+    error_message: str | None = ...
+    """A description of the cause of the failure."""
+
+@dataclass(kw_only=True)
+class AcknowledgeDeadLetterQueueRecordsInput(_SerdeShape):
+    """Dataclass for AcknowledgeDeadLetterQueueRecordsInput structure."""
+
+    queue_arn: str | None = ...
+    """The ARN of the queue whose dead-letter records are acknowledged."""
+    entries: list[AcknowledgeDeadLetterQueueRecordsRequestEntry] | None = ...
+    """
+    The dead-letter records to acknowledge, identified by their receipt
+    handles.
+    """
+
+class AcknowledgeDeadLetterQueueRecordsInputDict(TypedDict, total=False):
+    """Dictionary form of `AcknowledgeDeadLetterQueueRecordsInput`."""
+
+    queue_arn: Required[str]
+    """The ARN of the queue whose dead-letter records are acknowledged."""
+    entries: Required[
+        Sequence[
+            AcknowledgeDeadLetterQueueRecordsRequestEntry
+            | AcknowledgeDeadLetterQueueRecordsRequestEntryDict
+        ]
+    ]
+    """
+    The dead-letter records to acknowledge, identified by their receipt
+    handles.
+    """
+
+@dataclass(kw_only=True)
+class AcknowledgeDeadLetterQueueRecordsOutput(_SerdeShape):
+    """Dataclass for AcknowledgeDeadLetterQueueRecordsOutput structure."""
+
+    successful: list[AcknowledgeDeadLetterQueueRecordsResultEntry]
+    """The records that were acknowledged."""
+    failed: list[AcknowledgeDeadLetterQueueRecordsErrorEntry]
+    """
+    The records that were not acknowledged, each with the reason the entry
+    failed.
+    """
+    response_metadata: ResponseMetadata = ...
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+@dataclass(kw_only=True)
+class AcknowledgeDeadLetterQueueRecordsRequestEntry(_SerdeShape):
+    """A dead-letter record to acknowledge, identified by its receipt handle."""
+
+    receipt_handle: str
+    """
+    The receipt handle of the record to acknowledge, as returned by
+    ReceiveDeadLetterQueueRecords.
+    """
+
+class AcknowledgeDeadLetterQueueRecordsRequestEntryDict(TypedDict, total=False):
+    """Dictionary form of `AcknowledgeDeadLetterQueueRecordsRequestEntry`."""
+
+    receipt_handle: Required[str]
+    """
+    The receipt handle of the record to acknowledge, as returned by
+    ReceiveDeadLetterQueueRecords.
+    """
+
+@dataclass(kw_only=True)
+class AcknowledgeDeadLetterQueueRecordsResultEntry(_SerdeShape):
+    """A dead-letter record that was acknowledged."""
+
+    receipt_handle: str
+    """The receipt handle of the record that was acknowledged."""
+
+@dataclass(kw_only=True)
+class AcknowledgeQueueRecordsErrorEntry(_SerdeShape):
+    """A record that was not acknowledged, and why."""
+
+    receipt_handle: str
+    """The receipt handle of the record that was not acknowledged."""
+    error_code: str
+    """
+    A code identifying the type of failure. One of
+    `ResourceNotFoundException`, `InvalidArgumentException`,
+    `ThrottlingException`, or `InternalFailureException`.
+    """
+    error_message: str | None = ...
+    """A description of the cause of the failure."""
+
+@dataclass(kw_only=True)
+class AcknowledgeQueueRecordsInput(_SerdeShape):
+    """Dataclass for AcknowledgeQueueRecordsInput structure."""
+
+    queue_arn: str | None = ...
+    """The ARN of the queue the records were received from."""
+    entries: list[AcknowledgeQueueRecordsRequestEntry] | None = ...
+    """The records to acknowledge, identified by their receipt handles."""
+
+class AcknowledgeQueueRecordsInputDict(TypedDict, total=False):
+    """Dictionary form of `AcknowledgeQueueRecordsInput`."""
+
+    queue_arn: Required[str]
+    """The ARN of the queue the records were received from."""
+    entries: Required[
+        Sequence[
+            AcknowledgeQueueRecordsRequestEntry
+            | AcknowledgeQueueRecordsRequestEntryDict
+        ]
+    ]
+    """The records to acknowledge, identified by their receipt handles."""
+
+@dataclass(kw_only=True)
+class AcknowledgeQueueRecordsOutput(_SerdeShape):
+    """Dataclass for AcknowledgeQueueRecordsOutput structure."""
+
+    successful: list[AcknowledgeQueueRecordsResultEntry]
+    """The records that were acknowledged."""
+    failed: list[AcknowledgeQueueRecordsErrorEntry]
+    """
+    The records that were not acknowledged, each with the reason the entry
+    failed.
+    """
+    response_metadata: ResponseMetadata = ...
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+@dataclass(kw_only=True)
+class AcknowledgeQueueRecordsRequestEntry(_SerdeShape):
+    """A record to acknowledge, identified by its receipt handle."""
+
+    receipt_handle: str
+    """
+    The receipt handle of the record to acknowledge, as returned by
+    ReceiveQueueRecords.
+    """
+
+class AcknowledgeQueueRecordsRequestEntryDict(TypedDict, total=False):
+    """Dictionary form of `AcknowledgeQueueRecordsRequestEntry`."""
+
+    receipt_handle: Required[str]
+    """
+    The receipt handle of the record to acknowledge, as returned by
+    ReceiveQueueRecords.
+    """
+
+@dataclass(kw_only=True)
+class AcknowledgeQueueRecordsResultEntry(_SerdeShape):
+    """A record that was acknowledged."""
+
+    receipt_handle: str
+    """The receipt handle of the record that was acknowledged."""
+
+@dataclass(kw_only=True)
 class AddTagsToStreamInput(_SerdeShape):
     """Represents the input for `AddTagsToStream`."""
 
@@ -552,6 +722,79 @@ class CreateChannelOutput(_SerdeShape):
     """
 
 @dataclass(kw_only=True)
+class CreateQueueInput(_SerdeShape):
+    """Dataclass for CreateQueueInput structure."""
+
+    queue_name: str | None = ...
+    """
+    A name for the queue. The name is scoped to the Amazon Web Services
+    account and Region used by the request, so two queues in different
+    accounts, or in the same account and different Regions, can have the
+    same name.
+    """
+    stream_configuration_list: list[QueueStreamConfiguration] | None = ...
+    """
+    The data stream the queue delivers records from, and the position in
+    that stream where delivery begins. The list must contain exactly one
+    entry, because a queue delivers records from a single data stream.
+    """
+    queue_attributes: QueueAttributes | None = ...
+    """
+    The configuration attributes for the queue, including its visibility
+    timeout and its dead-letter handling configuration.
+    """
+    tags: dict[str, str] | None = ...
+    """
+    A set of up to 50 key-value pairs to apply to the queue. You can also
+    add, change, and remove tags after the queue is created with TagResource
+    and UntagResource.
+    """
+
+class CreateQueueInputDict(TypedDict, total=False):
+    """Dictionary form of `CreateQueueInput`."""
+
+    queue_name: Required[str]
+    """
+    A name for the queue. The name is scoped to the Amazon Web Services
+    account and Region used by the request, so two queues in different
+    accounts, or in the same account and different Regions, can have the
+    same name.
+    """
+    stream_configuration_list: Required[
+        Sequence[QueueStreamConfiguration | QueueStreamConfigurationDict]
+    ]
+    """
+    The data stream the queue delivers records from, and the position in
+    that stream where delivery begins. The list must contain exactly one
+    entry, because a queue delivers records from a single data stream.
+    """
+    queue_attributes: QueueAttributes | QueueAttributesDict | None
+    """
+    The configuration attributes for the queue, including its visibility
+    timeout and its dead-letter handling configuration.
+    """
+    tags: Mapping[str, str] | None
+    """
+    A set of up to 50 key-value pairs to apply to the queue. You can also
+    add, change, and remove tags after the queue is created with TagResource
+    and UntagResource.
+    """
+
+@dataclass(kw_only=True)
+class CreateQueueOutput(_SerdeShape):
+    """Dataclass for CreateQueueOutput structure."""
+
+    queue_description: QueueDescription
+    """A description of the queue that was created."""
+    response_metadata: ResponseMetadata = ...
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+@dataclass(kw_only=True)
 class CreateStreamInput(_SerdeShape):
     """Represents the input for `CreateStream`."""
 
@@ -685,6 +928,60 @@ class CreateStreamOutput(_SerdeShape):
     """
 
 @dataclass(kw_only=True)
+class DeadLetterConfiguration(_SerdeShape):
+    """
+    The dead-letter handling configuration for a queue. Each queue has
+    built-in dead-letter handling. When a record has been received
+    `MaxReceiveCount` times without being acknowledged, it becomes a
+    dead-letter record, and ReceiveQueueRecords no longer returns it. The
+    dead-letter record stays in the same queue, and you work with it through
+    ReceiveDeadLetterQueueRecords, AcknowledgeDeadLetterQueueRecords,
+    UpdateDeadLetterQueueRecordsVisibility, and
+    RestoreDeadLetterQueueRecords, which use the same queue ARN.
+
+    Dead-letter handling is enabled by default, with a `MaxReceiveCount` of
+    6. To use a different value, or to turn dead-letter handling off,
+    specify this configuration in `QueueAttributes`.
+    """
+
+    target_type: str
+    """
+    Whether dead-letter handling is enabled for the queue. `BUILT_IN`
+    enables it: when a record has been received `MaxReceiveCount` times
+    without being acknowledged, it becomes a dead-letter record and
+    ReceiveQueueRecords no longer returns it. `NONE` disables it, and an
+    unacknowledged record continues to be redelivered until it is
+    acknowledged or its retention period ends.
+    """
+    max_receive_count: int | None = ...
+    """
+    The number of times a record can be received without being acknowledged
+    before it becomes a dead-letter record. Required when `TargetType` is
+    `BUILT_IN`. A queue that you create without `DeadLetterConfiguration`
+    gets a `MaxReceiveCount` of 6.
+    """
+
+class DeadLetterConfigurationDict(TypedDict, total=False):
+    """Dictionary form of `DeadLetterConfiguration`."""
+
+    target_type: Required[str]
+    """
+    Whether dead-letter handling is enabled for the queue. `BUILT_IN`
+    enables it: when a record has been received `MaxReceiveCount` times
+    without being acknowledged, it becomes a dead-letter record and
+    ReceiveQueueRecords no longer returns it. `NONE` disables it, and an
+    unacknowledged record continues to be redelivered until it is
+    acknowledged or its retention period ends.
+    """
+    max_receive_count: int | None
+    """
+    The number of times a record can be received without being acknowledged
+    before it becomes a dead-letter record. Required when `TargetType` is
+    `BUILT_IN`. A queue that you create without `DeadLetterConfiguration`
+    gets a `MaxReceiveCount` of 6.
+    """
+
+@dataclass(kw_only=True)
 class DeadLetterQueueS3Configuration(_SerdeShape):
     """
     The Amazon S3 dead-letter queue configuration for records that cannot be
@@ -789,11 +1086,39 @@ class DeleteChannelOutput(_SerdeShape):
     """
 
 @dataclass(kw_only=True)
+class DeleteQueueInput(_SerdeShape):
+    """Dataclass for DeleteQueueInput structure."""
+
+    queue_arn: str | None = ...
+    """The ARN of the queue to delete."""
+
+class DeleteQueueInputDict(TypedDict, total=False):
+    """Dictionary form of `DeleteQueueInput`."""
+
+    queue_arn: Required[str]
+    """The ARN of the queue to delete."""
+
+@dataclass(kw_only=True)
+class DeleteQueueOutput(_SerdeShape):
+    """Dataclass for DeleteQueueOutput structure."""
+
+    response_metadata: ResponseMetadata = ...
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+@dataclass(kw_only=True)
 class DeleteResourcePolicyInput(_SerdeShape):
     """Dataclass for DeleteResourcePolicyInput structure."""
 
     resource_arn: str | None = ...
-    """The Amazon Resource Name (ARN) of the data stream or consumer."""
+    """
+    The Amazon Resource Name (ARN) of a data stream, a queue, or an enhanced
+    fan-out consumer.
+    """
     stream_id: str | None = ...
     """Not Implemented. Reserved for future use."""
 
@@ -801,7 +1126,10 @@ class DeleteResourcePolicyInputDict(TypedDict, total=False):
     """Dictionary form of `DeleteResourcePolicyInput`."""
 
     resource_arn: Required[str]
-    """The Amazon Resource Name (ARN) of the data stream or consumer."""
+    """
+    The Amazon Resource Name (ARN) of a data stream, a queue, or an enhanced
+    fan-out consumer.
+    """
     stream_id: str | None
     """Not Implemented. Reserved for future use."""
 
@@ -826,8 +1154,15 @@ class DeleteStreamInput(_SerdeShape):
     enforce_consumer_deletion: bool | None = ...
     """
     If this parameter is unset (`null`) or if you set it to `false`, and the
-    stream has registered consumers, the call to `DeleteStream` fails with a
-    `ResourceInUseException`.
+    stream has registered enhanced fan-out consumers, the call to
+    `DeleteStream` fails with a `ResourceInUseException`.
+
+    If you set it to `true`, `DeleteStream` deletes the stream and every
+    consumer registered with it.
+
+    This parameter does not apply to queues. A stream that has queues cannot
+    be deleted until every queue on it is deleted with DeleteQueue, whatever
+    this parameter is set to.
     """
     stream_arn: str | None = ...
     """The ARN of the stream."""
@@ -842,8 +1177,15 @@ class DeleteStreamInputDict(TypedDict, total=False):
     enforce_consumer_deletion: bool | None
     """
     If this parameter is unset (`null`) or if you set it to `false`, and the
-    stream has registered consumers, the call to `DeleteStream` fails with a
-    `ResourceInUseException`.
+    stream has registered enhanced fan-out consumers, the call to
+    `DeleteStream` fails with a `ResourceInUseException`.
+
+    If you set it to `true`, `DeleteStream` deletes the stream and every
+    consumer registered with it.
+
+    This parameter does not apply to queues. A stream that has queues cannot
+    be deleted until every queue on it is deleted with DeleteQueue, whatever
+    this parameter is set to.
     """
     stream_arn: str | None
     """The ARN of the stream."""
@@ -1002,6 +1344,33 @@ class DescribeLimitsOutput(_SerdeShape):
     """The number of channels in the account."""
     channel_count_limit: int | None = ...
     """The maximum number of channels allowed in the account."""
+    response_metadata: ResponseMetadata = ...
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+@dataclass(kw_only=True)
+class DescribeQueueInput(_SerdeShape):
+    """Dataclass for DescribeQueueInput structure."""
+
+    queue_arn: str | None = ...
+    """The ARN of the queue to describe."""
+
+class DescribeQueueInputDict(TypedDict, total=False):
+    """Dictionary form of `DescribeQueueInput`."""
+
+    queue_arn: Required[str]
+    """The ARN of the queue to describe."""
+
+@dataclass(kw_only=True)
+class DescribeQueueOutput(_SerdeShape):
+    """Dataclass for DescribeQueueOutput structure."""
+
+    queue_description: QueueDescription
+    """A description of the queue."""
     response_metadata: ResponseMetadata = ...
     """
     Metadata about the response that produced this output. Use this to
@@ -1549,7 +1918,10 @@ class GetResourcePolicyInput(_SerdeShape):
     """Dataclass for GetResourcePolicyInput structure."""
 
     resource_arn: str | None = ...
-    """The Amazon Resource Name (ARN) of the data stream or consumer."""
+    """
+    The Amazon Resource Name (ARN) of a data stream, a queue, or an enhanced
+    fan-out consumer.
+    """
     stream_id: str | None = ...
     """Not Implemented. Reserved for future use."""
 
@@ -1557,7 +1929,10 @@ class GetResourcePolicyInputDict(TypedDict, total=False):
     """Dictionary form of `GetResourcePolicyInput`."""
 
     resource_arn: Required[str]
-    """The Amazon Resource Name (ARN) of the data stream or consumer."""
+    """
+    The Amazon Resource Name (ARN) of a data stream, a queue, or an enhanced
+    fan-out consumer.
+    """
     stream_id: str | None
     """Not Implemented. Reserved for future use."""
 
@@ -1806,10 +2181,7 @@ class KMSAccessDeniedException(ServiceError, _SerdeShape):
 
 @dataclass(kw_only=True)
 class KMSDisabledException(ServiceError, _SerdeShape):
-    """
-    The request was rejected because the specified customer master key (CMK)
-    isn't enabled.
-    """
+    """The request was rejected because the specified KMS key isn't enabled."""
 
     response_metadata: ResponseMetadata = ...
     """
@@ -1945,6 +2317,61 @@ class ListChannelsOutput(_SerdeShape):
     The pagination token to use in a subsequent call to retrieve the next
     page of results. This value is `null` when there are no more results to
     return.
+    """
+    response_metadata: ResponseMetadata = ...
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+@dataclass(kw_only=True)
+class ListQueuesInput(_SerdeShape):
+    """Dataclass for ListQueuesInput structure."""
+
+    max_results: int | None = ...
+    """
+    The maximum number of queue summaries to return in one response. The
+    response might contain fewer summaries than this value, and might
+    contain a `NextToken` even when it contains fewer.
+    """
+    next_token: str | None = ...
+    """
+    The `NextToken` returned by a previous `ListQueues` request. Use it to
+    retrieve the next page of queue summaries.
+    """
+    stream_filter: list[QueueStreamFilter] | None = ...
+    """Lists only the queues created on the specified data stream."""
+
+class ListQueuesInputDict(TypedDict, total=False):
+    """Dictionary form of `ListQueuesInput`."""
+
+    max_results: int | None
+    """
+    The maximum number of queue summaries to return in one response. The
+    response might contain fewer summaries than this value, and might
+    contain a `NextToken` even when it contains fewer.
+    """
+    next_token: str | None
+    """
+    The `NextToken` returned by a previous `ListQueues` request. Use it to
+    retrieve the next page of queue summaries.
+    """
+    stream_filter: Sequence[QueueStreamFilter | QueueStreamFilterDict] | None
+    """Lists only the queues created on the specified data stream."""
+
+@dataclass(kw_only=True)
+class ListQueuesOutput(_SerdeShape):
+    """Dataclass for ListQueuesOutput structure."""
+
+    queue_summaries: list[QueueSummary]
+    """A summary of each queue that matched the request."""
+    next_token: str | None = ...
+    """
+    The token to pass to the next `ListQueues` request to retrieve the next
+    page of queue summaries. This member is absent when no more queues are
+    available.
     """
     response_metadata: ResponseMetadata = ...
     """
@@ -2973,7 +3400,10 @@ class PutResourcePolicyInput(_SerdeShape):
     """Dataclass for PutResourcePolicyInput structure."""
 
     resource_arn: str | None = ...
-    """The Amazon Resource Name (ARN) of the data stream or consumer."""
+    """
+    The Amazon Resource Name (ARN) of a data stream, a queue, or an enhanced
+    fan-out consumer.
+    """
     stream_id: str | None = ...
     """Not Implemented. Reserved for future use."""
     policy: str | None = ...
@@ -2987,7 +3417,10 @@ class PutResourcePolicyInputDict(TypedDict, total=False):
     """Dictionary form of `PutResourcePolicyInput`."""
 
     resource_arn: Required[str]
-    """The Amazon Resource Name (ARN) of the data stream or consumer."""
+    """
+    The Amazon Resource Name (ARN) of a data stream, a queue, or an enhanced
+    fan-out consumer.
+    """
     stream_id: str | None
     """Not Implemented. Reserved for future use."""
     policy: Required[str]
@@ -3001,6 +3434,405 @@ class PutResourcePolicyInputDict(TypedDict, total=False):
 class PutResourcePolicyOutput(_SerdeShape):
     """Dataclass for PutResourcePolicyOutput structure."""
 
+    response_metadata: ResponseMetadata = ...
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+@dataclass(kw_only=True)
+class QueueAttributes(_SerdeShape):
+    """The configuration attributes for a queue."""
+
+    visibility_timeout_seconds: int | None = ...
+    """
+    The duration, in seconds, that a record is in flight and not visible to
+    any consumer instance after it is received. A record that is not
+    acknowledged before this duration elapses becomes visible in the queue
+    again and can be received by any consumer instance. If you omit this
+    attribute when you create a queue, the queue uses 30 seconds.
+    """
+    dead_letter_configuration: DeadLetterConfiguration | None = ...
+    """
+    The dead-letter handling configuration for the queue. If you omit this
+    attribute, dead-letter handling is enabled with a `MaxReceiveCount` of
+    6. If you specify it with a `TargetType` of `BUILT_IN`, you must also
+    specify `MaxReceiveCount`.
+    """
+
+class QueueAttributesDict(TypedDict, total=False):
+    """Dictionary form of `QueueAttributes`."""
+
+    visibility_timeout_seconds: int | None
+    """
+    The duration, in seconds, that a record is in flight and not visible to
+    any consumer instance after it is received. A record that is not
+    acknowledged before this duration elapses becomes visible in the queue
+    again and can be received by any consumer instance. If you omit this
+    attribute when you create a queue, the queue uses 30 seconds.
+    """
+    dead_letter_configuration: (
+        DeadLetterConfiguration | DeadLetterConfigurationDict | None
+    )
+    """
+    The dead-letter handling configuration for the queue. If you omit this
+    attribute, dead-letter handling is enabled with a `MaxReceiveCount` of
+    6. If you specify it with a `TargetType` of `BUILT_IN`, you must also
+    specify `MaxReceiveCount`.
+    """
+
+@dataclass(kw_only=True)
+class QueueDescription(_SerdeShape):
+    """
+    A description of a queue. Returned by CreateQueue, UpdateQueue, and
+    DescribeQueue.
+    """
+
+    queue_name: str
+    """The name of the queue."""
+    queue_arn: str
+    """
+    The ARN of the queue. The resource identifier in the ARN is generated
+    when the queue is created and is not derived from `QueueName`. Use the
+    returned `QueueARN` to identify the queue in subsequent requests.
+    """
+    queue_status: str
+    """The current status of the queue."""
+    queue_creation_timestamp: datetime
+    """The time the queue was created."""
+    stream_configuration_list: list[QueueStreamConfiguration]
+    """
+    The data stream the queue delivers records from, and the position in
+    that stream where delivery begins. The list contains exactly one entry,
+    because a queue delivers records from a single data stream.
+    """
+    queue_attributes: QueueAttributes | None = ...
+    """The configuration attributes of the queue."""
+
+@dataclass(kw_only=True)
+class QueueRecord(_SerdeShape):
+    """A data stream record, as delivered through a queue."""
+
+    receipt_handle: str
+    """
+    The identifier you use to acknowledge this record, change its
+    visibility, or restore it after it becomes a dead-letter record. A new
+    receipt handle is issued each time the record is received.
+    """
+    record_id: str
+    """
+    The unique identifier of the record. This value stays the same across
+    every delivery of the record, and it is the same in every queue on the
+    stream that delivers the record. To identify a single delivery, use
+    `ReceiptHandle` instead.
+    """
+    partition_key: str | None = ...
+    """The partition key the record was written to the data stream with."""
+    data: bytes
+    """
+    The data blob of the record. Amazon Kinesis Data Streams does not
+    inspect, interpret, or change the data.
+    """
+    approximate_arrival_timestamp: datetime
+    """
+    The approximate time the record arrived in the data stream. The
+    difference between this value and the current time is how long the
+    record took to reach your queue consumer.
+    """
+    first_receive_timestamp: datetime
+    """The approximate time the record was first received from the queue."""
+    receive_count: int
+    """
+    The number of times this record has been received without being
+    acknowledged.
+    """
+
+@dataclass(kw_only=True)
+class QueueStartingPosition(_SerdeShape):
+    """
+    The position in a data stream from which a queue begins delivering
+    records.
+    """
+
+    type: str
+    """
+    You can set the starting position to one of the following values:
+
+    `LATEST`: Delivers records that arrive after you create the queue. This
+    is the default.
+
+    `TRIM_HORIZON`: Start delivering at the last untrimmed record in the
+    stream, which is the oldest record the stream still retains.
+
+    `AT_TIMESTAMP`: Delivers records that arrive at or after a time stamp
+    that you provide.
+    """
+    timestamp: datetime | None = ...
+    """
+    The approximate time from which the queue begins delivering records.
+    Records that arrive at approximately this time or later are delivered.
+
+    In a request, specify this value only when `Type` is `AT_TIMESTAMP`. It
+    is required in that case, and specifying it for any other type returns a
+    `ValidationException`.
+
+    In a response, this value is approximate and reflects the queue's
+    effective starting position. While the queue is `CREATING`, the response
+    echoes what you configured: for `AT_TIMESTAMP`, the timestamp you
+    provided, and for `TRIM_HORIZON` and `LATEST`, this member is absent
+    because the effective position is not yet determined. Once the queue is
+    `ACTIVE`, the response always includes this member. For `AT_TIMESTAMP`,
+    it is the timestamp you provided or the earliest time the stream can be
+    read from, whichever is later.
+    """
+
+class QueueStartingPositionDict(TypedDict, total=False):
+    """Dictionary form of `QueueStartingPosition`."""
+
+    type: Required[str]
+    """
+    You can set the starting position to one of the following values:
+
+    `LATEST`: Delivers records that arrive after you create the queue. This
+    is the default.
+
+    `TRIM_HORIZON`: Start delivering at the last untrimmed record in the
+    stream, which is the oldest record the stream still retains.
+
+    `AT_TIMESTAMP`: Delivers records that arrive at or after a time stamp
+    that you provide.
+    """
+    timestamp: datetime | None
+    """
+    The approximate time from which the queue begins delivering records.
+    Records that arrive at approximately this time or later are delivered.
+
+    In a request, specify this value only when `Type` is `AT_TIMESTAMP`. It
+    is required in that case, and specifying it for any other type returns a
+    `ValidationException`.
+
+    In a response, this value is approximate and reflects the queue's
+    effective starting position. While the queue is `CREATING`, the response
+    echoes what you configured: for `AT_TIMESTAMP`, the timestamp you
+    provided, and for `TRIM_HORIZON` and `LATEST`, this member is absent
+    because the effective position is not yet determined. Once the queue is
+    `ACTIVE`, the response always includes this member. For `AT_TIMESTAMP`,
+    it is the timestamp you provided or the earliest time the stream can be
+    read from, whichever is later.
+    """
+
+class QueueStartingPositionType(UnknownEnumMixin, StrEnum):
+    TRIM_HORIZON = "TRIM_HORIZON"
+    LATEST = "LATEST"
+    AT_TIMESTAMP = "AT_TIMESTAMP"
+
+class QueueStatus(UnknownEnumMixin, StrEnum):
+    CREATING = "CREATING"
+    ACTIVE = "ACTIVE"
+    UPDATING = "UPDATING"
+    DELETING = "DELETING"
+
+@dataclass(kw_only=True)
+class QueueStreamConfiguration(_SerdeShape):
+    """
+    The data stream a queue delivers records from, and the position in that
+    stream where delivery begins.
+    """
+
+    stream_arn: str
+    """The ARN of the data stream."""
+    starting_position: QueueStartingPosition | None = ...
+    """
+    The position in the stream from which the queue begins delivering
+    records. The default is `LATEST`.
+    """
+
+class QueueStreamConfigurationDict(TypedDict, total=False):
+    """Dictionary form of `QueueStreamConfiguration`."""
+
+    stream_arn: Required[str]
+    """The ARN of the data stream."""
+    starting_position: QueueStartingPosition | QueueStartingPositionDict | None
+    """
+    The position in the stream from which the queue begins delivering
+    records. The default is `LATEST`.
+    """
+
+@dataclass(kw_only=True)
+class QueueStreamFilter(_SerdeShape):
+    """
+    Filters the queues returned by ListQueues to those created on a
+    particular data stream.
+    """
+
+    stream_arn: str
+    """The ARN of the data stream to filter on."""
+    stream_creation_timestamp: datetime | None = ...
+    """
+    The time the data stream was created. Specify this value to distinguish
+    between a deleted stream and a stream that was recreated with the same
+    name.
+    """
+
+class QueueStreamFilterDict(TypedDict, total=False):
+    """Dictionary form of `QueueStreamFilter`."""
+
+    stream_arn: Required[str]
+    """The ARN of the data stream to filter on."""
+    stream_creation_timestamp: datetime | None
+    """
+    The time the data stream was created. Specify this value to distinguish
+    between a deleted stream and a stream that was recreated with the same
+    name.
+    """
+
+@dataclass(kw_only=True)
+class QueueStreamIdentifier(_SerdeShape):
+    """Identifies a data stream associated with a queue."""
+
+    stream_arn: str
+    """The ARN of the data stream."""
+    stream_creation_timestamp: datetime
+    """The time the data stream was created."""
+
+@dataclass(kw_only=True)
+class QueueSummary(_SerdeShape):
+    """
+    A summary of a queue. Returned by ListQueues. To retrieve a queue's
+    configuration attributes, use DescribeQueue.
+    """
+
+    queue_name: str
+    """The name of the queue."""
+    queue_arn: str
+    """The ARN of the queue."""
+    queue_status: str
+    """The current status of the queue."""
+    queue_creation_timestamp: datetime
+    """The time the queue was created."""
+    streams: list[QueueStreamIdentifier]
+    """The data stream the queue delivers records from."""
+
+@dataclass(kw_only=True)
+class ReceiveDeadLetterQueueRecordsInput(_SerdeShape):
+    """Dataclass for ReceiveDeadLetterQueueRecordsInput structure."""
+
+    queue_arn: str | None = ...
+    """The ARN of the queue whose dead-letter records are received."""
+    limit: int | None = ...
+    """
+    The maximum number of records to return. The queue never returns more
+    dead-letter records than this value, and might return fewer. The default
+    is 10.
+    """
+    wait_time_seconds: int | None = ...
+    """
+    The duration, in seconds, that the call waits for a record to become
+    visible before returning. The default is 9.
+    """
+    visibility_timeout_seconds: int | None = ...
+    """
+    The duration, in seconds, that the records returned by this request are
+    in flight and not visible to any consumer instance. If you do not
+    specify this value, the queue's visibility timeout is used.
+    """
+
+class ReceiveDeadLetterQueueRecordsInputDict(TypedDict, total=False):
+    """Dictionary form of `ReceiveDeadLetterQueueRecordsInput`."""
+
+    queue_arn: Required[str]
+    """The ARN of the queue whose dead-letter records are received."""
+    limit: int | None
+    """
+    The maximum number of records to return. The queue never returns more
+    dead-letter records than this value, and might return fewer. The default
+    is 10.
+    """
+    wait_time_seconds: int | None
+    """
+    The duration, in seconds, that the call waits for a record to become
+    visible before returning. The default is 9.
+    """
+    visibility_timeout_seconds: int | None
+    """
+    The duration, in seconds, that the records returned by this request are
+    in flight and not visible to any consumer instance. If you do not
+    specify this value, the queue's visibility timeout is used.
+    """
+
+@dataclass(kw_only=True)
+class ReceiveDeadLetterQueueRecordsOutput(_SerdeShape):
+    """Dataclass for ReceiveDeadLetterQueueRecordsOutput structure."""
+
+    queue_records: list[QueueRecord]
+    """
+    The dead-letter records received from the queue. This list is empty when
+    no dead-letter records are visible.
+    """
+    response_metadata: ResponseMetadata = ...
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+@dataclass(kw_only=True)
+class ReceiveQueueRecordsInput(_SerdeShape):
+    """Dataclass for ReceiveQueueRecordsInput structure."""
+
+    queue_arn: str | None = ...
+    """The ARN of the queue to receive records from."""
+    limit: int | None = ...
+    """
+    The maximum number of records to return. The queue never returns more
+    records than this value, and might return fewer. The default is 10.
+    """
+    wait_time_seconds: int | None = ...
+    """
+    The duration, in seconds, that the call waits for a record to become
+    visible before returning. The default is 9.
+    """
+    visibility_timeout_seconds: int | None = ...
+    """
+    The duration, in seconds, that the records returned by this request are
+    in flight and not visible to any consumer instance. If you do not
+    specify this value, the queue's visibility timeout is used.
+    """
+
+class ReceiveQueueRecordsInputDict(TypedDict, total=False):
+    """Dictionary form of `ReceiveQueueRecordsInput`."""
+
+    queue_arn: Required[str]
+    """The ARN of the queue to receive records from."""
+    limit: int | None
+    """
+    The maximum number of records to return. The queue never returns more
+    records than this value, and might return fewer. The default is 10.
+    """
+    wait_time_seconds: int | None
+    """
+    The duration, in seconds, that the call waits for a record to become
+    visible before returning. The default is 9.
+    """
+    visibility_timeout_seconds: int | None
+    """
+    The duration, in seconds, that the records returned by this request are
+    in flight and not visible to any consumer instance. If you do not
+    specify this value, the queue's visibility timeout is used.
+    """
+
+@dataclass(kw_only=True)
+class ReceiveQueueRecordsOutput(_SerdeShape):
+    """Dataclass for ReceiveQueueRecordsOutput structure."""
+
+    queue_records: list[QueueRecord]
+    """
+    The records received from the queue. This list is empty when no records
+    are visible.
+    """
     response_metadata: ResponseMetadata = ...
     """
     Metadata about the response that produced this output. Use this to
@@ -3241,6 +4073,88 @@ class ResourceNotFoundException(ServiceError, _SerdeShape):
     to investigate a call. Members of the metadata are individually
     optional.
     """
+
+@dataclass(kw_only=True)
+class RestoreDeadLetterQueueRecordsErrorEntry(_SerdeShape):
+    """A dead-letter record that was not restored, and why."""
+
+    receipt_handle: str
+    """The receipt handle of the record that was not restored."""
+    error_code: str
+    """
+    A code identifying the type of failure. One of
+    `ResourceNotFoundException`, `InvalidArgumentException`,
+    `ThrottlingException`, or `InternalFailureException`.
+    """
+    error_message: str | None = ...
+    """A description of the cause of the failure."""
+
+@dataclass(kw_only=True)
+class RestoreDeadLetterQueueRecordsInput(_SerdeShape):
+    """Dataclass for RestoreDeadLetterQueueRecordsInput structure."""
+
+    queue_arn: str | None = ...
+    """The ARN of the queue whose dead-letter records are restored."""
+    entries: list[RestoreDeadLetterQueueRecordsRequestEntry] | None = ...
+    """The dead-letter records to restore, identified by their receipt handles."""
+
+class RestoreDeadLetterQueueRecordsInputDict(TypedDict, total=False):
+    """Dictionary form of `RestoreDeadLetterQueueRecordsInput`."""
+
+    queue_arn: Required[str]
+    """The ARN of the queue whose dead-letter records are restored."""
+    entries: Required[
+        Sequence[
+            RestoreDeadLetterQueueRecordsRequestEntry
+            | RestoreDeadLetterQueueRecordsRequestEntryDict
+        ]
+    ]
+    """The dead-letter records to restore, identified by their receipt handles."""
+
+@dataclass(kw_only=True)
+class RestoreDeadLetterQueueRecordsOutput(_SerdeShape):
+    """Dataclass for RestoreDeadLetterQueueRecordsOutput structure."""
+
+    successful: list[RestoreDeadLetterQueueRecordsResultEntry]
+    """The records that were restored."""
+    failed: list[RestoreDeadLetterQueueRecordsErrorEntry]
+    """
+    The records that were not restored, each with the reason the entry
+    failed.
+    """
+    response_metadata: ResponseMetadata = ...
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+@dataclass(kw_only=True)
+class RestoreDeadLetterQueueRecordsRequestEntry(_SerdeShape):
+    """A dead-letter record to restore, identified by its receipt handle."""
+
+    receipt_handle: str
+    """
+    The receipt handle of the record to restore, as returned by
+    ReceiveDeadLetterQueueRecords.
+    """
+
+class RestoreDeadLetterQueueRecordsRequestEntryDict(TypedDict, total=False):
+    """Dictionary form of `RestoreDeadLetterQueueRecordsRequestEntry`."""
+
+    receipt_handle: Required[str]
+    """
+    The receipt handle of the record to restore, as returned by
+    ReceiveDeadLetterQueueRecords.
+    """
+
+@dataclass(kw_only=True)
+class RestoreDeadLetterQueueRecordsResultEntry(_SerdeShape):
+    """A dead-letter record that was restored."""
+
+    receipt_handle: str
+    """The receipt handle of the record that was restored."""
 
 class S3CompressionType(UnknownEnumMixin, StrEnum):
     NONE = "NONE"
@@ -4107,8 +5021,8 @@ class StreamDescriptionSummary(_SerdeShape):
     """
     Specifies the capacity mode to which you want to set your data stream.
     Currently, in Kinesis Data Streams, you can choose between an
-    **on-demand** ycapacity mode and a **provisioned** capacity mode for
-    your data streams.
+    **on-demand** capacity mode and a **provisioned** capacity mode for your
+    data streams.
     """
     retention_period_hours: int
     """The current retention period, in hours."""
@@ -4147,7 +5061,12 @@ class StreamDescriptionSummary(_SerdeShape):
     open_shard_count: int
     """The number of open shards in the stream."""
     consumer_count: int | None = ...
-    """The number of enhanced fan-out consumers registered with the stream."""
+    """
+    The number of enhanced fan-out consumers registered with the stream.
+    Queues are not included in this count, even though they share the
+    stream's registered consumer limit with enhanced fan-out consumers.
+    `QueueCount` reports the number of queues.
+    """
     warm_throughput: WarmThroughputObject | None = ...
     """
     The warm throughput in MB/s for the stream. This represents the
@@ -4170,6 +5089,8 @@ class StreamDescriptionSummary(_SerdeShape):
     partition key that producers supply. This field is only present for
     streams that use the on-demand capacity mode.
     """
+    queue_count: int | None = ...
+    """The number of queues created on the data stream."""
 
 @dataclass(kw_only=True)
 class StreamFilter(_SerdeShape):
@@ -4281,8 +5202,9 @@ class SubscribeToShardEventStreamSubscribeToShardEvent(_SerdeShape):
     """
     After you call SubscribeToShard, Kinesis Data Streams sends events of
     this type to your consumer. For an example of how to handle these
-    events, see [Enhanced Fan-Out Using the Kinesis Data Streams
-    API](/streams/latest/dev/building-enhanced-consumers-api.html).
+    events, see [Develop enhanced fan-out consumers with the Amazon Web
+    Services SDK for
+    Java](/streams/latest/dev/building-enhanced-consumers-api.html).
     """
 
     value: SubscribeToShardEvent
@@ -4307,10 +5229,7 @@ class SubscribeToShardEventStreamResourceInUseException(_SerdeShape):
 
 @dataclass
 class SubscribeToShardEventStreamKMSDisabledException(_SerdeShape):
-    """
-    The request was rejected because the specified customer master key (CMK)
-    isn't enabled.
-    """
+    """The request was rejected because the specified KMS key isn't enabled."""
 
     value: KMSDisabledException
 
@@ -4532,6 +5451,25 @@ class TagResourceOutput(_SerdeShape):
     optional.
     """
 
+class TargetType(UnknownEnumMixin, StrEnum):
+    BUILT_IN = "BUILT_IN"
+    NONE = "NONE"
+
+@dataclass(kw_only=True)
+class ThrottlingException(ServiceError, _SerdeShape):
+    """
+    The request was denied because the request rate is too high. Reduce the
+    frequency of your requests, and retry them with exponential backoff.
+    """
+
+    response_metadata: ResponseMetadata = ...
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
 @dataclass(kw_only=True)
 class UntagResourceInput(_SerdeShape):
     """Dataclass for UntagResourceInput structure."""
@@ -4688,6 +5626,112 @@ class UpdateChannelOutput(_SerdeShape):
     """
 
 @dataclass(kw_only=True)
+class UpdateDeadLetterQueueRecordsVisibilityErrorEntry(_SerdeShape):
+    """A dead-letter record whose visibility timeout was not changed, and why."""
+
+    receipt_handle: str
+    """
+    The receipt handle of the record whose visibility timeout was not
+    changed.
+    """
+    error_code: str
+    """
+    A code identifying the type of failure. One of
+    `ResourceNotFoundException`, `InvalidArgumentException`,
+    `ThrottlingException`, or `InternalFailureException`.
+    """
+    error_message: str | None = ...
+    """A description of the cause of the failure."""
+
+@dataclass(kw_only=True)
+class UpdateDeadLetterQueueRecordsVisibilityInput(_SerdeShape):
+    """Dataclass for UpdateDeadLetterQueueRecordsVisibilityInput structure."""
+
+    queue_arn: str | None = ...
+    """The ARN of the queue whose dead-letter records are updated."""
+    entries: list[UpdateDeadLetterQueueRecordsVisibilityRequestEntry] | None = ...
+    """
+    The dead-letter records whose visibility timeout is changed, identified
+    by their receipt handles, and the new visibility timeout for each.
+    """
+
+class UpdateDeadLetterQueueRecordsVisibilityInputDict(TypedDict, total=False):
+    """Dictionary form of `UpdateDeadLetterQueueRecordsVisibilityInput`."""
+
+    queue_arn: Required[str]
+    """The ARN of the queue whose dead-letter records are updated."""
+    entries: Required[
+        Sequence[
+            UpdateDeadLetterQueueRecordsVisibilityRequestEntry
+            | UpdateDeadLetterQueueRecordsVisibilityRequestEntryDict
+        ]
+    ]
+    """
+    The dead-letter records whose visibility timeout is changed, identified
+    by their receipt handles, and the new visibility timeout for each.
+    """
+
+@dataclass(kw_only=True)
+class UpdateDeadLetterQueueRecordsVisibilityOutput(_SerdeShape):
+    """Dataclass for UpdateDeadLetterQueueRecordsVisibilityOutput structure."""
+
+    successful: list[UpdateDeadLetterQueueRecordsVisibilityResultEntry]
+    """The records whose visibility timeout was changed."""
+    failed: list[UpdateDeadLetterQueueRecordsVisibilityErrorEntry]
+    """
+    The records whose visibility timeout was not changed, each with the
+    reason the entry failed.
+    """
+    response_metadata: ResponseMetadata = ...
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+@dataclass(kw_only=True)
+class UpdateDeadLetterQueueRecordsVisibilityRequestEntry(_SerdeShape):
+    """
+    A dead-letter record whose visibility timeout is changed, and the new
+    visibility timeout.
+    """
+
+    receipt_handle: str
+    """
+    The receipt handle of the record, as returned by
+    ReceiveDeadLetterQueueRecords.
+    """
+    visibility_timeout_seconds: int
+    """
+    The new duration, in seconds, that the record is in flight and not
+    visible to any consumer instance, measured from when this request is
+    processed. Specify `0` to make the record visible immediately.
+    """
+
+class UpdateDeadLetterQueueRecordsVisibilityRequestEntryDict(TypedDict, total=False):
+    """Dictionary form of `UpdateDeadLetterQueueRecordsVisibilityRequestEntry`."""
+
+    receipt_handle: Required[str]
+    """
+    The receipt handle of the record, as returned by
+    ReceiveDeadLetterQueueRecords.
+    """
+    visibility_timeout_seconds: Required[int]
+    """
+    The new duration, in seconds, that the record is in flight and not
+    visible to any consumer instance, measured from when this request is
+    processed. Specify `0` to make the record visible immediately.
+    """
+
+@dataclass(kw_only=True)
+class UpdateDeadLetterQueueRecordsVisibilityResultEntry(_SerdeShape):
+    """A dead-letter record whose visibility timeout was changed."""
+
+    receipt_handle: str
+    """The receipt handle of the record whose visibility timeout was changed."""
+
+@dataclass(kw_only=True)
 class UpdateMaxRecordSizeInput(_SerdeShape):
     """Dataclass for UpdateMaxRecordSizeInput structure."""
 
@@ -4735,6 +5779,145 @@ class UpdateMaxRecordSizeOutput(_SerdeShape):
     to investigate a call. Members of the metadata are individually
     optional.
     """
+
+@dataclass(kw_only=True)
+class UpdateQueueInput(_SerdeShape):
+    """Dataclass for UpdateQueueInput structure."""
+
+    queue_arn: str | None = ...
+    """The ARN of the queue to update."""
+    queue_attributes: QueueAttributes | None = ...
+    """
+    The configuration attributes to apply to the queue. Attributes you do
+    not specify are left unchanged.
+    """
+
+class UpdateQueueInputDict(TypedDict, total=False):
+    """Dictionary form of `UpdateQueueInput`."""
+
+    queue_arn: Required[str]
+    """The ARN of the queue to update."""
+    queue_attributes: Required[QueueAttributes | QueueAttributesDict]
+    """
+    The configuration attributes to apply to the queue. Attributes you do
+    not specify are left unchanged.
+    """
+
+@dataclass(kw_only=True)
+class UpdateQueueOutput(_SerdeShape):
+    """Dataclass for UpdateQueueOutput structure."""
+
+    queue_description: QueueDescription
+    """A description of the queue, including the updated attributes."""
+    response_metadata: ResponseMetadata = ...
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+@dataclass(kw_only=True)
+class UpdateQueueRecordsVisibilityErrorEntry(_SerdeShape):
+    """A record whose visibility timeout was not changed, and why."""
+
+    receipt_handle: str
+    """
+    The receipt handle of the record whose visibility timeout was not
+    changed.
+    """
+    error_code: str
+    """
+    A code identifying the type of failure. One of
+    `ResourceNotFoundException`, `InvalidArgumentException`,
+    `ThrottlingException`, or `InternalFailureException`.
+    """
+    error_message: str | None = ...
+    """A description of the cause of the failure."""
+
+@dataclass(kw_only=True)
+class UpdateQueueRecordsVisibilityInput(_SerdeShape):
+    """Dataclass for UpdateQueueRecordsVisibilityInput structure."""
+
+    queue_arn: str | None = ...
+    """The ARN of the queue the records were received from."""
+    entries: list[UpdateQueueRecordsVisibilityRequestEntry] | None = ...
+    """
+    The records whose visibility timeout is changed, identified by their
+    receipt handles, and the new visibility timeout for each.
+    """
+
+class UpdateQueueRecordsVisibilityInputDict(TypedDict, total=False):
+    """Dictionary form of `UpdateQueueRecordsVisibilityInput`."""
+
+    queue_arn: Required[str]
+    """The ARN of the queue the records were received from."""
+    entries: Required[
+        Sequence[
+            UpdateQueueRecordsVisibilityRequestEntry
+            | UpdateQueueRecordsVisibilityRequestEntryDict
+        ]
+    ]
+    """
+    The records whose visibility timeout is changed, identified by their
+    receipt handles, and the new visibility timeout for each.
+    """
+
+@dataclass(kw_only=True)
+class UpdateQueueRecordsVisibilityOutput(_SerdeShape):
+    """Dataclass for UpdateQueueRecordsVisibilityOutput structure."""
+
+    successful: list[UpdateQueueRecordsVisibilityResultEntry]
+    """The records whose visibility timeout was changed."""
+    failed: list[UpdateQueueRecordsVisibilityErrorEntry]
+    """
+    The records whose visibility timeout was not changed, each with the
+    reason the entry failed.
+    """
+    response_metadata: ResponseMetadata = ...
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+@dataclass(kw_only=True)
+class UpdateQueueRecordsVisibilityRequestEntry(_SerdeShape):
+    """
+    A record whose visibility timeout is changed, and the new visibility
+    timeout.
+    """
+
+    receipt_handle: str
+    """The receipt handle of the record, as returned by ReceiveQueueRecords."""
+    visibility_timeout_seconds: int
+    """
+    The new duration, in seconds, that the record is in flight and not
+    visible to any consumer instance, measured from when this request is
+    processed. Specify `0` to make the record visible in the queue
+    immediately.
+    """
+
+class UpdateQueueRecordsVisibilityRequestEntryDict(TypedDict, total=False):
+    """Dictionary form of `UpdateQueueRecordsVisibilityRequestEntry`."""
+
+    receipt_handle: Required[str]
+    """The receipt handle of the record, as returned by ReceiveQueueRecords."""
+    visibility_timeout_seconds: Required[int]
+    """
+    The new duration, in seconds, that the record is in flight and not
+    visible to any consumer instance, measured from when this request is
+    processed. Specify `0` to make the record visible in the queue
+    immediately.
+    """
+
+@dataclass(kw_only=True)
+class UpdateQueueRecordsVisibilityResultEntry(_SerdeShape):
+    """A record whose visibility timeout was changed."""
+
+    receipt_handle: str
+    """The receipt handle of the record whose visibility timeout was changed."""
 
 @dataclass(kw_only=True)
 class UpdateShardCountInput(_SerdeShape):
@@ -4990,9 +6173,10 @@ class UpdateStreamWarmThroughputOutput(_SerdeShape):
 @dataclass(kw_only=True)
 class ValidationException(ServiceError, _SerdeShape):
     """
-    Specifies that you tried to invoke this API for a data stream with the
-    on-demand capacity mode. This API is only supported for data streams
-    with the provisioned capacity mode.
+    The request failed validation. For example, a parameter value is not
+    valid, a combination of parameters is not supported, or the operation is
+    not supported for the stream's capacity mode. The error message
+    describes the specific reason.
     """
 
     response_metadata: ResponseMetadata = ...
@@ -5022,13 +6206,21 @@ class WarmThroughputObject(_SerdeShape):
     throughput in MiBps that the stream is currently scaled to handle.
     """
 
+ACKNOWLEDGE_DEAD_LETTER_QUEUE_RECORDS: APIOperation[
+    AcknowledgeDeadLetterQueueRecordsInput, AcknowledgeDeadLetterQueueRecordsOutput
+]
+ACKNOWLEDGE_QUEUE_RECORDS: APIOperation[
+    AcknowledgeQueueRecordsInput, AcknowledgeQueueRecordsOutput
+]
 ADD_TAGS_TO_STREAM: APIOperation[AddTagsToStreamInput, AddTagsToStreamOutput]
 CREATE_CHANNEL: APIOperation[CreateChannelInput, CreateChannelOutput]
+CREATE_QUEUE: APIOperation[CreateQueueInput, CreateQueueOutput]
 CREATE_STREAM: APIOperation[CreateStreamInput, CreateStreamOutput]
 DECREASE_STREAM_RETENTION_PERIOD: APIOperation[
     DecreaseStreamRetentionPeriodInput, DecreaseStreamRetentionPeriodOutput
 ]
 DELETE_CHANNEL: APIOperation[DeleteChannelInput, DeleteChannelOutput]
+DELETE_QUEUE: APIOperation[DeleteQueueInput, DeleteQueueOutput]
 DELETE_RESOURCE_POLICY: APIOperation[
     DeleteResourcePolicyInput, DeleteResourcePolicyOutput
 ]
@@ -5041,6 +6233,7 @@ DESCRIBE_ACCOUNT_SETTINGS: APIOperation[
 ]
 DESCRIBE_CHANNEL: APIOperation[DescribeChannelInput, DescribeChannelOutput]
 DESCRIBE_LIMITS: APIOperation[DescribeLimitsInput, DescribeLimitsOutput]
+DESCRIBE_QUEUE: APIOperation[DescribeQueueInput, DescribeQueueOutput]
 DESCRIBE_STREAM: APIOperation[DescribeStreamInput, DescribeStreamOutput]
 DESCRIBE_STREAM_CONSUMER: APIOperation[
     DescribeStreamConsumerInput, DescribeStreamConsumerOutput
@@ -5061,6 +6254,7 @@ INCREASE_STREAM_RETENTION_PERIOD: APIOperation[
     IncreaseStreamRetentionPeriodInput, IncreaseStreamRetentionPeriodOutput
 ]
 LIST_CHANNELS: APIOperation[ListChannelsInput, ListChannelsOutput]
+LIST_QUEUES: APIOperation[ListQueuesInput, ListQueuesOutput]
 LIST_SHARDS: APIOperation[ListShardsInput, ListShardsOutput]
 LIST_STREAM_CONSUMERS: APIOperation[ListStreamConsumersInput, ListStreamConsumersOutput]
 LIST_STREAMS: APIOperation[ListStreamsInput, ListStreamsOutput]
@@ -5072,11 +6266,18 @@ MERGE_SHARDS: APIOperation[MergeShardsInput, MergeShardsOutput]
 PUT_RECORD: APIOperation[PutRecordInput, PutRecordOutput]
 PUT_RECORDS: APIOperation[PutRecordsInput, PutRecordsOutput]
 PUT_RESOURCE_POLICY: APIOperation[PutResourcePolicyInput, PutResourcePolicyOutput]
+RECEIVE_DEAD_LETTER_QUEUE_RECORDS: APIOperation[
+    ReceiveDeadLetterQueueRecordsInput, ReceiveDeadLetterQueueRecordsOutput
+]
+RECEIVE_QUEUE_RECORDS: APIOperation[ReceiveQueueRecordsInput, ReceiveQueueRecordsOutput]
 REGISTER_STREAM_CONSUMER: APIOperation[
     RegisterStreamConsumerInput, RegisterStreamConsumerOutput
 ]
 REMOVE_TAGS_FROM_STREAM: APIOperation[
     RemoveTagsFromStreamInput, RemoveTagsFromStreamOutput
+]
+RESTORE_DEAD_LETTER_QUEUE_RECORDS: APIOperation[
+    RestoreDeadLetterQueueRecordsInput, RestoreDeadLetterQueueRecordsOutput
 ]
 SPLIT_SHARD: APIOperation[SplitShardInput, SplitShardOutput]
 START_STREAM_ENCRYPTION: APIOperation[
@@ -5092,8 +6293,16 @@ UPDATE_ACCOUNT_SETTINGS: APIOperation[
     UpdateAccountSettingsInput, UpdateAccountSettingsOutput
 ]
 UPDATE_CHANNEL: APIOperation[UpdateChannelInput, UpdateChannelOutput]
+UPDATE_DEAD_LETTER_QUEUE_RECORDS_VISIBILITY: APIOperation[
+    UpdateDeadLetterQueueRecordsVisibilityInput,
+    UpdateDeadLetterQueueRecordsVisibilityOutput,
+]
 UPDATE_MAX_RECORD_SIZE: APIOperation[
     UpdateMaxRecordSizeInput, UpdateMaxRecordSizeOutput
+]
+UPDATE_QUEUE: APIOperation[UpdateQueueInput, UpdateQueueOutput]
+UPDATE_QUEUE_RECORDS_VISIBILITY: APIOperation[
+    UpdateQueueRecordsVisibilityInput, UpdateQueueRecordsVisibilityOutput
 ]
 UPDATE_SHARD_COUNT: APIOperation[UpdateShardCountInput, UpdateShardCountOutput]
 UPDATE_STREAM_MODE: APIOperation[UpdateStreamModeInput, UpdateStreamModeOutput]

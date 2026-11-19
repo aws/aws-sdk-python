@@ -131,7 +131,7 @@ _RCe = "ResourceConflict"
 _Th = "Throttling"
 _SLE = "ServiceLimitExceeded"
 _STe = "ServiceTimeout"
-_NS = "NotStabilized"
+_NSo = "NotStabilized"
 _GSE = "GeneralServiceException"
 _SIE = "ServiceInternalError"
 _NFe = "NetworkFailure"
@@ -468,7 +468,7 @@ HANDLER_ERROR_CODE: StaticSchema = (
         (-1, {_sV: _RCe}),
         (-1, {_sV: _Th}),
         (-1, {_sV: _SLE}),
-        (-1, {_sV: _NS}),
+        (-1, {_sV: _NSo}),
         (-1, {_sV: _GSE}),
         (-1, {_sV: _SIE}),
         (-1, {_sV: _NFe}),

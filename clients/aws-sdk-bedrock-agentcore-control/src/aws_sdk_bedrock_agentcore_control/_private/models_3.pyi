@@ -16,6 +16,8 @@ from ..models import (
     A2aDescriptorDict,
     Action,
     ActionDict,
+    AgentInsightStoreEncryptionConfiguration,
+    AgentInsightStoreEncryptionConfigurationDict,
     AgentRuntimeArtifact,
     AgentRuntimeArtifactDict,
     AllowedPort,
@@ -106,6 +108,9 @@ from ..models import (
     InferenceTargetConfigurationDict,
     Insight,
     InsightDict,
+    InvocationConfiguration,
+    InvocationConfigurationInput,
+    InvocationConfigurationInputDict,
     KinesisResource,
     KinesisResourceDict,
     KmsConfiguration,
@@ -170,14 +175,438 @@ from ..models import (
     SchemaDefinition,
     SchemaDefinitionDict,
     Secret,
-    SecretReference,
-    SecretReferenceDict,
-    SelfManagedConfiguration,
-    ServerDefinition,
-    ServerDefinitionDict,
     ServiceError,
     _SerdeShape,
 )
+
+@dataclass(kw_only=True)
+class SecretReference(_SerdeShape):
+    """
+    Contains a reference to a secret stored in Amazon Web Services Secrets
+    Manager.
+    """
+
+    secret_id: str
+    """
+    The ID of the Amazon Web Services Secrets Manager secret that stores the
+    secret value.
+    """
+    json_key: str
+    """
+    The JSON key used to extract the secret value from the Amazon Web
+    Services Secrets Manager secret.
+    """
+
+class SecretReferenceDict(TypedDict, total=False):
+    """Dictionary form of `SecretReference`."""
+
+    secret_id: Required[str]
+    """
+    The ID of the Amazon Web Services Secrets Manager secret that stores the
+    secret value.
+    """
+    json_key: Required[str]
+    """
+    The JSON key used to extract the secret value from the Amazon Web
+    Services Secrets Manager secret.
+    """
+
+@dataclass(kw_only=True)
+class SecretsManagerCertificateConfiguration(_SerdeShape):
+    """
+    A reference to a PEM-encoded private CA certificate stored in an Amazon
+    Web Services Secrets Manager secret.
+    """
+
+    secret_arn: str
+    """
+    The Amazon Resource Name (ARN) of the Amazon Web Services Secrets
+    Manager secret that contains the PEM-encoded certificate.
+    """
+
+class SecretsManagerCertificateConfigurationDict(TypedDict, total=False):
+    """Dictionary form of `SecretsManagerCertificateConfiguration`."""
+
+    secret_arn: Required[str]
+    """
+    The Amazon Resource Name (ARN) of the Amazon Web Services Secrets
+    Manager secret that contains the PEM-encoded certificate.
+    """
+
+@dataclass(kw_only=True)
+class SecretsManagerLocation(_SerdeShape):
+    """The Amazon Web Services Secrets Manager location configuration."""
+
+    secret_arn: str
+    """
+    The ARN of the Amazon Web Services Secrets Manager secret containing the
+    certificate.
+    """
+
+class SecretsManagerLocationDict(TypedDict, total=False):
+    """Dictionary form of `SecretsManagerLocation`."""
+
+    secret_arn: Required[str]
+    """
+    The ARN of the Amazon Web Services Secrets Manager secret containing the
+    certificate.
+    """
+
+class SecretSourceType(UnknownEnumMixin, StrEnum):
+    MANAGED = "MANAGED"
+    EXTERNAL = "EXTERNAL"
+
+@dataclass(kw_only=True)
+class SelfManagedConfiguration(_SerdeShape):
+    """A configuration for a self-managed memory strategy."""
+
+    trigger_conditions: list[TriggerCondition]
+    """A list of conditions that trigger memory processing."""
+    invocation_configuration: InvocationConfiguration
+    """The configuration to use when invoking memory processing."""
+    historical_context_window_size: int
+    """The number of historical messages to include in processing context."""
+
+@dataclass(kw_only=True)
+class SelfManagedConfigurationInput(_SerdeShape):
+    """Input configuration for a self-managed memory strategy."""
+
+    trigger_conditions: list[TriggerConditionInput] | None = ...
+    """A list of conditions that trigger memory processing."""
+    invocation_configuration: InvocationConfigurationInput
+    """Configuration to invoke a self-managed memory processing pipeline with."""
+    historical_context_window_size: int = ...
+    """Number of historical messages to include in processing context."""
+
+class SelfManagedConfigurationInputDict(TypedDict, total=False):
+    """Dictionary form of `SelfManagedConfigurationInput`."""
+
+    trigger_conditions: (
+        Sequence[TriggerConditionInput | TriggerConditionInputDict] | None
+    )
+    """A list of conditions that trigger memory processing."""
+    invocation_configuration: Required[
+        InvocationConfigurationInput | InvocationConfigurationInputDict
+    ]
+    """Configuration to invoke a self-managed memory processing pipeline with."""
+    historical_context_window_size: int | None
+    """Number of historical messages to include in processing context."""
+
+@dataclass
+class SelfManagedLatticeResourceResourceConfigurationIdentifier(_SerdeShape):
+    """The ARN or ID of the VPC Lattice resource configuration."""
+
+    value: str
+
+@dataclass
+class SelfManagedLatticeResourceUnknown(_SerdeShape):
+    """
+    Represents an unknown variant. If you receive this value, you will need
+    to update your library to receive the parsed value. This value may not
+    be deliberately sent.
+    """
+
+    tag: str
+
+SelfManagedLatticeResource = Union[
+    SelfManagedLatticeResourceResourceConfigurationIdentifier
+    | SelfManagedLatticeResourceUnknown
+]
+"""
+Configuration for a self-managed VPC Lattice resource. You create and
+manage the VPC Lattice resource gateway and resource configuration, then
+provide the resource configuration identifier.
+"""
+
+class _SelfManagedLatticeResourceDeserializer:
+    def deserialize(
+        self, deserializer: ShapeDeserializer
+    ) -> SelfManagedLatticeResource: ...
+
+class SelfManagedLatticeResourceResourceConfigurationIdentifierDict(TypedDict):
+    resource_configuration_identifier: str
+    """The ARN or ID of the VPC Lattice resource configuration."""
+
+SelfManagedLatticeResourceDict = Union[
+    SelfManagedLatticeResourceResourceConfigurationIdentifierDict
+]
+"""
+Dictionary form of `SelfManagedLatticeResource`, setting exactly one
+variant.
+"""
+
+@dataclass(kw_only=True)
+class SemanticConsolidationOverride(_SerdeShape):
+    """Contains semantic consolidation override configuration."""
+
+    append_to_prompt: str
+    """The text to append to the prompt for semantic consolidation."""
+    model_id: str
+    """The model ID to use for semantic consolidation."""
+
+@dataclass(kw_only=True)
+class SemanticExtractionOverride(_SerdeShape):
+    """Contains semantic extraction override configuration."""
+
+    append_to_prompt: str
+    """The text to append to the prompt for semantic extraction."""
+    model_id: str
+    """The model ID to use for semantic extraction."""
+
+@dataclass(kw_only=True)
+class SemanticMemoryStrategyInput(_SerdeShape):
+    """Input for creating a semantic memory strategy."""
+
+    name: str
+    """The name of the semantic memory strategy."""
+    description: str | None = ...
+    """The description of the semantic memory strategy."""
+    namespaces: list[str] | None = ...
+    """
+    This is a legacy parameter, use `namespaceTemplates`. The namespaces
+    associated with the semantic memory strategy.
+    """
+    namespace_templates: list[str] | None = ...
+    """The namespaceTemplates associated with the semantic memory strategy."""
+    memory_record_schema: MemoryRecordSchema | None = ...
+    """Schema for metadata on memory records generated by a strategy."""
+    record_expiry_specification: RecordExpirySpecification | None = ...
+    """
+    The record expiry (long-term memory time-to-live) configuration for
+    memory records generated by this strategy. Set
+    `recordExpiryDurationDays` to the number of days after which records
+    expire. If not specified, records generated by this strategy do not
+    expire.
+    """
+
+class SemanticMemoryStrategyInputDict(TypedDict, total=False):
+    """Dictionary form of `SemanticMemoryStrategyInput`."""
+
+    name: Required[str]
+    """The name of the semantic memory strategy."""
+    description: str | None
+    """The description of the semantic memory strategy."""
+    namespaces: Sequence[str] | None
+    """
+    This is a legacy parameter, use `namespaceTemplates`. The namespaces
+    associated with the semantic memory strategy.
+    """
+    namespace_templates: Sequence[str] | None
+    """The namespaceTemplates associated with the semantic memory strategy."""
+    memory_record_schema: MemoryRecordSchema | MemoryRecordSchemaDict | None
+    """Schema for metadata on memory records generated by a strategy."""
+    record_expiry_specification: (
+        RecordExpirySpecification | RecordExpirySpecificationDict | None
+    )
+    """
+    The record expiry (long-term memory time-to-live) configuration for
+    memory records generated by this strategy. Set
+    `recordExpiryDurationDays` to the number of days after which records
+    expire. If not specified, records generated by this strategy do not
+    expire.
+    """
+
+@dataclass(kw_only=True)
+class SemanticOverrideConfigurationInput(_SerdeShape):
+    """Input for semantic override configuration in a memory strategy."""
+
+    extraction: SemanticOverrideExtractionConfigurationInput | None = ...
+    """The extraction configuration for a semantic override."""
+    consolidation: SemanticOverrideConsolidationConfigurationInput | None = ...
+    """The consolidation configuration for a semantic override."""
+
+class SemanticOverrideConfigurationInputDict(TypedDict, total=False):
+    """Dictionary form of `SemanticOverrideConfigurationInput`."""
+
+    extraction: (
+        SemanticOverrideExtractionConfigurationInput
+        | SemanticOverrideExtractionConfigurationInputDict
+        | None
+    )
+    """The extraction configuration for a semantic override."""
+    consolidation: (
+        SemanticOverrideConsolidationConfigurationInput
+        | SemanticOverrideConsolidationConfigurationInputDict
+        | None
+    )
+    """The consolidation configuration for a semantic override."""
+
+@dataclass(kw_only=True)
+class SemanticOverrideConsolidationConfigurationInput(_SerdeShape):
+    """
+    Input for semantic override consolidation configuration in a memory
+    strategy.
+    """
+
+    append_to_prompt: str
+    """The text to append to the prompt for semantic consolidation."""
+    model_id: str
+    """The model ID to use for semantic consolidation."""
+
+class SemanticOverrideConsolidationConfigurationInputDict(TypedDict, total=False):
+    """Dictionary form of `SemanticOverrideConsolidationConfigurationInput`."""
+
+    append_to_prompt: Required[str]
+    """The text to append to the prompt for semantic consolidation."""
+    model_id: Required[str]
+    """The model ID to use for semantic consolidation."""
+
+@dataclass(kw_only=True)
+class SemanticOverrideExtractionConfigurationInput(_SerdeShape):
+    """
+    Input for semantic override extraction configuration in a memory
+    strategy.
+    """
+
+    append_to_prompt: str
+    """The text to append to the prompt for semantic extraction."""
+    model_id: str
+    """The model ID to use for semantic extraction."""
+
+class SemanticOverrideExtractionConfigurationInputDict(TypedDict, total=False):
+    """Dictionary form of `SemanticOverrideExtractionConfigurationInput`."""
+
+    append_to_prompt: Required[str]
+    """The text to append to the prompt for semantic extraction."""
+    model_id: Required[str]
+    """The model ID to use for semantic extraction."""
+
+@dataclass(kw_only=True)
+class ServerDefinition(_SerdeShape):
+    """
+    The server definition for an MCP descriptor. Contains the schema version
+    and inline content for the MCP server configuration.
+    """
+
+    schema_version: str | None = ...
+    """
+    The schema version of the server definition based on the MCP protocol
+    specification. If not specified, the version is auto-detected from the
+    content.
+    """
+    inline_content: str | None = ...
+    """
+    The JSON content containing the MCP server definition, conforming to the
+    MCP protocol specification.
+    """
+
+class ServerDefinitionDict(TypedDict, total=False):
+    """Dictionary form of `ServerDefinition`."""
+
+    schema_version: str | None
+    """
+    The schema version of the server definition based on the MCP protocol
+    specification. If not specified, the version is auto-detected from the
+    content.
+    """
+    inline_content: str | None
+    """
+    The JSON content containing the MCP server definition, conforming to the
+    MCP protocol specification.
+    """
+
+class ServerProtocol(UnknownEnumMixin, StrEnum):
+    MCP = "MCP"
+    HTTP = "HTTP"
+    A2_A = "A2A"
+    AGUI = "AGUI"
+
+@dataclass(kw_only=True)
+class ServiceException(ServiceError, _SerdeShape):
+    """An internal error occurred."""
+
+    response_metadata: ResponseMetadata = ...
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+@dataclass(kw_only=True)
+class ServiceQuotaExceededException(ServiceError, _SerdeShape):
+    """This exception is thrown when a request is made beyond the service quota"""
+
+    response_metadata: ResponseMetadata = ...
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+@dataclass(kw_only=True)
+class SessionConfig(_SerdeShape):
+    """
+    The configuration that defines how agent sessions are detected and when
+    they are considered complete for evaluation.
+    """
+
+    session_timeout_minutes: int
+    """
+    The number of minutes of inactivity after which an agent session is
+    considered complete and ready for evaluation. Default is 15 minutes.
+    """
+
+class SessionConfigDict(TypedDict, total=False):
+    """Dictionary form of `SessionConfig`."""
+
+    session_timeout_minutes: Required[int]
+    """
+    The number of minutes of inactivity after which an agent session is
+    considered complete and ready for evaluation. Default is 15 minutes.
+    """
+
+@dataclass(kw_only=True)
+class SessionConfiguration(_SerdeShape):
+    """
+    The session configuration for an MCP gateway. This structure defines
+    settings that control session behavior.
+    """
+
+    session_timeout_in_seconds: int | None = ...
+    """
+    The session timeout in seconds. After this timeout, the session expires
+    and subsequent requests to this session will receive an error. The
+    minimum value is 900 seconds (15 minutes), the maximum value is 28800
+    seconds (8 hours), and the default value is 3600 seconds (1 hour).
+    """
+
+class SessionConfigurationDict(TypedDict, total=False):
+    """Dictionary form of `SessionConfiguration`."""
+
+    session_timeout_in_seconds: int | None
+    """
+    The session timeout in seconds. After this timeout, the session expires
+    and subsequent requests to this session will receive an error. The
+    minimum value is 900 seconds (15 minutes), the maximum value is 28800
+    seconds (8 hours), and the default value is 3600 seconds (1 hour).
+    """
+
+@dataclass(kw_only=True)
+class SessionStorageConfiguration(_SerdeShape):
+    """
+    Configuration for a session storage filesystem mounted into the
+    AgentCore Runtime. Session storage provides persistent storage that is
+    preserved across AgentCore Runtime session invocations.
+    """
+
+    mount_path: str
+    """
+    The mount path for the session storage filesystem inside the AgentCore
+    Runtime. The path must be under `/mnt` with exactly one subdirectory
+    level (for example, `/mnt/data`).
+    """
+
+class SessionStorageConfigurationDict(TypedDict, total=False):
+    """Dictionary form of `SessionStorageConfiguration`."""
+
+    mount_path: Required[str]
+    """
+    The mount path for the session storage filesystem inside the AgentCore
+    Runtime. The path must be under `/mnt` with exactly one subdirectory
+    level (for example, `/mnt/data`).
+    """
 
 @dataclass(kw_only=True)
 class SetTokenVaultCMKInput(_SerdeShape):
@@ -1729,6 +2158,118 @@ class UntagResourceInputDict(TypedDict, total=False):
 class UntagResourceOutput(_SerdeShape):
     """Dataclass for UntagResourceOutput structure."""
 
+    response_metadata: ResponseMetadata = ...
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+@dataclass(kw_only=True)
+class UpdateAgentInsightStoreInput(_SerdeShape):
+    """Dataclass for UpdateAgentInsightStoreInput structure."""
+
+    client_token: str | None = ...
+    """
+    A unique, case-sensitive identifier to ensure that the API request
+    completes no more than one time. If you don't specify this field, a
+    value is randomly generated for you. If this token matches a previous
+    request, the service ignores the request, but doesn't return an error.
+    For more information, see [Ensuring
+    idempotency](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html).
+
+    This field is autopopulated if not provided.
+    """
+    agent_insight_store_id: str | None = ...
+    """Specifies the unique identifier of the Agent Insight Store to update."""
+    enablement_status: str | None = ...
+    """
+    Specifies whether the Agent Insight Store accepts new Agent Insights. If
+    you don't specify this parameter, the store's current enablement
+    setting remains unchanged.
+    """
+    encryption_configuration: AgentInsightStoreEncryptionConfiguration | None = ...
+    """
+    Specifies the encryption mode and key configuration to use for new Agent
+    Insights. If you don't specify this parameter, the store's current
+    encryption configuration remains unchanged.
+    """
+
+class UpdateAgentInsightStoreInputDict(TypedDict, total=False):
+    """Dictionary form of `UpdateAgentInsightStoreInput`."""
+
+    client_token: str | None
+    """
+    A unique, case-sensitive identifier to ensure that the API request
+    completes no more than one time. If you don't specify this field, a
+    value is randomly generated for you. If this token matches a previous
+    request, the service ignores the request, but doesn't return an error.
+    For more information, see [Ensuring
+    idempotency](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html).
+
+    This field is autopopulated if not provided.
+    """
+    agent_insight_store_id: Required[str]
+    """Specifies the unique identifier of the Agent Insight Store to update."""
+    enablement_status: str | None
+    """
+    Specifies whether the Agent Insight Store accepts new Agent Insights. If
+    you don't specify this parameter, the store's current enablement
+    setting remains unchanged.
+    """
+    encryption_configuration: (
+        AgentInsightStoreEncryptionConfiguration
+        | AgentInsightStoreEncryptionConfigurationDict
+        | None
+    )
+    """
+    Specifies the encryption mode and key configuration to use for new Agent
+    Insights. If you don't specify this parameter, the store's current
+    encryption configuration remains unchanged.
+    """
+
+@dataclass(kw_only=True)
+class UpdateAgentInsightStoreOutput(_SerdeShape):
+    """Dataclass for UpdateAgentInsightStoreOutput structure."""
+
+    agent_insight_store_arn: str
+    """The Amazon Resource Name (ARN) of the updated Agent Insight Store."""
+    agent_insight_store_id: str
+    """The unique identifier of the updated Agent Insight Store."""
+    status: str
+    """
+    The lifecycle status of the Agent Insight Store after the update
+    request. Valid values:
+
+    ACTIVE
+
+    :   The store is available.
+
+    UPDATING
+
+    :   The service is applying a requested change.
+
+    INACTIVE
+
+    :   The store does not accept new Agent Insights.
+
+    ERROR
+
+    :   The store requires intervention.
+    """
+    enablement_status: str
+    """
+    Specifies whether the Agent Insight Store accepts new Agent Insights
+    after the update request.
+    """
+    updated_at: datetime
+    """The date and time when the Agent Insight Store was last updated."""
+    failure_reason: str | None = ...
+    """
+    Describes the failure that prevented the Agent Insight Store from
+    reaching its requested lifecycle status.
+    """
     response_metadata: ResponseMetadata = ...
     """
     Metadata about the response that produced this output. Use this to

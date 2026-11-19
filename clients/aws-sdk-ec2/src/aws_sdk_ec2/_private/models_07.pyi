@@ -64,10 +64,12 @@ from ..models import (
     EnaSrdSpecificationRequestDict,
     EnclaveOptions,
     EventInformation,
+    Filter,
+    FilterDict,
     FlexCostAllocationCidrRangeSpecifications,
     FlexCostAllocationCidrRangeSpecificationsDict,
     FpgaInfo,
-    GpuDeviceInfo,
+    IpamPublicAddressSecurityGroup,
     IpamPublicAddressTags,
     IpamResourceTag,
     Ipv4PrefixSpecificationRequest,
@@ -75,6 +77,7 @@ from ..models import (
     Ipv6PrefixSpecificationRequest,
     Ipv6PrefixSpecificationRequestDict,
     LicenseConfiguration,
+    MaintenanceDetails,
     MediaAcceleratorInfo,
     MemoryGiBPerVCpu,
     MemoryGiBPerVCpuDict,
@@ -107,8 +110,6 @@ from ..models import (
     PrivateIpAddressSpecificationDict,
     ProcessorInfo,
     ProductCode,
-    RequestIpamResourceTag,
-    RequestIpamResourceTagDict,
     ScanResultCondition,
     ScanResultConditionRequest,
     ScanResultConditionRequestDict,
@@ -128,6 +129,7 @@ from ..models import (
     TotalLocalStorageGBDict,
     TotalLocalStorageGBRequest,
     TotalLocalStorageGBRequestDict,
+    TransitGatewayRouteTablePropagation,
     UserBucket,
     UserBucketDict,
     UserData,
@@ -137,10 +139,574 @@ from ..models import (
     VCpuCountRangeRequest,
     VCpuCountRangeRequestDict,
     VCpuInfo,
+    VerifiedAccessEndpointTarget,
     VolumeDetail,
     VolumeDetailDict,
+    VpcEncryptionNonCompliantResource,
+    VpnConnectionDeviceType,
     _SerdeShape,
 )
+
+@dataclass(kw_only=True)
+class GetTransitGatewayRouteTablePropagationsInput(_SerdeShape):
+    """Dataclass for GetTransitGatewayRouteTablePropagationsInput structure."""
+
+    transit_gateway_route_table_id: str | None = ...
+    """The ID of the transit gateway route table."""
+    filters: list[Filter] | None = ...
+    """
+    One or more filters. The possible values are:
+
+    - `resource-id` - The ID of the resource.
+
+    - `resource-type` - The resource type. Valid values are `vpc` | `vpn`
+      | `direct-connect-gateway` | `peering` | `connect`.
+
+    - `transit-gateway-attachment-id` - The ID of the attachment.
+    """
+    max_results: int | None = ...
+    """
+    The maximum number of results to return with a single call. To retrieve
+    the remaining results, make another call with the returned `nextToken`
+    value.
+    """
+    next_token: str | None = ...
+    """The token for the next page of results."""
+    dry_run: bool | None = ...
+    """
+    Checks whether you have the required permissions for the action, without
+    actually making the request, and provides an error response. If you have
+    the required permissions, the error response is `DryRunOperation`.
+    Otherwise, it is `UnauthorizedOperation`.
+    """
+
+class GetTransitGatewayRouteTablePropagationsInputDict(TypedDict, total=False):
+    """Dictionary form of `GetTransitGatewayRouteTablePropagationsInput`."""
+
+    transit_gateway_route_table_id: Required[str]
+    """The ID of the transit gateway route table."""
+    filters: Sequence[Filter | FilterDict] | None
+    """
+    One or more filters. The possible values are:
+
+    - `resource-id` - The ID of the resource.
+
+    - `resource-type` - The resource type. Valid values are `vpc` | `vpn`
+      | `direct-connect-gateway` | `peering` | `connect`.
+
+    - `transit-gateway-attachment-id` - The ID of the attachment.
+    """
+    max_results: int | None
+    """
+    The maximum number of results to return with a single call. To retrieve
+    the remaining results, make another call with the returned `nextToken`
+    value.
+    """
+    next_token: str | None
+    """The token for the next page of results."""
+    dry_run: bool | None
+    """
+    Checks whether you have the required permissions for the action, without
+    actually making the request, and provides an error response. If you have
+    the required permissions, the error response is `DryRunOperation`.
+    Otherwise, it is `UnauthorizedOperation`.
+    """
+
+@dataclass(kw_only=True)
+class GetTransitGatewayRouteTablePropagationsOutput(_SerdeShape):
+    """Dataclass for GetTransitGatewayRouteTablePropagationsOutput structure."""
+
+    transit_gateway_route_table_propagations: (
+        list[TransitGatewayRouteTablePropagation] | None
+    ) = ...
+    """Information about the route table propagations."""
+    next_token: str | None = ...
+    """
+    The token to use to retrieve the next page of results. This value is
+    `null` when there are no more results to return.
+    """
+    response_metadata: ResponseMetadata = ...
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+@dataclass(kw_only=True)
+class GetVerifiedAccessEndpointPolicyInput(_SerdeShape):
+    """Dataclass for GetVerifiedAccessEndpointPolicyInput structure."""
+
+    verified_access_endpoint_id: str | None = ...
+    """The ID of the Verified Access endpoint."""
+    dry_run: bool | None = ...
+    """
+    Checks whether you have the required permissions for the action, without
+    actually making the request, and provides an error response. If you have
+    the required permissions, the error response is `DryRunOperation`.
+    Otherwise, it is `UnauthorizedOperation`.
+    """
+
+class GetVerifiedAccessEndpointPolicyInputDict(TypedDict, total=False):
+    """Dictionary form of `GetVerifiedAccessEndpointPolicyInput`."""
+
+    verified_access_endpoint_id: Required[str]
+    """The ID of the Verified Access endpoint."""
+    dry_run: bool | None
+    """
+    Checks whether you have the required permissions for the action, without
+    actually making the request, and provides an error response. If you have
+    the required permissions, the error response is `DryRunOperation`.
+    Otherwise, it is `UnauthorizedOperation`.
+    """
+
+@dataclass(kw_only=True)
+class GetVerifiedAccessEndpointPolicyOutput(_SerdeShape):
+    """Dataclass for GetVerifiedAccessEndpointPolicyOutput structure."""
+
+    policy_enabled: bool | None = ...
+    """The status of the Verified Access policy."""
+    policy_document: str | None = ...
+    """The Verified Access policy document."""
+    response_metadata: ResponseMetadata = ...
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+@dataclass(kw_only=True)
+class GetVerifiedAccessEndpointTargetsInput(_SerdeShape):
+    """Dataclass for GetVerifiedAccessEndpointTargetsInput structure."""
+
+    verified_access_endpoint_id: str | None = ...
+    """The ID of the network CIDR endpoint."""
+    max_results: int | None = ...
+    """
+    The maximum number of results to return with a single call. To retrieve
+    the remaining results, make another call with the returned `nextToken`
+    value.
+    """
+    next_token: str | None = ...
+    """The token for the next page of results."""
+    dry_run: bool | None = ...
+    """
+    Checks whether you have the required permissions for the action, without
+    actually making the request, and provides an error response. If you have
+    the required permissions, the error response is `DryRunOperation`.
+    Otherwise, it is `UnauthorizedOperation`.
+    """
+
+class GetVerifiedAccessEndpointTargetsInputDict(TypedDict, total=False):
+    """Dictionary form of `GetVerifiedAccessEndpointTargetsInput`."""
+
+    verified_access_endpoint_id: Required[str]
+    """The ID of the network CIDR endpoint."""
+    max_results: int | None
+    """
+    The maximum number of results to return with a single call. To retrieve
+    the remaining results, make another call with the returned `nextToken`
+    value.
+    """
+    next_token: str | None
+    """The token for the next page of results."""
+    dry_run: bool | None
+    """
+    Checks whether you have the required permissions for the action, without
+    actually making the request, and provides an error response. If you have
+    the required permissions, the error response is `DryRunOperation`.
+    Otherwise, it is `UnauthorizedOperation`.
+    """
+
+@dataclass(kw_only=True)
+class GetVerifiedAccessEndpointTargetsOutput(_SerdeShape):
+    """Dataclass for GetVerifiedAccessEndpointTargetsOutput structure."""
+
+    verified_access_endpoint_targets: list[VerifiedAccessEndpointTarget] | None = ...
+    """The Verified Access targets."""
+    next_token: str | None = ...
+    """
+    The token to use to retrieve the next page of results. This value is
+    `null` when there are no more results to return.
+    """
+    response_metadata: ResponseMetadata = ...
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+@dataclass(kw_only=True)
+class GetVerifiedAccessGroupPolicyInput(_SerdeShape):
+    """Dataclass for GetVerifiedAccessGroupPolicyInput structure."""
+
+    verified_access_group_id: str | None = ...
+    """The ID of the Verified Access group."""
+    dry_run: bool | None = ...
+    """
+    Checks whether you have the required permissions for the action, without
+    actually making the request, and provides an error response. If you have
+    the required permissions, the error response is `DryRunOperation`.
+    Otherwise, it is `UnauthorizedOperation`.
+    """
+
+class GetVerifiedAccessGroupPolicyInputDict(TypedDict, total=False):
+    """Dictionary form of `GetVerifiedAccessGroupPolicyInput`."""
+
+    verified_access_group_id: Required[str]
+    """The ID of the Verified Access group."""
+    dry_run: bool | None
+    """
+    Checks whether you have the required permissions for the action, without
+    actually making the request, and provides an error response. If you have
+    the required permissions, the error response is `DryRunOperation`.
+    Otherwise, it is `UnauthorizedOperation`.
+    """
+
+@dataclass(kw_only=True)
+class GetVerifiedAccessGroupPolicyOutput(_SerdeShape):
+    """Dataclass for GetVerifiedAccessGroupPolicyOutput structure."""
+
+    policy_enabled: bool | None = ...
+    """The status of the Verified Access policy."""
+    policy_document: str | None = ...
+    """The Verified Access policy document."""
+    response_metadata: ResponseMetadata = ...
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+@dataclass(kw_only=True)
+class GetVpcResourcesBlockingEncryptionEnforcementInput(_SerdeShape):
+    """
+    Dataclass for GetVpcResourcesBlockingEncryptionEnforcementInput
+    structure.
+    """
+
+    vpc_id: str | None = ...
+    """
+    The ID of the VPC to check for resources blocking encryption
+    enforcement.
+    """
+    max_results: int | None = ...
+    """
+    The maximum number of items to return for this request. To get the next
+    page of items, make another request with the token returned in the
+    output. For more information, see
+    [Pagination](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination).
+    """
+    next_token: str | None = ...
+    """
+    The token returned from a previous paginated request. Pagination
+    continues from the end of the items returned by the previous request.
+    """
+    dry_run: bool | None = ...
+    """
+    Checks whether you have the required permissions for the action, without
+    actually making the request, and provides an error response. If you have
+    the required permissions, the error response is `DryRunOperation`.
+    Otherwise, it is `UnauthorizedOperation`.
+    """
+
+class GetVpcResourcesBlockingEncryptionEnforcementInputDict(TypedDict, total=False):
+    """Dictionary form of `GetVpcResourcesBlockingEncryptionEnforcementInput`."""
+
+    vpc_id: Required[str]
+    """
+    The ID of the VPC to check for resources blocking encryption
+    enforcement.
+    """
+    max_results: int | None
+    """
+    The maximum number of items to return for this request. To get the next
+    page of items, make another request with the token returned in the
+    output. For more information, see
+    [Pagination](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination).
+    """
+    next_token: str | None
+    """
+    The token returned from a previous paginated request. Pagination
+    continues from the end of the items returned by the previous request.
+    """
+    dry_run: bool | None
+    """
+    Checks whether you have the required permissions for the action, without
+    actually making the request, and provides an error response. If you have
+    the required permissions, the error response is `DryRunOperation`.
+    Otherwise, it is `UnauthorizedOperation`.
+    """
+
+@dataclass(kw_only=True)
+class GetVpcResourcesBlockingEncryptionEnforcementOutput(_SerdeShape):
+    """
+    Dataclass for GetVpcResourcesBlockingEncryptionEnforcementOutput
+    structure.
+    """
+
+    non_compliant_resources: list[VpcEncryptionNonCompliantResource] | None = ...
+    """Information about resources that are blocking encryption enforcement."""
+    next_token: str | None = ...
+    """
+    The token to include in another request to get the next page of items.
+    This value is `null` when there are no more items to return.
+    """
+    response_metadata: ResponseMetadata = ...
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+@dataclass(kw_only=True)
+class GetVpnConnectionDeviceSampleConfigurationInput(_SerdeShape):
+    """Dataclass for GetVpnConnectionDeviceSampleConfigurationInput structure."""
+
+    vpn_connection_id: str | None = ...
+    """
+    The `VpnConnectionId` specifies the Site-to-Site VPN connection used for
+    the sample configuration.
+    """
+    vpn_connection_device_type_id: str | None = ...
+    """Device identifier provided by the `GetVpnConnectionDeviceTypes` API."""
+    internet_key_exchange_version: str | None = ...
+    """
+    The IKE version to be used in the sample configuration file for your
+    customer gateway device. You can specify one of the following versions:
+    `ikev1` or `ikev2`.
+    """
+    sample_type: str | None = ...
+    """
+    The type of sample configuration to generate. Valid values are
+    \"compatibility\" (includes IKEv1) or \"recommended\" (throws
+    UnsupportedOperationException for IKEv1).
+    """
+    dry_run: bool | None = ...
+    """
+    Checks whether you have the required permissions for the action, without
+    actually making the request, and provides an error response. If you have
+    the required permissions, the error response is `DryRunOperation`.
+    Otherwise, it is `UnauthorizedOperation`.
+    """
+
+class GetVpnConnectionDeviceSampleConfigurationInputDict(TypedDict, total=False):
+    """Dictionary form of `GetVpnConnectionDeviceSampleConfigurationInput`."""
+
+    vpn_connection_id: Required[str]
+    """
+    The `VpnConnectionId` specifies the Site-to-Site VPN connection used for
+    the sample configuration.
+    """
+    vpn_connection_device_type_id: Required[str]
+    """Device identifier provided by the `GetVpnConnectionDeviceTypes` API."""
+    internet_key_exchange_version: str | None
+    """
+    The IKE version to be used in the sample configuration file for your
+    customer gateway device. You can specify one of the following versions:
+    `ikev1` or `ikev2`.
+    """
+    sample_type: str | None
+    """
+    The type of sample configuration to generate. Valid values are
+    \"compatibility\" (includes IKEv1) or \"recommended\" (throws
+    UnsupportedOperationException for IKEv1).
+    """
+    dry_run: bool | None
+    """
+    Checks whether you have the required permissions for the action, without
+    actually making the request, and provides an error response. If you have
+    the required permissions, the error response is `DryRunOperation`.
+    Otherwise, it is `UnauthorizedOperation`.
+    """
+
+@dataclass(kw_only=True)
+class GetVpnConnectionDeviceSampleConfigurationOutput(_SerdeShape):
+    """Dataclass for GetVpnConnectionDeviceSampleConfigurationOutput structure."""
+
+    vpn_connection_device_sample_configuration: str | None = ...
+    """Sample configuration file for the specified customer gateway device."""
+    response_metadata: ResponseMetadata = ...
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+@dataclass(kw_only=True)
+class GetVpnConnectionDeviceTypesInput(_SerdeShape):
+    """Dataclass for GetVpnConnectionDeviceTypesInput structure."""
+
+    max_results: int | None = ...
+    """
+    The maximum number of results returned by `GetVpnConnectionDeviceTypes`
+    in paginated output. When this parameter is used,
+    `GetVpnConnectionDeviceTypes` only returns `MaxResults` results in a
+    single page along with a `NextToken` response element. The remaining
+    results of the initial request can be seen by sending another
+    `GetVpnConnectionDeviceTypes` request with the returned `NextToken`
+    value. This value can be between 200 and 1000. If this parameter is not
+    used, then `GetVpnConnectionDeviceTypes` returns all results.
+    """
+    next_token: str | None = ...
+    """
+    The `NextToken` value returned from a previous paginated
+    `GetVpnConnectionDeviceTypes` request where `MaxResults` was used and
+    the results exceeded the value of that parameter. Pagination continues
+    from the end of the previous results that returned the `NextToken`
+    value. This value is null when there are no more results to return.
+    """
+    dry_run: bool | None = ...
+    """
+    Checks whether you have the required permissions for the action, without
+    actually making the request, and provides an error response. If you have
+    the required permissions, the error response is `DryRunOperation`.
+    Otherwise, it is `UnauthorizedOperation`.
+    """
+
+class GetVpnConnectionDeviceTypesInputDict(TypedDict, total=False):
+    """Dictionary form of `GetVpnConnectionDeviceTypesInput`."""
+
+    max_results: int | None
+    """
+    The maximum number of results returned by `GetVpnConnectionDeviceTypes`
+    in paginated output. When this parameter is used,
+    `GetVpnConnectionDeviceTypes` only returns `MaxResults` results in a
+    single page along with a `NextToken` response element. The remaining
+    results of the initial request can be seen by sending another
+    `GetVpnConnectionDeviceTypes` request with the returned `NextToken`
+    value. This value can be between 200 and 1000. If this parameter is not
+    used, then `GetVpnConnectionDeviceTypes` returns all results.
+    """
+    next_token: str | None
+    """
+    The `NextToken` value returned from a previous paginated
+    `GetVpnConnectionDeviceTypes` request where `MaxResults` was used and
+    the results exceeded the value of that parameter. Pagination continues
+    from the end of the previous results that returned the `NextToken`
+    value. This value is null when there are no more results to return.
+    """
+    dry_run: bool | None
+    """
+    Checks whether you have the required permissions for the action, without
+    actually making the request, and provides an error response. If you have
+    the required permissions, the error response is `DryRunOperation`.
+    Otherwise, it is `UnauthorizedOperation`.
+    """
+
+@dataclass(kw_only=True)
+class GetVpnConnectionDeviceTypesOutput(_SerdeShape):
+    """Dataclass for GetVpnConnectionDeviceTypesOutput structure."""
+
+    vpn_connection_device_types: list[VpnConnectionDeviceType] | None = ...
+    """
+    List of customer gateway devices that have a sample configuration file
+    available for use.
+    """
+    next_token: str | None = ...
+    """
+    The `NextToken` value to include in a future
+    `GetVpnConnectionDeviceTypes` request. When the results of a
+    `GetVpnConnectionDeviceTypes` request exceed `MaxResults`, this value
+    can be used to retrieve the next page of results. This value is null
+    when there are no more results to return.
+    """
+    response_metadata: ResponseMetadata = ...
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+@dataclass(kw_only=True)
+class GetVpnTunnelReplacementStatusInput(_SerdeShape):
+    """Dataclass for GetVpnTunnelReplacementStatusInput structure."""
+
+    vpn_connection_id: str | None = ...
+    """The ID of the Site-to-Site VPN connection."""
+    vpn_tunnel_outside_ip_address: str | None = ...
+    """The external IP address of the VPN tunnel."""
+    dry_run: bool | None = ...
+    """
+    Checks whether you have the required permissions for the action, without
+    actually making the request, and provides an error response. If you have
+    the required permissions, the error response is `DryRunOperation`.
+    Otherwise, it is `UnauthorizedOperation`.
+    """
+
+class GetVpnTunnelReplacementStatusInputDict(TypedDict, total=False):
+    """Dictionary form of `GetVpnTunnelReplacementStatusInput`."""
+
+    vpn_connection_id: Required[str]
+    """The ID of the Site-to-Site VPN connection."""
+    vpn_tunnel_outside_ip_address: Required[str]
+    """The external IP address of the VPN tunnel."""
+    dry_run: bool | None
+    """
+    Checks whether you have the required permissions for the action, without
+    actually making the request, and provides an error response. If you have
+    the required permissions, the error response is `DryRunOperation`.
+    Otherwise, it is `UnauthorizedOperation`.
+    """
+
+@dataclass(kw_only=True)
+class GetVpnTunnelReplacementStatusOutput(_SerdeShape):
+    """Dataclass for GetVpnTunnelReplacementStatusOutput structure."""
+
+    vpn_connection_id: str | None = ...
+    """The ID of the Site-to-Site VPN connection."""
+    transit_gateway_id: str | None = ...
+    """The ID of the transit gateway associated with the VPN connection."""
+    customer_gateway_id: str | None = ...
+    """The ID of the customer gateway."""
+    vpn_gateway_id: str | None = ...
+    """The ID of the virtual private gateway."""
+    vpn_tunnel_outside_ip_address: str | None = ...
+    """The external IP address of the VPN tunnel."""
+    maintenance_details: MaintenanceDetails | None = ...
+    """Get details of pending tunnel endpoint maintenance."""
+    response_metadata: ResponseMetadata = ...
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+@dataclass(kw_only=True)
+class GpuDeviceInfo(_SerdeShape):
+    """Describes the GPU accelerators for the instance type."""
+
+    name: str | None = ...
+    """The name of the GPU accelerator."""
+    manufacturer: str | None = ...
+    """The manufacturer of the GPU accelerator."""
+    count: int | None = ...
+    """The number of GPUs for the instance type."""
+    logical_gpu_count: int | None = ...
+    """Total number of GPU devices of this type."""
+    gpu_partition_size: float | None = ...
+    """
+    The size of each GPU as a fraction of a full GPU, between 0 (excluded)
+    and 1 (included).
+    """
+    workloads: list[str] | None = ...
+    """A list of workload types this GPU supports."""
+    memory_info: GpuDeviceMemoryInfo | None = ...
+    """Describes the memory available to the GPU accelerator."""
+
+@dataclass(kw_only=True)
+class GpuDeviceMemoryInfo(_SerdeShape):
+    """Describes the memory available to the GPU accelerator."""
+
+    size_in_mi_b: int | None = ...
+    """The size of the memory available to the GPU accelerator, in MiB."""
 
 @dataclass(kw_only=True)
 class GpuInfo(_SerdeShape):
@@ -9507,679 +10073,3 @@ class IpamPoolSourceResourceRequestDict(TypedDict, total=False):
     """The source resource Region."""
     resource_owner: str | None
     """The source resource owner."""
-
-class IpamPoolSourceResourceType(UnknownEnumMixin, StrEnum):
-    VPC = "vpc"
-
-class IpamPoolState(UnknownEnumMixin, StrEnum):
-    CREATE_IN_PROGRESS = "create-in-progress"
-    CREATE_COMPLETE = "create-complete"
-    CREATE_FAILED = "create-failed"
-    MODIFY_IN_PROGRESS = "modify-in-progress"
-    MODIFY_COMPLETE = "modify-complete"
-    MODIFY_FAILED = "modify-failed"
-    DELETE_IN_PROGRESS = "delete-in-progress"
-    DELETE_COMPLETE = "delete-complete"
-    DELETE_FAILED = "delete-failed"
-    ISOLATE_IN_PROGRESS = "isolate-in-progress"
-    ISOLATE_COMPLETE = "isolate-complete"
-    RESTORE_IN_PROGRESS = "restore-in-progress"
-
-@dataclass(kw_only=True)
-class IpamPrefixListResolver(_SerdeShape):
-    """
-    Describes an IPAM prefix list resolver.
-
-    An IPAM prefix list resolver is a component that manages the
-    synchronization between IPAM's CIDR selection rules and
-    customer-managed prefix lists. It automates connectivity configurations
-    by selecting CIDRs from IPAM's database based on your business logic
-    and synchronizing them with prefix lists used in resources such as VPC
-    route tables and security groups.
-    """
-
-    owner_id: str | None = ...
-    """
-    The ID of the Amazon Web Services account that owns the IPAM prefix list
-    resolver.
-    """
-    ipam_prefix_list_resolver_id: str | None = ...
-    """The ID of the IPAM prefix list resolver."""
-    ipam_prefix_list_resolver_arn: str | None = ...
-    """The Amazon Resource Name (ARN) of the IPAM prefix list resolver."""
-    ipam_arn: str | None = ...
-    """
-    The Amazon Resource Name (ARN) of the IPAM associated with this
-    resolver.
-    """
-    ipam_region: str | None = ...
-    """The Amazon Web Services Region where the associated IPAM is located."""
-    description: str | None = ...
-    """The description of the IPAM prefix list resolver."""
-    address_family: str | None = ...
-    """The address family (IPv4 or IPv6) for the IPAM prefix list resolver."""
-    state: str | None = ...
-    """
-    The current state of the IPAM prefix list resolver. Valid values include
-    `create-in-progress`, `create-complete`, `create-failed`,
-    `modify-in-progress`, `modify-complete`, `modify-failed`,
-    `delete-in-progress`, `delete-complete`, and `delete-failed`.
-    """
-    tags: list[Tag] | None = ...
-    """The tags assigned to the IPAM prefix list resolver."""
-    last_version_creation_status: str | None = ...
-    """
-    The status for the last time a version was created.
-
-    Each version is a snapshot of what CIDRs matched your rules at that
-    moment in time. The version number increments every time the CIDR list
-    changes due to infrastructure changes.
-    """
-    last_version_creation_status_message: str | None = ...
-    """
-    The status message for the last time a version was created.
-
-    Each version is a snapshot of what CIDRs matched your rules at that
-    moment in time. The version number increments every time the CIDR list
-    changes due to infrastructure changes.
-    """
-
-@dataclass(kw_only=True)
-class IpamPrefixListResolverRule(_SerdeShape):
-    """
-    Describes a CIDR selection rule.
-
-    CIDR selection rules define the business logic for selecting CIDRs from
-    IPAM. If a CIDR matches any of the rules, it will be included. If a rule
-    has multiple conditions, the CIDR has to match every condition of that
-    rule. You can create a prefix list resolver without any CIDR selection
-    rules, but it will generate empty versions (containing no CIDRs) until
-    you add rules.
-    """
-
-    rule_type: str | None = ...
-    """
-    The type of CIDR selection rule. Valid values include `include` for
-    selecting CIDRs that match the conditions, and `exclude` for excluding
-    CIDRs that match the conditions.
-    """
-    static_cidr: str | None = ...
-    """
-    A fixed list of CIDRs that do not change (like a manual list replicated
-    across Regions).
-    """
-    ipam_scope_id: str | None = ...
-    """
-    The ID of the IPAM scope from which to select CIDRs. This determines
-    whether to select from public or private IP address space.
-    """
-    resource_type: str | None = ...
-    """For rules of type `ipam-resource-cidr`, this is the resource type."""
-    conditions: list[IpamPrefixListResolverRuleCondition] | None = ...
-    """
-    The conditions that determine which CIDRs are selected by this rule.
-    Conditions specify criteria such as resource type, tags, account IDs,
-    and Regions.
-    """
-
-@dataclass(kw_only=True)
-class IpamPrefixListResolverRuleCondition(_SerdeShape):
-    """
-    Describes a condition within a CIDR selection rule. Conditions define
-    the criteria for selecting CIDRs from IPAM's database based on resource
-    attributes.
-
-    CIDR selection rules define the business logic for selecting CIDRs from
-    IPAM. If a CIDR matches any of the rules, it will be included. If a rule
-    has multiple conditions, the CIDR has to match every condition of that
-    rule. You can create a prefix list resolver without any CIDR selection
-    rules, but it will generate empty versions (containing no CIDRs) until
-    you add rules.
-
-    There are three rule types. Only 2 of the 3 rule types support
-    conditions - **IPAM pool CIDR** and **Scope resource CIDR**. **Static
-    CIDR** rules cannot have conditions.
-
-    - **Static CIDR**: A fixed list of CIDRs that do not change (like a
-      manual list replicated across Regions)
-
-    - **IPAM pool CIDR**: CIDRs from specific IPAM pools (like all CIDRs
-      from your IPAM production pool)
-
-      If you choose this option, choose the following:
-
-      - **IPAM scope**: Select the IPAM scope to search for resources
-
-      - **Conditions:**
-
-        - **Property**
-
-          - **IPAM pool ID**: Select an IPAM pool that contains the
-            resources
-
-          - **CIDR** (like 10.24.34.0/23)
-
-        - **Operation**: Equals/Not equals
-
-        - **Value**: The value on which to match the condition
-
-    - **Scope resource CIDR**: CIDRs from Amazon Web Services resources like
-      VPCs, subnets, EIPs within an IPAM scope
-
-      If you choose this option, choose the following:
-
-      - **IPAM scope**: Select the IPAM scope to search for resources
-
-      - **Resource type**: Select a resource, like a VPC or subnet.
-
-      - **Conditions**:
-
-        - **Property**:
-
-          - Resource ID: The unique ID of a resource (like
-            vpc-1234567890abcdef0)
-
-          - Resource owner (like 111122223333)
-
-          - Resource region (like us-east-1)
-
-          - Resource tag (like key: name, value: dev-vpc-1)
-
-          - CIDR (like 10.24.34.0/23)
-
-        - **Operation**: Equals/Not equals
-
-        - **Value**: The value on which to match the condition
-    """
-
-    operation: str | None = ...
-    """
-    The operation to perform when evaluating this condition. Valid values
-    include `equals`, `not-equals`, `contains`, and `not-contains`.
-    """
-    ipam_pool_id: str | None = ...
-    """
-    The ID of the IPAM pool to match against. This condition selects CIDRs
-    that belong to the specified IPAM pool.
-    """
-    resource_id: str | None = ...
-    """
-    The ID of the Amazon Web Services resource to match against. This
-    condition selects CIDRs associated with the specified resource.
-    """
-    resource_owner: str | None = ...
-    """
-    The Amazon Web Services account ID that owns the resources to match
-    against. This condition selects CIDRs from resources owned by the
-    specified account.
-    """
-    resource_region: str | None = ...
-    """
-    The Amazon Web Services Region where the resources are located. This
-    condition selects CIDRs from resources in the specified Region.
-    """
-    resource_tag: IpamResourceTag | None = ...
-    """
-    A tag key-value pair to match against. This condition selects CIDRs from
-    resources that have the specified tag.
-    """
-    cidr: str | None = ...
-    """
-    A CIDR block to match against. This condition selects CIDRs that fall
-    within or match the specified CIDR range.
-    """
-
-class IpamPrefixListResolverRuleConditionOperation(UnknownEnumMixin, StrEnum):
-    EQUALS = "equals"
-    NOT_EQUALS = "not-equals"
-    SUBNET_OF = "subnet-of"
-
-@dataclass(kw_only=True)
-class IpamPrefixListResolverRuleConditionRequest(_SerdeShape):
-    """
-    Describes a condition used when creating or modifying resolver rules.
-
-    CIDR selection rules define the business logic for selecting CIDRs from
-    IPAM. If a CIDR matches any of the rules, it will be included. If a rule
-    has multiple conditions, the CIDR has to match every condition of that
-    rule. You can create a prefix list resolver without any CIDR selection
-    rules, but it will generate empty versions (containing no CIDRs) until
-    you add rules.
-
-    There are three rule types. Only 2 of the 3 rule types support
-    conditions - **IPAM pool CIDR** and **Scope resource CIDR**. **Static
-    CIDR** rules cannot have conditions.
-
-    - **Static CIDR**: A fixed list of CIDRs that do not change (like a
-      manual list replicated across Regions)
-
-    - **IPAM pool CIDR**: CIDRs from specific IPAM pools (like all CIDRs
-      from your IPAM production pool)
-
-      If you choose this option, choose the following:
-
-      - **IPAM scope**: Select the IPAM scope to search for resources
-
-      - **Conditions:**
-
-        - **Property**
-
-          - **IPAM pool ID**: Select an IPAM pool that contains the
-            resources
-
-          - **CIDR** (like 10.24.34.0/23)
-
-        - **Operation**: Equals/Not equals
-
-        - **Value**: The value on which to match the condition
-
-    - **Scope resource CIDR**: CIDRs from Amazon Web Services resources like
-      VPCs, subnets, EIPs within an IPAM scope
-
-      If you choose this option, choose the following:
-
-      - **IPAM scope**: Select the IPAM scope to search for resources
-
-      - **Resource type**: Select a resource, like a VPC or subnet.
-
-      - **Conditions**:
-
-        - **Property**:
-
-          - Resource ID: The unique ID of a resource (like
-            vpc-1234567890abcdef0)
-
-          - Resource owner (like 111122223333)
-
-          - Resource region (like us-east-1)
-
-          - Resource tag (like key: name, value: dev-vpc-1)
-
-          - CIDR (like 10.24.34.0/23)
-
-        - **Operation**: Equals/Not equals
-
-        - **Value**: The value on which to match the condition
-    """
-
-    operation: str | None = ...
-    """The operation to perform when evaluating this condition."""
-    ipam_pool_id: str | None = ...
-    """
-    The ID of the IPAM pool to match against. This condition selects CIDRs
-    that belong to the specified IPAM pool.
-    """
-    resource_id: str | None = ...
-    """
-    The ID of the Amazon Web Services resource to match against. This
-    condition selects CIDRs associated with the specified resource.
-    """
-    resource_owner: str | None = ...
-    """
-    The Amazon Web Services account ID that owns the resources to match
-    against. This condition selects CIDRs from resources owned by the
-    specified account.
-    """
-    resource_region: str | None = ...
-    """
-    The Amazon Web Services Region where the resources are located. This
-    condition selects CIDRs from resources in the specified Region.
-    """
-    resource_tag: RequestIpamResourceTag | None = ...
-    """
-    A tag key-value pair to match against. This condition selects CIDRs from
-    resources that have the specified tag.
-    """
-    cidr: str | None = ...
-    """
-    A CIDR block to match against. This condition selects CIDRs that fall
-    within or match the specified CIDR range.
-    """
-
-class IpamPrefixListResolverRuleConditionRequestDict(TypedDict, total=False):
-    """Dictionary form of `IpamPrefixListResolverRuleConditionRequest`."""
-
-    operation: Required[str]
-    """The operation to perform when evaluating this condition."""
-    ipam_pool_id: str | None
-    """
-    The ID of the IPAM pool to match against. This condition selects CIDRs
-    that belong to the specified IPAM pool.
-    """
-    resource_id: str | None
-    """
-    The ID of the Amazon Web Services resource to match against. This
-    condition selects CIDRs associated with the specified resource.
-    """
-    resource_owner: str | None
-    """
-    The Amazon Web Services account ID that owns the resources to match
-    against. This condition selects CIDRs from resources owned by the
-    specified account.
-    """
-    resource_region: str | None
-    """
-    The Amazon Web Services Region where the resources are located. This
-    condition selects CIDRs from resources in the specified Region.
-    """
-    resource_tag: RequestIpamResourceTag | RequestIpamResourceTagDict | None
-    """
-    A tag key-value pair to match against. This condition selects CIDRs from
-    resources that have the specified tag.
-    """
-    cidr: str | None
-    """
-    A CIDR block to match against. This condition selects CIDRs that fall
-    within or match the specified CIDR range.
-    """
-
-@dataclass(kw_only=True)
-class IpamPrefixListResolverRuleRequest(_SerdeShape):
-    """
-    Describes a CIDR selection rule to include in a request. This is used
-    when creating or modifying resolver rules.
-
-    CIDR selection rules define the business logic for selecting CIDRs from
-    IPAM. If a CIDR matches any of the rules, it will be included. If a rule
-    has multiple conditions, the CIDR has to match every condition of that
-    rule. You can create a prefix list resolver without any CIDR selection
-    rules, but it will generate empty versions (containing no CIDRs) until
-    you add rules.
-
-    There are three rule types. Only 2 of the 3 rule types support
-    conditions - **IPAM pool CIDR** and **Scope resource CIDR**. **Static
-    CIDR** rules cannot have conditions.
-
-    - **Static CIDR**: A fixed list of CIDRs that do not change (like a
-      manual list replicated across Regions)
-
-    - **IPAM pool CIDR**: CIDRs from specific IPAM pools (like all CIDRs
-      from your IPAM production pool)
-
-      If you choose this option, choose the following:
-
-      - **IPAM scope**: Select the IPAM scope to search for resources
-
-      - **Conditions:**
-
-        - **Property**
-
-          - **IPAM pool ID**: Select an IPAM pool that contains the
-            resources
-
-          - **CIDR** (like 10.24.34.0/23)
-
-        - **Operation**: Equals/Not equals
-
-        - **Value**: The value on which to match the condition
-
-    - **Scope resource CIDR**: CIDRs from Amazon Web Services resources like
-      VPCs, subnets, EIPs within an IPAM scope
-
-      If you choose this option, choose the following:
-
-      - **IPAM scope**: Select the IPAM scope to search for resources
-
-      - **Resource type**: Select a resource, like a VPC or subnet.
-
-      - **Conditions**:
-
-        - **Property**:
-
-          - Resource ID: The unique ID of a resource (like
-            vpc-1234567890abcdef0)
-
-          - Resource owner (like 111122223333)
-
-          - Resource region (like us-east-1)
-
-          - Resource tag (like key: name, value: dev-vpc-1)
-
-          - CIDR (like 10.24.34.0/23)
-
-        - **Operation**: Equals/Not equals
-
-        - **Value**: The value on which to match the condition
-    """
-
-    rule_type: str | None = ...
-    """
-    The type of CIDR selection rule. Valid values include `include` for
-    selecting CIDRs that match the conditions, and `exclude` for excluding
-    CIDRs that match the conditions.
-    """
-    static_cidr: str | None = ...
-    """
-    A fixed list of CIDRs that do not change (like a manual list replicated
-    across Regions).
-    """
-    ipam_scope_id: str | None = ...
-    """
-    The ID of the IPAM scope from which to select CIDRs. This determines
-    whether to select from public or private IP address space.
-    """
-    resource_type: str | None = ...
-    """For rules of type `ipam-resource-cidr`, this is the resource type."""
-    conditions: list[IpamPrefixListResolverRuleConditionRequest] | None = ...
-    """
-    The conditions that determine which CIDRs are selected by this rule.
-    Conditions specify criteria such as resource type, tags, account IDs,
-    and Regions.
-    """
-
-class IpamPrefixListResolverRuleRequestDict(TypedDict, total=False):
-    """Dictionary form of `IpamPrefixListResolverRuleRequest`."""
-
-    rule_type: Required[str]
-    """
-    The type of CIDR selection rule. Valid values include `include` for
-    selecting CIDRs that match the conditions, and `exclude` for excluding
-    CIDRs that match the conditions.
-    """
-    static_cidr: str | None
-    """
-    A fixed list of CIDRs that do not change (like a manual list replicated
-    across Regions).
-    """
-    ipam_scope_id: str | None
-    """
-    The ID of the IPAM scope from which to select CIDRs. This determines
-    whether to select from public or private IP address space.
-    """
-    resource_type: str | None
-    """For rules of type `ipam-resource-cidr`, this is the resource type."""
-    conditions: (
-        Sequence[
-            IpamPrefixListResolverRuleConditionRequest
-            | IpamPrefixListResolverRuleConditionRequestDict
-        ]
-        | None
-    )
-    """
-    The conditions that determine which CIDRs are selected by this rule.
-    Conditions specify criteria such as resource type, tags, account IDs,
-    and Regions.
-    """
-
-class IpamPrefixListResolverRuleType(UnknownEnumMixin, StrEnum):
-    STATIC_CIDR = "static-cidr"
-    IPAM_RESOURCE_CIDR = "ipam-resource-cidr"
-    IPAM_POOL_CIDR = "ipam-pool-cidr"
-
-class IpamPrefixListResolverState(UnknownEnumMixin, StrEnum):
-    CREATE_IN_PROGRESS = "create-in-progress"
-    CREATE_COMPLETE = "create-complete"
-    CREATE_FAILED = "create-failed"
-    MODIFY_IN_PROGRESS = "modify-in-progress"
-    MODIFY_COMPLETE = "modify-complete"
-    MODIFY_FAILED = "modify-failed"
-    DELETE_IN_PROGRESS = "delete-in-progress"
-    DELETE_COMPLETE = "delete-complete"
-    DELETE_FAILED = "delete-failed"
-    ISOLATE_IN_PROGRESS = "isolate-in-progress"
-    ISOLATE_COMPLETE = "isolate-complete"
-    RESTORE_IN_PROGRESS = "restore-in-progress"
-
-@dataclass(kw_only=True)
-class IpamPrefixListResolverTarget(_SerdeShape):
-    """
-    Describes an IPAM prefix list resolver target.
-
-    An IPAM prefix list resolver target is an association between a specific
-    customer-managed prefix list and an IPAM prefix list resolver. The
-    target enables the resolver to synchronize CIDRs selected by its rules
-    into the specified prefix list, which can then be referenced in Amazon
-    Web Services resources.
-    """
-
-    ipam_prefix_list_resolver_target_id: str | None = ...
-    """The ID of the IPAM prefix list resolver target."""
-    ipam_prefix_list_resolver_target_arn: str | None = ...
-    """The Amazon Resource Name (ARN) of the IPAM prefix list resolver target."""
-    ipam_prefix_list_resolver_id: str | None = ...
-    """The ID of the IPAM prefix list resolver associated with this target."""
-    owner_id: str | None = ...
-    """
-    The ID of the Amazon Web Services account that owns the IPAM prefix list
-    resolver target.
-    """
-    prefix_list_id: str | None = ...
-    """The ID of the managed prefix list associated with this target."""
-    prefix_list_region: str | None = ...
-    """
-    The Amazon Web Services Region where the prefix list associated with
-    this target is located.
-    """
-    desired_version: int | None = ...
-    """
-    The desired version of the prefix list that this target should
-    synchronize with.
-    """
-    last_synced_version: int | None = ...
-    """
-    The version of the prefix list that was last successfully synchronized
-    by this target.
-    """
-    track_latest_version: bool | None = ...
-    """
-    Indicates whether this target automatically tracks the latest version of
-    the prefix list.
-    """
-    state_message: str | None = ...
-    """
-    A message describing the current state of the IPAM prefix list resolver
-    target, including any error information.
-    """
-    state: str | None = ...
-    """
-    The current state of the IPAM prefix list resolver target. Valid values
-    include `create-in-progress`, `create-complete`, `create-failed`,
-    `modify-in-progress`, `modify-complete`, `modify-failed`,
-    `delete-in-progress`, `delete-complete`, and `delete-failed`.
-    """
-    tags: list[Tag] | None = ...
-    """The tags assigned to the IPAM prefix list resolver target."""
-
-class IpamPrefixListResolverTargetState(UnknownEnumMixin, StrEnum):
-    CREATE_IN_PROGRESS = "create-in-progress"
-    CREATE_COMPLETE = "create-complete"
-    CREATE_FAILED = "create-failed"
-    MODIFY_IN_PROGRESS = "modify-in-progress"
-    MODIFY_COMPLETE = "modify-complete"
-    MODIFY_FAILED = "modify-failed"
-    SYNC_IN_PROGRESS = "sync-in-progress"
-    SYNC_COMPLETE = "sync-complete"
-    SYNC_FAILED = "sync-failed"
-    DELETE_IN_PROGRESS = "delete-in-progress"
-    DELETE_COMPLETE = "delete-complete"
-    DELETE_FAILED = "delete-failed"
-    ISOLATE_IN_PROGRESS = "isolate-in-progress"
-    ISOLATE_COMPLETE = "isolate-complete"
-    RESTORE_IN_PROGRESS = "restore-in-progress"
-
-@dataclass(kw_only=True)
-class IpamPrefixListResolverVersion(_SerdeShape):
-    """
-    Describes a version of an IPAM prefix list resolver.
-
-    Each version is a snapshot of what CIDRs matched your rules at that
-    moment in time. The version number increments every time the CIDR list
-    changes due to infrastructure changes.
-
-    **Version example:**
-
-    **Initial State (Version 1)**
-
-    Production environment:
-
-    - vpc-prod-web (10.1.0.0/16) - tagged env=prod
-
-    - vpc-prod-db (10.2.0.0/16) - tagged env=prod
-
-    Resolver rule: Include all VPCs tagged env=prod
-
-    **Version 1 CIDRs:** 10.1.0.0/16, 10.2.0.0/16
-
-    **Infrastructure Change (Version 2)**
-
-    New VPC added:
-
-    - vpc-prod-api (10.3.0.0/16) - tagged env=prod
-
-    IPAM automatically detects the change and creates a new version.
-
-    **Version 2 CIDRs:** 10.1.0.0/16, 10.2.0.0/16, 10.3.0.0/16
-    """
-
-    version: int | None = ...
-    """
-    The version number of the IPAM prefix list resolver.
-
-    Each version is a snapshot of what CIDRs matched your rules at that
-    moment in time. The version number increments every time the CIDR list
-    changes due to infrastructure changes.
-    """
-
-class IpamPrefixListResolverVersionCreationStatus(UnknownEnumMixin, StrEnum):
-    PENDING = "pending"
-    SUCCESS = "success"
-    FAILURE = "failure"
-
-@dataclass(kw_only=True)
-class IpamPrefixListResolverVersionEntry(_SerdeShape):
-    """
-    Describes a CIDR entry in a specific version of an IPAM prefix list
-    resolver. This represents a CIDR that was selected and synchronized at a
-    particular point in time.
-    """
-
-    cidr: str | None = ...
-    """
-    The CIDR block that was selected and synchronized in this resolver
-    version.
-    """
-
-class IpamPublicAddressAssociationStatus(UnknownEnumMixin, StrEnum):
-    ASSOCIATED = "associated"
-    DISASSOCIATED = "disassociated"
-
-class IpamPublicAddressAwsService(UnknownEnumMixin, StrEnum):
-    NAT_GATEWAY = "nat-gateway"
-    DMS = "database-migration-service"
-    REDSHIFT = "redshift"
-    ECS = "elastic-container-service"
-    RDS = "relational-database-service"
-    S2_S_VPN = "site-to-site-vpn"
-    EC2_LB = "load-balancer"
-    AGA = "global-accelerator"
-    CLOUDFRONT = "cloudfront"
-    OTHER = "other"
-
-@dataclass(kw_only=True)
-class IpamPublicAddressSecurityGroup(_SerdeShape):
-    """The security group that the resource with the public IP address is in."""
-
-    group_name: str | None = ...
-    """The security group's name."""
-    group_id: str | None = ...
-    """The security group's ID."""

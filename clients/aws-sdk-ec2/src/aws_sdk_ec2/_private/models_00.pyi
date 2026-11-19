@@ -54,7 +54,6 @@ from ..models import (
     PortRange,
     PtrUpdateStatus,
     RegionalSummary,
-    ReservedInstancesListing,
     RouteServerAssociation,
     RouteTableAssociationState,
     RuleGroupRuleOptionsPair,
@@ -607,7 +606,20 @@ class AcceptVpcEndpointConnectionsInput(_SerdeShape):
     service_id: str | None = ...
     """The ID of the VPC endpoint service."""
     vpc_endpoint_ids: list[str] | None = ...
-    """The IDs of the interface VPC endpoints."""
+    """
+    The IDs of the interface VPC endpoints.
+
+    You must specify either `VpcEndpointIds` or
+    `TransitGatewayAttachmentIds`, but not both.
+    """
+    transit_gateway_attachment_ids: list[str] | None = ...
+    """
+    The IDs of the transit gateway attachments to accept. This parameter is
+    supported only for Gateway Load Balancer endpoint services.
+
+    You must specify either `VpcEndpointIds` or
+    `TransitGatewayAttachmentIds`, but not both.
+    """
 
 class AcceptVpcEndpointConnectionsInputDict(TypedDict, total=False):
     """Dictionary form of `AcceptVpcEndpointConnectionsInput`."""
@@ -622,7 +634,20 @@ class AcceptVpcEndpointConnectionsInputDict(TypedDict, total=False):
     service_id: Required[str]
     """The ID of the VPC endpoint service."""
     vpc_endpoint_ids: Required[Sequence[str]]
-    """The IDs of the interface VPC endpoints."""
+    """
+    The IDs of the interface VPC endpoints.
+
+    You must specify either `VpcEndpointIds` or
+    `TransitGatewayAttachmentIds`, but not both.
+    """
+    transit_gateway_attachment_ids: Sequence[str] | None
+    """
+    The IDs of the transit gateway attachments to accept. This parameter is
+    supported only for Gateway Load Balancer endpoint services.
+
+    You must specify either `VpcEndpointIds` or
+    `TransitGatewayAttachmentIds`, but not both.
+    """
 
 @dataclass(kw_only=True)
 class AcceptVpcEndpointConnectionsOutput(_SerdeShape):
@@ -823,7 +848,7 @@ class AccountVpcEncryptionControlExclusions(_SerdeShape):
     elastic_file_system: str | None = ...
     """The exclusion configuration for Elastic File System service."""
     global_accelerator: str | None = ...
-    """The exclusion configuration for AWS Global Accelerator."""
+    """The exclusion configuration for Amazon Web Services Global Accelerator."""
     api_gateway_v2: str | None = ...
     """The exclusion configuration for Amazon API Gateway V2."""
 
@@ -858,6 +883,18 @@ class ActiveInstance(_SerdeShape):
     """
 
 @dataclass(kw_only=True)
+class ActiveVpnTunnelAdditionalKeyExchange(_SerdeShape):
+    """
+    Describes an additional key exchange round negotiated for an active VPN
+    tunnel.
+    """
+
+    additional_key_exchange_round: int | None = ...
+    """The additional key exchange round number."""
+    key_exchange_method: int | None = ...
+    """The key exchange method number negotiated for this round."""
+
+@dataclass(kw_only=True)
 class ActiveVpnTunnelStatus(_SerdeShape):
     """
     Contains information about the current security configuration of an
@@ -882,6 +919,14 @@ class ActiveVpnTunnelStatus(_SerdeShape):
     """The current provisioning status of the VPN tunnel."""
     provisioning_status_reason: str | None = ...
     """The reason for the current provisioning status."""
+    phase1_additional_key_exchanges: (
+        list[ActiveVpnTunnelAdditionalKeyExchange] | None
+    ) = ...
+    """The additional key exchanges negotiated in Phase 1 IKE negotiations."""
+    phase2_additional_key_exchanges: (
+        list[ActiveVpnTunnelAdditionalKeyExchange] | None
+    ) = ...
+    """The additional key exchanges negotiated in Phase 2 IKE negotiations."""
 
 class ActivityStatus(UnknownEnumMixin, StrEnum):
     ERROR = "error"
@@ -901,6 +946,8 @@ class AddedPrincipal(_SerdeShape):
     """The ID of the service permission."""
     service_id: str | None = ...
     """The ID of the service."""
+    permission_type: str | None = ...
+    """The type of permission granted to the principal."""
 
 @dataclass(kw_only=True)
 class AddIpamOperatingRegion(_SerdeShape):
@@ -1028,6 +1075,36 @@ class AdditionalDetail(_SerdeShape):
     """The name of the VPC endpoint service."""
     load_balancers: list[AnalysisComponent] | None = ...
     """The load balancers."""
+
+@dataclass(kw_only=True)
+class AdditionalKeyExchangeMethodsListValue(_SerdeShape):
+    """
+    The key exchange method number that is permitted for an additional key
+    exchange round.
+    """
+
+    value: int | None = ...
+    """The key exchange method number."""
+
+@dataclass(kw_only=True)
+class AdditionalKeyExchangeMethodsRequestListValue(_SerdeShape):
+    """
+    Specifies a key exchange method number that is permitted for an
+    additional key exchange round.
+    """
+
+    value: int | None = ...
+    """The key exchange method number."""
+
+class AdditionalKeyExchangeMethodsRequestListValueDict(TypedDict, total=False):
+    """Dictionary form of `AdditionalKeyExchangeMethodsRequestListValue`."""
+
+    value: int | None
+    """The key exchange method number."""
+
+class AdditionalKeyExchangeRequirement(UnknownEnumMixin, StrEnum):
+    REQUIRED = "required"
+    OPTIONAL = "optional"
 
 @dataclass(kw_only=True)
 class AddPrefixListEntry(_SerdeShape):
@@ -1829,6 +1906,8 @@ class AllowedPrincipal(_SerdeShape):
     """The tags."""
     service_id: str | None = ...
     """The ID of the service."""
+    permission_type: str | None = ...
+    """The type of permission granted to the principal."""
 
 class AllowsMultipleInstanceTypes(UnknownEnumMixin, StrEnum):
     ON = "on"
@@ -3074,6 +3153,18 @@ class AssociateDhcpOptionsOutput(_SerdeShape):
     optional.
     """
 
+@dataclass(kw_only=True)
+class AssociatedKmsKey(_SerdeShape):
+    """
+    Describes an KMS key that is associated with an Amazon EBS snapshot, in
+    addition to the key the snapshot is encrypted under. An associated key
+    provides a second way to access the snapshot's data for cross-account
+    sharing and copying.
+    """
+
+    kms_key_id: str | None = ...
+    """The Amazon Resource Name (ARN) of the associated KMS key."""
+
 class AssociatedNetworkType(UnknownEnumMixin, StrEnum):
     VPC = "vpc"
 
@@ -3353,6 +3444,57 @@ class AssociateIpamResourceDiscoveryOutput(_SerdeShape):
     A resource discovery association. An associated resource discovery is a
     resource discovery that has been associated with an IPAM.
     """
+    response_metadata: ResponseMetadata = ...
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+@dataclass(kw_only=True)
+class AssociateKmsKeyIdInput(_SerdeShape):
+    """Dataclass for AssociateKmsKeyIdInput structure."""
+
+    snapshot_id: str | None = ...
+    """The ID of the Amazon EBS snapshot."""
+    kms_key_id: str | None = ...
+    """
+    The ID, alias, or ARN of the KMS key to associate with the snapshot. You
+    can specify a key ID, key alias, key ARN, or alias ARN.
+    """
+    dry_run: bool | None = ...
+    """
+    Checks whether you have the required permissions for the action, without
+    actually making the request, and provides an error response. If you have
+    the required permissions, the error response is `DryRunOperation`.
+    Otherwise, it is `UnauthorizedOperation`.
+    """
+
+class AssociateKmsKeyIdInputDict(TypedDict, total=False):
+    """Dictionary form of `AssociateKmsKeyIdInput`."""
+
+    snapshot_id: str | None
+    """The ID of the Amazon EBS snapshot."""
+    kms_key_id: Required[str]
+    """
+    The ID, alias, or ARN of the KMS key to associate with the snapshot. You
+    can specify a key ID, key alias, key ARN, or alias ARN.
+    """
+    dry_run: bool | None
+    """
+    Checks whether you have the required permissions for the action, without
+    actually making the request, and provides an error response. If you have
+    the required permissions, the error response is `DryRunOperation`.
+    Otherwise, it is `UnauthorizedOperation`.
+    """
+
+@dataclass(kw_only=True)
+class AssociateKmsKeyIdOutput(_SerdeShape):
+    """Dataclass for AssociateKmsKeyIdOutput structure."""
+
+    return_: bool | None = ...
+    """Returns `true` if the request succeeds; otherwise, it returns an error."""
     response_metadata: ResponseMetadata = ...
     """
     Metadata about the response that produced this output. Use this to
@@ -6423,146 +6565,3 @@ class CancelReservedInstancesListingInputDict(TypedDict, total=False):
 
     reserved_instances_listing_id: Required[str]
     """The ID of the Reserved Instance listing."""
-
-@dataclass(kw_only=True)
-class CancelReservedInstancesListingOutput(_SerdeShape):
-    """Contains the output of CancelReservedInstancesListing."""
-
-    reserved_instances_listings: list[ReservedInstancesListing] | None = ...
-    """The Reserved Instance listing."""
-    response_metadata: ResponseMetadata = ...
-    """
-    Metadata about the response that produced this output. Use this to
-    recover the request identifiers a service's support team needs in order
-    to investigate a call. Members of the metadata are individually
-    optional.
-    """
-
-@dataclass(kw_only=True)
-class CancelSpotFleetRequestsError(_SerdeShape):
-    """Describes a Spot Fleet error."""
-
-    code: str | None = ...
-    """The error code."""
-    message: str | None = ...
-    """The description for the error code."""
-
-@dataclass(kw_only=True)
-class CancelSpotFleetRequestsErrorItem(_SerdeShape):
-    """Describes a Spot Fleet request that was not successfully canceled."""
-
-    error: CancelSpotFleetRequestsError | None = ...
-    """The error."""
-    spot_fleet_request_id: str | None = ...
-    """The ID of the Spot Fleet request."""
-
-@dataclass(kw_only=True)
-class CancelSpotFleetRequestsInput(_SerdeShape):
-    """Contains the parameters for CancelSpotFleetRequests."""
-
-    dry_run: bool | None = ...
-    """
-    Checks whether you have the required permissions for the action, without
-    actually making the request, and provides an error response. If you have
-    the required permissions, the error response is `DryRunOperation`.
-    Otherwise, it is `UnauthorizedOperation`.
-    """
-    spot_fleet_request_ids: list[str] | None = ...
-    """
-    The IDs of the Spot Fleet requests.
-
-    Constraint: You can specify up to 100 IDs in a single request.
-    """
-    terminate_instances: bool | None = ...
-    """
-    Indicates whether to terminate the associated instances when the Spot
-    Fleet request is canceled. The default is to terminate the instances.
-
-    To let the instances continue to run after the Spot Fleet request is
-    canceled, specify `no-terminate-instances`.
-    """
-
-class CancelSpotFleetRequestsInputDict(TypedDict, total=False):
-    """Dictionary form of `CancelSpotFleetRequestsInput`."""
-
-    dry_run: bool | None
-    """
-    Checks whether you have the required permissions for the action, without
-    actually making the request, and provides an error response. If you have
-    the required permissions, the error response is `DryRunOperation`.
-    Otherwise, it is `UnauthorizedOperation`.
-    """
-    spot_fleet_request_ids: Required[Sequence[str]]
-    """
-    The IDs of the Spot Fleet requests.
-
-    Constraint: You can specify up to 100 IDs in a single request.
-    """
-    terminate_instances: Required[bool]
-    """
-    Indicates whether to terminate the associated instances when the Spot
-    Fleet request is canceled. The default is to terminate the instances.
-
-    To let the instances continue to run after the Spot Fleet request is
-    canceled, specify `no-terminate-instances`.
-    """
-
-@dataclass(kw_only=True)
-class CancelSpotFleetRequestsOutput(_SerdeShape):
-    """Contains the output of CancelSpotFleetRequests."""
-
-    successful_fleet_requests: list[CancelSpotFleetRequestsSuccessItem] | None = ...
-    """
-    Information about the Spot Fleet requests that are successfully
-    canceled.
-    """
-    unsuccessful_fleet_requests: list[CancelSpotFleetRequestsErrorItem] | None = ...
-    """
-    Information about the Spot Fleet requests that are not successfully
-    canceled.
-    """
-    response_metadata: ResponseMetadata = ...
-    """
-    Metadata about the response that produced this output. Use this to
-    recover the request identifiers a service's support team needs in order
-    to investigate a call. Members of the metadata are individually
-    optional.
-    """
-
-@dataclass(kw_only=True)
-class CancelSpotFleetRequestsSuccessItem(_SerdeShape):
-    """Describes a Spot Fleet request that was successfully canceled."""
-
-    current_spot_fleet_request_state: str | None = ...
-    """The current state of the Spot Fleet request."""
-    previous_spot_fleet_request_state: str | None = ...
-    """The previous state of the Spot Fleet request."""
-    spot_fleet_request_id: str | None = ...
-    """The ID of the Spot Fleet request."""
-
-@dataclass(kw_only=True)
-class CancelSpotInstanceRequestsInput(_SerdeShape):
-    """Contains the parameters for CancelSpotInstanceRequests."""
-
-    dry_run: bool | None = ...
-    """
-    Checks whether you have the required permissions for the action, without
-    actually making the request, and provides an error response. If you have
-    the required permissions, the error response is `DryRunOperation`.
-    Otherwise, it is `UnauthorizedOperation`.
-    """
-    spot_instance_request_ids: list[str] | None = ...
-    """The IDs of the Spot Instance requests."""
-
-class CancelSpotInstanceRequestsInputDict(TypedDict, total=False):
-    """Dictionary form of `CancelSpotInstanceRequestsInput`."""
-
-    dry_run: bool | None
-    """
-    Checks whether you have the required permissions for the action, without
-    actually making the request, and provides an error response. If you have
-    the required permissions, the error response is `DryRunOperation`.
-    Otherwise, it is `UnauthorizedOperation`.
-    """
-    spot_instance_request_ids: Required[Sequence[str]]
-    """The IDs of the Spot Instance requests."""

@@ -12,8 +12,13 @@ from smithy_core.response import ResponseMetadata
 from smithy_core.types import UnknownEnumMixin
 
 from ..models import (
+    AgentInsightStoreSummary,
+    AgentRuntime,
+    AgentRuntimeEndpoint,
+    AgentRuntimeVersionSummary,
     ApiGatewayTargetConfiguration,
     ApiGatewayTargetConfigurationDict,
+    ApiKeyCredentialProviderItem,
     ApiSchemaConfiguration,
     ApiSchemaConfigurationDict,
     AtlassianOauth2ProviderConfigInput,
@@ -68,6 +73,10 @@ from ..models import (
     EvaluatorModelConfig,
     EvaluatorModelConfigDict,
     EvaluatorSummary,
+    ExampleCountByFieldCondition,
+    ExampleCountByFieldConditionDict,
+    ExampleFieldCondition,
+    ExampleFieldConditionDict,
     ExtractionConfig,
     ExtractionConfigDict,
     Filter,
@@ -94,16 +103,25 @@ from ..models import (
     IncludedOauth2ProviderConfigOutput,
     IndexedKey,
     Insight,
-    InvocationConfiguration,
-    InvocationConfigurationInput,
-    InvocationConfigurationInputDict,
     KmsConfiguration,
     KmsKeySourceType,
     KmsKeySourceTypeDict,
     LinkedinOauth2ProviderConfigInput,
     LinkedinOauth2ProviderConfigInputDict,
     LinkedinOauth2ProviderConfigOutput,
+    SecretReference,
+    SecretReferenceDict,
+    SelfManagedLatticeResource,
+    SelfManagedLatticeResourceDict,
+    SemanticMemoryStrategyInput,
+    SemanticMemoryStrategyInputDict,
+    ServerDefinition,
+    ServerDefinitionDict,
     ServiceError,
+    SessionConfig,
+    SessionConfigDict,
+    SessionConfiguration,
+    SessionConfigurationDict,
     SlackOauth2ProviderConfigInput,
     SlackOauth2ProviderConfigInputDict,
     SlackOauth2ProviderConfigOutput,
@@ -127,7 +145,6 @@ from ..models import (
     ToolSchemaDict,
     ToolsDefinition,
     ToolsDefinitionDict,
-    TriggerCondition,
     TriggerConditionInput,
     TriggerConditionInputDict,
     UserPreferenceMemoryStrategyInput,
@@ -143,6 +160,325 @@ from ..models import (
     WorkloadIdentityType,
     _SerdeShape,
 )
+
+@dataclass(kw_only=True)
+class LinuxOperatingSystemConfiguration(_SerdeShape):
+    """
+    Contains the operating system configuration of agents that run on Linux
+    instances, such as the privilege mode.
+    """
+
+    privilege_mode: str | None = ...
+    """
+    The privilege mode of the agents. If you omit this field, the agents run
+    in `STANDARD` privilege mode. The following values are possible:
+
+    - `STANDARD` -- The agent runs without elevated privileges. This is the
+      default.
+
+    - `PRIVILEGED` -- The agent runs with elevated privileges on its
+      instance. Use this mode for agents that build container images, run
+      containers, or install system packages. A session that runs a
+      `PRIVILEGED` agent runs only that agent.
+    """
+
+class LinuxOperatingSystemConfigurationDict(TypedDict, total=False):
+    """Dictionary form of `LinuxOperatingSystemConfiguration`."""
+
+    privilege_mode: str | None
+    """
+    The privilege mode of the agents. If you omit this field, the agents run
+    in `STANDARD` privilege mode. The following values are possible:
+
+    - `STANDARD` -- The agent runs without elevated privileges. This is the
+      default.
+
+    - `PRIVILEGED` -- The agent runs with elevated privileges on its
+      instance. Use this mode for agents that build container images, run
+      containers, or install system packages. A session that runs a
+      `PRIVILEGED` agent runs only that agent.
+    """
+
+@dataclass(kw_only=True)
+class ListAgentInsightStoresInput(_SerdeShape):
+    """Dataclass for ListAgentInsightStoresInput structure."""
+
+    next_token: str | None = ...
+    """
+    If the total number of results is greater than the `maxResults` value
+    provided in the request, enter the token returned in the `nextToken`
+    field in the response in this field to return the next batch of results.
+    """
+    max_results: int | None = ...
+    """
+    The maximum number of results to return in the response. If the total
+    number of results is greater than this value, use the token returned in
+    the response in the `nextToken` field when making another request to
+    return the next batch of results.
+    """
+
+class ListAgentInsightStoresInputDict(TypedDict, total=False):
+    """Dictionary form of `ListAgentInsightStoresInput`."""
+
+    next_token: str | None
+    """
+    If the total number of results is greater than the `maxResults` value
+    provided in the request, enter the token returned in the `nextToken`
+    field in the response in this field to return the next batch of results.
+    """
+    max_results: int | None
+    """
+    The maximum number of results to return in the response. If the total
+    number of results is greater than this value, use the token returned in
+    the response in the `nextToken` field when making another request to
+    return the next batch of results.
+    """
+
+@dataclass(kw_only=True)
+class ListAgentInsightStoresOutput(_SerdeShape):
+    """Dataclass for ListAgentInsightStoresOutput structure."""
+
+    agent_insight_stores: list[AgentInsightStoreSummary]
+    """The Agent Insight Store summaries."""
+    next_token: str | None = ...
+    """
+    If the total number of results is greater than the `maxResults` value
+    provided in the request, use this token when making another request in
+    the `nextToken` field to return the next batch of results.
+    """
+    response_metadata: ResponseMetadata = ...
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+@dataclass(kw_only=True)
+class ListAgentRuntimeEndpointsInput(_SerdeShape):
+    """Dataclass for ListAgentRuntimeEndpointsInput structure."""
+
+    agent_runtime_id: str | None = ...
+    """The unique identifier of the AgentCore Runtime to list endpoints for."""
+    max_results: int | None = ...
+    """The maximum number of results to return in the response."""
+    next_token: str | None = ...
+    """A token to retrieve the next page of results."""
+
+class ListAgentRuntimeEndpointsInputDict(TypedDict, total=False):
+    """Dictionary form of `ListAgentRuntimeEndpointsInput`."""
+
+    agent_runtime_id: Required[str]
+    """The unique identifier of the AgentCore Runtime to list endpoints for."""
+    max_results: int | None
+    """The maximum number of results to return in the response."""
+    next_token: str | None
+    """A token to retrieve the next page of results."""
+
+@dataclass(kw_only=True)
+class ListAgentRuntimeEndpointsOutput(_SerdeShape):
+    """Dataclass for ListAgentRuntimeEndpointsOutput structure."""
+
+    runtime_endpoints: list[AgentRuntimeEndpoint]
+    """The list of AgentCore Runtime endpoints."""
+    next_token: str | None = ...
+    """A token to retrieve the next page of results."""
+    response_metadata: ResponseMetadata = ...
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+@dataclass(kw_only=True)
+class ListAgentRuntimesInput(_SerdeShape):
+    """Dataclass for ListAgentRuntimesInput structure."""
+
+    max_results: int | None = ...
+    """The maximum number of results to return in the response."""
+    next_token: str | None = ...
+    """A token to retrieve the next page of results."""
+
+class ListAgentRuntimesInputDict(TypedDict, total=False):
+    """Dictionary form of `ListAgentRuntimesInput`."""
+
+    max_results: int | None
+    """The maximum number of results to return in the response."""
+    next_token: str | None
+    """A token to retrieve the next page of results."""
+
+@dataclass(kw_only=True)
+class ListAgentRuntimesOutput(_SerdeShape):
+    """Dataclass for ListAgentRuntimesOutput structure."""
+
+    agent_runtimes: list[AgentRuntime]
+    """The list of AgentCore Runtime resources."""
+    next_token: str | None = ...
+    """A token to retrieve the next page of results."""
+    response_metadata: ResponseMetadata = ...
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+@dataclass(kw_only=True)
+class ListAgentRuntimeVersionsByCapacityProviderInput(_SerdeShape):
+    """Dataclass for ListAgentRuntimeVersionsByCapacityProviderInput structure."""
+
+    capacity_provider_id: str | None = ...
+    """The unique identifier of the capacity provider."""
+    max_results: int | None = ...
+    """
+    The maximum number of results to return in the response. If the total
+    number of results is greater than this value, use the token returned in
+    the response in the `nextToken` field when making another request to
+    return the next batch of results.
+    """
+    next_token: str | None = ...
+    """
+    If the total number of results is greater than the `maxResults` value
+    provided in the request, enter the token returned in the `nextToken`
+    field in the response in this field to return the next batch of results.
+    """
+
+class ListAgentRuntimeVersionsByCapacityProviderInputDict(TypedDict, total=False):
+    """Dictionary form of `ListAgentRuntimeVersionsByCapacityProviderInput`."""
+
+    capacity_provider_id: Required[str]
+    """The unique identifier of the capacity provider."""
+    max_results: int | None
+    """
+    The maximum number of results to return in the response. If the total
+    number of results is greater than this value, use the token returned in
+    the response in the `nextToken` field when making another request to
+    return the next batch of results.
+    """
+    next_token: str | None
+    """
+    If the total number of results is greater than the `maxResults` value
+    provided in the request, enter the token returned in the `nextToken`
+    field in the response in this field to return the next batch of results.
+    """
+
+@dataclass(kw_only=True)
+class ListAgentRuntimeVersionsByCapacityProviderOutput(_SerdeShape):
+    """
+    Dataclass for ListAgentRuntimeVersionsByCapacityProviderOutput
+    structure.
+    """
+
+    agent_runtimes: list[AgentRuntimeVersionSummary]
+    """
+    The list of agent runtime versions that are associated with the capacity
+    provider.
+    """
+    next_token: str | None = ...
+    """
+    If the total number of results is greater than the `maxResults` value
+    provided in the request, use this token when making another request in
+    the `nextToken` field to return the next batch of results.
+    """
+    response_metadata: ResponseMetadata = ...
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+@dataclass(kw_only=True)
+class ListAgentRuntimeVersionsInput(_SerdeShape):
+    """Dataclass for ListAgentRuntimeVersionsInput structure."""
+
+    agent_runtime_id: str | None = ...
+    """The unique identifier of the AgentCore Runtime to list versions for."""
+    max_results: int | None = ...
+    """The maximum number of results to return in the response."""
+    next_token: str | None = ...
+    """A token to retrieve the next page of results."""
+
+class ListAgentRuntimeVersionsInputDict(TypedDict, total=False):
+    """Dictionary form of `ListAgentRuntimeVersionsInput`."""
+
+    agent_runtime_id: Required[str]
+    """The unique identifier of the AgentCore Runtime to list versions for."""
+    max_results: int | None
+    """The maximum number of results to return in the response."""
+    next_token: str | None
+    """A token to retrieve the next page of results."""
+
+@dataclass(kw_only=True)
+class ListAgentRuntimeVersionsOutput(_SerdeShape):
+    """Dataclass for ListAgentRuntimeVersionsOutput structure."""
+
+    agent_runtimes: list[AgentRuntime]
+    """The list of AgentCore Runtime versions."""
+    next_token: str | None = ...
+    """A token to retrieve the next page of results."""
+    response_metadata: ResponseMetadata = ...
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+@dataclass(kw_only=True)
+class ListApiKeyCredentialProvidersInput(_SerdeShape):
+    """Dataclass for ListApiKeyCredentialProvidersInput structure."""
+
+    next_token: str | None = ...
+    """Pagination token."""
+    max_results: int = ...
+    """Maximum number of results to return."""
+
+class ListApiKeyCredentialProvidersInputDict(TypedDict, total=False):
+    """Dictionary form of `ListApiKeyCredentialProvidersInput`."""
+
+    next_token: str | None
+    """Pagination token."""
+    max_results: int | None
+    """Maximum number of results to return."""
+
+@dataclass(kw_only=True)
+class ListApiKeyCredentialProvidersOutput(_SerdeShape):
+    """Dataclass for ListApiKeyCredentialProvidersOutput structure."""
+
+    credential_providers: list[ApiKeyCredentialProviderItem]
+    """The list of API key credential providers."""
+    next_token: str | None = ...
+    """Pagination token for the next page of results."""
+    response_metadata: ResponseMetadata = ...
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+@dataclass(kw_only=True)
+class ListBrowserProfilesInput(_SerdeShape):
+    """Dataclass for ListBrowserProfilesInput structure."""
+
+    max_results: int | None = ...
+    """The maximum number of results to return in the response."""
+    next_token: str | None = ...
+    """A token to retrieve the next page of results."""
+    name: str | None = ...
+    """The name of the browser profile to filter results by."""
+
+class ListBrowserProfilesInputDict(TypedDict, total=False):
+    """Dictionary form of `ListBrowserProfilesInput`."""
+
+    max_results: int | None
+    """The maximum number of results to return in the response."""
+    next_token: str | None
+    """A token to retrieve the next page of results."""
+    name: str | None
+    """The name of the browser profile to filter results by."""
 
 @dataclass(kw_only=True)
 class ListBrowserProfilesOutput(_SerdeShape):
@@ -476,6 +812,37 @@ class ListConsentPortalsOutput(_SerdeShape):
     """
 
 @dataclass(kw_only=True)
+class ListDatasetExamplesFilter(_SerdeShape):
+    """A filter for `ListDatasetExamples`."""
+
+    generation_ids: list[str] | None = ...
+    """
+    Returns only examples created by this dataset generation. Specify one
+    ID.
+    """
+    example_fields: list[ExampleFieldCondition] | None = ...
+    """
+    Returns only examples that meet at least one of these conditions.
+    Examples last written before example field filtering was available never
+    match.
+    """
+
+class ListDatasetExamplesFilterDict(TypedDict, total=False):
+    """Dictionary form of `ListDatasetExamplesFilter`."""
+
+    generation_ids: Sequence[str] | None
+    """
+    Returns only examples created by this dataset generation. Specify one
+    ID.
+    """
+    example_fields: Sequence[ExampleFieldCondition | ExampleFieldConditionDict] | None
+    """
+    Returns only examples that meet at least one of these conditions.
+    Examples last written before example field filtering was available never
+    match.
+    """
+
+@dataclass(kw_only=True)
 class ListDatasetExamplesInput(_SerdeShape):
     """Dataclass for ListDatasetExamplesInput structure."""
 
@@ -484,9 +851,12 @@ class ListDatasetExamplesInput(_SerdeShape):
     dataset_version: str | None = ...
     """
     Version to paginate: \"DRAFT\" or a version number. Defaults to DRAFT if
-    absent. Only used on the first request; for subsequent pages, the
-    version is extracted from the pagination token.
+    absent on the first request. With a pagination token, the version comes
+    from the token: you can omit this member, and a value that differs from
+    the token's version is rejected with a `ValidationException`.
     """
+    filter: ListDatasetExamplesFilter | None = ...
+    """A filter to apply to the examples."""
     max_results: int | None = ...
     """Maximum number of examples to return per page."""
     next_token: str | None = ...
@@ -500,9 +870,12 @@ class ListDatasetExamplesInputDict(TypedDict, total=False):
     dataset_version: str | None
     """
     Version to paginate: \"DRAFT\" or a version number. Defaults to DRAFT if
-    absent. Only used on the first request; for subsequent pages, the
-    version is extracted from the pagination token.
+    absent on the first request. With a pagination token, the version comes
+    from the token: you can omit this member, and a value that differs from
+    the token's version is rejected with a `ValidationException`.
     """
+    filter: ListDatasetExamplesFilter | ListDatasetExamplesFilterDict | None
+    """A filter to apply to the examples."""
     max_results: int | None
     """Maximum number of examples to return per page."""
     next_token: str | None
@@ -537,9 +910,32 @@ class ListDatasetExamplesOutput(_SerdeShape):
     """
 
 @dataclass(kw_only=True)
+class ListDatasetsFilter(_SerdeShape):
+    """A filter for `ListDatasets`."""
+
+    example_count_by_field: list[ExampleCountByFieldCondition] | None = ...
+    """
+    Returns only datasets whose DRAFT example counts meet at least one of
+    these conditions.
+    """
+
+class ListDatasetsFilterDict(TypedDict, total=False):
+    """Dictionary form of `ListDatasetsFilter`."""
+
+    example_count_by_field: (
+        Sequence[ExampleCountByFieldCondition | ExampleCountByFieldConditionDict] | None
+    )
+    """
+    Returns only datasets whose DRAFT example counts meet at least one of
+    these conditions.
+    """
+
+@dataclass(kw_only=True)
 class ListDatasetsInput(_SerdeShape):
     """Dataclass for ListDatasetsInput structure."""
 
+    filter: ListDatasetsFilter | None = ...
+    """A filter to apply to the datasets."""
     next_token: str | None = ...
     """The token for the next page of results."""
     max_results: int | None = ...
@@ -548,6 +944,8 @@ class ListDatasetsInput(_SerdeShape):
 class ListDatasetsInputDict(TypedDict, total=False):
     """Dictionary form of `ListDatasetsInput`."""
 
+    filter: ListDatasetsFilter | ListDatasetsFilterDict | None
+    """A filter to apply to the datasets."""
     next_token: str | None
     """The token for the next page of results."""
     max_results: int | None
@@ -573,11 +971,34 @@ class ListDatasetsOutput(_SerdeShape):
     """
 
 @dataclass(kw_only=True)
+class ListDatasetVersionsFilter(_SerdeShape):
+    """A filter for `ListDatasetVersions`."""
+
+    example_count_by_field: list[ExampleCountByFieldCondition] | None = ...
+    """
+    Returns only versions whose example counts meet at least one of these
+    conditions.
+    """
+
+class ListDatasetVersionsFilterDict(TypedDict, total=False):
+    """Dictionary form of `ListDatasetVersionsFilter`."""
+
+    example_count_by_field: (
+        Sequence[ExampleCountByFieldCondition | ExampleCountByFieldConditionDict] | None
+    )
+    """
+    Returns only versions whose example counts meet at least one of these
+    conditions.
+    """
+
+@dataclass(kw_only=True)
 class ListDatasetVersionsInput(_SerdeShape):
     """Dataclass for ListDatasetVersionsInput structure."""
 
     dataset_id: str | None = ...
     """The unique identifier of the dataset."""
+    filter: ListDatasetVersionsFilter | None = ...
+    """A filter to apply to the dataset versions."""
     next_token: str | None = ...
     """The token for the next page of results."""
     max_results: int | None = ...
@@ -588,6 +1009,8 @@ class ListDatasetVersionsInputDict(TypedDict, total=False):
 
     dataset_id: Required[str]
     """The unique identifier of the dataset."""
+    filter: ListDatasetVersionsFilter | ListDatasetVersionsFilterDict | None
+    """A filter to apply to the dataset versions."""
     next_token: str | None
     """The token for the next page of results."""
     max_results: int | None
@@ -4172,6 +4595,52 @@ class OperatingSystem(UnknownEnumMixin, StrEnum):
     LINUX_X86_64 = "LINUX_X86_64"
     LINUX_ARM64 = "LINUX_ARM64"
 
+@dataclass
+class OperatingSystemConfigurationLinux(_SerdeShape):
+    """
+    The operating system configuration of agents that run on Linux
+    instances.
+    """
+
+    value: LinuxOperatingSystemConfiguration
+
+@dataclass
+class OperatingSystemConfigurationUnknown(_SerdeShape):
+    """
+    Represents an unknown variant. If you receive this value, you will need
+    to update your library to receive the parsed value. This value may not
+    be deliberately sent.
+    """
+
+    tag: str
+
+OperatingSystemConfiguration = Union[
+    OperatingSystemConfigurationLinux | OperatingSystemConfigurationUnknown
+]
+"""
+Contains the operating system configuration of the agents that AgentCore
+Runtime runs on a capacity provider. Specify the member for the
+operating system of the capacity provider.
+"""
+
+class _OperatingSystemConfigurationDeserializer:
+    def deserialize(
+        self, deserializer: ShapeDeserializer
+    ) -> OperatingSystemConfiguration: ...
+
+class OperatingSystemConfigurationLinuxDict(TypedDict):
+    linux: LinuxOperatingSystemConfiguration | LinuxOperatingSystemConfigurationDict
+    """
+    The operating system configuration of agents that run on Linux
+    instances.
+    """
+
+OperatingSystemConfigurationDict = Union[OperatingSystemConfigurationLinuxDict]
+"""
+Dictionary form of `OperatingSystemConfiguration`, setting exactly one
+variant.
+"""
+
 @dataclass(kw_only=True)
 class OutputConfig(_SerdeShape):
     """
@@ -5290,6 +5759,15 @@ class PrivateKeySourceKmsKeySourceDict(TypedDict):
 
 PrivateKeySourceDict = Union[PrivateKeySourceKmsKeySourceDict]
 """Dictionary form of `PrivateKeySource`, setting exactly one variant."""
+
+class PrivilegeMode(UnknownEnumMixin, StrEnum):
+    """
+    The privilege mode of the agents, either `STANDARD` (the default) or
+    `PRIVILEGED`.
+    """
+
+    STANDARD = "STANDARD"
+    PRIVILEGED = "PRIVILEGED"
 
 @dataclass(kw_only=True)
 class ProtocolConfiguration(_SerdeShape):
@@ -6591,6 +7069,74 @@ class RuntimeTargetConfigurationDict(TypedDict, total=False):
     """
 
 @dataclass(kw_only=True)
+class S3BucketMountConfiguration(_SerdeShape):
+    """
+    Mounts an Amazon S3 bucket in the AgentCore Runtime with Mountpoint for
+    Amazon S3. Files under the mount path map to objects in the bucket.
+    """
+
+    bucket: str
+    """
+    The name of the S3 bucket to mount. You can specify a general purpose
+    bucket or a directory bucket.
+    """
+    mount_path: str
+    """
+    The mount path for the S3 bucket inside the AgentCore Runtime. The path
+    must be under `/mnt` with exactly one subdirectory level (for example,
+    `/mnt/data`).
+    """
+    prefix: str | None = ...
+    """
+    The key prefix to mount. Only objects under this prefix are visible at
+    the mount path. To give each session its own prefix, include
+    `{runtimeSessionId}` (for example, `data/{runtimeSessionId}/`). If you
+    omit the prefix, the whole bucket is mounted.
+    """
+    s3_bucket_owner: str | None = ...
+    """
+    The AWS account ID that must own the bucket. If you omit it, the bucket
+    must be owned by the account that owns the AgentCore Runtime.
+    """
+    s3_bucket_region: str | None = ...
+    """
+    The AWS Region of the S3 bucket. If you omit it, the bucket must be in
+    the same Region as the AgentCore Runtime.
+    """
+
+class S3BucketMountConfigurationDict(TypedDict, total=False):
+    """Dictionary form of `S3BucketMountConfiguration`."""
+
+    bucket: Required[str]
+    """
+    The name of the S3 bucket to mount. You can specify a general purpose
+    bucket or a directory bucket.
+    """
+    mount_path: Required[str]
+    """
+    The mount path for the S3 bucket inside the AgentCore Runtime. The path
+    must be under `/mnt` with exactly one subdirectory level (for example,
+    `/mnt/data`).
+    """
+    prefix: str | None
+    """
+    The key prefix to mount. Only objects under this prefix are visible at
+    the mount path. To give each session its own prefix, include
+    `{runtimeSessionId}` (for example, `data/{runtimeSessionId}/`). If you
+    omit the prefix, the whole bucket is mounted.
+    """
+    s3_bucket_owner: str | None
+    """
+    The AWS account ID that must own the bucket. If you omit it, the bucket
+    must be owned by the account that owns the AgentCore Runtime.
+    """
+    s3_bucket_region: str | None
+    """
+    The AWS Region of the S3 bucket. If you omit it, the bucket must be in
+    the same Region as the AgentCore Runtime.
+    """
+
+@dataclass(kw_only=True)
 class S3CertificateConfiguration(_SerdeShape):
     """
     A reference to a PEM-encoded private CA certificate stored as an Amazon
@@ -6946,433 +7492,4 @@ class Secret(_SerdeShape):
     """
     The Amazon Resource Name (ARN) of the secret in Amazon Web Services
     Secrets Manager.
-    """
-
-@dataclass(kw_only=True)
-class SecretReference(_SerdeShape):
-    """
-    Contains a reference to a secret stored in Amazon Web Services Secrets
-    Manager.
-    """
-
-    secret_id: str
-    """
-    The ID of the Amazon Web Services Secrets Manager secret that stores the
-    secret value.
-    """
-    json_key: str
-    """
-    The JSON key used to extract the secret value from the Amazon Web
-    Services Secrets Manager secret.
-    """
-
-class SecretReferenceDict(TypedDict, total=False):
-    """Dictionary form of `SecretReference`."""
-
-    secret_id: Required[str]
-    """
-    The ID of the Amazon Web Services Secrets Manager secret that stores the
-    secret value.
-    """
-    json_key: Required[str]
-    """
-    The JSON key used to extract the secret value from the Amazon Web
-    Services Secrets Manager secret.
-    """
-
-@dataclass(kw_only=True)
-class SecretsManagerCertificateConfiguration(_SerdeShape):
-    """
-    A reference to a PEM-encoded private CA certificate stored in an Amazon
-    Web Services Secrets Manager secret.
-    """
-
-    secret_arn: str
-    """
-    The Amazon Resource Name (ARN) of the Amazon Web Services Secrets
-    Manager secret that contains the PEM-encoded certificate.
-    """
-
-class SecretsManagerCertificateConfigurationDict(TypedDict, total=False):
-    """Dictionary form of `SecretsManagerCertificateConfiguration`."""
-
-    secret_arn: Required[str]
-    """
-    The Amazon Resource Name (ARN) of the Amazon Web Services Secrets
-    Manager secret that contains the PEM-encoded certificate.
-    """
-
-@dataclass(kw_only=True)
-class SecretsManagerLocation(_SerdeShape):
-    """The Amazon Web Services Secrets Manager location configuration."""
-
-    secret_arn: str
-    """
-    The ARN of the Amazon Web Services Secrets Manager secret containing the
-    certificate.
-    """
-
-class SecretsManagerLocationDict(TypedDict, total=False):
-    """Dictionary form of `SecretsManagerLocation`."""
-
-    secret_arn: Required[str]
-    """
-    The ARN of the Amazon Web Services Secrets Manager secret containing the
-    certificate.
-    """
-
-class SecretSourceType(UnknownEnumMixin, StrEnum):
-    MANAGED = "MANAGED"
-    EXTERNAL = "EXTERNAL"
-
-@dataclass(kw_only=True)
-class SelfManagedConfiguration(_SerdeShape):
-    """A configuration for a self-managed memory strategy."""
-
-    trigger_conditions: list[TriggerCondition]
-    """A list of conditions that trigger memory processing."""
-    invocation_configuration: InvocationConfiguration
-    """The configuration to use when invoking memory processing."""
-    historical_context_window_size: int
-    """The number of historical messages to include in processing context."""
-
-@dataclass(kw_only=True)
-class SelfManagedConfigurationInput(_SerdeShape):
-    """Input configuration for a self-managed memory strategy."""
-
-    trigger_conditions: list[TriggerConditionInput] | None = ...
-    """A list of conditions that trigger memory processing."""
-    invocation_configuration: InvocationConfigurationInput
-    """Configuration to invoke a self-managed memory processing pipeline with."""
-    historical_context_window_size: int = ...
-    """Number of historical messages to include in processing context."""
-
-class SelfManagedConfigurationInputDict(TypedDict, total=False):
-    """Dictionary form of `SelfManagedConfigurationInput`."""
-
-    trigger_conditions: (
-        Sequence[TriggerConditionInput | TriggerConditionInputDict] | None
-    )
-    """A list of conditions that trigger memory processing."""
-    invocation_configuration: Required[
-        InvocationConfigurationInput | InvocationConfigurationInputDict
-    ]
-    """Configuration to invoke a self-managed memory processing pipeline with."""
-    historical_context_window_size: int | None
-    """Number of historical messages to include in processing context."""
-
-@dataclass
-class SelfManagedLatticeResourceResourceConfigurationIdentifier(_SerdeShape):
-    """The ARN or ID of the VPC Lattice resource configuration."""
-
-    value: str
-
-@dataclass
-class SelfManagedLatticeResourceUnknown(_SerdeShape):
-    """
-    Represents an unknown variant. If you receive this value, you will need
-    to update your library to receive the parsed value. This value may not
-    be deliberately sent.
-    """
-
-    tag: str
-
-SelfManagedLatticeResource = Union[
-    SelfManagedLatticeResourceResourceConfigurationIdentifier
-    | SelfManagedLatticeResourceUnknown
-]
-"""
-Configuration for a self-managed VPC Lattice resource. You create and
-manage the VPC Lattice resource gateway and resource configuration, then
-provide the resource configuration identifier.
-"""
-
-class _SelfManagedLatticeResourceDeserializer:
-    def deserialize(
-        self, deserializer: ShapeDeserializer
-    ) -> SelfManagedLatticeResource: ...
-
-class SelfManagedLatticeResourceResourceConfigurationIdentifierDict(TypedDict):
-    resource_configuration_identifier: str
-    """The ARN or ID of the VPC Lattice resource configuration."""
-
-SelfManagedLatticeResourceDict = Union[
-    SelfManagedLatticeResourceResourceConfigurationIdentifierDict
-]
-"""
-Dictionary form of `SelfManagedLatticeResource`, setting exactly one
-variant.
-"""
-
-@dataclass(kw_only=True)
-class SemanticConsolidationOverride(_SerdeShape):
-    """Contains semantic consolidation override configuration."""
-
-    append_to_prompt: str
-    """The text to append to the prompt for semantic consolidation."""
-    model_id: str
-    """The model ID to use for semantic consolidation."""
-
-@dataclass(kw_only=True)
-class SemanticExtractionOverride(_SerdeShape):
-    """Contains semantic extraction override configuration."""
-
-    append_to_prompt: str
-    """The text to append to the prompt for semantic extraction."""
-    model_id: str
-    """The model ID to use for semantic extraction."""
-
-@dataclass(kw_only=True)
-class SemanticMemoryStrategyInput(_SerdeShape):
-    """Input for creating a semantic memory strategy."""
-
-    name: str
-    """The name of the semantic memory strategy."""
-    description: str | None = ...
-    """The description of the semantic memory strategy."""
-    namespaces: list[str] | None = ...
-    """
-    This is a legacy parameter, use `namespaceTemplates`. The namespaces
-    associated with the semantic memory strategy.
-    """
-    namespace_templates: list[str] | None = ...
-    """The namespaceTemplates associated with the semantic memory strategy."""
-    memory_record_schema: MemoryRecordSchema | None = ...
-    """Schema for metadata on memory records generated by a strategy."""
-    record_expiry_specification: RecordExpirySpecification | None = ...
-    """
-    The record expiry (long-term memory time-to-live) configuration for
-    memory records generated by this strategy. Set
-    `recordExpiryDurationDays` to the number of days after which records
-    expire. If not specified, records generated by this strategy do not
-    expire.
-    """
-
-class SemanticMemoryStrategyInputDict(TypedDict, total=False):
-    """Dictionary form of `SemanticMemoryStrategyInput`."""
-
-    name: Required[str]
-    """The name of the semantic memory strategy."""
-    description: str | None
-    """The description of the semantic memory strategy."""
-    namespaces: Sequence[str] | None
-    """
-    This is a legacy parameter, use `namespaceTemplates`. The namespaces
-    associated with the semantic memory strategy.
-    """
-    namespace_templates: Sequence[str] | None
-    """The namespaceTemplates associated with the semantic memory strategy."""
-    memory_record_schema: MemoryRecordSchema | MemoryRecordSchemaDict | None
-    """Schema for metadata on memory records generated by a strategy."""
-    record_expiry_specification: (
-        RecordExpirySpecification | RecordExpirySpecificationDict | None
-    )
-    """
-    The record expiry (long-term memory time-to-live) configuration for
-    memory records generated by this strategy. Set
-    `recordExpiryDurationDays` to the number of days after which records
-    expire. If not specified, records generated by this strategy do not
-    expire.
-    """
-
-@dataclass(kw_only=True)
-class SemanticOverrideConfigurationInput(_SerdeShape):
-    """Input for semantic override configuration in a memory strategy."""
-
-    extraction: SemanticOverrideExtractionConfigurationInput | None = ...
-    """The extraction configuration for a semantic override."""
-    consolidation: SemanticOverrideConsolidationConfigurationInput | None = ...
-    """The consolidation configuration for a semantic override."""
-
-class SemanticOverrideConfigurationInputDict(TypedDict, total=False):
-    """Dictionary form of `SemanticOverrideConfigurationInput`."""
-
-    extraction: (
-        SemanticOverrideExtractionConfigurationInput
-        | SemanticOverrideExtractionConfigurationInputDict
-        | None
-    )
-    """The extraction configuration for a semantic override."""
-    consolidation: (
-        SemanticOverrideConsolidationConfigurationInput
-        | SemanticOverrideConsolidationConfigurationInputDict
-        | None
-    )
-    """The consolidation configuration for a semantic override."""
-
-@dataclass(kw_only=True)
-class SemanticOverrideConsolidationConfigurationInput(_SerdeShape):
-    """
-    Input for semantic override consolidation configuration in a memory
-    strategy.
-    """
-
-    append_to_prompt: str
-    """The text to append to the prompt for semantic consolidation."""
-    model_id: str
-    """The model ID to use for semantic consolidation."""
-
-class SemanticOverrideConsolidationConfigurationInputDict(TypedDict, total=False):
-    """Dictionary form of `SemanticOverrideConsolidationConfigurationInput`."""
-
-    append_to_prompt: Required[str]
-    """The text to append to the prompt for semantic consolidation."""
-    model_id: Required[str]
-    """The model ID to use for semantic consolidation."""
-
-@dataclass(kw_only=True)
-class SemanticOverrideExtractionConfigurationInput(_SerdeShape):
-    """
-    Input for semantic override extraction configuration in a memory
-    strategy.
-    """
-
-    append_to_prompt: str
-    """The text to append to the prompt for semantic extraction."""
-    model_id: str
-    """The model ID to use for semantic extraction."""
-
-class SemanticOverrideExtractionConfigurationInputDict(TypedDict, total=False):
-    """Dictionary form of `SemanticOverrideExtractionConfigurationInput`."""
-
-    append_to_prompt: Required[str]
-    """The text to append to the prompt for semantic extraction."""
-    model_id: Required[str]
-    """The model ID to use for semantic extraction."""
-
-@dataclass(kw_only=True)
-class ServerDefinition(_SerdeShape):
-    """
-    The server definition for an MCP descriptor. Contains the schema version
-    and inline content for the MCP server configuration.
-    """
-
-    schema_version: str | None = ...
-    """
-    The schema version of the server definition based on the MCP protocol
-    specification. If not specified, the version is auto-detected from the
-    content.
-    """
-    inline_content: str | None = ...
-    """
-    The JSON content containing the MCP server definition, conforming to the
-    MCP protocol specification.
-    """
-
-class ServerDefinitionDict(TypedDict, total=False):
-    """Dictionary form of `ServerDefinition`."""
-
-    schema_version: str | None
-    """
-    The schema version of the server definition based on the MCP protocol
-    specification. If not specified, the version is auto-detected from the
-    content.
-    """
-    inline_content: str | None
-    """
-    The JSON content containing the MCP server definition, conforming to the
-    MCP protocol specification.
-    """
-
-class ServerProtocol(UnknownEnumMixin, StrEnum):
-    MCP = "MCP"
-    HTTP = "HTTP"
-    A2_A = "A2A"
-    AGUI = "AGUI"
-
-@dataclass(kw_only=True)
-class ServiceException(ServiceError, _SerdeShape):
-    """An internal error occurred."""
-
-    response_metadata: ResponseMetadata = ...
-    """
-    Metadata about the response that produced this output. Use this to
-    recover the request identifiers a service's support team needs in order
-    to investigate a call. Members of the metadata are individually
-    optional.
-    """
-
-@dataclass(kw_only=True)
-class ServiceQuotaExceededException(ServiceError, _SerdeShape):
-    """This exception is thrown when a request is made beyond the service quota"""
-
-    response_metadata: ResponseMetadata = ...
-    """
-    Metadata about the response that produced this output. Use this to
-    recover the request identifiers a service's support team needs in order
-    to investigate a call. Members of the metadata are individually
-    optional.
-    """
-
-@dataclass(kw_only=True)
-class SessionConfig(_SerdeShape):
-    """
-    The configuration that defines how agent sessions are detected and when
-    they are considered complete for evaluation.
-    """
-
-    session_timeout_minutes: int
-    """
-    The number of minutes of inactivity after which an agent session is
-    considered complete and ready for evaluation. Default is 15 minutes.
-    """
-
-class SessionConfigDict(TypedDict, total=False):
-    """Dictionary form of `SessionConfig`."""
-
-    session_timeout_minutes: Required[int]
-    """
-    The number of minutes of inactivity after which an agent session is
-    considered complete and ready for evaluation. Default is 15 minutes.
-    """
-
-@dataclass(kw_only=True)
-class SessionConfiguration(_SerdeShape):
-    """
-    The session configuration for an MCP gateway. This structure defines
-    settings that control session behavior.
-    """
-
-    session_timeout_in_seconds: int | None = ...
-    """
-    The session timeout in seconds. After this timeout, the session expires
-    and subsequent requests to this session will receive an error. The
-    minimum value is 900 seconds (15 minutes), the maximum value is 28800
-    seconds (8 hours), and the default value is 3600 seconds (1 hour).
-    """
-
-class SessionConfigurationDict(TypedDict, total=False):
-    """Dictionary form of `SessionConfiguration`."""
-
-    session_timeout_in_seconds: int | None
-    """
-    The session timeout in seconds. After this timeout, the session expires
-    and subsequent requests to this session will receive an error. The
-    minimum value is 900 seconds (15 minutes), the maximum value is 28800
-    seconds (8 hours), and the default value is 3600 seconds (1 hour).
-    """
-
-@dataclass(kw_only=True)
-class SessionStorageConfiguration(_SerdeShape):
-    """
-    Configuration for a session storage filesystem mounted into the
-    AgentCore Runtime. Session storage provides persistent storage that is
-    preserved across AgentCore Runtime session invocations.
-    """
-
-    mount_path: str
-    """
-    The mount path for the session storage filesystem inside the AgentCore
-    Runtime. The path must be under `/mnt` with exactly one subdirectory
-    level (for example, `/mnt/data`).
-    """
-
-class SessionStorageConfigurationDict(TypedDict, total=False):
-    """Dictionary form of `SessionStorageConfiguration`."""
-
-    mount_path: Required[str]
-    """
-    The mount path for the session storage filesystem inside the AgentCore
-    Runtime. The path must be under `/mnt` with exactly one subdirectory
-    level (for example, `/mnt/data`).
     """

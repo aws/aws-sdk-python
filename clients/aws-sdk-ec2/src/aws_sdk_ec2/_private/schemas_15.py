@@ -32,10 +32,6 @@ _TGI = "TransitGatewayId"
 _tGI = "transitGatewayId"
 _St = "State"
 _st = "state"
-_as = "associating"
-_ass = "associated"
-_di = "disassociating"
-_dis = "disassociated"
 _fa = "failed"
 _SIu = "SubnetId"
 _sI = "subnetId"
@@ -44,6 +40,7 @@ _OIw = "OwnerId"
 _oI = "ownerId"
 _e = "enable"
 _disa = "disable"
+_en = "enabled"
 _mo = "modifying"
 _fai = "failing"
 _Sta = "Status"
@@ -56,13 +53,16 @@ _VEI = "VpcEndpointId"
 _dRr = "dryRun"
 _VPCI = "VpcPeeringConnectionId"
 _vPCI = "vpcPeeringConnectionId"
-_CB = "CidrBlock"
-_cB = "cidrBlock"
+_PENDING = "PENDING"
+_ENABLED = "ENABLED"
+_DISABLED = "DISABLED"
 _act = "active"
 _N = "Name"
 _IA = "IpAddress"
 _AZ = "AvailabilityZone"
+_aZ = "availabilityZone"
 _AZI = "AvailabilityZoneId"
+_aZI = "availabilityZoneId"
 _DPLI = "DestinationPrefixListId"
 _dPLI = "destinationPrefixListId"
 _EOIGI = "EgressOnlyInternetGatewayId"
@@ -84,28 +84,34 @@ _cNA = "coreNetworkArn"
 _LGI = "LocalGatewayId"
 _lGI = "localGatewayId"
 _ROo = "RouteOrigin"
+_NI = "NetworkInterface"
 _RTo = "RouteTable"
 _rTo = "routeTable"
-_en = "enabling"
-_ena = "enabled"
+_ena = "enabling"
 _disab = "disabling"
-_AIs = "AssociationId"
-_aIs = "associationId"
+_Des = "Description"
+_PIAr = "PrivateIpAddress"
+_pIAr = "privateIpAddress"
 _PIP = "PublicIpv4Pool"
 _pIP = "publicIpv4Pool"
 _NBG = "NetworkBorderGroup"
 _SMt = "StatusMessage"
 _sMt = "statusMessage"
+_desc = "description"
 _PIo = "PoolId"
 _pIo = "poolId"
 _ho = "host"
+_OA = "OutpostArn"
 _CTl = "ClientToken"
 _cTl = "clientToken"
 _sT = "smithy.api#idempotencyToken"
+_IPp = "Ipv6Prefixes"
+_IAp = "Ipv6Addresses"
+_IPpvr = "Ipv4Prefixes"
+_PIAri = "PrivateIpAddresses"
 _suc = "succeeded"
 _FAILED = "FAILED"
-_af = "association_failed"
-_af_ = "association-failed"
+_SIn = "SnapshotId"
 _FR = "FailureReason"
 _fR = "failureReason"
 _RSI = "RouteServerId"
@@ -115,11 +121,14 @@ _rTIo = "routeTableId"
 _ASss = "AssociationState"
 _aSs = "associationState"
 _GIr = "GroupId"
-_df_ = "disassociation_failed"
-_df__ = "disassociation-failed"
+_Ass = "Association"
+_assoc = "association"
 _gIr = "groupId"
+_G = "Groups"
 _IIm = "ImageId"
 _VIo = "VolumeId"
+_At = "Attachment"
+_atta = "attachment"
 _rev = "revoking"
 _GN = "GroupName"
 _gN = "groupName"
@@ -142,50 +151,81 @@ _RILe = "ReservedInstancesListings"
 _RILS = "ReservedInstancesListingsSet"
 _rILS = "reservedInstancesListingsSet"
 _iIm = "imageId"
-_SIn = "SnapshotId"
 _sIn = "snapshotId"
+_oAu = "outpostArn"
 _Op = "Operator"
-_ope = "operator"
+_oper = "operator"
 _VIR = "VolumeInitializationRate"
-_Ty = "Type"
 _DCB = "DestinationCidrBlock"
-_ty = "type"
 _iApd = "ipAddress"
-_df___ = "delete_failed"
+_IN = "Ipv6Native"
+_iN = "ipv6Native"
 _df____ = "delete-failed"
 _ip_____ = "in-progress"
 _TSas = "TaskState"
 _tSa = "taskState"
-_DISABLED = "DISABLED"
-_ENABLED = "ENABLED"
-_cip = "create_in_progress"
-_cip_ = "create-in-progress"
-_cc_ = "create_complete"
-_cc__ = "create-complete"
-_cf________________________ = "create_failed"
-_cf_________________________ = "create-failed"
-_dip_ = "delete_in_progress"
-_dip__ = "delete-in-progress"
-_dc_ = "delete_complete"
-_dc__ = "delete-complete"
 _DF_ = "DELETE_FAILED"
 _ASw = "AwsService"
 _aSw = "awsService"
+_IApv = "Ipv6Address"
+_Prim = "Primary"
+_prim = "primary"
+_ITnte = "InterfaceType"
+_iApv = "ipv6Address"
+_GS = "GroupSet"
+_gS = "groupSet"
+_iTnt = "interfaceType"
+_IAS = "Ipv6AddressesSet"
+_iAS = "ipv6AddressesSet"
+_PIASr = "PrivateIpAddressesSet"
+_pIAS = "privateIpAddressesSet"
+_IPSpv = "Ipv4PrefixSet"
+_iPS = "ipv4PrefixSet"
+_IPSpvr = "Ipv6PrefixSet"
+_iPSp = "ipv6PrefixSet"
 _bl = "blackhole"
 _dCB = "destinationCidrBlock"
 _Rou = "Route"
-_SRt = "StateReason"
-_sRt = "stateReason"
 _PAe = "PeerAddress"
 _pAe = "peerAddress"
-_PENDING = "PENDING"
 _AVAILABLE = "AVAILABLE"
 _DELETING = "DELETING"
 _DELETED = "DELETED"
 _ASsso = "AssociationSet"
 _aSss = "associationSet"
+_PDNu = "PublicDnsName"
+_pDNu = "publicDnsName"
 _IOIn = "InstanceOwnerId"
 _iOIn = "instanceOwnerId"
+_CTC = "ConnectionTrackingConfiguration"
+_PIDN = "PublicIpv6DnsName"
+_pIDN = "publicIpv6DnsName"
+_NIPIA = "NetworkInterfacePrivateIpAddress"
+_PDNr = "PrivateDnsName"
+_pDNr = "privateDnsName"
+_NIPIAL = "NetworkInterfacePrivateIpAddressList"
+_PIDNO = "PublicIpDnsNameOptions"
+_DHT = "DnsHostnameType"
+_dHT = "dnsHostnameType"
+_PIDNu = "PublicIpv4DnsName"
+_pIDNu = "publicIpv4DnsName"
+_PDSDN = "PublicDualStackDnsName"
+_pDSDN = "publicDualStackDnsName"
+_cTC = "connectionTrackingConfiguration"
+_MAa = "MacAddress"
+_mAa = "macAddress"
+_pIDNO = "publicIpDnsNameOptions"
+_RIeq = "RequesterId"
+_rIeq = "requesterId"
+_RMe = "RequesterManaged"
+_rMe = "requesterManaged"
+_SDC = "SourceDestCheck"
+_sDC = "sourceDestCheck"
+_DAIT = "DenyAllIgwTraffic"
+_dAIT = "denyAllIgwTraffic"
+_ASssoc = "AssociatedSubnets"
+_ASSs = "AssociatedSubnetSet"
+_aSSs = "associatedSubnetSet"
 _IPTn = "InterfacePermissionType"
 _IA_ = "INSTANCE_ATTACH"
 _IA__ = "INSTANCE-ATTACH"
@@ -389,38 +429,131 @@ _RSout = "RouteSet"
 _rSou = "routeSet"
 _CRTO = "CreateRouteTableOutput"
 _cCRTRo = "com.amazonaws.ec2#CreateRouteTableResult"
-_SNT = "SecondaryNetworkType"
-_rdma = "rdma"
 _CSNI = "CreateSecondaryNetworkInput"
 _cCSNR = "com.amazonaws.ec2#CreateSecondaryNetworkRequest"
 _ICBp = "Ipv4CidrBlock"
 _NTe = "NetworkType"
-_SNCAI = "SecondaryNetworkCidrAssociationId"
-_SNCBAS = "SecondaryNetworkCidrBlockAssociationState"
-_SNICBA = "SecondaryNetworkIpv4CidrBlockAssociation"
-_SNICBAL = "SecondaryNetworkIpv4CidrBlockAssociationList"
-_SNI = "SecondaryNetworkId"
-_SNS = "SecondaryNetworkState"
 _SNec = "SecondaryNetwork"
-_sNI = "secondaryNetworkId"
-_SNA = "SecondaryNetworkArn"
-_sNA = "secondaryNetworkArn"
-_ICBAp = "Ipv4CidrBlockAssociations"
-_ICBASp = "Ipv4CidrBlockAssociationSet"
-_iCBASp = "ipv4CidrBlockAssociationSet"
 _CSNO = "CreateSecondaryNetworkOutput"
 _cCSNRo = "com.amazonaws.ec2#CreateSecondaryNetworkResult"
 _sNec = "secondaryNetwork"
 _CSN = "CreateSecondaryNetwork"
-_CSSI = "CreateSecondarySubnetInput"
-_cCSSR = "com.amazonaws.ec2#CreateSecondarySubnetRequest"
-_SSCAI = "SecondarySubnetCidrAssociationId"
-_SSe = "SecondarySubnet"
-_CSSO = "CreateSecondarySubnetOutput"
-_cCSSRo = "com.amazonaws.ec2#CreateSecondarySubnetResult"
-_sSe = "secondarySubnet"
-_CSS = "CreateSecondarySubnet"
 _RSMR = "RouteServerMaxResults"
+
+NETWORK_INTERFACE_PRIVATE_IP_ADDRESS: StaticSchema = (
+    18,
+    n0,
+    _NIPIA,
+    0,
+    (_Ass, _Prim, _PDNr, _PIAr),
+    (
+        (lambda: schemas.NETWORK_INTERFACE_ASSOCIATION, {_aQN: _Ass, _sN: _assoc}),
+        (lambda: schemas.BOOLEAN, {_aQN: _Prim, _sN: _prim}),
+        (lambda: schemas.STRING, {_aQN: _PDNr, _sN: _pDNr}),
+        (lambda: schemas.STRING, {_aQN: _PIAr, _sN: _pIAr}),
+    ),
+)
+
+NETWORK_INTERFACE_PRIVATE_IP_ADDRESS_LIST: StaticSchema = (
+    16,
+    n0,
+    _NIPIAL,
+    0,
+    (_me,),
+    ((NETWORK_INTERFACE_PRIVATE_IP_ADDRESS, {_sN: _i}),),
+)
+
+PUBLIC_IP_DNS_NAME_OPTIONS: StaticSchema = (
+    18,
+    n0,
+    _PIDNO,
+    0,
+    (_DHT, _PIDNu, _PIDN, _PDSDN),
+    (
+        (lambda: schemas.STRING, {_aQN: _DHT, _sN: _dHT}),
+        (lambda: schemas.STRING, {_aQN: _PIDNu, _sN: _pIDNu}),
+        (lambda: schemas.STRING, {_aQN: _PIDN, _sN: _pIDN}),
+        (lambda: schemas.STRING, {_aQN: _PDSDN, _sN: _pDSDN}),
+    ),
+)
+
+NETWORK_INTERFACE: StaticSchema = (
+    18,
+    n0,
+    _NI,
+    0,
+    (
+        _Ass,
+        _At,
+        _AZ,
+        _CTC,
+        _Des,
+        _G,
+        _ITnte,
+        _IAp,
+        _MAa,
+        _NII,
+        _OA,
+        _OIw,
+        _PDNr,
+        _PDNu,
+        _PIDNO,
+        _PIAr,
+        _PIAri,
+        _IPpvr,
+        _IPp,
+        _RIeq,
+        _RMe,
+        _SDC,
+        _Sta,
+        _SIu,
+        _TSag,
+        _VI,
+        _DAIT,
+        _IN,
+        _IApv,
+        _Op,
+        _ASssoc,
+        _AZI,
+    ),
+    (
+        (lambda: schemas.NETWORK_INTERFACE_ASSOCIATION, {_aQN: _Ass, _sN: _assoc}),
+        (lambda: schemas.NETWORK_INTERFACE_ATTACHMENT, {_aQN: _At, _sN: _atta}),
+        (lambda: schemas.STRING, {_aQN: _AZ, _sN: _aZ}),
+        (lambda: schemas.CONNECTION_TRACKING_CONFIGURATION, {_aQN: _CTC, _sN: _cTC}),
+        (lambda: schemas.STRING, {_aQN: _Des, _sN: _desc}),
+        (lambda: schemas.GROUP_IDENTIFIER_LIST, {_aQN: _GS, _sN: _gS}),
+        (lambda: schemas.NETWORK_INTERFACE_TYPE, {_aQN: _ITnte, _sN: _iTnt}),
+        (
+            lambda: schemas.NETWORK_INTERFACE_IPV6_ADDRESSES_LIST,
+            {_aQN: _IAS, _sN: _iAS},
+        ),
+        (lambda: schemas.STRING, {_aQN: _MAa, _sN: _mAa}),
+        (lambda: schemas.STRING, {_aQN: _NII, _sN: _nII}),
+        (lambda: schemas.STRING, {_aQN: _OA, _sN: _oAu}),
+        (lambda: schemas.STRING, {_aQN: _OIw, _sN: _oI}),
+        (lambda: schemas.STRING, {_aQN: _PDNr, _sN: _pDNr}),
+        (lambda: schemas.STRING, {_aQN: _PDNu, _sN: _pDNu}),
+        (PUBLIC_IP_DNS_NAME_OPTIONS, {_aQN: _PIDNO, _sN: _pIDNO}),
+        (lambda: schemas.STRING, {_aQN: _PIAr, _sN: _pIAr}),
+        (NETWORK_INTERFACE_PRIVATE_IP_ADDRESS_LIST, {_aQN: _PIASr, _sN: _pIAS}),
+        (lambda: schemas.IPV4_PREFIXES_LIST, {_aQN: _IPSpv, _sN: _iPS}),
+        (lambda: schemas.IPV6_PREFIXES_LIST, {_aQN: _IPSpvr, _sN: _iPSp}),
+        (lambda: schemas.STRING, {_aQN: _RIeq, _sN: _rIeq}),
+        (lambda: schemas.BOOLEAN, {_aQN: _RMe, _sN: _rMe}),
+        (lambda: schemas.BOOLEAN, {_aQN: _SDC, _sN: _sDC}),
+        (lambda: schemas.NETWORK_INTERFACE_STATUS, {_aQN: _Sta, _sN: _sta}),
+        (lambda: schemas.STRING, {_aQN: _SIu, _sN: _sI}),
+        (lambda: schemas.TAG_LIST, {_aQN: _TSag, _sN: _tS}),
+        (lambda: schemas.STRING, {_aQN: _VI, _sN: _vI}),
+        (lambda: schemas.BOOLEAN, {_aQN: _DAIT, _sN: _dAIT}),
+        (lambda: schemas.BOOLEAN, {_aQN: _IN, _sN: _iN}),
+        (lambda: schemas.STRING, {_aQN: _IApv, _sN: _iApv}),
+        (lambda: schemas.OPERATOR_RESPONSE, {_aQN: _Op, _sN: _oper}),
+        (lambda: schemas.ASSOCIATED_SUBNET_LIST, {_aQN: _ASSs, _sN: _aSSs}),
+        (lambda: schemas.STRING, {_aQN: _AZI, _sN: _aZI}),
+    ),
+)
 
 INTERFACE_PERMISSION_TYPE: StaticSchema = (
     14,
@@ -583,7 +716,7 @@ PLACEMENT_GROUP: StaticSchema = (
         (lambda: schemas.STRING, {_aQN: _GAr, _sN: _gAr}),
         (SPREAD_LEVEL, {_aQN: _SLp, _sN: _sL}),
         (lambda: schemas.PLACEMENT_GROUP_ID, {_aQN: _LGIi, _sN: _lGIi}),
-        (lambda: schemas.OPERATOR_RESPONSE, {_aQN: _Op, _sN: _ope}),
+        (lambda: schemas.OPERATOR_RESPONSE, {_aQN: _Op, _sN: _oper}),
         (lambda: schemas.PLACEMENT_GROUP_ID, {_aQN: _PGIa, _sN: _pGI}),
     ),
 )
@@ -915,8 +1048,8 @@ ROUTE_SERVER_PERSIST_ROUTES_STATE: StaticSchema = (
     0,
     (_ENABLING, _ENABLED, _RESETTING, _DISABLING, _DISABLED, _MODIFYING),
     (
-        (-1, {_sV: _en}),
         (-1, {_sV: _ena}),
+        (-1, {_sV: _en}),
         (-1, {_sV: _rese}),
         (-1, {_sV: _disab}),
         (-1, {_sV: _d}),
@@ -1338,15 +1471,6 @@ ROUTE_TABLE: StaticSchema = (
     ),
 )
 
-SECONDARY_NETWORK_TYPE: StaticSchema = (
-    14,
-    n0,
-    _SNT,
-    0,
-    (_rdma,),
-    ((-1, {_sV: _rdma}),),
-)
-
 CREATE_SECONDARY_NETWORK_INPUT: StaticSchema = (
     18,
     n0,
@@ -1357,7 +1481,7 @@ CREATE_SECONDARY_NETWORK_INPUT: StaticSchema = (
         (lambda: schemas.STRING, 2),
         (lambda: schemas.BOOLEAN, 0),
         (lambda: schemas.STRING, {_sO: None, _smi: None}),
-        (SECONDARY_NETWORK_TYPE, {_sO: None, _smi: None}),
+        (lambda: schemas.SECONDARY_NETWORK_TYPE, {_sO: None, _smi: None}),
         (lambda: schemas.TAG_SPECIFICATION_LIST, {_sN: _TS}),
     ),
 )
@@ -1369,7 +1493,7 @@ CREATE_SECONDARY_NETWORK_OUTPUT: StaticSchema = (
     {_sSI: _cCSNRo, _smit: None},
     (_SNec, _CTl),
     (
-        (lambda: SECONDARY_NETWORK, {_aQN: _SNec, _sN: _sNec}),
+        (lambda: schemas.SECONDARY_NETWORK, {_aQN: _SNec, _sN: _sNec}),
         (lambda: schemas.STRING, {_aQN: _CTl, _sN: _cTl}),
     ),
 )
@@ -1383,126 +1507,5 @@ CREATE_SECONDARY_NETWORK: StaticOperationSchema = (
     CREATE_SECONDARY_NETWORK_OUTPUT,
     (),
 )
-
-SECONDARY_NETWORK_CIDR_ASSOCIATION_ID: StaticSchema = (3, n0, _SNCAI, 0)
-
-SECONDARY_NETWORK_CIDR_BLOCK_ASSOCIATION_STATE: StaticSchema = (
-    14,
-    n0,
-    _SNCBAS,
-    0,
-    (_as, _ass, _af, _di, _dis, _df_),
-    (
-        (-1, {_sV: _as}),
-        (-1, {_sV: _ass}),
-        (-1, {_sV: _af_}),
-        (-1, {_sV: _di}),
-        (-1, {_sV: _dis}),
-        (-1, {_sV: _df__}),
-    ),
-)
-
-SECONDARY_NETWORK_IPV4_CIDR_BLOCK_ASSOCIATION: StaticSchema = (
-    18,
-    n0,
-    _SNICBA,
-    0,
-    (_AIs, _CB, _St, _SRt),
-    (
-        (SECONDARY_NETWORK_CIDR_ASSOCIATION_ID, {_aQN: _AIs, _sN: _aIs}),
-        (lambda: schemas.STRING, {_aQN: _CB, _sN: _cB}),
-        (SECONDARY_NETWORK_CIDR_BLOCK_ASSOCIATION_STATE, {_aQN: _St, _sN: _st}),
-        (lambda: schemas.STRING, {_aQN: _SRt, _sN: _sRt}),
-    ),
-)
-
-SECONDARY_NETWORK_IPV4_CIDR_BLOCK_ASSOCIATION_LIST: StaticSchema = (
-    16,
-    n0,
-    _SNICBAL,
-    0,
-    (_me,),
-    ((SECONDARY_NETWORK_IPV4_CIDR_BLOCK_ASSOCIATION, {_sN: _i}),),
-)
-
-SECONDARY_NETWORK_ID: StaticSchema = (3, n0, _SNI, 0)
-
-SECONDARY_NETWORK_STATE: StaticSchema = (
-    14,
-    n0,
-    _SNS,
-    0,
-    (_cip, _cc_, _cf________________________, _dip_, _dc_, _df___),
-    (
-        (-1, {_sV: _cip_}),
-        (-1, {_sV: _cc__}),
-        (-1, {_sV: _cf_________________________}),
-        (-1, {_sV: _dip__}),
-        (-1, {_sV: _dc__}),
-        (-1, {_sV: _df____}),
-    ),
-)
-
-SECONDARY_NETWORK: StaticSchema = (
-    18,
-    n0,
-    _SNec,
-    0,
-    (_SNI, _SNA, _OIw, _Ty, _St, _SRt, _ICBAp, _Tag),
-    (
-        (SECONDARY_NETWORK_ID, {_aQN: _SNI, _sN: _sNI}),
-        (lambda: schemas.STRING, {_aQN: _SNA, _sN: _sNA}),
-        (lambda: schemas.STRING, {_aQN: _OIw, _sN: _oI}),
-        (SECONDARY_NETWORK_TYPE, {_aQN: _Ty, _sN: _ty}),
-        (SECONDARY_NETWORK_STATE, {_aQN: _St, _sN: _st}),
-        (lambda: schemas.STRING, {_aQN: _SRt, _sN: _sRt}),
-        (
-            SECONDARY_NETWORK_IPV4_CIDR_BLOCK_ASSOCIATION_LIST,
-            {_aQN: _ICBASp, _sN: _iCBASp},
-        ),
-        (lambda: schemas.TAG_LIST, {_aQN: _TSag, _sN: _tS}),
-    ),
-)
-
-CREATE_SECONDARY_SUBNET_INPUT: StaticSchema = (
-    18,
-    n0,
-    _CSSI,
-    {_sSI: _cCSSR, _sm: None},
-    (_CTl, _AZ, _AZI, _DR, _ICBp, _SNI, _TSa),
-    (
-        (lambda: schemas.STRING, 2),
-        (lambda: schemas.AVAILABILITY_ZONE_NAME, 0),
-        (lambda: schemas.AVAILABILITY_ZONE_ID, 0),
-        (lambda: schemas.BOOLEAN, 0),
-        (lambda: schemas.STRING, {_sO: None, _smi: None}),
-        (SECONDARY_NETWORK_ID, {_sO: None, _smi: None}),
-        (lambda: schemas.TAG_SPECIFICATION_LIST, {_sN: _TS}),
-    ),
-)
-
-CREATE_SECONDARY_SUBNET_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _CSSO,
-    {_sSI: _cCSSRo, _smit: None},
-    (_SSe, _CTl),
-    (
-        (lambda: schemas.SECONDARY_SUBNET, {_aQN: _SSe, _sN: _sSe}),
-        (lambda: schemas.STRING, {_aQN: _CTl, _sN: _cTl}),
-    ),
-)
-
-CREATE_SECONDARY_SUBNET: StaticOperationSchema = (
-    23,
-    n0,
-    _CSS,
-    0,
-    CREATE_SECONDARY_SUBNET_INPUT,
-    CREATE_SECONDARY_SUBNET_OUTPUT,
-    (),
-)
-
-SECONDARY_SUBNET_CIDR_ASSOCIATION_ID: StaticSchema = (3, n0, _SSCAI, 0)
 
 ROUTE_SERVER_MAX_RESULTS: StaticSchema = (7, n0, _RSMR, 0)

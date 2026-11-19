@@ -36,6 +36,7 @@ _Ar = "Arn"
 _ARPD = "AssumeRolePolicyDocument"
 _D = "Description"
 _MSD = "MaxSessionDuration"
+_MSSD = "MaxSigninSessionDuration"
 _PB = "PermissionsBoundary"
 _Ta = "Tags"
 _OIDCPA = "OpenIDConnectProviderArn"
@@ -216,7 +217,6 @@ _CU = "CreateUser"
 _bOT = "booleanObjectType"
 _uLT = "userListType"
 _pOET = "policyOwnerEntityType"
-_pNLT = "policyNameListType"
 _pPTa = "pathPrefixType"
 
 ENTITY_TEMPORARILY_UNMODIFIABLE_MESSAGE: StaticSchema = (3, n0, _eTUM, 0)
@@ -552,11 +552,12 @@ CREATE_LOGIN_PROFILE_INPUT: StaticSchema = (
     n0,
     _CLPI,
     {_sSI: _cCLPR, _s: None},
-    (_UN, _Pas, _PRR),
+    (_UN, _Pas, _PRR, _MSSD),
     (
         (lambda: schemas.USER_NAME_TYPE, 0),
         (lambda: schemas.PASSWORD_TYPE, 0),
         (BOOLEAN_TYPE, {_smithy: False}),
+        (lambda: schemas.MAX_SIGNIN_SESSION_DURATION_TYPE, 0),
     ),
 )
 
@@ -590,11 +591,12 @@ LOGIN_PROFILE: StaticSchema = (
     n0,
     _LP,
     0,
-    (_UN, _CD, _PRR),
+    (_UN, _CD, _PRR, _MSSD),
     (
         (lambda: schemas.USER_NAME_TYPE, 1),
         (lambda: schemas.DATE_TYPE, 1),
         (BOOLEAN_TYPE, {_smithy: False}),
+        (lambda: schemas.MAX_SIGNIN_SESSION_DURATION_TYPE, 0),
     ),
 )
 
@@ -794,13 +796,14 @@ CREATE_ROLE_INPUT: StaticSchema = (
     n0,
     _CRI,
     {_sSI: _cCRR, _s: None},
-    (_Pa, _RN, _ARPD, _D, _MSD, _PB, _Ta),
+    (_Pa, _RN, _ARPD, _D, _MSD, _MSSD, _PB, _Ta),
     (
         (lambda: schemas.PATH_TYPE, 0),
         (lambda: schemas.ROLE_NAME_TYPE, 1),
         (lambda: schemas.POLICY_DOCUMENT_TYPE, 1),
         (lambda: schemas.ROLE_DESCRIPTION_TYPE, 0),
         (lambda: schemas.ROLE_MAX_SESSION_DURATION_TYPE, 0),
+        (lambda: schemas.MAX_SIGNIN_SESSION_DURATION_TYPE, 0),
         (lambda: schemas.ARN_TYPE, 0),
         (lambda: schemas.TAG_LIST_TYPE, 0),
     ),
@@ -1045,15 +1048,6 @@ POLICY_OWNER_ENTITY_TYPE: StaticSchema = (
     0,
     (_USER, _ROLE, _GROUP),
     ((-1, {_sV: _USER}), (-1, {_sV: _ROLE}), (-1, {_sV: _GROUP})),
-)
-
-POLICY_NAME_LIST_TYPE: StaticSchema = (
-    16,
-    n0,
-    _pNLT,
-    0,
-    (_me,),
-    ((lambda: schemas.POLICY_NAME_TYPE, 0),),
 )
 
 PATH_PREFIX_TYPE: StaticSchema = (3, n0, _pPTa, 0)

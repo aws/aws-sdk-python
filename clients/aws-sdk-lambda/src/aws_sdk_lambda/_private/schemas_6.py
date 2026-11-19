@@ -8,12 +8,14 @@ from . import schemas
 
 
 n0 = "com.amazonaws.lambda"
-_s = "smithy.api#default"
+_sV = "smithy.api#enumValue"
+_AC = "AcceleratorConfig"
+_s = "smithy.api#required"
+_sm = "smithy.api#default"
 _AL = "AccountLimit"
 _AU = "AccountUsage"
 _sSI = "smithy.synthetic#originalShapeId"
-_sm = "smithy.api#input"
-_smi = "smithy.api#required"
+_smi = "smithy.api#input"
 _sL = "smithy.api#httpLabel"
 _RI = "RevisionId"
 _sQ = "smithy.api#httpQuery"
@@ -40,12 +42,11 @@ _MI = "MaxItems"
 _NM = "NextMarker"
 _CSCA = "CodeSigningConfigArn"
 _sU = "smithy.api#Unit"
-_RAe = "ResourceArn"
+_READY = "READY"
+_FAILED = "FAILED"
 _Stat = "Status"
 _DC = "DurableConfig"
 _Tim = "Timeout"
-_DCe = "DestinationConfig"
-_MRA = "MaximumRetryAttempts"
 _CPC = "CapacityProviderConfig"
 _SB = "S3Bucket"
 _SK = "S3Key"
@@ -95,15 +96,33 @@ _RCEe = "ReservedConcurrentExecutions"
 _RL = "RecursiveLoop"
 _FSCu = "FunctionScalingConfig"
 _LMT = "LastModifiedTime"
-_Po = "Policy"
 _URO = "UpdateRuntimeOn"
 _DR = "DryRun"
+_LFUCI = "ListFunctionUrlConfigsInput"
+_cLFUCR = "com.amazonaws.lambda#ListFunctionUrlConfigsRequest"
+_FUC = "FunctionUrlConfig"
+_FUCL = "FunctionUrlConfigList"
+_LFUCO = "ListFunctionUrlConfigsOutput"
+_cLFUCRo = "com.amazonaws.lambda#ListFunctionUrlConfigsResponse"
+_FUCu = "FunctionUrlConfigs"
+_LFUC = "ListFunctionUrlConfigs"
+_MPCCLI = "MaxProvisionedConcurrencyConfigListItems"
+_LPCCI = "ListProvisionedConcurrencyConfigsInput"
+_cLPCCR = "com.amazonaws.lambda#ListProvisionedConcurrencyConfigsRequest"
+_NNI = "NonNegativeInteger"
+_PIo = "PositiveInteger"
+_PCSE = "ProvisionedConcurrencyStatusEnum"
+_IP_ = "IN_PROGRESS"
 _PCCLI = "ProvisionedConcurrencyConfigListItem"
 _RPCE = "RequestedProvisionedConcurrentExecutions"
 _APCE = "AvailableProvisionedConcurrentExecutions"
 _APCEl = "AllocatedProvisionedConcurrentExecutions"
 _SRt = "StatusReason"
 _PCCL = "ProvisionedConcurrencyConfigList"
+_LPCCO = "ListProvisionedConcurrencyConfigsOutput"
+_cLPCCRo = "com.amazonaws.lambda#ListProvisionedConcurrencyConfigsResponse"
+_PCC = "ProvisionedConcurrencyConfigs"
+_LPCC = "ListProvisionedConcurrencyConfigs"
 _PFCSCI = "PutFunctionCodeSigningConfigInput"
 _cPFCSCR = "com.amazonaws.lambda#PutFunctionCodeSigningConfigRequest"
 _PFCSCO = "PutFunctionCodeSigningConfigOutput"
@@ -181,17 +200,139 @@ _cGASR = "com.amazonaws.lambda#GetAccountSettingsRequest"
 _GASO = "GetAccountSettingsOutput"
 _cGASRo = "com.amazonaws.lambda#GetAccountSettingsResponse"
 _GAS = "GetAccountSettings"
-_GFEICI = "GetFunctionEventInvokeConfigInput"
-_cGFEICR = "com.amazonaws.lambda#GetFunctionEventInvokeConfigRequest"
-_MEAIS = "MaximumEventAgeInSeconds"
-_GFEICO = "GetFunctionEventInvokeConfigOutput"
-_cFEIC = "com.amazonaws.lambda#FunctionEventInvokeConfig"
-_GFEIC = "GetFunctionEventInvokeConfig"
-_GRPI = "GetResourcePolicyInput"
-_cGRPR = "com.amazonaws.lambda#GetResourcePolicyRequest"
-_GRPO = "GetResourcePolicyOutput"
-_cGRPRo = "com.amazonaws.lambda#GetResourcePolicyResponse"
-_GRP = "GetResourcePolicy"
+
+MAX_ITEMS: StaticSchema = (7, n0, _MI, 0)
+
+LIST_FUNCTION_URL_CONFIGS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _LFUCI,
+    {_sSI: _cLFUCR, _smi: None},
+    (_FN, _Mar, _MI),
+    (
+        (lambda: schemas.FUNCTION_URL_FUNCTION_NAME, 9),
+        (lambda: schemas.STRING, {_sQ: _Mar}),
+        (MAX_ITEMS, {_sQ: _MI}),
+    ),
+)
+
+LIST_FUNCTION_URL_CONFIGS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _LFUCO,
+    {_sSI: _cLFUCRo, _smit: None},
+    (_FUCu, _NM),
+    ((lambda: FUNCTION_URL_CONFIG_LIST, 1), (lambda: schemas.STRING, 0)),
+)
+
+LIST_FUNCTION_URL_CONFIGS: StaticOperationSchema = (
+    23,
+    n0,
+    _LFUC,
+    {
+        _smithy: MappingProxyType(
+            {
+                "method": "GET",
+                "uri": "/2021-10-31/functions/{FunctionName}/urls",
+                "code": 200,
+            }
+        )
+    },
+    LIST_FUNCTION_URL_CONFIGS_INPUT,
+    LIST_FUNCTION_URL_CONFIGS_OUTPUT,
+    (
+        lambda: schemas.INVALID_PARAMETER_VALUE_EXCEPTION,
+        lambda: schemas.RESOURCE_NOT_FOUND_EXCEPTION,
+        lambda: schemas.SERVICE_EXCEPTION,
+        lambda: schemas.TOO_MANY_REQUESTS_EXCEPTION,
+    ),
+)
+
+FUNCTION_URL_CONFIG: StaticSchema = (
+    18,
+    n0,
+    _FUC,
+    0,
+    (_FU, _FA, _CTr, _LMT, _Cor, _ATu, _IM),
+    (
+        (lambda: schemas.FUNCTION_URL, 1),
+        (lambda: schemas.FUNCTION_ARN, 1),
+        (lambda: schemas.TIMESTAMP, 1),
+        (lambda: schemas.TIMESTAMP, 1),
+        (lambda: schemas.CORS, 0),
+        (lambda: schemas.FUNCTION_URL_AUTH_TYPE, 1),
+        (lambda: schemas.INVOKE_MODE, 0),
+    ),
+)
+
+FUNCTION_URL_CONFIG_LIST: StaticSchema = (
+    16,
+    n0,
+    _FUCL,
+    0,
+    (_me,),
+    ((FUNCTION_URL_CONFIG, 0),),
+)
+
+MAX_PROVISIONED_CONCURRENCY_CONFIG_LIST_ITEMS: StaticSchema = (7, n0, _MPCCLI, 0)
+
+LIST_PROVISIONED_CONCURRENCY_CONFIGS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _LPCCI,
+    {_sSI: _cLPCCR, _smi: None},
+    (_FN, _Mar, _MI),
+    (
+        (lambda: schemas.FUNCTION_NAME, 9),
+        (lambda: schemas.STRING, {_sQ: _Mar}),
+        (MAX_PROVISIONED_CONCURRENCY_CONFIG_LIST_ITEMS, {_sQ: _MI}),
+    ),
+)
+
+LIST_PROVISIONED_CONCURRENCY_CONFIGS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _LPCCO,
+    {_sSI: _cLPCCRo, _smit: None},
+    (_PCC, _NM),
+    ((lambda: PROVISIONED_CONCURRENCY_CONFIG_LIST, 0), (lambda: schemas.STRING, 0)),
+)
+
+LIST_PROVISIONED_CONCURRENCY_CONFIGS: StaticOperationSchema = (
+    23,
+    n0,
+    _LPCC,
+    {
+        _smithy: MappingProxyType(
+            {
+                "method": "GET",
+                "uri": "/2019-09-30/functions/{FunctionName}/provisioned-concurrency?List=ALL",
+                "code": 200,
+            }
+        )
+    },
+    LIST_PROVISIONED_CONCURRENCY_CONFIGS_INPUT,
+    LIST_PROVISIONED_CONCURRENCY_CONFIGS_OUTPUT,
+    (
+        lambda: schemas.INVALID_PARAMETER_VALUE_EXCEPTION,
+        lambda: schemas.RESOURCE_NOT_FOUND_EXCEPTION,
+        lambda: schemas.SERVICE_EXCEPTION,
+        lambda: schemas.TOO_MANY_REQUESTS_EXCEPTION,
+    ),
+)
+
+NON_NEGATIVE_INTEGER: StaticSchema = (7, n0, _NNI, 0)
+
+POSITIVE_INTEGER: StaticSchema = (7, n0, _PIo, 0)
+
+PROVISIONED_CONCURRENCY_STATUS_ENUM: StaticSchema = (
+    14,
+    n0,
+    _PCSE,
+    0,
+    (_IP_, _READY, _FAILED),
+    ((-1, {_sV: _IP_}), (-1, {_sV: _READY}), (-1, {_sV: _FAILED})),
+)
 
 PROVISIONED_CONCURRENCY_CONFIG_LIST_ITEM: StaticSchema = (
     18,
@@ -201,10 +342,10 @@ PROVISIONED_CONCURRENCY_CONFIG_LIST_ITEM: StaticSchema = (
     (_FA, _RPCE, _APCE, _APCEl, _Stat, _SRt, _LM),
     (
         (lambda: schemas.FUNCTION_ARN, 0),
-        (lambda: schemas.POSITIVE_INTEGER, 0),
-        (lambda: schemas.NON_NEGATIVE_INTEGER, 0),
-        (lambda: schemas.NON_NEGATIVE_INTEGER, 0),
-        (lambda: schemas.PROVISIONED_CONCURRENCY_STATUS_ENUM, 0),
+        (POSITIVE_INTEGER, 0),
+        (NON_NEGATIVE_INTEGER, 0),
+        (NON_NEGATIVE_INTEGER, 0),
+        (PROVISIONED_CONCURRENCY_STATUS_ENUM, 0),
         (lambda: schemas.STRING, 0),
         (lambda: schemas.TIMESTAMP, 0),
     ),
@@ -223,7 +364,7 @@ PUT_FUNCTION_CODE_SIGNING_CONFIG_INPUT: StaticSchema = (
     18,
     n0,
     _PFCSCI,
-    {_sSI: _cPFCSCR, _sm: None},
+    {_sSI: _cPFCSCR, _smi: None},
     (_CSCA, _FN),
     (
         (lambda: schemas.CODE_SIGNING_CONFIG_ARN, 1),
@@ -269,7 +410,7 @@ PUT_FUNCTION_CONCURRENCY_INPUT: StaticSchema = (
     18,
     n0,
     _PFCI,
-    {_sSI: _cPFCR, _sm: None},
+    {_sSI: _cPFCR, _smi: None},
     (_FN, _RCEe),
     (
         (lambda: schemas.FUNCTION_NAME, 9),
@@ -314,7 +455,7 @@ PUT_FUNCTION_RECURSION_CONFIG_INPUT: StaticSchema = (
     18,
     n0,
     _PFRCI,
-    {_sSI: _cPFRCR, _sm: None},
+    {_sSI: _cPFRCR, _smi: None},
     (_FN, _RL),
     (
         (lambda: schemas.UNQUALIFIED_FUNCTION_NAME, 9),
@@ -359,11 +500,11 @@ PUT_FUNCTION_SCALING_CONFIG_INPUT: StaticSchema = (
     18,
     n0,
     _PFSCI,
-    {_sSI: _cPFSCR, _sm: None},
+    {_sSI: _cPFSCR, _smi: None},
     (_FN, _Q, _FSCu),
     (
         (lambda: schemas.UNQUALIFIED_FUNCTION_NAME, 9),
-        (lambda: schemas.PUBLISHED_FUNCTION_QUALIFIER, {_sQ: _Q, _smi: None}),
+        (lambda: schemas.PUBLISHED_FUNCTION_QUALIFIER, {_sQ: _Q, _s: None}),
         (lambda: schemas.FUNCTION_SCALING_CONFIG, 0),
     ),
 )
@@ -405,7 +546,7 @@ PUT_RUNTIME_MANAGEMENT_CONFIG_INPUT: StaticSchema = (
     18,
     n0,
     _PRMCI,
-    {_sSI: _cPRMCR, _sm: None},
+    {_sSI: _cPRMCR, _smi: None},
     (_FN, _Q, _URO, _RVA),
     (
         (lambda: schemas.NAMESPACED_FUNCTION_NAME, 9),
@@ -456,7 +597,7 @@ UPDATE_FUNCTION_CODE_INPUT: StaticSchema = (
     18,
     n0,
     _UFCI,
-    {_sSI: _cUFCR, _sm: None},
+    {_sSI: _cUFCR, _smi: None},
     (_FN, _ZF, _SB, _SK, _SOV, _SOSM, _IU, _Arch, _Pu, _PTu, _DR, _RI, _SKMSKA),
     (
         (lambda: schemas.FUNCTION_NAME, 9),
@@ -467,9 +608,9 @@ UPDATE_FUNCTION_CODE_INPUT: StaticSchema = (
         (lambda: schemas.S3_OBJECT_STORAGE_MODE, 0),
         (lambda: schemas.STRING, 0),
         (lambda: schemas.ARCHITECTURES_LIST, 0),
-        (lambda: schemas.BOOLEAN, {_s: False}),
+        (lambda: schemas.BOOLEAN, {_sm: False}),
         (lambda: schemas.FUNCTION_VERSION_LATEST_PUBLISHED, 0),
-        (lambda: schemas.BOOLEAN, {_s: False}),
+        (lambda: schemas.BOOLEAN, {_sm: False}),
         (lambda: schemas.STRING, 0),
         (lambda: schemas.KMS_KEY_ARN, 0),
     ),
@@ -522,6 +663,7 @@ UPDATE_FUNCTION_CODE_OUTPUT: StaticSchema = (
         _CSon,
         _DC,
         _RCu,
+        _AC,
     ),
     (
         (lambda: schemas.NAMESPACED_FUNCTION_NAME, 0),
@@ -529,7 +671,7 @@ UPDATE_FUNCTION_CODE_OUTPUT: StaticSchema = (
         (lambda: schemas.RUNTIME, 0),
         (lambda: schemas.ROLE_ARN, 0),
         (lambda: schemas.HANDLER, 0),
-        (lambda: schemas.LONG, {_s: 0}),
+        (lambda: schemas.LONG, {_sm: 0}),
         (lambda: schemas.DESCRIPTION, 0),
         (lambda: schemas.TIMEOUT, 0),
         (lambda: schemas.MEMORY_SIZE, 0),
@@ -565,6 +707,7 @@ UPDATE_FUNCTION_CODE_OUTPUT: StaticSchema = (
         (lambda: schemas.STRING, 0),
         (lambda: schemas.DURABLE_CONFIG, 0),
         (lambda: schemas.FUNCTION_RUNTIME_CONFIG, 0),
+        (lambda: schemas.ACCELERATOR_CONFIG, 0),
     ),
 )
 
@@ -601,7 +744,7 @@ UPDATE_FUNCTION_CONFIGURATION_INPUT: StaticSchema = (
     18,
     n0,
     _UFCIp,
-    {_sSI: _cUFCRo, _sm: None},
+    {_sSI: _cUFCRo, _smi: None},
     (
         _FN,
         _Ro,
@@ -625,6 +768,7 @@ UPDATE_FUNCTION_CONFIGURATION_INPUT: StaticSchema = (
         _CPC,
         _DC,
         _RCu,
+        _AC,
     ),
     (
         (lambda: schemas.FUNCTION_NAME, 9),
@@ -649,6 +793,7 @@ UPDATE_FUNCTION_CONFIGURATION_INPUT: StaticSchema = (
         (lambda: schemas.CAPACITY_PROVIDER_CONFIG, 0),
         (lambda: schemas.DURABLE_CONFIG, 0),
         (lambda: schemas.FUNCTION_RUNTIME_CONFIG, 0),
+        (lambda: schemas.ACCELERATOR_CONFIG, 0),
     ),
 )
 
@@ -699,6 +844,7 @@ UPDATE_FUNCTION_CONFIGURATION_OUTPUT: StaticSchema = (
         _CSon,
         _DC,
         _RCu,
+        _AC,
     ),
     (
         (lambda: schemas.NAMESPACED_FUNCTION_NAME, 0),
@@ -706,7 +852,7 @@ UPDATE_FUNCTION_CONFIGURATION_OUTPUT: StaticSchema = (
         (lambda: schemas.RUNTIME, 0),
         (lambda: schemas.ROLE_ARN, 0),
         (lambda: schemas.HANDLER, 0),
-        (lambda: schemas.LONG, {_s: 0}),
+        (lambda: schemas.LONG, {_sm: 0}),
         (lambda: schemas.DESCRIPTION, 0),
         (lambda: schemas.TIMEOUT, 0),
         (lambda: schemas.MEMORY_SIZE, 0),
@@ -742,6 +888,7 @@ UPDATE_FUNCTION_CONFIGURATION_OUTPUT: StaticSchema = (
         (lambda: schemas.STRING, 0),
         (lambda: schemas.DURABLE_CONFIG, 0),
         (lambda: schemas.FUNCTION_RUNTIME_CONFIG, 0),
+        (lambda: schemas.ACCELERATOR_CONFIG, 0),
     ),
 )
 
@@ -777,7 +924,7 @@ UPDATE_FUNCTION_URL_CONFIG_INPUT: StaticSchema = (
     18,
     n0,
     _UFUCI,
-    {_sSI: _cUFUCR, _sm: None},
+    {_sSI: _cUFUCR, _smi: None},
     (_FN, _Q, _ATu, _Cor, _IM),
     (
         (lambda: schemas.FUNCTION_URL_FUNCTION_NAME, 9),
@@ -833,7 +980,7 @@ CREATE_ALIAS_INPUT: StaticSchema = (
     18,
     n0,
     _CAI,
-    {_sSI: _cCAR, _sm: None},
+    {_sSI: _cCAR, _smi: None},
     (_FN, _N, _FV, _D, _RC),
     (
         (lambda: schemas.FUNCTION_NAME, 9),
@@ -889,7 +1036,7 @@ DELETE_ALIAS_INPUT: StaticSchema = (
     18,
     n0,
     _DAI,
-    {_sSI: _cDAR, _sm: None},
+    {_sSI: _cDAR, _smi: None},
     (_FN, _N),
     ((lambda: schemas.FUNCTION_NAME, 9), (lambda: schemas.ALIAS, 9)),
 )
@@ -924,7 +1071,7 @@ GET_ALIAS_INPUT: StaticSchema = (
     18,
     n0,
     _GAI,
-    {_sSI: _cGAR, _sm: None},
+    {_sSI: _cGAR, _smi: None},
     (_FN, _N),
     ((lambda: schemas.FUNCTION_NAME, 9), (lambda: schemas.ALIAS, 9)),
 )
@@ -972,7 +1119,7 @@ LIST_ALIASES_INPUT: StaticSchema = (
     18,
     n0,
     _LAI,
-    {_sSI: _cLAR, _sm: None},
+    {_sSI: _cLAR, _smi: None},
     (_FN, _FV, _Mar, _MI),
     (
         (lambda: schemas.FUNCTION_NAME, 9),
@@ -1018,7 +1165,7 @@ UPDATE_ALIAS_INPUT: StaticSchema = (
     18,
     n0,
     _UAI,
-    {_sSI: _cUAR, _sm: None},
+    {_sSI: _cUAR, _smi: None},
     (_FN, _N, _FV, _D, _RC, _RI),
     (
         (lambda: schemas.FUNCTION_NAME, 9),
@@ -1075,7 +1222,7 @@ LIST_VERSIONS_BY_FUNCTION_INPUT: StaticSchema = (
     18,
     n0,
     _LVBFI,
-    {_sSI: _cLVBFR, _sm: None},
+    {_sSI: _cLVBFR, _smi: None},
     (_FN, _Mar, _MI),
     (
         (lambda: schemas.NAMESPACED_FUNCTION_NAME, 9),
@@ -1120,7 +1267,7 @@ PUBLISH_VERSION_INPUT: StaticSchema = (
     18,
     n0,
     _PVI,
-    {_sSI: _cPVR, _sm: None},
+    {_sSI: _cPVR, _smi: None},
     (_FN, _CSode, _D, _RI, _PTu),
     (
         (lambda: schemas.FUNCTION_NAME, 9),
@@ -1178,6 +1325,7 @@ PUBLISH_VERSION_OUTPUT: StaticSchema = (
         _CSon,
         _DC,
         _RCu,
+        _AC,
     ),
     (
         (lambda: schemas.NAMESPACED_FUNCTION_NAME, 0),
@@ -1185,7 +1333,7 @@ PUBLISH_VERSION_OUTPUT: StaticSchema = (
         (lambda: schemas.RUNTIME, 0),
         (lambda: schemas.ROLE_ARN, 0),
         (lambda: schemas.HANDLER, 0),
-        (lambda: schemas.LONG, {_s: 0}),
+        (lambda: schemas.LONG, {_sm: 0}),
         (lambda: schemas.DESCRIPTION, 0),
         (lambda: schemas.TIMEOUT, 0),
         (lambda: schemas.MEMORY_SIZE, 0),
@@ -1221,6 +1369,7 @@ PUBLISH_VERSION_OUTPUT: StaticSchema = (
         (lambda: schemas.STRING, 0),
         (lambda: schemas.DURABLE_CONFIG, 0),
         (lambda: schemas.FUNCTION_RUNTIME_CONFIG, 0),
+        (lambda: schemas.ACCELERATOR_CONFIG, 0),
     ),
 )
 
@@ -1253,7 +1402,7 @@ PUBLISH_VERSION: StaticOperationSchema = (
     ),
 )
 
-GET_ACCOUNT_SETTINGS_INPUT: StaticSchema = (18, n0, _GASI, {_sSI: _cGASR, _sm: None})
+GET_ACCOUNT_SETTINGS_INPUT: StaticSchema = (18, n0, _GASI, {_sSI: _cGASR, _smi: None})
 
 GET_ACCOUNT_SETTINGS_OUTPUT: StaticSchema = (
     18,
@@ -1276,99 +1425,4 @@ GET_ACCOUNT_SETTINGS: StaticOperationSchema = (
     GET_ACCOUNT_SETTINGS_INPUT,
     GET_ACCOUNT_SETTINGS_OUTPUT,
     (lambda: schemas.SERVICE_EXCEPTION, lambda: schemas.TOO_MANY_REQUESTS_EXCEPTION),
-)
-
-GET_FUNCTION_EVENT_INVOKE_CONFIG_INPUT: StaticSchema = (
-    18,
-    n0,
-    _GFEICI,
-    {_sSI: _cGFEICR, _sm: None},
-    (_FN, _Q),
-    (
-        (lambda: schemas.NAMESPACED_FUNCTION_NAME, 9),
-        (lambda: schemas.NUMERIC_LATEST_PUBLISHED_OR_ALIAS_QUALIFIER, {_sQ: _Q}),
-    ),
-)
-
-GET_FUNCTION_EVENT_INVOKE_CONFIG_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _GFEICO,
-    {_sSI: _cFEIC, _smit: None},
-    (_LM, _FA, _MRA, _MEAIS, _DCe),
-    (
-        (lambda: schemas.DATE, 0),
-        (lambda: schemas.FUNCTION_ARN, 0),
-        (lambda: MAXIMUM_RETRY_ATTEMPTS, 0),
-        (lambda: MAXIMUM_EVENT_AGE_IN_SECONDS, 0),
-        (lambda: schemas.DESTINATION_CONFIG, 0),
-    ),
-)
-
-GET_FUNCTION_EVENT_INVOKE_CONFIG: StaticOperationSchema = (
-    23,
-    n0,
-    _GFEIC,
-    {
-        _smithy: MappingProxyType(
-            {
-                "method": "GET",
-                "uri": "/2019-09-25/functions/{FunctionName}/event-invoke-config",
-                "code": 200,
-            }
-        )
-    },
-    GET_FUNCTION_EVENT_INVOKE_CONFIG_INPUT,
-    GET_FUNCTION_EVENT_INVOKE_CONFIG_OUTPUT,
-    (
-        lambda: schemas.INVALID_PARAMETER_VALUE_EXCEPTION,
-        lambda: schemas.RESOURCE_NOT_FOUND_EXCEPTION,
-        lambda: schemas.SERVICE_EXCEPTION,
-        lambda: schemas.TOO_MANY_REQUESTS_EXCEPTION,
-    ),
-)
-
-MAXIMUM_EVENT_AGE_IN_SECONDS: StaticSchema = (7, n0, _MEAIS, 0)
-
-MAXIMUM_RETRY_ATTEMPTS: StaticSchema = (7, n0, _MRA, 0)
-
-GET_RESOURCE_POLICY_INPUT: StaticSchema = (
-    18,
-    n0,
-    _GRPI,
-    {_sSI: _cGRPR, _sm: None},
-    (_RAe,),
-    ((lambda: schemas.POLICY_RESOURCE_ARN, 9),),
-)
-
-GET_RESOURCE_POLICY_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _GRPO,
-    {_sSI: _cGRPRo, _smit: None},
-    (_Po, _RI),
-    ((lambda: schemas.RESOURCE_POLICY, 0), (lambda: schemas.REVISION_ID, 0)),
-)
-
-GET_RESOURCE_POLICY: StaticOperationSchema = (
-    23,
-    n0,
-    _GRP,
-    {
-        _smithy: MappingProxyType(
-            {
-                "method": "GET",
-                "uri": "/2026-07-09/resource-policy/{ResourceArn}",
-                "code": 200,
-            }
-        )
-    },
-    GET_RESOURCE_POLICY_INPUT,
-    GET_RESOURCE_POLICY_OUTPUT,
-    (
-        lambda: schemas.INVALID_PARAMETER_VALUE_EXCEPTION,
-        lambda: schemas.RESOURCE_NOT_FOUND_EXCEPTION,
-        lambda: schemas.SERVICE_EXCEPTION,
-        lambda: schemas.TOO_MANY_REQUESTS_EXCEPTION,
-    ),
 )

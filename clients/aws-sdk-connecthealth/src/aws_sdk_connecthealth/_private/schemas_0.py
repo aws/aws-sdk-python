@@ -49,23 +49,40 @@ _PSAGS = "PostStreamArtifactGenerationStatus"
 _IP = "IN_PROGRESS"
 _FAILED = "FAILED"
 _COMPLETED = "COMPLETED"
+_PENDING = "PENDING"
+_SKIPPED = "SKIPPED"
 _AD = "ArtifactDetails"
 _oL = "outputLocation"
 _fR = "failureReason"
+_ASIr = "ArtifactSourceId"
 _AC = "AudioChunk"
 _AO = "AudioOffset"
+_BSS = "BoundedSafeString"
+_CI = "ChecklistId"
+_CIK = "ChecklistItemKey"
+_smithy = "smithy.api#sensitive"
+_CIS = "ChecklistItemStatus"
+_DISCUSSED = "DISCUSSED"
+_PD = "PARTIALLY_DISCUSSED"
+_ND = "NOT_DISCUSSED"
+_CIh = "ChecklistItem"
+_iK = "itemKey"
+_CIL = "ChecklistItemList"
+_me = "member"
+_C = "Checklist"
+_cI = "checklistId"
+_i = "items"
+_CL = "ChecklistList"
 _CNGR = "ClinicalNoteGenerationResult"
 _nR = "noteResult"
 _tR = "transcriptResult"
 _aVSR = "afterVisitSummaryResult"
 _SSHS = "SensitiveSectionHeaderString"
-_smithy = "smithy.api#sensitive"
 _SMS = "SensitiveMarkdownString"
 _TSI = "TemplateSectionInstruction"
 _sH = "sectionHeader"
 _sIe = "sectionInstruction"
 _TI = "TemplateInstructions"
-_me = "member"
 _CTB = "CustomTemplateBase"
 _HAP = "HISTORY_AND_PHYSICAL"
 _GIRPP = "GIRPP"
@@ -89,6 +106,32 @@ _MTR = "ManagedTemplateResponse"
 _NTSR = "NoteTemplateSettingsResponse"
 _CNGSR = "ClinicalNoteGenerationSettingsResponse"
 _CE = "ConflictException"
+_SU = "S3Uri"
+_MCDC = "MedicalCodingDatasetConfig"
+_sIP = "s3InputPath"
+_sOP = "s3OutputPath"
+_DC = "DatasetConfig"
+_mC = "medicalCoding"
+_CDI = "CreateDatasetInput"
+_n = "name"
+_co = "config"
+_cTl = "clientToken"
+_sT = "smithy.api#idempotencyToken"
+_DA = "DatasetArn"
+_DIa = "DatasetId"
+_DS = "DatasetStatus"
+_CREATING = "CREATING"
+_CF = "CREATE_FAILED"
+_DELETING = "DELETING"
+_DF = "DELETE_FAILED"
+_DT = "DatasetType"
+_MC = "MEDICAL_CODING"
+_CDO = "CreateDatasetOutput"
+_dIa = "datasetId"
+_t = "type"
+_SQEE = "ServiceQuotaExceededException"
+_TE = "ThrottlingException"
+_CD = "CreateDataset"
 _KKA = "KmsKeyArn"
 _DN = "DomainName"
 _TK = "TagKey"
@@ -100,75 +143,43 @@ _CWAC = "CreateWebAppConfiguration"
 _eR = "ehrRole"
 _iII = "idcInstanceId"
 _iR = "idcRegion"
-_CDI = "CreateDomainInput"
-_n = "name"
+_CDIr = "CreateDomainInput"
 _kKA = "kmsKeyArn"
 _wASC = "webAppSetupConfiguration"
-_t = "tags"
-_DA = "DomainArn"
+_ta = "tags"
+_DAo = "DomainArn"
 _ET = "EncryptionType"
 _AOK = "AWS_OWNED_KEY"
 _CMK = "CUSTOMER_MANAGED_KEY"
 _EC = "EncryptionContext"
 _eT = "encryptionType"
-_DS = "DomainStatus"
-_DELETING = "DELETING"
+_DSo = "DomainStatus"
 _WAC = "WebAppConfiguration"
 _iAI = "idcApplicationId"
 _WAU = "WebAppUrl"
-_CDO = "CreateDomainOutput"
+_CDOr = "CreateDomainOutput"
 _eC = "encryptionContext"
 _wAU = "webAppUrl"
 _wAC = "webAppConfiguration"
-_SQEE = "ServiceQuotaExceededException"
-_CD = "CreateDomain"
+_CDr = "CreateDomain"
 _CSI = "CreateSubscriptionInput"
 _CSO = "CreateSubscriptionOutput"
 _CS = "CreateSubscription"
 _DSI = "DeactivateSubscriptionInput"
 _DSO = "DeactivateSubscriptionOutput"
 _DSe = "DeactivateSubscription"
-_DDI = "DeleteDomainInput"
-_DDO = "DeleteDomainOutput"
-_DD = "DeleteDomain"
-_GDI = "GetDomainInput"
-_GDO = "GetDomainOutput"
-_GD = "GetDomain"
-_SSI = "ScribeSessionId"
-_GMSLSI = "GetMedicalScribeListeningSessionInput"
-_sIes = "sessionId"
-_MSCI = "MedicalScribeChannelId"
-_MSPR = "MedicalScribeParticipantRole"
-_PATIENT = "PATIENT"
-_CLINICIAN = "CLINICIAN"
-_MSCD = "MedicalScribeChannelDefinition"
-_cI = "channelId"
-_pR = "participantRole"
-_MSCDe = "MedicalScribeChannelDefinitions"
-_NNB = "NonNullBoolean"
-_MSLC = "MedicalScribeLanguageCode"
-_EU = "EN_US"
-_eU = "en-US"
-_MULTI = "MULTI"
-_mu = "multi"
-_MSME = "MedicalScribeMediaEncoding"
-_PCM = "PCM"
-_p = "pcm"
-_FLAC = "FLAC"
-_f = "flac"
-_MSMSRH = "MedicalScribeMediaSampleRateHertz"
-_MSPSAR = "MedicalScribePostStreamActionsResult"
-_cNGR = "clinicalNoteGenerationResult"
-_SU = "S3Uri"
-_MSPSASR = "MedicalScribePostStreamActionSettingsResponse"
-_oSU = "outputS3Uri"
-_cNGS = "clinicalNoteGenerationSettings"
-_MSSS = "MedicalScribeStreamStatus"
-_PAUSED = "PAUSED"
-_GMSLSO = "GetMedicalScribeListeningSessionOutput"
-_mSLSD = "medicalScribeListeningSessionDetails"
-_GMSLS = "GetMedicalScribeListeningSession"
-_smithya = "smithy.api#endpoint"
+_DDI = "DeleteDatasetInput"
+_DDO = "DeleteDatasetOutput"
+_DD = "DeleteDataset"
+_DDIe = "DeleteDomainInput"
+_DDOe = "DeleteDomainOutput"
+_DDe = "DeleteDomain"
+_GDI = "GetDatasetInput"
+_GDO = "GetDatasetOutput"
+_sD = "statusDetails"
+_ar = "artifacts"
+_uA = "updatedAt"
+_GD = "GetDataset"
 
 ACCESS_DENIED_EXCEPTION: StaticSchema = (
     18,
@@ -282,8 +293,14 @@ POST_STREAM_ARTIFACT_GENERATION_STATUS: StaticSchema = (
     n0,
     _PSAGS,
     0,
-    (_IP, _FAILED, _COMPLETED),
-    ((-1, {_sV: _IP}), (-1, {_sV: _FAILED}), (-1, {_sV: _COMPLETED})),
+    (_IP, _FAILED, _COMPLETED, _PENDING, _SKIPPED),
+    (
+        (-1, {_sV: _IP}),
+        (-1, {_sV: _FAILED}),
+        (-1, {_sV: _COMPLETED}),
+        (-1, {_sV: _PENDING}),
+        (-1, {_sV: _SKIPPED}),
+    ),
 )
 
 ARTIFACT_DETAILS: StaticSchema = (
@@ -295,9 +312,48 @@ ARTIFACT_DETAILS: StaticSchema = (
     ((URI, 0), (POST_STREAM_ARTIFACT_GENERATION_STATUS, 0), (ERROR_MESSAGE, 0)),
 )
 
+ARTIFACT_SOURCE_ID: StaticSchema = (3, n0, _ASIr, 0)
+
 AUDIO_CHUNK: StaticSchema = (1, n0, _AC, 0)
 
 AUDIO_OFFSET: StaticSchema = (10, n0, _AO, 0)
+
+BOUNDED_SAFE_STRING: StaticSchema = (3, n0, _BSS, 0)
+
+CHECKLIST_ID: StaticSchema = (3, n0, _CI, 0)
+
+CHECKLIST_ITEM_KEY: StaticSchema = (3, n0, _CIK, 4)
+
+CHECKLIST_ITEM_STATUS: StaticSchema = (
+    14,
+    n0,
+    _CIS,
+    0,
+    (_DISCUSSED, _PD, _ND),
+    ((-1, {_sV: _DISCUSSED}), (-1, {_sV: _PD}), (-1, {_sV: _ND})),
+)
+
+CHECKLIST_ITEM: StaticSchema = (
+    18,
+    n0,
+    _CIh,
+    0,
+    (_iK, _st),
+    ((CHECKLIST_ITEM_KEY, 1), (CHECKLIST_ITEM_STATUS, 1)),
+)
+
+CHECKLIST_ITEM_LIST: StaticSchema = (16, n0, _CIL, 0, (_me,), ((CHECKLIST_ITEM, 0),))
+
+CHECKLIST: StaticSchema = (
+    18,
+    n0,
+    _C,
+    0,
+    (_cI, _i),
+    ((CHECKLIST_ID, 1), (CHECKLIST_ITEM_LIST, 1)),
+)
+
+CHECKLIST_LIST: StaticSchema = (16, n0, _CL, 0, (_me,), ((CHECKLIST, 0),))
 
 CLINICAL_NOTE_GENERATION_RESULT: StaticSchema = (
     18,
@@ -430,6 +486,105 @@ CLINICAL_NOTE_GENERATION_SETTINGS_RESPONSE: StaticSchema = (
 
 CONFLICT_EXCEPTION: StaticSchema = (18, n0, _CE, {_s: _c, _sE: 409}, (_m,), ((3, 0),))
 
+S3_URI: StaticSchema = (3, n0, _SU, 0)
+
+MEDICAL_CODING_DATASET_CONFIG: StaticSchema = (
+    18,
+    n0,
+    _MCDC,
+    0,
+    (_sIP, _sOP),
+    ((S3_URI, 1), (S3_URI, 1)),
+)
+
+DATASET_CONFIG: StaticSchema = (
+    19,
+    n0,
+    _DC,
+    0,
+    (_mC,),
+    ((MEDICAL_CODING_DATASET_CONFIG, 0),),
+)
+
+CREATE_DATASET_INPUT: StaticSchema = (
+    18,
+    n0,
+    _CDI,
+    {_sm: None},
+    (_dI, _n, _co, _cTl),
+    ((DOMAIN_ID, 9), (BOUNDED_SAFE_STRING, 1), (DATASET_CONFIG, 1), (3, 2)),
+)
+
+CREATE_DATASET_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _CDO,
+    {_smit: None},
+    (_a, _dIa, _t, _st, _cA),
+    (
+        (lambda: DATASET_ARN, 1),
+        (lambda: DATASET_ID, 1),
+        (lambda: DATASET_TYPE, 1),
+        (lambda: DATASET_STATUS, 1),
+        (4, 1),
+    ),
+)
+
+CREATE_DATASET: StaticOperationSchema = (
+    23,
+    n0,
+    _CD,
+    {
+        _smith: MappingProxyType(
+            {"code": 201, "method": "POST", "uri": "/domains/{domainId}/datasets"}
+        )
+    },
+    CREATE_DATASET_INPUT,
+    CREATE_DATASET_OUTPUT,
+    (
+        ACCESS_DENIED_EXCEPTION,
+        CONFLICT_EXCEPTION,
+        INTERNAL_SERVER_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        lambda: SERVICE_QUOTA_EXCEEDED_EXCEPTION,
+        lambda: THROTTLING_EXCEPTION,
+        VALIDATION_EXCEPTION,
+    ),
+)
+
+DATASET_ARN: StaticSchema = (3, n0, _DA, 0)
+
+DATASET_ID: StaticSchema = (3, n0, _DIa, 0)
+
+DATASET_STATUS: StaticSchema = (
+    14,
+    n0,
+    _DS,
+    0,
+    (_CREATING, _ACTIVE, _CF, _DELETING, _DF, _DELETED),
+    (
+        (-1, {_sV: _CREATING}),
+        (-1, {_sV: _ACTIVE}),
+        (-1, {_sV: _CF}),
+        (-1, {_sV: _DELETING}),
+        (-1, {_sV: _DF}),
+        (-1, {_sV: _DELETED}),
+    ),
+)
+
+DATASET_TYPE: StaticSchema = (14, n0, _DT, 0, (_MC,), ((-1, {_sV: _MC}),))
+
+SERVICE_QUOTA_EXCEEDED_EXCEPTION: StaticSchema = (
+    18,
+    n0,
+    _SQEE,
+    {_s: _c, _sE: 402},
+    (_m,),
+    ((3, 0),),
+)
+
+THROTTLING_EXCEPTION: StaticSchema = (18, n0, _TE, {_s: _c, _sE: 429}, (_m,), ((3, 0),))
+
 KMS_KEY_ARN: StaticSchema = (3, n0, _KKA, 0)
 
 DOMAIN_NAME: StaticSchema = (3, n0, _DN, 0)
@@ -452,9 +607,9 @@ CREATE_WEB_APP_CONFIGURATION: StaticSchema = (
 CREATE_DOMAIN_INPUT: StaticSchema = (
     18,
     n0,
-    _CDI,
+    _CDIr,
     {_sm: None},
-    (_n, _kKA, _wASC, _t),
+    (_n, _kKA, _wASC, _ta),
     (
         (DOMAIN_NAME, 1),
         (KMS_KEY_ARN, 0),
@@ -466,7 +621,7 @@ CREATE_DOMAIN_INPUT: StaticSchema = (
 CREATE_DOMAIN_OUTPUT: StaticSchema = (
     18,
     n0,
-    _CDO,
+    _CDOr,
     {_smit: None},
     (_dI, _a, _n, _kKA, _eC, _st, _wAU, _wAC, _cA),
     (
@@ -485,14 +640,14 @@ CREATE_DOMAIN_OUTPUT: StaticSchema = (
 CREATE_DOMAIN: StaticOperationSchema = (
     23,
     n0,
-    _CD,
+    _CDr,
     {_smith: MappingProxyType({"method": "POST", "uri": "/domain", "code": 201})},
     CREATE_DOMAIN_INPUT,
     CREATE_DOMAIN_OUTPUT,
-    (lambda: SERVICE_QUOTA_EXCEEDED_EXCEPTION,),
+    (SERVICE_QUOTA_EXCEEDED_EXCEPTION,),
 )
 
-DOMAIN_ARN: StaticSchema = (3, n0, _DA, 0)
+DOMAIN_ARN: StaticSchema = (3, n0, _DAo, 0)
 
 ENCRYPTION_TYPE: StaticSchema = (
     14,
@@ -515,7 +670,7 @@ ENCRYPTION_CONTEXT: StaticSchema = (
 DOMAIN_STATUS: StaticSchema = (
     14,
     n0,
-    _DS,
+    _DSo,
     0,
     (_ACTIVE, _DELETING, _DELETED),
     ((-1, {_sV: _ACTIVE}), (-1, {_sV: _DELETING}), (-1, {_sV: _DELETED})),
@@ -531,15 +686,6 @@ WEB_APP_CONFIGURATION: StaticSchema = (
 )
 
 WEB_APP_URL: StaticSchema = (3, n0, _WAU, 0)
-
-SERVICE_QUOTA_EXCEEDED_EXCEPTION: StaticSchema = (
-    18,
-    n0,
-    _SQEE,
-    {_s: _c, _sE: 402},
-    (_m,),
-    ((3, 0),),
-)
 
 CREATE_SUBSCRIPTION_INPUT: StaticSchema = (
     18,
@@ -629,10 +775,53 @@ DEACTIVATE_SUBSCRIPTION: StaticOperationSchema = (
     ),
 )
 
-DELETE_DOMAIN_INPUT: StaticSchema = (
+DELETE_DATASET_INPUT: StaticSchema = (
     18,
     n0,
     _DDI,
+    {_sm: None},
+    (_dI, _dIa),
+    ((DOMAIN_ID, 9), (DATASET_ID, 9)),
+)
+
+DELETE_DATASET_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DDO,
+    {_smit: None},
+    (_a, _dIa, _st),
+    ((DATASET_ARN, 1), (DATASET_ID, 1), (DATASET_STATUS, 1)),
+)
+
+DELETE_DATASET: StaticOperationSchema = (
+    23,
+    n0,
+    _DD,
+    {
+        _smith: MappingProxyType(
+            {
+                "code": 202,
+                "method": "DELETE",
+                "uri": "/domains/{domainId}/datasets/{datasetId}",
+            }
+        )
+    },
+    DELETE_DATASET_INPUT,
+    DELETE_DATASET_OUTPUT,
+    (
+        ACCESS_DENIED_EXCEPTION,
+        CONFLICT_EXCEPTION,
+        INTERNAL_SERVER_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        THROTTLING_EXCEPTION,
+        VALIDATION_EXCEPTION,
+    ),
+)
+
+DELETE_DOMAIN_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DDIe,
     {_sm: None},
     (_dI,),
     ((DOMAIN_ID, 9),),
@@ -641,7 +830,7 @@ DELETE_DOMAIN_INPUT: StaticSchema = (
 DELETE_DOMAIN_OUTPUT: StaticSchema = (
     18,
     n0,
-    _DDO,
+    _DDOe,
     {_smit: None},
     (_dI, _a, _st),
     ((DOMAIN_ID, 1), (DOMAIN_ARN, 1), (DOMAIN_STATUS, 1)),
@@ -650,170 +839,62 @@ DELETE_DOMAIN_OUTPUT: StaticSchema = (
 DELETE_DOMAIN: StaticOperationSchema = (
     23,
     n0,
-    _DD,
+    _DDe,
     {_smith: MappingProxyType({"method": "DELETE", "uri": "/domain/{domainId}"})},
     DELETE_DOMAIN_INPUT,
     DELETE_DOMAIN_OUTPUT,
     (RESOURCE_NOT_FOUND_EXCEPTION,),
 )
 
-GET_DOMAIN_INPUT: StaticSchema = (18, n0, _GDI, {_sm: None}, (_dI,), ((DOMAIN_ID, 9),))
+GET_DATASET_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GDI,
+    {_sm: None},
+    (_dI, _dIa),
+    ((DOMAIN_ID, 9), (DATASET_ID, 9)),
+)
 
-GET_DOMAIN_OUTPUT: StaticSchema = (
+GET_DATASET_OUTPUT: StaticSchema = (
     18,
     n0,
     _GDO,
     {_smit: None},
-    (_dI, _a, _n, _kKA, _eC, _st, _wAU, _wAC, _cA, _t),
+    (_a, _dIa, _n, _t, _co, _st, _sD, _ar, _cA, _uA),
     (
-        (DOMAIN_ID, 1),
-        (DOMAIN_ARN, 1),
-        (DOMAIN_NAME, 1),
-        (KMS_KEY_ARN, 0),
-        (ENCRYPTION_CONTEXT, 0),
-        (DOMAIN_STATUS, 1),
-        (WEB_APP_URL, 0),
-        (WEB_APP_CONFIGURATION, 0),
+        (DATASET_ARN, 1),
+        (DATASET_ID, 1),
+        (BOUNDED_SAFE_STRING, 1),
+        (DATASET_TYPE, 1),
+        (DATASET_CONFIG, 1),
+        (DATASET_STATUS, 1),
+        (BOUNDED_SAFE_STRING, 0),
+        (lambda: schemas.DATASET_ARTIFACTS, 0),
         (4, 1),
-        (TAG_MAP, 0),
+        (4, 1),
     ),
 )
 
-GET_DOMAIN: StaticOperationSchema = (
+GET_DATASET: StaticOperationSchema = (
     23,
     n0,
     _GD,
-    {_smith: MappingProxyType({"method": "GET", "uri": "/domain/{domainId}"})},
-    GET_DOMAIN_INPUT,
-    GET_DOMAIN_OUTPUT,
-    (RESOURCE_NOT_FOUND_EXCEPTION,),
-)
-
-SCRIBE_SESSION_ID: StaticSchema = (3, n0, _SSI, 0)
-
-GET_MEDICAL_SCRIBE_LISTENING_SESSION_INPUT: StaticSchema = (
-    18,
-    n0,
-    _GMSLSI,
-    {_sm: None},
-    (_sIes, _dI, _sI),
-    ((SCRIBE_SESSION_ID, 9), (DOMAIN_ID, 9), (SUBSCRIPTION_ID, 9)),
-)
-
-GET_MEDICAL_SCRIBE_LISTENING_SESSION_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _GMSLSO,
-    {_smit: None},
-    (_mSLSD,),
-    ((lambda: schemas.MEDICAL_SCRIBE_LISTENING_SESSION_DETAILS, 0),),
-)
-
-GET_MEDICAL_SCRIBE_LISTENING_SESSION: StaticOperationSchema = (
-    23,
-    n0,
-    _GMSLS,
     {
-        _smithya: MappingProxyType({"hostPrefix": "streaming."}),
         _smith: MappingProxyType(
             {
-                "uri": "/medical-scribe-stream/domain/{domainId}/subscription/{subscriptionId}/session/{sessionId}",
+                "code": 200,
                 "method": "GET",
+                "uri": "/domains/{domainId}/datasets/{datasetId}",
             }
-        ),
+        )
     },
-    GET_MEDICAL_SCRIBE_LISTENING_SESSION_INPUT,
-    GET_MEDICAL_SCRIBE_LISTENING_SESSION_OUTPUT,
+    GET_DATASET_INPUT,
+    GET_DATASET_OUTPUT,
     (
         ACCESS_DENIED_EXCEPTION,
         INTERNAL_SERVER_EXCEPTION,
         RESOURCE_NOT_FOUND_EXCEPTION,
-        SERVICE_QUOTA_EXCEEDED_EXCEPTION,
-        lambda: schemas.THROTTLING_EXCEPTION,
-    ),
-)
-
-MEDICAL_SCRIBE_CHANNEL_ID: StaticSchema = (7, n0, _MSCI, 0)
-
-MEDICAL_SCRIBE_PARTICIPANT_ROLE: StaticSchema = (
-    14,
-    n0,
-    _MSPR,
-    0,
-    (_PATIENT, _CLINICIAN),
-    ((-1, {_sV: _PATIENT}), (-1, {_sV: _CLINICIAN})),
-)
-
-MEDICAL_SCRIBE_CHANNEL_DEFINITION: StaticSchema = (
-    18,
-    n0,
-    _MSCD,
-    0,
-    (_cI, _pR),
-    ((MEDICAL_SCRIBE_CHANNEL_ID, 1), (MEDICAL_SCRIBE_PARTICIPANT_ROLE, 1)),
-)
-
-MEDICAL_SCRIBE_CHANNEL_DEFINITIONS: StaticSchema = (
-    16,
-    n0,
-    _MSCDe,
-    0,
-    (_me,),
-    ((MEDICAL_SCRIBE_CHANNEL_DEFINITION, 0),),
-)
-
-NON_NULL_BOOLEAN: StaticSchema = (2, n0, _NNB, 0)
-
-MEDICAL_SCRIBE_LANGUAGE_CODE: StaticSchema = (
-    14,
-    n0,
-    _MSLC,
-    0,
-    (_EU, _MULTI),
-    ((-1, {_sV: _eU}), (-1, {_sV: _mu})),
-)
-
-MEDICAL_SCRIBE_MEDIA_ENCODING: StaticSchema = (
-    14,
-    n0,
-    _MSME,
-    0,
-    (_PCM, _FLAC),
-    ((-1, {_sV: _p}), (-1, {_sV: _f})),
-)
-
-MEDICAL_SCRIBE_MEDIA_SAMPLE_RATE_HERTZ: StaticSchema = (7, n0, _MSMSRH, 0)
-
-MEDICAL_SCRIBE_POST_STREAM_ACTIONS_RESULT: StaticSchema = (
-    18,
-    n0,
-    _MSPSAR,
-    0,
-    (_cNGR,),
-    ((CLINICAL_NOTE_GENERATION_RESULT, 0),),
-)
-
-S3_URI: StaticSchema = (3, n0, _SU, 0)
-
-MEDICAL_SCRIBE_POST_STREAM_ACTION_SETTINGS_RESPONSE: StaticSchema = (
-    18,
-    n0,
-    _MSPSASR,
-    0,
-    (_oSU, _cNGS),
-    ((S3_URI, 1), (CLINICAL_NOTE_GENERATION_SETTINGS_RESPONSE, 1)),
-)
-
-MEDICAL_SCRIBE_STREAM_STATUS: StaticSchema = (
-    14,
-    n0,
-    _MSSS,
-    0,
-    (_IP, _PAUSED, _FAILED, _COMPLETED),
-    (
-        (-1, {_sV: _IP}),
-        (-1, {_sV: _PAUSED}),
-        (-1, {_sV: _FAILED}),
-        (-1, {_sV: _COMPLETED}),
+        THROTTLING_EXCEPTION,
+        VALIDATION_EXCEPTION,
     ),
 )

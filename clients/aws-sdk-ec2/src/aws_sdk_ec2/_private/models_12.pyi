@@ -10,6 +10,9 @@ from smithy_core.response import ResponseMetadata
 from smithy_core.types import UnknownEnumMixin
 
 from ..models import (
+    AdditionalKeyExchangeMethodsListValue,
+    AdditionalKeyExchangeMethodsRequestListValue,
+    AdditionalKeyExchangeMethodsRequestListValueDict,
     BlockPublicAccessStates,
     ByoipCidr,
     CapacityManagerMonitoredTagKey,
@@ -20,27 +23,36 @@ from ..models import (
     DeviceOptions,
     DnsEntry,
     DnsOptions,
+    IKEVersionsListValue,
     IKEVersionsRequestListValue,
     IKEVersionsRequestListValueDict,
     InitializationStatusDetails,
+    InstanceMonitoring,
     IpPermission,
     IpPermissionDict,
     Ipv6CidrBlock,
     LastError,
+    NatGatewayAddress,
     NativeApplicationOidcOptions,
     OidcOptions,
     OperatorResponse,
     PayerResponsibilityEntry,
+    Phase1DHGroupNumbersListValue,
     Phase1DHGroupNumbersRequestListValue,
     Phase1DHGroupNumbersRequestListValueDict,
+    Phase1EncryptionAlgorithmsListValue,
     Phase1EncryptionAlgorithmsRequestListValue,
     Phase1EncryptionAlgorithmsRequestListValueDict,
+    Phase1IntegrityAlgorithmsListValue,
     Phase1IntegrityAlgorithmsRequestListValue,
     Phase1IntegrityAlgorithmsRequestListValueDict,
+    Phase2DHGroupNumbersListValue,
     Phase2DHGroupNumbersRequestListValue,
     Phase2DHGroupNumbersRequestListValueDict,
+    Phase2EncryptionAlgorithmsListValue,
     Phase2EncryptionAlgorithmsRequestListValue,
     Phase2EncryptionAlgorithmsRequestListValueDict,
+    Phase2IntegrityAlgorithmsListValue,
     Phase2IntegrityAlgorithmsRequestListValue,
     Phase2IntegrityAlgorithmsRequestListValueDict,
     SecurityGroupIdentifier,
@@ -48,9 +60,573 @@ from ..models import (
     SecurityGroupRuleDescriptionDict,
     SubnetIpPrefixes,
     Tag,
-    TunnelOption,
     _SerdeShape,
 )
+
+@dataclass(kw_only=True)
+class TransitGatewayRouteTableAnnouncement(_SerdeShape):
+    """Describes a transit gateway route table announcement."""
+
+    transit_gateway_route_table_announcement_id: str | None = ...
+    """The ID of the transit gateway route table announcement."""
+    transit_gateway_id: str | None = ...
+    """The ID of the transit gateway."""
+    core_network_id: str | None = ...
+    """
+    The ID of the core network for the transit gateway route table
+    announcement.
+    """
+    peer_transit_gateway_id: str | None = ...
+    """The ID of the peer transit gateway."""
+    peer_core_network_id: str | None = ...
+    """The ID of the core network ID for the peer."""
+    peering_attachment_id: str | None = ...
+    """The ID of the peering attachment."""
+    announcement_direction: str | None = ...
+    """The direction for the route table announcement."""
+    transit_gateway_route_table_id: str | None = ...
+    """The ID of the transit gateway route table."""
+    state: str | None = ...
+    """The state of the transit gateway announcement."""
+    creation_time: datetime | None = ...
+    """
+    The timestamp when the transit gateway route table announcement was
+    created.
+    """
+    tags: list[Tag] | None = ...
+    """The key-value pairs associated with the route table announcement."""
+
+class TransitGatewayRouteTableAnnouncementDirection(UnknownEnumMixin, StrEnum):
+    OUTGOING = "outgoing"
+    INCOMING = "incoming"
+
+class TransitGatewayRouteTableAnnouncementState(UnknownEnumMixin, StrEnum):
+    AVAILABLE = "available"
+    PENDING = "pending"
+    FAILING = "failing"
+    FAILED = "failed"
+    DELETING = "deleting"
+    DELETED = "deleted"
+
+@dataclass(kw_only=True)
+class TransitGatewayRouteTableAssociation(_SerdeShape):
+    """
+    Describes an association between a route table and a resource
+    attachment.
+    """
+
+    transit_gateway_attachment_id: str | None = ...
+    """The ID of the attachment."""
+    resource_id: str | None = ...
+    """The ID of the resource."""
+    resource_type: str | None = ...
+    """
+    The resource type. Note that the `tgw-peering` resource type has been
+    deprecated.
+    """
+    state: str | None = ...
+    """The state of the association."""
+
+@dataclass(kw_only=True)
+class TransitGatewayRouteTablePropagation(_SerdeShape):
+    """Describes a route table propagation."""
+
+    transit_gateway_attachment_id: str | None = ...
+    """The ID of the attachment."""
+    resource_id: str | None = ...
+    """The ID of the resource."""
+    resource_type: str | None = ...
+    """
+    The type of resource. Note that the `tgw-peering` resource type has been
+    deprecated.
+    """
+    state: str | None = ...
+    """The state of the resource."""
+    transit_gateway_route_table_announcement_id: str | None = ...
+    """The ID of the transit gateway route table announcement."""
+
+@dataclass(kw_only=True)
+class TransitGatewayRouteTableRoute(_SerdeShape):
+    """Describes a route in a transit gateway route table."""
+
+    destination_cidr: str | None = ...
+    """The CIDR block used for destination matches."""
+    state: str | None = ...
+    """The state of the route."""
+    route_origin: str | None = ...
+    """
+    The route origin. The following are the possible values:
+
+    - static
+
+    - propagated
+    """
+    prefix_list_id: str | None = ...
+    """The ID of the prefix list."""
+    attachment_id: str | None = ...
+    """The ID of the route attachment."""
+    resource_id: str | None = ...
+    """The ID of the resource for the route attachment."""
+    resource_type: str | None = ...
+    """The resource type for the route attachment."""
+
+class TransitGatewayRouteTableState(UnknownEnumMixin, StrEnum):
+    PENDING = "pending"
+    AVAILABLE = "available"
+    DELETING = "deleting"
+    DELETED = "deleted"
+
+class TransitGatewayRouteType(UnknownEnumMixin, StrEnum):
+    STATIC = "static"
+    PROPAGATED = "propagated"
+    SYSTEM = "system"
+
+class TransitGatewayState(UnknownEnumMixin, StrEnum):
+    PENDING = "pending"
+    AVAILABLE = "available"
+    MODIFYING = "modifying"
+    DELETING = "deleting"
+    DELETED = "deleted"
+
+@dataclass(kw_only=True)
+class TransitGatewayVpcAttachment(_SerdeShape):
+    """Describes a VPC attachment."""
+
+    transit_gateway_attachment_id: str | None = ...
+    """The ID of the attachment."""
+    transit_gateway_id: str | None = ...
+    """The ID of the transit gateway."""
+    vpc_id: str | None = ...
+    """The ID of the VPC."""
+    vpc_owner_id: str | None = ...
+    """The ID of the Amazon Web Services account that owns the VPC."""
+    state: str | None = ...
+    """
+    The state of the VPC attachment. Note that the `initiating` state has
+    been deprecated.
+    """
+    subnet_ids: list[str] | None = ...
+    """The IDs of the subnets."""
+    creation_time: datetime | None = ...
+    """The creation time."""
+    options: TransitGatewayVpcAttachmentOptions | None = ...
+    """The VPC attachment options."""
+    tags: list[Tag] | None = ...
+    """The tags for the VPC attachment."""
+
+@dataclass(kw_only=True)
+class TransitGatewayVpcAttachmentOptions(_SerdeShape):
+    """Describes the VPC attachment options."""
+
+    dns_support: str | None = ...
+    """Indicates whether DNS support is enabled."""
+    security_group_referencing_support: str | None = ...
+    """
+    Enables you to reference a security group across VPCs attached to a
+    transit gateway to simplify security group management.
+
+    This option is enabled by default.
+
+    For more information about security group referencing, see [Security
+    group
+    referencing](https://docs.aws.amazon.com/vpc/latest/tgw/tgw-vpc-attachments.html#vpc-attachment-security)
+    in the *Amazon Web Services Transit Gateways Guide*.
+    """
+    ipv6_support: str | None = ...
+    """Indicates whether IPv6 support is disabled."""
+    appliance_mode_support: str | None = ...
+    """Indicates whether appliance mode support is enabled."""
+
+class TransportProtocol(UnknownEnumMixin, StrEnum):
+    TCP = "tcp"
+    UDP = "udp"
+
+@dataclass(kw_only=True)
+class TrunkInterfaceAssociation(_SerdeShape):
+    """
+    Information about an association between a branch network interface with
+    a trunk network interface.
+    """
+
+    association_id: str | None = ...
+    """The ID of the association."""
+    branch_interface_id: str | None = ...
+    """The ID of the branch network interface."""
+    trunk_interface_id: str | None = ...
+    """The ID of the trunk network interface."""
+    interface_protocol: str | None = ...
+    """The interface protocol. Valid values are `VLAN` and `GRE`."""
+    vlan_id: int | None = ...
+    """The ID of the VLAN when you use the VLAN protocol."""
+    gre_key: int | None = ...
+    """The application key when you use the GRE protocol."""
+    tags: list[Tag] | None = ...
+    """The tags for the trunk interface association."""
+
+class TrustProviderType(UnknownEnumMixin, StrEnum):
+    USER = "user"
+    DEVICE = "device"
+
+class TunnelInsideIpVersion(UnknownEnumMixin, StrEnum):
+    IPV4 = "ipv4"
+    IPV6 = "ipv6"
+
+@dataclass(kw_only=True)
+class TunnelOption(_SerdeShape):
+    """The VPN tunnel options."""
+
+    outside_ip_address: str | None = ...
+    """The external IP address of the VPN tunnel."""
+    tunnel_inside_cidr: str | None = ...
+    """The range of inside IPv4 addresses for the tunnel."""
+    tunnel_inside_ipv6_cidr: str | None = ...
+    """The range of inside IPv6 addresses for the tunnel."""
+    pre_shared_key: str | None = ...
+    """
+    The pre-shared key (PSK) to establish initial authentication between the
+    virtual private gateway and the customer gateway.
+    """
+    phase1_lifetime_seconds: int | None = ...
+    """The lifetime for phase 1 of the IKE negotiation, in seconds."""
+    phase2_lifetime_seconds: int | None = ...
+    """The lifetime for phase 2 of the IKE negotiation, in seconds."""
+    rekey_margin_time_seconds: int | None = ...
+    """
+    The margin time, in seconds, before the phase 2 lifetime expires, during
+    which the Amazon Web Services side of the VPN connection performs an IKE
+    rekey.
+    """
+    rekey_fuzz_percentage: int | None = ...
+    """
+    The percentage of the rekey window determined by
+    `RekeyMarginTimeSeconds` during which the rekey time is randomly
+    selected.
+    """
+    replay_window_size: int | None = ...
+    """The number of packets in an IKE replay window."""
+    dpd_timeout_seconds: int | None = ...
+    """The number of seconds after which a DPD timeout occurs."""
+    dpd_timeout_action: str | None = ...
+    """The action to take after a DPD timeout occurs."""
+    phase1_encryption_algorithms: list[Phase1EncryptionAlgorithmsListValue] | None = ...
+    """
+    The permitted encryption algorithms for the VPN tunnel for phase 1 IKE
+    negotiations.
+    """
+    phase2_encryption_algorithms: list[Phase2EncryptionAlgorithmsListValue] | None = ...
+    """
+    The permitted encryption algorithms for the VPN tunnel for phase 2 IKE
+    negotiations.
+    """
+    phase1_integrity_algorithms: list[Phase1IntegrityAlgorithmsListValue] | None = ...
+    """
+    The permitted integrity algorithms for the VPN tunnel for phase 1 IKE
+    negotiations.
+    """
+    phase2_integrity_algorithms: list[Phase2IntegrityAlgorithmsListValue] | None = ...
+    """
+    The permitted integrity algorithms for the VPN tunnel for phase 2 IKE
+    negotiations.
+    """
+    phase1_dh_group_numbers: list[Phase1DHGroupNumbersListValue] | None = ...
+    """
+    The permitted Diffie-Hellman group numbers for the VPN tunnel for phase
+    1 IKE negotiations.
+    """
+    phase2_dh_group_numbers: list[Phase2DHGroupNumbersListValue] | None = ...
+    """
+    The permitted Diffie-Hellman group numbers for the VPN tunnel for phase
+    2 IKE negotiations.
+    """
+    ike_versions: list[IKEVersionsListValue] | None = ...
+    """The IKE versions that are permitted for the VPN tunnel."""
+    startup_action: str | None = ...
+    """
+    The action to take when the establishing the VPN tunnels for a VPN
+    connection.
+    """
+    log_options: VpnTunnelLogOptions | None = ...
+    """Options for logging VPN tunnel activity."""
+    enable_tunnel_lifecycle_control: bool | None = ...
+    """Status of tunnel endpoint lifecycle control feature."""
+    phase1_additional_key_exchanges: list[VpnAdditionalKeyExchange] | None = ...
+    """
+    The permitted additional key exchange rounds for the VPN tunnel for
+    phase 1 IKE negotiations.
+    """
+    phase2_additional_key_exchanges: list[VpnAdditionalKeyExchange] | None = ...
+    """
+    The permitted additional key exchange rounds for the VPN tunnel for
+    phase 2 IKE negotiations.
+    """
+
+@dataclass(kw_only=True)
+class UnassignIpv6AddressesInput(_SerdeShape):
+    """Dataclass for UnassignIpv6AddressesInput structure."""
+
+    ipv6_prefixes: list[str] | None = ...
+    """The IPv6 prefixes to unassign from the network interface."""
+    network_interface_id: str | None = ...
+    """The ID of the network interface."""
+    ipv6_addresses: list[str] | None = ...
+    """The IPv6 addresses to unassign from the network interface."""
+
+class UnassignIpv6AddressesInputDict(TypedDict, total=False):
+    """Dictionary form of `UnassignIpv6AddressesInput`."""
+
+    ipv6_prefixes: Sequence[str] | None
+    """The IPv6 prefixes to unassign from the network interface."""
+    network_interface_id: Required[str]
+    """The ID of the network interface."""
+    ipv6_addresses: Sequence[str] | None
+    """The IPv6 addresses to unassign from the network interface."""
+
+@dataclass(kw_only=True)
+class UnassignIpv6AddressesOutput(_SerdeShape):
+    """Dataclass for UnassignIpv6AddressesOutput structure."""
+
+    network_interface_id: str | None = ...
+    """The ID of the network interface."""
+    unassigned_ipv6_addresses: list[str] | None = ...
+    """The IPv6 addresses that have been unassigned from the network interface."""
+    unassigned_ipv6_prefixes: list[str] | None = ...
+    """The IPv6 prefixes that have been unassigned from the network interface."""
+    response_metadata: ResponseMetadata = ...
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+@dataclass(kw_only=True)
+class UnassignPrivateIpAddressesInput(_SerdeShape):
+    """Contains the parameters for UnassignPrivateIpAddresses."""
+
+    ipv4_prefixes: list[str] | None = ...
+    """The IPv4 prefixes to unassign from the network interface."""
+    network_interface_id: str | None = ...
+    """The ID of the network interface."""
+    private_ip_addresses: list[str] | None = ...
+    """
+    The secondary private IP addresses to unassign from the network
+    interface. You can specify this option multiple times to unassign more
+    than one IP address.
+    """
+
+class UnassignPrivateIpAddressesInputDict(TypedDict, total=False):
+    """Dictionary form of `UnassignPrivateIpAddressesInput`."""
+
+    ipv4_prefixes: Sequence[str] | None
+    """The IPv4 prefixes to unassign from the network interface."""
+    network_interface_id: Required[str]
+    """The ID of the network interface."""
+    private_ip_addresses: Sequence[str] | None
+    """
+    The secondary private IP addresses to unassign from the network
+    interface. You can specify this option multiple times to unassign more
+    than one IP address.
+    """
+
+@dataclass(kw_only=True)
+class UnassignPrivateIpAddressesOutput(_SerdeShape):
+    """Dataclass for UnassignPrivateIpAddressesOutput structure."""
+
+    response_metadata: ResponseMetadata = ...
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+@dataclass(kw_only=True)
+class UnassignPrivateNatGatewayAddressInput(_SerdeShape):
+    """Dataclass for UnassignPrivateNatGatewayAddressInput structure."""
+
+    nat_gateway_id: str | None = ...
+    """The ID of the NAT gateway."""
+    private_ip_addresses: list[str] | None = ...
+    """The private IPv4 addresses you want to unassign."""
+    max_drain_duration_seconds: int | None = ...
+    """
+    The maximum amount of time to wait (in seconds) before forcibly
+    releasing the IP addresses if connections are still in progress. Default
+    value is 350 seconds.
+    """
+    dry_run: bool | None = ...
+    """
+    Checks whether you have the required permissions for the action, without
+    actually making the request, and provides an error response. If you have
+    the required permissions, the error response is `DryRunOperation`.
+    Otherwise, it is `UnauthorizedOperation`.
+    """
+
+class UnassignPrivateNatGatewayAddressInputDict(TypedDict, total=False):
+    """Dictionary form of `UnassignPrivateNatGatewayAddressInput`."""
+
+    nat_gateway_id: Required[str]
+    """The ID of the NAT gateway."""
+    private_ip_addresses: Required[Sequence[str]]
+    """The private IPv4 addresses you want to unassign."""
+    max_drain_duration_seconds: int | None
+    """
+    The maximum amount of time to wait (in seconds) before forcibly
+    releasing the IP addresses if connections are still in progress. Default
+    value is 350 seconds.
+    """
+    dry_run: bool | None
+    """
+    Checks whether you have the required permissions for the action, without
+    actually making the request, and provides an error response. If you have
+    the required permissions, the error response is `DryRunOperation`.
+    Otherwise, it is `UnauthorizedOperation`.
+    """
+
+@dataclass(kw_only=True)
+class UnassignPrivateNatGatewayAddressOutput(_SerdeShape):
+    """Dataclass for UnassignPrivateNatGatewayAddressOutput structure."""
+
+    nat_gateway_id: str | None = ...
+    """The ID of the NAT gateway."""
+    nat_gateway_addresses: list[NatGatewayAddress] | None = ...
+    """Information about the NAT gateway IP addresses."""
+    response_metadata: ResponseMetadata = ...
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+class UnlimitedSupportedInstanceFamily(UnknownEnumMixin, StrEnum):
+    T2 = "t2"
+    T3 = "t3"
+    T3A = "t3a"
+    T4G = "t4g"
+    T8I = "t8i"
+
+@dataclass(kw_only=True)
+class UnlockSnapshotInput(_SerdeShape):
+    """Dataclass for UnlockSnapshotInput structure."""
+
+    snapshot_id: str | None = ...
+    """The ID of the snapshot to unlock."""
+    dry_run: bool | None = ...
+    """
+    Checks whether you have the required permissions for the action, without
+    actually making the request, and provides an error response. If you have
+    the required permissions, the error response is `DryRunOperation`.
+    Otherwise, it is `UnauthorizedOperation`.
+    """
+
+class UnlockSnapshotInputDict(TypedDict, total=False):
+    """Dictionary form of `UnlockSnapshotInput`."""
+
+    snapshot_id: Required[str]
+    """The ID of the snapshot to unlock."""
+    dry_run: bool | None
+    """
+    Checks whether you have the required permissions for the action, without
+    actually making the request, and provides an error response. If you have
+    the required permissions, the error response is `DryRunOperation`.
+    Otherwise, it is `UnauthorizedOperation`.
+    """
+
+@dataclass(kw_only=True)
+class UnlockSnapshotOutput(_SerdeShape):
+    """Dataclass for UnlockSnapshotOutput structure."""
+
+    snapshot_id: str | None = ...
+    """The ID of the snapshot."""
+    response_metadata: ResponseMetadata = ...
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+@dataclass(kw_only=True)
+class UnmonitorInstancesInput(_SerdeShape):
+    """Dataclass for UnmonitorInstancesInput structure."""
+
+    instance_ids: list[str] | None = ...
+    """The IDs of the instances."""
+    metric_category_ids: list[str] | None = ...
+    """
+    The IDs of the metric categories to remove from the instances. If you
+    specify metric categories, only those metric categories are removed and
+    detailed monitoring remains enabled. If you don't specify metric
+    categories, detailed monitoring and all metric categories are turned
+    off.
+    """
+    dry_run: bool | None = ...
+    """
+    Checks whether you have the required permissions for the operation,
+    without actually making the request, and provides an error response. If
+    you have the required permissions, the error response is
+    `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    """
+
+class UnmonitorInstancesInputDict(TypedDict, total=False):
+    """Dictionary form of `UnmonitorInstancesInput`."""
+
+    instance_ids: Required[Sequence[str]]
+    """The IDs of the instances."""
+    metric_category_ids: Sequence[str] | None
+    """
+    The IDs of the metric categories to remove from the instances. If you
+    specify metric categories, only those metric categories are removed and
+    detailed monitoring remains enabled. If you don't specify metric
+    categories, detailed monitoring and all metric categories are turned
+    off.
+    """
+    dry_run: bool | None
+    """
+    Checks whether you have the required permissions for the operation,
+    without actually making the request, and provides an error response. If
+    you have the required permissions, the error response is
+    `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    """
+
+@dataclass(kw_only=True)
+class UnmonitorInstancesOutput(_SerdeShape):
+    """Dataclass for UnmonitorInstancesOutput structure."""
+
+    instance_monitorings: list[InstanceMonitoring] | None = ...
+    """The monitoring information."""
+    response_metadata: ResponseMetadata = ...
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+@dataclass(kw_only=True)
+class UnsuccessfulAssociationResponseObject(_SerdeShape):
+    """Describes an unsuccessful application status check association."""
+
+    application_status_check_id: str | None = ...
+    """The ID of the application status check."""
+    association_type: str | None = ...
+    """The type of association. Valid values: `EC2TAG` and `INSTANCE_ID`."""
+    association_value: str | None = ...
+    """
+    The association value. For `EC2TAG`, the value is formatted as
+    `key=value`. For `INSTANCE_ID`, the value is the instance ID.
+    """
+    reason: str | None = ...
+    """The reason the association failed."""
+
+class UnsuccessfulInstanceCreditSpecificationErrorCode(UnknownEnumMixin, StrEnum):
+    INVALID_INSTANCE_ID = "InvalidInstanceID.Malformed"
+    INSTANCE_NOT_FOUND = "InvalidInstanceID.NotFound"
+    INCORRECT_INSTANCE_STATE = "IncorrectInstanceState"
+    INSTANCE_CREDIT_SPECIFICATION_NOT_SUPPORTED = (
+        "InstanceCreditSpecification.NotSupported"
+    )
 
 @dataclass(kw_only=True)
 class UnsuccessfulInstanceCreditSpecificationItem(_SerdeShape):
@@ -2104,8 +2680,8 @@ class VpcEncryptionControlConfiguration(_SerdeShape):
     """
     global_accelerator_exclusion: str | None = ...
     """
-    Specifies whether to exclude AWS Global Accelerator traffic from
-    encryption enforcement.
+    Specifies whether to exclude Amazon Web Services Global Accelerator
+    traffic from encryption enforcement.
     """
     api_gateway_v2_exclusion: str | None = ...
     """
@@ -2160,8 +2736,8 @@ class VpcEncryptionControlConfigurationDict(TypedDict, total=False):
     """
     global_accelerator_exclusion: str | None
     """
-    Specifies whether to exclude AWS Global Accelerator traffic from
-    encryption enforcement.
+    Specifies whether to exclude Amazon Web Services Global Accelerator
+    traffic from encryption enforcement.
     """
     api_gateway_v2_exclusion: str | None
     """
@@ -2212,7 +2788,10 @@ class VpcEncryptionControlExclusions(_SerdeShape):
     elastic_file_system: VpcEncryptionControlExclusion | None = ...
     """The exclusion configuration for Elastic File System traffic."""
     global_accelerator: VpcEncryptionControlExclusion | None = ...
-    """The exclusion configuration for AWS Global Accelerator traffic."""
+    """
+    The exclusion configuration for Amazon Web Services Global Accelerator
+    traffic.
+    """
     api_gateway_v2: VpcEncryptionControlExclusion | None = ...
     """The exclusion configuration for Amazon API Gateway V2 traffic."""
 
@@ -2415,6 +2994,16 @@ class VpcEndpointConnection(_SerdeShape):
     """The Region of the endpoint."""
     payer_responsibilities: list[PayerResponsibilityEntry] | None = ...
     """The payer responsibility settings for the endpoint."""
+    transit_gateway_attachment_id: str | None = ...
+    """
+    The ID of the transit gateway attachment, if the connection is for a
+    transit gateway attachment.
+    """
+    transit_gateway_attachment_owner: str | None = ...
+    """
+    The ID of the Amazon Web Services account that owns the transit gateway
+    attachment, if the connection is for a transit gateway attachment.
+    """
 
 class VpcEndpointType(UnknownEnumMixin, StrEnum):
     INTERFACE = "Interface"
@@ -2481,6 +3070,20 @@ class VpcPeeringConnection(_SerdeShape):
     """Any tags assigned to the resource."""
     vpc_peering_connection_id: str | None = ...
     """The ID of the VPC peering connection."""
+    multipath_resilience_status: str | None = ...
+    """
+    The multipath resilience status of the VPC peering connection. The
+    possible values are:
+
+    - `enabled` -- Both the requester and the accepter allow multipath
+      resilience.
+
+    - `pending` -- Either the requester or the accepter allows multipath
+      resilience, but not both.
+
+    - `disabled` -- Neither the requester nor the accepter allows multipath
+      resilience.
+    """
 
 @dataclass(kw_only=True)
 class VpcPeeringConnectionOptionsDescription(_SerdeShape):
@@ -2495,6 +3098,17 @@ class VpcPeeringConnectionOptionsDescription(_SerdeShape):
     """Deprecated."""
     allow_egress_from_local_vpc_to_remote_classic_link: bool | None = ...
     """Deprecated."""
+    allow_multipath_resilience: bool | None = ...
+    """
+    Indicates whether this side of the VPC peering connection allows
+    multipath resilience.
+    """
+    multipath_resilience_mode: str | None = ...
+    """
+    The multipath resilience mode for this side of the VPC peering
+    connection. This value is present only when this side allows multipath
+    resilience.
+    """
 
 @dataclass(kw_only=True)
 class VpcPeeringConnectionStateReason(_SerdeShape):
@@ -2548,6 +3162,106 @@ class VpcState(UnknownEnumMixin, StrEnum):
 
 class VpcTenancy(UnknownEnumMixin, StrEnum):
     DEFAULT = "default"
+
+@dataclass(kw_only=True)
+class VpnAdditionalKeyExchange(_SerdeShape):
+    """
+    Describes an additional key exchange round that is permitted for the VPN
+    tunnel.
+    """
+
+    additional_key_exchange_round: int | None = ...
+    """The additional key exchange round number."""
+    key_exchange_methods: list[AdditionalKeyExchangeMethodsListValue] | None = ...
+    """The key exchange method numbers permitted for this round."""
+    requirement: str | None = ...
+    """Indicates whether this round is mandatory."""
+
+@dataclass(kw_only=True)
+class VpnAdditionalKeyExchangeRequest(_SerdeShape):
+    """
+    Specifies an additional key exchange round for the VPN tunnel, as
+    defined in RFC 9370.
+    """
+
+    additional_key_exchange_round: int | None = ...
+    """
+    The additional key exchange round number.
+
+    Valid range: Minimum value of 1. Maximum value of 7.
+    """
+    key_exchange_methods: (
+        list[AdditionalKeyExchangeMethodsRequestListValue] | None
+    ) = ...
+    """
+    The key exchange method numbers that are permitted for this round. The
+    method numbers are the IANA IKEv2 key exchange method transform IDs.
+
+    A `required` round must specify at least one method. An `optional` round
+    can omit this parameter or specify an empty list. If omitted or empty
+    for an optional round, the round is disabled.
+
+    IKEv2 requires that the initial Diffie-Hellman exchange and each
+    required round use a different key exchange method. The permitted
+    methods must allow a distinct method to be selected for each of them.
+
+    Valid values: `2` | `5` | `14` | `15` | `16` | `17` | `18` | `19`
+    | `20` | `21` | `22` | `23` | `24` | `35` | `36` | `37`
+    """
+    requirement: str | None = ...
+    """
+    Indicates whether this round is mandatory. If `required`, the tunnel
+    isn't established unless the customer gateway device negotiates this
+    round. If `optional`, the round is negotiated only if the customer
+    gateway device supports it.
+
+    Valid values: `required` | `optional`
+
+    Default: `required`
+    """
+
+class VpnAdditionalKeyExchangeRequestDict(TypedDict, total=False):
+    """Dictionary form of `VpnAdditionalKeyExchangeRequest`."""
+
+    additional_key_exchange_round: Required[int]
+    """
+    The additional key exchange round number.
+
+    Valid range: Minimum value of 1. Maximum value of 7.
+    """
+    key_exchange_methods: (
+        Sequence[
+            AdditionalKeyExchangeMethodsRequestListValue
+            | AdditionalKeyExchangeMethodsRequestListValueDict
+        ]
+        | None
+    )
+    """
+    The key exchange method numbers that are permitted for this round. The
+    method numbers are the IANA IKEv2 key exchange method transform IDs.
+
+    A `required` round must specify at least one method. An `optional` round
+    can omit this parameter or specify an empty list. If omitted or empty
+    for an optional round, the round is disabled.
+
+    IKEv2 requires that the initial Diffie-Hellman exchange and each
+    required round use a different key exchange method. The permitted
+    methods must allow a distinct method to be selected for each of them.
+
+    Valid values: `2` | `5` | `14` | `15` | `16` | `17` | `18` | `19`
+    | `20` | `21` | `22` | `23` | `24` | `35` | `36` | `37`
+    """
+    requirement: str | None
+    """
+    Indicates whether this round is mandatory. If `required`, the tunnel
+    isn't established unless the customer gateway device negotiates this
+    round. If `optional`, the round is negotiated only if the customer
+    gateway device supports it.
+
+    Valid values: `required` | `optional`
+
+    Default: `required`
+    """
 
 @dataclass(kw_only=True)
 class VpnConcentrator(_SerdeShape):
@@ -3080,7 +3794,7 @@ class VpnTunnelOptionsSpecification(_SerdeShape):
     tunnel for phase 1 IKE negotiations.
 
     Valid values: `2` | `14` | `15` | `16` | `17` | `18` | `19` |
-    `20` | `21` | `22` | `23` | `24`
+    `20` | `21` | `22` | `23` | `24` | `35`
     """
     phase2_dh_group_numbers: list[Phase2DHGroupNumbersRequestListValue] | None = ...
     """
@@ -3088,7 +3802,7 @@ class VpnTunnelOptionsSpecification(_SerdeShape):
     tunnel for phase 2 IKE negotiations.
 
     Valid values: `2` | `5` | `14` | `15` | `16` | `17` | `18` | `19`
-    | `20` | `21` | `22` | `23` | `24`
+    | `20` | `21` | `22` | `23` | `24` | `35` | `36` | `37`
     """
     ike_versions: list[IKEVersionsRequestListValue] | None = ...
     """
@@ -3111,6 +3825,26 @@ class VpnTunnelOptionsSpecification(_SerdeShape):
     """Options for logging VPN tunnel activity."""
     enable_tunnel_lifecycle_control: bool | None = ...
     """Turn on or off tunnel endpoint lifecycle control feature."""
+    phase1_additional_key_exchanges: list[VpnAdditionalKeyExchangeRequest] | None = ...
+    """
+    One or more additional key exchange rounds that are permitted for the
+    VPN tunnel for phase 1 IKE negotiations. Additional key exchanges occur
+    after the initial Diffie-Hellman exchange. Each round must have a unique
+    round number.
+
+    Additional key exchanges are supported only with IKEv2. You can't
+    specify a `required` round if `IKEVersions` contains only `ikev1`.
+    """
+    phase2_additional_key_exchanges: list[VpnAdditionalKeyExchangeRequest] | None = ...
+    """
+    One or more additional key exchange rounds that are permitted for the
+    VPN tunnel for phase 2 IKE negotiations. Additional key exchanges occur
+    after the initial Diffie-Hellman exchange. Each round must have a unique
+    round number.
+
+    Additional key exchanges are supported only with IKEv2. You can't
+    specify a `required` round if `IKEVersions` contains only `ikev1`.
+    """
 
 class VpnTunnelOptionsSpecificationDict(TypedDict, total=False):
     """Dictionary form of `VpnTunnelOptionsSpecification`."""
@@ -3282,7 +4016,7 @@ class VpnTunnelOptionsSpecificationDict(TypedDict, total=False):
     tunnel for phase 1 IKE negotiations.
 
     Valid values: `2` | `14` | `15` | `16` | `17` | `18` | `19` |
-    `20` | `21` | `22` | `23` | `24`
+    `20` | `21` | `22` | `23` | `24` | `35`
     """
     phase2_dh_group_numbers: (
         Sequence[
@@ -3296,7 +4030,7 @@ class VpnTunnelOptionsSpecificationDict(TypedDict, total=False):
     tunnel for phase 2 IKE negotiations.
 
     Valid values: `2` | `5` | `14` | `15` | `16` | `17` | `18` | `19`
-    | `20` | `21` | `22` | `23` | `24`
+    | `20` | `21` | `22` | `23` | `24` | `35` | `36` | `37`
     """
     ike_versions: (
         Sequence[IKEVersionsRequestListValue | IKEVersionsRequestListValueDict] | None
@@ -3323,6 +4057,32 @@ class VpnTunnelOptionsSpecificationDict(TypedDict, total=False):
     """Options for logging VPN tunnel activity."""
     enable_tunnel_lifecycle_control: bool | None
     """Turn on or off tunnel endpoint lifecycle control feature."""
+    phase1_additional_key_exchanges: (
+        Sequence[VpnAdditionalKeyExchangeRequest | VpnAdditionalKeyExchangeRequestDict]
+        | None
+    )
+    """
+    One or more additional key exchange rounds that are permitted for the
+    VPN tunnel for phase 1 IKE negotiations. Additional key exchanges occur
+    after the initial Diffie-Hellman exchange. Each round must have a unique
+    round number.
+
+    Additional key exchanges are supported only with IKEv2. You can't
+    specify a `required` round if `IKEVersions` contains only `ikev1`.
+    """
+    phase2_additional_key_exchanges: (
+        Sequence[VpnAdditionalKeyExchangeRequest | VpnAdditionalKeyExchangeRequestDict]
+        | None
+    )
+    """
+    One or more additional key exchange rounds that are permitted for the
+    VPN tunnel for phase 2 IKE negotiations. Additional key exchanges occur
+    after the initial Diffie-Hellman exchange. Each round must have a unique
+    round number.
+
+    Additional key exchanges are supported only with IKEv2. You can't
+    specify a `required` round if `IKEVersions` contains only `ikev1`.
+    """
 
 class VpnTunnelProvisioningStatus(UnknownEnumMixin, StrEnum):
     AVAILABLE = "available"

@@ -23,6 +23,10 @@ _AN = "AcceleratorName"
 _ATMMB = "AcceleratorTotalMemoryMiB"
 _AT = "AcceleratorType"
 _cb_ = "capacity-block"
+_Ke = "Key"
+_ke = "key"
+_Va = "Value"
+_va = "value"
 _TS = "TagSpecification"
 _Tag = "Tags"
 _sSI = "smithy.synthetic#originalShapeId"
@@ -35,6 +39,7 @@ _p = "pending"
 _smit = "smithy.api#output"
 _CRI = "CapacityReservationId"
 _IC = "InstanceCount"
+_re = "rejected"
 _St = "State"
 _st = "state"
 _fa = "failed"
@@ -54,6 +59,7 @@ _AZI = "AvailabilityZoneId"
 _aZI = "availabilityZoneId"
 _IT = "InstanceType"
 _iT = "instanceType"
+_req = "required"
 _def = "default"
 _INCLUDED = "INCLUDED"
 _inc = "included"
@@ -63,6 +69,7 @@ _IF = "InstanceFamily"
 _OA = "OutpostArn"
 _CTl = "ClientToken"
 _sT = "smithy.api#idempotencyToken"
+_ATl = "AllocationType"
 _ca = "cancelling"
 _AIT = "AllowedInstanceType"
 _URBOI = "UnusedReservationBillingOwnerId"
@@ -74,31 +81,114 @@ _can = "cancelled"
 _iC = "instanceCount"
 _CD = "CreateDate"
 _cD = "createDate"
-_op = "open"
+_ope = "open"
 _oAu = "outpostArn"
 _CTr = "CreateTime"
 _cTr = "createTime"
+_OF = "OutputFormat"
+_Sch = "Schedule"
+_CCMDEI = "CreateCapacityManagerDataExportInput"
+_cCCMDER = "com.amazonaws.ec2#CreateCapacityManagerDataExportRequest"
+_SBN = "S3BucketName"
+_SBP = "S3BucketPrefix"
+_CMDEI = "CapacityManagerDataExportId"
+_CCMDEO = "CreateCapacityManagerDataExportOutput"
+_cCCMDERo = "com.amazonaws.ec2#CreateCapacityManagerDataExportResult"
+_cMDEI = "capacityManagerDataExportId"
+_CCMDE = "CreateCapacityManagerDataExport"
+_CRCD = "CapacityReservationCommitmentDuration"
+_CRDP = "CapacityReservationDeliveryPreference"
+_FIXED = "FIXED"
+_fix = "fixed"
+_INCREMENTAL = "INCREMENTAL"
+_incr = "incremental"
 _EDT = "EndDateType"
+_unl = "unlimited"
+_li = "limited"
 _IMC = "InstanceMatchCriteria"
+_ta = "targeted"
+_CRIP = "CapacityReservationInstancePlatform"
+_LU = "LINUX_UNIX"
+_LUNIX = "Linux/UNIX"
+_RHEL = "RED_HAT_ENTERPRISE_LINUX"
+_RHEL_ = "Red Hat Enterprise Linux"
+_SL_ = "SUSE_LINUX"
+_SL__ = "SUSE Linux"
+_WINDOWS = "WINDOWS"
+_W = "Windows"
+_WWSS = "WINDOWS_WITH_SQL_SERVER"
+_WwSS = "Windows with SQL Server"
+_WWSSE = "WINDOWS_WITH_SQL_SERVER_ENTERPRISE"
+_WwSSE = "Windows with SQL Server Enterprise"
+_WWSSS = "WINDOWS_WITH_SQL_SERVER_STANDARD"
+_WwSSS = "Windows with SQL Server Standard"
+_WWSSW = "WINDOWS_WITH_SQL_SERVER_WEB"
+_WwSSW = "Windows with SQL Server Web"
+_LWSSS = "LINUX_WITH_SQL_SERVER_STANDARD"
+_LwSSS = "Linux with SQL Server Standard"
+_LWSSW = "LINUX_WITH_SQL_SERVER_WEB"
+_LwSSW = "Linux with SQL Server Web"
+_LWSSE = "LINUX_WITH_SQL_SERVER_ENTERPRISE"
+_LwSSE = "Linux with SQL Server Enterprise"
+_RWSSS = "RHEL_WITH_SQL_SERVER_STANDARD"
+_RwSSS = "RHEL with SQL Server Standard"
+_RWSSE = "RHEL_WITH_SQL_SERVER_ENTERPRISE"
+_RwSSE = "RHEL with SQL Server Enterprise"
+_RWSSW = "RHEL_WITH_SQL_SERVER_WEB"
+_RwSSW = "RHEL with SQL Server Web"
+_RWH = "RHEL_WITH_HA"
+_RwH = "RHEL with HA"
+_RWHASSS = "RHEL_WITH_HA_AND_SQL_SERVER_STANDARD"
+_RwHaSSS = "RHEL with HA and SQL Server Standard"
+_RWHASSE = "RHEL_WITH_HA_AND_SQL_SERVER_ENTERPRISE"
+_RwHaSSE = "RHEL with HA and SQL Server Enterprise"
+_UPL = "UBUNTU_PRO_LINUX"
+_UP_ = "Ubuntu Pro"
 _PGA = "PlacementGroupArn"
 _CRT = "CapacityReservationTenancy"
 _ded = "dedicated"
+_CCRIr = "CreateCapacityReservationInput"
+_cCCRRom = "com.amazonaws.ec2#CreateCapacityReservationRequest"
 _IPns = "InstancePlatform"
 _Ten = "Tenancy"
 _EO = "EbsOptimized"
 _ESp = "EphemeralStorage"
 _ED = "EndDate"
 _SDt = "StartDate"
+_CDo = "CommitmentDuration"
 _DPel = "DeliveryPreference"
+_CRAD = "CapacityReservationAdjustmentDetails"
 _sDt = "startDate"
 _eD = "endDate"
+_CED = "CommitmentEndDate"
+_cED = "commitmentEndDate"
 _eDT = "endDateType"
+_cDo = "commitmentDuration"
+_CRAS = "CapacityReservationAdjustmentStatus"
+_reque = "requested"
+_ap = "applied"
+_CAME = "CapacityAllocationMetadataEntry"
+_CAML = "CapacityAllocationMetadataList"
+_CAa = "CapacityAllocation"
+_aTl = "allocationType"
+_Cou = "Count"
+_cou = "count"
+_AMl = "AllocationMetadata"
+_AML = "AllocationMetadataList"
+_aML = "allocationMetadataList"
 _CAap = "CapacityAllocations"
 _CBI = "CapacityBlockId"
+_CRCI = "CapacityReservationCommitmentInfo"
 _CIC = "CommittedInstanceCount"
 _cIC = "committedInstanceCount"
 _ITnt = "InterruptionType"
+_adh = "adhoc"
+_ICRAS = "InterruptibleCapacityReservationAllocationStatus"
+_up = "updating"
+_canc = "canceling"
+_cance = "canceled"
 _ZSP = "ZeroSizePreference"
+_ret = "retain"
 _ICA = "InterruptibleCapacityAllocation"
 _TIC = "TargetInstanceCount"
 _tIC = "targetInstanceCount"
@@ -162,6 +252,10 @@ _OSD = "OriginalStartDate"
 _oSD = "originalStartDate"
 _LSa = "LaunchStatus"
 _lS = "launchStatus"
+_CCROr = "CreateCapacityReservationOutput"
+_cCCRRoma = "com.amazonaws.ec2#CreateCapacityReservationResult"
+_cRa = "capacityReservation"
+_CCRr = "CreateCapacityReservation"
 _CCRBSI = "CreateCapacityReservationBySplittingInput"
 _cCCRBSR = "com.amazonaws.ec2#CreateCapacityReservationBySplittingRequest"
 _CCRBSO = "CreateCapacityReservationBySplittingOutput"
@@ -222,7 +316,6 @@ _CCRDCQ = "CreateCapacityReservationDateChangeQuote"
 _FIMC = "FleetInstanceMatchCriteria"
 _BM = "BareMetal"
 _REQUIRED = "REQUIRED"
-_requ = "required"
 _BEBMR = "BaselineEbsBandwidthMbpsRequest"
 _PFRR = "PerformanceFactorReferenceRequest"
 _PFRSR = "PerformanceFactorReferenceSetRequest"
@@ -284,6 +377,122 @@ _REIT = "RequireEncryptionInTransit"
 
 BOXED_INTEGER: StaticSchema = (7, n0, _BI, 0)
 
+CREATE_CAPACITY_MANAGER_DATA_EXPORT_INPUT: StaticSchema = (
+    18,
+    n0,
+    _CCMDEI,
+    {_sSI: _cCCMDER, _sm: None},
+    (_SBN, _SBP, _Sch, _OF, _CTl, _DR, _TSa),
+    (
+        (lambda: schemas.STRING, {_sO: None, _smi: None}),
+        (lambda: schemas.STRING, 0),
+        (lambda: schemas.SCHEDULE, {_sO: None, _smi: None}),
+        (lambda: schemas.OUTPUT_FORMAT, {_sO: None, _smi: None}),
+        (lambda: schemas.STRING, 2),
+        (lambda: schemas.BOOLEAN, 0),
+        (lambda: schemas.TAG_SPECIFICATION_LIST, {_sN: _TS}),
+    ),
+)
+
+CREATE_CAPACITY_MANAGER_DATA_EXPORT_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _CCMDEO,
+    {_sSI: _cCCMDERo, _smit: None},
+    (_CMDEI,),
+    ((lambda: schemas.CAPACITY_MANAGER_DATA_EXPORT_ID, {_aQN: _CMDEI, _sN: _cMDEI}),),
+)
+
+CREATE_CAPACITY_MANAGER_DATA_EXPORT: StaticOperationSchema = (
+    23,
+    n0,
+    _CCMDE,
+    0,
+    CREATE_CAPACITY_MANAGER_DATA_EXPORT_INPUT,
+    CREATE_CAPACITY_MANAGER_DATA_EXPORT_OUTPUT,
+    (),
+)
+
+CAPACITY_RESERVATION_COMMITMENT_DURATION: StaticSchema = (8, n0, _CRCD, 0)
+
+CAPACITY_RESERVATION_DELIVERY_PREFERENCE: StaticSchema = (
+    14,
+    n0,
+    _CRDP,
+    0,
+    (_FIXED, _INCREMENTAL),
+    ((-1, {_sV: _fix}), (-1, {_sV: _incr})),
+)
+
+END_DATE_TYPE: StaticSchema = (
+    14,
+    n0,
+    _EDT,
+    0,
+    (_unl, _li),
+    ((-1, {_sV: _unl}), (-1, {_sV: _li})),
+)
+
+INSTANCE_MATCH_CRITERIA: StaticSchema = (
+    14,
+    n0,
+    _IMC,
+    0,
+    (_ope, _ta),
+    ((-1, {_sV: _ope}), (-1, {_sV: _ta})),
+)
+
+CAPACITY_RESERVATION_INSTANCE_PLATFORM: StaticSchema = (
+    14,
+    n0,
+    _CRIP,
+    0,
+    (
+        _LU,
+        _RHEL,
+        _SL_,
+        _WINDOWS,
+        _WWSS,
+        _WWSSE,
+        _WWSSS,
+        _WWSSW,
+        _LWSSS,
+        _LWSSW,
+        _LWSSE,
+        _RWSSS,
+        _RWSSE,
+        _RWSSW,
+        _RWH,
+        _RWHASSS,
+        _RWHASSE,
+        _UPL,
+    ),
+    (
+        (-1, {_sV: _LUNIX}),
+        (-1, {_sV: _RHEL_}),
+        (-1, {_sV: _SL__}),
+        (-1, {_sV: _W}),
+        (-1, {_sV: _WwSS}),
+        (-1, {_sV: _WwSSE}),
+        (-1, {_sV: _WwSSS}),
+        (-1, {_sV: _WwSSW}),
+        (-1, {_sV: _LwSSS}),
+        (-1, {_sV: _LwSSW}),
+        (-1, {_sV: _LwSSE}),
+        (-1, {_sV: _RwSSS}),
+        (-1, {_sV: _RwSSE}),
+        (-1, {_sV: _RwSSW}),
+        (-1, {_sV: _RwH}),
+        (-1, {_sV: _RwHaSSS}),
+        (-1, {_sV: _RwHaSSE}),
+        (-1, {_sV: _UP_}),
+    ),
+)
+
+OUTPOST_ARN: StaticSchema = (3, n0, _OA, 0)
+
+PLACEMENT_GROUP_ARN: StaticSchema = (3, n0, _PGA, 0)
+
 CAPACITY_RESERVATION_TENANCY: StaticSchema = (
     14,
     n0,
@@ -291,6 +500,183 @@ CAPACITY_RESERVATION_TENANCY: StaticSchema = (
     0,
     (_def, _ded),
     ((-1, {_sV: _def}), (-1, {_sV: _ded})),
+)
+
+CREATE_CAPACITY_RESERVATION_INPUT: StaticSchema = (
+    18,
+    n0,
+    _CCRIr,
+    {_sSI: _cCCRRom, _sm: None},
+    (
+        _CTl,
+        _IT,
+        _IPns,
+        _AZ,
+        _AZI,
+        _Ten,
+        _IC,
+        _EO,
+        _ESp,
+        _ED,
+        _EDT,
+        _IMC,
+        _TSa,
+        _DR,
+        _OA,
+        _PGA,
+        _SDt,
+        _CDo,
+        _DPel,
+    ),
+    (
+        (lambda: schemas.STRING, 0),
+        (lambda: schemas.STRING, {_sO: None, _smi: None}),
+        (CAPACITY_RESERVATION_INSTANCE_PLATFORM, {_sO: None, _smi: None}),
+        (lambda: schemas.AVAILABILITY_ZONE_NAME, 0),
+        (lambda: schemas.AVAILABILITY_ZONE_ID, 0),
+        (CAPACITY_RESERVATION_TENANCY, 0),
+        (lambda: schemas.INTEGER, {_sO: None, _smi: None}),
+        (lambda: schemas.BOOLEAN, 0),
+        (lambda: schemas.BOOLEAN, 0),
+        (lambda: schemas.DATE_TIME, 0),
+        (END_DATE_TYPE, 0),
+        (INSTANCE_MATCH_CRITERIA, 0),
+        (lambda: schemas.TAG_SPECIFICATION_LIST, 0),
+        (lambda: schemas.BOOLEAN, 0),
+        (OUTPOST_ARN, 0),
+        (PLACEMENT_GROUP_ARN, 0),
+        (lambda: schemas.MILLISECOND_DATE_TIME, 0),
+        (CAPACITY_RESERVATION_COMMITMENT_DURATION, 0),
+        (CAPACITY_RESERVATION_DELIVERY_PREFERENCE, 0),
+    ),
+)
+
+CREATE_CAPACITY_RESERVATION_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _CCROr,
+    {_sSI: _cCCRRoma, _smit: None},
+    (_CRap,),
+    ((lambda: CAPACITY_RESERVATION, {_aQN: _CRap, _sN: _cRa}),),
+)
+
+CREATE_CAPACITY_RESERVATION: StaticOperationSchema = (
+    23,
+    n0,
+    _CCRr,
+    0,
+    CREATE_CAPACITY_RESERVATION_INPUT,
+    CREATE_CAPACITY_RESERVATION_OUTPUT,
+    (),
+)
+
+CAPACITY_RESERVATION_ADJUSTMENT_DETAILS: StaticSchema = (
+    18,
+    n0,
+    _CRAD,
+    0,
+    (_SDt, _ED, _CED, _EDT, _CDo),
+    (
+        (lambda: schemas.MILLISECOND_DATE_TIME, {_aQN: _SDt, _sN: _sDt}),
+        (lambda: schemas.MILLISECOND_DATE_TIME, {_aQN: _ED, _sN: _eD}),
+        (lambda: schemas.MILLISECOND_DATE_TIME, {_aQN: _CED, _sN: _cED}),
+        (lambda: schemas.STRING, {_aQN: _EDT, _sN: _eDT}),
+        (lambda: schemas.BOXED_LONG, {_aQN: _CDo, _sN: _cDo}),
+    ),
+)
+
+CAPACITY_RESERVATION_ADJUSTMENT_STATUS: StaticSchema = (
+    14,
+    n0,
+    _CRAS,
+    0,
+    (_reque, _ap, _re),
+    ((-1, {_sV: _reque}), (-1, {_sV: _ap}), (-1, {_sV: _re})),
+)
+
+CAPACITY_ALLOCATION_METADATA_ENTRY: StaticSchema = (
+    18,
+    n0,
+    _CAME,
+    0,
+    (_Ke, _Va),
+    (
+        (lambda: schemas.STRING, {_aQN: _Ke, _sN: _ke}),
+        (lambda: schemas.STRING, {_aQN: _Va, _sN: _va}),
+    ),
+)
+
+CAPACITY_ALLOCATION_METADATA_LIST: StaticSchema = (
+    16,
+    n0,
+    _CAML,
+    0,
+    (_me,),
+    ((CAPACITY_ALLOCATION_METADATA_ENTRY, {_sN: _i}),),
+)
+
+CAPACITY_ALLOCATION: StaticSchema = (
+    18,
+    n0,
+    _CAa,
+    0,
+    (_ATl, _Cou, _AMl),
+    (
+        (lambda: schemas.ALLOCATION_TYPE, {_aQN: _ATl, _sN: _aTl}),
+        (lambda: schemas.INTEGER, {_aQN: _Cou, _sN: _cou}),
+        (CAPACITY_ALLOCATION_METADATA_LIST, {_aQN: _AML, _sN: _aML}),
+    ),
+)
+
+CAPACITY_ALLOCATIONS: StaticSchema = (
+    16,
+    n0,
+    _CAap,
+    0,
+    (_me,),
+    ((CAPACITY_ALLOCATION, {_sN: _i}),),
+)
+
+CAPACITY_BLOCK_ID: StaticSchema = (3, n0, _CBI, 0)
+
+CAPACITY_RESERVATION_COMMITMENT_INFO: StaticSchema = (
+    18,
+    n0,
+    _CRCI,
+    0,
+    (_CIC, _CED, _CDo),
+    (
+        (lambda: schemas.INTEGER, {_aQN: _CIC, _sN: _cIC}),
+        (lambda: schemas.MILLISECOND_DATE_TIME, {_aQN: _CED, _sN: _cED}),
+        (lambda: schemas.BOXED_LONG, {_aQN: _CDo, _sN: _cDo}),
+    ),
+)
+
+INTERRUPTION_TYPE: StaticSchema = (14, n0, _ITnt, 0, (_adh,), ((-1, {_sV: _adh}),))
+
+INTERRUPTIBLE_CAPACITY_RESERVATION_ALLOCATION_STATUS: StaticSchema = (
+    14,
+    n0,
+    _ICRAS,
+    0,
+    (_p, _act, _up, _canc, _cance, _fa),
+    (
+        (-1, {_sV: _p}),
+        (-1, {_sV: _act}),
+        (-1, {_sV: _up}),
+        (-1, {_sV: _canc}),
+        (-1, {_sV: _cance}),
+        (-1, {_sV: _fa}),
+    ),
+)
+
+ZERO_SIZE_PREFERENCE: StaticSchema = (
+    14,
+    n0,
+    _ZSP,
+    0,
+    (_ret, _def),
+    ((-1, {_sV: _ret}), (-1, {_sV: _def})),
 )
 
 INTERRUPTIBLE_CAPACITY_ALLOCATION: StaticSchema = (
@@ -302,13 +688,10 @@ INTERRUPTIBLE_CAPACITY_ALLOCATION: StaticSchema = (
     (
         (lambda: schemas.INTEGER, {_aQN: _IC, _sN: _iC}),
         (lambda: schemas.INTEGER, {_aQN: _TIC, _sN: _tIC}),
-        (
-            lambda: schemas.INTERRUPTIBLE_CAPACITY_RESERVATION_ALLOCATION_STATUS,
-            {_aQN: _Sta, _sN: _sta},
-        ),
+        (INTERRUPTIBLE_CAPACITY_RESERVATION_ALLOCATION_STATUS, {_aQN: _Sta, _sN: _sta}),
         (lambda: schemas.STRING, {_aQN: _ICRI, _sN: _iCRI}),
-        (lambda: schemas.INTERRUPTION_TYPE, {_aQN: _ITnt, _sN: _iTn}),
-        (lambda: schemas.ZERO_SIZE_PREFERENCE, {_aQN: _ZSP, _sN: _zSP}),
+        (INTERRUPTION_TYPE, {_aQN: _ITnt, _sN: _iTn}),
+        (ZERO_SIZE_PREFERENCE, {_aQN: _ZSP, _sN: _zSP}),
     ),
 )
 
@@ -320,7 +703,7 @@ INTERRUPTION_INFO: StaticSchema = (
     (_SCRI, _ITnt),
     (
         (lambda: schemas.STRING, {_aQN: _SCRI, _sN: _sCRI}),
-        (lambda: schemas.INTERRUPTION_TYPE, {_aQN: _ITnt, _sN: _iTn}),
+        (INTERRUPTION_TYPE, {_aQN: _ITnt, _sN: _iTn}),
     ),
 )
 
@@ -414,10 +797,7 @@ CAPACITY_RESERVATION: StaticSchema = (
         (lambda: schemas.STRING, {_aQN: _CRA, _sN: _cRA}),
         (lambda: schemas.STRING, {_aQN: _AZI, _sN: _aZI}),
         (lambda: schemas.STRING, {_aQN: _IT, _sN: _iT}),
-        (
-            lambda: schemas.CAPACITY_RESERVATION_INSTANCE_PLATFORM,
-            {_aQN: _IPns, _sN: _iPns},
-        ),
+        (CAPACITY_RESERVATION_INSTANCE_PLATFORM, {_aQN: _IPns, _sN: _iPns}),
         (lambda: schemas.STRING, {_aQN: _AZ, _sN: _aZ}),
         (CAPACITY_RESERVATION_TENANCY, {_aQN: _Ten, _sN: _ten}),
         (lambda: schemas.INTEGER, {_aQN: _TICo, _sN: _tICo}),
@@ -427,38 +807,26 @@ CAPACITY_RESERVATION: StaticSchema = (
         (CAPACITY_RESERVATION_STATE, {_aQN: _St, _sN: _st}),
         (lambda: schemas.MILLISECOND_DATE_TIME, {_aQN: _SDt, _sN: _sDt}),
         (lambda: schemas.DATE_TIME, {_aQN: _ED, _sN: _eD}),
-        (lambda: schemas.END_DATE_TYPE, {_aQN: _EDT, _sN: _eDT}),
-        (lambda: schemas.INSTANCE_MATCH_CRITERIA, {_aQN: _IMC, _sN: _iMC}),
+        (END_DATE_TYPE, {_aQN: _EDT, _sN: _eDT}),
+        (INSTANCE_MATCH_CRITERIA, {_aQN: _IMC, _sN: _iMC}),
         (lambda: schemas.DATE_TIME, {_aQN: _CD, _sN: _cD}),
         (lambda: schemas.TAG_LIST, {_aQN: _TSag, _sN: _tS}),
-        (lambda: schemas.OUTPOST_ARN, {_aQN: _OA, _sN: _oAu}),
+        (OUTPOST_ARN, {_aQN: _OA, _sN: _oAu}),
         (lambda: schemas.STRING, {_aQN: _CRFI, _sN: _cRFI}),
-        (lambda: schemas.PLACEMENT_GROUP_ARN, {_aQN: _PGA, _sN: _pGA}),
-        (lambda: schemas.CAPACITY_ALLOCATIONS, {_aQN: _CAS, _sN: _cAS}),
+        (PLACEMENT_GROUP_ARN, {_aQN: _PGA, _sN: _pGA}),
+        (CAPACITY_ALLOCATIONS, {_aQN: _CAS, _sN: _cAS}),
         (CAPACITY_RESERVATION_TYPE, {_aQN: _RTes, _sN: _rTe}),
         (lambda: schemas.ACCOUNT_ID, {_aQN: _URBOI, _sN: _uRBOI}),
-        (
-            lambda: schemas.CAPACITY_RESERVATION_COMMITMENT_INFO,
-            {_aQN: _CIom, _sN: _cIom},
-        ),
-        (
-            lambda: schemas.CAPACITY_RESERVATION_DELIVERY_PREFERENCE,
-            {_aQN: _DPel, _sN: _dP},
-        ),
-        (lambda: schemas.CAPACITY_BLOCK_ID, {_aQN: _CBI, _sN: _cBI}),
+        (CAPACITY_RESERVATION_COMMITMENT_INFO, {_aQN: _CIom, _sN: _cIom}),
+        (CAPACITY_RESERVATION_DELIVERY_PREFERENCE, {_aQN: _DPel, _sN: _dP}),
+        (CAPACITY_BLOCK_ID, {_aQN: _CBI, _sN: _cBI}),
         (lambda: schemas.BOXED_BOOLEAN, {_aQN: _Inte, _sN: _inte}),
         (INTERRUPTIBLE_CAPACITY_ALLOCATION, {_aQN: _ICA, _sN: _iCA}),
         (INTERRUPTION_INFO, {_aQN: _IInt, _sN: _iIn}),
-        (
-            lambda: schemas.CAPACITY_RESERVATION_ADJUSTMENT_STATUS,
-            {_aQN: _ASd, _sN: _aSd},
-        ),
-        (
-            lambda: schemas.CAPACITY_RESERVATION_ADJUSTMENT_DETAILS,
-            {_aQN: _ADdj, _sN: _aD},
-        ),
+        (CAPACITY_RESERVATION_ADJUSTMENT_STATUS, {_aQN: _ASd, _sN: _aSd}),
+        (CAPACITY_RESERVATION_ADJUSTMENT_DETAILS, {_aQN: _ADdj, _sN: _aD}),
         (lambda: schemas.MILLISECOND_DATE_TIME, {_aQN: _OSD, _sN: _oSD}),
-        (lambda: schemas.ZERO_SIZE_PREFERENCE, {_aQN: _ZSP, _sN: _zSP}),
+        (ZERO_SIZE_PREFERENCE, {_aQN: _ZSP, _sN: _zSP}),
         (CAPACITY_RESERVATION_LAUNCH_STATUS, {_aQN: _LSa, _sN: _lS}),
     ),
 )
@@ -704,8 +1072,8 @@ FLEET_INSTANCE_MATCH_CRITERIA: StaticSchema = (
     n0,
     _FIMC,
     0,
-    (_op,),
-    ((-1, {_sV: _op}),),
+    (_ope,),
+    ((-1, {_sV: _ope}),),
 )
 
 BARE_METAL: StaticSchema = (
@@ -714,7 +1082,7 @@ BARE_METAL: StaticSchema = (
     _BM,
     0,
     (_INCLUDED, _REQUIRED, _EXCLUDED),
-    ((-1, {_sV: _inc}), (-1, {_sV: _requ}), (-1, {_sV: _excl})),
+    ((-1, {_sV: _inc}), (-1, {_sV: _req}), (-1, {_sV: _excl})),
 )
 
 BASELINE_EBS_BANDWIDTH_MBPS_REQUEST: StaticSchema = (
@@ -768,7 +1136,7 @@ BURSTABLE_PERFORMANCE: StaticSchema = (
     _BP,
     0,
     (_INCLUDED, _REQUIRED, _EXCLUDED),
-    ((-1, {_sV: _inc}), (-1, {_sV: _requ}), (-1, {_sV: _excl})),
+    ((-1, {_sV: _inc}), (-1, {_sV: _req}), (-1, {_sV: _excl})),
 )
 
 CPU_MANUFACTURER: StaticSchema = (
@@ -824,7 +1192,7 @@ LOCAL_STORAGE: StaticSchema = (
     _LSo,
     0,
     (_INCLUDED, _REQUIRED, _EXCLUDED),
-    ((-1, {_sV: _inc}), (-1, {_sV: _requ}), (-1, {_sV: _excl})),
+    ((-1, {_sV: _inc}), (-1, {_sV: _req}), (-1, {_sV: _excl})),
 )
 
 LOCAL_STORAGE_TYPE: StaticSchema = (

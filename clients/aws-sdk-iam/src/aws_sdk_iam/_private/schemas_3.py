@@ -225,6 +225,7 @@ _GASO = "GetAccountSummaryOutput"
 _cGASR = "com.amazonaws.iam#GetAccountSummaryResponse"
 _SM = "SummaryMap"
 _GAS = "GetAccountSummary"
+_pNLT = "policyNameListType"
 
 ORGANIZATIONS_ENTITY_PATH_TYPE: StaticSchema = (3, n0, _oEPT, 0)
 
@@ -994,4 +995,13 @@ SUMMARY_KEY_TYPE: StaticSchema = (
         (-1, {_sV: _Rol}),
         (-1, {_sV: _RQ}),
     ),
+)
+
+POLICY_NAME_LIST_TYPE: StaticSchema = (
+    16,
+    n0,
+    _pNLT,
+    0,
+    (_me,),
+    ((lambda: schemas.POLICY_NAME_TYPE, 0),),
 )

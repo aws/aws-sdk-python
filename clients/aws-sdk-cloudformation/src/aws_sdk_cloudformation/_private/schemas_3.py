@@ -14,6 +14,7 @@ _SUCCEEDED = "SUCCEEDED"
 _FAILED = "FAILED"
 _S = "Status"
 _SR = "StatusReason"
+_V = "Value"
 _m = "member"
 _s = "smithy.api#input"
 _sm = "smithy.api#output"
@@ -33,9 +34,11 @@ _CRT = "ClientRequestToken"
 _SN = "StackName"
 _P = "Properties"
 _Me = "Metadata"
+_AVc = "ActualValue"
 _LRI = "LogicalResourceId"
 _MI = "ModuleInfo"
 _PRI = "PhysicalResourceId"
+_SRDS = "StackResourceDriftStatus"
 _RT = "ResourceType"
 _HFM = "HookFailureMode"
 _HIP = "HookInvocationPoint"
@@ -45,7 +48,6 @@ _CC = "CREATE_COMPLETE"
 _DIP = "DELETE_IN_PROGRESS"
 _DC = "DELETE_COMPLETE"
 _DF = "DELETE_FAILED"
-_CTr = "CreationTime"
 _Des = "Description"
 _ES = "ExecutionStatus"
 _AVAILABLE = "AVAILABLE"
@@ -56,10 +58,7 @@ _OBSOLETE = "OBSOLETE"
 _SI = "StackId"
 _RI = "ResourceIdentifier"
 _RTe = "ResourceTypes"
-_GTN = "GeneratedTemplateName"
-_TCe = "TemplateConfiguration"
-_Reso = "Resources"
-_GTI = "GeneratedTemplateId"
+_K = "Key"
 _OI = "OperationId"
 _OUI = "OrganizationalUnitId"
 _Reg = "Region"
@@ -71,11 +70,9 @@ _NT = "NextToken"
 _SDS = "StackDriftStatus"
 _DSe = "DetailedStatus"
 _EI = "EventId"
-_ETv = "EventType"
 _HS = "HookStatus"
 _HSR = "HookStatusReason"
 _HT = "HookType"
-_OT = "OperationType"
 _RP = "ResourceProperties"
 _RSe = "ResourceStatus"
 _CF = "CREATE_FAILED"
@@ -83,18 +80,8 @@ _RIP_ = "ROLLBACK_IN_PROGRESS"
 _RC_ = "ROLLBACK_COMPLETE"
 _RF = "ROLLBACK_FAILED"
 _RSR = "ResourceStatusReason"
-_VN = "ValidationName"
-_VP = "ValidationPath"
-_VS = "ValidationStatus"
-_VSR = "ValidationStatusReason"
-_OE = "OperationEvent"
-_OS = "OperationStatus"
 _ST = "StartTime"
 _ETn = "EndTime"
-_VFM = "ValidationFailureMode"
-_OEp = "OperationEvents"
-_DGTIe = "DescribeGeneratedTemplateInput"
-_LUT = "LastUpdatedTime"
 _RFe = "ResourcesFailed"
 _RPe = "ResourcesPending"
 _RPes = "ResourcesProcessing"
@@ -121,9 +108,6 @@ _RDeso = "ResourceDetail"
 _W = "Warnings"
 _RDesou = "ResourceDetails"
 _TW = "TotalWarnings"
-_DGTOe = "DescribeGeneratedTemplateOutput"
-_Pr = "Progress"
-_DGTe = "DescribeGeneratedTemplate"
 _DOAIe = "DescribeOrganizationsAccessInput"
 _OSr = "OrganizationStatus"
 _ENABLED = "ENABLED"
@@ -210,114 +194,28 @@ _LUTa = "LastUpdatedTimestamp"
 _DI = "DriftInformation"
 _DSROe = "DescribeStackResourceOutput"
 _DSRes = "DescribeStackResource"
+_SRDSF = "StackResourceDriftStatusFilters"
+_DSRDI = "DescribeStackResourceDriftsInput"
+_MR = "MaxResults"
+_SRDSR = "StackResourceDriftStatusReason"
+_PRICKVP = "PhysicalResourceIdContextKeyValuePair"
+_PRIC = "PhysicalResourceIdContext"
+_PVr = "PropertyValue"
+_DTi = "DifferenceType"
+_ADD = "ADD"
+_REMOVE = "REMOVE"
+_NE = "NOT_EQUAL"
+_PDr = "PropertyDifference"
+_EV = "ExpectedValue"
+_PDro = "PropertyDifferences"
+_SRDt = "StackResourceDrift"
+_EPx = "ExpectedProperties"
+_AP = "ActualProperties"
+_DSRr = "DriftStatusReason"
+_SRDta = "StackResourceDrifts"
+_DSRDO = "DescribeStackResourceDriftsOutput"
+_DSRD = "DescribeStackResourceDrifts"
 _RSIPE = "ResourceScanInProgressException"
-
-OPERATION_EVENT: StaticSchema = (
-    18,
-    n0,
-    _OE,
-    0,
-    (
-        _EI,
-        _SI,
-        _OI,
-        _OT,
-        _OS,
-        _ETv,
-        _LRI,
-        _PRI,
-        _RT,
-        _Ti,
-        _ST,
-        _ETn,
-        _RSe,
-        _RSR,
-        _RP,
-        _CRT,
-        _HT,
-        _HS,
-        _HSR,
-        _HIP,
-        _HFM,
-        _DSe,
-        _VFM,
-        _VN,
-        _VS,
-        _VSR,
-        _VP,
-    ),
-    (
-        (lambda: schemas.EVENT_ID, 0),
-        (lambda: schemas.STACK_ID, 0),
-        (lambda: schemas.OPERATION_ID, 0),
-        (lambda: schemas.OPERATION_TYPE, 0),
-        (lambda: schemas.BEACON_STACK_OPERATION_STATUS, 0),
-        (lambda: schemas.EVENT_TYPE, 0),
-        (lambda: schemas.LOGICAL_RESOURCE_ID, 0),
-        (lambda: schemas.PHYSICAL_RESOURCE_ID, 0),
-        (lambda: schemas.RESOURCE_TYPE, 0),
-        (lambda: schemas.TIMESTAMP, 0),
-        (lambda: schemas.TIMESTAMP, 0),
-        (lambda: schemas.TIMESTAMP, 0),
-        (lambda: schemas.RESOURCE_STATUS, 0),
-        (lambda: schemas.RESOURCE_STATUS_REASON, 0),
-        (lambda: schemas.RESOURCE_PROPERTIES, 0),
-        (lambda: schemas.CLIENT_REQUEST_TOKEN, 0),
-        (lambda: schemas.HOOK_TYPE, 0),
-        (lambda: schemas.HOOK_STATUS, 0),
-        (lambda: schemas.HOOK_STATUS_REASON, 0),
-        (lambda: schemas.HOOK_INVOCATION_POINT, 0),
-        (lambda: schemas.HOOK_FAILURE_MODE, 0),
-        (lambda: schemas.DETAILED_STATUS, 0),
-        (lambda: schemas.HOOK_FAILURE_MODE, 0),
-        (lambda: schemas.VALIDATION_NAME, 0),
-        (lambda: schemas.VALIDATION_STATUS, 0),
-        (lambda: schemas.VALIDATION_STATUS_REASON, 0),
-        (lambda: schemas.VALIDATION_PATH, 0),
-    ),
-)
-
-OPERATION_EVENTS: StaticSchema = (16, n0, _OEp, 0, (_m,), ((OPERATION_EVENT, 0),))
-
-DESCRIBE_GENERATED_TEMPLATE_INPUT: StaticSchema = (
-    18,
-    n0,
-    _DGTIe,
-    {_s: None},
-    (_GTN,),
-    ((lambda: schemas.GENERATED_TEMPLATE_NAME, {_sO: None, _smit: None}),),
-)
-
-DESCRIBE_GENERATED_TEMPLATE_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _DGTOe,
-    {_sm: None},
-    (_GTI, _GTN, _Reso, _S, _SR, _CTr, _LUT, _Pr, _SI, _TCe, _TW),
-    (
-        (lambda: schemas.GENERATED_TEMPLATE_ID, 0),
-        (lambda: schemas.GENERATED_TEMPLATE_NAME, 0),
-        (lambda: RESOURCE_DETAILS, 0),
-        (lambda: schemas.GENERATED_TEMPLATE_STATUS, 0),
-        (lambda: schemas.TEMPLATE_STATUS_REASON, 0),
-        (lambda: schemas.CREATION_TIME, 0),
-        (lambda: schemas.LAST_UPDATED_TIME, 0),
-        (lambda: TEMPLATE_PROGRESS, 0),
-        (lambda: schemas.STACK_ID, 0),
-        (lambda: schemas.TEMPLATE_CONFIGURATION, 0),
-        (lambda: TOTAL_WARNINGS, 0),
-    ),
-)
-
-DESCRIBE_GENERATED_TEMPLATE: StaticOperationSchema = (
-    23,
-    n0,
-    _DGTe,
-    0,
-    DESCRIBE_GENERATED_TEMPLATE_INPUT,
-    DESCRIBE_GENERATED_TEMPLATE_OUTPUT,
-    (lambda: schemas.GENERATED_TEMPLATE_NOT_FOUND_EXCEPTION,),
-)
 
 RESOURCES_FAILED: StaticSchema = (7, n0, _RFe, 0)
 
@@ -357,6 +255,8 @@ GENERATED_TEMPLATE_RESOURCE_STATUS: StaticSchema = (
 
 PROPERTY_DESCRIPTION: StaticSchema = (3, n0, _PD, 0)
 
+PROPERTY_PATH: StaticSchema = (3, n0, _PPr, 0)
+
 REQUIRED_PROPERTY: StaticSchema = (2, n0, _RPeq, 0)
 
 WARNING_PROPERTY: StaticSchema = (
@@ -365,11 +265,7 @@ WARNING_PROPERTY: StaticSchema = (
     _WP,
     0,
     (_PPr, _Req, _Des),
-    (
-        (lambda: schemas.PROPERTY_PATH, 0),
-        (REQUIRED_PROPERTY, 0),
-        (PROPERTY_DESCRIPTION, 0),
-    ),
+    ((PROPERTY_PATH, 0), (REQUIRED_PROPERTY, 0), (PROPERTY_DESCRIPTION, 0)),
 )
 
 WARNING_PROPERTIES: StaticSchema = (16, n0, _WPa, 0, (_m,), ((WARNING_PROPERTY, 0),))
@@ -971,6 +867,133 @@ STACK_RESOURCE_DETAIL: StaticSchema = (
         (lambda: schemas.METADATA, 0),
         (lambda: schemas.STACK_RESOURCE_DRIFT_INFORMATION, 0),
         (lambda: schemas.MODULE_INFO, 0),
+    ),
+)
+
+STACK_RESOURCE_DRIFT_STATUS_FILTERS: StaticSchema = (
+    16,
+    n0,
+    _SRDSF,
+    0,
+    (_m,),
+    ((lambda: schemas.STACK_RESOURCE_DRIFT_STATUS, 0),),
+)
+
+DESCRIBE_STACK_RESOURCE_DRIFTS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _DSRDI,
+    {_s: None},
+    (_SN, _SRDSF, _NT, _MR),
+    (
+        (lambda: schemas.STACK_NAME_OR_ID, {_sO: None, _smit: None}),
+        (STACK_RESOURCE_DRIFT_STATUS_FILTERS, 0),
+        (lambda: schemas.NEXT_TOKEN, 0),
+        (lambda: schemas.BOXED_MAX_RESULTS, 0),
+    ),
+)
+
+DESCRIBE_STACK_RESOURCE_DRIFTS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _DSRDO,
+    {_sm: None},
+    (_SRDta, _NT),
+    (
+        (lambda: schemas.STACK_RESOURCE_DRIFTS, {_sO: None, _smit: None}),
+        (lambda: schemas.NEXT_TOKEN, 0),
+    ),
+)
+
+DESCRIBE_STACK_RESOURCE_DRIFTS: StaticOperationSchema = (
+    23,
+    n0,
+    _DSRD,
+    0,
+    DESCRIBE_STACK_RESOURCE_DRIFTS_INPUT,
+    DESCRIBE_STACK_RESOURCE_DRIFTS_OUTPUT,
+    (),
+)
+
+PROPERTIES: StaticSchema = (3, n0, _P, 0)
+
+STACK_RESOURCE_DRIFT_STATUS_REASON: StaticSchema = (3, n0, _SRDSR, 0)
+
+KEY: StaticSchema = (3, n0, _K, 0)
+
+VALUE: StaticSchema = (3, n0, _V, 0)
+
+PHYSICAL_RESOURCE_ID_CONTEXT_KEY_VALUE_PAIR: StaticSchema = (
+    18,
+    n0,
+    _PRICKVP,
+    0,
+    (_K, _V),
+    ((KEY, {_sO: None, _smit: None}), (VALUE, {_sO: None, _smit: None})),
+)
+
+PHYSICAL_RESOURCE_ID_CONTEXT: StaticSchema = (
+    16,
+    n0,
+    _PRIC,
+    0,
+    (_m,),
+    ((PHYSICAL_RESOURCE_ID_CONTEXT_KEY_VALUE_PAIR, 0),),
+)
+
+PROPERTY_VALUE: StaticSchema = (3, n0, _PVr, 0)
+
+DIFFERENCE_TYPE: StaticSchema = (
+    14,
+    n0,
+    _DTi,
+    0,
+    (_ADD, _REMOVE, _NE),
+    ((-1, {_sV: _ADD}), (-1, {_sV: _REMOVE}), (-1, {_sV: _NE})),
+)
+
+PROPERTY_DIFFERENCE: StaticSchema = (
+    18,
+    n0,
+    _PDr,
+    0,
+    (_PPr, _EV, _AVc, _DTi),
+    (
+        (PROPERTY_PATH, {_sO: None, _smit: None}),
+        (PROPERTY_VALUE, {_sO: None, _smit: None}),
+        (PROPERTY_VALUE, {_sO: None, _smit: None}),
+        (DIFFERENCE_TYPE, {_sO: None, _smit: None}),
+    ),
+)
+
+PROPERTY_DIFFERENCES: StaticSchema = (
+    16,
+    n0,
+    _PDro,
+    0,
+    (_m,),
+    ((PROPERTY_DIFFERENCE, 0),),
+)
+
+STACK_RESOURCE_DRIFT: StaticSchema = (
+    18,
+    n0,
+    _SRDt,
+    0,
+    (_SI, _LRI, _PRI, _PRIC, _RT, _EPx, _AP, _PDro, _SRDS, _Ti, _MI, _DSRr),
+    (
+        (lambda: schemas.STACK_ID, {_sO: None, _smit: None}),
+        (lambda: schemas.LOGICAL_RESOURCE_ID, {_sO: None, _smit: None}),
+        (lambda: schemas.PHYSICAL_RESOURCE_ID, 0),
+        (PHYSICAL_RESOURCE_ID_CONTEXT, 0),
+        (lambda: schemas.RESOURCE_TYPE, {_sO: None, _smit: None}),
+        (PROPERTIES, 0),
+        (PROPERTIES, 0),
+        (PROPERTY_DIFFERENCES, 0),
+        (lambda: schemas.STACK_RESOURCE_DRIFT_STATUS, {_sO: None, _smit: None}),
+        (lambda: schemas.TIMESTAMP, {_sO: None, _smit: None}),
+        (lambda: schemas.MODULE_INFO, 0),
+        (STACK_RESOURCE_DRIFT_STATUS_REASON, 0),
     ),
 )
 

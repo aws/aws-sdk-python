@@ -8,6 +8,8 @@ from . import schemas
 
 
 n0 = "com.amazonaws.bedrockagentcorecontrol"
+_sV = "schemaVersion"
+_iC = "inlineContent"
 _s = "smithy.api#error"
 _c = "client"
 _sE = "smithy.api#httpError"
@@ -19,7 +21,6 @@ _mem = "member"
 _sVm = "smithy.api#enumValue"
 _smi = "smithy.api#default"
 _smit = "smithy.api#sensitive"
-_NONE = "NONE"
 _sSI = "smithy.synthetic#originalShapeId"
 _smith = "smithy.api#input"
 _sL = "smithy.api#httpLabel"
@@ -32,8 +33,11 @@ _DF = "DELETE_FAILED"
 _smithy = "smithy.api#output"
 _st = "status"
 _smithya = "smithy.api#http"
+_aRI = "agentRuntimeId"
+_aRV = "agentRuntimeVersion"
 _t = "tags"
 _READY = "READY"
+_aRA = "agentRuntimeArn"
 _cA = "createdAt"
 _sQ = "smithy.api#httpQuery"
 _lUA = "lastUpdatedAt"
@@ -48,8 +52,44 @@ _aPA = "accessPointArn"
 _PUBLIC = "PUBLIC"
 _VPC = "VPC"
 _nM = "networkMode"
+_aRAg = "agentRuntimeArtifact"
+_rA = "roleArn"
 _nC = "networkConfiguration"
+_aCu = "authorizerConfiguration"
+_rHC = "requestHeaderConfiguration"
+_pC = "protocolConfiguration"
+_lC = "lifecycleConfiguration"
+_hC = "hooksConfiguration"
+_eV = "environmentVariables"
 _fC = "filesystemConfigurations"
+_cPC = "capacityProviderConfiguration"
+_pV = "platformVersion"
+_aP = "allowedPorts"
+_rC = "resourceConfigurations"
+_wID = "workloadIdentityDetails"
+_mC = "metadataConfiguration"
+_UARI = "UpdateAgentRuntimeInput"
+_cUARR = "com.amazonaws.bedrockagentcorecontrol#UpdateAgentRuntimeRequest"
+_UARO = "UpdateAgentRuntimeOutput"
+_cUARRo = "com.amazonaws.bedrockagentcorecontrol#UpdateAgentRuntimeResponse"
+_UAR = "UpdateAgentRuntime"
+_ARVS = "AgentRuntimeVersionSummary"
+_ARVSL = "AgentRuntimeVersionSummaryList"
+_SD = "SkillDefinition"
+_SMD = "SkillMdDefinition"
+_ASD = "AgentSkillsDescriptor"
+_sMk = "skillMd"
+_sD = "skillDefinition"
+_AAT = "AllowedAudienceType"
+_HQPN = "HttpQueryParameterName"
+_AQP = "AllowedQueryParameters"
+_HHN = "HttpHeaderName"
+_ARH = "AllowedRequestHeaders"
+_ARHl = "AllowedResponseHeaders"
+_ASLV = "AllowedStringListValue"
+_ASLVL = "AllowedStringListValuesList"
+_ASV = "AllowedStringValue"
+_ASVL = "AllowedStringValuesList"
 _AKCPAT = "ApiKeyCredentialProviderArnType"
 _DAKT = "DefaultApiKeyType"
 _SJKT = "SecretJsonKeyType"
@@ -154,7 +194,7 @@ _TSA = "ToolSecretArn"
 _SML = "SecretsManagerLocation"
 _CL = "CertificateLocation"
 _Ce = "Certificate"
-_l = "location"
+_lo = "location"
 _Cer = "Certificates"
 _RL = "ResourceLocation"
 _BEPT = "BrowserEnterprisePolicyType"
@@ -169,7 +209,7 @@ _SFFSA = "S3FilesFileSystemArn"
 _SFC = "S3FilesConfiguration"
 _TFSC = "ToolsFileSystemConfiguration"
 _sFC = "s3FilesConfiguration"
-_eC = "efsConfiguration"
+_eCf = "efsConfiguration"
 _TFSCo = "ToolsFileSystemConfigurations"
 _SN = "SandboxName"
 _BNM = "BrowserNetworkMode"
@@ -205,66 +245,222 @@ _GB = "GetBrowser"
 _RT = "ResourceType"
 _SYSTEM = "SYSTEM"
 _CUSTOM = "CUSTOM"
-_LBI = "ListBrowsersInput"
-_cLBR = "com.amazonaws.bedrockagentcorecontrol#ListBrowsersRequest"
-_BSr = "BrowserSummary"
-_BSro = "BrowserSummaries"
-_LBO = "ListBrowsersOutput"
-_cLBRo = "com.amazonaws.bedrockagentcorecontrol#ListBrowsersResponse"
-_bSr = "browserSummaries"
-_LB = "ListBrowsers"
-_CRP = "CapacityReservationPreference"
-_CRO = "CAPACITY_RESERVATIONS_ONLY"
-_cro = "capacity-reservations-only"
-_OPEN = "OPEN"
-_o = "open"
-_no = "none"
-_CRI = "CapacityReservationId"
-_CRRGA = "CapacityReservationResourceGroupArn"
-_CRT = "CapacityReservationTarget"
-_cRI = "capacityReservationId"
-_cRRGA = "capacityReservationResourceGroupArn"
-_CRS = "CapacityReservationSpecification"
-_cRP = "capacityReservationPreference"
-_cRT = "capacityReservationTarget"
-_DN = "DeviceName"
-_ECI = "EbsCardIndex"
-_VIo = "VolumeIops"
-_KKI = "KmsKeyId"
-_ESI = "EbsSnapshotId"
-_VT = "VolumeThroughput"
-_EVIR = "EbsVolumeInitializationRate"
-_VSGB = "VolumeSizeGiB"
-_EVT = "EbsVolumeType"
-_STANDARD = "STANDARD"
-_sta = "standard"
-_IO = "IO1"
-_io = "io1"
-_IO_ = "IO2"
-_io_ = "io2"
-_GP = "GP2"
-_g = "gp2"
-_SC = "SC1"
-_sc = "sc1"
-_ST = "ST1"
-_st_ = "st1"
-_GP_ = "GP3"
-_gp = "gp3"
-_EEBSVC = "EphemeralEBSVolumeConfiguration"
-_vT = "volumeType"
-_iop = "iops"
-_th = "throughput"
-_enc = "encrypted"
-_kKI = "kmsKeyId"
-_sIn = "snapshotId"
-_vS = "volumeSize"
-_vIR = "volumeInitializationRate"
-_eCI = "ebsCardIndex"
-_VDN = "VirtualDeviceName"
-_EBDM = "EphemeralBlockDeviceMapping"
-_dN = "deviceName"
-_vNi = "virtualName"
-_eb = "ebs"
+_CPVT = "CredentialProviderVendorType"
+_GO = "GoogleOauth2"
+_GOi = "GithubOauth2"
+_SOl = "SlackOauth2"
+_SOa = "SalesforceOauth2"
+_MOi = "MicrosoftOauth2"
+_COu = "CustomOauth2"
+_AOt = "AtlassianOauth2"
+_LOi = "LinkedinOauth2"
+_XO = "XOauth2"
+_OO = "OktaOauth2"
+_OLO = "OneLoginOauth2"
+_POO = "PingOneOauth2"
+_FOa = "FacebookOauth2"
+_YO = "YandexOauth2"
+_RO = "RedditOauth2"
+_ZO = "ZoomOauth2"
+_TO = "TwitchOauth2"
+_SOp = "SpotifyOauth2"
+_DOr = "DropboxOauth2"
+_NO = "NotionOauth2"
+_HO = "HubspotOauth2"
+_CAO = "CyberArkOauth2"
+_FAO = "FusionAuthOauth2"
+_AOu = "Auth0Oauth2"
+_COo = "CognitoOauth2"
+
+UPDATE_AGENT_RUNTIME_INPUT: StaticSchema = (
+    18,
+    n0,
+    _UARI,
+    {_sSI: _cUARR, _smith: None},
+    (
+        _aRI,
+        _aRAg,
+        _rA,
+        _nC,
+        _d,
+        _aCu,
+        _rHC,
+        _pC,
+        _lC,
+        _hC,
+        _mC,
+        _eV,
+        _fC,
+        _cPC,
+        _pV,
+        _aP,
+        _rC,
+        _cT,
+    ),
+    (
+        (lambda: schemas.AGENT_RUNTIME_ID, 9),
+        (lambda: schemas.AGENT_RUNTIME_ARTIFACT, 1),
+        (lambda: schemas.ROLE_ARN, 1),
+        (lambda: schemas.NETWORK_CONFIGURATION, 0),
+        (lambda: schemas.DESCRIPTION, 0),
+        (lambda: schemas.AUTHORIZER_CONFIGURATION, 0),
+        (lambda: schemas.REQUEST_HEADER_CONFIGURATION, 0),
+        (lambda: schemas.PROTOCOL_CONFIGURATION, 0),
+        (lambda: schemas.LIFECYCLE_CONFIGURATION, 0),
+        (lambda: schemas.RUNTIME_HOOKS_CONFIGURATION, 0),
+        (lambda: schemas.RUNTIME_METADATA_CONFIGURATION, 0),
+        (lambda: schemas.ENVIRONMENT_VARIABLES_MAP, 0),
+        (lambda: schemas.FILESYSTEM_CONFIGURATIONS, 0),
+        (lambda: schemas.CAPACITY_PROVIDER_CONFIGURATION, 0),
+        (lambda: schemas.PLATFORM_VERSION, 0),
+        (lambda: schemas.ALLOWED_PORTS, 0),
+        (lambda: schemas.RESOURCE_CONFIGURATIONS, 0),
+        (lambda: schemas.CLIENT_TOKEN, 2),
+    ),
+)
+
+UPDATE_AGENT_RUNTIME_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _UARO,
+    {_sSI: _cUARRo, _smithy: None},
+    (_aRA, _aRI, _wID, _aRV, _cA, _lUA, _st),
+    (
+        (lambda: schemas.AGENT_RUNTIME_ARN, 1),
+        (lambda: schemas.AGENT_RUNTIME_ID, 1),
+        (lambda: schemas.WORKLOAD_IDENTITY_DETAILS, 0),
+        (lambda: schemas.AGENT_RUNTIME_VERSION, 1),
+        (lambda: schemas.DATE_TIMESTAMP, 1),
+        (lambda: schemas.DATE_TIMESTAMP, 1),
+        (lambda: schemas.AGENT_RUNTIME_STATUS, 1),
+    ),
+)
+
+UPDATE_AGENT_RUNTIME: StaticOperationSchema = (
+    23,
+    n0,
+    _UAR,
+    {
+        _smithya: MappingProxyType(
+            {"code": 202, "method": "PUT", "uri": "/runtimes/{agentRuntimeId}/"}
+        )
+    },
+    UPDATE_AGENT_RUNTIME_INPUT,
+    UPDATE_AGENT_RUNTIME_OUTPUT,
+    (
+        lambda: schemas.ACCESS_DENIED_EXCEPTION,
+        lambda: schemas.CONFLICT_EXCEPTION,
+        lambda: schemas.INTERNAL_SERVER_EXCEPTION,
+        lambda: schemas.RESOURCE_NOT_FOUND_EXCEPTION,
+        lambda: schemas.SERVICE_QUOTA_EXCEEDED_EXCEPTION,
+        lambda: schemas.THROTTLING_EXCEPTION,
+        lambda: schemas.VALIDATION_EXCEPTION,
+    ),
+)
+
+AGENT_RUNTIME_VERSION_SUMMARY: StaticSchema = (
+    18,
+    n0,
+    _ARVS,
+    0,
+    (_aRA, _aRV, _st),
+    (
+        (lambda: schemas.AGENT_RUNTIME_ARN, 1),
+        (lambda: schemas.AGENT_RUNTIME_VERSION, 1),
+        (lambda: schemas.AGENT_RUNTIME_STATUS, 1),
+    ),
+)
+
+AGENT_RUNTIME_VERSION_SUMMARY_LIST: StaticSchema = (
+    16,
+    n0,
+    _ARVSL,
+    0,
+    (_mem,),
+    ((AGENT_RUNTIME_VERSION_SUMMARY, 0),),
+)
+
+SKILL_DEFINITION: StaticSchema = (
+    18,
+    n0,
+    _SD,
+    0,
+    (_sV, _iC),
+    ((lambda: schemas.SCHEMA_VERSION, 0), (lambda: schemas.INLINE_CONTENT, 0)),
+)
+
+SKILL_MD_DEFINITION: StaticSchema = (
+    18,
+    n0,
+    _SMD,
+    0,
+    (_iC,),
+    ((lambda: schemas.INLINE_CONTENT, 0),),
+)
+
+AGENT_SKILLS_DESCRIPTOR: StaticSchema = (
+    18,
+    n0,
+    _ASD,
+    0,
+    (_sMk, _sD),
+    ((SKILL_MD_DEFINITION, 0), (SKILL_DEFINITION, 0)),
+)
+
+ALLOWED_AUDIENCE_TYPE: StaticSchema = (3, n0, _AAT, 0)
+
+HTTP_QUERY_PARAMETER_NAME: StaticSchema = (3, n0, _HQPN, 0)
+
+ALLOWED_QUERY_PARAMETERS: StaticSchema = (
+    16,
+    n0,
+    _AQP,
+    0,
+    (_mem,),
+    ((HTTP_QUERY_PARAMETER_NAME, 0),),
+)
+
+HTTP_HEADER_NAME: StaticSchema = (3, n0, _HHN, 0)
+
+ALLOWED_REQUEST_HEADERS: StaticSchema = (
+    16,
+    n0,
+    _ARH,
+    0,
+    (_mem,),
+    ((HTTP_HEADER_NAME, 0),),
+)
+
+ALLOWED_RESPONSE_HEADERS: StaticSchema = (
+    16,
+    n0,
+    _ARHl,
+    0,
+    (_mem,),
+    ((HTTP_HEADER_NAME, 0),),
+)
+
+ALLOWED_STRING_LIST_VALUE: StaticSchema = (3, n0, _ASLV, 0)
+
+ALLOWED_STRING_LIST_VALUES_LIST: StaticSchema = (
+    16,
+    n0,
+    _ASLVL,
+    0,
+    (_mem,),
+    ((ALLOWED_STRING_LIST_VALUE, 0),),
+)
+
+ALLOWED_STRING_VALUE: StaticSchema = (3, n0, _ASV, 0)
+
+ALLOWED_STRING_VALUES_LIST: StaticSchema = (
+    16,
+    n0,
+    _ASVL,
+    0,
+    (_mem,),
+    ((ALLOWED_STRING_VALUE, 0),),
+)
 
 API_KEY_CREDENTIAL_PROVIDER_ARN_TYPE: StaticSchema = (3, n0, _AKCPAT, 0)
 
@@ -853,7 +1049,7 @@ CERTIFICATE_LOCATION: StaticSchema = (
     ((SECRETS_MANAGER_LOCATION, 0),),
 )
 
-CERTIFICATE: StaticSchema = (18, n0, _Ce, 0, (_l,), ((CERTIFICATE_LOCATION, 1),))
+CERTIFICATE: StaticSchema = (18, n0, _Ce, 0, (_lo,), ((CERTIFICATE_LOCATION, 1),))
 
 CERTIFICATES: StaticSchema = (16, n0, _Cer, 0, (_mem,), ((CERTIFICATE, 0),))
 
@@ -880,7 +1076,7 @@ BROWSER_ENTERPRISE_POLICY: StaticSchema = (
     n0,
     _BEP,
     0,
-    (_l, _ty),
+    (_lo, _ty),
     ((RESOURCE_LOCATION, 1), (BROWSER_ENTERPRISE_POLICY_TYPE, 0)),
 )
 
@@ -928,7 +1124,7 @@ TOOLS_FILE_SYSTEM_CONFIGURATION: StaticSchema = (
     n0,
     _TFSC,
     0,
-    (_sFC, _eC),
+    (_sFC, _eCf),
     ((S3_FILES_CONFIGURATION, 0), (EFS_CONFIGURATION, 0)),
 )
 
@@ -1155,156 +1351,63 @@ RESOURCE_TYPE: StaticSchema = (
     ((-1, {_sVm: _SYSTEM}), (-1, {_sVm: _CUSTOM})),
 )
 
-LIST_BROWSERS_INPUT: StaticSchema = (
-    18,
-    n0,
-    _LBI,
-    {_sSI: _cLBR, _smith: None},
-    (_mR, _nT, _ty),
-    (
-        (lambda: schemas.MAX_RESULTS, {_sQ: _mR}),
-        (lambda: schemas.NEXT_TOKEN, {_sQ: _nT}),
-        (RESOURCE_TYPE, {_sQ: _ty}),
-    ),
-)
-
-LIST_BROWSERS_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _LBO,
-    {_sSI: _cLBRo, _smithy: None},
-    (_bSr, _nT),
-    ((lambda: BROWSER_SUMMARIES, 1), (lambda: schemas.NEXT_TOKEN, 0)),
-)
-
-LIST_BROWSERS: StaticOperationSchema = (
-    23,
-    n0,
-    _LB,
-    {_smithya: MappingProxyType({"code": 200, "method": "POST", "uri": "/browsers"})},
-    LIST_BROWSERS_INPUT,
-    LIST_BROWSERS_OUTPUT,
-    (
-        lambda: schemas.ACCESS_DENIED_EXCEPTION,
-        lambda: schemas.INTERNAL_SERVER_EXCEPTION,
-        lambda: schemas.THROTTLING_EXCEPTION,
-        lambda: schemas.VALIDATION_EXCEPTION,
-    ),
-)
-
-BROWSER_SUMMARY: StaticSchema = (
-    18,
-    n0,
-    _BSr,
-    0,
-    (_bI, _bAr, _n, _d, _st, _cA, _lUA),
-    (
-        (BROWSER_ID, 1),
-        (BROWSER_ARN, 1),
-        (SANDBOX_NAME, 0),
-        (lambda: schemas.DESCRIPTION, 0),
-        (BROWSER_STATUS, 1),
-        (lambda: schemas.DATE_TIMESTAMP, 1),
-        (lambda: schemas.DATE_TIMESTAMP, 0),
-    ),
-)
-
-BROWSER_SUMMARIES: StaticSchema = (16, n0, _BSro, 0, (_mem,), ((BROWSER_SUMMARY, 0),))
-
-CAPACITY_RESERVATION_PREFERENCE: StaticSchema = (
+CREDENTIAL_PROVIDER_VENDOR_TYPE: StaticSchema = (
     14,
     n0,
-    _CRP,
+    _CPVT,
     0,
-    (_CRO, _OPEN, _NONE),
-    ((-1, {_sVm: _cro}), (-1, {_sVm: _o}), (-1, {_sVm: _no})),
-)
-
-CAPACITY_RESERVATION_ID: StaticSchema = (3, n0, _CRI, 0)
-
-CAPACITY_RESERVATION_RESOURCE_GROUP_ARN: StaticSchema = (3, n0, _CRRGA, 0)
-
-CAPACITY_RESERVATION_TARGET: StaticSchema = (
-    18,
-    n0,
-    _CRT,
-    0,
-    (_cRI, _cRRGA),
-    ((CAPACITY_RESERVATION_ID, 0), (CAPACITY_RESERVATION_RESOURCE_GROUP_ARN, 0)),
-)
-
-CAPACITY_RESERVATION_SPECIFICATION: StaticSchema = (
-    18,
-    n0,
-    _CRS,
-    0,
-    (_cRP, _cRT),
-    ((CAPACITY_RESERVATION_PREFERENCE, 0), (CAPACITY_RESERVATION_TARGET, 0)),
-)
-
-DEVICE_NAME: StaticSchema = (3, n0, _DN, 0)
-
-EBS_CARD_INDEX: StaticSchema = (7, n0, _ECI, 0)
-
-VOLUME_IOPS: StaticSchema = (7, n0, _VIo, 0)
-
-KMS_KEY_ID: StaticSchema = (3, n0, _KKI, 0)
-
-EBS_SNAPSHOT_ID: StaticSchema = (3, n0, _ESI, 0)
-
-VOLUME_THROUGHPUT: StaticSchema = (7, n0, _VT, 0)
-
-EBS_VOLUME_INITIALIZATION_RATE: StaticSchema = (7, n0, _EVIR, 0)
-
-VOLUME_SIZE_GI_B: StaticSchema = (7, n0, _VSGB, 0)
-
-EBS_VOLUME_TYPE: StaticSchema = (
-    14,
-    n0,
-    _EVT,
-    0,
-    (_STANDARD, _IO, _IO_, _GP, _SC, _ST, _GP_),
     (
-        (-1, {_sVm: _sta}),
-        (-1, {_sVm: _io}),
-        (-1, {_sVm: _io_}),
-        (-1, {_sVm: _g}),
-        (-1, {_sVm: _sc}),
-        (-1, {_sVm: _st_}),
-        (-1, {_sVm: _gp}),
+        _GO,
+        _GOi,
+        _SOl,
+        _SOa,
+        _MOi,
+        _COu,
+        _AOt,
+        _LOi,
+        _XO,
+        _OO,
+        _OLO,
+        _POO,
+        _FOa,
+        _YO,
+        _RO,
+        _ZO,
+        _TO,
+        _SOp,
+        _DOr,
+        _NO,
+        _HO,
+        _CAO,
+        _FAO,
+        _AOu,
+        _COo,
     ),
-)
-
-EPHEMERAL_EBS_VOLUME_CONFIGURATION: StaticSchema = (
-    18,
-    n0,
-    _EEBSVC,
-    0,
-    (_vT, _iop, _th, _enc, _kKI, _sIn, _vS, _vIR, _eCI),
     (
-        (EBS_VOLUME_TYPE, {_smi: _gp}),
-        (VOLUME_IOPS, 0),
-        (VOLUME_THROUGHPUT, 0),
-        (2, 0),
-        (KMS_KEY_ID, 0),
-        (EBS_SNAPSHOT_ID, 0),
-        (VOLUME_SIZE_GI_B, 0),
-        (EBS_VOLUME_INITIALIZATION_RATE, 0),
-        (EBS_CARD_INDEX, 0),
-    ),
-)
-
-VIRTUAL_DEVICE_NAME: StaticSchema = (3, n0, _VDN, 0)
-
-EPHEMERAL_BLOCK_DEVICE_MAPPING: StaticSchema = (
-    18,
-    n0,
-    _EBDM,
-    0,
-    (_dN, _vNi, _eb),
-    (
-        (DEVICE_NAME, 0),
-        (VIRTUAL_DEVICE_NAME, 0),
-        (EPHEMERAL_EBS_VOLUME_CONFIGURATION, 0),
+        (-1, {_sVm: _GO}),
+        (-1, {_sVm: _GOi}),
+        (-1, {_sVm: _SOl}),
+        (-1, {_sVm: _SOa}),
+        (-1, {_sVm: _MOi}),
+        (-1, {_sVm: _COu}),
+        (-1, {_sVm: _AOt}),
+        (-1, {_sVm: _LOi}),
+        (-1, {_sVm: _XO}),
+        (-1, {_sVm: _OO}),
+        (-1, {_sVm: _OLO}),
+        (-1, {_sVm: _POO}),
+        (-1, {_sVm: _FOa}),
+        (-1, {_sVm: _YO}),
+        (-1, {_sVm: _RO}),
+        (-1, {_sVm: _ZO}),
+        (-1, {_sVm: _TO}),
+        (-1, {_sVm: _SOp}),
+        (-1, {_sVm: _DOr}),
+        (-1, {_sVm: _NO}),
+        (-1, {_sVm: _HO}),
+        (-1, {_sVm: _CAO}),
+        (-1, {_sVm: _FAO}),
+        (-1, {_sVm: _AOu}),
+        (-1, {_sVm: _COo}),
     ),
 )

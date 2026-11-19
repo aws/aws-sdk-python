@@ -68,7 +68,6 @@ _PN = "PolicyName"
 _KMD = "KeyMaterialDescription"
 _IS = "ImportState"
 _IKMn = "IncludeKeyMaterial"
-_IGIE = "InvalidGrantIdException"
 _KLE = "KeyListEntry"
 _KAe = "KeyArn"
 _KL = "KeyList"
@@ -110,8 +109,13 @@ _LKRO = "ListKeyRotationsOutput"
 _cLKRRo = "com.amazonaws.kms#ListKeyRotationsResponse"
 _Ro = "Rotations"
 _LKR = "ListKeyRotations"
+_ROT = "ResourceOwnerType"
+_SELF = "SELF"
+_OAVR = "OTHER_ACCOUNTS_VIA_RAM"
+_ROL = "ResourceOwnersList"
 _LKI = "ListKeysInput"
 _cLKR = "com.amazonaws.kms#ListKeysRequest"
+_ROe = "ResourceOwners"
 _LKO = "ListKeysOutput"
 _cLKRo = "com.amazonaws.kms#ListKeysResponse"
 _K = "Keys"
@@ -222,19 +226,6 @@ _a = "aws.auth#sigv4"
 _a_ = "aws.protocols#awsJson1_1"
 _aw = "aws.api#service"
 _sN = "smithy.api#xmlNamespace"
-
-INVALID_GRANT_ID_EXCEPTION: StaticSchema = (
-    18,
-    n0,
-    _IGIE,
-    {
-        _s: _c,
-        _sE: 400,
-        _aQE: MappingProxyType({"code": "InvalidGrantId", "httpResponseCode": 400}),
-    },
-    (_me,),
-    ((lambda: schemas.ERROR_MESSAGE_TYPE, 0),),
-)
 
 KEY_LIST_ENTRY: StaticSchema = (
     18,
@@ -365,7 +356,7 @@ LIST_GRANTS: StaticOperationSchema = (
     (
         lambda: schemas.DEPENDENCY_TIMEOUT_EXCEPTION,
         lambda: schemas.INVALID_ARN_EXCEPTION,
-        INVALID_GRANT_ID_EXCEPTION,
+        lambda: schemas.INVALID_GRANT_ID_EXCEPTION,
         lambda: schemas.INVALID_MARKER_EXCEPTION,
         lambda: schemas.KMS_INTERNAL_EXCEPTION,
         lambda: schemas.KMS_INVALID_STATE_EXCEPTION,
@@ -498,13 +489,35 @@ ROTATIONS_LIST_ENTRY: StaticSchema = (
 
 ROTATIONS_LIST: StaticSchema = (16, n0, _RL, 0, (_m,), ((ROTATIONS_LIST_ENTRY, 0),))
 
+RESOURCE_OWNER_TYPE: StaticSchema = (
+    14,
+    n0,
+    _ROT,
+    0,
+    (_SELF, _OAVR),
+    ((-1, {_sV: _SELF}), (-1, {_sV: _OAVR})),
+)
+
+RESOURCE_OWNERS_LIST: StaticSchema = (
+    16,
+    n0,
+    _ROL,
+    0,
+    (_m,),
+    ((RESOURCE_OWNER_TYPE, 0),),
+)
+
 LIST_KEYS_INPUT: StaticSchema = (
     18,
     n0,
     _LKI,
     {_sSI: _cLKR, _smi: None},
-    (_L, _M),
-    ((lambda: schemas.LIMIT_TYPE, 0), (lambda: schemas.MARKER_TYPE, 0)),
+    (_L, _M, _ROe),
+    (
+        (lambda: schemas.LIMIT_TYPE, 0),
+        (lambda: schemas.MARKER_TYPE, 0),
+        (RESOURCE_OWNERS_LIST, 0),
+    ),
 )
 
 LIST_KEYS_OUTPUT: StaticSchema = (
@@ -798,7 +811,7 @@ RETIRE_GRANT: StaticOperationSchema = (
         lambda: schemas.DEPENDENCY_TIMEOUT_EXCEPTION,
         lambda: schemas.DRY_RUN_OPERATION_EXCEPTION,
         lambda: schemas.INVALID_ARN_EXCEPTION,
-        INVALID_GRANT_ID_EXCEPTION,
+        lambda: schemas.INVALID_GRANT_ID_EXCEPTION,
         lambda: schemas.INVALID_GRANT_TOKEN_EXCEPTION,
         lambda: schemas.KMS_INTERNAL_EXCEPTION,
         lambda: schemas.KMS_INVALID_STATE_EXCEPTION,
@@ -832,7 +845,7 @@ REVOKE_GRANT: StaticOperationSchema = (
         lambda: schemas.DEPENDENCY_TIMEOUT_EXCEPTION,
         lambda: schemas.DRY_RUN_OPERATION_EXCEPTION,
         lambda: schemas.INVALID_ARN_EXCEPTION,
-        INVALID_GRANT_ID_EXCEPTION,
+        lambda: schemas.INVALID_GRANT_ID_EXCEPTION,
         lambda: schemas.KMS_INTERNAL_EXCEPTION,
         lambda: schemas.KMS_INVALID_STATE_EXCEPTION,
         lambda: schemas.NOT_FOUND_EXCEPTION,

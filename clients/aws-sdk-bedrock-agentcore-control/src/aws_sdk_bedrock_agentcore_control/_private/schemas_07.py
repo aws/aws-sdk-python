@@ -21,8 +21,6 @@ _mod = "model"
 _sSI = "smithy.synthetic#originalShapeId"
 _smith = "smithy.api#input"
 _sL = "smithy.api#httpLabel"
-_cT = "clientToken"
-_sT = "smithy.api#idempotencyToken"
 _so = "source"
 _CREATING = "CREATING"
 _UPDATING = "UPDATING"
@@ -31,10 +29,7 @@ _smithy = "smithy.api#output"
 _st = "status"
 _uA = "updatedAt"
 _smithya = "smithy.api#http"
-_t = "tags"
 _READY = "READY"
-_tV = "targetVersion"
-_eN = "endpointName"
 _cA = "createdAt"
 _sQ = "smithy.api#httpQuery"
 _mR = "maxResults"
@@ -55,20 +50,56 @@ _ve = "version"
 _mC = "metadataConfiguration"
 _en = "enabled"
 _CUSTOM = "CUSTOM"
-_kKA = "kmsKeyArn"
 _sco = "scopes"
 _id = "identifier"
 _FAILED = "FAILED"
-_rAe = "resourceArn"
 _pr = "provider"
-_gI = "gatewayIdentifier"
+_gIa = "gatewayIdentifier"
 _pTr = "protocolType"
 _UU = "UPDATE_UNSUCCESSFUL"
 _gA = "gatewayArn"
 _sRta = "statusReasons"
 _it = "items"
+_pri = "priority"
+_cond = "conditions"
+_act = "actions"
+_rI = "ruleId"
+_sy = "system"
+_LGRI = "ListGatewayRulesInput"
+_cLGRR = "com.amazonaws.bedrockagentcorecontrol#ListGatewayRulesRequest"
+_GRDa = "GatewayRuleDetail"
+_GR = "GatewayRules"
+_LGRO = "ListGatewayRulesOutput"
+_cLGRRo = "com.amazonaws.bedrockagentcorecontrol#ListGatewayRulesResponse"
+_gR = "gatewayRules"
+_LGR = "ListGatewayRules"
+_UGRI = "UpdateGatewayRuleInput"
+_cUGRR = "com.amazonaws.bedrockagentcorecontrol#UpdateGatewayRuleRequest"
+_UGRO = "UpdateGatewayRuleOutput"
+_cUGRRo = "com.amazonaws.bedrockagentcorecontrol#UpdateGatewayRuleResponse"
+_UGR = "UpdateGatewayRule"
+_AKCL = "ApiKeyCredentialLocation"
+_HEADER = "HEADER"
+_QP = "QUERY_PARAMETER"
+_AKCPN = "ApiKeyCredentialParameterName"
+_AKCPp = "ApiKeyCredentialPrefix"
+_AKCPA = "ApiKeyCredentialProviderArn"
+_GAKCPa = "GatewayApiKeyCredentialProvider"
 _pAr = "providerArn"
+_cPN = "credentialParameterName"
+_cPr = "credentialPrefix"
+_cL = "credentialLocation"
+_ICP = "IamCredentialProvider"
+_ser = "service"
+_reg = "region"
+_OACPK = "OAuthCustomParametersKey"
+_OACPV = "OAuthCustomParametersValue"
+_OACP = "OAuthCustomParameters"
+_OADRU = "OAuthDefaultReturnUrl"
+_OAGT = "OAuthGrantType"
 _CC_ = "CLIENT_CREDENTIALS"
+_AC_ = "AUTHORIZATION_CODE"
+_TE_ = "TOKEN_EXCHANGE"
 _OACPAu = "OAuthCredentialProviderArn"
 _OAS = "OAuthScope"
 _OASu = "OAuthScopes"
@@ -263,55 +294,202 @@ _TSa = "TargetSummary"
 _lSAa = "lastSynchronizedAt"
 _aDu = "authorizationData"
 _tT = "targetType"
-_TSar = "TargetSummaries"
 _LGTO = "ListGatewayTargetsOutput"
 _cLGTRo = "com.amazonaws.bedrockagentcorecontrol#ListGatewayTargetsResponse"
 _LGT = "ListGatewayTargets"
-_TIL = "TargetIdList"
-_SGTI = "SynchronizeGatewayTargetsInput"
-_cSGTR = "com.amazonaws.bedrockagentcorecontrol#SynchronizeGatewayTargetsRequest"
-_tIL = "targetIdList"
-_GRPI = "GetResourcePolicyInput"
-_cGRPR = "com.amazonaws.bedrockagentcorecontrol#GetResourcePolicyRequest"
-_RPB = "ResourcePolicyBody"
-_GRPO = "GetResourcePolicyOutput"
-_cGRPRo = "com.amazonaws.bedrockagentcorecontrol#GetResourcePolicyResponse"
-_pol = "policy"
-_GRPe = "GetResourcePolicy"
-_TVIT = "TokenVaultIdType"
-_GTVI = "GetTokenVaultInput"
-_cGTVR = "com.amazonaws.bedrockagentcorecontrol#GetTokenVaultRequest"
-_tVI = "tokenVaultId"
-_KT = "KeyType"
-_CMK = "CustomerManagedKey"
-_SMK = "ServiceManagedKey"
-_KC = "KmsConfiguration"
-_kT = "keyType"
-_GTVO = "GetTokenVaultOutput"
-_cGTVRo = "com.amazonaws.bedrockagentcorecontrol#GetTokenVaultResponse"
-_kC = "kmsConfiguration"
-_lMD = "lastModifiedDate"
-_GTV = "GetTokenVault"
-_HED = "HarnessEndpointDescription"
-_HEN = "HarnessEndpointName"
-_HI = "HarnessId"
-_HV = "HarnessVersion"
-_CHEI = "CreateHarnessEndpointInput"
-_cCHER = "com.amazonaws.bedrockagentcorecontrol#CreateHarnessEndpointRequest"
-_hI = "harnessId"
-_CHEO = "CreateHarnessEndpointOutput"
-_cCHERo = "com.amazonaws.bedrockagentcorecontrol#CreateHarnessEndpointResponse"
-_CHE = "CreateHarnessEndpoint"
 _cPCr = "credentialProviderConfigurations"
 _tCa = "targetConfiguration"
 _pEMR = "privateEndpointManagedResources"
 _GGTO = "GetGatewayTargetOutput"
 _cGGTRo = "com.amazonaws.bedrockagentcorecontrol#GetGatewayTargetResponse"
 _GGT = "GetGatewayTarget"
-_SGTO = "SynchronizeGatewayTargetsOutput"
-_cSGTRo = "com.amazonaws.bedrockagentcorecontrol#SynchronizeGatewayTargetsResponse"
-_tar = "targets"
-_SGT = "SynchronizeGatewayTargets"
+
+LIST_GATEWAY_RULES_INPUT: StaticSchema = (
+    18,
+    n0,
+    _LGRI,
+    {_sSI: _cLGRR, _smith: None},
+    (_gIa, _mR, _nT),
+    (
+        (lambda: schemas.GATEWAY_IDENTIFIER, 9),
+        (lambda: schemas.GATEWAY_RULE_MAX_RESULTS, {_sQ: _mR}),
+        (lambda: schemas.GATEWAY_RULE_NEXT_TOKEN, {_sQ: _nT}),
+    ),
+)
+
+LIST_GATEWAY_RULES_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _LGRO,
+    {_sSI: _cLGRRo, _smithy: None},
+    (_gR, _nT),
+    ((lambda: GATEWAY_RULES, 1), (lambda: schemas.GATEWAY_RULE_NEXT_TOKEN, 0)),
+)
+
+LIST_GATEWAY_RULES: StaticOperationSchema = (
+    23,
+    n0,
+    _LGR,
+    {
+        _smithya: MappingProxyType(
+            {"code": 200, "method": "GET", "uri": "/gateways/{gatewayIdentifier}/rules"}
+        )
+    },
+    LIST_GATEWAY_RULES_INPUT,
+    LIST_GATEWAY_RULES_OUTPUT,
+    (
+        lambda: schemas.ACCESS_DENIED_EXCEPTION,
+        lambda: schemas.INTERNAL_SERVER_EXCEPTION,
+        lambda: schemas.RESOURCE_NOT_FOUND_EXCEPTION,
+        lambda: schemas.THROTTLING_EXCEPTION,
+        lambda: schemas.VALIDATION_EXCEPTION,
+    ),
+)
+
+GATEWAY_RULE_DETAIL: StaticSchema = (
+    18,
+    n0,
+    _GRDa,
+    0,
+    (_rI, _gA, _pri, _cond, _act, _d, _cA, _st, _sy, _uA),
+    (
+        (lambda: schemas.GATEWAY_RULE_ID, 1),
+        (lambda: schemas.GATEWAY_ARN, 1),
+        (lambda: schemas.GATEWAY_RULE_PRIORITY, 1),
+        (lambda: schemas.CONDITIONS, 0),
+        (lambda: schemas.ACTIONS, 1),
+        (lambda: schemas.GATEWAY_RULE_DESCRIPTION, 0),
+        (lambda: schemas.DATE_TIMESTAMP, 1),
+        (lambda: schemas.GATEWAY_RULE_STATUS, 1),
+        (lambda: schemas.SYSTEM_MANAGED_BLOCK, 0),
+        (lambda: schemas.DATE_TIMESTAMP, 0),
+    ),
+)
+
+GATEWAY_RULES: StaticSchema = (16, n0, _GR, 0, (_mem,), ((GATEWAY_RULE_DETAIL, 0),))
+
+UPDATE_GATEWAY_RULE_INPUT: StaticSchema = (
+    18,
+    n0,
+    _UGRI,
+    {_sSI: _cUGRR, _smith: None},
+    (_gIa, _rI, _pri, _cond, _act, _d),
+    (
+        (lambda: schemas.GATEWAY_IDENTIFIER, 9),
+        (lambda: schemas.GATEWAY_RULE_ID, 9),
+        (lambda: schemas.GATEWAY_RULE_PRIORITY, 0),
+        (lambda: schemas.CONDITIONS, 0),
+        (lambda: schemas.ACTIONS, 0),
+        (lambda: schemas.GATEWAY_RULE_DESCRIPTION, 0),
+    ),
+)
+
+UPDATE_GATEWAY_RULE_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _UGRO,
+    {_sSI: _cUGRRo, _smithy: None},
+    (_rI, _gA, _pri, _cond, _act, _d, _cA, _st, _sy, _uA),
+    (
+        (lambda: schemas.GATEWAY_RULE_ID, 1),
+        (lambda: schemas.GATEWAY_ARN, 1),
+        (lambda: schemas.GATEWAY_RULE_PRIORITY, 1),
+        (lambda: schemas.CONDITIONS, 0),
+        (lambda: schemas.ACTIONS, 1),
+        (lambda: schemas.GATEWAY_RULE_DESCRIPTION, 0),
+        (lambda: schemas.DATE_TIMESTAMP, 1),
+        (lambda: schemas.GATEWAY_RULE_STATUS, 1),
+        (lambda: schemas.SYSTEM_MANAGED_BLOCK, 0),
+        (lambda: schemas.DATE_TIMESTAMP, 0),
+    ),
+)
+
+UPDATE_GATEWAY_RULE: StaticOperationSchema = (
+    23,
+    n0,
+    _UGR,
+    {
+        _smithya: MappingProxyType(
+            {
+                "code": 202,
+                "method": "PATCH",
+                "uri": "/gateways/{gatewayIdentifier}/rules/{ruleId}",
+            }
+        )
+    },
+    UPDATE_GATEWAY_RULE_INPUT,
+    UPDATE_GATEWAY_RULE_OUTPUT,
+    (
+        lambda: schemas.ACCESS_DENIED_EXCEPTION,
+        lambda: schemas.CONFLICT_EXCEPTION,
+        lambda: schemas.INTERNAL_SERVER_EXCEPTION,
+        lambda: schemas.RESOURCE_NOT_FOUND_EXCEPTION,
+        lambda: schemas.THROTTLING_EXCEPTION,
+        lambda: schemas.VALIDATION_EXCEPTION,
+    ),
+)
+
+API_KEY_CREDENTIAL_LOCATION: StaticSchema = (
+    14,
+    n0,
+    _AKCL,
+    0,
+    (_HEADER, _QP),
+    ((-1, {_sVm: _HEADER}), (-1, {_sVm: _QP})),
+)
+
+API_KEY_CREDENTIAL_PARAMETER_NAME: StaticSchema = (3, n0, _AKCPN, 0)
+
+API_KEY_CREDENTIAL_PREFIX: StaticSchema = (3, n0, _AKCPp, 0)
+
+API_KEY_CREDENTIAL_PROVIDER_ARN: StaticSchema = (3, n0, _AKCPA, 0)
+
+GATEWAY_API_KEY_CREDENTIAL_PROVIDER: StaticSchema = (
+    18,
+    n0,
+    _GAKCPa,
+    0,
+    (_pAr, _cPN, _cPr, _cL),
+    (
+        (API_KEY_CREDENTIAL_PROVIDER_ARN, 1),
+        (API_KEY_CREDENTIAL_PARAMETER_NAME, 0),
+        (API_KEY_CREDENTIAL_PREFIX, 0),
+        (API_KEY_CREDENTIAL_LOCATION, 0),
+    ),
+)
+
+IAM_CREDENTIAL_PROVIDER: StaticSchema = (
+    18,
+    n0,
+    _ICP,
+    0,
+    (_ser, _reg),
+    ((3, 1), (3, 0)),
+)
+
+O_AUTH_CUSTOM_PARAMETERS_KEY: StaticSchema = (3, n0, _OACPK, 0)
+
+O_AUTH_CUSTOM_PARAMETERS_VALUE: StaticSchema = (3, n0, _OACPV, 4)
+
+O_AUTH_CUSTOM_PARAMETERS: StaticSchema = (
+    17,
+    n0,
+    _OACP,
+    0,
+    (_k, _v),
+    ((O_AUTH_CUSTOM_PARAMETERS_KEY, 0), (O_AUTH_CUSTOM_PARAMETERS_VALUE, 0)),
+)
+
+O_AUTH_DEFAULT_RETURN_URL: StaticSchema = (3, n0, _OADRU, 0)
+
+O_AUTH_GRANT_TYPE: StaticSchema = (
+    14,
+    n0,
+    _OAGT,
+    0,
+    (_CC_, _AC_, _TE_),
+    ((-1, {_sVm: _CC_}), (-1, {_sVm: _AC_}), (-1, {_sVm: _TE_})),
+)
 
 O_AUTH_CREDENTIAL_PROVIDER_ARN: StaticSchema = (3, n0, _OACPAu, 0)
 
@@ -328,9 +506,9 @@ O_AUTH_CREDENTIAL_PROVIDER: StaticSchema = (
     (
         (O_AUTH_CREDENTIAL_PROVIDER_ARN, 1),
         (O_AUTH_SCOPES, 1),
-        (lambda: schemas.O_AUTH_CUSTOM_PARAMETERS, 0),
-        (lambda: schemas.O_AUTH_GRANT_TYPE, {_smi: _CC_}),
-        (lambda: schemas.O_AUTH_DEFAULT_RETURN_URL, 0),
+        (O_AUTH_CUSTOM_PARAMETERS, 0),
+        (O_AUTH_GRANT_TYPE, {_smi: _CC_}),
+        (O_AUTH_DEFAULT_RETURN_URL, 0),
     ),
 )
 
@@ -342,8 +520,8 @@ CREDENTIAL_PROVIDER: StaticSchema = (
     (_oCP, _aKCP, _iCP),
     (
         (O_AUTH_CREDENTIAL_PROVIDER, 0),
-        (lambda: schemas.GATEWAY_API_KEY_CREDENTIAL_PROVIDER, 0),
-        (lambda: schemas.IAM_CREDENTIAL_PROVIDER, 0),
+        (GATEWAY_API_KEY_CREDENTIAL_PROVIDER, 0),
+        (IAM_CREDENTIAL_PROVIDER, 0),
     ),
 )
 
@@ -917,7 +1095,7 @@ DELETE_GATEWAY_TARGET_INPUT: StaticSchema = (
     n0,
     _DGTI,
     {_sSI: _cDGTR, _smith: None},
-    (_gI, _tI),
+    (_gIa, _tI),
     ((lambda: schemas.GATEWAY_IDENTIFIER, 9), (TARGET_ID, 9)),
 )
 
@@ -965,7 +1143,7 @@ GET_GATEWAY_TARGET_INPUT: StaticSchema = (
     n0,
     _GGTI,
     {_sSI: _cGGTR, _smith: None},
-    (_gI, _tI),
+    (_gIa, _tI),
     ((lambda: schemas.GATEWAY_IDENTIFIER, 9), (TARGET_ID, 9)),
 )
 
@@ -1047,7 +1225,7 @@ LIST_GATEWAY_TARGETS_INPUT: StaticSchema = (
     n0,
     _LGTI,
     {_sSI: _cLGTR, _smith: None},
-    (_gI, _mR, _nT),
+    (_gIa, _mR, _nT),
     (
         (lambda: schemas.GATEWAY_IDENTIFIER, 9),
         (TARGET_MAX_RESULTS, {_sQ: _mR}),
@@ -1061,7 +1239,7 @@ LIST_GATEWAY_TARGETS_OUTPUT: StaticSchema = (
     _LGTO,
     {_sSI: _cLGTRo, _smithy: None},
     (_it, _nT),
-    ((lambda: TARGET_SUMMARIES, 1), (TARGET_NEXT_TOKEN, 0)),
+    ((lambda: schemas.TARGET_SUMMARIES, 1), (TARGET_NEXT_TOKEN, 0)),
 )
 
 LIST_GATEWAY_TARGETS: StaticOperationSchema = (
@@ -1126,207 +1304,5 @@ TARGET_SUMMARY: StaticSchema = (
         (AUTHORIZATION_DATA, 0),
         (TARGET_TYPE, 0),
         (LISTING_MODE, 0),
-    ),
-)
-
-TARGET_SUMMARIES: StaticSchema = (16, n0, _TSar, 0, (_mem,), ((TARGET_SUMMARY, 0),))
-
-TARGET_ID_LIST: StaticSchema = (16, n0, _TIL, 0, (_mem,), ((TARGET_ID, 0),))
-
-SYNCHRONIZE_GATEWAY_TARGETS_INPUT: StaticSchema = (
-    18,
-    n0,
-    _SGTI,
-    {_sSI: _cSGTR, _smith: None},
-    (_gI, _tIL),
-    ((lambda: schemas.GATEWAY_IDENTIFIER, 9), (TARGET_ID_LIST, 1)),
-)
-
-SYNCHRONIZE_GATEWAY_TARGETS_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _SGTO,
-    {_sSI: _cSGTRo, _smithy: None},
-    (_tar,),
-    ((lambda: schemas.GATEWAY_TARGET_LIST, 0),),
-)
-
-SYNCHRONIZE_GATEWAY_TARGETS: StaticOperationSchema = (
-    23,
-    n0,
-    _SGT,
-    {
-        _smithya: MappingProxyType(
-            {
-                "code": 202,
-                "method": "PUT",
-                "uri": "/gateways/{gatewayIdentifier}/synchronizeTargets",
-            }
-        )
-    },
-    SYNCHRONIZE_GATEWAY_TARGETS_INPUT,
-    SYNCHRONIZE_GATEWAY_TARGETS_OUTPUT,
-    (
-        lambda: schemas.ACCESS_DENIED_EXCEPTION,
-        lambda: schemas.CONFLICT_EXCEPTION,
-        lambda: schemas.INTERNAL_SERVER_EXCEPTION,
-        lambda: schemas.RESOURCE_NOT_FOUND_EXCEPTION,
-        lambda: schemas.SERVICE_QUOTA_EXCEEDED_EXCEPTION,
-        lambda: schemas.THROTTLING_EXCEPTION,
-        lambda: schemas.VALIDATION_EXCEPTION,
-    ),
-)
-
-GET_RESOURCE_POLICY_INPUT: StaticSchema = (
-    18,
-    n0,
-    _GRPI,
-    {_sSI: _cGRPR, _smith: None},
-    (_rAe,),
-    ((lambda: schemas.BEDROCK_AGENTCORE_RESOURCE_ARN, 9),),
-)
-
-GET_RESOURCE_POLICY_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _GRPO,
-    {_sSI: _cGRPRo, _smithy: None},
-    (_pol,),
-    ((lambda: RESOURCE_POLICY_BODY, 0),),
-)
-
-GET_RESOURCE_POLICY: StaticOperationSchema = (
-    23,
-    n0,
-    _GRPe,
-    {
-        _smithya: MappingProxyType(
-            {"code": 200, "method": "GET", "uri": "/resourcepolicy/{resourceArn}"}
-        )
-    },
-    GET_RESOURCE_POLICY_INPUT,
-    GET_RESOURCE_POLICY_OUTPUT,
-    (
-        lambda: schemas.ACCESS_DENIED_EXCEPTION,
-        lambda: schemas.INTERNAL_SERVER_EXCEPTION,
-        lambda: schemas.RESOURCE_NOT_FOUND_EXCEPTION,
-        lambda: schemas.THROTTLING_EXCEPTION,
-        lambda: schemas.VALIDATION_EXCEPTION,
-    ),
-)
-
-RESOURCE_POLICY_BODY: StaticSchema = (3, n0, _RPB, 0)
-
-TOKEN_VAULT_ID_TYPE: StaticSchema = (3, n0, _TVIT, 0)
-
-GET_TOKEN_VAULT_INPUT: StaticSchema = (
-    18,
-    n0,
-    _GTVI,
-    {_sSI: _cGTVR, _smith: None},
-    (_tVI,),
-    ((TOKEN_VAULT_ID_TYPE, 0),),
-)
-
-GET_TOKEN_VAULT_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _GTVO,
-    {_sSI: _cGTVRo, _smithy: None},
-    (_tVI, _kC, _lMD),
-    ((TOKEN_VAULT_ID_TYPE, 1), (lambda: KMS_CONFIGURATION, 1), (4, 1)),
-)
-
-GET_TOKEN_VAULT: StaticOperationSchema = (
-    23,
-    n0,
-    _GTV,
-    {
-        _smithya: MappingProxyType(
-            {"uri": "/identities/get-token-vault", "method": "POST"}
-        )
-    },
-    GET_TOKEN_VAULT_INPUT,
-    GET_TOKEN_VAULT_OUTPUT,
-    (
-        lambda: schemas.ACCESS_DENIED_EXCEPTION,
-        lambda: schemas.INTERNAL_SERVER_EXCEPTION,
-        lambda: schemas.RESOURCE_NOT_FOUND_EXCEPTION,
-        lambda: schemas.THROTTLING_EXCEPTION,
-        lambda: schemas.UNAUTHORIZED_EXCEPTION,
-        lambda: schemas.VALIDATION_EXCEPTION,
-    ),
-)
-
-KEY_TYPE: StaticSchema = (
-    14,
-    n0,
-    _KT,
-    0,
-    (_CMK, _SMK),
-    ((-1, {_sVm: _CMK}), (-1, {_sVm: _SMK})),
-)
-
-KMS_CONFIGURATION: StaticSchema = (
-    18,
-    n0,
-    _KC,
-    0,
-    (_kT, _kKA),
-    ((KEY_TYPE, 1), (lambda: schemas.KMS_KEY_ARN, 0)),
-)
-
-HARNESS_ENDPOINT_DESCRIPTION: StaticSchema = (3, n0, _HED, 0)
-
-HARNESS_ENDPOINT_NAME: StaticSchema = (3, n0, _HEN, 0)
-
-HARNESS_ID: StaticSchema = (3, n0, _HI, 0)
-
-HARNESS_VERSION: StaticSchema = (3, n0, _HV, 0)
-
-CREATE_HARNESS_ENDPOINT_INPUT: StaticSchema = (
-    18,
-    n0,
-    _CHEI,
-    {_sSI: _cCHER, _smith: None},
-    (_hI, _eN, _tV, _d, _cT, _t),
-    (
-        (HARNESS_ID, 9),
-        (HARNESS_ENDPOINT_NAME, 1),
-        (HARNESS_VERSION, 0),
-        (HARNESS_ENDPOINT_DESCRIPTION, 0),
-        (lambda: schemas.CLIENT_TOKEN, 2),
-        (lambda: schemas.TAGS_MAP, 0),
-    ),
-)
-
-CREATE_HARNESS_ENDPOINT_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _CHEO,
-    {_sSI: _cCHERo, _smithy: None},
-    (_end,),
-    ((lambda: schemas.HARNESS_ENDPOINT, 1),),
-)
-
-CREATE_HARNESS_ENDPOINT: StaticOperationSchema = (
-    23,
-    n0,
-    _CHE,
-    {
-        _smithya: MappingProxyType(
-            {"code": 201, "method": "POST", "uri": "/harnesses/{harnessId}/endpoints"}
-        )
-    },
-    CREATE_HARNESS_ENDPOINT_INPUT,
-    CREATE_HARNESS_ENDPOINT_OUTPUT,
-    (
-        lambda: schemas.ACCESS_DENIED_EXCEPTION,
-        lambda: schemas.CONFLICT_EXCEPTION,
-        lambda: schemas.INTERNAL_SERVER_EXCEPTION,
-        lambda: schemas.RESOURCE_NOT_FOUND_EXCEPTION,
-        lambda: schemas.SERVICE_QUOTA_EXCEEDED_EXCEPTION,
-        lambda: schemas.THROTTLING_EXCEPTION,
-        lambda: schemas.VALIDATION_EXCEPTION,
     ),
 )

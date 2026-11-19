@@ -5,6 +5,8 @@ from typing import Any
 from aws_sdk_lambda.aio.client import AsyncLambdaClient
 from aws_sdk_lambda.client import LambdaClient
 from aws_sdk_lambda.models import (
+    AcceleratorConfig,
+    AcceleratorConfigDict,
     AccountLimit,
     AccountUsage,
     AddLayerVersionPermissionInput,
@@ -94,6 +96,9 @@ from aws_sdk_lambda.models import (
     DeleteCodeSigningConfigInput,
     DeleteCodeSigningConfigInputDict,
     DeleteCodeSigningConfigOutput,
+    DeleteDurableExecutionInput,
+    DeleteDurableExecutionInputDict,
+    DeleteDurableExecutionOutput,
     DeleteEventSourceMappingInput,
     DeleteEventSourceMappingInputDict,
     DeleteEventSourceMappingOutput,
@@ -138,7 +143,9 @@ from aws_sdk_lambda.models import (
     Event,
     EventError,
     EventInput,
+    EventPauseReason,
     EventResult,
+    EventResumeReason,
     EventSourceMappingConfiguration,
     EventSourceMappingLoggingConfig,
     EventSourceMappingLoggingConfigDict,
@@ -147,6 +154,8 @@ from aws_sdk_lambda.models import (
     Execution,
     ExecutionDetails,
     ExecutionFailedDetails,
+    ExecutionPausedDetails,
+    ExecutionResumedDetails,
     ExecutionStartedDetails,
     ExecutionStoppedDetails,
     ExecutionSucceededDetails,
@@ -325,6 +334,10 @@ from aws_sdk_lambda.models import (
     Operation,
     OperationUpdate,
     OperationUpdateDict,
+    PauseDetails,
+    PauseDurableExecutionInput,
+    PauseDurableExecutionInputDict,
+    PauseDurableExecutionOutput,
     PropagateTags,
     PropagateTagsDict,
     ProvisionedConcurrencyConfigListItem,
@@ -367,6 +380,9 @@ from aws_sdk_lambda.models import (
     RemovePermissionInputDict,
     RemovePermissionOutput,
     ResolvedS3Object,
+    ResumeDurableExecutionInput,
+    ResumeDurableExecutionInputDict,
+    ResumeDurableExecutionOutput,
     RetryDetails,
     RuntimeVersionConfig,
     RuntimeVersionError,
@@ -458,6 +474,7 @@ from aws_sdk_lambda.models import (
 
 _: Any = ...
 
+AcceleratorConfig(accelerator_memory_size=_)
 AccountLimit()
 AccountUsage()
 AddLayerVersionPermissionInput()
@@ -527,6 +544,8 @@ DeleteCapacityProviderInput()
 DeleteCapacityProviderOutput(capacity_provider=_)
 DeleteCodeSigningConfigInput()
 DeleteCodeSigningConfigOutput()
+DeleteDurableExecutionInput()
+DeleteDurableExecutionOutput(deletion_request_timestamp=_)
 DeleteEventSourceMappingInput()
 DeleteEventSourceMappingOutput()
 DeleteFunctionCodeSigningConfigInput()
@@ -556,7 +575,9 @@ ErrorObject()
 Event()
 EventError()
 EventInput()
+EventPauseReason()
 EventResult()
+EventResumeReason()
 EventSourceMappingConfiguration()
 EventSourceMappingLoggingConfig()
 EventSourceMappingMetricsConfig()
@@ -569,6 +590,8 @@ Execution(
 )
 ExecutionDetails()
 ExecutionFailedDetails(error=_)
+ExecutionPausedDetails(pause_request_timestamp=_, execution_timeout_paused=_)
+ExecutionResumedDetails(resume_request_timestamp=_)
 ExecutionStartedDetails(input=_, execution_timeout=_)
 ExecutionStoppedDetails(error=_)
 ExecutionSucceededDetails(result=_)
@@ -701,6 +724,9 @@ OnFailure()
 OnSuccess()
 Operation(id=_, type=_, start_timestamp=_, status=_)
 OperationUpdate(id=_, type=_, action=_)
+PauseDetails(pause_request_timestamp=_, execution_timeout_paused=_)
+PauseDurableExecutionInput()
+PauseDurableExecutionOutput()
 PropagateTags()
 ProvisionedConcurrencyConfigListItem()
 ProvisionedPollerConfig()
@@ -729,6 +755,8 @@ RemoveLayerVersionPermissionOutput()
 RemovePermissionInput()
 RemovePermissionOutput()
 ResolvedS3Object()
+ResumeDurableExecutionInput()
+ResumeDurableExecutionOutput()
 RetryDetails()
 RuntimeVersionConfig()
 RuntimeVersionError()
@@ -787,208 +815,212 @@ WaitDetails()
 WaitOptions()
 WaitStartedDetails(duration=_, scheduled_end_timestamp=_)
 WaitSucceededDetails()
-_params_0: AddLayerVersionPermissionInputDict = {
+_params_0: AcceleratorConfigDict = {"accelerator_memory_size": _}
+_params_1: AddLayerVersionPermissionInputDict = {
     "layer_name": _,
     "statement_id": _,
     "action": _,
     "principal": _,
 }
-_params_1: AddPermissionInputDict = {
+_params_2: AddPermissionInputDict = {
     "function_name": _,
     "statement_id": _,
     "action": _,
     "principal": _,
 }
-_params_2: AliasRoutingConfigurationDict = {}
-_params_3: AllowedPublishersDict = {"signing_profile_version_arns": _}
-_params_4: AmazonManagedKafkaEventSourceConfigDict = {}
-_params_5: CallbackOptionsDict = {}
-_params_6: CapacityProviderConfigDict = {
+_params_3: AliasRoutingConfigurationDict = {}
+_params_4: AllowedPublishersDict = {"signing_profile_version_arns": _}
+_params_5: AmazonManagedKafkaEventSourceConfigDict = {}
+_params_6: CallbackOptionsDict = {}
+_params_7: CapacityProviderConfigDict = {
     "lambda_managed_instances_capacity_provider_config": _
 }
-_params_7: CapacityProviderLoggingConfigDict = {}
-_params_8: CapacityProviderPermissionsConfigDict = {
+_params_8: CapacityProviderLoggingConfigDict = {}
+_params_9: CapacityProviderPermissionsConfigDict = {
     "capacity_provider_operator_role_arn": _
 }
-_params_9: CapacityProviderScalingConfigDict = {}
-_params_10: CapacityProviderTelemetryConfigDict = {}
-_params_11: CapacityProviderVpcConfigDict = {"subnet_ids": _, "security_group_ids": _}
-_params_12: ChainedInvokeOptionsDict = {"function_name": _}
-_params_13: CheckpointDurableExecutionInputDict = {
+_params_10: CapacityProviderScalingConfigDict = {}
+_params_11: CapacityProviderTelemetryConfigDict = {}
+_params_12: CapacityProviderVpcConfigDict = {"subnet_ids": _, "security_group_ids": _}
+_params_13: ChainedInvokeOptionsDict = {"function_name": _}
+_params_14: CheckpointDurableExecutionInputDict = {
     "durable_execution_arn": _,
     "checkpoint_token": _,
 }
-_params_14: CodeSigningPoliciesDict = {}
-_params_15: ContextOptionsDict = {}
-_params_16: CorsDict = {}
-_params_17: CreateAliasInputDict = {
+_params_15: CodeSigningPoliciesDict = {}
+_params_16: ContextOptionsDict = {}
+_params_17: CorsDict = {}
+_params_18: CreateAliasInputDict = {
     "function_name": _,
     "name": _,
     "function_version": _,
 }
-_params_18: CreateCapacityProviderInputDict = {
+_params_19: CreateCapacityProviderInputDict = {
     "capacity_provider_name": _,
     "vpc_config": _,
     "permissions_config": _,
 }
-_params_19: CreateCodeSigningConfigInputDict = {"allowed_publishers": _}
-_params_20: CreateEventSourceMappingInputDict = {"function_name": _}
-_params_21: CreateFunctionInputDict = {"function_name": _, "role": _, "code": _}
-_params_22: CreateFunctionUrlConfigInputDict = {"function_name": _, "auth_type": _}
-_params_23: DeadLetterConfigDict = {}
-_params_24: DeleteAliasInputDict = {"function_name": _, "name": _}
-_params_25: DeleteCapacityProviderInputDict = {"capacity_provider_name": _}
-_params_26: DeleteCodeSigningConfigInputDict = {"code_signing_config_arn": _}
-_params_27: DeleteEventSourceMappingInputDict = {"uuid": _}
-_params_28: DeleteFunctionCodeSigningConfigInputDict = {"function_name": _}
-_params_29: DeleteFunctionConcurrencyInputDict = {"function_name": _}
-_params_30: DeleteFunctionEventInvokeConfigInputDict = {"function_name": _}
-_params_31: DeleteFunctionInputDict = {"function_name": _}
-_params_32: DeleteFunctionUrlConfigInputDict = {"function_name": _}
-_params_33: DeleteLayerVersionInputDict = {"layer_name": _}
-_params_34: DeleteProvisionedConcurrencyConfigInputDict = {
+_params_20: CreateCodeSigningConfigInputDict = {"allowed_publishers": _}
+_params_21: CreateEventSourceMappingInputDict = {"function_name": _}
+_params_22: CreateFunctionInputDict = {"function_name": _, "role": _, "code": _}
+_params_23: CreateFunctionUrlConfigInputDict = {"function_name": _, "auth_type": _}
+_params_24: DeadLetterConfigDict = {}
+_params_25: DeleteAliasInputDict = {"function_name": _, "name": _}
+_params_26: DeleteCapacityProviderInputDict = {"capacity_provider_name": _}
+_params_27: DeleteCodeSigningConfigInputDict = {"code_signing_config_arn": _}
+_params_28: DeleteDurableExecutionInputDict = {"durable_execution_arn": _}
+_params_29: DeleteEventSourceMappingInputDict = {"uuid": _}
+_params_30: DeleteFunctionCodeSigningConfigInputDict = {"function_name": _}
+_params_31: DeleteFunctionConcurrencyInputDict = {"function_name": _}
+_params_32: DeleteFunctionEventInvokeConfigInputDict = {"function_name": _}
+_params_33: DeleteFunctionInputDict = {"function_name": _}
+_params_34: DeleteFunctionUrlConfigInputDict = {"function_name": _}
+_params_35: DeleteLayerVersionInputDict = {"layer_name": _}
+_params_36: DeleteProvisionedConcurrencyConfigInputDict = {
     "function_name": _,
     "qualifier": _,
 }
-_params_35: DeleteResourcePolicyInputDict = {"resource_arn": _}
-_params_36: DestinationConfigDict = {}
-_params_37: DocumentDBEventSourceConfigDict = {}
-_params_38: DurableConfigDict = {}
-_params_39: EnvironmentDict = {}
-_params_40: EphemeralStorageDict = {"size": _}
-_params_41: ErrorObjectDict = {}
-_params_42: EventSourceMappingLoggingConfigDict = {}
-_params_43: EventSourceMappingMetricsConfigDict = {}
-_params_44: FileSystemConfigDict = {"arn": _, "local_mount_path": _}
-_params_45: FilterDict = {}
-_params_46: FilterCriteriaDict = {}
-_params_47: FunctionCodeDict = {}
-_params_48: FunctionRuntimeConfigDict = {"runtime_arn": _, "runtime_alias": _}
-_params_49: FunctionScalingConfigDict = {}
-_params_50: GetAccountSettingsInputDict = {}
-_params_51: GetAliasInputDict = {"function_name": _, "name": _}
-_params_52: GetCapacityProviderInputDict = {"capacity_provider_name": _}
-_params_53: GetCodeSigningConfigInputDict = {"code_signing_config_arn": _}
-_params_54: GetDurableExecutionHistoryInputDict = {"durable_execution_arn": _}
-_params_55: GetDurableExecutionInputDict = {"durable_execution_arn": _}
-_params_56: GetDurableExecutionStateInputDict = {
+_params_37: DeleteResourcePolicyInputDict = {"resource_arn": _}
+_params_38: DestinationConfigDict = {}
+_params_39: DocumentDBEventSourceConfigDict = {}
+_params_40: DurableConfigDict = {}
+_params_41: EnvironmentDict = {}
+_params_42: EphemeralStorageDict = {"size": _}
+_params_43: ErrorObjectDict = {}
+_params_44: EventSourceMappingLoggingConfigDict = {}
+_params_45: EventSourceMappingMetricsConfigDict = {}
+_params_46: FileSystemConfigDict = {"arn": _, "local_mount_path": _}
+_params_47: FilterDict = {}
+_params_48: FilterCriteriaDict = {}
+_params_49: FunctionCodeDict = {}
+_params_50: FunctionRuntimeConfigDict = {"runtime_arn": _, "runtime_alias": _}
+_params_51: FunctionScalingConfigDict = {}
+_params_52: GetAccountSettingsInputDict = {}
+_params_53: GetAliasInputDict = {"function_name": _, "name": _}
+_params_54: GetCapacityProviderInputDict = {"capacity_provider_name": _}
+_params_55: GetCodeSigningConfigInputDict = {"code_signing_config_arn": _}
+_params_56: GetDurableExecutionHistoryInputDict = {"durable_execution_arn": _}
+_params_57: GetDurableExecutionInputDict = {"durable_execution_arn": _}
+_params_58: GetDurableExecutionStateInputDict = {
     "durable_execution_arn": _,
     "checkpoint_token": _,
 }
-_params_57: GetEventSourceMappingInputDict = {"uuid": _}
-_params_58: GetFunctionCodeSigningConfigInputDict = {"function_name": _}
-_params_59: GetFunctionConcurrencyInputDict = {"function_name": _}
-_params_60: GetFunctionConfigurationInputDict = {"function_name": _}
-_params_61: GetFunctionEventInvokeConfigInputDict = {"function_name": _}
-_params_62: GetFunctionInputDict = {"function_name": _}
-_params_63: GetFunctionRecursionConfigInputDict = {"function_name": _}
-_params_64: GetFunctionScalingConfigInputDict = {"function_name": _, "qualifier": _}
-_params_65: GetFunctionUrlConfigInputDict = {"function_name": _}
-_params_66: GetLayerVersionByArnInputDict = {"arn": _}
-_params_67: GetLayerVersionInputDict = {"layer_name": _}
-_params_68: GetLayerVersionPolicyInputDict = {"layer_name": _}
-_params_69: GetPolicyInputDict = {"function_name": _}
-_params_70: GetProvisionedConcurrencyConfigInputDict = {
+_params_59: GetEventSourceMappingInputDict = {"uuid": _}
+_params_60: GetFunctionCodeSigningConfigInputDict = {"function_name": _}
+_params_61: GetFunctionConcurrencyInputDict = {"function_name": _}
+_params_62: GetFunctionConfigurationInputDict = {"function_name": _}
+_params_63: GetFunctionEventInvokeConfigInputDict = {"function_name": _}
+_params_64: GetFunctionInputDict = {"function_name": _}
+_params_65: GetFunctionRecursionConfigInputDict = {"function_name": _}
+_params_66: GetFunctionScalingConfigInputDict = {"function_name": _, "qualifier": _}
+_params_67: GetFunctionUrlConfigInputDict = {"function_name": _}
+_params_68: GetLayerVersionByArnInputDict = {"arn": _}
+_params_69: GetLayerVersionInputDict = {"layer_name": _}
+_params_70: GetLayerVersionPolicyInputDict = {"layer_name": _}
+_params_71: GetPolicyInputDict = {"function_name": _}
+_params_72: GetProvisionedConcurrencyConfigInputDict = {
     "function_name": _,
     "qualifier": _,
 }
-_params_71: GetResourcePolicyInputDict = {"resource_arn": _}
-_params_72: GetRuntimeManagementConfigInputDict = {"function_name": _}
-_params_73: ImageConfigDict = {}
-_params_74: InstanceRequirementsDict = {}
-_params_75: InvokeAsyncInputDict = {"function_name": _, "invoke_args": _}
-_params_76: InvokeInputDict = {"function_name": _}
-_params_77: InvokeWithResponseStreamInputDict = {"function_name": _}
-_params_78: KafkaSchemaRegistryAccessConfigDict = {}
-_params_79: KafkaSchemaRegistryConfigDict = {}
-_params_80: KafkaSchemaValidationConfigDict = {}
-_params_81: LambdaManagedInstancesCapacityProviderConfigDict = {
+_params_73: GetResourcePolicyInputDict = {"resource_arn": _}
+_params_74: GetRuntimeManagementConfigInputDict = {"function_name": _}
+_params_75: ImageConfigDict = {}
+_params_76: InstanceRequirementsDict = {}
+_params_77: InvokeAsyncInputDict = {"function_name": _, "invoke_args": _}
+_params_78: InvokeInputDict = {"function_name": _}
+_params_79: InvokeWithResponseStreamInputDict = {"function_name": _}
+_params_80: KafkaSchemaRegistryAccessConfigDict = {}
+_params_81: KafkaSchemaRegistryConfigDict = {}
+_params_82: KafkaSchemaValidationConfigDict = {}
+_params_83: LambdaManagedInstancesCapacityProviderConfigDict = {
     "capacity_provider_arn": _
 }
-_params_82: LayerVersionContentInputDict = {}
-_params_83: ListAliasesInputDict = {"function_name": _}
-_params_84: ListCapacityProvidersInputDict = {}
-_params_85: ListCodeSigningConfigsInputDict = {}
-_params_86: ListDurableExecutionsByFunctionInputDict = {"function_name": _}
-_params_87: ListEventSourceMappingsInputDict = {}
-_params_88: ListFunctionEventInvokeConfigsInputDict = {"function_name": _}
-_params_89: ListFunctionsByCodeSigningConfigInputDict = {"code_signing_config_arn": _}
-_params_90: ListFunctionsInputDict = {}
-_params_91: ListFunctionUrlConfigsInputDict = {"function_name": _}
-_params_92: ListFunctionVersionsByCapacityProviderInputDict = {
+_params_84: LayerVersionContentInputDict = {}
+_params_85: ListAliasesInputDict = {"function_name": _}
+_params_86: ListCapacityProvidersInputDict = {}
+_params_87: ListCodeSigningConfigsInputDict = {}
+_params_88: ListDurableExecutionsByFunctionInputDict = {"function_name": _}
+_params_89: ListEventSourceMappingsInputDict = {}
+_params_90: ListFunctionEventInvokeConfigsInputDict = {"function_name": _}
+_params_91: ListFunctionsByCodeSigningConfigInputDict = {"code_signing_config_arn": _}
+_params_92: ListFunctionsInputDict = {}
+_params_93: ListFunctionUrlConfigsInputDict = {"function_name": _}
+_params_94: ListFunctionVersionsByCapacityProviderInputDict = {
     "capacity_provider_name": _
 }
-_params_93: ListLayersInputDict = {}
-_params_94: ListLayerVersionsInputDict = {"layer_name": _}
-_params_95: ListProvisionedConcurrencyConfigsInputDict = {"function_name": _}
-_params_96: ListTagsInputDict = {"resource": _}
-_params_97: ListVersionsByFunctionInputDict = {"function_name": _}
-_params_98: LoggingConfigDict = {}
-_params_99: OnFailureDict = {}
-_params_100: OnSuccessDict = {}
-_params_101: OperationUpdateDict = {"id": _, "type": _, "action": _}
-_params_102: PropagateTagsDict = {}
-_params_103: ProvisionedPollerConfigDict = {}
-_params_104: PublishLayerVersionInputDict = {"layer_name": _, "content": _}
-_params_105: PublishVersionInputDict = {"function_name": _}
-_params_106: PutFunctionCodeSigningConfigInputDict = {
+_params_95: ListLayersInputDict = {}
+_params_96: ListLayerVersionsInputDict = {"layer_name": _}
+_params_97: ListProvisionedConcurrencyConfigsInputDict = {"function_name": _}
+_params_98: ListTagsInputDict = {"resource": _}
+_params_99: ListVersionsByFunctionInputDict = {"function_name": _}
+_params_100: LoggingConfigDict = {}
+_params_101: OnFailureDict = {}
+_params_102: OnSuccessDict = {}
+_params_103: OperationUpdateDict = {"id": _, "type": _, "action": _}
+_params_104: PauseDurableExecutionInputDict = {"durable_execution_arn": _}
+_params_105: PropagateTagsDict = {}
+_params_106: ProvisionedPollerConfigDict = {}
+_params_107: PublishLayerVersionInputDict = {"layer_name": _, "content": _}
+_params_108: PublishVersionInputDict = {"function_name": _}
+_params_109: PutFunctionCodeSigningConfigInputDict = {
     "code_signing_config_arn": _,
     "function_name": _,
 }
-_params_107: PutFunctionConcurrencyInputDict = {
+_params_110: PutFunctionConcurrencyInputDict = {
     "function_name": _,
     "reserved_concurrent_executions": _,
 }
-_params_108: PutFunctionEventInvokeConfigInputDict = {"function_name": _}
-_params_109: PutFunctionRecursionConfigInputDict = {
+_params_111: PutFunctionEventInvokeConfigInputDict = {"function_name": _}
+_params_112: PutFunctionRecursionConfigInputDict = {
     "function_name": _,
     "recursive_loop": _,
 }
-_params_110: PutFunctionScalingConfigInputDict = {"function_name": _, "qualifier": _}
-_params_111: PutProvisionedConcurrencyConfigInputDict = {
+_params_113: PutFunctionScalingConfigInputDict = {"function_name": _, "qualifier": _}
+_params_114: PutProvisionedConcurrencyConfigInputDict = {
     "function_name": _,
     "qualifier": _,
     "provisioned_concurrent_executions": _,
 }
-_params_112: PutResourcePolicyInputDict = {"resource_arn": _, "policy": _}
-_params_113: PutRuntimeManagementConfigInputDict = {
+_params_115: PutResourcePolicyInputDict = {"resource_arn": _, "policy": _}
+_params_116: PutRuntimeManagementConfigInputDict = {
     "function_name": _,
     "update_runtime_on": _,
 }
-_params_114: RemoveLayerVersionPermissionInputDict = {
+_params_117: RemoveLayerVersionPermissionInputDict = {
     "layer_name": _,
     "statement_id": _,
 }
-_params_115: RemovePermissionInputDict = {"function_name": _, "statement_id": _}
-_params_116: S3FilesConfigDict = {}
-_params_117: ScalingConfigDict = {}
-_params_118: SelfManagedEventSourceDict = {}
-_params_119: SelfManagedKafkaEventSourceConfigDict = {}
-_params_120: SendDurableExecutionCallbackFailureInputDict = {"callback_id": _}
-_params_121: SendDurableExecutionCallbackHeartbeatInputDict = {"callback_id": _}
-_params_122: SendDurableExecutionCallbackSuccessInputDict = {"callback_id": _}
-_params_123: SnapStartDict = {}
-_params_124: SourceAccessConfigurationDict = {}
-_params_125: StepOptionsDict = {}
-_params_126: StopDurableExecutionInputDict = {"durable_execution_arn": _}
-_params_127: TagResourceInputDict = {"resource": _, "tags": _}
-_params_128: TargetTrackingScalingPolicyDict = {
+_params_118: RemovePermissionInputDict = {"function_name": _, "statement_id": _}
+_params_119: ResumeDurableExecutionInputDict = {"durable_execution_arn": _}
+_params_120: S3FilesConfigDict = {}
+_params_121: ScalingConfigDict = {}
+_params_122: SelfManagedEventSourceDict = {}
+_params_123: SelfManagedKafkaEventSourceConfigDict = {}
+_params_124: SendDurableExecutionCallbackFailureInputDict = {"callback_id": _}
+_params_125: SendDurableExecutionCallbackHeartbeatInputDict = {"callback_id": _}
+_params_126: SendDurableExecutionCallbackSuccessInputDict = {"callback_id": _}
+_params_127: SnapStartDict = {}
+_params_128: SourceAccessConfigurationDict = {}
+_params_129: StepOptionsDict = {}
+_params_130: StopDurableExecutionInputDict = {"durable_execution_arn": _}
+_params_131: TagResourceInputDict = {"resource": _, "tags": _}
+_params_132: TargetTrackingScalingPolicyDict = {
     "predefined_metric_type": _,
     "target_value": _,
 }
-_params_129: TenancyConfigDict = {"tenant_isolation_mode": _}
-_params_130: TracingConfigDict = {}
-_params_131: UntagResourceInputDict = {"resource": _, "tag_keys": _}
-_params_132: UpdateAliasInputDict = {"function_name": _, "name": _}
-_params_133: UpdateCapacityProviderInputDict = {"capacity_provider_name": _}
-_params_134: UpdateCodeSigningConfigInputDict = {"code_signing_config_arn": _}
-_params_135: UpdateEventSourceMappingInputDict = {"uuid": _}
-_params_136: UpdateFunctionCodeInputDict = {"function_name": _}
-_params_137: UpdateFunctionConfigurationInputDict = {"function_name": _}
-_params_138: UpdateFunctionEventInvokeConfigInputDict = {"function_name": _}
-_params_139: UpdateFunctionUrlConfigInputDict = {"function_name": _}
-_params_140: VpcConfigDict = {}
-_params_141: WaitOptionsDict = {}
+_params_133: TenancyConfigDict = {"tenant_isolation_mode": _}
+_params_134: TracingConfigDict = {}
+_params_135: UntagResourceInputDict = {"resource": _, "tag_keys": _}
+_params_136: UpdateAliasInputDict = {"function_name": _, "name": _}
+_params_137: UpdateCapacityProviderInputDict = {"capacity_provider_name": _}
+_params_138: UpdateCodeSigningConfigInputDict = {"code_signing_config_arn": _}
+_params_139: UpdateEventSourceMappingInputDict = {"uuid": _}
+_params_140: UpdateFunctionCodeInputDict = {"function_name": _}
+_params_141: UpdateFunctionConfigurationInputDict = {"function_name": _}
+_params_142: UpdateFunctionEventInvokeConfigInputDict = {"function_name": _}
+_params_143: UpdateFunctionUrlConfigInputDict = {"function_name": _}
+_params_144: VpcConfigDict = {}
+_params_145: WaitOptionsDict = {}
 
 
 def _request[T](form: type[T]) -> T:
@@ -1069,6 +1101,10 @@ async def check_async_calls(client: AsyncLambdaClient) -> None:
     )
     await client.delete_code_signing_config(_request(DeleteCodeSigningConfigInput))
     await client.delete_code_signing_config(_request(DeleteCodeSigningConfigInputDict))
+    await client.delete_durable_execution(durable_execution_arn=_)
+    await client.delete_durable_execution(**_request(DeleteDurableExecutionInputDict))
+    await client.delete_durable_execution(_request(DeleteDurableExecutionInput))
+    await client.delete_durable_execution(_request(DeleteDurableExecutionInputDict))
     await client.delete_event_source_mapping(uuid=_)
     await client.delete_event_source_mapping(
         **_request(DeleteEventSourceMappingInputDict)
@@ -1383,6 +1419,10 @@ async def check_async_calls(client: AsyncLambdaClient) -> None:
     await client.list_versions_by_function(**_request(ListVersionsByFunctionInputDict))
     await client.list_versions_by_function(_request(ListVersionsByFunctionInput))
     await client.list_versions_by_function(_request(ListVersionsByFunctionInputDict))
+    await client.pause_durable_execution(durable_execution_arn=_)
+    await client.pause_durable_execution(**_request(PauseDurableExecutionInputDict))
+    await client.pause_durable_execution(_request(PauseDurableExecutionInput))
+    await client.pause_durable_execution(_request(PauseDurableExecutionInputDict))
     await client.publish_layer_version(layer_name=_, content=_)
     await client.publish_layer_version(**_request(PublishLayerVersionInputDict))
     await client.publish_layer_version(_request(PublishLayerVersionInput))
@@ -1477,6 +1517,10 @@ async def check_async_calls(client: AsyncLambdaClient) -> None:
     await client.remove_permission(**_request(RemovePermissionInputDict))
     await client.remove_permission(_request(RemovePermissionInput))
     await client.remove_permission(_request(RemovePermissionInputDict))
+    await client.resume_durable_execution(durable_execution_arn=_)
+    await client.resume_durable_execution(**_request(ResumeDurableExecutionInputDict))
+    await client.resume_durable_execution(_request(ResumeDurableExecutionInput))
+    await client.resume_durable_execution(_request(ResumeDurableExecutionInputDict))
     await client.send_durable_execution_callback_failure(callback_id=_)
     await client.send_durable_execution_callback_failure(
         **_request(SendDurableExecutionCallbackFailureInputDict)
@@ -1627,6 +1671,10 @@ def check_sync_calls(client: LambdaClient) -> None:
     client.delete_code_signing_config(**_request(DeleteCodeSigningConfigInputDict))
     client.delete_code_signing_config(_request(DeleteCodeSigningConfigInput))
     client.delete_code_signing_config(_request(DeleteCodeSigningConfigInputDict))
+    client.delete_durable_execution(durable_execution_arn=_)
+    client.delete_durable_execution(**_request(DeleteDurableExecutionInputDict))
+    client.delete_durable_execution(_request(DeleteDurableExecutionInput))
+    client.delete_durable_execution(_request(DeleteDurableExecutionInputDict))
     client.delete_event_source_mapping(uuid=_)
     client.delete_event_source_mapping(**_request(DeleteEventSourceMappingInputDict))
     client.delete_event_source_mapping(_request(DeleteEventSourceMappingInput))
@@ -1891,6 +1939,10 @@ def check_sync_calls(client: LambdaClient) -> None:
     client.list_versions_by_function(**_request(ListVersionsByFunctionInputDict))
     client.list_versions_by_function(_request(ListVersionsByFunctionInput))
     client.list_versions_by_function(_request(ListVersionsByFunctionInputDict))
+    client.pause_durable_execution(durable_execution_arn=_)
+    client.pause_durable_execution(**_request(PauseDurableExecutionInputDict))
+    client.pause_durable_execution(_request(PauseDurableExecutionInput))
+    client.pause_durable_execution(_request(PauseDurableExecutionInputDict))
     client.publish_layer_version(layer_name=_, content=_)
     client.publish_layer_version(**_request(PublishLayerVersionInputDict))
     client.publish_layer_version(_request(PublishLayerVersionInput))
@@ -1963,6 +2015,10 @@ def check_sync_calls(client: LambdaClient) -> None:
     client.remove_permission(**_request(RemovePermissionInputDict))
     client.remove_permission(_request(RemovePermissionInput))
     client.remove_permission(_request(RemovePermissionInputDict))
+    client.resume_durable_execution(durable_execution_arn=_)
+    client.resume_durable_execution(**_request(ResumeDurableExecutionInputDict))
+    client.resume_durable_execution(_request(ResumeDurableExecutionInput))
+    client.resume_durable_execution(_request(ResumeDurableExecutionInputDict))
     client.send_durable_execution_callback_failure(callback_id=_)
     client.send_durable_execution_callback_failure(
         **_request(SendDurableExecutionCallbackFailureInputDict)

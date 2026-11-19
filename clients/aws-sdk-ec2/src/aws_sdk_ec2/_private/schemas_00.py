@@ -448,12 +448,27 @@ _oI = "ownerId"
 _Re = "Region"
 _reg = "region"
 _DT = "DateTime"
+_TGPAMRM = "TransitGatewayPeeringAttachmentMultipathResilienceMode"
+_ao = "always_on"
+_ao_ = "always-on"
 _DRV = "DynamicRoutingValue"
 _e = "enable"
 _disa = "disable"
+_TGPAMRS = "TransitGatewayPeeringAttachmentMultipathResilienceStatus"
+_en = "enabled"
 _TGPAO = "TransitGatewayPeeringAttachmentOptions"
 _DRy = "DynamicRouting"
 _dR = "dynamicRouting"
+_RAMR = "RequesterAllowMultipathResilience"
+_rAMR = "requesterAllowMultipathResilience"
+_RMRM = "RequesterMultipathResilienceMode"
+_rMRM = "requesterMultipathResilienceMode"
+_AAMR = "AccepterAllowMultipathResilience"
+_aAMR = "accepterAllowMultipathResilience"
+_AMRM = "AccepterMultipathResilienceMode"
+_aMRM = "accepterMultipathResilienceMode"
+_MRS = "MultipathResilienceStatus"
+_mRS = "multipathResilienceStatus"
 _TGAS = "TransitGatewayAttachmentState"
 _ini = "initiating"
 _iR = "initiatingRequest"
@@ -509,12 +524,14 @@ _cATGVARo = "com.amazonaws.ec2#AcceptTransitGatewayVpcAttachmentResult"
 _tGVA = "transitGatewayVpcAttachment"
 _ATGVA = "AcceptTransitGatewayVpcAttachment"
 _VESI = "VpcEndpointServiceId"
+_TGAIL = "TransitGatewayAttachmentIdList"
 _VEI = "VpcEndpointId"
 _VEIL = "VpcEndpointIdList"
 _AVECI = "AcceptVpcEndpointConnectionsInput"
 _cAVECR = "com.amazonaws.ec2#AcceptVpcEndpointConnectionsRequest"
 _SIe = "ServiceId"
 _VEIp = "VpcEndpointIds"
+_TGAIr = "TransitGatewayAttachmentIds"
 _UIE = "UnsuccessfulItemError"
 _UI = "UnsuccessfulItem"
 _E = "Error"
@@ -533,22 +550,8 @@ _VPCI = "VpcPeeringConnectionId"
 _vPCI = "vpcPeeringConnectionId"
 _CB = "CidrBlock"
 _cB = "cidrBlock"
-_CBS = "CidrBlockSet"
-_ICB = "Ipv6CidrBlock"
-_iCB = "ipv6CidrBlock"
-_ICBS = "Ipv6CidrBlockSet"
-_VPCOD = "VpcPeeringConnectionOptionsDescription"
-_ADRFRV = "AllowDnsResolutionFromRemoteVpc"
-_aDRFRV = "allowDnsResolutionFromRemoteVpc"
-_AEFLCLTRV = "AllowEgressFromLocalClassicLinkToRemoteVpc"
-_aEFLCLTRV = "allowEgressFromLocalClassicLinkToRemoteVpc"
-_AEFLVTRCL = "AllowEgressFromLocalVpcToRemoteClassicLink"
-_aEFLVTRCL = "allowEgressFromLocalVpcToRemoteClassicLink"
-_VPCVI = "VpcPeeringConnectionVpcInfo"
-_iCBS = "ipv6CidrBlockSet"
-_cBS = "cidrBlockSet"
-_PO = "PeeringOptions"
-_pO = "peeringOptions"
+_MRM = "MultipathResilienceMode"
+_AO = "ALWAYS_ON"
 _VPC = "VpcPeeringConnection"
 _AVPCO = "AcceptVpcPeeringConnectionOutput"
 _cAVPCRo = "com.amazonaws.ec2#AcceptVpcPeeringConnectionResult"
@@ -559,27 +562,21 @@ _F = "From"
 _fr = "from"
 _To = "To"
 _to = "to"
+_Id = "Id"
+_id = "id"
+_Ar = "Arn"
+_ar = "arn"
 _NGI = "NatGatewayId"
 _NIASAI = "NetworkInsightsAccessScopeAnalysisId"
 _NIASI = "NetworkInsightsAccessScopeId"
 _AID = "AccountID"
 _VECES = "VpcEncryptionControlExclusionState"
-_en = "enabling"
-_ena = "enabled"
+_ena = "enabling"
 _disab = "disabling"
 _MB = "ManagedBy"
 _acc = "account"
 _dp = "declarative_policy"
 _dp_ = "declarative-policy"
-_PTr = "PrincipalType"
-_Al = "All"
-_Ser = "Service"
-_OU = "OrganizationUnit"
-_Acc = "Account"
-_Us = "User"
-_Ro = "Role"
-_DTo = "DomainType"
-_stan = "standard"
 _IPI = "IpamPoolId"
 _IPEI = "Ipv4PoolEc2Id"
 _RHIL = "ResponseHostIdList"
@@ -590,9 +587,11 @@ _af = "association_failed"
 _af_ = "association-failed"
 _CIe = "CertificateId"
 _RIo = "RoleId"
+_IIP = "IamInstanceProfile"
 _DHI = "DedicatedHostId"
 _IIp = "IpamId"
 _IRDI = "IpamResourceDiscoveryId"
+_KKI = "KmsKeyId"
 _FCAPI = "FlexCostAllocationPolicyId"
 _RSI = "RouteServerId"
 _RTIo = "RouteTableId"
@@ -609,6 +608,7 @@ _tGRTI = "transitGatewayRouteTableId"
 _TIAI = "TrunkInterfaceAssociationId"
 _IPEIp = "Ipv6PoolEc2Id"
 _IGI = "InternetGatewayId"
+_VAII = "VerifiedAccessInstanceId"
 
 INTEGER: StaticSchema = (7, n0, _I, 0)
 
@@ -1392,6 +1392,15 @@ PEERING_TGW_INFO: StaticSchema = (
 
 DATE_TIME: StaticSchema = (4, n0, _DT, 0)
 
+TRANSIT_GATEWAY_PEERING_ATTACHMENT_MULTIPATH_RESILIENCE_MODE: StaticSchema = (
+    14,
+    n0,
+    _TGPAMRM,
+    0,
+    (_ao,),
+    ((-1, {_sV: _ao_}),),
+)
+
 DYNAMIC_ROUTING_VALUE: StaticSchema = (
     14,
     n0,
@@ -1401,13 +1410,38 @@ DYNAMIC_ROUTING_VALUE: StaticSchema = (
     ((-1, {_sV: _e}), (-1, {_sV: _disa})),
 )
 
+TRANSIT_GATEWAY_PEERING_ATTACHMENT_MULTIPATH_RESILIENCE_STATUS: StaticSchema = (
+    14,
+    n0,
+    _TGPAMRS,
+    0,
+    (_p, _en, _d),
+    ((-1, {_sV: _p}), (-1, {_sV: _en}), (-1, {_sV: _d})),
+)
+
 TRANSIT_GATEWAY_PEERING_ATTACHMENT_OPTIONS: StaticSchema = (
     18,
     n0,
     _TGPAO,
     0,
-    (_DRy,),
-    ((DYNAMIC_ROUTING_VALUE, {_aQN: _DRy, _sN: _dR}),),
+    (_DRy, _RAMR, _RMRM, _AAMR, _AMRM, _MRS),
+    (
+        (DYNAMIC_ROUTING_VALUE, {_aQN: _DRy, _sN: _dR}),
+        (BOOLEAN, {_aQN: _RAMR, _sN: _rAMR}),
+        (
+            TRANSIT_GATEWAY_PEERING_ATTACHMENT_MULTIPATH_RESILIENCE_MODE,
+            {_aQN: _RMRM, _sN: _rMRM},
+        ),
+        (BOOLEAN, {_aQN: _AAMR, _sN: _aAMR}),
+        (
+            TRANSIT_GATEWAY_PEERING_ATTACHMENT_MULTIPATH_RESILIENCE_MODE,
+            {_aQN: _AMRM, _sN: _aMRM},
+        ),
+        (
+            TRANSIT_GATEWAY_PEERING_ATTACHMENT_MULTIPATH_RESILIENCE_STATUS,
+            {_aQN: _MRS, _sN: _mRS},
+        ),
+    ),
 )
 
 TRANSIT_GATEWAY_ATTACHMENT_STATE: StaticSchema = (
@@ -1560,6 +1594,15 @@ TRANSIT_GATEWAY_VPC_ATTACHMENT: StaticSchema = (
 
 VPC_ENDPOINT_SERVICE_ID: StaticSchema = (3, n0, _VESI, 0)
 
+TRANSIT_GATEWAY_ATTACHMENT_ID_LIST: StaticSchema = (
+    16,
+    n0,
+    _TGAIL,
+    0,
+    (_me,),
+    ((TRANSIT_GATEWAY_ATTACHMENT_ID, {_sN: _i}),),
+)
+
 VPC_ENDPOINT_ID: StaticSchema = (3, n0, _VEI, 0)
 
 VPC_ENDPOINT_ID_LIST: StaticSchema = (
@@ -1576,11 +1619,12 @@ ACCEPT_VPC_ENDPOINT_CONNECTIONS_INPUT: StaticSchema = (
     n0,
     _AVECI,
     {_sSI: _cAVECR, _sm: None},
-    (_DR, _SIe, _VEIp),
+    (_DR, _SIe, _VEIp, _TGAIr),
     (
         (BOOLEAN, 0),
         (VPC_ENDPOINT_SERVICE_ID, {_sO: None, _smi: None}),
         (VPC_ENDPOINT_ID_LIST, {_sN: _VEI, _sO: None, _smi: None}),
+        (TRANSIT_GATEWAY_ATTACHMENT_ID_LIST, {_sN: _TGAI}),
     ),
 )
 
@@ -1668,54 +1712,13 @@ ACCEPT_VPC_PEERING_CONNECTION: StaticOperationSchema = (
 
 CIDR_BLOCK: StaticSchema = (18, n0, _CB, 0, (_CB,), ((STRING, {_aQN: _CB, _sN: _cB}),))
 
-CIDR_BLOCK_SET: StaticSchema = (16, n0, _CBS, 0, (_me,), ((CIDR_BLOCK, {_sN: _i}),))
-
-IPV6_CIDR_BLOCK: StaticSchema = (
-    18,
+MULTIPATH_RESILIENCE_MODE: StaticSchema = (
+    14,
     n0,
-    _ICB,
+    _MRM,
     0,
-    (_ICB,),
-    ((STRING, {_aQN: _ICB, _sN: _iCB}),),
-)
-
-IPV6_CIDR_BLOCK_SET: StaticSchema = (
-    16,
-    n0,
-    _ICBS,
-    0,
-    (_me,),
-    ((IPV6_CIDR_BLOCK, {_sN: _i}),),
-)
-
-VPC_PEERING_CONNECTION_OPTIONS_DESCRIPTION: StaticSchema = (
-    18,
-    n0,
-    _VPCOD,
-    0,
-    (_ADRFRV, _AEFLCLTRV, _AEFLVTRCL),
-    (
-        (BOOLEAN, {_aQN: _ADRFRV, _sN: _aDRFRV}),
-        (BOOLEAN, {_aQN: _AEFLCLTRV, _sN: _aEFLCLTRV}),
-        (BOOLEAN, {_aQN: _AEFLVTRCL, _sN: _aEFLVTRCL}),
-    ),
-)
-
-VPC_PEERING_CONNECTION_VPC_INFO: StaticSchema = (
-    18,
-    n0,
-    _VPCVI,
-    0,
-    (_CB, _ICBS, _CBS, _OIw, _PO, _VI, _Re),
-    (
-        (STRING, {_aQN: _CB, _sN: _cB}),
-        (IPV6_CIDR_BLOCK_SET, {_aQN: _ICBS, _sN: _iCBS}),
-        (CIDR_BLOCK_SET, {_aQN: _CBS, _sN: _cBS}),
-        (STRING, {_aQN: _OIw, _sN: _oI}),
-        (VPC_PEERING_CONNECTION_OPTIONS_DESCRIPTION, {_aQN: _PO, _sN: _pO}),
-        (STRING, {_aQN: _VI, _sN: _vI}),
-        (STRING, {_aQN: _Re, _sN: _reg}),
-    ),
+    (_AO,),
+    ((-1, {_sV: _ao_}),),
 )
 
 PORT_RANGE: StaticSchema = (
@@ -1738,8 +1741,8 @@ VPC_ENCRYPTION_CONTROL_EXCLUSION_STATE: StaticSchema = (
     n0,
     _VECES,
     0,
-    (_en, _ena, _disab, _d),
-    ((-1, {_sV: _en}), (-1, {_sV: _ena}), (-1, {_sV: _disab}), (-1, {_sV: _d})),
+    (_ena, _en, _disab, _d),
+    ((-1, {_sV: _ena}), (-1, {_sV: _en}), (-1, {_sV: _disab}), (-1, {_sV: _d})),
 )
 
 MANAGED_BY: StaticSchema = (
@@ -1749,31 +1752,6 @@ MANAGED_BY: StaticSchema = (
     0,
     (_acc, _dp),
     ((-1, {_sV: _acc}), (-1, {_sV: _dp_})),
-)
-
-PRINCIPAL_TYPE: StaticSchema = (
-    14,
-    n0,
-    _PTr,
-    0,
-    (_Al, _Ser, _OU, _Acc, _Us, _Ro),
-    (
-        (-1, {_sV: _Al}),
-        (-1, {_sV: _Ser}),
-        (-1, {_sV: _OU}),
-        (-1, {_sV: _Acc}),
-        (-1, {_sV: _Us}),
-        (-1, {_sV: _Ro}),
-    ),
-)
-
-DOMAIN_TYPE: StaticSchema = (
-    14,
-    n0,
-    _DTo,
-    0,
-    (_vp, _stan),
-    ((-1, {_sV: _vp}), (-1, {_sV: _stan})),
 )
 
 ALLOCATION_ID: StaticSchema = (3, n0, _AI, 0)
@@ -1796,11 +1774,22 @@ CERTIFICATE_ID: StaticSchema = (3, n0, _CIe, 0)
 
 ROLE_ID: StaticSchema = (3, n0, _RIo, 0)
 
+IAM_INSTANCE_PROFILE: StaticSchema = (
+    18,
+    n0,
+    _IIP,
+    0,
+    (_Ar, _Id),
+    ((STRING, {_aQN: _Ar, _sN: _ar}), (STRING, {_aQN: _Id, _sN: _id})),
+)
+
 DEDICATED_HOST_ID: StaticSchema = (3, n0, _DHI, 0)
 
 IPAM_ID: StaticSchema = (3, n0, _IIp, 0)
 
 IPAM_RESOURCE_DISCOVERY_ID: StaticSchema = (3, n0, _IRDI, 0)
+
+KMS_KEY_ID: StaticSchema = (3, n0, _KKI, 0)
 
 FLEX_COST_ALLOCATION_POLICY_ID: StaticSchema = (3, n0, _FCAPI, 0)
 
@@ -1872,3 +1861,5 @@ TRUNK_INTERFACE_ASSOCIATION_ID: StaticSchema = (3, n0, _TIAI, 0)
 IPV6_POOL_EC2_ID: StaticSchema = (3, n0, _IPEIp, 0)
 
 INTERNET_GATEWAY_ID: StaticSchema = (3, n0, _IGI, 0)
+
+VERIFIED_ACCESS_INSTANCE_ID: StaticSchema = (3, n0, _VAII, 0)

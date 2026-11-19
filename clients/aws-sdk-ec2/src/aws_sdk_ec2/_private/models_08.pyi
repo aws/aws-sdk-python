@@ -13,8 +13,6 @@ from ..models import (
     AccountVpcEncryptionControl,
     AddIpamOperatingRegion,
     AddIpamOperatingRegionDict,
-    AddIpamOrganizationalUnitExclusion,
-    AddIpamOrganizationalUnitExclusionDict,
     AddressAttribute,
     ApplicationStatusCheckResponseObject,
     AttributeBooleanValue,
@@ -50,8 +48,6 @@ from ..models import (
     EnaSrdSpecificationRequestDict,
     EnclaveOptionsRequest,
     EnclaveOptionsRequestDict,
-    ExternalAuthorityConfiguration,
-    ExternalAuthorityConfigurationDict,
     FleetLaunchTemplateConfigRequest,
     FleetLaunchTemplateConfigRequestDict,
     FleetLaunchTemplateOverrides,
@@ -79,18 +75,8 @@ from ..models import (
     InstanceRequirements,
     InstanceRequirementsDict,
     InstanceStatusEvent,
-    Ipam,
     IpamOperatingRegion,
     IpamOrganizationalUnitExclusion,
-    IpamPolicyAllocationRuleRequest,
-    IpamPolicyAllocationRuleRequestDict,
-    IpamPolicyDocument,
-    IpamPool,
-    IpamPoolAllocation,
-    IpamPrefixListResolver,
-    IpamPrefixListResolverRuleRequest,
-    IpamPrefixListResolverRuleRequestDict,
-    IpamPrefixListResolverTarget,
     OperatorResponse,
     PoolCidrBlock,
     PrefixListId,
@@ -99,8 +85,6 @@ from ..models import (
     PrivateIpAddressSpecificationDict,
     RemoveIpamOperatingRegion,
     RemoveIpamOperatingRegionDict,
-    RemoveIpamOrganizationalUnitExclusion,
-    RemoveIpamOrganizationalUnitExclusionDict,
     RequestIpamResourceTag,
     RequestIpamResourceTagDict,
     ResponseLaunchTemplateData,
@@ -129,6 +113,682 @@ from ..models import (
     VolumeRecycleBinInfo,
     _SerdeShape,
 )
+
+class IpamPoolSourceResourceType(UnknownEnumMixin, StrEnum):
+    VPC = "vpc"
+
+class IpamPoolState(UnknownEnumMixin, StrEnum):
+    CREATE_IN_PROGRESS = "create-in-progress"
+    CREATE_COMPLETE = "create-complete"
+    CREATE_FAILED = "create-failed"
+    MODIFY_IN_PROGRESS = "modify-in-progress"
+    MODIFY_COMPLETE = "modify-complete"
+    MODIFY_FAILED = "modify-failed"
+    DELETE_IN_PROGRESS = "delete-in-progress"
+    DELETE_COMPLETE = "delete-complete"
+    DELETE_FAILED = "delete-failed"
+    ISOLATE_IN_PROGRESS = "isolate-in-progress"
+    ISOLATE_COMPLETE = "isolate-complete"
+    RESTORE_IN_PROGRESS = "restore-in-progress"
+
+@dataclass(kw_only=True)
+class IpamPrefixListResolver(_SerdeShape):
+    """
+    Describes an IPAM prefix list resolver.
+
+    An IPAM prefix list resolver is a component that manages the
+    synchronization between IPAM's CIDR selection rules and
+    customer-managed prefix lists. It automates connectivity configurations
+    by selecting CIDRs from IPAM's database based on your business logic
+    and synchronizing them with prefix lists used in resources such as VPC
+    route tables and security groups.
+    """
+
+    owner_id: str | None = ...
+    """
+    The ID of the Amazon Web Services account that owns the IPAM prefix list
+    resolver.
+    """
+    ipam_prefix_list_resolver_id: str | None = ...
+    """The ID of the IPAM prefix list resolver."""
+    ipam_prefix_list_resolver_arn: str | None = ...
+    """The Amazon Resource Name (ARN) of the IPAM prefix list resolver."""
+    ipam_arn: str | None = ...
+    """
+    The Amazon Resource Name (ARN) of the IPAM associated with this
+    resolver.
+    """
+    ipam_region: str | None = ...
+    """The Amazon Web Services Region where the associated IPAM is located."""
+    description: str | None = ...
+    """The description of the IPAM prefix list resolver."""
+    address_family: str | None = ...
+    """The address family (IPv4 or IPv6) for the IPAM prefix list resolver."""
+    state: str | None = ...
+    """
+    The current state of the IPAM prefix list resolver. Valid values include
+    `create-in-progress`, `create-complete`, `create-failed`,
+    `modify-in-progress`, `modify-complete`, `modify-failed`,
+    `delete-in-progress`, `delete-complete`, and `delete-failed`.
+    """
+    tags: list[Tag] | None = ...
+    """The tags assigned to the IPAM prefix list resolver."""
+    last_version_creation_status: str | None = ...
+    """
+    The status for the last time a version was created.
+
+    Each version is a snapshot of what CIDRs matched your rules at that
+    moment in time. The version number increments every time the CIDR list
+    changes due to infrastructure changes.
+    """
+    last_version_creation_status_message: str | None = ...
+    """
+    The status message for the last time a version was created.
+
+    Each version is a snapshot of what CIDRs matched your rules at that
+    moment in time. The version number increments every time the CIDR list
+    changes due to infrastructure changes.
+    """
+
+@dataclass(kw_only=True)
+class IpamPrefixListResolverRule(_SerdeShape):
+    """
+    Describes a CIDR selection rule.
+
+    CIDR selection rules define the business logic for selecting CIDRs from
+    IPAM. If a CIDR matches any of the rules, it will be included. If a rule
+    has multiple conditions, the CIDR has to match every condition of that
+    rule. You can create a prefix list resolver without any CIDR selection
+    rules, but it will generate empty versions (containing no CIDRs) until
+    you add rules.
+    """
+
+    rule_type: str | None = ...
+    """
+    The type of CIDR selection rule. Valid values include `include` for
+    selecting CIDRs that match the conditions, and `exclude` for excluding
+    CIDRs that match the conditions.
+    """
+    static_cidr: str | None = ...
+    """
+    A fixed list of CIDRs that do not change (like a manual list replicated
+    across Regions).
+    """
+    ipam_scope_id: str | None = ...
+    """
+    The ID of the IPAM scope from which to select CIDRs. This determines
+    whether to select from public or private IP address space.
+    """
+    resource_type: str | None = ...
+    """For rules of type `ipam-resource-cidr`, this is the resource type."""
+    conditions: list[IpamPrefixListResolverRuleCondition] | None = ...
+    """
+    The conditions that determine which CIDRs are selected by this rule.
+    Conditions specify criteria such as resource type, tags, account IDs,
+    and Regions.
+    """
+
+@dataclass(kw_only=True)
+class IpamPrefixListResolverRuleCondition(_SerdeShape):
+    """
+    Describes a condition within a CIDR selection rule. Conditions define
+    the criteria for selecting CIDRs from IPAM's database based on resource
+    attributes.
+
+    CIDR selection rules define the business logic for selecting CIDRs from
+    IPAM. If a CIDR matches any of the rules, it will be included. If a rule
+    has multiple conditions, the CIDR has to match every condition of that
+    rule. You can create a prefix list resolver without any CIDR selection
+    rules, but it will generate empty versions (containing no CIDRs) until
+    you add rules.
+
+    There are three rule types. Only 2 of the 3 rule types support
+    conditions - **IPAM pool CIDR** and **Scope resource CIDR**. **Static
+    CIDR** rules cannot have conditions.
+
+    - **Static CIDR**: A fixed list of CIDRs that do not change (like a
+      manual list replicated across Regions)
+
+    - **IPAM pool CIDR**: CIDRs from specific IPAM pools (like all CIDRs
+      from your IPAM production pool)
+
+      If you choose this option, choose the following:
+
+      - **IPAM scope**: Select the IPAM scope to search for resources
+
+      - **Conditions:**
+
+        - **Property**
+
+          - **IPAM pool ID**: Select an IPAM pool that contains the
+            resources
+
+          - **CIDR** (like 10.24.34.0/23)
+
+        - **Operation**: Equals/Not equals
+
+        - **Value**: The value on which to match the condition
+
+    - **Scope resource CIDR**: CIDRs from Amazon Web Services resources like
+      VPCs, subnets, EIPs within an IPAM scope
+
+      If you choose this option, choose the following:
+
+      - **IPAM scope**: Select the IPAM scope to search for resources
+
+      - **Resource type**: Select a resource, like a VPC or subnet.
+
+      - **Conditions**:
+
+        - **Property**:
+
+          - Resource ID: The unique ID of a resource (like
+            vpc-1234567890abcdef0)
+
+          - Resource owner (like 111122223333)
+
+          - Resource region (like us-east-1)
+
+          - Resource tag (like key: name, value: dev-vpc-1)
+
+          - CIDR (like 10.24.34.0/23)
+
+        - **Operation**: Equals/Not equals
+
+        - **Value**: The value on which to match the condition
+    """
+
+    operation: str | None = ...
+    """
+    The operation to perform when evaluating this condition. Valid values
+    include `equals`, `not-equals`, `contains`, and `not-contains`.
+    """
+    ipam_pool_id: str | None = ...
+    """
+    The ID of the IPAM pool to match against. This condition selects CIDRs
+    that belong to the specified IPAM pool.
+    """
+    resource_id: str | None = ...
+    """
+    The ID of the Amazon Web Services resource to match against. This
+    condition selects CIDRs associated with the specified resource.
+    """
+    resource_owner: str | None = ...
+    """
+    The Amazon Web Services account ID that owns the resources to match
+    against. This condition selects CIDRs from resources owned by the
+    specified account.
+    """
+    resource_region: str | None = ...
+    """
+    The Amazon Web Services Region where the resources are located. This
+    condition selects CIDRs from resources in the specified Region.
+    """
+    resource_tag: IpamResourceTag | None = ...
+    """
+    A tag key-value pair to match against. This condition selects CIDRs from
+    resources that have the specified tag.
+    """
+    cidr: str | None = ...
+    """
+    A CIDR block to match against. This condition selects CIDRs that fall
+    within or match the specified CIDR range.
+    """
+
+class IpamPrefixListResolverRuleConditionOperation(UnknownEnumMixin, StrEnum):
+    EQUALS = "equals"
+    NOT_EQUALS = "not-equals"
+    SUBNET_OF = "subnet-of"
+
+@dataclass(kw_only=True)
+class IpamPrefixListResolverRuleConditionRequest(_SerdeShape):
+    """
+    Describes a condition used when creating or modifying resolver rules.
+
+    CIDR selection rules define the business logic for selecting CIDRs from
+    IPAM. If a CIDR matches any of the rules, it will be included. If a rule
+    has multiple conditions, the CIDR has to match every condition of that
+    rule. You can create a prefix list resolver without any CIDR selection
+    rules, but it will generate empty versions (containing no CIDRs) until
+    you add rules.
+
+    There are three rule types. Only 2 of the 3 rule types support
+    conditions - **IPAM pool CIDR** and **Scope resource CIDR**. **Static
+    CIDR** rules cannot have conditions.
+
+    - **Static CIDR**: A fixed list of CIDRs that do not change (like a
+      manual list replicated across Regions)
+
+    - **IPAM pool CIDR**: CIDRs from specific IPAM pools (like all CIDRs
+      from your IPAM production pool)
+
+      If you choose this option, choose the following:
+
+      - **IPAM scope**: Select the IPAM scope to search for resources
+
+      - **Conditions:**
+
+        - **Property**
+
+          - **IPAM pool ID**: Select an IPAM pool that contains the
+            resources
+
+          - **CIDR** (like 10.24.34.0/23)
+
+        - **Operation**: Equals/Not equals
+
+        - **Value**: The value on which to match the condition
+
+    - **Scope resource CIDR**: CIDRs from Amazon Web Services resources like
+      VPCs, subnets, EIPs within an IPAM scope
+
+      If you choose this option, choose the following:
+
+      - **IPAM scope**: Select the IPAM scope to search for resources
+
+      - **Resource type**: Select a resource, like a VPC or subnet.
+
+      - **Conditions**:
+
+        - **Property**:
+
+          - Resource ID: The unique ID of a resource (like
+            vpc-1234567890abcdef0)
+
+          - Resource owner (like 111122223333)
+
+          - Resource region (like us-east-1)
+
+          - Resource tag (like key: name, value: dev-vpc-1)
+
+          - CIDR (like 10.24.34.0/23)
+
+        - **Operation**: Equals/Not equals
+
+        - **Value**: The value on which to match the condition
+    """
+
+    operation: str | None = ...
+    """The operation to perform when evaluating this condition."""
+    ipam_pool_id: str | None = ...
+    """
+    The ID of the IPAM pool to match against. This condition selects CIDRs
+    that belong to the specified IPAM pool.
+    """
+    resource_id: str | None = ...
+    """
+    The ID of the Amazon Web Services resource to match against. This
+    condition selects CIDRs associated with the specified resource.
+    """
+    resource_owner: str | None = ...
+    """
+    The Amazon Web Services account ID that owns the resources to match
+    against. This condition selects CIDRs from resources owned by the
+    specified account.
+    """
+    resource_region: str | None = ...
+    """
+    The Amazon Web Services Region where the resources are located. This
+    condition selects CIDRs from resources in the specified Region.
+    """
+    resource_tag: RequestIpamResourceTag | None = ...
+    """
+    A tag key-value pair to match against. This condition selects CIDRs from
+    resources that have the specified tag.
+    """
+    cidr: str | None = ...
+    """
+    A CIDR block to match against. This condition selects CIDRs that fall
+    within or match the specified CIDR range.
+    """
+
+class IpamPrefixListResolverRuleConditionRequestDict(TypedDict, total=False):
+    """Dictionary form of `IpamPrefixListResolverRuleConditionRequest`."""
+
+    operation: Required[str]
+    """The operation to perform when evaluating this condition."""
+    ipam_pool_id: str | None
+    """
+    The ID of the IPAM pool to match against. This condition selects CIDRs
+    that belong to the specified IPAM pool.
+    """
+    resource_id: str | None
+    """
+    The ID of the Amazon Web Services resource to match against. This
+    condition selects CIDRs associated with the specified resource.
+    """
+    resource_owner: str | None
+    """
+    The Amazon Web Services account ID that owns the resources to match
+    against. This condition selects CIDRs from resources owned by the
+    specified account.
+    """
+    resource_region: str | None
+    """
+    The Amazon Web Services Region where the resources are located. This
+    condition selects CIDRs from resources in the specified Region.
+    """
+    resource_tag: RequestIpamResourceTag | RequestIpamResourceTagDict | None
+    """
+    A tag key-value pair to match against. This condition selects CIDRs from
+    resources that have the specified tag.
+    """
+    cidr: str | None
+    """
+    A CIDR block to match against. This condition selects CIDRs that fall
+    within or match the specified CIDR range.
+    """
+
+@dataclass(kw_only=True)
+class IpamPrefixListResolverRuleRequest(_SerdeShape):
+    """
+    Describes a CIDR selection rule to include in a request. This is used
+    when creating or modifying resolver rules.
+
+    CIDR selection rules define the business logic for selecting CIDRs from
+    IPAM. If a CIDR matches any of the rules, it will be included. If a rule
+    has multiple conditions, the CIDR has to match every condition of that
+    rule. You can create a prefix list resolver without any CIDR selection
+    rules, but it will generate empty versions (containing no CIDRs) until
+    you add rules.
+
+    There are three rule types. Only 2 of the 3 rule types support
+    conditions - **IPAM pool CIDR** and **Scope resource CIDR**. **Static
+    CIDR** rules cannot have conditions.
+
+    - **Static CIDR**: A fixed list of CIDRs that do not change (like a
+      manual list replicated across Regions)
+
+    - **IPAM pool CIDR**: CIDRs from specific IPAM pools (like all CIDRs
+      from your IPAM production pool)
+
+      If you choose this option, choose the following:
+
+      - **IPAM scope**: Select the IPAM scope to search for resources
+
+      - **Conditions:**
+
+        - **Property**
+
+          - **IPAM pool ID**: Select an IPAM pool that contains the
+            resources
+
+          - **CIDR** (like 10.24.34.0/23)
+
+        - **Operation**: Equals/Not equals
+
+        - **Value**: The value on which to match the condition
+
+    - **Scope resource CIDR**: CIDRs from Amazon Web Services resources like
+      VPCs, subnets, EIPs within an IPAM scope
+
+      If you choose this option, choose the following:
+
+      - **IPAM scope**: Select the IPAM scope to search for resources
+
+      - **Resource type**: Select a resource, like a VPC or subnet.
+
+      - **Conditions**:
+
+        - **Property**:
+
+          - Resource ID: The unique ID of a resource (like
+            vpc-1234567890abcdef0)
+
+          - Resource owner (like 111122223333)
+
+          - Resource region (like us-east-1)
+
+          - Resource tag (like key: name, value: dev-vpc-1)
+
+          - CIDR (like 10.24.34.0/23)
+
+        - **Operation**: Equals/Not equals
+
+        - **Value**: The value on which to match the condition
+    """
+
+    rule_type: str | None = ...
+    """
+    The type of CIDR selection rule. Valid values include `include` for
+    selecting CIDRs that match the conditions, and `exclude` for excluding
+    CIDRs that match the conditions.
+    """
+    static_cidr: str | None = ...
+    """
+    A fixed list of CIDRs that do not change (like a manual list replicated
+    across Regions).
+    """
+    ipam_scope_id: str | None = ...
+    """
+    The ID of the IPAM scope from which to select CIDRs. This determines
+    whether to select from public or private IP address space.
+    """
+    resource_type: str | None = ...
+    """For rules of type `ipam-resource-cidr`, this is the resource type."""
+    conditions: list[IpamPrefixListResolverRuleConditionRequest] | None = ...
+    """
+    The conditions that determine which CIDRs are selected by this rule.
+    Conditions specify criteria such as resource type, tags, account IDs,
+    and Regions.
+    """
+
+class IpamPrefixListResolverRuleRequestDict(TypedDict, total=False):
+    """Dictionary form of `IpamPrefixListResolverRuleRequest`."""
+
+    rule_type: Required[str]
+    """
+    The type of CIDR selection rule. Valid values include `include` for
+    selecting CIDRs that match the conditions, and `exclude` for excluding
+    CIDRs that match the conditions.
+    """
+    static_cidr: str | None
+    """
+    A fixed list of CIDRs that do not change (like a manual list replicated
+    across Regions).
+    """
+    ipam_scope_id: str | None
+    """
+    The ID of the IPAM scope from which to select CIDRs. This determines
+    whether to select from public or private IP address space.
+    """
+    resource_type: str | None
+    """For rules of type `ipam-resource-cidr`, this is the resource type."""
+    conditions: (
+        Sequence[
+            IpamPrefixListResolverRuleConditionRequest
+            | IpamPrefixListResolverRuleConditionRequestDict
+        ]
+        | None
+    )
+    """
+    The conditions that determine which CIDRs are selected by this rule.
+    Conditions specify criteria such as resource type, tags, account IDs,
+    and Regions.
+    """
+
+class IpamPrefixListResolverRuleType(UnknownEnumMixin, StrEnum):
+    STATIC_CIDR = "static-cidr"
+    IPAM_RESOURCE_CIDR = "ipam-resource-cidr"
+    IPAM_POOL_CIDR = "ipam-pool-cidr"
+
+class IpamPrefixListResolverState(UnknownEnumMixin, StrEnum):
+    CREATE_IN_PROGRESS = "create-in-progress"
+    CREATE_COMPLETE = "create-complete"
+    CREATE_FAILED = "create-failed"
+    MODIFY_IN_PROGRESS = "modify-in-progress"
+    MODIFY_COMPLETE = "modify-complete"
+    MODIFY_FAILED = "modify-failed"
+    DELETE_IN_PROGRESS = "delete-in-progress"
+    DELETE_COMPLETE = "delete-complete"
+    DELETE_FAILED = "delete-failed"
+    ISOLATE_IN_PROGRESS = "isolate-in-progress"
+    ISOLATE_COMPLETE = "isolate-complete"
+    RESTORE_IN_PROGRESS = "restore-in-progress"
+
+@dataclass(kw_only=True)
+class IpamPrefixListResolverTarget(_SerdeShape):
+    """
+    Describes an IPAM prefix list resolver target.
+
+    An IPAM prefix list resolver target is an association between a specific
+    customer-managed prefix list and an IPAM prefix list resolver. The
+    target enables the resolver to synchronize CIDRs selected by its rules
+    into the specified prefix list, which can then be referenced in Amazon
+    Web Services resources.
+    """
+
+    ipam_prefix_list_resolver_target_id: str | None = ...
+    """The ID of the IPAM prefix list resolver target."""
+    ipam_prefix_list_resolver_target_arn: str | None = ...
+    """The Amazon Resource Name (ARN) of the IPAM prefix list resolver target."""
+    ipam_prefix_list_resolver_id: str | None = ...
+    """The ID of the IPAM prefix list resolver associated with this target."""
+    owner_id: str | None = ...
+    """
+    The ID of the Amazon Web Services account that owns the IPAM prefix list
+    resolver target.
+    """
+    prefix_list_id: str | None = ...
+    """The ID of the managed prefix list associated with this target."""
+    prefix_list_region: str | None = ...
+    """
+    The Amazon Web Services Region where the prefix list associated with
+    this target is located.
+    """
+    desired_version: int | None = ...
+    """
+    The desired version of the prefix list that this target should
+    synchronize with.
+    """
+    last_synced_version: int | None = ...
+    """
+    The version of the prefix list that was last successfully synchronized
+    by this target.
+    """
+    track_latest_version: bool | None = ...
+    """
+    Indicates whether this target automatically tracks the latest version of
+    the prefix list.
+    """
+    state_message: str | None = ...
+    """
+    A message describing the current state of the IPAM prefix list resolver
+    target, including any error information.
+    """
+    state: str | None = ...
+    """
+    The current state of the IPAM prefix list resolver target. Valid values
+    include `create-in-progress`, `create-complete`, `create-failed`,
+    `modify-in-progress`, `modify-complete`, `modify-failed`,
+    `delete-in-progress`, `delete-complete`, and `delete-failed`.
+    """
+    tags: list[Tag] | None = ...
+    """The tags assigned to the IPAM prefix list resolver target."""
+
+class IpamPrefixListResolverTargetState(UnknownEnumMixin, StrEnum):
+    CREATE_IN_PROGRESS = "create-in-progress"
+    CREATE_COMPLETE = "create-complete"
+    CREATE_FAILED = "create-failed"
+    MODIFY_IN_PROGRESS = "modify-in-progress"
+    MODIFY_COMPLETE = "modify-complete"
+    MODIFY_FAILED = "modify-failed"
+    SYNC_IN_PROGRESS = "sync-in-progress"
+    SYNC_COMPLETE = "sync-complete"
+    SYNC_FAILED = "sync-failed"
+    DELETE_IN_PROGRESS = "delete-in-progress"
+    DELETE_COMPLETE = "delete-complete"
+    DELETE_FAILED = "delete-failed"
+    ISOLATE_IN_PROGRESS = "isolate-in-progress"
+    ISOLATE_COMPLETE = "isolate-complete"
+    RESTORE_IN_PROGRESS = "restore-in-progress"
+
+@dataclass(kw_only=True)
+class IpamPrefixListResolverVersion(_SerdeShape):
+    """
+    Describes a version of an IPAM prefix list resolver.
+
+    Each version is a snapshot of what CIDRs matched your rules at that
+    moment in time. The version number increments every time the CIDR list
+    changes due to infrastructure changes.
+
+    **Version example:**
+
+    **Initial State (Version 1)**
+
+    Production environment:
+
+    - vpc-prod-web (10.1.0.0/16) - tagged env=prod
+
+    - vpc-prod-db (10.2.0.0/16) - tagged env=prod
+
+    Resolver rule: Include all VPCs tagged env=prod
+
+    **Version 1 CIDRs:** 10.1.0.0/16, 10.2.0.0/16
+
+    **Infrastructure Change (Version 2)**
+
+    New VPC added:
+
+    - vpc-prod-api (10.3.0.0/16) - tagged env=prod
+
+    IPAM automatically detects the change and creates a new version.
+
+    **Version 2 CIDRs:** 10.1.0.0/16, 10.2.0.0/16, 10.3.0.0/16
+    """
+
+    version: int | None = ...
+    """
+    The version number of the IPAM prefix list resolver.
+
+    Each version is a snapshot of what CIDRs matched your rules at that
+    moment in time. The version number increments every time the CIDR list
+    changes due to infrastructure changes.
+    """
+
+class IpamPrefixListResolverVersionCreationStatus(UnknownEnumMixin, StrEnum):
+    PENDING = "pending"
+    SUCCESS = "success"
+    FAILURE = "failure"
+
+@dataclass(kw_only=True)
+class IpamPrefixListResolverVersionEntry(_SerdeShape):
+    """
+    Describes a CIDR entry in a specific version of an IPAM prefix list
+    resolver. This represents a CIDR that was selected and synchronized at a
+    particular point in time.
+    """
+
+    cidr: str | None = ...
+    """
+    The CIDR block that was selected and synchronized in this resolver
+    version.
+    """
+
+class IpamPublicAddressAssociationStatus(UnknownEnumMixin, StrEnum):
+    ASSOCIATED = "associated"
+    DISASSOCIATED = "disassociated"
+
+class IpamPublicAddressAwsService(UnknownEnumMixin, StrEnum):
+    NAT_GATEWAY = "nat-gateway"
+    DMS = "database-migration-service"
+    REDSHIFT = "redshift"
+    ECS = "elastic-container-service"
+    RDS = "relational-database-service"
+    S2_S_VPN = "site-to-site-vpn"
+    EC2_LB = "load-balancer"
+    AGA = "global-accelerator"
+    CLOUDFRONT = "cloudfront"
+    OTHER = "other"
+
+@dataclass(kw_only=True)
+class IpamPublicAddressSecurityGroup(_SerdeShape):
+    """The security group that the resource with the public IP address is in."""
+
+    group_name: str | None = ...
+    """The security group's name."""
+    group_id: str | None = ...
+    """The security group's ID."""
 
 @dataclass(kw_only=True)
 class IpamPublicAddressTag(_SerdeShape):
@@ -5027,8 +5687,8 @@ class ModifyAccountVpcEncryptionControlInput(_SerdeShape):
     """
     global_accelerator: str | None = ...
     """
-    Specifies whether to exclude AWS Global Accelerator from account-level
-    encryption enforcement.
+    Specifies whether to exclude Amazon Web Services Global Accelerator from
+    account-level encryption enforcement.
     """
     api_gateway_v2: str | None = ...
     """
@@ -5090,8 +5750,8 @@ class ModifyAccountVpcEncryptionControlInputDict(TypedDict, total=False):
     """
     global_accelerator: str | None
     """
-    Specifies whether to exclude AWS Global Accelerator from account-level
-    encryption enforcement.
+    Specifies whether to exclude Amazon Web Services Global Accelerator from
+    account-level encryption enforcement.
     """
     api_gateway_v2: str | None
     """
@@ -8276,850 +8936,3 @@ class ModifyIpamInputDict(TypedDict, total=False):
     - `resource-owner`: The Amazon Web Services account that owns the IP
       address is charged for the active IP address.
     """
-
-@dataclass(kw_only=True)
-class ModifyIpamOutput(_SerdeShape):
-    """Dataclass for ModifyIpamOutput structure."""
-
-    ipam: Ipam | None = ...
-    """The results of the modification."""
-    response_metadata: ResponseMetadata = ...
-    """
-    Metadata about the response that produced this output. Use this to
-    recover the request identifiers a service's support team needs in order
-    to investigate a call. Members of the metadata are individually
-    optional.
-    """
-
-@dataclass(kw_only=True)
-class ModifyIpamPolicyAllocationRulesInput(_SerdeShape):
-    """Dataclass for ModifyIpamPolicyAllocationRulesInput structure."""
-
-    dry_run: bool | None = ...
-    """
-    A check for whether you have the required permissions for the action
-    without actually making the request and provides an error response. If
-    you have the required permissions, the error response is
-    `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    """
-    ipam_policy_id: str | None = ...
-    """The ID of the IPAM policy whose allocation rules you want to modify."""
-    locale: str | None = ...
-    """The locale for which to modify the allocation rules."""
-    resource_type: str | None = ...
-    """
-    The resource type for which to modify the allocation rules.
-
-    The Amazon Web Services service or resource type that can use IP
-    addresses through IPAM policies. Supported services and resource types
-    include:
-
-    - Elastic IP addresses
-    """
-    allocation_rules: list[IpamPolicyAllocationRuleRequest] | None = ...
-    """
-    The new allocation rules to apply to the IPAM policy.
-
-    Allocation rules are optional configurations within an IPAM policy that
-    map Amazon Web Services resource types to specific IPAM pools. If no
-    rules are defined, the resource types default to using Amazon-provided
-    IP addresses.
-    """
-
-class ModifyIpamPolicyAllocationRulesInputDict(TypedDict, total=False):
-    """Dictionary form of `ModifyIpamPolicyAllocationRulesInput`."""
-
-    dry_run: bool | None
-    """
-    A check for whether you have the required permissions for the action
-    without actually making the request and provides an error response. If
-    you have the required permissions, the error response is
-    `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    """
-    ipam_policy_id: Required[str]
-    """The ID of the IPAM policy whose allocation rules you want to modify."""
-    locale: Required[str]
-    """The locale for which to modify the allocation rules."""
-    resource_type: Required[str]
-    """
-    The resource type for which to modify the allocation rules.
-
-    The Amazon Web Services service or resource type that can use IP
-    addresses through IPAM policies. Supported services and resource types
-    include:
-
-    - Elastic IP addresses
-    """
-    allocation_rules: (
-        Sequence[IpamPolicyAllocationRuleRequest | IpamPolicyAllocationRuleRequestDict]
-        | None
-    )
-    """
-    The new allocation rules to apply to the IPAM policy.
-
-    Allocation rules are optional configurations within an IPAM policy that
-    map Amazon Web Services resource types to specific IPAM pools. If no
-    rules are defined, the resource types default to using Amazon-provided
-    IP addresses.
-    """
-
-@dataclass(kw_only=True)
-class ModifyIpamPolicyAllocationRulesOutput(_SerdeShape):
-    """Dataclass for ModifyIpamPolicyAllocationRulesOutput structure."""
-
-    ipam_policy_document: IpamPolicyDocument | None = ...
-    """The modified IPAM policy containing the updated allocation rules."""
-    response_metadata: ResponseMetadata = ...
-    """
-    Metadata about the response that produced this output. Use this to
-    recover the request identifiers a service's support team needs in order
-    to investigate a call. Members of the metadata are individually
-    optional.
-    """
-
-@dataclass(kw_only=True)
-class ModifyIpamPoolAllocationInput(_SerdeShape):
-    """Dataclass for ModifyIpamPoolAllocationInput structure."""
-
-    dry_run: bool | None = ...
-    """
-    A check for whether you have the required permissions for the action
-    without actually making the request and provides an error response. If
-    you have the required permissions, the error response is
-    `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    """
-    ipam_pool_allocation_id: str | None = ...
-    """The ID of the IPAM pool allocation you want to modify."""
-    description: str | None = ...
-    """
-    The new description for the IPAM pool allocation. If you submit a `null`
-    value, the description is removed from the allocation.
-    """
-
-class ModifyIpamPoolAllocationInputDict(TypedDict, total=False):
-    """Dictionary form of `ModifyIpamPoolAllocationInput`."""
-
-    dry_run: bool | None
-    """
-    A check for whether you have the required permissions for the action
-    without actually making the request and provides an error response. If
-    you have the required permissions, the error response is
-    `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    """
-    ipam_pool_allocation_id: Required[str]
-    """The ID of the IPAM pool allocation you want to modify."""
-    description: str | None
-    """
-    The new description for the IPAM pool allocation. If you submit a `null`
-    value, the description is removed from the allocation.
-    """
-
-@dataclass(kw_only=True)
-class ModifyIpamPoolAllocationOutput(_SerdeShape):
-    """Dataclass for ModifyIpamPoolAllocationOutput structure."""
-
-    ipam_pool_allocation: IpamPoolAllocation | None = ...
-    """The modified IPAM pool allocation."""
-    response_metadata: ResponseMetadata = ...
-    """
-    Metadata about the response that produced this output. Use this to
-    recover the request identifiers a service's support team needs in order
-    to investigate a call. Members of the metadata are individually
-    optional.
-    """
-
-@dataclass(kw_only=True)
-class ModifyIpamPoolInput(_SerdeShape):
-    """Dataclass for ModifyIpamPoolInput structure."""
-
-    dry_run: bool | None = ...
-    """
-    A check for whether you have the required permissions for the action
-    without actually making the request and provides an error response. If
-    you have the required permissions, the error response is
-    `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    """
-    ipam_pool_id: str | None = ...
-    """The ID of the IPAM pool you want to modify."""
-    description: str | None = ...
-    """The description of the IPAM pool you want to modify."""
-    auto_import: bool | None = ...
-    """
-    If true, IPAM will continuously look for resources within the CIDR range
-    of this pool and automatically import them as allocations into your
-    IPAM. The CIDRs that will be allocated for these resources must not
-    already be allocated to other resources in order for the import to
-    succeed. IPAM will import a CIDR regardless of its compliance with the
-    pool's allocation rules, so a resource might be imported and
-    subsequently marked as noncompliant. If IPAM discovers multiple CIDRs
-    that overlap, IPAM will import the largest CIDR only. If IPAM discovers
-    multiple CIDRs with matching CIDRs, IPAM will randomly import one of
-    them only.
-
-    A locale must be set on the pool for this feature to work.
-    """
-    allocation_min_netmask_length: int | None = ...
-    """
-    The minimum netmask length required for CIDR allocations in this IPAM
-    pool to be compliant. Possible netmask lengths for IPv4 addresses are
-    0 - 32. Possible netmask lengths for IPv6 addresses are 0 - 128. The
-    minimum netmask length must be less than the maximum netmask length.
-    """
-    allocation_max_netmask_length: int | None = ...
-    """
-    The maximum netmask length possible for CIDR allocations in this IPAM
-    pool to be compliant. Possible netmask lengths for IPv4 addresses are
-    0 - 32. Possible netmask lengths for IPv6 addresses are 0 - 128.The
-    maximum netmask length must be greater than the minimum netmask length.
-    """
-    allocation_default_netmask_length: int | None = ...
-    """
-    The default netmask length for allocations added to this pool. If, for
-    example, the CIDR assigned to this pool is 10.0.0.0/8 and you enter 16
-    here, new allocations will default to 10.0.0.0/16.
-    """
-    clear_allocation_default_netmask_length: bool | None = ...
-    """Clear the default netmask length allocation rule for this pool."""
-    add_allocation_resource_tags: list[RequestIpamResourceTag] | None = ...
-    """
-    Add tag allocation rules to a pool. For more information about
-    allocation rules, see [Create a top-level
-    pool](https://docs.aws.amazon.com/vpc/latest/ipam/create-top-ipam.html)
-    in the *Amazon VPC IPAM User Guide*.
-    """
-    remove_allocation_resource_tags: list[RequestIpamResourceTag] | None = ...
-    """Remove tag allocation rules from a pool."""
-
-class ModifyIpamPoolInputDict(TypedDict, total=False):
-    """Dictionary form of `ModifyIpamPoolInput`."""
-
-    dry_run: bool | None
-    """
-    A check for whether you have the required permissions for the action
-    without actually making the request and provides an error response. If
-    you have the required permissions, the error response is
-    `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    """
-    ipam_pool_id: Required[str]
-    """The ID of the IPAM pool you want to modify."""
-    description: str | None
-    """The description of the IPAM pool you want to modify."""
-    auto_import: bool | None
-    """
-    If true, IPAM will continuously look for resources within the CIDR range
-    of this pool and automatically import them as allocations into your
-    IPAM. The CIDRs that will be allocated for these resources must not
-    already be allocated to other resources in order for the import to
-    succeed. IPAM will import a CIDR regardless of its compliance with the
-    pool's allocation rules, so a resource might be imported and
-    subsequently marked as noncompliant. If IPAM discovers multiple CIDRs
-    that overlap, IPAM will import the largest CIDR only. If IPAM discovers
-    multiple CIDRs with matching CIDRs, IPAM will randomly import one of
-    them only.
-
-    A locale must be set on the pool for this feature to work.
-    """
-    allocation_min_netmask_length: int | None
-    """
-    The minimum netmask length required for CIDR allocations in this IPAM
-    pool to be compliant. Possible netmask lengths for IPv4 addresses are
-    0 - 32. Possible netmask lengths for IPv6 addresses are 0 - 128. The
-    minimum netmask length must be less than the maximum netmask length.
-    """
-    allocation_max_netmask_length: int | None
-    """
-    The maximum netmask length possible for CIDR allocations in this IPAM
-    pool to be compliant. Possible netmask lengths for IPv4 addresses are
-    0 - 32. Possible netmask lengths for IPv6 addresses are 0 - 128.The
-    maximum netmask length must be greater than the minimum netmask length.
-    """
-    allocation_default_netmask_length: int | None
-    """
-    The default netmask length for allocations added to this pool. If, for
-    example, the CIDR assigned to this pool is 10.0.0.0/8 and you enter 16
-    here, new allocations will default to 10.0.0.0/16.
-    """
-    clear_allocation_default_netmask_length: bool | None
-    """Clear the default netmask length allocation rule for this pool."""
-    add_allocation_resource_tags: (
-        Sequence[RequestIpamResourceTag | RequestIpamResourceTagDict] | None
-    )
-    """
-    Add tag allocation rules to a pool. For more information about
-    allocation rules, see [Create a top-level
-    pool](https://docs.aws.amazon.com/vpc/latest/ipam/create-top-ipam.html)
-    in the *Amazon VPC IPAM User Guide*.
-    """
-    remove_allocation_resource_tags: (
-        Sequence[RequestIpamResourceTag | RequestIpamResourceTagDict] | None
-    )
-    """Remove tag allocation rules from a pool."""
-
-@dataclass(kw_only=True)
-class ModifyIpamPoolOutput(_SerdeShape):
-    """Dataclass for ModifyIpamPoolOutput structure."""
-
-    ipam_pool: IpamPool | None = ...
-    """The results of the modification."""
-    response_metadata: ResponseMetadata = ...
-    """
-    Metadata about the response that produced this output. Use this to
-    recover the request identifiers a service's support team needs in order
-    to investigate a call. Members of the metadata are individually
-    optional.
-    """
-
-@dataclass(kw_only=True)
-class ModifyIpamPrefixListResolverInput(_SerdeShape):
-    """Dataclass for ModifyIpamPrefixListResolverInput structure."""
-
-    dry_run: bool | None = ...
-    """
-    A check for whether you have the required permissions for the action
-    without actually making the request and provides an error response. If
-    you have the required permissions, the error response is
-    `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    """
-    ipam_prefix_list_resolver_id: str | None = ...
-    """The ID of the IPAM prefix list resolver to modify."""
-    description: str | None = ...
-    """A new description for the IPAM prefix list resolver."""
-    rules: list[IpamPrefixListResolverRuleRequest] | None = ...
-    """
-    The updated CIDR selection rules for the resolver. These rules replace
-    the existing rules entirely.
-    """
-
-class ModifyIpamPrefixListResolverInputDict(TypedDict, total=False):
-    """Dictionary form of `ModifyIpamPrefixListResolverInput`."""
-
-    dry_run: bool | None
-    """
-    A check for whether you have the required permissions for the action
-    without actually making the request and provides an error response. If
-    you have the required permissions, the error response is
-    `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    """
-    ipam_prefix_list_resolver_id: Required[str]
-    """The ID of the IPAM prefix list resolver to modify."""
-    description: str | None
-    """A new description for the IPAM prefix list resolver."""
-    rules: (
-        Sequence[
-            IpamPrefixListResolverRuleRequest | IpamPrefixListResolverRuleRequestDict
-        ]
-        | None
-    )
-    """
-    The updated CIDR selection rules for the resolver. These rules replace
-    the existing rules entirely.
-    """
-
-@dataclass(kw_only=True)
-class ModifyIpamPrefixListResolverOutput(_SerdeShape):
-    """Dataclass for ModifyIpamPrefixListResolverOutput structure."""
-
-    ipam_prefix_list_resolver: IpamPrefixListResolver | None = ...
-    """Information about the modified IPAM prefix list resolver."""
-    response_metadata: ResponseMetadata = ...
-    """
-    Metadata about the response that produced this output. Use this to
-    recover the request identifiers a service's support team needs in order
-    to investigate a call. Members of the metadata are individually
-    optional.
-    """
-
-@dataclass(kw_only=True)
-class ModifyIpamPrefixListResolverTargetInput(_SerdeShape):
-    """Dataclass for ModifyIpamPrefixListResolverTargetInput structure."""
-
-    dry_run: bool | None = ...
-    """
-    A check for whether you have the required permissions for the action
-    without actually making the request and provides an error response. If
-    you have the required permissions, the error response is
-    `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    """
-    ipam_prefix_list_resolver_target_id: str | None = ...
-    """The ID of the IPAM prefix list resolver target to modify."""
-    desired_version: int | None = ...
-    """
-    The desired version of the prefix list to target. This allows you to pin
-    the target to a specific version.
-    """
-    track_latest_version: bool | None = ...
-    """
-    Indicates whether the resolver target should automatically track the
-    latest version of the prefix list. When enabled, the target will always
-    synchronize with the most current version.
-
-    Choose this for automatic updates when you want your prefix lists to
-    stay current with infrastructure changes without manual intervention.
-    """
-    client_token: str | None = ...
-    """
-    A unique, case-sensitive identifier that you provide to ensure the
-    idempotency of the request. For more information, see [Ensuring
-    idempotency](https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html).
-
-    This field is autopopulated if not provided.
-    """
-
-class ModifyIpamPrefixListResolverTargetInputDict(TypedDict, total=False):
-    """Dictionary form of `ModifyIpamPrefixListResolverTargetInput`."""
-
-    dry_run: bool | None
-    """
-    A check for whether you have the required permissions for the action
-    without actually making the request and provides an error response. If
-    you have the required permissions, the error response is
-    `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    """
-    ipam_prefix_list_resolver_target_id: Required[str]
-    """The ID of the IPAM prefix list resolver target to modify."""
-    desired_version: int | None
-    """
-    The desired version of the prefix list to target. This allows you to pin
-    the target to a specific version.
-    """
-    track_latest_version: bool | None
-    """
-    Indicates whether the resolver target should automatically track the
-    latest version of the prefix list. When enabled, the target will always
-    synchronize with the most current version.
-
-    Choose this for automatic updates when you want your prefix lists to
-    stay current with infrastructure changes without manual intervention.
-    """
-    client_token: str | None
-    """
-    A unique, case-sensitive identifier that you provide to ensure the
-    idempotency of the request. For more information, see [Ensuring
-    idempotency](https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html).
-
-    This field is autopopulated if not provided.
-    """
-
-@dataclass(kw_only=True)
-class ModifyIpamPrefixListResolverTargetOutput(_SerdeShape):
-    """Dataclass for ModifyIpamPrefixListResolverTargetOutput structure."""
-
-    ipam_prefix_list_resolver_target: IpamPrefixListResolverTarget | None = ...
-    """Information about the modified IPAM prefix list resolver target."""
-    response_metadata: ResponseMetadata = ...
-    """
-    Metadata about the response that produced this output. Use this to
-    recover the request identifiers a service's support team needs in order
-    to investigate a call. Members of the metadata are individually
-    optional.
-    """
-
-@dataclass(kw_only=True)
-class ModifyIpamResourceCidrInput(_SerdeShape):
-    """Dataclass for ModifyIpamResourceCidrInput structure."""
-
-    dry_run: bool | None = ...
-    """
-    A check for whether you have the required permissions for the action
-    without actually making the request and provides an error response. If
-    you have the required permissions, the error response is
-    `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    """
-    resource_id: str | None = ...
-    """The ID of the resource you want to modify."""
-    resource_cidr: str | None = ...
-    """The CIDR of the resource you want to modify."""
-    resource_region: str | None = ...
-    """The Amazon Web Services Region of the resource you want to modify."""
-    current_ipam_scope_id: str | None = ...
-    """The ID of the current scope that the resource CIDR is in."""
-    destination_ipam_scope_id: str | None = ...
-    """The ID of the scope you want to transfer the resource CIDR to."""
-    monitored: bool | None = ...
-    """
-    Determines if the resource is monitored by IPAM. If a resource is
-    monitored, the resource is discovered by IPAM and you can view details
-    about the resource's CIDR.
-    """
-
-class ModifyIpamResourceCidrInputDict(TypedDict, total=False):
-    """Dictionary form of `ModifyIpamResourceCidrInput`."""
-
-    dry_run: bool | None
-    """
-    A check for whether you have the required permissions for the action
-    without actually making the request and provides an error response. If
-    you have the required permissions, the error response is
-    `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    """
-    resource_id: Required[str]
-    """The ID of the resource you want to modify."""
-    resource_cidr: Required[str]
-    """The CIDR of the resource you want to modify."""
-    resource_region: Required[str]
-    """The Amazon Web Services Region of the resource you want to modify."""
-    current_ipam_scope_id: Required[str]
-    """The ID of the current scope that the resource CIDR is in."""
-    destination_ipam_scope_id: str | None
-    """The ID of the scope you want to transfer the resource CIDR to."""
-    monitored: Required[bool]
-    """
-    Determines if the resource is monitored by IPAM. If a resource is
-    monitored, the resource is discovered by IPAM and you can view details
-    about the resource's CIDR.
-    """
-
-@dataclass(kw_only=True)
-class ModifyIpamResourceCidrOutput(_SerdeShape):
-    """Dataclass for ModifyIpamResourceCidrOutput structure."""
-
-    ipam_resource_cidr: IpamResourceCidr | None = ...
-    """The CIDR of the resource."""
-    response_metadata: ResponseMetadata = ...
-    """
-    Metadata about the response that produced this output. Use this to
-    recover the request identifiers a service's support team needs in order
-    to investigate a call. Members of the metadata are individually
-    optional.
-    """
-
-@dataclass(kw_only=True)
-class ModifyIpamResourceDiscoveryInput(_SerdeShape):
-    """Dataclass for ModifyIpamResourceDiscoveryInput structure."""
-
-    dry_run: bool | None = ...
-    """
-    A check for whether you have the required permissions for the action
-    without actually making the request and provides an error response. If
-    you have the required permissions, the error response is
-    `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    """
-    ipam_resource_discovery_id: str | None = ...
-    """A resource discovery ID."""
-    description: str | None = ...
-    """A resource discovery description."""
-    add_operating_regions: list[AddIpamOperatingRegion] | None = ...
-    """
-    Add operating Regions to the resource discovery. Operating Regions are
-    Amazon Web Services Regions where the IPAM is allowed to manage IP
-    address CIDRs. IPAM only discovers and monitors resources in the Amazon
-    Web Services Regions you select as operating Regions.
-    """
-    remove_operating_regions: list[RemoveIpamOperatingRegion] | None = ...
-    """Remove operating Regions."""
-    add_organizational_unit_exclusions: (
-        list[AddIpamOrganizationalUnitExclusion] | None
-    ) = ...
-    """
-    Add an Organizational Unit (OU) exclusion to your IPAM. If your IPAM is
-    integrated with Amazon Web Services Organizations and you add an
-    organizational unit (OU) exclusion, IPAM will not manage the IP
-    addresses in accounts in that OU exclusion. There is a limit on the
-    number of exclusions you can create. For more information, see [Quotas
-    for your
-    IPAM](https://docs.aws.amazon.com/vpc/latest/ipam/quotas-ipam.html) in
-    the *Amazon VPC IPAM User Guide*.
-
-    Note:
-        The resulting set of exclusions must not result in \"overlap\", meaning
-        two or more OU exclusions must not exclude the same OU. For more
-        information and examples, see the Amazon Web Services CLI request
-        process in [Add or remove OU
-        exclusions](https://docs.aws.amazon.com/vpc/latest/ipam/exclude-ous.html#exclude-ous-create-delete)
-        in the *Amazon VPC User Guide*.
-    """
-    remove_organizational_unit_exclusions: (
-        list[RemoveIpamOrganizationalUnitExclusion] | None
-    ) = ...
-    """
-    Remove an Organizational Unit (OU) exclusion to your IPAM. If your IPAM
-    is integrated with Amazon Web Services Organizations and you add an
-    organizational unit (OU) exclusion, IPAM will not manage the IP
-    addresses in accounts in that OU exclusion. There is a limit on the
-    number of exclusions you can create. For more information, see [Quotas
-    for your
-    IPAM](https://docs.aws.amazon.com/vpc/latest/ipam/quotas-ipam.html) in
-    the *Amazon VPC IPAM User Guide*.
-
-    Note:
-        The resulting set of exclusions must not result in \"overlap\", meaning
-        two or more OU exclusions must not exclude the same OU. For more
-        information and examples, see the Amazon Web Services CLI request
-        process in [Add or remove OU
-        exclusions](https://docs.aws.amazon.com/vpc/latest/ipam/exclude-ous.html#exclude-ous-create-delete)
-        in the *Amazon VPC User Guide*.
-    """
-
-class ModifyIpamResourceDiscoveryInputDict(TypedDict, total=False):
-    """Dictionary form of `ModifyIpamResourceDiscoveryInput`."""
-
-    dry_run: bool | None
-    """
-    A check for whether you have the required permissions for the action
-    without actually making the request and provides an error response. If
-    you have the required permissions, the error response is
-    `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    """
-    ipam_resource_discovery_id: Required[str]
-    """A resource discovery ID."""
-    description: str | None
-    """A resource discovery description."""
-    add_operating_regions: (
-        Sequence[AddIpamOperatingRegion | AddIpamOperatingRegionDict] | None
-    )
-    """
-    Add operating Regions to the resource discovery. Operating Regions are
-    Amazon Web Services Regions where the IPAM is allowed to manage IP
-    address CIDRs. IPAM only discovers and monitors resources in the Amazon
-    Web Services Regions you select as operating Regions.
-    """
-    remove_operating_regions: (
-        Sequence[RemoveIpamOperatingRegion | RemoveIpamOperatingRegionDict] | None
-    )
-    """Remove operating Regions."""
-    add_organizational_unit_exclusions: (
-        Sequence[
-            AddIpamOrganizationalUnitExclusion | AddIpamOrganizationalUnitExclusionDict
-        ]
-        | None
-    )
-    """
-    Add an Organizational Unit (OU) exclusion to your IPAM. If your IPAM is
-    integrated with Amazon Web Services Organizations and you add an
-    organizational unit (OU) exclusion, IPAM will not manage the IP
-    addresses in accounts in that OU exclusion. There is a limit on the
-    number of exclusions you can create. For more information, see [Quotas
-    for your
-    IPAM](https://docs.aws.amazon.com/vpc/latest/ipam/quotas-ipam.html) in
-    the *Amazon VPC IPAM User Guide*.
-
-    Note:
-        The resulting set of exclusions must not result in \"overlap\", meaning
-        two or more OU exclusions must not exclude the same OU. For more
-        information and examples, see the Amazon Web Services CLI request
-        process in [Add or remove OU
-        exclusions](https://docs.aws.amazon.com/vpc/latest/ipam/exclude-ous.html#exclude-ous-create-delete)
-        in the *Amazon VPC User Guide*.
-    """
-    remove_organizational_unit_exclusions: (
-        Sequence[
-            RemoveIpamOrganizationalUnitExclusion
-            | RemoveIpamOrganizationalUnitExclusionDict
-        ]
-        | None
-    )
-    """
-    Remove an Organizational Unit (OU) exclusion to your IPAM. If your IPAM
-    is integrated with Amazon Web Services Organizations and you add an
-    organizational unit (OU) exclusion, IPAM will not manage the IP
-    addresses in accounts in that OU exclusion. There is a limit on the
-    number of exclusions you can create. For more information, see [Quotas
-    for your
-    IPAM](https://docs.aws.amazon.com/vpc/latest/ipam/quotas-ipam.html) in
-    the *Amazon VPC IPAM User Guide*.
-
-    Note:
-        The resulting set of exclusions must not result in \"overlap\", meaning
-        two or more OU exclusions must not exclude the same OU. For more
-        information and examples, see the Amazon Web Services CLI request
-        process in [Add or remove OU
-        exclusions](https://docs.aws.amazon.com/vpc/latest/ipam/exclude-ous.html#exclude-ous-create-delete)
-        in the *Amazon VPC User Guide*.
-    """
-
-@dataclass(kw_only=True)
-class ModifyIpamResourceDiscoveryOutput(_SerdeShape):
-    """Dataclass for ModifyIpamResourceDiscoveryOutput structure."""
-
-    ipam_resource_discovery: IpamResourceDiscovery | None = ...
-    """A resource discovery."""
-    response_metadata: ResponseMetadata = ...
-    """
-    Metadata about the response that produced this output. Use this to
-    recover the request identifiers a service's support team needs in order
-    to investigate a call. Members of the metadata are individually
-    optional.
-    """
-
-@dataclass(kw_only=True)
-class ModifyIpamRoutingPolicyRegistrationInput(_SerdeShape):
-    """Dataclass for ModifyIpamRoutingPolicyRegistrationInput structure."""
-
-    dry_run: bool | None = ...
-    """
-    Checks whether you have the required permissions for the operation,
-    without actually making the request, and provides an error response. If
-    you have the required permissions, the error response is
-    `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    """
-    ipam_internet_registry_association_id: str | None = ...
-    """The ID of the IPAM internet registry association."""
-    cidr: str | None = ...
-    """
-    The IP address prefix in CIDR notation identifying the routing policy
-    registration to modify.
-    """
-    asns: list[str] | None = ...
-    """
-    The updated list of Autonomous System Numbers (ASNs) authorized to
-    originate the prefix.
-    """
-    permit_more_specific_announcements: bool | None = ...
-    """
-    Specifies whether to permit more specific route announcements than the
-    CIDR prefix. Default: `false`.
-    """
-    max_length: int | None = ...
-    """
-    The new maximum prefix length that the ASNs are authorized to announce.
-    Must be greater than or equal to the prefix length of the CIDR.
-    """
-    description: str | None = ...
-    """A new description for the routing policy registration."""
-    force: bool | None = ...
-    """
-    Forces the modification even if it conflicts with an announced route.
-    Default: `false`.
-    """
-    client_token: str | None = ...
-    """
-    A unique, case-sensitive identifier to ensure that the operation
-    completes no more than one time. If this token matches a previous
-    request, the operation ignores the request, but does not return an
-    error.
-
-    This field is autopopulated if not provided.
-    """
-
-class ModifyIpamRoutingPolicyRegistrationInputDict(TypedDict, total=False):
-    """Dictionary form of `ModifyIpamRoutingPolicyRegistrationInput`."""
-
-    dry_run: bool | None
-    """
-    Checks whether you have the required permissions for the operation,
-    without actually making the request, and provides an error response. If
-    you have the required permissions, the error response is
-    `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    """
-    ipam_internet_registry_association_id: Required[str]
-    """The ID of the IPAM internet registry association."""
-    cidr: Required[str]
-    """
-    The IP address prefix in CIDR notation identifying the routing policy
-    registration to modify.
-    """
-    asns: Required[Sequence[str]]
-    """
-    The updated list of Autonomous System Numbers (ASNs) authorized to
-    originate the prefix.
-    """
-    permit_more_specific_announcements: bool | None
-    """
-    Specifies whether to permit more specific route announcements than the
-    CIDR prefix. Default: `false`.
-    """
-    max_length: int | None
-    """
-    The new maximum prefix length that the ASNs are authorized to announce.
-    Must be greater than or equal to the prefix length of the CIDR.
-    """
-    description: str | None
-    """A new description for the routing policy registration."""
-    force: bool | None
-    """
-    Forces the modification even if it conflicts with an announced route.
-    Default: `false`.
-    """
-    client_token: str | None
-    """
-    A unique, case-sensitive identifier to ensure that the operation
-    completes no more than one time. If this token matches a previous
-    request, the operation ignores the request, but does not return an
-    error.
-
-    This field is autopopulated if not provided.
-    """
-
-@dataclass(kw_only=True)
-class ModifyIpamRoutingPolicyRegistrationOutput(_SerdeShape):
-    """Dataclass for ModifyIpamRoutingPolicyRegistrationOutput structure."""
-
-    ipam_routing_policy_registration_delta: (
-        IpamRoutingPolicyRegistrationDelta | None
-    ) = ...
-    """
-    Information about the routing policy registration delta created by this
-    modification.
-    """
-    response_metadata: ResponseMetadata = ...
-    """
-    Metadata about the response that produced this output. Use this to
-    recover the request identifiers a service's support team needs in order
-    to investigate a call. Members of the metadata are individually
-    optional.
-    """
-
-@dataclass(kw_only=True)
-class ModifyIpamScopeInput(_SerdeShape):
-    """Dataclass for ModifyIpamScopeInput structure."""
-
-    dry_run: bool | None = ...
-    """
-    A check for whether you have the required permissions for the action
-    without actually making the request and provides an error response. If
-    you have the required permissions, the error response is
-    `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    """
-    ipam_scope_id: str | None = ...
-    """The ID of the scope you want to modify."""
-    description: str | None = ...
-    """The description of the scope you want to modify."""
-    external_authority_configuration: ExternalAuthorityConfiguration | None = ...
-    """
-    The configuration that links an Amazon VPC IPAM scope to an external
-    authority system. It specifies the type of external system and the
-    external resource identifier that identifies your account or instance in
-    that system.
-
-    In IPAM, an external authority is a third-party IP address management
-    system that provides CIDR blocks when you provision address space for
-    top-level IPAM pools. This allows you to use your existing IP management
-    system to control which address ranges are allocated to Amazon Web
-    Services while using Amazon VPC IPAM to manage subnets within those
-    ranges.
-    """
-    remove_external_authority_configuration: bool | None = ...
-    """Remove the external authority configuration. `true` to remove."""
-
-class ModifyIpamScopeInputDict(TypedDict, total=False):
-    """Dictionary form of `ModifyIpamScopeInput`."""
-
-    dry_run: bool | None
-    """
-    A check for whether you have the required permissions for the action
-    without actually making the request and provides an error response. If
-    you have the required permissions, the error response is
-    `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    """
-    ipam_scope_id: Required[str]
-    """The ID of the scope you want to modify."""
-    description: str | None
-    """The description of the scope you want to modify."""
-    external_authority_configuration: (
-        ExternalAuthorityConfiguration | ExternalAuthorityConfigurationDict | None
-    )
-    """
-    The configuration that links an Amazon VPC IPAM scope to an external
-    authority system. It specifies the type of external system and the
-    external resource identifier that identifies your account or instance in
-    that system.
-
-    In IPAM, an external authority is a third-party IP address management
-    system that provides CIDR blocks when you provision address space for
-    top-level IPAM pools. This allows you to use your existing IP management
-    system to control which address ranges are allocated to Amazon Web
-    Services while using Amazon VPC IPAM to manage subnets within those
-    ranges.
-    """
-    remove_external_authority_configuration: bool | None
-    """Remove the external authority configuration. `true` to remove."""

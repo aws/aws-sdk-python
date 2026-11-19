@@ -2914,6 +2914,7 @@ _operation_data["UPDATE_LOGIN_PROFILE"] = (
     "UPDATE_LOGIN_PROFILE",
     (
         "com.amazonaws.iam#EntityTemporarilyUnmodifiableException",
+        "com.amazonaws.iam#InvalidInputException",
         "com.amazonaws.iam#LimitExceededException",
         "com.amazonaws.iam#NoSuchEntityException",
         "com.amazonaws.iam#PasswordPolicyViolationException",
@@ -2936,6 +2937,7 @@ _operation_data["UPDATE_OPEN_ID_CONNECT_PROVIDER_THUMBPRINT"] = (
 _operation_data["UPDATE_ROLE"] = (
     "UPDATE_ROLE",
     (
+        "com.amazonaws.iam#InvalidInputException",
         "com.amazonaws.iam#NoSuchEntityException",
         "com.amazonaws.iam#ServiceFailureException",
         "com.amazonaws.iam#UnmodifiableEntityException",

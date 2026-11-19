@@ -10,6 +10,8 @@ from smithy_core.response import ResponseMetadata
 from smithy_core.types import UnknownEnumMixin
 
 from ..models import (
+    AcceleratorConfig,
+    AcceleratorConfigDict,
     AliasRoutingConfiguration,
     AliasRoutingConfigurationDict,
     AllowedPublishers,
@@ -54,10 +56,12 @@ from ..models import (
     ErrorObjectDict,
     EventError,
     EventResult,
+    EventSourceMappingConfiguration,
     EventSourceMappingLoggingConfig,
     EventSourceMappingLoggingConfigDict,
     EventSourceMappingMetricsConfig,
     EventSourceMappingMetricsConfigDict,
+    Execution,
     ExecutionDetails,
     FileSystemConfig,
     FileSystemConfigDict,
@@ -86,6 +90,373 @@ from ..models import (
     ServiceError,
     _SerdeShape,
 )
+
+@dataclass(kw_only=True)
+class ListCapacityProvidersOutput(_SerdeShape):
+    """Dataclass for ListCapacityProvidersOutput structure."""
+
+    capacity_providers: list[CapacityProvider]
+    """A list of capacity providers in your account."""
+    next_marker: str | None = ...
+    """The pagination token that's included if more results are available."""
+    response_metadata: ResponseMetadata = ...
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+@dataclass(kw_only=True)
+class ListCodeSigningConfigsInput(_SerdeShape):
+    """Dataclass for ListCodeSigningConfigsInput structure."""
+
+    marker: str | None = ...
+    """
+    Specify the pagination token that's returned by a previous request to
+    retrieve the next page of results.
+    """
+    max_items: int | None = ...
+    """Maximum number of items to return."""
+
+class ListCodeSigningConfigsInputDict(TypedDict, total=False):
+    """Dictionary form of `ListCodeSigningConfigsInput`."""
+
+    marker: str | None
+    """
+    Specify the pagination token that's returned by a previous request to
+    retrieve the next page of results.
+    """
+    max_items: int | None
+    """Maximum number of items to return."""
+
+@dataclass(kw_only=True)
+class ListCodeSigningConfigsOutput(_SerdeShape):
+    """Dataclass for ListCodeSigningConfigsOutput structure."""
+
+    next_marker: str | None = ...
+    """The pagination token that's included if more results are available."""
+    code_signing_configs: list[CodeSigningConfig] | None = ...
+    """The code signing configurations"""
+    response_metadata: ResponseMetadata = ...
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+@dataclass(kw_only=True)
+class ListDurableExecutionsByFunctionInput(_SerdeShape):
+    """Dataclass for ListDurableExecutionsByFunctionInput structure."""
+
+    function_name: str | None = ...
+    """
+    The name or ARN of the Lambda function. You can specify a function name,
+    a partial ARN, or a full ARN.
+    """
+    qualifier: str | None = ...
+    """
+    The function version to filter executions by. If you don't specify a
+    qualifier, this operation returns executions across all versions of the
+    Lambda function.
+    """
+    durable_execution_name: str | None = ...
+    """
+    Filter executions by name. Only executions with names that matches this
+    string are returned.
+    """
+    statuses: list[str] | None = ...
+    """
+    Filters the executions by status. Specify one of the following values:
+
+    - `RUNNING` -- The execution is running or waiting for pending
+      operations to complete.
+
+    - `PAUSING` -- The execution is waiting for an in-progress invocation to
+      reach its next checkpoint before it pauses.
+
+    - `PAUSED` -- The execution is paused, and Lambda doesn't invoke your
+      function.
+
+    - `SUCCEEDED` -- The execution completed successfully.
+
+    - `FAILED` -- The execution completed with an error.
+
+    - `TIMED_OUT` -- The execution exceeded its execution timeout.
+
+    - `STOPPED` -- A `StopDurableExecution` request stopped the execution.
+
+    - `DELETING` -- A `DeleteDurableExecution` request is deleting the
+      execution and its data.
+    """
+    started_after: datetime | None = ...
+    """Filter executions that started after this timestamp (ISO 8601 format)."""
+    started_before: datetime | None = ...
+    """Filter executions that started before this timestamp (ISO 8601 format)."""
+    reverse_order: bool | None = ...
+    """
+    Set to true to return results in chronological order (oldest first).
+    Default is false.
+    """
+    marker: str | None = ...
+    """Pagination token from a previous request to continue retrieving results."""
+    max_items: int = ...
+    """Maximum number of executions to return (1-1000). Default is 100."""
+
+class ListDurableExecutionsByFunctionInputDict(TypedDict, total=False):
+    """Dictionary form of `ListDurableExecutionsByFunctionInput`."""
+
+    function_name: Required[str]
+    """
+    The name or ARN of the Lambda function. You can specify a function name,
+    a partial ARN, or a full ARN.
+    """
+    qualifier: str | None
+    """
+    The function version to filter executions by. If you don't specify a
+    qualifier, this operation returns executions across all versions of the
+    Lambda function.
+    """
+    durable_execution_name: str | None
+    """
+    Filter executions by name. Only executions with names that matches this
+    string are returned.
+    """
+    statuses: Sequence[str] | None
+    """
+    Filters the executions by status. Specify one of the following values:
+
+    - `RUNNING` -- The execution is running or waiting for pending
+      operations to complete.
+
+    - `PAUSING` -- The execution is waiting for an in-progress invocation to
+      reach its next checkpoint before it pauses.
+
+    - `PAUSED` -- The execution is paused, and Lambda doesn't invoke your
+      function.
+
+    - `SUCCEEDED` -- The execution completed successfully.
+
+    - `FAILED` -- The execution completed with an error.
+
+    - `TIMED_OUT` -- The execution exceeded its execution timeout.
+
+    - `STOPPED` -- A `StopDurableExecution` request stopped the execution.
+
+    - `DELETING` -- A `DeleteDurableExecution` request is deleting the
+      execution and its data.
+    """
+    started_after: datetime | None
+    """Filter executions that started after this timestamp (ISO 8601 format)."""
+    started_before: datetime | None
+    """Filter executions that started before this timestamp (ISO 8601 format)."""
+    reverse_order: bool | None
+    """
+    Set to true to return results in chronological order (oldest first).
+    Default is false.
+    """
+    marker: str | None
+    """Pagination token from a previous request to continue retrieving results."""
+    max_items: int | None
+    """Maximum number of executions to return (1-1000). Default is 100."""
+
+@dataclass(kw_only=True)
+class ListDurableExecutionsByFunctionOutput(_SerdeShape):
+    """
+    The response from the ListDurableExecutionsByFunction operation,
+    containing a list of durable executions and pagination information.
+    """
+
+    durable_executions: list[Execution] | None = ...
+    """List of durable execution summaries matching the filter criteria."""
+    next_marker: str | None = ...
+    """
+    Pagination token for retrieving additional results. Present only if
+    there are more results available.
+    """
+    response_metadata: ResponseMetadata = ...
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+@dataclass(kw_only=True)
+class ListEventSourceMappingsInput(_SerdeShape):
+    """Dataclass for ListEventSourceMappingsInput structure."""
+
+    event_source_arn: str | None = ...
+    """
+    The Amazon Resource Name (ARN) of the event source.
+
+    - **Amazon Kinesis** -- The ARN of the data stream or a stream consumer.
+
+    - **Amazon DynamoDB Streams** -- The ARN of the stream.
+
+    - **Amazon Simple Queue Service** -- The ARN of the queue.
+
+    - **Amazon Managed Streaming for Apache Kafka** -- The ARN of the
+      cluster or the ARN of the VPC connection (for [cross-account event
+      source
+      mappings](https://docs.aws.amazon.com/lambda/latest/dg/with-msk.html#msk-multi-vpc)).
+
+    - **Amazon MQ** -- The ARN of the broker.
+
+    - **Amazon DocumentDB** -- The ARN of the DocumentDB change stream.
+    """
+    function_name: str | None = ...
+    """
+    The name or ARN of the Lambda function.
+
+    **Name formats**
+
+    - **Function name** -- `MyFunction`.
+
+    - **Function ARN** --
+      `arn:aws:lambda:us-west-2:123456789012:function:MyFunction`.
+
+    - **Version or Alias ARN** --
+      `arn:aws:lambda:us-west-2:123456789012:function:MyFunction:PROD`.
+
+    - **Partial ARN** -- `123456789012:function:MyFunction`.
+
+    The length constraint applies only to the full ARN. If you specify only
+    the function name, it's limited to 64 characters in length.
+    """
+    marker: str | None = ...
+    """A pagination token returned by a previous call."""
+    max_items: int | None = ...
+    """
+    The maximum number of event source mappings to return. Note that
+    ListEventSourceMappings returns a maximum of 100 items in each response,
+    even if you set the number higher.
+    """
+
+class ListEventSourceMappingsInputDict(TypedDict, total=False):
+    """Dictionary form of `ListEventSourceMappingsInput`."""
+
+    event_source_arn: str | None
+    """
+    The Amazon Resource Name (ARN) of the event source.
+
+    - **Amazon Kinesis** -- The ARN of the data stream or a stream consumer.
+
+    - **Amazon DynamoDB Streams** -- The ARN of the stream.
+
+    - **Amazon Simple Queue Service** -- The ARN of the queue.
+
+    - **Amazon Managed Streaming for Apache Kafka** -- The ARN of the
+      cluster or the ARN of the VPC connection (for [cross-account event
+      source
+      mappings](https://docs.aws.amazon.com/lambda/latest/dg/with-msk.html#msk-multi-vpc)).
+
+    - **Amazon MQ** -- The ARN of the broker.
+
+    - **Amazon DocumentDB** -- The ARN of the DocumentDB change stream.
+    """
+    function_name: str | None
+    """
+    The name or ARN of the Lambda function.
+
+    **Name formats**
+
+    - **Function name** -- `MyFunction`.
+
+    - **Function ARN** --
+      `arn:aws:lambda:us-west-2:123456789012:function:MyFunction`.
+
+    - **Version or Alias ARN** --
+      `arn:aws:lambda:us-west-2:123456789012:function:MyFunction:PROD`.
+
+    - **Partial ARN** -- `123456789012:function:MyFunction`.
+
+    The length constraint applies only to the full ARN. If you specify only
+    the function name, it's limited to 64 characters in length.
+    """
+    marker: str | None
+    """A pagination token returned by a previous call."""
+    max_items: int | None
+    """
+    The maximum number of event source mappings to return. Note that
+    ListEventSourceMappings returns a maximum of 100 items in each response,
+    even if you set the number higher.
+    """
+
+@dataclass(kw_only=True)
+class ListEventSourceMappingsOutput(_SerdeShape):
+    """Dataclass for ListEventSourceMappingsOutput structure."""
+
+    next_marker: str | None = ...
+    """
+    A pagination token that's returned when the response doesn't contain
+    all event source mappings.
+    """
+    event_source_mappings: list[EventSourceMappingConfiguration] | None = ...
+    """A list of event source mappings."""
+    response_metadata: ResponseMetadata = ...
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+@dataclass(kw_only=True)
+class ListFunctionEventInvokeConfigsInput(_SerdeShape):
+    """Dataclass for ListFunctionEventInvokeConfigsInput structure."""
+
+    function_name: str | None = ...
+    """
+    The name or ARN of the Lambda function.
+
+    **Name formats**
+
+    - **Function name** - `my-function`.
+
+    - **Function ARN** -
+      `arn:aws:lambda:us-west-2:123456789012:function:my-function`.
+
+    - **Partial ARN** - `123456789012:function:my-function`.
+
+    The length constraint applies only to the full ARN. If you specify only
+    the function name, it is limited to 64 characters in length.
+    """
+    marker: str | None = ...
+    """
+    Specify the pagination token that's returned by a previous request to
+    retrieve the next page of results.
+    """
+    max_items: int | None = ...
+    """The maximum number of configurations to return."""
+
+class ListFunctionEventInvokeConfigsInputDict(TypedDict, total=False):
+    """Dictionary form of `ListFunctionEventInvokeConfigsInput`."""
+
+    function_name: Required[str]
+    """
+    The name or ARN of the Lambda function.
+
+    **Name formats**
+
+    - **Function name** - `my-function`.
+
+    - **Function ARN** -
+      `arn:aws:lambda:us-west-2:123456789012:function:my-function`.
+
+    - **Partial ARN** - `123456789012:function:my-function`.
+
+    The length constraint applies only to the full ARN. If you specify only
+    the function name, it is limited to 64 characters in length.
+    """
+    marker: str | None
+    """
+    Specify the pagination token that's returned by a previous request to
+    retrieve the next page of results.
+    """
+    max_items: int | None
+    """The maximum number of configurations to return."""
 
 @dataclass(kw_only=True)
 class ListFunctionEventInvokeConfigsOutput(_SerdeShape):
@@ -1065,6 +1436,95 @@ class PackageType(UnknownEnumMixin, StrEnum):
     IMAGE = "Image"
 
 @dataclass(kw_only=True)
+class PauseDetails(_SerdeShape):
+    """
+    Details about a [durable
+    execution](https://docs.aws.amazon.com/lambda/latest/dg/durable-functions.html)
+    that is pausing or paused.
+    """
+
+    pause_request_timestamp: datetime
+    """
+    The date and time when you requested the pause, in [ISO-8601
+    format](https://www.w3.org/TR/NOTE-datetime) (YYYY-MM-DDThh:mm:ss.sTZD).
+    """
+    reason: str | None = ...
+    """
+    The reason that you provided when you paused the execution. This field
+    is only present if you set `IncludeExecutionData` to `true` in the
+    request.
+    """
+    execution_timeout_paused: bool
+    """Specifies whether the pause also pauses the execution timeout."""
+
+@dataclass(kw_only=True)
+class PauseDurableExecutionInput(_SerdeShape):
+    """Dataclass for PauseDurableExecutionInput structure."""
+
+    durable_execution_arn: str | None = ...
+    """The Amazon Resource Name (ARN) of the durable execution."""
+    client_token: str | None = ...
+    """
+    A unique, case-sensitive identifier that you provide so that the request
+    completes no more than one time. If you repeat a request with the same
+    client token and parameters within 15 minutes, Lambda doesn't pause the
+    execution again and returns a successful response instead of an error.
+
+    This field is autopopulated if not provided.
+    """
+    reason: str | None = ...
+    """
+    A description of why you're pausing the execution. Lambda records the
+    reason in the execution history.
+    """
+    execution_timeout_paused: bool = ...
+    """
+    Specifies whether to pause the execution timeout while the execution is
+    paused. If `true`, Lambda extends the execution timeout by the time the
+    execution spends paused. An execution with a paused timeout still times
+    out 366 days after it started. The default value is `true`.
+    """
+
+class PauseDurableExecutionInputDict(TypedDict, total=False):
+    """Dictionary form of `PauseDurableExecutionInput`."""
+
+    durable_execution_arn: Required[str]
+    """The Amazon Resource Name (ARN) of the durable execution."""
+    client_token: str | None
+    """
+    A unique, case-sensitive identifier that you provide so that the request
+    completes no more than one time. If you repeat a request with the same
+    client token and parameters within 15 minutes, Lambda doesn't pause the
+    execution again and returns a successful response instead of an error.
+
+    This field is autopopulated if not provided.
+    """
+    reason: str | None
+    """
+    A description of why you're pausing the execution. Lambda records the
+    reason in the execution history.
+    """
+    execution_timeout_paused: bool | None
+    """
+    Specifies whether to pause the execution timeout while the execution is
+    paused. If `true`, Lambda extends the execution timeout by the time the
+    execution spends paused. An execution with a paused timeout still times
+    out 366 days after it started. The default value is `true`.
+    """
+
+@dataclass(kw_only=True)
+class PauseDurableExecutionOutput(_SerdeShape):
+    """Dataclass for PauseDurableExecutionOutput structure."""
+
+    response_metadata: ResponseMetadata = ...
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+@dataclass(kw_only=True)
 class PolicyLengthExceededException(ServiceError, _SerdeShape):
     """
     The permissions policy for the resource is too large. For more
@@ -1624,8 +2084,9 @@ class PublishVersionOutput(_SerdeShape):
     ephemeral_storage: EphemeralStorage | None = ...
     """
     The size of the function's `/tmp` directory in MB. The default value is
-    512, but can be any whole number between 512 and 10,240 MB. For more
-    information, see [Configuring ephemeral storage
+    512, but can be any whole number between 512 and 10,240 MB. For
+    functions that use `AcceleratorConfig`, the maximum is 32,768 MB. For
+    more information, see [Configuring ephemeral storage
     (console)](https://docs.aws.amazon.com/lambda/latest/dg/configuration-function-common.html#configuration-ephemeral-storage).
     """
     snap_start: SnapStartResponse | None = ...
@@ -1663,6 +2124,8 @@ class PublishVersionOutput(_SerdeShape):
     the customer-managed runtime and the runtime alias that your function
     uses.
     """
+    accelerator_config: AcceleratorConfig | None = ...
+    """The accelerator resource settings for a Lambda execution environment."""
     response_metadata: ResponseMetadata = ...
     """
     Metadata about the response that produced this output. Use this to
@@ -2673,6 +3136,61 @@ class ResponseStreamingInvocationType(UnknownEnumMixin, StrEnum):
     DRY_RUN = "DryRun"
 
 @dataclass(kw_only=True)
+class ResumeDurableExecutionInput(_SerdeShape):
+    """Dataclass for ResumeDurableExecutionInput structure."""
+
+    durable_execution_arn: str | None = ...
+    """The Amazon Resource Name (ARN) of the durable execution."""
+    client_token: str | None = ...
+    """
+    A unique, case-sensitive identifier that you provide so that the request
+    completes no more than one time. If you repeat a request with the same
+    client token and parameters within 15 minutes, Lambda doesn't resume
+    the execution again and returns a successful response instead of an
+    error.
+
+    This field is autopopulated if not provided.
+    """
+    reason: str | None = ...
+    """
+    A description of why you're resuming the execution. Lambda records the
+    reason in the execution history.
+    """
+
+class ResumeDurableExecutionInputDict(TypedDict, total=False):
+    """Dictionary form of `ResumeDurableExecutionInput`."""
+
+    durable_execution_arn: Required[str]
+    """The Amazon Resource Name (ARN) of the durable execution."""
+    client_token: str | None
+    """
+    A unique, case-sensitive identifier that you provide so that the request
+    completes no more than one time. If you repeat a request with the same
+    client token and parameters within 15 minutes, Lambda doesn't resume
+    the execution again and returns a successful response instead of an
+    error.
+
+    This field is autopopulated if not provided.
+    """
+    reason: str | None
+    """
+    A description of why you're resuming the execution. Lambda records the
+    reason in the execution history.
+    """
+
+@dataclass(kw_only=True)
+class ResumeDurableExecutionOutput(_SerdeShape):
+    """Dataclass for ResumeDurableExecutionOutput structure."""
+
+    response_metadata: ResponseMetadata = ...
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+@dataclass(kw_only=True)
 class RetryDetails(_SerdeShape):
     """Information about retry attempts for an operation."""
 
@@ -3566,6 +4084,7 @@ class StateReasonCode(UnknownEnumMixin, StrEnum):
     FUNCTION_ERROR_INIT_RESOURCE_EXHAUSTED = "FunctionError.InitResourceExhausted"
     DISALLOWED_BY_VPC_ENCRYPTION_CONTROL = "DisallowedByVpcEncryptionControl"
     DRAINING_DURABLE_EXECUTIONS = "DrainingDurableExecutions"
+    INCOMPATIBLE_ACCELERATOR_INSTANCE_TYPES = "IncompatibleAcceleratorInstanceTypes"
     DEPENDENCY_ERROR = "DependencyError"
 
 @dataclass(kw_only=True)
@@ -5002,8 +5521,9 @@ class UpdateFunctionCodeOutput(_SerdeShape):
     ephemeral_storage: EphemeralStorage | None = ...
     """
     The size of the function's `/tmp` directory in MB. The default value is
-    512, but can be any whole number between 512 and 10,240 MB. For more
-    information, see [Configuring ephemeral storage
+    512, but can be any whole number between 512 and 10,240 MB. For
+    functions that use `AcceleratorConfig`, the maximum is 32,768 MB. For
+    more information, see [Configuring ephemeral storage
     (console)](https://docs.aws.amazon.com/lambda/latest/dg/configuration-function-common.html#configuration-ephemeral-storage).
     """
     snap_start: SnapStartResponse | None = ...
@@ -5041,6 +5561,8 @@ class UpdateFunctionCodeOutput(_SerdeShape):
     the customer-managed runtime and the runtime alias that your function
     uses.
     """
+    accelerator_config: AcceleratorConfig | None = ...
+    """The accelerator resource settings for a Lambda execution environment."""
     response_metadata: ResponseMetadata = ...
     """
     Metadata about the response that produced this output. Use this to
@@ -5199,8 +5721,9 @@ class UpdateFunctionConfigurationInput(_SerdeShape):
     ephemeral_storage: EphemeralStorage | None = ...
     """
     The size of the function's `/tmp` directory in MB. The default value is
-    512, but can be any whole number between 512 and 10,240 MB. For more
-    information, see [Configuring ephemeral storage
+    512, but can be any whole number between 512 and 10,240 MB. For
+    functions that use `AcceleratorConfig`, the maximum is 32,768 MB. For
+    more information, see [Configuring ephemeral storage
     (console)](https://docs.aws.amazon.com/lambda/latest/dg/configuration-function-common.html#configuration-ephemeral-storage).
     """
     snap_start: SnapStart | None = ...
@@ -5231,6 +5754,8 @@ class UpdateFunctionConfigurationInput(_SerdeShape):
     the customer-managed runtime and the runtime alias that your function
     uses.
     """
+    accelerator_config: AcceleratorConfig | None = ...
+    """The accelerator resource settings for a Lambda execution environment."""
 
 class UpdateFunctionConfigurationInputDict(TypedDict, total=False):
     """Dictionary form of `UpdateFunctionConfigurationInput`."""
@@ -5381,8 +5906,9 @@ class UpdateFunctionConfigurationInputDict(TypedDict, total=False):
     ephemeral_storage: EphemeralStorage | EphemeralStorageDict | None
     """
     The size of the function's `/tmp` directory in MB. The default value is
-    512, but can be any whole number between 512 and 10,240 MB. For more
-    information, see [Configuring ephemeral storage
+    512, but can be any whole number between 512 and 10,240 MB. For
+    functions that use `AcceleratorConfig`, the maximum is 32,768 MB. For
+    more information, see [Configuring ephemeral storage
     (console)](https://docs.aws.amazon.com/lambda/latest/dg/configuration-function-common.html#configuration-ephemeral-storage).
     """
     snap_start: SnapStart | SnapStartDict | None
@@ -5413,6 +5939,8 @@ class UpdateFunctionConfigurationInputDict(TypedDict, total=False):
     the customer-managed runtime and the runtime alias that your function
     uses.
     """
+    accelerator_config: AcceleratorConfig | AcceleratorConfigDict | None
+    """The accelerator resource settings for a Lambda execution environment."""
 
 @dataclass(kw_only=True)
 class UpdateFunctionConfigurationOutput(_SerdeShape):
@@ -5560,8 +6088,9 @@ class UpdateFunctionConfigurationOutput(_SerdeShape):
     ephemeral_storage: EphemeralStorage | None = ...
     """
     The size of the function's `/tmp` directory in MB. The default value is
-    512, but can be any whole number between 512 and 10,240 MB. For more
-    information, see [Configuring ephemeral storage
+    512, but can be any whole number between 512 and 10,240 MB. For
+    functions that use `AcceleratorConfig`, the maximum is 32,768 MB. For
+    more information, see [Configuring ephemeral storage
     (console)](https://docs.aws.amazon.com/lambda/latest/dg/configuration-function-common.html#configuration-ephemeral-storage).
     """
     snap_start: SnapStartResponse | None = ...
@@ -5599,6 +6128,8 @@ class UpdateFunctionConfigurationOutput(_SerdeShape):
     the customer-managed runtime and the runtime alias that your function
     uses.
     """
+    accelerator_config: AcceleratorConfig | None = ...
+    """The accelerator resource settings for a Lambda execution environment."""
     response_metadata: ResponseMetadata = ...
     """
     Metadata about the response that produced this output. Use this to
@@ -5984,7 +6515,7 @@ class WaitDetails(_SerdeShape):
 
 @dataclass(kw_only=True)
 class WaitOptions(_SerdeShape):
-    """Specifies how long to pause the durable execution."""
+    """Specifies how long the durable execution waits."""
 
     wait_seconds: int | None = ...
     """The duration to wait, in seconds."""

@@ -28,8 +28,11 @@ _xarp = "x-amz-request-payer"
 _EBO = "ExpectedBucketOwner"
 _xaebo = "x-amz-expected-bucket-owner"
 _RC = "RequestCharged"
+_OVI = "ObjectVersionId"
 _smi = "smithy.api#output"
 _xarc = "x-amz-request-charged"
+_VI = "VersionId"
+_xavi = "x-amz-version-id"
 _smit = "smithy.api#error"
 _c = "client"
 _sE = "smithy.api#httpError"
@@ -86,11 +89,8 @@ _BKE = "BucketKeyEnabled"
 _Ex = "Expiration"
 _SSE = "ServerSideEncryption"
 _SSEKMSKI = "SSEKMSKeyId"
-_OVI = "ObjectVersionId"
 _xae = "x-amz-expiration"
 _xasse = "x-amz-server-side-encryption"
-_VI = "VersionId"
-_xavi = "x-amz-version-id"
 _xasseakki = "x-amz-server-side-encryption-aws-kms-key-id"
 _xassebke = "x-amz-server-side-encryption-bucket-key-enabled"
 _CC = "CacheControl"
@@ -105,8 +105,6 @@ _OLEHDD = "ObjectLockEventHoldDurationDays"
 _OLEHDY = "ObjectLockEventHoldDurationYears"
 _OLLHS = "ObjectLockLegalHoldStatus"
 _OLM = "ObjectLockMode"
-_GOVERNANCE = "GOVERNANCE"
-_COMPLIANCE = "COMPLIANCE"
 _OLRUD = "ObjectLockRetainUntilDate"
 _SC = "StorageClass"
 _WRL = "WebsiteRedirectLocation"
@@ -130,6 +128,7 @@ _LM = "LastModified"
 _sCP = "smithy.rules#staticContextParams"
 _Tag = "Tag"
 _TS = "TagSet"
+_Tags = "Tags"
 _ENABLED = "ENABLED"
 _R = "Role"
 _Da = "Days"
@@ -150,6 +149,12 @@ _AT = "AccessTier"
 _RS = "ReplicationStatus"
 _DMR = "DeleteMarkerReplication"
 _EOR = "ExistingObjectReplication"
+_RROO = "ReplicationRuleOrOperator"
+_Pre = "Prefixes"
+_RRNO = "ReplicationRuleNotOperator"
+_Or = "Or"
+_RRAO = "ReplicationRuleAndOperator"
+_No = "Not"
 _RRF = "ReplicationRuleFilter"
 _Pri = "Priority"
 _RMS = "ReplicaModificationsStatus"
@@ -296,27 +301,59 @@ _cGOLCR = "com.amazonaws.s3#GetObjectLockConfigurationRequest"
 _OLE = "ObjectLockEnabled"
 _Y = "Years"
 _EHD = "EventHoldDuration"
-_OLRM = "ObjectLockRetentionMode"
-_DRef = "DefaultRetention"
-_Mo = "Mode"
-_DEH = "DefaultEventHold"
 _OLC = "ObjectLockConfiguration"
 _GOLCO = "GetObjectLockConfigurationOutput"
 _GOLC = "GetObjectLockConfiguration"
-_OLRb = "ObjectLockRetention"
-_RUD = "RetainUntilDate"
-_EHv = "EventHold"
+
+REPLICATION_RULE_OR_OPERATOR: StaticSchema = (
+    18,
+    n0,
+    _RROO,
+    0,
+    (_Pre, _Tags),
+    (
+        (lambda: schemas.REPLICATION_PREFIX_LIST, {_sN: _Pr, _sFm: None}),
+        (lambda: schemas.TAG_SET, {_sN: _Tag, _sFm: None}),
+    ),
+)
+
+REPLICATION_RULE_NOT_OPERATOR: StaticSchema = (
+    18,
+    n0,
+    _RRNO,
+    0,
+    (_Pr, _Tag, _Or),
+    (
+        (lambda: schemas.PREFIX, 0),
+        (lambda: schemas.TAG, 0),
+        (REPLICATION_RULE_OR_OPERATOR, 0),
+    ),
+)
+
+REPLICATION_RULE_AND_OPERATOR: StaticSchema = (
+    18,
+    n0,
+    _RRAO,
+    0,
+    (_Pr, _Tags, _No),
+    (
+        (lambda: schemas.PREFIX, 0),
+        (lambda: schemas.TAG_SET, {_sN: _Tag, _sFm: None}),
+        (REPLICATION_RULE_NOT_OPERATOR, 0),
+    ),
+)
 
 REPLICATION_RULE_FILTER: StaticSchema = (
     18,
     n0,
     _RRF,
     0,
-    (_Pr, _Tag, _A),
+    (_Pr, _Tag, _A, _No),
     (
         (lambda: schemas.PREFIX, 0),
         (lambda: schemas.TAG, 0),
-        (lambda: schemas.REPLICATION_RULE_AND_OPERATOR, 0),
+        (REPLICATION_RULE_AND_OPERATOR, 0),
+        (REPLICATION_RULE_NOT_OPERATOR, 0),
     ),
 )
 
@@ -1343,41 +1380,4 @@ EVENT_HOLD_DURATION: StaticSchema = (
     0,
     (_Da, _Y),
     ((lambda: schemas.DAYS, 0), (YEARS, 0)),
-)
-
-OBJECT_LOCK_RETENTION_MODE: StaticSchema = (
-    14,
-    n0,
-    _OLRM,
-    0,
-    (_GOVERNANCE, _COMPLIANCE),
-    ((-1, {_sV: _GOVERNANCE}), (-1, {_sV: _COMPLIANCE})),
-)
-
-DEFAULT_RETENTION: StaticSchema = (
-    18,
-    n0,
-    _DRef,
-    0,
-    (_Mo, _Da, _Y, _DEH),
-    (
-        (OBJECT_LOCK_RETENTION_MODE, 0),
-        (lambda: schemas.DAYS, 0),
-        (YEARS, 0),
-        (EVENT_HOLD_DURATION, 0),
-    ),
-)
-
-OBJECT_LOCK_RETENTION: StaticSchema = (
-    18,
-    n0,
-    _OLRb,
-    0,
-    (_Mo, _RUD, _EHv, _EHD),
-    (
-        (OBJECT_LOCK_RETENTION_MODE, 0),
-        (lambda: schemas.DATE, 0),
-        (lambda: schemas.OBJECT_LOCK_EVENT_HOLD, 0),
-        (EVENT_HOLD_DURATION, 0),
-    ),
 )

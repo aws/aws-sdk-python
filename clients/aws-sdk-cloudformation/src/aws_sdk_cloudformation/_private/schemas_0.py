@@ -147,6 +147,7 @@ _BMR = "BoxedMaxResults"
 _CA = "CallAs"
 _SELF = "SELF"
 _DA = "DELEGATED_ADMIN"
+_CSIC = "CancelledStackInstancesCount"
 _CRT = "ClientRequestToken"
 _SN = "StackName"
 _CUSI = "CancelUpdateStackInput"
@@ -241,10 +242,12 @@ _UNKNOWN = "UNKNOWN"
 _UNSUPPORTED = "UNSUPPORTED"
 _RT = "ResourceType"
 _Sc = "Scope"
+_RC = "ResourceChange"
+_Ac = "Action"
+_RDS = "ResourceDriftStatus"
+_Det = "Details"
 _CTl = "ClientToken"
 _RTe = "ResourceTypes"
-_LEE = "LimitExceededException"
-_SPB = "StackPolicyBody"
 
 ACCEPT_TERMS_AND_CONDITIONS: StaticSchema = (2, n0, _ATAC, 0)
 
@@ -750,6 +753,8 @@ CALL_AS: StaticSchema = (
     ((-1, {_sV: _SELF}), (-1, {_sV: _DA})),
 )
 
+CANCELLED_STACK_INSTANCES_COUNT: StaticSchema = (7, n0, _CSIC, 0)
+
 CLIENT_REQUEST_TOKEN: StaticSchema = (3, n0, _CRT, 0)
 
 STACK_NAME: StaticSchema = (3, n0, _SN, 0)
@@ -1045,23 +1050,47 @@ RESOURCE_TYPE: StaticSchema = (3, n0, _RT, 0)
 
 SCOPE: StaticSchema = (16, n0, _Sc, 0, (_m,), ((RESOURCE_ATTRIBUTE, 0),))
 
+RESOURCE_CHANGE: StaticSchema = (
+    18,
+    n0,
+    _RC,
+    0,
+    (
+        _PA,
+        _Ac,
+        _LRI,
+        _PRI,
+        _RT,
+        _Rep,
+        _Sc,
+        _RDS,
+        _RDIAe,
+        _Det,
+        _CSI,
+        _MI,
+        _BC,
+        _AC,
+        _PDC,
+    ),
+    (
+        (POLICY_ACTION, 0),
+        (CHANGE_ACTION, 0),
+        (LOGICAL_RESOURCE_ID, 0),
+        (PHYSICAL_RESOURCE_ID, 0),
+        (RESOURCE_TYPE, 0),
+        (REPLACEMENT, 0),
+        (SCOPE, 0),
+        (STACK_RESOURCE_DRIFT_STATUS, 0),
+        (RESOURCE_DRIFT_IGNORED_ATTRIBUTES, 0),
+        (RESOURCE_CHANGE_DETAILS, 0),
+        (CHANGE_SET_ID, 0),
+        (MODULE_INFO, 0),
+        (BEFORE_CONTEXT, 0),
+        (AFTER_CONTEXT, 0),
+        (PREVIOUS_DEPLOYMENT_CONTEXT, 0),
+    ),
+)
+
 CLIENT_TOKEN: StaticSchema = (3, n0, _CTl, 0)
 
 RESOURCE_TYPES: StaticSchema = (16, n0, _RTe, 0, (_m,), ((RESOURCE_TYPE, 0),))
-
-LIMIT_EXCEEDED_EXCEPTION: StaticSchema = (
-    18,
-    n0,
-    _LEE,
-    {
-        _smi: _c,
-        _sE: 400,
-        _aQE: MappingProxyType(
-            {"code": "LimitExceededException", "httpResponseCode": 400}
-        ),
-    },
-    (_M,),
-    ((ERROR_MESSAGE, 0),),
-)
-
-STACK_POLICY_BODY: StaticSchema = (3, n0, _SPB, 0)

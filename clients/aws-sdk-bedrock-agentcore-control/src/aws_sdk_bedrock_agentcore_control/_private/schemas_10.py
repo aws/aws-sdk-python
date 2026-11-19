@@ -25,6 +25,7 @@ _sL = "smithy.api#httpLabel"
 _cT = "clientToken"
 _sT = "smithy.api#idempotencyToken"
 _CREATING = "CREATING"
+_UPDATING = "UPDATING"
 _DELETING = "DELETING"
 _ACTIVE = "ACTIVE"
 _smithy = "smithy.api#output"
@@ -32,12 +33,14 @@ _st = "status"
 _uA = "updatedAt"
 _se = "server"
 _smithya = "smithy.api#http"
+_t = "tags"
 _cA = "createdAt"
 _sQ = "smithy.api#httpQuery"
 _fR = "failureReason"
 _i = "id"
 _mR = "maxResults"
 _nT = "nextToken"
+_kKA = "kmsKeyArn"
 _a = "arn"
 _pE = "privateEndpoint"
 _dU = "discoveryUrl"
@@ -47,7 +50,6 @@ _v_ = ""
 _ty = "type"
 _CUSTOM = "CUSTOM"
 _con = "configuration"
-_kKA = "kmsKeyArn"
 _FAILED = "FAILED"
 _mI = "modelId"
 _SEMANTIC = "SEMANTIC"
@@ -82,15 +84,27 @@ _hCWS = "historicalContextWindowSize"
 _sMC = "selfManagedConfiguration"
 _rEDD = "recordExpiryDurationDays"
 _rES = "recordExpirySpecification"
+_SDRL = "StreamDeliveryResourcesList"
+_SDRt = "StreamDeliveryResources"
+_reso = "resources"
+_CMIr = "CreateMemoryInput"
 _mERA = "memoryExecutionRoleArn"
 _mSe = "memoryStrategies"
 _iK = "indexedKeys"
 _nK = "namespaceKeys"
 _sDR = "streamDeliveryResources"
+_MIe = "MemoryId"
+_MSe = "MemoryStatus"
+_ECO = "EpisodicConsolidationOverride"
+_SCO = "SemanticConsolidationOverride"
+_SCOu = "SummaryConsolidationOverride"
+_UPCO = "UserPreferenceConsolidationOverride"
+_CCC = "CustomConsolidationConfiguration"
 _sCO = "semanticConsolidationOverride"
 _sCOu = "summaryConsolidationOverride"
 _uPCO = "userPreferenceConsolidationOverride"
 _eCO = "episodicConsolidationOverride"
+_CCons = "ConsolidationConfiguration"
 _cCC = "customConsolidationConfiguration"
 _EEO = "EpisodicExtractionOverride"
 _SEO = "SemanticExtractionOverride"
@@ -129,8 +143,10 @@ _MSem = "MemoryStrategy"
 _MSLe = "MemoryStrategyList"
 _Me = "Memory"
 _mBRA = "managedByResourceArn"
+_CMO = "CreateMemoryOutput"
 _SEe = "ServiceException"
 _TEh = "ThrottledException"
+_CM = "CreateMemory"
 _DMI = "DeleteMemoryInput"
 _mIe = "memoryId"
 _DMO = "DeleteMemoryOutput"
@@ -230,15 +246,152 @@ _COPCI = "CustomOauth2ProviderConfigInput"
 _oD = "oauthDiscovery"
 _oBOTEC = "onBehalfOfTokenExchangeConfig"
 _pKJC = "privateKeyJwtConfig"
-_GOPCI = "GithubOauth2ProviderConfigInput"
-_GOPCIo = "GoogleOauth2ProviderConfigInput"
-_IOPCI = "IncludedOauth2ProviderConfigInput"
-_LOPCI = "LinkedinOauth2ProviderConfigInput"
-_TIT = "TenantIdType"
-_MOPCI = "MicrosoftOauth2ProviderConfigInput"
-_tIe = "tenantId"
-_SOPCI = "SalesforceOauth2ProviderConfigInput"
-_SOPCIl = "SlackOauth2ProviderConfigInput"
+
+STREAM_DELIVERY_RESOURCES_LIST: StaticSchema = (
+    16,
+    n0,
+    _SDRL,
+    0,
+    (_mem,),
+    ((lambda: schemas.STREAM_DELIVERY_RESOURCE, 0),),
+)
+
+STREAM_DELIVERY_RESOURCES: StaticSchema = (
+    18,
+    n0,
+    _SDRt,
+    0,
+    (_reso,),
+    ((STREAM_DELIVERY_RESOURCES_LIST, 1),),
+)
+
+CREATE_MEMORY_INPUT: StaticSchema = (
+    18,
+    n0,
+    _CMIr,
+    {_smith: None},
+    (_cT, _n, _d, _eKA, _mERA, _eED, _mSe, _iK, _nK, _sDR, _t),
+    (
+        (lambda: schemas.NON_EMPTY_STRING, 2),
+        (lambda: schemas.NAME, 1),
+        (lambda: schemas.DESCRIPTION, 0),
+        (lambda: schemas.ARN, 0),
+        (lambda: schemas.ARN, 0),
+        (7, 1),
+        (lambda: schemas.MEMORY_STRATEGY_INPUT_LIST, 0),
+        (lambda: schemas.INDEXED_KEYS_LIST, 0),
+        (lambda: schemas.NAMESPACE_KEYS_LIST, 0),
+        (STREAM_DELIVERY_RESOURCES, 0),
+        (lambda: schemas.TAGS_MAP, 0),
+    ),
+)
+
+CREATE_MEMORY_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _CMO,
+    {_smithy: None},
+    (_memo,),
+    ((lambda: MEMORY, 0),),
+)
+
+CREATE_MEMORY: StaticOperationSchema = (
+    23,
+    n0,
+    _CM,
+    {
+        _smithya: MappingProxyType(
+            {"code": 202, "method": "POST", "uri": "/memories/create"}
+        )
+    },
+    CREATE_MEMORY_INPUT,
+    CREATE_MEMORY_OUTPUT,
+    (
+        lambda: schemas.ACCESS_DENIED_EXCEPTION,
+        lambda: schemas.CONFLICT_EXCEPTION,
+        lambda: schemas.RESOURCE_NOT_FOUND_EXCEPTION,
+        lambda: SERVICE_EXCEPTION,
+        lambda: schemas.SERVICE_QUOTA_EXCEEDED_EXCEPTION,
+        lambda: THROTTLED_EXCEPTION,
+        lambda: schemas.VALIDATION_EXCEPTION,
+    ),
+)
+
+MEMORY_ID: StaticSchema = (3, n0, _MIe, 0)
+
+MEMORY_STATUS: StaticSchema = (
+    14,
+    n0,
+    _MSe,
+    0,
+    (_CREATING, _ACTIVE, _FAILED, _DELETING, _UPDATING),
+    (
+        (-1, {_sVm: _CREATING}),
+        (-1, {_sVm: _ACTIVE}),
+        (-1, {_sVm: _FAILED}),
+        (-1, {_sVm: _DELETING}),
+        (-1, {_sVm: _UPDATING}),
+    ),
+)
+
+EPISODIC_CONSOLIDATION_OVERRIDE: StaticSchema = (
+    18,
+    n0,
+    _ECO,
+    0,
+    (_aTP, _mI),
+    ((lambda: schemas.PROMPT, 1), (3, 1)),
+)
+
+SEMANTIC_CONSOLIDATION_OVERRIDE: StaticSchema = (
+    18,
+    n0,
+    _SCO,
+    0,
+    (_aTP, _mI),
+    ((lambda: schemas.PROMPT, 1), (3, 1)),
+)
+
+SUMMARY_CONSOLIDATION_OVERRIDE: StaticSchema = (
+    18,
+    n0,
+    _SCOu,
+    0,
+    (_aTP, _mI),
+    ((lambda: schemas.PROMPT, 1), (3, 1)),
+)
+
+USER_PREFERENCE_CONSOLIDATION_OVERRIDE: StaticSchema = (
+    18,
+    n0,
+    _UPCO,
+    0,
+    (_aTP, _mI),
+    ((lambda: schemas.PROMPT, 1), (3, 1)),
+)
+
+CUSTOM_CONSOLIDATION_CONFIGURATION: StaticSchema = (
+    19,
+    n0,
+    _CCC,
+    0,
+    (_sCO, _sCOu, _uPCO, _eCO),
+    (
+        (SEMANTIC_CONSOLIDATION_OVERRIDE, 0),
+        (SUMMARY_CONSOLIDATION_OVERRIDE, 0),
+        (USER_PREFERENCE_CONSOLIDATION_OVERRIDE, 0),
+        (EPISODIC_CONSOLIDATION_OVERRIDE, 0),
+    ),
+)
+
+CONSOLIDATION_CONFIGURATION: StaticSchema = (
+    19,
+    n0,
+    _CCons,
+    0,
+    (_cCC,),
+    ((CUSTOM_CONSOLIDATION_CONFIGURATION, 0),),
+)
 
 EPISODIC_EXTRACTION_OVERRIDE: StaticSchema = (
     18,
@@ -401,7 +554,7 @@ STRATEGY_CONFIGURATION: StaticSchema = (
     (
         (OVERRIDE_TYPE, 0),
         (EXTRACTION_CONFIGURATION, 0),
-        (lambda: schemas.CONSOLIDATION_CONFIGURATION, 0),
+        (CONSOLIDATION_CONFIGURATION, 0),
         (REFLECTION_CONFIGURATION, 0),
         (SELF_MANAGED_CONFIGURATION, 0),
     ),
@@ -494,20 +647,20 @@ MEMORY: StaticSchema = (
     ),
     (
         (lambda: schemas.MEMORY_ARN, 1),
-        (lambda: schemas.MEMORY_ID, 1),
+        (MEMORY_ID, 1),
         (lambda: schemas.NAME, 1),
         (lambda: schemas.DESCRIPTION, 0),
         (lambda: schemas.ARN, 0),
         (lambda: schemas.ARN, 0),
         (7, 1),
-        (lambda: schemas.MEMORY_STATUS, 1),
+        (MEMORY_STATUS, 1),
         (3, 0),
         (4, 1),
         (4, 1),
         (MEMORY_STRATEGY_LIST, 0),
         (lambda: schemas.INDEXED_KEYS_LIST, 0),
         (lambda: schemas.NAMESPACE_KEYS_LIST, 0),
-        (lambda: schemas.STREAM_DELIVERY_RESOURCES, 0),
+        (STREAM_DELIVERY_RESOURCES, 0),
         (lambda: schemas.ARN, 0),
     ),
 )
@@ -522,10 +675,7 @@ DELETE_MEMORY_INPUT: StaticSchema = (
     _DMI,
     {_smith: None},
     (_cT, _mIe),
-    (
-        (lambda: schemas.NON_EMPTY_STRING, {_sQ: _cT, _sT: None}),
-        (lambda: schemas.MEMORY_ID, 9),
-    ),
+    ((lambda: schemas.NON_EMPTY_STRING, {_sQ: _cT, _sT: None}), (MEMORY_ID, 9)),
 )
 
 DELETE_MEMORY_OUTPUT: StaticSchema = (
@@ -534,7 +684,7 @@ DELETE_MEMORY_OUTPUT: StaticSchema = (
     _DMO,
     {_smithy: None},
     (_mIe, _st),
-    ((lambda: schemas.MEMORY_ID, 1), (lambda: schemas.MEMORY_STATUS, 0)),
+    ((MEMORY_ID, 1), (MEMORY_STATUS, 0)),
 )
 
 DELETE_MEMORY: StaticOperationSchema = (
@@ -573,7 +723,7 @@ GET_MEMORY_INPUT: StaticSchema = (
     _GMI,
     {_smith: None},
     (_mIe, _vie),
-    ((lambda: schemas.MEMORY_ID, 9), (MEMORY_VIEW, {_smi: _fu, _sQ: _vie})),
+    ((MEMORY_ID, 9), (MEMORY_VIEW, {_smi: _fu, _sQ: _vie})),
 )
 
 GET_MEMORY_OUTPUT: StaticSchema = (
@@ -647,8 +797,8 @@ MEMORY_SUMMARY: StaticSchema = (
     (_a, _i, _st, _cA, _uA, _mBRA),
     (
         (lambda: schemas.MEMORY_ARN, 0),
-        (lambda: schemas.MEMORY_ID, 0),
-        (lambda: schemas.MEMORY_STATUS, 0),
+        (MEMORY_ID, 0),
+        (MEMORY_STATUS, 0),
         (4, 1),
         (4, 1),
         (lambda: schemas.ARN, 0),
@@ -817,14 +967,14 @@ UPDATE_MEMORY_INPUT: StaticSchema = (
     (_cT, _mIe, _d, _eED, _mERA, _mSe, _aIK, _nK, _sDR),
     (
         (lambda: schemas.NON_EMPTY_STRING, 2),
-        (lambda: schemas.MEMORY_ID, 9),
+        (MEMORY_ID, 9),
         (lambda: schemas.DESCRIPTION, 0),
         (7, 0),
         (lambda: schemas.ARN, 0),
         (MODIFY_MEMORY_STRATEGIES, 0),
         (lambda: schemas.INDEXED_KEYS_LIST, 0),
         (lambda: schemas.NAMESPACE_KEYS_LIST, 0),
-        (lambda: schemas.STREAM_DELIVERY_RESOURCES, 0),
+        (STREAM_DELIVERY_RESOURCES, 0),
     ),
 )
 
@@ -1047,109 +1197,5 @@ CUSTOM_OAUTH2_PROVIDER_CONFIG_INPUT: StaticSchema = (
         (lambda: schemas.PRIVATE_ENDPOINT, 0),
         (lambda: schemas.PRIVATE_ENDPOINT_OVERRIDES, 0),
         (lambda: schemas.CERTIFICATE_CONFIGURATION_LIST, 0),
-    ),
-)
-
-GITHUB_OAUTH2_PROVIDER_CONFIG_INPUT: StaticSchema = (
-    18,
-    n0,
-    _GOPCI,
-    0,
-    (_cIl, _cS, _cSC, _cSS),
-    (
-        (CLIENT_ID_TYPE, 1),
-        (DEFAULT_CLIENT_SECRET_TYPE, {_smi: _v_}),
-        (lambda: schemas.SECRET_REFERENCE, 0),
-        (lambda: schemas.SECRET_SOURCE_TYPE, 0),
-    ),
-)
-
-GOOGLE_OAUTH2_PROVIDER_CONFIG_INPUT: StaticSchema = (
-    18,
-    n0,
-    _GOPCIo,
-    0,
-    (_cIl, _cS, _cSC, _cSS),
-    (
-        (CLIENT_ID_TYPE, 1),
-        (DEFAULT_CLIENT_SECRET_TYPE, {_smi: _v_}),
-        (lambda: schemas.SECRET_REFERENCE, 0),
-        (lambda: schemas.SECRET_SOURCE_TYPE, 0),
-    ),
-)
-
-INCLUDED_OAUTH2_PROVIDER_CONFIG_INPUT: StaticSchema = (
-    18,
-    n0,
-    _IOPCI,
-    0,
-    (_cIl, _cS, _cSC, _cSS, _is, _aE, _tE),
-    (
-        (CLIENT_ID_TYPE, 1),
-        (DEFAULT_CLIENT_SECRET_TYPE, {_smi: _v_}),
-        (lambda: schemas.SECRET_REFERENCE, 0),
-        (lambda: schemas.SECRET_SOURCE_TYPE, 0),
-        (ISSUER_URL_TYPE, 0),
-        (AUTHORIZATION_ENDPOINT_TYPE, 0),
-        (TOKEN_ENDPOINT_TYPE, 0),
-    ),
-)
-
-LINKEDIN_OAUTH2_PROVIDER_CONFIG_INPUT: StaticSchema = (
-    18,
-    n0,
-    _LOPCI,
-    0,
-    (_cIl, _cS, _cSC, _cSS),
-    (
-        (CLIENT_ID_TYPE, 1),
-        (DEFAULT_CLIENT_SECRET_TYPE, {_smi: _v_}),
-        (lambda: schemas.SECRET_REFERENCE, 0),
-        (lambda: schemas.SECRET_SOURCE_TYPE, 0),
-    ),
-)
-
-TENANT_ID_TYPE: StaticSchema = (3, n0, _TIT, 0)
-
-MICROSOFT_OAUTH2_PROVIDER_CONFIG_INPUT: StaticSchema = (
-    18,
-    n0,
-    _MOPCI,
-    0,
-    (_cIl, _cS, _cSC, _cSS, _tIe),
-    (
-        (CLIENT_ID_TYPE, 1),
-        (DEFAULT_CLIENT_SECRET_TYPE, {_smi: _v_}),
-        (lambda: schemas.SECRET_REFERENCE, 0),
-        (lambda: schemas.SECRET_SOURCE_TYPE, 0),
-        (TENANT_ID_TYPE, 0),
-    ),
-)
-
-SALESFORCE_OAUTH2_PROVIDER_CONFIG_INPUT: StaticSchema = (
-    18,
-    n0,
-    _SOPCI,
-    0,
-    (_cIl, _cS, _cSC, _cSS),
-    (
-        (CLIENT_ID_TYPE, 1),
-        (DEFAULT_CLIENT_SECRET_TYPE, {_smi: _v_}),
-        (lambda: schemas.SECRET_REFERENCE, 0),
-        (lambda: schemas.SECRET_SOURCE_TYPE, 0),
-    ),
-)
-
-SLACK_OAUTH2_PROVIDER_CONFIG_INPUT: StaticSchema = (
-    18,
-    n0,
-    _SOPCIl,
-    0,
-    (_cIl, _cS, _cSC, _cSS),
-    (
-        (CLIENT_ID_TYPE, 1),
-        (DEFAULT_CLIENT_SECRET_TYPE, {_smi: _v_}),
-        (lambda: schemas.SECRET_REFERENCE, 0),
-        (lambda: schemas.SECRET_SOURCE_TYPE, 0),
     ),
 )

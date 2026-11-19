@@ -1,0 +1,4 @@
+{
+  "type": "api-change",
+  "description": "Adds support for continuous insights and automatic dataset generation"
+}

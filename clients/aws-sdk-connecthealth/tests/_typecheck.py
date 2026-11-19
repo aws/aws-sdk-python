@@ -9,9 +9,14 @@ from aws_sdk_connecthealth.models import (
     ActivateSubscriptionInputDict,
     ActivateSubscriptionOutput,
     ArtifactDetails,
+    Checklist,
+    ChecklistItem,
     ClinicalNoteGenerationResult,
     ClinicalNoteGenerationSettings,
     ClinicalNoteGenerationSettingsResponse,
+    CreateDatasetInput,
+    CreateDatasetInputDict,
+    CreateDatasetOutput,
     CreateDomainInput,
     CreateDomainInputDict,
     CreateDomainOutput,
@@ -22,9 +27,14 @@ from aws_sdk_connecthealth.models import (
     CreateWebAppConfigurationDict,
     CustomTemplate,
     CustomTemplateResponse,
+    DatasetConfigDict,
+    DatasetSummary,
     DeactivateSubscriptionInput,
     DeactivateSubscriptionInputDict,
     DeactivateSubscriptionOutput,
+    DeleteDatasetInput,
+    DeleteDatasetInputDict,
+    DeleteDatasetOutput,
     DeleteDomainInput,
     DeleteDomainInputDict,
     DeleteDomainOutput,
@@ -33,9 +43,15 @@ from aws_sdk_connecthealth.models import (
     EncryptionContext,
     FHIRServer,
     FHIRServerDict,
+    GetDatasetInput,
+    GetDatasetInputDict,
+    GetDatasetOutput,
     GetDomainInput,
     GetDomainInputDict,
     GetDomainOutput,
+    GetMedicalCodingJobInput,
+    GetMedicalCodingJobInputDict,
+    GetMedicalCodingJobOutput,
     GetMedicalScribeListeningSessionInput,
     GetMedicalScribeListeningSessionInputDict,
     GetMedicalScribeListeningSessionOutput,
@@ -50,6 +66,9 @@ from aws_sdk_connecthealth.models import (
     InsightsContext,
     InsightsContextDict,
     InsightsOutput,
+    ListDatasetsInput,
+    ListDatasetsInputDict,
+    ListDatasetsOutput,
     ListDomainsInput,
     ListDomainsInputDict,
     ListDomainsOutput,
@@ -61,11 +80,27 @@ from aws_sdk_connecthealth.models import (
     ListTagsForResourceOutput,
     ManagedTemplate,
     ManagedTemplateResponse,
+    MedicalCodeGenerationResult,
+    MedicalCodeGenerationSettings,
+    MedicalCodeGenerationSettingsResponse,
+    MedicalCodesEncounterContext,
+    MedicalCodesEncounterContextDict,
+    MedicalCodesPatientContext,
+    MedicalCodesPatientContextDict,
+    MedicalCodingContext,
+    MedicalCodingDatasetArtifacts,
+    MedicalCodingDatasetConfig,
+    MedicalCodingDatasetConfigDict,
+    MedicalCodingOutput,
+    MedicalCodingOutputDataConfig,
+    MedicalCodingOutputDataConfigDict,
     MedicalScribeAudioEvent,
     MedicalScribeBinaryAudioEvent,
     MedicalScribeChannelDefinition,
+    MedicalScribeChecklistEvent,
     MedicalScribeConfigurationEvent,
     MedicalScribeListeningSessionDetails,
+    MedicalScribePeriodontalChartEvent,
     MedicalScribePostStreamActionSettings,
     MedicalScribePostStreamActionSettingsResponse,
     MedicalScribePostStreamActionsResult,
@@ -78,14 +113,23 @@ from aws_sdk_connecthealth.models import (
     PatientInsightsEncounterContextDict,
     PatientInsightsPatientContext,
     PatientInsightsPatientContextDict,
+    PeriodontalReview,
+    PeriodontalSite,
+    PeriodontalTooth,
     S3Source,
     S3SourceDict,
+    StartMedicalCodingJobInput,
+    StartMedicalCodingJobInputDict,
+    StartMedicalCodingJobOutput,
     StartMedicalScribeListeningSessionInput,
     StartMedicalScribeListeningSessionInputDict,
     StartMedicalScribeListeningSessionOutput,
     StartPatientInsightsJobInput,
     StartPatientInsightsJobInputDict,
     StartPatientInsightsJobOutput,
+    SubmitFeedbackInput,
+    SubmitFeedbackInputDict,
+    SubmitFeedbackOutput,
     SubscriptionDescription,
     TagResourceInput,
     TagResourceInputDict,
@@ -109,9 +153,13 @@ _: Any = ...
 ActivateSubscriptionInput()
 ActivateSubscriptionOutput()
 ArtifactDetails()
+Checklist(checklist_id=_, items=_)
+ChecklistItem(item_key=_, status=_)
 ClinicalNoteGenerationResult()
 ClinicalNoteGenerationSettings(note_template_settings=_)
 ClinicalNoteGenerationSettingsResponse()
+CreateDatasetInput()
+CreateDatasetOutput(arn=_, dataset_id=_, type=_, status=_, created_at=_)
 CreateDomainInput()
 CreateDomainOutput(domain_id=_, arn=_, name=_, status=_, created_at=_)
 CreateSubscriptionInput()
@@ -121,16 +169,29 @@ CreateSubscriptionOutput(
 CreateWebAppConfiguration(ehr_role=_, idc_instance_id=_, idc_region=_)
 CustomTemplate(template_type=_, template_instructions=_)
 CustomTemplateResponse()
+DatasetSummary(
+    arn=_, dataset_id=_, name=_, type=_, status=_, created_at=_, updated_at=_
+)
 DeactivateSubscriptionInput()
 DeactivateSubscriptionOutput()
+DeleteDatasetInput()
+DeleteDatasetOutput(arn=_, dataset_id=_, status=_)
 DeleteDomainInput()
 DeleteDomainOutput(domain_id=_, arn=_, status=_)
 DomainSummary(domain_id=_, arn=_, name=_, status=_, created_at=_)
 EncounterContext()
 EncryptionContext(encryption_type=_)
 FHIRServer(fhir_endpoint=_)
+GetDatasetInput()
+GetDatasetOutput(
+    arn=_, dataset_id=_, name=_, type=_, config=_, status=_, created_at=_, updated_at=_
+)
 GetDomainInput()
 GetDomainOutput(domain_id=_, arn=_, name=_, status=_, created_at=_)
+GetMedicalCodingJobInput()
+GetMedicalCodingJobOutput(
+    job_id=_, job_arn=_, job_status=_, text=_, output_data_config=_
+)
 GetMedicalScribeListeningSessionInput()
 GetMedicalScribeListeningSessionOutput()
 GetPatientInsightsJobInput()
@@ -150,6 +211,8 @@ GetSubscriptionOutput()
 InputDataConfig()
 InsightsContext(insights_type=_)
 InsightsOutput(uri=_)
+ListDatasetsInput()
+ListDatasetsOutput(items=_)
 ListDomainsInput()
 ListDomainsOutput(domains=_)
 ListSubscriptionsInput()
@@ -158,11 +221,23 @@ ListTagsForResourceInput()
 ListTagsForResourceOutput()
 ManagedTemplate(template_type=_)
 ManagedTemplateResponse()
+MedicalCodeGenerationResult()
+MedicalCodeGenerationSettings(enabled=_)
+MedicalCodeGenerationSettingsResponse()
+MedicalCodesEncounterContext()
+MedicalCodesPatientContext()
+MedicalCodingContext()
+MedicalCodingDatasetArtifacts()
+MedicalCodingDatasetConfig(s3_input_path=_, s3_output_path=_)
+MedicalCodingOutput(uri=_)
+MedicalCodingOutputDataConfig(s3_output_path=_)
 MedicalScribeAudioEvent(audio_chunk=_)
 MedicalScribeBinaryAudioEvent(audio_chunk=_)
 MedicalScribeChannelDefinition(channel_id=_, participant_role=_)
+MedicalScribeChecklistEvent(snapshot_version=_, checklists=_)
 MedicalScribeConfigurationEvent(post_stream_action_settings=_)
 MedicalScribeListeningSessionDetails()
+MedicalScribePeriodontalChartEvent(snapshot_version=_, teeth=_)
 MedicalScribePostStreamActionSettings(
     output_s3_uri=_, clinical_note_generation_settings=_
 )
@@ -176,11 +251,18 @@ MedicalScribeTranscriptSegment()
 OutputDataConfig(s3_output_path=_)
 PatientInsightsEncounterContext(encounter_reason=_)
 PatientInsightsPatientContext(patient_id=_)
+PeriodontalReview(reason=_)
+PeriodontalSite(site=_)
+PeriodontalTooth(tooth_number=_, missing=_)
 S3Source(uri=_)
+StartMedicalCodingJobInput()
+StartMedicalCodingJobOutput(job_arn=_, job_id=_)
 StartMedicalScribeListeningSessionInput()
 StartMedicalScribeListeningSessionOutput()
 StartPatientInsightsJobInput()
 StartPatientInsightsJobOutput(job_arn=_, job_id=_)
+SubmitFeedbackInput()
+SubmitFeedbackOutput()
 SubscriptionDescription(
     domain_id=_, subscription_id=_, arn=_, status=_, created_at=_, last_updated_at=_
 )
@@ -192,34 +274,49 @@ UntagResourceOutput()
 UserContext(role=_, user_id=_)
 WebAppConfiguration(ehr_role=_, idc_application_id=_, idc_region=_)
 _params_0: ActivateSubscriptionInputDict = {"domain_id": _, "subscription_id": _}
-_params_1: CreateDomainInputDict = {"name": _}
-_params_2: CreateSubscriptionInputDict = {"domain_id": _}
-_params_3: CreateWebAppConfigurationDict = {
+_params_1: CreateDatasetInputDict = {"domain_id": _, "name": _, "config": _}
+_params_2: CreateDomainInputDict = {"name": _}
+_params_3: CreateSubscriptionInputDict = {"domain_id": _}
+_params_4: CreateWebAppConfigurationDict = {
     "ehr_role": _,
     "idc_instance_id": _,
     "idc_region": _,
 }
-_params_4: DeactivateSubscriptionInputDict = {"domain_id": _, "subscription_id": _}
-_params_5: DeleteDomainInputDict = {"domain_id": _}
-_params_6: FHIRServerDict = {"fhir_endpoint": _}
-_params_7: GetDomainInputDict = {"domain_id": _}
-_params_8: GetMedicalScribeListeningSessionInputDict = {
+_params_5: DatasetConfigDict = {"medical_coding": _}
+_params_6: DeactivateSubscriptionInputDict = {"domain_id": _, "subscription_id": _}
+_params_7: DeleteDatasetInputDict = {"domain_id": _, "dataset_id": _}
+_params_8: DeleteDomainInputDict = {"domain_id": _}
+_params_9: FHIRServerDict = {"fhir_endpoint": _}
+_params_10: GetDatasetInputDict = {"domain_id": _, "dataset_id": _}
+_params_11: GetDomainInputDict = {"domain_id": _}
+_params_12: GetMedicalCodingJobInputDict = {"domain_id": _, "job_id": _}
+_params_13: GetMedicalScribeListeningSessionInputDict = {
     "session_id": _,
     "domain_id": _,
     "subscription_id": _,
 }
-_params_9: GetPatientInsightsJobInputDict = {"domain_id": _, "job_id": _}
-_params_10: GetSubscriptionInputDict = {"domain_id": _, "subscription_id": _}
-_params_11: InputDataConfigDict = {}
-_params_12: InsightsContextDict = {"insights_type": _}
-_params_13: ListDomainsInputDict = {}
-_params_14: ListSubscriptionsInputDict = {"domain_id": _}
-_params_15: ListTagsForResourceInputDict = {"resource_arn": _}
-_params_16: OutputDataConfigDict = {"s3_output_path": _}
-_params_17: PatientInsightsEncounterContextDict = {"encounter_reason": _}
-_params_18: PatientInsightsPatientContextDict = {"patient_id": _}
-_params_19: S3SourceDict = {"uri": _}
-_params_20: StartMedicalScribeListeningSessionInputDict = {
+_params_14: GetPatientInsightsJobInputDict = {"domain_id": _, "job_id": _}
+_params_15: GetSubscriptionInputDict = {"domain_id": _, "subscription_id": _}
+_params_16: InputDataConfigDict = {}
+_params_17: InsightsContextDict = {"insights_type": _}
+_params_18: ListDatasetsInputDict = {"domain_id": _}
+_params_19: ListDomainsInputDict = {}
+_params_20: ListSubscriptionsInputDict = {"domain_id": _}
+_params_21: ListTagsForResourceInputDict = {"resource_arn": _}
+_params_22: MedicalCodesEncounterContextDict = {}
+_params_23: MedicalCodesPatientContextDict = {}
+_params_24: MedicalCodingDatasetConfigDict = {"s3_input_path": _, "s3_output_path": _}
+_params_25: MedicalCodingOutputDataConfigDict = {"s3_output_path": _}
+_params_26: OutputDataConfigDict = {"s3_output_path": _}
+_params_27: PatientInsightsEncounterContextDict = {"encounter_reason": _}
+_params_28: PatientInsightsPatientContextDict = {"patient_id": _}
+_params_29: S3SourceDict = {"uri": _}
+_params_30: StartMedicalCodingJobInputDict = {
+    "domain_id": _,
+    "text": _,
+    "output_data_config": _,
+}
+_params_31: StartMedicalScribeListeningSessionInputDict = {
     "session_id": _,
     "domain_id": _,
     "subscription_id": _,
@@ -227,7 +324,7 @@ _params_20: StartMedicalScribeListeningSessionInputDict = {
     "media_sample_rate_hertz": _,
     "media_encoding": _,
 }
-_params_21: StartPatientInsightsJobInputDict = {
+_params_32: StartPatientInsightsJobInputDict = {
     "domain_id": _,
     "patient_context": _,
     "insights_context": _,
@@ -236,9 +333,15 @@ _params_21: StartPatientInsightsJobInputDict = {
     "input_data_config": _,
     "output_data_config": _,
 }
-_params_22: TagResourceInputDict = {"resource_arn": _, "tags": _}
-_params_23: UntagResourceInputDict = {"resource_arn": _, "tag_keys": _}
-_params_24: UserContextDict = {"role": _, "user_id": _}
+_params_33: SubmitFeedbackInputDict = {
+    "domain_id": _,
+    "artifact_source_id": _,
+    "artifact_type": _,
+    "signed_artifact_s3_uri": _,
+}
+_params_34: TagResourceInputDict = {"resource_arn": _, "tags": _}
+_params_35: UntagResourceInputDict = {"resource_arn": _, "tag_keys": _}
+_params_36: UserContextDict = {"role": _, "user_id": _}
 
 
 def _request[T](form: type[T]) -> T:
@@ -251,6 +354,10 @@ async def check_async_calls(client: AsyncConnectHealthClient) -> None:
     await client.activate_subscription(**_request(ActivateSubscriptionInputDict))
     await client.activate_subscription(_request(ActivateSubscriptionInput))
     await client.activate_subscription(_request(ActivateSubscriptionInputDict))
+    await client.create_dataset(domain_id=_, name=_, config=_)
+    await client.create_dataset(**_request(CreateDatasetInputDict))
+    await client.create_dataset(_request(CreateDatasetInput))
+    await client.create_dataset(_request(CreateDatasetInputDict))
     await client.create_domain(name=_)
     await client.create_domain(**_request(CreateDomainInputDict))
     await client.create_domain(_request(CreateDomainInput))
@@ -263,14 +370,26 @@ async def check_async_calls(client: AsyncConnectHealthClient) -> None:
     await client.deactivate_subscription(**_request(DeactivateSubscriptionInputDict))
     await client.deactivate_subscription(_request(DeactivateSubscriptionInput))
     await client.deactivate_subscription(_request(DeactivateSubscriptionInputDict))
+    await client.delete_dataset(domain_id=_, dataset_id=_)
+    await client.delete_dataset(**_request(DeleteDatasetInputDict))
+    await client.delete_dataset(_request(DeleteDatasetInput))
+    await client.delete_dataset(_request(DeleteDatasetInputDict))
     await client.delete_domain(domain_id=_)
     await client.delete_domain(**_request(DeleteDomainInputDict))
     await client.delete_domain(_request(DeleteDomainInput))
     await client.delete_domain(_request(DeleteDomainInputDict))
+    await client.get_dataset(domain_id=_, dataset_id=_)
+    await client.get_dataset(**_request(GetDatasetInputDict))
+    await client.get_dataset(_request(GetDatasetInput))
+    await client.get_dataset(_request(GetDatasetInputDict))
     await client.get_domain(domain_id=_)
     await client.get_domain(**_request(GetDomainInputDict))
     await client.get_domain(_request(GetDomainInput))
     await client.get_domain(_request(GetDomainInputDict))
+    await client.get_medical_coding_job(domain_id=_, job_id=_)
+    await client.get_medical_coding_job(**_request(GetMedicalCodingJobInputDict))
+    await client.get_medical_coding_job(_request(GetMedicalCodingJobInput))
+    await client.get_medical_coding_job(_request(GetMedicalCodingJobInputDict))
     await client.get_medical_scribe_listening_session(
         session_id=_, domain_id=_, subscription_id=_
     )
@@ -291,6 +410,10 @@ async def check_async_calls(client: AsyncConnectHealthClient) -> None:
     await client.get_subscription(**_request(GetSubscriptionInputDict))
     await client.get_subscription(_request(GetSubscriptionInput))
     await client.get_subscription(_request(GetSubscriptionInputDict))
+    await client.list_datasets(domain_id=_)
+    await client.list_datasets(**_request(ListDatasetsInputDict))
+    await client.list_datasets(_request(ListDatasetsInput))
+    await client.list_datasets(_request(ListDatasetsInputDict))
     await client.list_domains()
     await client.list_domains(**_request(ListDomainsInputDict))
     await client.list_domains(_request(ListDomainsInput))
@@ -303,6 +426,10 @@ async def check_async_calls(client: AsyncConnectHealthClient) -> None:
     await client.list_tags_for_resource(**_request(ListTagsForResourceInputDict))
     await client.list_tags_for_resource(_request(ListTagsForResourceInput))
     await client.list_tags_for_resource(_request(ListTagsForResourceInputDict))
+    await client.start_medical_coding_job(domain_id=_, text=_, output_data_config=_)
+    await client.start_medical_coding_job(**_request(StartMedicalCodingJobInputDict))
+    await client.start_medical_coding_job(_request(StartMedicalCodingJobInput))
+    await client.start_medical_coding_job(_request(StartMedicalCodingJobInputDict))
     await client.start_medical_scribe_listening_session(
         session_id=_,
         domain_id=_,
@@ -334,6 +461,12 @@ async def check_async_calls(client: AsyncConnectHealthClient) -> None:
     )
     await client.start_patient_insights_job(_request(StartPatientInsightsJobInput))
     await client.start_patient_insights_job(_request(StartPatientInsightsJobInputDict))
+    await client.submit_feedback(
+        domain_id=_, artifact_source_id=_, artifact_type=_, signed_artifact_s3_uri=_
+    )
+    await client.submit_feedback(**_request(SubmitFeedbackInputDict))
+    await client.submit_feedback(_request(SubmitFeedbackInput))
+    await client.submit_feedback(_request(SubmitFeedbackInputDict))
     await client.tag_resource(resource_arn=_, tags=_)
     await client.tag_resource(**_request(TagResourceInputDict))
     await client.tag_resource(_request(TagResourceInput))
@@ -350,6 +483,10 @@ def check_sync_calls(client: ConnectHealthClient) -> None:
     client.activate_subscription(**_request(ActivateSubscriptionInputDict))
     client.activate_subscription(_request(ActivateSubscriptionInput))
     client.activate_subscription(_request(ActivateSubscriptionInputDict))
+    client.create_dataset(domain_id=_, name=_, config=_)
+    client.create_dataset(**_request(CreateDatasetInputDict))
+    client.create_dataset(_request(CreateDatasetInput))
+    client.create_dataset(_request(CreateDatasetInputDict))
     client.create_domain(name=_)
     client.create_domain(**_request(CreateDomainInputDict))
     client.create_domain(_request(CreateDomainInput))
@@ -362,14 +499,26 @@ def check_sync_calls(client: ConnectHealthClient) -> None:
     client.deactivate_subscription(**_request(DeactivateSubscriptionInputDict))
     client.deactivate_subscription(_request(DeactivateSubscriptionInput))
     client.deactivate_subscription(_request(DeactivateSubscriptionInputDict))
+    client.delete_dataset(domain_id=_, dataset_id=_)
+    client.delete_dataset(**_request(DeleteDatasetInputDict))
+    client.delete_dataset(_request(DeleteDatasetInput))
+    client.delete_dataset(_request(DeleteDatasetInputDict))
     client.delete_domain(domain_id=_)
     client.delete_domain(**_request(DeleteDomainInputDict))
     client.delete_domain(_request(DeleteDomainInput))
     client.delete_domain(_request(DeleteDomainInputDict))
+    client.get_dataset(domain_id=_, dataset_id=_)
+    client.get_dataset(**_request(GetDatasetInputDict))
+    client.get_dataset(_request(GetDatasetInput))
+    client.get_dataset(_request(GetDatasetInputDict))
     client.get_domain(domain_id=_)
     client.get_domain(**_request(GetDomainInputDict))
     client.get_domain(_request(GetDomainInput))
     client.get_domain(_request(GetDomainInputDict))
+    client.get_medical_coding_job(domain_id=_, job_id=_)
+    client.get_medical_coding_job(**_request(GetMedicalCodingJobInputDict))
+    client.get_medical_coding_job(_request(GetMedicalCodingJobInput))
+    client.get_medical_coding_job(_request(GetMedicalCodingJobInputDict))
     client.get_medical_scribe_listening_session(
         session_id=_, domain_id=_, subscription_id=_
     )
@@ -390,6 +539,10 @@ def check_sync_calls(client: ConnectHealthClient) -> None:
     client.get_subscription(**_request(GetSubscriptionInputDict))
     client.get_subscription(_request(GetSubscriptionInput))
     client.get_subscription(_request(GetSubscriptionInputDict))
+    client.list_datasets(domain_id=_)
+    client.list_datasets(**_request(ListDatasetsInputDict))
+    client.list_datasets(_request(ListDatasetsInput))
+    client.list_datasets(_request(ListDatasetsInputDict))
     client.list_domains()
     client.list_domains(**_request(ListDomainsInputDict))
     client.list_domains(_request(ListDomainsInput))
@@ -402,6 +555,10 @@ def check_sync_calls(client: ConnectHealthClient) -> None:
     client.list_tags_for_resource(**_request(ListTagsForResourceInputDict))
     client.list_tags_for_resource(_request(ListTagsForResourceInput))
     client.list_tags_for_resource(_request(ListTagsForResourceInputDict))
+    client.start_medical_coding_job(domain_id=_, text=_, output_data_config=_)
+    client.start_medical_coding_job(**_request(StartMedicalCodingJobInputDict))
+    client.start_medical_coding_job(_request(StartMedicalCodingJobInput))
+    client.start_medical_coding_job(_request(StartMedicalCodingJobInputDict))
     client.start_patient_insights_job(
         domain_id=_,
         patient_context=_,
@@ -414,6 +571,12 @@ def check_sync_calls(client: ConnectHealthClient) -> None:
     client.start_patient_insights_job(**_request(StartPatientInsightsJobInputDict))
     client.start_patient_insights_job(_request(StartPatientInsightsJobInput))
     client.start_patient_insights_job(_request(StartPatientInsightsJobInputDict))
+    client.submit_feedback(
+        domain_id=_, artifact_source_id=_, artifact_type=_, signed_artifact_s3_uri=_
+    )
+    client.submit_feedback(**_request(SubmitFeedbackInputDict))
+    client.submit_feedback(_request(SubmitFeedbackInput))
+    client.submit_feedback(_request(SubmitFeedbackInputDict))
     client.tag_resource(resource_arn=_, tags=_)
     client.tag_resource(**_request(TagResourceInputDict))
     client.tag_resource(_request(TagResourceInput))

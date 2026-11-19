@@ -42,6 +42,7 @@ _sI = "subnetId"
 _As = "Associations"
 _OIw = "OwnerId"
 _oI = "ownerId"
+_en = "enabled"
 _mo = "modifying"
 _C = "Code"
 _co = "code"
@@ -57,6 +58,9 @@ _CB = "CidrBlock"
 _cB = "cidrBlock"
 _ICB = "Ipv6CidrBlock"
 _iCB = "ipv6CidrBlock"
+_PENDING = "PENDING"
+_ENABLED = "ENABLED"
+_DISABLED = "DISABLED"
 _PR = "PortRange"
 _ci = "cidr"
 _Eg = "Egress"
@@ -69,15 +73,11 @@ _rA = "ruleAction"
 _RN = "RuleNumber"
 _rN = "ruleNumber"
 _AZ = "AvailabilityZone"
-_aZ = "availabilityZone"
 _AZI = "AvailabilityZoneId"
-_aZI = "availabilityZoneId"
 _II = "InstanceId"
 _iI = "instanceId"
 _NGI = "NatGatewayId"
 _nGI = "natGatewayId"
-_NII = "NetworkInterfaceId"
-_nII = "networkInterfaceId"
 _SGI = "SecurityGroupId"
 _SPR = "SourcePortRange"
 _sPR = "sourcePortRange"
@@ -96,7 +96,6 @@ _so = "source"
 _SAou = "SourceAddress"
 _DAe = "DestinationAddress"
 _DPe = "DestinationPort"
-_ena = "enabled"
 _la = "lambda"
 _acc = "account"
 _Des = "Description"
@@ -111,10 +110,10 @@ _cI = "carrierIp"
 _prov = "provisioned"
 _desc = "description"
 _def = "default"
-_OA = "OutpostArn"
 _CTl = "ClientToken"
 _cTl = "clientToken"
 _sT = "smithy.api#idempotencyToken"
+_AIl = "AllocationIds"
 _IPC = "Ipv6PrefixCount"
 _IPp = "Ipv6Prefixes"
 _IPpv = "Ipv6Prefix"
@@ -148,8 +147,8 @@ _eEA = "expectedEffectiveAt"
 _RTIo = "RouteTableId"
 _rTIo = "routeTableId"
 _GIr = "GroupId"
-_Ass = "Association"
-_assoc = "association"
+_pu = "public"
+_priv = "private"
 _gIr = "groupId"
 _G = "Groups"
 _ESUS = "EnaSrdUdpSpecification"
@@ -169,8 +168,6 @@ _DOT = "DeleteOnTermination"
 _dOT = "deleteOnTermination"
 _ATtt = "AttachTime"
 _aTtt = "attachTime"
-_At = "Attachment"
-_atta = "attachment"
 _GN = "GroupName"
 _gN = "groupName"
 _FP = "FromPort"
@@ -181,28 +178,24 @@ _MODIFYING = "MODIFYING"
 _compl = "completed"
 _iu = "in_use"
 _iu_ = "in-use"
-_oAu = "outpostArn"
 _Op = "Operator"
-_ope = "operator"
 _CTr = "CreateTime"
 _cTr = "createTime"
-_req = "requested"
+_PRIVATE = "PRIVATE"
+_reque = "requested"
 _Ty = "Type"
 _ty = "type"
-_IN = "Ipv6Native"
-_iN = "ipv6Native"
-_DISABLED = "DISABLED"
-_ENABLED = "ENABLED"
+_REGIONAL = "REGIONAL"
+_regi = "regional"
 _CAr = "CreatedAt"
 _cAr = "createdAt"
 _ec__ = "ec2"
 _eni = "eni"
+_MCI = "MetricCategoryId"
 _TET = "TcpEstablishedTimeout"
 _UST = "UdpStreamTimeout"
 _UTd = "UdpTimeout"
 _IApv = "Ipv6Address"
-_Prim = "Primary"
-_prim = "primary"
 _ITnte = "InterfaceType"
 _CTSo = "ConnectionTrackingSpecification"
 _tET = "tcpEstablishedTimeout"
@@ -215,22 +208,36 @@ _iApv = "ipv6Address"
 _IPIs = "IsPrimaryIpv6"
 _iPIs = "isPrimaryIpv6"
 _iPpvr = "ipv6Prefix"
-_GS = "GroupSet"
-_gS = "groupSet"
-_iTnt = "interfaceType"
-_IAS = "Ipv6AddressesSet"
-_iAS = "ipv6AddressesSet"
-_PIASr = "PrivateIpAddressesSet"
-_pIAS = "privateIpAddressesSet"
-_IPSpv = "Ipv4PrefixSet"
-_iPS = "ipv4PrefixSet"
-_IPSpvr = "Ipv6PrefixSet"
-_iPSp = "ipv6PrefixSet"
 _eSS = "enaSrdSpecification"
 _eQC = "enaQueueCount"
 _Ent = "Entries"
+_MCMN = "MetricCategoryMetricName"
+_MCMNL = "MetricCategoryMetricNameList"
+_CMCI = "CreateMetricCategoryInput"
+_cCMCR = "com.amazonaws.ec2#CreateMetricCategoryRequest"
+_Met = "Metrics"
+_Metr = "Metric"
+_MCe = "MetricCategory"
+_mCI = "metricCategoryId"
+_MSe = "MetricSet"
+_mS = "metricSet"
+_CMCO = "CreateMetricCategoryOutput"
+_cCMCRo = "com.amazonaws.ec2#CreateMetricCategoryResult"
+_mCe = "metricCategory"
+_CMC = "CreateMetricCategory"
 _AMv = "AvailabilityMode"
+_ZONAL = "ZONAL"
+_zo = "zonal"
+_AZA = "AvailabilityZoneAddress"
+_AZAv = "AvailabilityZoneAddresses"
 _CTo = "ConnectivityType"
+_PUBLIC = "PUBLIC"
+_CNGI = "CreateNatGatewayInput"
+_cCNGR = "com.amazonaws.ec2#CreateNatGatewayRequest"
+_SAI = "SecondaryAllocationIds"
+_SAIe = "SecondaryAllocationId"
+_SPIA = "SecondaryPrivateIpAddresses"
+_SPIAe = "SecondaryPrivateIpAddress"
 _NGASat = "NatGatewayApplianceState"
 _ATTACHING = "ATTACHING"
 _ATTACHED = "ATTACHED"
@@ -262,9 +269,8 @@ _pTr = "provisionTime"
 _Prov = "Provisioned"
 _RTeq = "RequestTime"
 _rTeq = "requestTime"
-_Req = "Requested"
+_Requ = "Requested"
 _NGS = "NatGatewayState"
-_PENDING = "PENDING"
 _AVAILABLE = "AVAILABLE"
 _DELETING = "DELETING"
 _DELETED = "DELETED"
@@ -280,6 +286,9 @@ _aPZ = "autoProvisionZones"
 _AAt = "AttachedAppliances"
 _AASt = "AttachedApplianceSet"
 _aASt = "attachedApplianceSet"
+_CNGO = "CreateNatGatewayOutput"
+_cCNGRo = "com.amazonaws.ec2#CreateNatGatewayResult"
+_CNG = "CreateNatGateway"
 _CNAI = "CreateNetworkAclInput"
 _cCNAR = "com.amazonaws.ec2#CreateNetworkAclRequest"
 _NAA = "NetworkAclAssociation"
@@ -443,37 +452,153 @@ _pIDN = "publicIpv6DnsName"
 _NIIAL = "NetworkInterfaceIpv6AddressesList"
 _IPSpvre = "Ipv6PrefixSpecification"
 _IPLpvre = "Ipv6PrefixesList"
-_NIPIA = "NetworkInterfacePrivateIpAddress"
-_PDNr = "PrivateDnsName"
-_pDNr = "privateDnsName"
-_NIPIAL = "NetworkInterfacePrivateIpAddressList"
-_PIDNO = "PublicIpDnsNameOptions"
-_DHT = "DnsHostnameType"
-_dHT = "dnsHostnameType"
-_PIDNu = "PublicIpv4DnsName"
-_pIDNu = "publicIpv4DnsName"
-_PDSDN = "PublicDualStackDnsName"
-_pDSDN = "publicDualStackDnsName"
 _NISe = "NetworkInterfaceStatus"
-_cTC = "connectionTrackingConfiguration"
-_MAa = "MacAddress"
-_mAa = "macAddress"
-_pIDNO = "publicIpDnsNameOptions"
-_RIeq = "RequesterId"
-_rIeq = "requesterId"
-_RMe = "RequesterManaged"
-_rMe = "requesterManaged"
-_SDC = "SourceDestCheck"
-_sDC = "sourceDestCheck"
-_DAIT = "DenyAllIgwTraffic"
-_dAIT = "denyAllIgwTraffic"
-_ASssoc = "AssociatedSubnets"
-_ASSs = "AssociatedSubnetSet"
-_aSSs = "associatedSubnetSet"
 _CNIO = "CreateNetworkInterfaceOutput"
 _cCNIRo = "com.amazonaws.ec2#CreateNetworkInterfaceResult"
 _CNIr = "CreateNetworkInterface"
 _FCAPVN = "FlexCostAllocationPolicyVersionNumber"
+
+METRIC_CATEGORY_METRIC_NAME: StaticSchema = (3, n0, _MCMN, 0)
+
+METRIC_CATEGORY_METRIC_NAME_LIST: StaticSchema = (
+    16,
+    n0,
+    _MCMNL,
+    0,
+    (_me,),
+    ((METRIC_CATEGORY_METRIC_NAME, {_sN: _i}),),
+)
+
+CREATE_METRIC_CATEGORY_INPUT: StaticSchema = (
+    18,
+    n0,
+    _CMCI,
+    {_sSI: _cCMCR, _sm: None},
+    (_Met, _TSa, _CTl, _DR),
+    (
+        (METRIC_CATEGORY_METRIC_NAME_LIST, {_sN: _Metr, _sO: None, _smi: None}),
+        (lambda: schemas.TAG_SPECIFICATION_LIST, {_sN: _TS}),
+        (lambda: schemas.STRING, 2),
+        (lambda: schemas.BOOLEAN, 0),
+    ),
+)
+
+CREATE_METRIC_CATEGORY_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _CMCO,
+    {_sSI: _cCMCRo, _smit: None},
+    (_MCe,),
+    ((lambda: METRIC_CATEGORY, {_aQN: _MCe, _sN: _mCe}),),
+)
+
+CREATE_METRIC_CATEGORY: StaticOperationSchema = (
+    23,
+    n0,
+    _CMC,
+    0,
+    CREATE_METRIC_CATEGORY_INPUT,
+    CREATE_METRIC_CATEGORY_OUTPUT,
+    (),
+)
+
+METRIC_CATEGORY: StaticSchema = (
+    18,
+    n0,
+    _MCe,
+    0,
+    (_MCI, _Met, _Tag),
+    (
+        (lambda: schemas.METRIC_CATEGORY_ID, {_aQN: _MCI, _sN: _mCI}),
+        (METRIC_CATEGORY_METRIC_NAME_LIST, {_aQN: _MSe, _sN: _mS}),
+        (lambda: schemas.TAG_LIST, {_aQN: _TSag, _sN: _tS}),
+    ),
+)
+
+AVAILABILITY_MODE: StaticSchema = (
+    14,
+    n0,
+    _AMv,
+    0,
+    (_ZONAL, _REGIONAL),
+    ((-1, {_sV: _zo}), (-1, {_sV: _regi})),
+)
+
+AVAILABILITY_ZONE_ADDRESS: StaticSchema = (
+    18,
+    n0,
+    _AZA,
+    0,
+    (_AZ, _AZI, _AIl),
+    (
+        (lambda: schemas.AVAILABILITY_ZONE_NAME, 0),
+        (lambda: schemas.AVAILABILITY_ZONE_ID, 0),
+        (lambda: schemas.ALLOCATION_ID_LIST, {_sN: _AI}),
+    ),
+)
+
+AVAILABILITY_ZONE_ADDRESSES: StaticSchema = (
+    16,
+    n0,
+    _AZAv,
+    0,
+    (_me,),
+    ((AVAILABILITY_ZONE_ADDRESS, {_sN: _AZA}),),
+)
+
+CONNECTIVITY_TYPE: StaticSchema = (
+    14,
+    n0,
+    _CTo,
+    0,
+    (_PRIVATE, _PUBLIC),
+    ((-1, {_sV: _priv}), (-1, {_sV: _pu})),
+)
+
+CREATE_NAT_GATEWAY_INPUT: StaticSchema = (
+    18,
+    n0,
+    _CNGI,
+    {_sSI: _cCNGR, _sm: None},
+    (_AMv, _AI, _CTl, _DR, _SIu, _VI, _AZAv, _TSa, _CTo, _PIAr, _SAI, _SPIA, _SPIAC),
+    (
+        (AVAILABILITY_MODE, 0),
+        (lambda: schemas.ALLOCATION_ID, 0),
+        (lambda: schemas.STRING, 2),
+        (lambda: schemas.BOOLEAN, 0),
+        (lambda: schemas.SUBNET_ID, 0),
+        (lambda: schemas.VPC_ID, 0),
+        (AVAILABILITY_ZONE_ADDRESSES, {_sN: _AZA}),
+        (lambda: schemas.TAG_SPECIFICATION_LIST, {_sN: _TS}),
+        (CONNECTIVITY_TYPE, 0),
+        (lambda: schemas.STRING, 0),
+        (lambda: schemas.ALLOCATION_ID_LIST, {_sN: _SAIe}),
+        (lambda: schemas.IP_LIST, {_sN: _SPIAe}),
+        (lambda: schemas.PRIVATE_IP_ADDRESS_COUNT, 0),
+    ),
+)
+
+CREATE_NAT_GATEWAY_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _CNGO,
+    {_sSI: _cCNGRo, _smit: None},
+    (_CTl, _NG),
+    (
+        (lambda: schemas.STRING, {_aQN: _CTl, _sN: _cTl}),
+        (lambda: NAT_GATEWAY, {_aQN: _NG, _sN: _nG}),
+    ),
+)
+
+CREATE_NAT_GATEWAY: StaticOperationSchema = (
+    23,
+    n0,
+    _CNG,
+    0,
+    CREATE_NAT_GATEWAY_INPUT,
+    CREATE_NAT_GATEWAY_OUTPUT,
+    (),
+)
 
 NAT_GATEWAY_APPLIANCE_STATE: StaticSchema = (
     14,
@@ -541,7 +666,7 @@ AUTO_PROVISION_ZONES_STATE: StaticSchema = (
     _APZS,
     0,
     (_ENABLED, _DISABLED),
-    ((-1, {_sV: _ena}), (-1, {_sV: _d})),
+    ((-1, {_sV: _en}), (-1, {_sV: _d})),
 )
 
 AUTO_SCALING_IPS_STATE: StaticSchema = (
@@ -550,7 +675,7 @@ AUTO_SCALING_IPS_STATE: StaticSchema = (
     _ASIS,
     0,
     (_ENABLED, _DISABLED),
-    ((-1, {_sV: _ena}), (-1, {_sV: _d})),
+    ((-1, {_sV: _en}), (-1, {_sV: _d})),
 )
 
 PROVISIONED_BANDWIDTH: StaticSchema = (
@@ -558,12 +683,12 @@ PROVISIONED_BANDWIDTH: StaticSchema = (
     n0,
     _PB,
     0,
-    (_PTro, _Prov, _RTeq, _Req, _Sta),
+    (_PTro, _Prov, _RTeq, _Requ, _Sta),
     (
         (lambda: schemas.DATE_TIME, {_aQN: _PTro, _sN: _pTr}),
         (lambda: schemas.STRING, {_aQN: _Prov, _sN: _prov}),
         (lambda: schemas.DATE_TIME, {_aQN: _RTeq, _sN: _rTeq}),
-        (lambda: schemas.STRING, {_aQN: _Req, _sN: _req}),
+        (lambda: schemas.STRING, {_aQN: _Requ, _sN: _reque}),
         (lambda: schemas.STRING, {_aQN: _Sta, _sN: _sta}),
     ),
 )
@@ -619,8 +744,8 @@ NAT_GATEWAY: StaticSchema = (
         (lambda: schemas.STRING, {_aQN: _SIu, _sN: _sI}),
         (lambda: schemas.STRING, {_aQN: _VI, _sN: _vI}),
         (lambda: schemas.TAG_LIST, {_aQN: _TSag, _sN: _tS}),
-        (lambda: schemas.CONNECTIVITY_TYPE, {_aQN: _CTo, _sN: _cTo}),
-        (lambda: schemas.AVAILABILITY_MODE, {_aQN: _AMv, _sN: _aMv}),
+        (CONNECTIVITY_TYPE, {_aQN: _CTo, _sN: _cTo}),
+        (AVAILABILITY_MODE, {_aQN: _AMv, _sN: _aMv}),
         (AUTO_SCALING_IPS_STATE, {_aQN: _ASI, _sN: _aSI}),
         (AUTO_PROVISION_ZONES_STATE, {_aQN: _APZ, _sN: _aPZ}),
         (NAT_GATEWAY_ATTACHED_APPLIANCE_LIST, {_aQN: _AASt, _sN: _aASt}),
@@ -1217,7 +1342,7 @@ CREATE_NETWORK_INTERFACE_OUTPUT: StaticSchema = (
     {_sSI: _cCNIRo, _smit: None},
     (_NI, _CTl),
     (
-        (lambda: NETWORK_INTERFACE, {_aQN: _NI, _sN: _nI}),
+        (lambda: schemas.NETWORK_INTERFACE, {_aQN: _NI, _sN: _nI}),
         (lambda: schemas.STRING, {_aQN: _CTl, _sN: _cTl}),
     ),
 )
@@ -1420,43 +1545,6 @@ IPV6_PREFIXES_LIST: StaticSchema = (
     ((IPV6_PREFIX_SPECIFICATION, {_sN: _i}),),
 )
 
-NETWORK_INTERFACE_PRIVATE_IP_ADDRESS: StaticSchema = (
-    18,
-    n0,
-    _NIPIA,
-    0,
-    (_Ass, _Prim, _PDNr, _PIAr),
-    (
-        (NETWORK_INTERFACE_ASSOCIATION, {_aQN: _Ass, _sN: _assoc}),
-        (lambda: schemas.BOOLEAN, {_aQN: _Prim, _sN: _prim}),
-        (lambda: schemas.STRING, {_aQN: _PDNr, _sN: _pDNr}),
-        (lambda: schemas.STRING, {_aQN: _PIAr, _sN: _pIAr}),
-    ),
-)
-
-NETWORK_INTERFACE_PRIVATE_IP_ADDRESS_LIST: StaticSchema = (
-    16,
-    n0,
-    _NIPIAL,
-    0,
-    (_me,),
-    ((NETWORK_INTERFACE_PRIVATE_IP_ADDRESS, {_sN: _i}),),
-)
-
-PUBLIC_IP_DNS_NAME_OPTIONS: StaticSchema = (
-    18,
-    n0,
-    _PIDNO,
-    0,
-    (_DHT, _PIDNu, _PIDN, _PDSDN),
-    (
-        (lambda: schemas.STRING, {_aQN: _DHT, _sN: _dHT}),
-        (lambda: schemas.STRING, {_aQN: _PIDNu, _sN: _pIDNu}),
-        (lambda: schemas.STRING, {_aQN: _PIDN, _sN: _pIDN}),
-        (lambda: schemas.STRING, {_aQN: _PDSDN, _sN: _pDSDN}),
-    ),
-)
-
 NETWORK_INTERFACE_STATUS: StaticSchema = (
     14,
     n0,
@@ -1469,81 +1557,6 @@ NETWORK_INTERFACE_STATUS: StaticSchema = (
         (-1, {_sV: _at}),
         (-1, {_sV: _iu_}),
         (-1, {_sV: _det}),
-    ),
-)
-
-NETWORK_INTERFACE: StaticSchema = (
-    18,
-    n0,
-    _NI,
-    0,
-    (
-        _Ass,
-        _At,
-        _AZ,
-        _CTC,
-        _Des,
-        _G,
-        _ITnte,
-        _IAp,
-        _MAa,
-        _NII,
-        _OA,
-        _OIw,
-        _PDNr,
-        _PDNu,
-        _PIDNO,
-        _PIAr,
-        _PIAri,
-        _IPpvr,
-        _IPp,
-        _RIeq,
-        _RMe,
-        _SDC,
-        _Sta,
-        _SIu,
-        _TSag,
-        _VI,
-        _DAIT,
-        _IN,
-        _IApv,
-        _Op,
-        _ASssoc,
-        _AZI,
-    ),
-    (
-        (NETWORK_INTERFACE_ASSOCIATION, {_aQN: _Ass, _sN: _assoc}),
-        (NETWORK_INTERFACE_ATTACHMENT, {_aQN: _At, _sN: _atta}),
-        (lambda: schemas.STRING, {_aQN: _AZ, _sN: _aZ}),
-        (CONNECTION_TRACKING_CONFIGURATION, {_aQN: _CTC, _sN: _cTC}),
-        (lambda: schemas.STRING, {_aQN: _Des, _sN: _desc}),
-        (GROUP_IDENTIFIER_LIST, {_aQN: _GS, _sN: _gS}),
-        (NETWORK_INTERFACE_TYPE, {_aQN: _ITnte, _sN: _iTnt}),
-        (NETWORK_INTERFACE_IPV6_ADDRESSES_LIST, {_aQN: _IAS, _sN: _iAS}),
-        (lambda: schemas.STRING, {_aQN: _MAa, _sN: _mAa}),
-        (lambda: schemas.STRING, {_aQN: _NII, _sN: _nII}),
-        (lambda: schemas.STRING, {_aQN: _OA, _sN: _oAu}),
-        (lambda: schemas.STRING, {_aQN: _OIw, _sN: _oI}),
-        (lambda: schemas.STRING, {_aQN: _PDNr, _sN: _pDNr}),
-        (lambda: schemas.STRING, {_aQN: _PDNu, _sN: _pDNu}),
-        (PUBLIC_IP_DNS_NAME_OPTIONS, {_aQN: _PIDNO, _sN: _pIDNO}),
-        (lambda: schemas.STRING, {_aQN: _PIAr, _sN: _pIAr}),
-        (NETWORK_INTERFACE_PRIVATE_IP_ADDRESS_LIST, {_aQN: _PIASr, _sN: _pIAS}),
-        (lambda: schemas.IPV4_PREFIXES_LIST, {_aQN: _IPSpv, _sN: _iPS}),
-        (IPV6_PREFIXES_LIST, {_aQN: _IPSpvr, _sN: _iPSp}),
-        (lambda: schemas.STRING, {_aQN: _RIeq, _sN: _rIeq}),
-        (lambda: schemas.BOOLEAN, {_aQN: _RMe, _sN: _rMe}),
-        (lambda: schemas.BOOLEAN, {_aQN: _SDC, _sN: _sDC}),
-        (NETWORK_INTERFACE_STATUS, {_aQN: _Sta, _sN: _sta}),
-        (lambda: schemas.STRING, {_aQN: _SIu, _sN: _sI}),
-        (lambda: schemas.TAG_LIST, {_aQN: _TSag, _sN: _tS}),
-        (lambda: schemas.STRING, {_aQN: _VI, _sN: _vI}),
-        (lambda: schemas.BOOLEAN, {_aQN: _DAIT, _sN: _dAIT}),
-        (lambda: schemas.BOOLEAN, {_aQN: _IN, _sN: _iN}),
-        (lambda: schemas.STRING, {_aQN: _IApv, _sN: _iApv}),
-        (lambda: schemas.OPERATOR_RESPONSE, {_aQN: _Op, _sN: _ope}),
-        (ASSOCIATED_SUBNET_LIST, {_aQN: _ASSs, _sN: _aSSs}),
-        (lambda: schemas.STRING, {_aQN: _AZI, _sN: _aZI}),
     ),
 )
 

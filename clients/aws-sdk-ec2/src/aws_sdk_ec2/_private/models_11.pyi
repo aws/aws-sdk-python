@@ -10,21 +10,22 @@ from smithy_core.response import ResponseMetadata
 from smithy_core.types import UnknownEnumMixin
 
 from ..models import (
+    AssociatedKmsKey,
     AssociationStatus,
     BlockDeviceMapping,
     BlockDeviceMappingDict,
     BlockPublicAccessStates,
     ClientVpnConnectionStatus,
     EncryptionSupport,
+    Filter,
+    FilterDict,
     FleetSpotMaintenanceStrategies,
     FleetSpotMaintenanceStrategiesRequest,
     FleetSpotMaintenanceStrategiesRequestDict,
     GroupIdentifier,
     GroupIdentifierDict,
-    IKEVersionsListValue,
     IamInstanceProfileSpecification,
     IamInstanceProfileSpecificationDict,
-    InstanceMonitoring,
     InstanceNetworkInterfaceSpecification,
     InstanceNetworkInterfaceSpecificationDict,
     InstanceRequirements,
@@ -36,17 +37,11 @@ from ..models import (
     LaunchTemplateConfigDict,
     LoadBalancersConfig,
     LoadBalancersConfigDict,
-    NatGatewayAddress,
+    LocalGatewayRoute,
     NetworkInsightsAccessScopeAnalysis,
     NetworkInsightsAnalysis,
     PeeringAttachmentStatus,
     PeeringTgwInfo,
-    Phase1DHGroupNumbersListValue,
-    Phase1EncryptionAlgorithmsListValue,
-    Phase1IntegrityAlgorithmsListValue,
-    Phase2DHGroupNumbersListValue,
-    Phase2EncryptionAlgorithmsListValue,
-    Phase2IntegrityAlgorithmsListValue,
     PrivateDnsDetails,
     PrivateDnsNameConfiguration,
     PrivateDnsNameOptionsOnLaunch,
@@ -57,13 +52,848 @@ from ..models import (
     ResourceStatementRequestDict,
     S3Storage,
     S3StorageDict,
+    ScheduledInstancesBlockDeviceMapping,
+    ScheduledInstancesBlockDeviceMappingDict,
+    ScheduledInstancesIamInstanceProfile,
+    ScheduledInstancesIamInstanceProfileDict,
     UserBucket,
     UserBucketDetails,
     UserBucketDict,
     UserIdGroupPair,
-    VpnTunnelLogOptions,
     _SerdeShape,
 )
+
+@dataclass(kw_only=True)
+class ScheduledInstancesIpv6Address(_SerdeShape):
+    """Describes an IPv6 address."""
+
+    ipv6_address: str | None = ...
+    """The IPv6 address."""
+
+class ScheduledInstancesIpv6AddressDict(TypedDict, total=False):
+    """Dictionary form of `ScheduledInstancesIpv6Address`."""
+
+    ipv6_address: str | None
+    """The IPv6 address."""
+
+@dataclass(kw_only=True)
+class ScheduledInstancesLaunchSpecification(_SerdeShape):
+    """
+    Describes the launch specification for a Scheduled Instance.
+
+    If you are launching the Scheduled Instance in EC2-VPC, you must specify
+    the ID of the subnet. You can specify the subnet using either `SubnetId`
+    or `NetworkInterface`.
+    """
+
+    block_device_mappings: list[ScheduledInstancesBlockDeviceMapping] | None = ...
+    """The block device mapping entries."""
+    ebs_optimized: bool | None = ...
+    """
+    Indicates whether the instances are optimized for EBS I/O. This
+    optimization provides dedicated throughput to Amazon EBS and an
+    optimized configuration stack to provide optimal EBS I/O performance.
+    This optimization isn't available with all instance types. Additional
+    usage charges apply when using an EBS-optimized instance.
+
+    Default: `false`
+    """
+    iam_instance_profile: ScheduledInstancesIamInstanceProfile | None = ...
+    """The IAM instance profile."""
+    image_id: str | None = ...
+    """The ID of the Amazon Machine Image (AMI)."""
+    instance_type: str | None = ...
+    """The instance type."""
+    kernel_id: str | None = ...
+    """The ID of the kernel."""
+    key_name: str | None = ...
+    """The name of the key pair."""
+    monitoring: ScheduledInstancesMonitoring | None = ...
+    """Enable or disable monitoring for the instances."""
+    network_interfaces: list[ScheduledInstancesNetworkInterface] | None = ...
+    """The network interfaces."""
+    placement: ScheduledInstancesPlacement | None = ...
+    """The placement information."""
+    ramdisk_id: str | None = ...
+    """The ID of the RAM disk."""
+    security_group_ids: list[str] | None = ...
+    """The IDs of the security groups."""
+    subnet_id: str | None = ...
+    """The ID of the subnet in which to launch the instances."""
+    user_data: str | None = ...
+    """The base64-encoded MIME user data."""
+
+class ScheduledInstancesLaunchSpecificationDict(TypedDict, total=False):
+    """Dictionary form of `ScheduledInstancesLaunchSpecification`."""
+
+    block_device_mappings: (
+        Sequence[
+            ScheduledInstancesBlockDeviceMapping
+            | ScheduledInstancesBlockDeviceMappingDict
+        ]
+        | None
+    )
+    """The block device mapping entries."""
+    ebs_optimized: bool | None
+    """
+    Indicates whether the instances are optimized for EBS I/O. This
+    optimization provides dedicated throughput to Amazon EBS and an
+    optimized configuration stack to provide optimal EBS I/O performance.
+    This optimization isn't available with all instance types. Additional
+    usage charges apply when using an EBS-optimized instance.
+
+    Default: `false`
+    """
+    iam_instance_profile: (
+        ScheduledInstancesIamInstanceProfile
+        | ScheduledInstancesIamInstanceProfileDict
+        | None
+    )
+    """The IAM instance profile."""
+    image_id: Required[str]
+    """The ID of the Amazon Machine Image (AMI)."""
+    instance_type: str | None
+    """The instance type."""
+    kernel_id: str | None
+    """The ID of the kernel."""
+    key_name: str | None
+    """The name of the key pair."""
+    monitoring: ScheduledInstancesMonitoring | ScheduledInstancesMonitoringDict | None
+    """Enable or disable monitoring for the instances."""
+    network_interfaces: (
+        Sequence[
+            ScheduledInstancesNetworkInterface | ScheduledInstancesNetworkInterfaceDict
+        ]
+        | None
+    )
+    """The network interfaces."""
+    placement: ScheduledInstancesPlacement | ScheduledInstancesPlacementDict | None
+    """The placement information."""
+    ramdisk_id: str | None
+    """The ID of the RAM disk."""
+    security_group_ids: Sequence[str] | None
+    """The IDs of the security groups."""
+    subnet_id: str | None
+    """The ID of the subnet in which to launch the instances."""
+    user_data: str | None
+    """The base64-encoded MIME user data."""
+
+@dataclass(kw_only=True)
+class ScheduledInstancesMonitoring(_SerdeShape):
+    """Describes whether monitoring is enabled for a Scheduled Instance."""
+
+    enabled: bool | None = ...
+    """Indicates whether monitoring is enabled."""
+
+class ScheduledInstancesMonitoringDict(TypedDict, total=False):
+    """Dictionary form of `ScheduledInstancesMonitoring`."""
+
+    enabled: bool | None
+    """Indicates whether monitoring is enabled."""
+
+@dataclass(kw_only=True)
+class ScheduledInstancesNetworkInterface(_SerdeShape):
+    """Describes a network interface for a Scheduled Instance."""
+
+    associate_public_ip_address: bool | None = ...
+    """
+    Indicates whether to assign a public IPv4 address to instances launched
+    in a VPC. The public IPv4 address can only be assigned to a network
+    interface for eth0, and can only be assigned to a new network interface,
+    not an existing one. You cannot specify more than one network interface
+    in the request. If launching into a default subnet, the default value is
+    `true`.
+
+    Amazon Web Services charges for all public IPv4 addresses, including
+    public IPv4 addresses associated with running instances and Elastic IP
+    addresses. For more information, see the *Public IPv4 Address* tab on
+    the [Amazon VPC pricing page](http://aws.amazon.com/vpc/pricing/).
+    """
+    delete_on_termination: bool | None = ...
+    """
+    Indicates whether to delete the interface when the instance is
+    terminated.
+    """
+    description: str | None = ...
+    """The description."""
+    device_index: int | None = ...
+    """The index of the device for the network interface attachment."""
+    groups: list[str] | None = ...
+    """The IDs of the security groups."""
+    ipv6_address_count: int | None = ...
+    """
+    The number of IPv6 addresses to assign to the network interface. The
+    IPv6 addresses are automatically selected from the subnet range.
+    """
+    ipv6_addresses: list[ScheduledInstancesIpv6Address] | None = ...
+    """The specific IPv6 addresses from the subnet range."""
+    network_interface_id: str | None = ...
+    """The ID of the network interface."""
+    private_ip_address: str | None = ...
+    """The IPv4 address of the network interface within the subnet."""
+    private_ip_address_configs: (
+        list[ScheduledInstancesPrivateIpAddressConfig] | None
+    ) = ...
+    """The private IPv4 addresses."""
+    secondary_private_ip_address_count: int | None = ...
+    """The number of secondary private IPv4 addresses."""
+    subnet_id: str | None = ...
+    """The ID of the subnet."""
+
+class ScheduledInstancesNetworkInterfaceDict(TypedDict, total=False):
+    """Dictionary form of `ScheduledInstancesNetworkInterface`."""
+
+    associate_public_ip_address: bool | None
+    """
+    Indicates whether to assign a public IPv4 address to instances launched
+    in a VPC. The public IPv4 address can only be assigned to a network
+    interface for eth0, and can only be assigned to a new network interface,
+    not an existing one. You cannot specify more than one network interface
+    in the request. If launching into a default subnet, the default value is
+    `true`.
+
+    Amazon Web Services charges for all public IPv4 addresses, including
+    public IPv4 addresses associated with running instances and Elastic IP
+    addresses. For more information, see the *Public IPv4 Address* tab on
+    the [Amazon VPC pricing page](http://aws.amazon.com/vpc/pricing/).
+    """
+    delete_on_termination: bool | None
+    """
+    Indicates whether to delete the interface when the instance is
+    terminated.
+    """
+    description: str | None
+    """The description."""
+    device_index: int | None
+    """The index of the device for the network interface attachment."""
+    groups: Sequence[str] | None
+    """The IDs of the security groups."""
+    ipv6_address_count: int | None
+    """
+    The number of IPv6 addresses to assign to the network interface. The
+    IPv6 addresses are automatically selected from the subnet range.
+    """
+    ipv6_addresses: (
+        Sequence[ScheduledInstancesIpv6Address | ScheduledInstancesIpv6AddressDict]
+        | None
+    )
+    """The specific IPv6 addresses from the subnet range."""
+    network_interface_id: str | None
+    """The ID of the network interface."""
+    private_ip_address: str | None
+    """The IPv4 address of the network interface within the subnet."""
+    private_ip_address_configs: (
+        Sequence[
+            ScheduledInstancesPrivateIpAddressConfig
+            | ScheduledInstancesPrivateIpAddressConfigDict
+        ]
+        | None
+    )
+    """The private IPv4 addresses."""
+    secondary_private_ip_address_count: int | None
+    """The number of secondary private IPv4 addresses."""
+    subnet_id: str | None
+    """The ID of the subnet."""
+
+@dataclass(kw_only=True)
+class ScheduledInstancesPlacement(_SerdeShape):
+    """Describes the placement for a Scheduled Instance."""
+
+    availability_zone: str | None = ...
+    """The Availability Zone."""
+    group_name: str | None = ...
+    """The name of the placement group."""
+
+class ScheduledInstancesPlacementDict(TypedDict, total=False):
+    """Dictionary form of `ScheduledInstancesPlacement`."""
+
+    availability_zone: str | None
+    """The Availability Zone."""
+    group_name: str | None
+    """The name of the placement group."""
+
+@dataclass(kw_only=True)
+class ScheduledInstancesPrivateIpAddressConfig(_SerdeShape):
+    """Describes a private IPv4 address for a Scheduled Instance."""
+
+    primary: bool | None = ...
+    """
+    Indicates whether this is a primary IPv4 address. Otherwise, this is a
+    secondary IPv4 address.
+    """
+    private_ip_address: str | None = ...
+    """The IPv4 address."""
+
+class ScheduledInstancesPrivateIpAddressConfigDict(TypedDict, total=False):
+    """Dictionary form of `ScheduledInstancesPrivateIpAddressConfig`."""
+
+    primary: bool | None
+    """
+    Indicates whether this is a primary IPv4 address. Otherwise, this is a
+    secondary IPv4 address.
+    """
+    private_ip_address: str | None
+    """The IPv4 address."""
+
+class Scope(UnknownEnumMixin, StrEnum):
+    AVAILABILITY_ZONE = "Availability Zone"
+    REGIONAL = "Region"
+
+@dataclass(kw_only=True)
+class SearchLocalGatewayRoutesInput(_SerdeShape):
+    """Dataclass for SearchLocalGatewayRoutesInput structure."""
+
+    local_gateway_route_table_id: str | None = ...
+    """The ID of the local gateway route table."""
+    filters: list[Filter] | None = ...
+    """
+    One or more filters.
+
+    - `prefix-list-id` - The ID of the prefix list.
+
+    - `route-search.exact-match` - The exact match of the specified filter.
+
+    - `route-search.longest-prefix-match` - The longest prefix that matches
+      the route.
+
+    - `route-search.subnet-of-match` - The routes with a subnet that match
+      the specified CIDR filter.
+
+    - `route-search.supernet-of-match` - The routes with a CIDR that
+      encompass the CIDR filter. For example, if you have 10.0.1.0/29 and
+      10.0.1.0/31 routes in your route table and you specify
+      `supernet-of-match` as 10.0.1.0/30, then the result returns
+      10.0.1.0/29.
+
+    - `state` - The state of the route.
+
+    - `type` - The route type.
+    """
+    max_results: int | None = ...
+    """
+    The maximum number of results to return with a single call. To retrieve
+    the remaining results, make another call with the returned `nextToken`
+    value.
+    """
+    next_token: str | None = ...
+    """The token for the next page of results."""
+    dry_run: bool | None = ...
+    """
+    Checks whether you have the required permissions for the action, without
+    actually making the request, and provides an error response. If you have
+    the required permissions, the error response is `DryRunOperation`.
+    Otherwise, it is `UnauthorizedOperation`.
+    """
+
+class SearchLocalGatewayRoutesInputDict(TypedDict, total=False):
+    """Dictionary form of `SearchLocalGatewayRoutesInput`."""
+
+    local_gateway_route_table_id: Required[str]
+    """The ID of the local gateway route table."""
+    filters: Sequence[Filter | FilterDict] | None
+    """
+    One or more filters.
+
+    - `prefix-list-id` - The ID of the prefix list.
+
+    - `route-search.exact-match` - The exact match of the specified filter.
+
+    - `route-search.longest-prefix-match` - The longest prefix that matches
+      the route.
+
+    - `route-search.subnet-of-match` - The routes with a subnet that match
+      the specified CIDR filter.
+
+    - `route-search.supernet-of-match` - The routes with a CIDR that
+      encompass the CIDR filter. For example, if you have 10.0.1.0/29 and
+      10.0.1.0/31 routes in your route table and you specify
+      `supernet-of-match` as 10.0.1.0/30, then the result returns
+      10.0.1.0/29.
+
+    - `state` - The state of the route.
+
+    - `type` - The route type.
+    """
+    max_results: int | None
+    """
+    The maximum number of results to return with a single call. To retrieve
+    the remaining results, make another call with the returned `nextToken`
+    value.
+    """
+    next_token: str | None
+    """The token for the next page of results."""
+    dry_run: bool | None
+    """
+    Checks whether you have the required permissions for the action, without
+    actually making the request, and provides an error response. If you have
+    the required permissions, the error response is `DryRunOperation`.
+    Otherwise, it is `UnauthorizedOperation`.
+    """
+
+@dataclass(kw_only=True)
+class SearchLocalGatewayRoutesOutput(_SerdeShape):
+    """Dataclass for SearchLocalGatewayRoutesOutput structure."""
+
+    routes: list[LocalGatewayRoute] | None = ...
+    """Information about the routes."""
+    next_token: str | None = ...
+    """
+    The token to use to retrieve the next page of results. This value is
+    `null` when there are no more results to return.
+    """
+    response_metadata: ResponseMetadata = ...
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+@dataclass(kw_only=True)
+class SearchTransitGatewayMulticastGroupsInput(_SerdeShape):
+    """Dataclass for SearchTransitGatewayMulticastGroupsInput structure."""
+
+    transit_gateway_multicast_domain_id: str | None = ...
+    """The ID of the transit gateway multicast domain."""
+    filters: list[Filter] | None = ...
+    """
+    One or more filters. The possible values are:
+
+    - `group-ip-address` - The IP address of the transit gateway multicast
+      group.
+
+    - `is-group-member` - The resource is a group member. Valid values are
+      `true` | `false`.
+
+    - `is-group-source` - The resource is a group source. Valid values are
+      `true` | `false`.
+
+    - `member-type` - The member type. Valid values are `igmp` | `static`.
+
+    - `resource-id` - The ID of the resource.
+
+    - `resource-type` - The type of resource. Valid values are `vpc` |
+      `vpn` | `direct-connect-gateway` | `tgw-peering`.
+
+    - `source-type` - The source type. Valid values are `igmp` | `static`.
+
+    - `subnet-id` - The ID of the subnet.
+
+    - `transit-gateway-attachment-id` - The id of the transit gateway
+      attachment.
+    """
+    max_results: int | None = ...
+    """
+    The maximum number of results to return with a single call. To retrieve
+    the remaining results, make another call with the returned `nextToken`
+    value.
+    """
+    next_token: str | None = ...
+    """The token for the next page of results."""
+    dry_run: bool | None = ...
+    """
+    Checks whether you have the required permissions for the action, without
+    actually making the request, and provides an error response. If you have
+    the required permissions, the error response is `DryRunOperation`.
+    Otherwise, it is `UnauthorizedOperation`.
+    """
+
+class SearchTransitGatewayMulticastGroupsInputDict(TypedDict, total=False):
+    """Dictionary form of `SearchTransitGatewayMulticastGroupsInput`."""
+
+    transit_gateway_multicast_domain_id: Required[str]
+    """The ID of the transit gateway multicast domain."""
+    filters: Sequence[Filter | FilterDict] | None
+    """
+    One or more filters. The possible values are:
+
+    - `group-ip-address` - The IP address of the transit gateway multicast
+      group.
+
+    - `is-group-member` - The resource is a group member. Valid values are
+      `true` | `false`.
+
+    - `is-group-source` - The resource is a group source. Valid values are
+      `true` | `false`.
+
+    - `member-type` - The member type. Valid values are `igmp` | `static`.
+
+    - `resource-id` - The ID of the resource.
+
+    - `resource-type` - The type of resource. Valid values are `vpc` |
+      `vpn` | `direct-connect-gateway` | `tgw-peering`.
+
+    - `source-type` - The source type. Valid values are `igmp` | `static`.
+
+    - `subnet-id` - The ID of the subnet.
+
+    - `transit-gateway-attachment-id` - The id of the transit gateway
+      attachment.
+    """
+    max_results: int | None
+    """
+    The maximum number of results to return with a single call. To retrieve
+    the remaining results, make another call with the returned `nextToken`
+    value.
+    """
+    next_token: str | None
+    """The token for the next page of results."""
+    dry_run: bool | None
+    """
+    Checks whether you have the required permissions for the action, without
+    actually making the request, and provides an error response. If you have
+    the required permissions, the error response is `DryRunOperation`.
+    Otherwise, it is `UnauthorizedOperation`.
+    """
+
+@dataclass(kw_only=True)
+class SearchTransitGatewayMulticastGroupsOutput(_SerdeShape):
+    """Dataclass for SearchTransitGatewayMulticastGroupsOutput structure."""
+
+    multicast_groups: list[TransitGatewayMulticastGroup] | None = ...
+    """Information about the transit gateway multicast group."""
+    next_token: str | None = ...
+    """
+    The token to use to retrieve the next page of results. This value is
+    `null` when there are no more results to return.
+    """
+    response_metadata: ResponseMetadata = ...
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+@dataclass(kw_only=True)
+class SearchTransitGatewayRoutesInput(_SerdeShape):
+    """Dataclass for SearchTransitGatewayRoutesInput structure."""
+
+    transit_gateway_route_table_id: str | None = ...
+    """The ID of the transit gateway route table."""
+    filters: list[Filter] | None = ...
+    """
+    One or more filters. The possible values are:
+
+    - `attachment.transit-gateway-attachment-id`- The id of the transit
+      gateway attachment.
+
+    - `attachment.resource-id` - The resource id of the transit gateway
+      attachment.
+
+    - `attachment.resource-type` - The attachment resource type. Valid
+      values are `vpc` | `vpn` | `direct-connect-gateway` | `peering` |
+      `connect`.
+
+    - `prefix-list-id` - The ID of the prefix list.
+
+    - `route-search.exact-match` - The exact match of the specified filter.
+
+    - `route-search.longest-prefix-match` - The longest prefix that matches
+      the route.
+
+    - `route-search.subnet-of-match` - The routes with a subnet that match
+      the specified CIDR filter.
+
+    - `route-search.supernet-of-match` - The routes with a CIDR that
+      encompass the CIDR filter. For example, if you have 10.0.1.0/29 and
+      10.0.1.0/31 routes in your route table and you specify
+      supernet-of-match as 10.0.1.0/30, then the result returns 10.0.1.0/29.
+
+    - `state` - The state of the route (`active` | `blackhole`).
+
+    - `type` - The type of route (`propagated` | `static`).
+    """
+    max_results: int | None = ...
+    """
+    The maximum number of routes to return. If a value is not provided, the
+    default is 1000.
+    """
+    dry_run: bool | None = ...
+    """
+    Checks whether you have the required permissions for the action, without
+    actually making the request, and provides an error response. If you have
+    the required permissions, the error response is `DryRunOperation`.
+    Otherwise, it is `UnauthorizedOperation`.
+    """
+    next_token: str | None = ...
+    """The token for the next page of results."""
+
+class SearchTransitGatewayRoutesInputDict(TypedDict, total=False):
+    """Dictionary form of `SearchTransitGatewayRoutesInput`."""
+
+    transit_gateway_route_table_id: Required[str]
+    """The ID of the transit gateway route table."""
+    filters: Required[Sequence[Filter | FilterDict]]
+    """
+    One or more filters. The possible values are:
+
+    - `attachment.transit-gateway-attachment-id`- The id of the transit
+      gateway attachment.
+
+    - `attachment.resource-id` - The resource id of the transit gateway
+      attachment.
+
+    - `attachment.resource-type` - The attachment resource type. Valid
+      values are `vpc` | `vpn` | `direct-connect-gateway` | `peering` |
+      `connect`.
+
+    - `prefix-list-id` - The ID of the prefix list.
+
+    - `route-search.exact-match` - The exact match of the specified filter.
+
+    - `route-search.longest-prefix-match` - The longest prefix that matches
+      the route.
+
+    - `route-search.subnet-of-match` - The routes with a subnet that match
+      the specified CIDR filter.
+
+    - `route-search.supernet-of-match` - The routes with a CIDR that
+      encompass the CIDR filter. For example, if you have 10.0.1.0/29 and
+      10.0.1.0/31 routes in your route table and you specify
+      supernet-of-match as 10.0.1.0/30, then the result returns 10.0.1.0/29.
+
+    - `state` - The state of the route (`active` | `blackhole`).
+
+    - `type` - The type of route (`propagated` | `static`).
+    """
+    max_results: int | None
+    """
+    The maximum number of routes to return. If a value is not provided, the
+    default is 1000.
+    """
+    dry_run: bool | None
+    """
+    Checks whether you have the required permissions for the action, without
+    actually making the request, and provides an error response. If you have
+    the required permissions, the error response is `DryRunOperation`.
+    Otherwise, it is `UnauthorizedOperation`.
+    """
+    next_token: str | None
+    """The token for the next page of results."""
+
+@dataclass(kw_only=True)
+class SearchTransitGatewayRoutesOutput(_SerdeShape):
+    """Dataclass for SearchTransitGatewayRoutesOutput structure."""
+
+    routes: list[TransitGatewayRoute] | None = ...
+    """Information about the routes."""
+    additional_routes_available: bool | None = ...
+    """Indicates whether there are additional routes available."""
+    next_token: str | None = ...
+    """
+    The token to use to retrieve the next page of results. This value is
+    `null` when there are no more results to return.
+    """
+    response_metadata: ResponseMetadata = ...
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+@dataclass(kw_only=True)
+class SecondaryInterface(_SerdeShape):
+    """Describes a secondary interface."""
+
+    availability_zone: str | None = ...
+    """The Availability Zone of the secondary interface."""
+    availability_zone_id: str | None = ...
+    """The ID of the Availability Zone of the secondary interface."""
+    attachment: SecondaryInterfaceAttachment | None = ...
+    """The attachment information for the secondary interface."""
+    mac_address: str | None = ...
+    """The MAC address of the secondary interface."""
+    owner_id: str | None = ...
+    """
+    The ID of the Amazon Web Services account that owns the secondary
+    interface.
+    """
+    private_ipv4_addresses: list[SecondaryInterfaceIpv4Address] | None = ...
+    """The private IPv4 addresses associated with the secondary interface."""
+    secondary_interface_id: str | None = ...
+    """The ID of the secondary interface."""
+    secondary_interface_arn: str | None = ...
+    """The Amazon Resource Name (ARN) of the secondary interface."""
+    secondary_interface_type: str | None = ...
+    """The type of secondary interface."""
+    secondary_subnet_id: str | None = ...
+    """The ID of the secondary subnet."""
+    secondary_network_id: str | None = ...
+    """The ID of the secondary network."""
+    secondary_network_type: str | None = ...
+    """The type of the secondary network."""
+    source_dest_check: bool | None = ...
+    """Indicates whether source/destination checking is enabled."""
+    status: str | None = ...
+    """The status of the secondary interface."""
+    tags: list[Tag] | None = ...
+    """The tags assigned to the secondary interface."""
+
+@dataclass(kw_only=True)
+class SecondaryInterfaceAttachment(_SerdeShape):
+    """Describes the attachment of a secondary interface to an instance."""
+
+    attachment_id: str | None = ...
+    """The ID of the attachment."""
+    attach_time: datetime | None = ...
+    """The timestamp when the attachment was created."""
+    delete_on_termination: bool | None = ...
+    """
+    Indicates whether the secondary interface is deleted when the instance
+    is terminated.
+
+    The only supported value for this field is `true`.
+    """
+    device_index: int | None = ...
+    """The device index of the secondary interface."""
+    instance_id: str | None = ...
+    """The ID of the instance to which the secondary interface is attached."""
+    instance_owner_id: str | None = ...
+    """The Amazon Web Services account ID of the owner of the instance."""
+    network_card_index: int | None = ...
+    """The index of the network card."""
+    status: str | None = ...
+    """The attachment state."""
+
+@dataclass(kw_only=True)
+class SecondaryInterfaceIpv4Address(_SerdeShape):
+    """Describes a private IPv4 address for a secondary interface."""
+
+    private_ip_address: str | None = ...
+    """The private IPv4 address."""
+
+@dataclass(kw_only=True)
+class SecondaryInterfacePrivateIpAddressSpecification(_SerdeShape):
+    """
+    Describes a private IPv4 address specification for a secondary
+    interface.
+    """
+
+    private_ip_address: str | None = ...
+    """The private IPv4 address."""
+
+@dataclass(kw_only=True)
+class SecondaryInterfacePrivateIpAddressSpecificationRequest(_SerdeShape):
+    """
+    Describes a private IPv4 address specification for a secondary interface
+    request.
+    """
+
+    private_ip_address: str | None = ...
+    """The private IPv4 address."""
+
+class SecondaryInterfacePrivateIpAddressSpecificationRequestDict(
+    TypedDict, total=False
+):
+    """Dictionary form of `SecondaryInterfacePrivateIpAddressSpecificationRequest`."""
+
+    private_ip_address: str | None
+    """The private IPv4 address."""
+
+class SecondaryInterfaceStatus(UnknownEnumMixin, StrEnum):
+    AVAILABLE = "available"
+    IN_USE = "in-use"
+
+class SecondaryInterfaceType(UnknownEnumMixin, StrEnum):
+    SECONDARY = "secondary"
+
+@dataclass(kw_only=True)
+class SecondaryNetwork(_SerdeShape):
+    """Describes a secondary network."""
+
+    secondary_network_id: str | None = ...
+    """The ID of the secondary network."""
+    secondary_network_arn: str | None = ...
+    """The Amazon Resource Name (ARN) of the secondary network."""
+    owner_id: str | None = ...
+    """
+    The ID of the Amazon Web Services account that owns the secondary
+    network.
+    """
+    type: str | None = ...
+    """The type of the secondary network."""
+    state: str | None = ...
+    """The state of the secondary network."""
+    state_reason: str | None = ...
+    """The reason for the current state of the secondary network."""
+    ipv4_cidr_block_associations: (
+        list[SecondaryNetworkIpv4CidrBlockAssociation] | None
+    ) = ...
+    """
+    Information about the IPv4 CIDR blocks associated with the secondary
+    network.
+    """
+    tags: list[Tag] | None = ...
+    """The tags assigned to the secondary network."""
+
+class SecondaryNetworkCidrBlockAssociationState(UnknownEnumMixin, StrEnum):
+    ASSOCIATING = "associating"
+    ASSOCIATED = "associated"
+    ASSOCIATION_FAILED = "association-failed"
+    DISASSOCIATING = "disassociating"
+    DISASSOCIATED = "disassociated"
+    DISASSOCIATION_FAILED = "disassociation-failed"
+
+@dataclass(kw_only=True)
+class SecondaryNetworkIpv4CidrBlockAssociation(_SerdeShape):
+    """Describes an IPv4 CIDR block associated with a secondary network."""
+
+    association_id: str | None = ...
+    """The association ID for the IPv4 CIDR block."""
+    cidr_block: str | None = ...
+    """The IPv4 CIDR block."""
+    state: str | None = ...
+    """The state of the CIDR block association."""
+    state_reason: str | None = ...
+    """The reason for the current state of the CIDR block association."""
+
+class SecondaryNetworkState(UnknownEnumMixin, StrEnum):
+    CREATE_IN_PROGRESS = "create-in-progress"
+    CREATE_COMPLETE = "create-complete"
+    CREATE_FAILED = "create-failed"
+    DELETE_IN_PROGRESS = "delete-in-progress"
+    DELETE_COMPLETE = "delete-complete"
+    DELETE_FAILED = "delete-failed"
+
+class SecondaryNetworkType(UnknownEnumMixin, StrEnum):
+    RDMA = "rdma"
+
+@dataclass(kw_only=True)
+class SecondarySubnet(_SerdeShape):
+    """Describes a secondary subnet."""
+
+    secondary_subnet_id: str | None = ...
+    """The ID of the secondary subnet."""
+    secondary_subnet_arn: str | None = ...
+    """The Amazon Resource Name (ARN) of the secondary subnet."""
+    secondary_network_id: str | None = ...
+    """The ID of the secondary network."""
+    secondary_network_type: str | None = ...
+    """The type of the secondary network."""
+    owner_id: str | None = ...
+    """
+    The ID of the Amazon Web Services account that owns the secondary
+    subnet.
+    """
+    availability_zone_id: str | None = ...
+    """The ID of the Availability Zone of the secondary subnet."""
+    availability_zone: str | None = ...
+    """The Availability Zone of the secondary subnet."""
+    ipv4_cidr_block_associations: (
+        list[SecondarySubnetIpv4CidrBlockAssociation] | None
+    ) = ...
+    """
+    Information about the IPv4 CIDR blocks associated with the secondary
+    subnet.
+    """
+    state: str | None = ...
+    """The state of the secondary subnet."""
+    state_reason: str | None = ...
+    """The reason for the current state of the secondary subnet."""
+    tags: list[Tag] | None = ...
+    """The tags assigned to the secondary subnet."""
 
 class SecondarySubnetCidrBlockAssociationState(UnknownEnumMixin, StrEnum):
     ASSOCIATING = "associating"
@@ -804,6 +1634,8 @@ class Snapshot(_SerdeShape):
         snapshot size and represents the size of all the blocks that were
         written to the source volume at the time the snapshot was created.
     """
+    associated_kms_keys: list[AssociatedKmsKey] | None = ...
+    """The additional KMS keys that are associated with the snapshot."""
     snapshot_id: str | None = ...
     """
     The ID of the snapshot. Each snapshot receives a unique identifier when
@@ -5408,6 +6240,36 @@ class TransitGatewayNatRuleState(UnknownEnumMixin, StrEnum):
     DELETING = "deleting"
 
 @dataclass(kw_only=True)
+class TransitGatewayNetworkFunctionAttachment(_SerdeShape):
+    """
+    Contains information about a transit gateway network function
+    attachment, including the attachment ID, the transit gateway, the
+    endpoint service, the Availability Zones, and the state of the
+    attachment.
+    """
+
+    transit_gateway_attachment_id: str | None = ...
+    """The ID of the attachment."""
+    transit_gateway_id: str | None = ...
+    """The ID of the transit gateway."""
+    transit_gateway_owner_id: str | None = ...
+    """The ID of the Amazon Web Services account that owns the transit gateway."""
+    resource_owner_id: str | None = ...
+    """The ID of the Amazon Web Services account that owns the attachment."""
+    resource_id: str | None = ...
+    """The name of the Gateway Load Balancer endpoint service."""
+    availability_zones: list[str] | None = ...
+    """The names of the Availability Zones for the attachment."""
+    availability_zone_ids: list[str] | None = ...
+    """The IDs of the Availability Zones for the attachment."""
+    state: str | None = ...
+    """The state of the attachment."""
+    creation_time: datetime | None = ...
+    """The date and time the attachment was created."""
+    tags: list[Tag] | None = ...
+    """The tags for the attachment."""
+
+@dataclass(kw_only=True)
 class TransitGatewayOptions(_SerdeShape):
     """Describes the options for a transit gateway."""
 
@@ -5482,6 +6344,16 @@ class TransitGatewayPeeringAttachment(_SerdeShape):
     tags: list[Tag] | None = ...
     """The tags for the transit gateway peering attachment."""
 
+class TransitGatewayPeeringAttachmentMultipathResilienceMode(UnknownEnumMixin, StrEnum):
+    ALWAYS_ON = "always-on"
+
+class TransitGatewayPeeringAttachmentMultipathResilienceStatus(
+    UnknownEnumMixin, StrEnum
+):
+    PENDING = "pending"
+    ENABLED = "enabled"
+    DISABLED = "disabled"
+
 @dataclass(kw_only=True)
 class TransitGatewayPeeringAttachmentOptions(_SerdeShape):
     """Describes dynamic routing for the transit gateway peering attachment."""
@@ -5490,6 +6362,40 @@ class TransitGatewayPeeringAttachmentOptions(_SerdeShape):
     """
     Describes whether dynamic routing is enabled or disabled for the transit
     gateway peering attachment.
+    """
+    requester_allow_multipath_resilience: bool | None = ...
+    """
+    Indicates whether the requester allows multipath resilience for the
+    transit gateway peering attachment.
+    """
+    requester_multipath_resilience_mode: str | None = ...
+    """
+    The multipath resilience mode for the requester. This value is present
+    only when the requester allows multipath resilience.
+    """
+    accepter_allow_multipath_resilience: bool | None = ...
+    """
+    Indicates whether the accepter allows multipath resilience for the
+    transit gateway peering attachment.
+    """
+    accepter_multipath_resilience_mode: str | None = ...
+    """
+    The multipath resilience mode for the accepter. This value is present
+    only when the accepter allows multipath resilience.
+    """
+    multipath_resilience_status: str | None = ...
+    """
+    The multipath resilience status of the transit gateway peering
+    attachment. The possible values are:
+
+    - `enabled` -- Both the requester and the accepter allow multipath
+      resilience.
+
+    - `pending` -- Either the requester or the accepter allows multipath
+      resilience, but not both.
+
+    - `disabled` -- Neither the requester nor the accepter allows multipath
+      resilience.
     """
 
 @dataclass(kw_only=True)
@@ -5880,558 +6786,3 @@ class TransitGatewayRouteTable(_SerdeShape):
     """The creation time."""
     tags: list[Tag] | None = ...
     """Any tags assigned to the route table."""
-
-@dataclass(kw_only=True)
-class TransitGatewayRouteTableAnnouncement(_SerdeShape):
-    """Describes a transit gateway route table announcement."""
-
-    transit_gateway_route_table_announcement_id: str | None = ...
-    """The ID of the transit gateway route table announcement."""
-    transit_gateway_id: str | None = ...
-    """The ID of the transit gateway."""
-    core_network_id: str | None = ...
-    """
-    The ID of the core network for the transit gateway route table
-    announcement.
-    """
-    peer_transit_gateway_id: str | None = ...
-    """The ID of the peer transit gateway."""
-    peer_core_network_id: str | None = ...
-    """The ID of the core network ID for the peer."""
-    peering_attachment_id: str | None = ...
-    """The ID of the peering attachment."""
-    announcement_direction: str | None = ...
-    """The direction for the route table announcement."""
-    transit_gateway_route_table_id: str | None = ...
-    """The ID of the transit gateway route table."""
-    state: str | None = ...
-    """The state of the transit gateway announcement."""
-    creation_time: datetime | None = ...
-    """
-    The timestamp when the transit gateway route table announcement was
-    created.
-    """
-    tags: list[Tag] | None = ...
-    """The key-value pairs associated with the route table announcement."""
-
-class TransitGatewayRouteTableAnnouncementDirection(UnknownEnumMixin, StrEnum):
-    OUTGOING = "outgoing"
-    INCOMING = "incoming"
-
-class TransitGatewayRouteTableAnnouncementState(UnknownEnumMixin, StrEnum):
-    AVAILABLE = "available"
-    PENDING = "pending"
-    FAILING = "failing"
-    FAILED = "failed"
-    DELETING = "deleting"
-    DELETED = "deleted"
-
-@dataclass(kw_only=True)
-class TransitGatewayRouteTableAssociation(_SerdeShape):
-    """
-    Describes an association between a route table and a resource
-    attachment.
-    """
-
-    transit_gateway_attachment_id: str | None = ...
-    """The ID of the attachment."""
-    resource_id: str | None = ...
-    """The ID of the resource."""
-    resource_type: str | None = ...
-    """
-    The resource type. Note that the `tgw-peering` resource type has been
-    deprecated.
-    """
-    state: str | None = ...
-    """The state of the association."""
-
-@dataclass(kw_only=True)
-class TransitGatewayRouteTablePropagation(_SerdeShape):
-    """Describes a route table propagation."""
-
-    transit_gateway_attachment_id: str | None = ...
-    """The ID of the attachment."""
-    resource_id: str | None = ...
-    """The ID of the resource."""
-    resource_type: str | None = ...
-    """
-    The type of resource. Note that the `tgw-peering` resource type has been
-    deprecated.
-    """
-    state: str | None = ...
-    """The state of the resource."""
-    transit_gateway_route_table_announcement_id: str | None = ...
-    """The ID of the transit gateway route table announcement."""
-
-@dataclass(kw_only=True)
-class TransitGatewayRouteTableRoute(_SerdeShape):
-    """Describes a route in a transit gateway route table."""
-
-    destination_cidr: str | None = ...
-    """The CIDR block used for destination matches."""
-    state: str | None = ...
-    """The state of the route."""
-    route_origin: str | None = ...
-    """
-    The route origin. The following are the possible values:
-
-    - static
-
-    - propagated
-    """
-    prefix_list_id: str | None = ...
-    """The ID of the prefix list."""
-    attachment_id: str | None = ...
-    """The ID of the route attachment."""
-    resource_id: str | None = ...
-    """The ID of the resource for the route attachment."""
-    resource_type: str | None = ...
-    """The resource type for the route attachment."""
-
-class TransitGatewayRouteTableState(UnknownEnumMixin, StrEnum):
-    PENDING = "pending"
-    AVAILABLE = "available"
-    DELETING = "deleting"
-    DELETED = "deleted"
-
-class TransitGatewayRouteType(UnknownEnumMixin, StrEnum):
-    STATIC = "static"
-    PROPAGATED = "propagated"
-    SYSTEM = "system"
-
-class TransitGatewayState(UnknownEnumMixin, StrEnum):
-    PENDING = "pending"
-    AVAILABLE = "available"
-    MODIFYING = "modifying"
-    DELETING = "deleting"
-    DELETED = "deleted"
-
-@dataclass(kw_only=True)
-class TransitGatewayVpcAttachment(_SerdeShape):
-    """Describes a VPC attachment."""
-
-    transit_gateway_attachment_id: str | None = ...
-    """The ID of the attachment."""
-    transit_gateway_id: str | None = ...
-    """The ID of the transit gateway."""
-    vpc_id: str | None = ...
-    """The ID of the VPC."""
-    vpc_owner_id: str | None = ...
-    """The ID of the Amazon Web Services account that owns the VPC."""
-    state: str | None = ...
-    """
-    The state of the VPC attachment. Note that the `initiating` state has
-    been deprecated.
-    """
-    subnet_ids: list[str] | None = ...
-    """The IDs of the subnets."""
-    creation_time: datetime | None = ...
-    """The creation time."""
-    options: TransitGatewayVpcAttachmentOptions | None = ...
-    """The VPC attachment options."""
-    tags: list[Tag] | None = ...
-    """The tags for the VPC attachment."""
-
-@dataclass(kw_only=True)
-class TransitGatewayVpcAttachmentOptions(_SerdeShape):
-    """Describes the VPC attachment options."""
-
-    dns_support: str | None = ...
-    """Indicates whether DNS support is enabled."""
-    security_group_referencing_support: str | None = ...
-    """
-    Enables you to reference a security group across VPCs attached to a
-    transit gateway to simplify security group management.
-
-    This option is enabled by default.
-
-    For more information about security group referencing, see [Security
-    group
-    referencing](https://docs.aws.amazon.com/vpc/latest/tgw/tgw-vpc-attachments.html#vpc-attachment-security)
-    in the *Amazon Web Services Transit Gateways Guide*.
-    """
-    ipv6_support: str | None = ...
-    """Indicates whether IPv6 support is disabled."""
-    appliance_mode_support: str | None = ...
-    """Indicates whether appliance mode support is enabled."""
-
-class TransportProtocol(UnknownEnumMixin, StrEnum):
-    TCP = "tcp"
-    UDP = "udp"
-
-@dataclass(kw_only=True)
-class TrunkInterfaceAssociation(_SerdeShape):
-    """
-    Information about an association between a branch network interface with
-    a trunk network interface.
-    """
-
-    association_id: str | None = ...
-    """The ID of the association."""
-    branch_interface_id: str | None = ...
-    """The ID of the branch network interface."""
-    trunk_interface_id: str | None = ...
-    """The ID of the trunk network interface."""
-    interface_protocol: str | None = ...
-    """The interface protocol. Valid values are `VLAN` and `GRE`."""
-    vlan_id: int | None = ...
-    """The ID of the VLAN when you use the VLAN protocol."""
-    gre_key: int | None = ...
-    """The application key when you use the GRE protocol."""
-    tags: list[Tag] | None = ...
-    """The tags for the trunk interface association."""
-
-class TrustProviderType(UnknownEnumMixin, StrEnum):
-    USER = "user"
-    DEVICE = "device"
-
-class TunnelInsideIpVersion(UnknownEnumMixin, StrEnum):
-    IPV4 = "ipv4"
-    IPV6 = "ipv6"
-
-@dataclass(kw_only=True)
-class TunnelOption(_SerdeShape):
-    """The VPN tunnel options."""
-
-    outside_ip_address: str | None = ...
-    """The external IP address of the VPN tunnel."""
-    tunnel_inside_cidr: str | None = ...
-    """The range of inside IPv4 addresses for the tunnel."""
-    tunnel_inside_ipv6_cidr: str | None = ...
-    """The range of inside IPv6 addresses for the tunnel."""
-    pre_shared_key: str | None = ...
-    """
-    The pre-shared key (PSK) to establish initial authentication between the
-    virtual private gateway and the customer gateway.
-    """
-    phase1_lifetime_seconds: int | None = ...
-    """The lifetime for phase 1 of the IKE negotiation, in seconds."""
-    phase2_lifetime_seconds: int | None = ...
-    """The lifetime for phase 2 of the IKE negotiation, in seconds."""
-    rekey_margin_time_seconds: int | None = ...
-    """
-    The margin time, in seconds, before the phase 2 lifetime expires, during
-    which the Amazon Web Services side of the VPN connection performs an IKE
-    rekey.
-    """
-    rekey_fuzz_percentage: int | None = ...
-    """
-    The percentage of the rekey window determined by
-    `RekeyMarginTimeSeconds` during which the rekey time is randomly
-    selected.
-    """
-    replay_window_size: int | None = ...
-    """The number of packets in an IKE replay window."""
-    dpd_timeout_seconds: int | None = ...
-    """The number of seconds after which a DPD timeout occurs."""
-    dpd_timeout_action: str | None = ...
-    """The action to take after a DPD timeout occurs."""
-    phase1_encryption_algorithms: list[Phase1EncryptionAlgorithmsListValue] | None = ...
-    """
-    The permitted encryption algorithms for the VPN tunnel for phase 1 IKE
-    negotiations.
-    """
-    phase2_encryption_algorithms: list[Phase2EncryptionAlgorithmsListValue] | None = ...
-    """
-    The permitted encryption algorithms for the VPN tunnel for phase 2 IKE
-    negotiations.
-    """
-    phase1_integrity_algorithms: list[Phase1IntegrityAlgorithmsListValue] | None = ...
-    """
-    The permitted integrity algorithms for the VPN tunnel for phase 1 IKE
-    negotiations.
-    """
-    phase2_integrity_algorithms: list[Phase2IntegrityAlgorithmsListValue] | None = ...
-    """
-    The permitted integrity algorithms for the VPN tunnel for phase 2 IKE
-    negotiations.
-    """
-    phase1_dh_group_numbers: list[Phase1DHGroupNumbersListValue] | None = ...
-    """
-    The permitted Diffie-Hellman group numbers for the VPN tunnel for phase
-    1 IKE negotiations.
-    """
-    phase2_dh_group_numbers: list[Phase2DHGroupNumbersListValue] | None = ...
-    """
-    The permitted Diffie-Hellman group numbers for the VPN tunnel for phase
-    2 IKE negotiations.
-    """
-    ike_versions: list[IKEVersionsListValue] | None = ...
-    """The IKE versions that are permitted for the VPN tunnel."""
-    startup_action: str | None = ...
-    """
-    The action to take when the establishing the VPN tunnels for a VPN
-    connection.
-    """
-    log_options: VpnTunnelLogOptions | None = ...
-    """Options for logging VPN tunnel activity."""
-    enable_tunnel_lifecycle_control: bool | None = ...
-    """Status of tunnel endpoint lifecycle control feature."""
-
-@dataclass(kw_only=True)
-class UnassignIpv6AddressesInput(_SerdeShape):
-    """Dataclass for UnassignIpv6AddressesInput structure."""
-
-    ipv6_prefixes: list[str] | None = ...
-    """The IPv6 prefixes to unassign from the network interface."""
-    network_interface_id: str | None = ...
-    """The ID of the network interface."""
-    ipv6_addresses: list[str] | None = ...
-    """The IPv6 addresses to unassign from the network interface."""
-
-class UnassignIpv6AddressesInputDict(TypedDict, total=False):
-    """Dictionary form of `UnassignIpv6AddressesInput`."""
-
-    ipv6_prefixes: Sequence[str] | None
-    """The IPv6 prefixes to unassign from the network interface."""
-    network_interface_id: Required[str]
-    """The ID of the network interface."""
-    ipv6_addresses: Sequence[str] | None
-    """The IPv6 addresses to unassign from the network interface."""
-
-@dataclass(kw_only=True)
-class UnassignIpv6AddressesOutput(_SerdeShape):
-    """Dataclass for UnassignIpv6AddressesOutput structure."""
-
-    network_interface_id: str | None = ...
-    """The ID of the network interface."""
-    unassigned_ipv6_addresses: list[str] | None = ...
-    """The IPv6 addresses that have been unassigned from the network interface."""
-    unassigned_ipv6_prefixes: list[str] | None = ...
-    """The IPv6 prefixes that have been unassigned from the network interface."""
-    response_metadata: ResponseMetadata = ...
-    """
-    Metadata about the response that produced this output. Use this to
-    recover the request identifiers a service's support team needs in order
-    to investigate a call. Members of the metadata are individually
-    optional.
-    """
-
-@dataclass(kw_only=True)
-class UnassignPrivateIpAddressesInput(_SerdeShape):
-    """Contains the parameters for UnassignPrivateIpAddresses."""
-
-    ipv4_prefixes: list[str] | None = ...
-    """The IPv4 prefixes to unassign from the network interface."""
-    network_interface_id: str | None = ...
-    """The ID of the network interface."""
-    private_ip_addresses: list[str] | None = ...
-    """
-    The secondary private IP addresses to unassign from the network
-    interface. You can specify this option multiple times to unassign more
-    than one IP address.
-    """
-
-class UnassignPrivateIpAddressesInputDict(TypedDict, total=False):
-    """Dictionary form of `UnassignPrivateIpAddressesInput`."""
-
-    ipv4_prefixes: Sequence[str] | None
-    """The IPv4 prefixes to unassign from the network interface."""
-    network_interface_id: Required[str]
-    """The ID of the network interface."""
-    private_ip_addresses: Sequence[str] | None
-    """
-    The secondary private IP addresses to unassign from the network
-    interface. You can specify this option multiple times to unassign more
-    than one IP address.
-    """
-
-@dataclass(kw_only=True)
-class UnassignPrivateIpAddressesOutput(_SerdeShape):
-    """Dataclass for UnassignPrivateIpAddressesOutput structure."""
-
-    response_metadata: ResponseMetadata = ...
-    """
-    Metadata about the response that produced this output. Use this to
-    recover the request identifiers a service's support team needs in order
-    to investigate a call. Members of the metadata are individually
-    optional.
-    """
-
-@dataclass(kw_only=True)
-class UnassignPrivateNatGatewayAddressInput(_SerdeShape):
-    """Dataclass for UnassignPrivateNatGatewayAddressInput structure."""
-
-    nat_gateway_id: str | None = ...
-    """The ID of the NAT gateway."""
-    private_ip_addresses: list[str] | None = ...
-    """The private IPv4 addresses you want to unassign."""
-    max_drain_duration_seconds: int | None = ...
-    """
-    The maximum amount of time to wait (in seconds) before forcibly
-    releasing the IP addresses if connections are still in progress. Default
-    value is 350 seconds.
-    """
-    dry_run: bool | None = ...
-    """
-    Checks whether you have the required permissions for the action, without
-    actually making the request, and provides an error response. If you have
-    the required permissions, the error response is `DryRunOperation`.
-    Otherwise, it is `UnauthorizedOperation`.
-    """
-
-class UnassignPrivateNatGatewayAddressInputDict(TypedDict, total=False):
-    """Dictionary form of `UnassignPrivateNatGatewayAddressInput`."""
-
-    nat_gateway_id: Required[str]
-    """The ID of the NAT gateway."""
-    private_ip_addresses: Required[Sequence[str]]
-    """The private IPv4 addresses you want to unassign."""
-    max_drain_duration_seconds: int | None
-    """
-    The maximum amount of time to wait (in seconds) before forcibly
-    releasing the IP addresses if connections are still in progress. Default
-    value is 350 seconds.
-    """
-    dry_run: bool | None
-    """
-    Checks whether you have the required permissions for the action, without
-    actually making the request, and provides an error response. If you have
-    the required permissions, the error response is `DryRunOperation`.
-    Otherwise, it is `UnauthorizedOperation`.
-    """
-
-@dataclass(kw_only=True)
-class UnassignPrivateNatGatewayAddressOutput(_SerdeShape):
-    """Dataclass for UnassignPrivateNatGatewayAddressOutput structure."""
-
-    nat_gateway_id: str | None = ...
-    """The ID of the NAT gateway."""
-    nat_gateway_addresses: list[NatGatewayAddress] | None = ...
-    """Information about the NAT gateway IP addresses."""
-    response_metadata: ResponseMetadata = ...
-    """
-    Metadata about the response that produced this output. Use this to
-    recover the request identifiers a service's support team needs in order
-    to investigate a call. Members of the metadata are individually
-    optional.
-    """
-
-class UnlimitedSupportedInstanceFamily(UnknownEnumMixin, StrEnum):
-    T2 = "t2"
-    T3 = "t3"
-    T3A = "t3a"
-    T4G = "t4g"
-    T8I = "t8i"
-
-@dataclass(kw_only=True)
-class UnlockSnapshotInput(_SerdeShape):
-    """Dataclass for UnlockSnapshotInput structure."""
-
-    snapshot_id: str | None = ...
-    """The ID of the snapshot to unlock."""
-    dry_run: bool | None = ...
-    """
-    Checks whether you have the required permissions for the action, without
-    actually making the request, and provides an error response. If you have
-    the required permissions, the error response is `DryRunOperation`.
-    Otherwise, it is `UnauthorizedOperation`.
-    """
-
-class UnlockSnapshotInputDict(TypedDict, total=False):
-    """Dictionary form of `UnlockSnapshotInput`."""
-
-    snapshot_id: Required[str]
-    """The ID of the snapshot to unlock."""
-    dry_run: bool | None
-    """
-    Checks whether you have the required permissions for the action, without
-    actually making the request, and provides an error response. If you have
-    the required permissions, the error response is `DryRunOperation`.
-    Otherwise, it is `UnauthorizedOperation`.
-    """
-
-@dataclass(kw_only=True)
-class UnlockSnapshotOutput(_SerdeShape):
-    """Dataclass for UnlockSnapshotOutput structure."""
-
-    snapshot_id: str | None = ...
-    """The ID of the snapshot."""
-    response_metadata: ResponseMetadata = ...
-    """
-    Metadata about the response that produced this output. Use this to
-    recover the request identifiers a service's support team needs in order
-    to investigate a call. Members of the metadata are individually
-    optional.
-    """
-
-@dataclass(kw_only=True)
-class UnmonitorInstancesInput(_SerdeShape):
-    """Dataclass for UnmonitorInstancesInput structure."""
-
-    instance_ids: list[str] | None = ...
-    """The IDs of the instances."""
-    metric_category_ids: list[str] | None = ...
-    """
-    The IDs of the metric categories to remove from the instances. If you
-    specify metric categories, only those metric categories are removed and
-    detailed monitoring remains enabled. If you don't specify metric
-    categories, detailed monitoring and all metric categories are turned
-    off.
-    """
-    dry_run: bool | None = ...
-    """
-    Checks whether you have the required permissions for the operation,
-    without actually making the request, and provides an error response. If
-    you have the required permissions, the error response is
-    `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    """
-
-class UnmonitorInstancesInputDict(TypedDict, total=False):
-    """Dictionary form of `UnmonitorInstancesInput`."""
-
-    instance_ids: Required[Sequence[str]]
-    """The IDs of the instances."""
-    metric_category_ids: Sequence[str] | None
-    """
-    The IDs of the metric categories to remove from the instances. If you
-    specify metric categories, only those metric categories are removed and
-    detailed monitoring remains enabled. If you don't specify metric
-    categories, detailed monitoring and all metric categories are turned
-    off.
-    """
-    dry_run: bool | None
-    """
-    Checks whether you have the required permissions for the operation,
-    without actually making the request, and provides an error response. If
-    you have the required permissions, the error response is
-    `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    """
-
-@dataclass(kw_only=True)
-class UnmonitorInstancesOutput(_SerdeShape):
-    """Dataclass for UnmonitorInstancesOutput structure."""
-
-    instance_monitorings: list[InstanceMonitoring] | None = ...
-    """The monitoring information."""
-    response_metadata: ResponseMetadata = ...
-    """
-    Metadata about the response that produced this output. Use this to
-    recover the request identifiers a service's support team needs in order
-    to investigate a call. Members of the metadata are individually
-    optional.
-    """
-
-@dataclass(kw_only=True)
-class UnsuccessfulAssociationResponseObject(_SerdeShape):
-    """Describes an unsuccessful application status check association."""
-
-    application_status_check_id: str | None = ...
-    """The ID of the application status check."""
-    association_type: str | None = ...
-    """The type of association. Valid values: `EC2TAG` and `INSTANCE_ID`."""
-    association_value: str | None = ...
-    """
-    The association value. For `EC2TAG`, the value is formatted as
-    `key=value`. For `INSTANCE_ID`, the value is the instance ID.
-    """
-    reason: str | None = ...
-    """The reason the association failed."""
-
-class UnsuccessfulInstanceCreditSpecificationErrorCode(UnknownEnumMixin, StrEnum):
-    INVALID_INSTANCE_ID = "InvalidInstanceID.Malformed"
-    INSTANCE_NOT_FOUND = "InvalidInstanceID.NotFound"
-    INCORRECT_INSTANCE_STATE = "IncorrectInstanceState"
-    INSTANCE_CREDIT_SPECIFICATION_NOT_SUPPORTED = (
-        "InstanceCreditSpecification.NotSupported"
-    )

@@ -72,8 +72,6 @@ _Fi = "Filter"
 _Ru = "Rules"
 _Rul = "Rule"
 _Dat = "Date"
-_OSGTB = "ObjectSizeGreaterThanBytes"
-_OSLTB = "ObjectSizeLessThanBytes"
 _LRAO = "LifecycleRuleAndOperator"
 _OSGT = "ObjectSizeGreaterThan"
 _OSLT = "ObjectSizeLessThan"
@@ -275,6 +273,8 @@ _cGBRR = "com.amazonaws.s3#GetBucketReplicationRequest"
 _DMRS = "DeleteMarkerReplicationStatus"
 _DMR = "DeleteMarkerReplication"
 _RKKID = "ReplicaKmsKeyID"
+_USMRKS = "UseSourceMultiRegionKeyStatus"
+_USMRK = "UseSourceMultiRegionKey"
 _Mi = "Minutes"
 _RTV = "ReplicationTimeValue"
 _MS = "MetricsStatus"
@@ -286,14 +286,10 @@ _Tim = "Time"
 _Ac = "Account"
 _EORS = "ExistingObjectReplicationStatus"
 _EOR = "ExistingObjectReplication"
-_RRAO = "ReplicationRuleAndOperator"
+_RPL = "ReplicationPrefixList"
 _RCe = "ReplicationConfiguration"
 _GBRO = "GetBucketReplicationOutput"
 _GBR = "GetBucketReplication"
-
-OBJECT_SIZE_GREATER_THAN_BYTES: StaticSchema = (8, n0, _OSGTB, 0)
-
-OBJECT_SIZE_LESS_THAN_BYTES: StaticSchema = (8, n0, _OSLTB, 0)
 
 LIFECYCLE_RULE_AND_OPERATOR: StaticSchema = (
     18,
@@ -304,8 +300,8 @@ LIFECYCLE_RULE_AND_OPERATOR: StaticSchema = (
     (
         (lambda: schemas.PREFIX, 0),
         (lambda: schemas.TAG_SET, {_sN: _Tag, _sFm: None}),
-        (OBJECT_SIZE_GREATER_THAN_BYTES, 0),
-        (OBJECT_SIZE_LESS_THAN_BYTES, 0),
+        (lambda: schemas.OBJECT_SIZE_GREATER_THAN_BYTES, 0),
+        (lambda: schemas.OBJECT_SIZE_LESS_THAN_BYTES, 0),
     ),
 )
 
@@ -318,8 +314,8 @@ LIFECYCLE_RULE_FILTER: StaticSchema = (
     (
         (lambda: schemas.PREFIX, 0),
         (lambda: schemas.TAG, 0),
-        (OBJECT_SIZE_GREATER_THAN_BYTES, 0),
-        (OBJECT_SIZE_LESS_THAN_BYTES, 0),
+        (lambda: schemas.OBJECT_SIZE_GREATER_THAN_BYTES, 0),
+        (lambda: schemas.OBJECT_SIZE_LESS_THAN_BYTES, 0),
         (LIFECYCLE_RULE_AND_OPERATOR, 0),
     ),
 )
@@ -1347,13 +1343,31 @@ DELETE_MARKER_REPLICATION: StaticSchema = (
 
 REPLICA_KMS_KEY_ID: StaticSchema = (3, n0, _RKKID, 0)
 
+USE_SOURCE_MULTI_REGION_KEY_STATUS: StaticSchema = (
+    14,
+    n0,
+    _USMRKS,
+    0,
+    (_E, _D),
+    ((-1, {_sV: _E}), (-1, {_sV: _D})),
+)
+
+USE_SOURCE_MULTI_REGION_KEY: StaticSchema = (
+    18,
+    n0,
+    _USMRK,
+    0,
+    (_S,),
+    ((USE_SOURCE_MULTI_REGION_KEY_STATUS, 1),),
+)
+
 ENCRYPTION_CONFIGURATION: StaticSchema = (
     18,
     n0,
     _EC,
     0,
-    (_RKKID,),
-    ((REPLICA_KMS_KEY_ID, 0),),
+    (_RKKID, _USMRK),
+    ((REPLICA_KMS_KEY_ID, 0), (USE_SOURCE_MULTI_REGION_KEY, 0)),
 )
 
 MINUTES: StaticSchema = (7, n0, _Mi, 0)
@@ -1431,11 +1445,11 @@ EXISTING_OBJECT_REPLICATION: StaticSchema = (
     ((EXISTING_OBJECT_REPLICATION_STATUS, 1),),
 )
 
-REPLICATION_RULE_AND_OPERATOR: StaticSchema = (
-    18,
+REPLICATION_PREFIX_LIST: StaticSchema = (
+    16,
     n0,
-    _RRAO,
+    _RPL,
     0,
-    (_Pr, _Tags),
-    ((lambda: schemas.PREFIX, 0), (lambda: schemas.TAG_SET, {_sN: _Tag, _sFm: None})),
+    (_m,),
+    ((lambda: schemas.PREFIX, {_sN: _Pr}),),
 )

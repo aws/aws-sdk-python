@@ -12,106 +12,105 @@ _sV = "smithy.api#enumValue"
 _me = "member"
 _i = "item"
 _tg = "t4g"
-_RT = "ResourceType"
-_ins = "instance"
-_ni = "network_interface"
-_ni_ = "network-interface"
-_su = "subnet"
-_vp = "vpc"
+_cb_ = "capacity-block"
 _Ke = "Key"
 _ke = "key"
 _Va = "Value"
 _va = "value"
-_rT = "resourceType"
 _Tag = "Tags"
 _sSI = "smithy.synthetic#originalShapeId"
 _sm = "smithy.api#input"
-_Ad = "Address"
 _sO = "smithy.api#clientOptional"
 _smi = "smithy.api#required"
 _DR = "DryRun"
 _d = "disabled"
+_AI = "AllocationId"
+_aI = "allocationId"
 _smit = "smithy.api#output"
 _CRI = "CapacityReservationId"
-_OI = "OfferingId"
-_ass = "associated"
-_dis = "disassociated"
-_SIu = "SubnetId"
-_sI = "subnetId"
-_RIe = "ResourceId"
-_rI = "resourceId"
-_ROI = "ResourceOwnerId"
-_rOI = "resourceOwnerId"
-_OIw = "OwnerId"
-_oI = "ownerId"
-_C = "Code"
-_co = "code"
-_Me = "Message"
-_mes = "message"
-_VI = "VpcId"
-_vI = "vpcId"
-_Ci = "Cidr"
-_ad = "address"
+_RI = "ReservationId"
+_CVEI = "ClientVpnEndpointId"
+_de = "deleting"
+_cVEI = "clientVpnEndpointId"
+_St = "State"
+_st = "state"
+_fa = "failed"
+_en = "enabled"
+_Sta = "Status"
+_sta = "status"
+_TSag = "TagSet"
+_tS = "tagSet"
+_dRr = "dryRun"
+_act = "active"
+_AZI = "AvailabilityZoneId"
+_aZI = "availabilityZoneId"
 _II = "InstanceId"
 _iI = "instanceId"
-_NII = "NetworkInterfaceId"
-_nII = "networkInterfaceId"
-_SGe = "SecurityGroups"
-_SGS = "SecurityGroupSet"
-_sGS = "securityGroupSet"
 _ANt = "AttributeName"
 _aN = "attributeName"
-_ena = "enabled"
 _MB = "ManagedBy"
 _acc = "account"
-_unm = "unmanaged"
 _mB = "managedBy"
 _IT = "InstanceType"
 _iT = "instanceType"
-_Ser = "Service"
 _RNe = "RegionName"
-_NBG = "NetworkBorderGroup"
-_nBG = "networkBorderGroup"
+_Des = "Description"
+_SMt = "StatusMessage"
+_sMt = "statusMessage"
+_desc = "description"
+_PIo = "PoolId"
+_def = "default"
 _IF = "InstanceFamily"
-_HIS = "HostIdSet"
-_hIS = "hostIdSet"
-_eip = "eip"
 _RR = "ResourceRegion"
 _rR = "resourceRegion"
-_ASs = "AssociationStatus"
-_ASSOCIATED = "ASSOCIATED"
-_DISASSOCIATED = "DISASSOCIATED"
-_IRDI = "IpamResourceDiscoveryId"
-_iRDI = "ipamResourceDiscoveryId"
-_FR = "FailureReason"
-_fR = "failureReason"
-_GIr = "GroupId"
-_b = "byoip"
-_no = "none"
-_gIr = "groupId"
-_IIm = "ImageId"
-_smith = "smithy.api#sensitive"
-_GN = "GroupName"
-_gN = "groupName"
+_Ti = "Timestamp"
+_ti = "timestamp"
+_cre = "creating"
+_KKI = "KmsKeyId"
 _ST = "StartTime"
 _sTt = "startTime"
 _RIep = "ReportId"
-_CC = "CurrencyCode"
-_cC = "currencyCode"
-_KKI = "KmsKeyId"
 _kKI = "kmsKeyId"
-_SII = "SourceImageId"
-_iIm = "imageId"
-_SIn = "SnapshotId"
-_sIn = "snapshotId"
 _STs = "SseType"
 _sTs = "sseType"
+_unl = "unlimited"
+_li = "limited"
+_ded = "dedicated"
+_IPns = "InstancePlatform"
+_Ten = "Tenancy"
+_up = "updating"
+_ICA = "InterruptibleCapacityAllocation"
+_IInt = "InterruptionInfo"
+_DEFAULT = "DEFAULT"
+_CB_ = "CAPACITY_BLOCK"
+_uns = "unsupported"
+_cRI = "capacityReservationId"
+_iPns = "instancePlatform"
+_ten = "tenancy"
+_TICo = "TotalInstanceCount"
+_tICo = "totalInstanceCount"
+_AIC = "AvailableInstanceCount"
+_aIC = "availableInstanceCount"
+_RTes = "ReservationType"
+_rTe = "reservationType"
+_Inte = "Interruptible"
+_inte = "interruptible"
+_iCA = "interruptibleCapacityAllocation"
+_iIn = "interruptionInfo"
+_RSes = "ReservationState"
+_rSes = "reservationState"
 _IRn = "InstanceRequirements"
-_HTt = "HttpTokens"
-_HPRHL = "HttpPutResponseHopLimit"
-_HE = "HttpEndpoint"
-_Con = "Context"
+_CPIo = "CoipPoolId"
+_cPI = "coipPoolId"
+_LGRTI = "LocalGatewayRouteTableId"
+_lGRTI = "localGatewayRouteTableId"
+_OD = "ON_DEMAND"
+_od = "on-demand"
+_MTar = "MarketType"
+_SPOT = "SPOT"
+_spo = "spot"
 _iF = "instanceFamily"
+_TK = "TagKey"
 _AIcco = "AccountId"
 _rIe = "reportId"
 _SBu = "S3Bucket"
@@ -119,72 +118,317 @@ _sB = "s3Bucket"
 _SPr = "S3Prefix"
 _sP = "s3Prefix"
 _rNe = "regionName"
-_ISI = "IpamScopeId"
 _IPIp = "IpamPolicyId"
 _iPIp = "ipamPolicyId"
-_KF = "KeyFormat"
-_KT = "KeyType"
+_ASw = "AwsService"
+_aSw = "awsService"
 _CCp = "CpuCredits"
-_IMT = "InstanceMetadataTags"
 _cCp = "cpuCredits"
-_hTt = "httpTokens"
-_hPRHL = "httpPutResponseHopLimit"
-_hE = "httpEndpoint"
-_iMT = "instanceMetadataTags"
-_GAr = "GroupArn"
-_gAr = "groupArn"
-_UA = "UpdatedAt"
-_uA = "updatedAt"
-_lb_ = "load-balancer"
-_FLIl = "FlowLogId"
+_Metr = "Metric"
+_MSe = "MetricSet"
+_AAIw = "AwsAccountId"
+_aAI = "awsAccountId"
+_PDo = "PolicyDocument"
+_pDo = "policyDocument"
+_CVAPS = "ClientVpnAuthorizationPolicyStatus"
 _Fi = "Filter"
 _Fil = "Filters"
 _NTex = "NextToken"
 _MR = "MaxResults"
 _nT = "nextToken"
+_met = "metric"
+_Per = "Period"
 _TIa = "TargetId"
 _tIa = "targetId"
 _ETnd = "EndTime"
 _eTnd = "endTime"
-_HRS = "HistoryRecordSet"
-_HRi = "HistoryRecords"
-_hRS = "historyRecordSet"
-_tags = "tags"
 _ITnsta = "InstanceTypes"
-_POa = "PaymentOption"
-_Dur = "Duration"
-_dur = "duration"
-_HP = "HourlyPrice"
-_hP = "hourlyPrice"
-_pOa = "paymentOption"
-_UPp = "UpfrontPrice"
-_uPp = "upfrontPrice"
-_HRI = "HostReservationId"
-_hRI = "hostReservationId"
-_uDe = "uefiData"
-_UDe = "UefiData"
-_SIR = "SourceImageRegion"
-_sIR = "sourceImageRegion"
-_sII = "sourceImageId"
-_SLe = "SeverityLabel"
+_UNSUPPORTED = "UNSUPPORTED"
+_insta = "instances"
+_low = "low"
+_medi = "medium"
+_hig = "high"
 _VTi = "VirtualizationType"
-_IOA = "ImageOwnerAlias"
-_iOA = "imageOwnerAlias"
-_CDre = "CreationDate"
-_cDre = "creationDate"
 _aIc = "accountId"
+_rIes = "reservationId"
+_DEDICATED = "DEDICATED"
 _ATr = "ArchitectureType"
-_ITSns = "InstanceTypeSet"
-_iTSns = "instanceTypeSet"
-_kT = "keyType"
+_Ou = "Output"
+_outp = "output"
 _EEBD = "EbsEncryptionByDefault"
 _eEBD = "ebsEncryptionByDefault"
-_IBPAS = "ImageBlockPublicAccessState"
-_iBPAS = "imageBlockPublicAccessState"
+_EDTa = "EarliestDatapointTimestamp"
+_eDTa = "earliestDatapointTimestamp"
+_Dime = "Dimension"
+_GB = "GroupBy"
+_RTCHV = "RESERVATION_TOTAL_CAPACITY_HRS_VCPU"
+_rtchv = "reservation-total-capacity-hrs-vcpu"
+_RTCHI = "RESERVATION_TOTAL_CAPACITY_HRS_INST"
+_rtchi = "reservation-total-capacity-hrs-inst"
+_RMSV = "RESERVATION_MAX_SIZE_VCPU"
+_rmsv = "reservation-max-size-vcpu"
+_RMSI = "RESERVATION_MAX_SIZE_INST"
+_rmsi = "reservation-max-size-inst"
+_RMSV_ = "RESERVATION_MIN_SIZE_VCPU"
+_rmsv_ = "reservation-min-size-vcpu"
+_RMSI_ = "RESERVATION_MIN_SIZE_INST"
+_rmsi_ = "reservation-min-size-inst"
+_RUTCHV = "RESERVATION_UNUSED_TOTAL_CAPACITY_HRS_VCPU"
+_rutchv = "reservation-unused-total-capacity-hrs-vcpu"
+_RUTCHI = "RESERVATION_UNUSED_TOTAL_CAPACITY_HRS_INST"
+_rutchi = "reservation-unused-total-capacity-hrs-inst"
+_RUTEC = "RESERVATION_UNUSED_TOTAL_ESTIMATED_COST"
+_rutec = "reservation-unused-total-estimated-cost"
+_RMUSV = "RESERVATION_MAX_UNUSED_SIZE_VCPU"
+_rmusv = "reservation-max-unused-size-vcpu"
+_RMUSI = "RESERVATION_MAX_UNUSED_SIZE_INST"
+_rmusi = "reservation-max-unused-size-inst"
+_RMUSV_ = "RESERVATION_MIN_UNUSED_SIZE_VCPU"
+_rmusv_ = "reservation-min-unused-size-vcpu"
+_RMUSI_ = "RESERVATION_MIN_UNUSED_SIZE_INST"
+_rmusi_ = "reservation-min-unused-size-inst"
+_RMU = "RESERVATION_MAX_UTILIZATION"
+_rmu = "reservation-max-utilization"
+_RMU_ = "RESERVATION_MIN_UTILIZATION"
+_rmu_ = "reservation-min-utilization"
+_RAUV = "RESERVATION_AVG_UTILIZATION_VCPU"
+_rauv = "reservation-avg-utilization-vcpu"
+_RAUI = "RESERVATION_AVG_UTILIZATION_INST"
+_raui = "reservation-avg-utilization-inst"
+_RTC = "RESERVATION_TOTAL_COUNT"
+_rtc = "reservation-total-count"
+_RTEC = "RESERVATION_TOTAL_ESTIMATED_COST"
+_rtec = "reservation-total-estimated-cost"
+_RAFSV = "RESERVATION_AVG_FUTURE_SIZE_VCPU"
+_rafsv = "reservation-avg-future-size-vcpu"
+_RAFSI = "RESERVATION_AVG_FUTURE_SIZE_INST"
+_rafsi = "reservation-avg-future-size-inst"
+_RMFSV = "RESERVATION_MIN_FUTURE_SIZE_VCPU"
+_rmfsv = "reservation-min-future-size-vcpu"
+_RMFSI = "RESERVATION_MIN_FUTURE_SIZE_INST"
+_rmfsi = "reservation-min-future-size-inst"
+_RMFSV_ = "RESERVATION_MAX_FUTURE_SIZE_VCPU"
+_rmfsv_ = "reservation-max-future-size-vcpu"
+_RMFSI_ = "RESERVATION_MAX_FUTURE_SIZE_INST"
+_rmfsi_ = "reservation-max-future-size-inst"
+_RACSV = "RESERVATION_AVG_COMMITTED_SIZE_VCPU"
+_racsv = "reservation-avg-committed-size-vcpu"
+_RACSI = "RESERVATION_AVG_COMMITTED_SIZE_INST"
+_racsi = "reservation-avg-committed-size-inst"
+_RMCSV = "RESERVATION_MAX_COMMITTED_SIZE_VCPU"
+_rmcsv = "reservation-max-committed-size-vcpu"
+_RMCSI = "RESERVATION_MAX_COMMITTED_SIZE_INST"
+_rmcsi = "reservation-max-committed-size-inst"
+_RMCSV_ = "RESERVATION_MIN_COMMITTED_SIZE_VCPU"
+_rmcsv_ = "reservation-min-committed-size-vcpu"
+_RMCSI_ = "RESERVATION_MIN_COMMITTED_SIZE_INST"
+_rmcsi_ = "reservation-min-committed-size-inst"
+_RTUHV = "RESERVED_TOTAL_USAGE_HRS_VCPU"
+_rtuhv = "reserved-total-usage-hrs-vcpu"
+_RTUHI = "RESERVED_TOTAL_USAGE_HRS_INST"
+_rtuhi = "reserved-total-usage-hrs-inst"
+_RTEC_ = "RESERVED_TOTAL_ESTIMATED_COST"
+_rtec_ = "reserved-total-estimated-cost"
+_UTUHV = "UNRESERVED_TOTAL_USAGE_HRS_VCPU"
+_utuhv = "unreserved-total-usage-hrs-vcpu"
+_UTUHI = "UNRESERVED_TOTAL_USAGE_HRS_INST"
+_utuhi = "unreserved-total-usage-hrs-inst"
+_UTEC = "UNRESERVED_TOTAL_ESTIMATED_COST"
+_utec = "unreserved-total-estimated-cost"
+_STUHV = "SPOT_TOTAL_USAGE_HRS_VCPU"
+_stuhv = "spot-total-usage-hrs-vcpu"
+_STUHI = "SPOT_TOTAL_USAGE_HRS_INST"
+_stuhi = "spot-total-usage-hrs-inst"
+_STEC = "SPOT_TOTAL_ESTIMATED_COST"
+_stec = "spot-total-estimated-cost"
+_SARTBII = "SPOT_AVG_RUN_TIME_BEFORE_INTERRUPTION_INST"
+_sartbii = "spot-avg-run-time-before-interruption-inst"
+_SMRTBII = "SPOT_MAX_RUN_TIME_BEFORE_INTERRUPTION_INST"
+_smrtbii = "spot-max-run-time-before-interruption-inst"
+_SMRTBII_ = "SPOT_MIN_RUN_TIME_BEFORE_INTERRUPTION_INST"
+_smrtbii_ = "spot-min-run-time-before-interruption-inst"
+_STII = "SPOT_TOTAL_INTERRUPTIONS_INST"
+_stii = "spot-total-interruptions-inst"
+_STIV = "SPOT_TOTAL_INTERRUPTIONS_VCPU"
+_stiv = "spot-total-interruptions-vcpu"
+_STCI = "SPOT_TOTAL_COUNT_INST"
+_stci = "spot-total-count-inst"
+_STCV = "SPOT_TOTAL_COUNT_VCPU"
+_stcv = "spot-total-count-vcpu"
+_SIRI_ = "SPOT_INTERRUPTION_RATE_INST"
+_siri = "spot-interruption-rate-inst"
+_SIRV = "SPOT_INTERRUPTION_RATE_VCPU"
+_sirv = "spot-interruption-rate-vcpu"
+_CTRV = "CAPACITY_TOTAL_REQUESTED_VCPU"
+_ctrv = "capacity-total-requested-vcpu"
+_CTFV = "CAPACITY_TOTAL_FULFILLED_VCPU"
+_ctfv = "capacity-total-fulfilled-vcpu"
+_SCTRV = "SPOT_CAPACITY_TOTAL_REQUESTED_VCPU"
+_sctrv = "spot-capacity-total-requested-vcpu"
+_SCTFV = "SPOT_CAPACITY_TOTAL_FULFILLED_VCPU"
+_sctfv = "spot-capacity-total-fulfilled-vcpu"
+_CRFR = "CAPACITY_REQUEST_FULFILLMENT_RATE"
+_crfr = "capacity-request-fulfillment-rate"
+_AIACPRV = "AVG_INST_AZ_COUNT_PER_REQUESTED_VCPU"
+_aiacprv = "avg-inst-az-count-per-requested-vcpu"
+_IAFR = "INST_AZ_FULFILLMENT_RATE"
+_iafr = "inst-az-fulfillment-rate"
+_SCRFR = "SPOT_CAPACITY_REQUEST_FULFILLMENT_RATE"
+_scrfr = "spot-capacity-request-fulfillment-rate"
+_SAIACPRV = "SPOT_AVG_INST_AZ_COUNT_PER_REQUESTED_VCPU"
+_saiacprv = "spot-avg-inst-az-count-per-requested-vcpu"
+_SIAFR = "SPOT_INST_AZ_FULFILLMENT_RATE"
+_siafr = "spot-inst-az-fulfillment-rate"
+_GCMMDI = "GetCapacityManagerMetricDataInput"
+_cGCMMDR = "com.amazonaws.ec2#GetCapacityManagerMetricDataRequest"
+_MN = "MetricNames"
+_MNe = "MetricName"
+_FB = "FilterBy"
+_REDTe = "ReservationEndDateType"
+_LIMITED = "LIMITED"
+_UNLIMITED = "UNLIMITED"
+_ODCR_ = "ODCR"
+_odc = "odcr"
+_CMTD = "CapacityManagerTagDimension"
+_CMTDS = "CapacityManagerTagDimensionSet"
+_CTap = "CapacityTenancy"
+_CMD = "CapacityManagerDimension"
+_ANcc = "AccountName"
+_aNc = "accountName"
+_RAese = "ReservationArn"
+_rAese = "reservationArn"
+_RCTe = "ReservationCreateTimestamp"
+_rCTe = "reservationCreateTimestamp"
+_RSTe = "ReservationStartTimestamp"
+_rST = "reservationStartTimestamp"
+_RETe = "ReservationEndTimestamp"
+_rETe = "reservationEndTimestamp"
+_rEDT = "reservationEndDateType"
+_RIMCe = "ReservationInstanceMatchCriteria"
+_rIMC = "reservationInstanceMatchCriteria"
+_RUFOe = "ReservationUnusedFinancialOwner"
+_rUFO = "reservationUnusedFinancialOwner"
+_MVe = "MetricValue"
+_MVS = "MetricValueSet"
+_MDR = "MetricDataResult"
+_dim = "dimension"
+_MVet = "MetricValues"
+_mVS = "metricValueSet"
+_MDRS = "MetricDataResultSet"
+_GCMMDO = "GetCapacityManagerMetricDataOutput"
+_cGCMMDRo = "com.amazonaws.ec2#GetCapacityManagerMetricDataResult"
+_MDRe = "MetricDataResults"
+_mDRS = "metricDataResultSet"
+_GCMMD = "GetCapacityManagerMetricData"
+_GCMMDIe = "GetCapacityManagerMetricDimensionsInput"
+_cGCMMDRom = "com.amazonaws.ec2#GetCapacityManagerMetricDimensionsRequest"
+_MDRSe = "MetricDimensionResultSet"
+_GCMMDOe = "GetCapacityManagerMetricDimensionsOutput"
+_cGCMMDRoma = "com.amazonaws.ec2#GetCapacityManagerMetricDimensionsResult"
+_MDRet = "MetricDimensionResults"
+_mDRSe = "metricDimensionResultSet"
+_GCMMDe = "GetCapacityManagerMetricDimensions"
+_GCMMTKRMR = "GetCapacityManagerMonitoredTagKeysRequestMaxResults"
+_GCMMTKI = "GetCapacityManagerMonitoredTagKeysInput"
+_cGCMMTKR = "com.amazonaws.ec2#GetCapacityManagerMonitoredTagKeysRequest"
+_CMMTKS = "CapacityManagerMonitoredTagKeyStatus"
+_ACTIVATING = "ACTIVATING"
+_acti = "activating"
+_ACTIVATED = "ACTIVATED"
+_activ = "activated"
+_DEACTIVATING = "DEACTIVATING"
+_deac = "deactivating"
+_SUSPENDED = "SUSPENDED"
+_sus = "suspended"
+_CMMTK = "CapacityManagerMonitoredTagKey"
+_tK = "tagKey"
+_CMP = "CapacityManagerProvided"
+_cMP = "capacityManagerProvided"
+_CMMTKL = "CapacityManagerMonitoredTagKeyList"
+_GCMMTKO = "GetCapacityManagerMonitoredTagKeysOutput"
+_cGCMMTKRo = "com.amazonaws.ec2#GetCapacityManagerMonitoredTagKeysResult"
+_CMTK = "CapacityManagerTagKeys"
+_CMTKS = "CapacityManagerTagKeySet"
+_cMTKS = "capacityManagerTagKeySet"
+_GCMMTK = "GetCapacityManagerMonitoredTagKeys"
+_CAapa = "CapacityAmount"
+_CAZIL = "CapacityAvailabilityZoneIdList"
+_CU = "CapacityUnit"
+_VCPUS = "VCPUS"
+_vcpu = "vcpus"
+_INSTANCES = "INSTANCES"
+_ATSr = "ArchitectureTypeSet"
+_VTS = "VirtualizationTypeSet"
+_IRWMR = "InstanceRequirementsWithMetadataRequest"
 _ATrc = "ArchitectureTypes"
 _VTir = "VirtualizationTypes"
+_SITL = "SupportabilityInstanceTypeList"
+_SMT = "SupportabilityMarketType"
+_GCMSSI = "GetCapacityManagerSupportabilityScoresInput"
+_cGCMSSR = "com.amazonaws.ec2#GetCapacityManagerSupportabilityScoresRequest"
+_CAZI = "CapacityAvailabilityZoneIds"
+_CAZIa = "CapacityAvailabilityZoneId"
+_IRWM = "InstanceRequirementsWithMetadata"
+_SSupp = "SupportabilityScore"
+_HIGH = "HIGH"
+_MEDIUM = "MEDIUM"
+_LOW = "LOW"
+_CMSS = "CapacityManagerSupportabilityScore"
 _Scor = "Score"
 _scor = "score"
+_CMSSS = "CapacityManagerSupportabilityScoreSet"
+_GCMSSO = "GetCapacityManagerSupportabilityScoresOutput"
+_cGCMSSRo = "com.amazonaws.ec2#GetCapacityManagerSupportabilityScoresResult"
+_ASg = "AggregateScore"
+_aSg = "aggregateScore"
+_CMSSa = "CapacityManagerSupportabilityScores"
+_cMSSS = "capacityManagerSupportabilityScoreSet"
+_GCMSS = "GetCapacityManagerSupportabilityScores"
+_GCRURMR = "GetCapacityReservationUsageRequestMaxResults"
+_GCRUI = "GetCapacityReservationUsageInput"
+_cGCRUR = "com.amazonaws.ec2#GetCapacityReservationUsageRequest"
+_IU = "InstanceUsage"
+_UIC = "UsedInstanceCount"
+_uIC = "usedInstanceCount"
+_IUS = "InstanceUsageSet"
+_GCRUO = "GetCapacityReservationUsageOutput"
+_cGCRURo = "com.amazonaws.ec2#GetCapacityReservationUsageResult"
+_IUn = "InstanceUsages"
+_iUS = "instanceUsageSet"
+_GCRU = "GetCapacityReservationUsage"
+_GCVEAPI = "GetClientVpnEndpointAuthorizationPolicyInput"
+_cGCVEAPR = "com.amazonaws.ec2#GetClientVpnEndpointAuthorizationPolicyRequest"
+_CVAPSM = "ClientVpnAuthorizationPolicyShadowMode"
+_GCVEAPO = "GetClientVpnEndpointAuthorizationPolicyOutput"
+_cGCVEAPRo = "com.amazonaws.ec2#GetClientVpnEndpointAuthorizationPolicyResult"
+_SMh = "ShadowMode"
+_sMh = "shadowMode"
+_GCVEAP = "GetClientVpnEndpointAuthorizationPolicy"
+_GCPUI = "GetCoipPoolUsageInput"
+_cGCPUR = "com.amazonaws.ec2#GetCoipPoolUsageRequest"
+_CAU = "CoipAddressUsage"
+_CIop_ = "CoIp"
+_cIop = "coIp"
+_CAUS = "CoipAddressUsageSet"
+_GCPUO = "GetCoipPoolUsageOutput"
+_cGCPURo = "com.amazonaws.ec2#GetCoipPoolUsageResult"
+_CAUo = "CoipAddressUsages"
+_cAUS = "coipAddressUsageSet"
+_GCPU = "GetCoipPoolUsage"
+_GCOI = "GetConsoleOutputInput"
+_cGCOR = "com.amazonaws.ec2#GetConsoleOutputRequest"
+_Lat = "Latest"
+_GCOO = "GetConsoleOutputOutput"
+_cGCORo = "com.amazonaws.ec2#GetConsoleOutputResult"
+_GCO = "GetConsoleOutput"
+_GCSI = "GetConsoleScreenshotInput"
+_cGCSR = "com.amazonaws.ec2#GetConsoleScreenshotRequest"
+_WU = "WakeUp"
+_GCSO = "GetConsoleScreenshotOutput"
+_cGCSRo = "com.amazonaws.ec2#GetConsoleScreenshotResult"
+_IDm = "ImageData"
+_iDm = "imageData"
+_GCS = "GetConsoleScreenshot"
 _GDPRSI = "GetDeclarativePoliciesReportSummaryInput"
 _cGDPRSR = "com.amazonaws.ec2#GetDeclarativePoliciesReportSummaryRequest"
 _RSeg = "RegionalSummary"
@@ -242,258 +486,840 @@ _cGEIPRo = "com.amazonaws.ec2#GetEnabledIpamPolicyResult"
 _IPEp = "IpamPolicyEnabled"
 _iPEp = "ipamPolicyEnabled"
 _GEIP = "GetEnabledIpamPolicy"
-_PLF = "PartitionLoadFrequency"
-_NONE = "NONE"
-_DAILY = "DAILY"
-_da = "daily"
-_WEEKLY = "WEEKLY"
-_wee = "weekly"
-_MONTHLY = "MONTHLY"
-_mont = "monthly"
-_AIth = "AthenaIntegration"
-_IRSDA = "IntegrationResultS3DestinationArn"
-_PSD = "PartitionStartDate"
-_PED = "PartitionEndDate"
-_AISt = "AthenaIntegrationsSet"
-_ISnte = "IntegrateServices"
-_AIthe = "AthenaIntegrations"
-_GFLITI = "GetFlowLogsIntegrationTemplateInput"
-_cGFLITR = "com.amazonaws.ec2#GetFlowLogsIntegrationTemplateRequest"
-_CDSDA = "ConfigDeliveryS3DestinationArn"
-_ISnteg = "IntegrateService"
-_GFLITO = "GetFlowLogsIntegrationTemplateOutput"
-_cGFLITRo = "com.amazonaws.ec2#GetFlowLogsIntegrationTemplateResult"
-_Resu = "Result"
-_resu = "result"
-_GFLIT = "GetFlowLogsIntegrationTemplate"
-_GGFCRRMR = "GetGroupsForCapacityReservationRequestMaxResults"
-_GGFCRI = "GetGroupsForCapacityReservationInput"
-_cGGFCRR = "com.amazonaws.ec2#GetGroupsForCapacityReservationRequest"
-_CRG = "CapacityReservationGroup"
-_CRGS = "CapacityReservationGroupSet"
-_GGFCRO = "GetGroupsForCapacityReservationOutput"
-_cGGFCRRo = "com.amazonaws.ec2#GetGroupsForCapacityReservationResult"
-_CRGa = "CapacityReservationGroups"
-_cRGS = "capacityReservationGroupSet"
-_GGFCR = "GetGroupsForCapacityReservation"
-_RHISe = "RequestHostIdSet"
-_GHRPPI = "GetHostReservationPurchasePreviewInput"
-_cGHRPPR = "com.amazonaws.ec2#GetHostReservationPurchasePreviewRequest"
-_Pur = "Purchase"
-_PSu = "PurchaseSet"
-_GHRPPO = "GetHostReservationPurchasePreviewOutput"
-_cGHRPPRo = "com.amazonaws.ec2#GetHostReservationPurchasePreviewResult"
-_pur = "purchase"
-_THP = "TotalHourlyPrice"
-_tHP = "totalHourlyPrice"
-_TUP = "TotalUpfrontPrice"
-_tUP = "totalUpfrontPrice"
-_GHRPP = "GetHostReservationPurchasePreview"
-_GIAI = "GetImageAncestryInput"
-_cGIAR = "com.amazonaws.ec2#GetImageAncestryRequest"
-_IAE = "ImageAncestryEntry"
-_IAEL = "ImageAncestryEntryList"
-_GIAO = "GetImageAncestryOutput"
-_cGIARo = "com.amazonaws.ec2#GetImageAncestryResult"
-_IAEm = "ImageAncestryEntries"
-_IAES = "ImageAncestryEntrySet"
-_iAES = "imageAncestryEntrySet"
-_GIAe = "GetImageAncestry"
-_GIBPASI = "GetImageBlockPublicAccessStateInput"
-_cGIBPASR = "com.amazonaws.ec2#GetImageBlockPublicAccessStateRequest"
-_GIBPASO = "GetImageBlockPublicAccessStateOutput"
-_cGIBPASRo = "com.amazonaws.ec2#GetImageBlockPublicAccessStateResult"
-_GIBPAS = "GetImageBlockPublicAccessState"
-_GIFMR = "GetImageFindingsMaxResults"
-_GIFI = "GetImageFindingsInput"
-_cGIFR = "com.amazonaws.ec2#GetImageFindingsRequest"
-_IFPS = "ImageFindingPathSet"
-_IFm = "ImageFinding"
-_FAix = "FixAvailable"
-_fAix = "fixAvailable"
-_FOAi = "FirstObservedAt"
-_fOA = "firstObservedAt"
-_Tit = "Title"
-_tit = "title"
-_Pat = "Paths"
-_PSat = "PathSet"
-_pSa = "pathSet"
-_sLe = "severityLabel"
-_GIFES = "GetImageFindingsEntrySet"
-_GIFO = "GetImageFindingsOutput"
-_cGIFRo = "com.amazonaws.ec2#GetImageFindingsResult"
-_IFma = "ImageFindings"
-_IFS = "ImageFindingSet"
-_iFS = "imageFindingSet"
-_GIF = "GetImageFindings"
-_GIMDI = "GetInstanceMetadataDefaultsInput"
-_cGIMDR = "com.amazonaws.ec2#GetInstanceMetadataDefaultsRequest"
-_HTES = "HttpTokensEnforcedState"
-_IMDR = "InstanceMetadataDefaultsResponse"
-_MEM = "ManagedExceptionMessage"
-_mEM = "managedExceptionMessage"
-_HTE = "HttpTokensEnforced"
-_hTE = "httpTokensEnforced"
-_GIMDO = "GetInstanceMetadataDefaultsOutput"
-_cGIMDRo = "com.amazonaws.ec2#GetInstanceMetadataDefaultsResult"
-_ALcc = "AccountLevel"
-_aLc = "accountLevel"
-_GIMD = "GetInstanceMetadataDefaults"
-_EPKF = "EkPubKeyFormat"
-_der_ = "der"
-_tpm = "tpmt"
-_EPKT = "EkPubKeyType"
-_R_ = "RSA_2048"
-_r___________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________ = "rsa-2048"
-_ESP = "ECC_SEC_P384"
-_esp = "ecc-sec-p384"
-_GITEPI = "GetInstanceTpmEkPubInput"
-_cGITEPR = "com.amazonaws.ec2#GetInstanceTpmEkPubRequest"
-_EPKV = "EkPubKeyValue"
-_GITEPO = "GetInstanceTpmEkPubOutput"
-_cGITEPRo = "com.amazonaws.ec2#GetInstanceTpmEkPubResult"
-_kFe = "keyFormat"
-_KV = "KeyValue"
-_kV = "keyValue"
-_GITEP = "GetInstanceTpmEkPub"
-_GITFIRI = "GetInstanceTypesFromInstanceRequirementsInput"
-_cGITFIRR = "com.amazonaws.ec2#GetInstanceTypesFromInstanceRequirementsRequest"
-_ITIFIR = "InstanceTypeInfoFromInstanceRequirements"
-_ITIFIRS = "InstanceTypeInfoFromInstanceRequirementsSet"
-_GITFIRO = "GetInstanceTypesFromInstanceRequirementsOutput"
-_cGITFIRRo = "com.amazonaws.ec2#GetInstanceTypesFromInstanceRequirementsResult"
-_GITFIR = "GetInstanceTypesFromInstanceRequirements"
-_GIUDI = "GetInstanceUefiDataInput"
-_cGIUDR = "com.amazonaws.ec2#GetInstanceUefiDataRequest"
-_SSen = "SensitiveString"
-_GIUDO = "GetInstanceUefiDataOutput"
-_cGIUDRo = "com.amazonaws.ec2#GetInstanceUefiDataResult"
-_GIUD = "GetInstanceUefiData"
-_IAHMR = "IpamAddressHistoryMaxResults"
-_GIAHI = "GetIpamAddressHistoryInput"
-_cGIAHR = "com.amazonaws.ec2#GetIpamAddressHistoryRequest"
-_ICSp = "IpamComplianceStatus"
-_complia = "compliant"
-_non = "noncompliant"
-_ign = "ignored"
-_IOSp = "IpamOverlapStatus"
-_ove = "overlapping"
-_nono = "nonoverlapping"
-_IAHRT = "IpamAddressHistoryResourceType"
-_IAHR = "IpamAddressHistoryRecord"
-_RCes = "ResourceCidr"
-_rCes = "resourceCidr"
-_RNes = "ResourceName"
-_rNes = "resourceName"
-_RCS = "ResourceComplianceStatus"
-_rCS = "resourceComplianceStatus"
-_ROSe = "ResourceOverlapStatus"
-_rOSe = "resourceOverlapStatus"
-_SST = "SampledStartTime"
-_sST = "sampledStartTime"
-_SET = "SampledEndTime"
-_sET = "sampledEndTime"
-_IAHRS = "IpamAddressHistoryRecordSet"
-_GIAHO = "GetIpamAddressHistoryOutput"
-_cGIAHRo = "com.amazonaws.ec2#GetIpamAddressHistoryResult"
-_GIAH = "GetIpamAddressHistory"
-_GIDAI = "GetIpamDiscoveredAccountsInput"
-_cGIDAR = "com.amazonaws.ec2#GetIpamDiscoveredAccountsRequest"
-_DRi = "DiscoveryRegion"
-_IDFC = "IpamDiscoveryFailureCode"
-_arf = "assume_role_failure"
-_arf_ = "assume-role-failure"
-_tf__ = "throttling_failure"
-_tf___ = "throttling-failure"
-_uf__ = "unauthorized_failure"
-_uf___ = "unauthorized-failure"
-_IDFR = "IpamDiscoveryFailureReason"
-_IDA = "IpamDiscoveredAccount"
-_dRi = "discoveryRegion"
-_LADT = "LastAttemptedDiscoveryTime"
-_lADT = "lastAttemptedDiscoveryTime"
-_LSDT = "LastSuccessfulDiscoveryTime"
-_lSDT = "lastSuccessfulDiscoveryTime"
-_OUI = "OrganizationalUnitId"
-_oUI = "organizationalUnitId"
-_IDAS = "IpamDiscoveredAccountSet"
-_GIDAO = "GetIpamDiscoveredAccountsOutput"
-_cGIDARo = "com.amazonaws.ec2#GetIpamDiscoveredAccountsResult"
-_IDAp = "IpamDiscoveredAccounts"
-_iDAS = "ipamDiscoveredAccountSet"
-_GIDA = "GetIpamDiscoveredAccounts"
-_GIDPAI = "GetIpamDiscoveredPublicAddressesInput"
-_cGIDPAR = "com.amazonaws.ec2#GetIpamDiscoveredPublicAddressesRequest"
-_ARd = "AddressRegion"
-_IPAT = "IpamPublicAddressType"
-_SMI = "SERVICE_MANAGED_IP"
-_smi_ = "service-managed-ip"
-_SMB = "SERVICE_MANAGED_BYOIP"
-_smb = "service-managed-byoip"
-_AOE = "AMAZON_OWNED_EIP"
-_aoe = "amazon-owned-eip"
-_AOC = "AMAZON_OWNED_CONTIG"
-_aoc = "amazon-owned-contig"
-_BYOIP = "BYOIP"
-_EPI_ = "EC2_PUBLIC_IP"
-_epi = "ec2-public-ip"
-_AILI = "ANYCAST_IP_LIST_IP"
-_aili = "anycast-ip-list-ip"
-_IPAAS = "IpamPublicAddressAssociationStatus"
-_IPASG = "IpamPublicAddressSecurityGroup"
-_IPASGL = "IpamPublicAddressSecurityGroupList"
-_IPAASp = "IpamPublicAddressAwsService"
-_NG_ = "NAT_GATEWAY"
-_ng = "nat-gateway"
-_DMS = "DMS"
-_dms = "database-migration-service"
-_REDSHIFT = "REDSHIFT"
-_red = "redshift"
-_ECS_ = "ECS"
-_ecs = "elastic-container-service"
-_RDS_ = "RDS"
-_rds = "relational-database-service"
-_SV_ = "S2S_VPN"
-_stsv = "site-to-site-vpn"
-_EL_ = "EC2_LB"
-_AGA = "AGA"
-_ga_ = "global-accelerator"
-_CLOUDFRONT = "CLOUDFRONT"
-_clo = "cloudfront"
-_OTHER = "OTHER"
-_oth = "other"
-_IPATp = "IpamPublicAddressTag"
-_IPATL = "IpamPublicAddressTagList"
-_IPATpa = "IpamPublicAddressTags"
-_ETi = "EipTags"
-_ETSi = "EipTagSet"
-_eTSi = "eipTagSet"
-_IDPA = "IpamDiscoveredPublicAddress"
-_aRd = "addressRegion"
-_AOI = "AddressOwnerId"
-_aOI = "addressOwnerId"
-_AAId = "AddressAllocationId"
-_aAId = "addressAllocationId"
-_aSsso = "associationStatus"
-_ATddre = "AddressType"
-_aTddr = "addressType"
-_ser = "service"
-_SRerv = "ServiceResource"
-_sRer = "serviceResource"
-_PIPI = "PublicIpv4PoolId"
-_pIPI = "publicIpv4PoolId"
-_NID = "NetworkInterfaceDescription"
-_nID = "networkInterfaceDescription"
-_STa = "SampleTime"
-_sTa = "sampleTime"
-_IDPAS = "IpamDiscoveredPublicAddressSet"
-_GIDPAO = "GetIpamDiscoveredPublicAddressesOutput"
-_cGIDPARo = "com.amazonaws.ec2#GetIpamDiscoveredPublicAddressesResult"
-_IDPAp = "IpamDiscoveredPublicAddresses"
-_iDPAS = "ipamDiscoveredPublicAddressSet"
-_OST = "OldestSampleTime"
-_oST = "oldestSampleTime"
-_GIDPA = "GetIpamDiscoveredPublicAddresses"
+
+CLIENT_VPN_AUTHORIZATION_POLICY_STATUS: StaticSchema = (
+    14,
+    n0,
+    _CVAPS,
+    0,
+    (_cre, _up, _act, _fa, _de),
+    (
+        (-1, {_sV: _cre}),
+        (-1, {_sV: _up}),
+        (-1, {_sV: _act}),
+        (-1, {_sV: _fa}),
+        (-1, {_sV: _de}),
+    ),
+)
+
+METRIC: StaticSchema = (
+    14,
+    n0,
+    _Metr,
+    0,
+    (
+        _RTCHV,
+        _RTCHI,
+        _RMSV,
+        _RMSI,
+        _RMSV_,
+        _RMSI_,
+        _RUTCHV,
+        _RUTCHI,
+        _RUTEC,
+        _RMUSV,
+        _RMUSI,
+        _RMUSV_,
+        _RMUSI_,
+        _RMU,
+        _RMU_,
+        _RAUV,
+        _RAUI,
+        _RTC,
+        _RTEC,
+        _RAFSV,
+        _RAFSI,
+        _RMFSV,
+        _RMFSI,
+        _RMFSV_,
+        _RMFSI_,
+        _RACSV,
+        _RACSI,
+        _RMCSV,
+        _RMCSI,
+        _RMCSV_,
+        _RMCSI_,
+        _RTUHV,
+        _RTUHI,
+        _RTEC_,
+        _UTUHV,
+        _UTUHI,
+        _UTEC,
+        _STUHV,
+        _STUHI,
+        _STEC,
+        _SARTBII,
+        _SMRTBII,
+        _SMRTBII_,
+        _STII,
+        _STIV,
+        _STCI,
+        _STCV,
+        _SIRI_,
+        _SIRV,
+        _CTRV,
+        _CTFV,
+        _SCTRV,
+        _SCTFV,
+        _CRFR,
+        _AIACPRV,
+        _IAFR,
+        _SCRFR,
+        _SAIACPRV,
+        _SIAFR,
+    ),
+    (
+        (-1, {_sV: _rtchv}),
+        (-1, {_sV: _rtchi}),
+        (-1, {_sV: _rmsv}),
+        (-1, {_sV: _rmsi}),
+        (-1, {_sV: _rmsv_}),
+        (-1, {_sV: _rmsi_}),
+        (-1, {_sV: _rutchv}),
+        (-1, {_sV: _rutchi}),
+        (-1, {_sV: _rutec}),
+        (-1, {_sV: _rmusv}),
+        (-1, {_sV: _rmusi}),
+        (-1, {_sV: _rmusv_}),
+        (-1, {_sV: _rmusi_}),
+        (-1, {_sV: _rmu}),
+        (-1, {_sV: _rmu_}),
+        (-1, {_sV: _rauv}),
+        (-1, {_sV: _raui}),
+        (-1, {_sV: _rtc}),
+        (-1, {_sV: _rtec}),
+        (-1, {_sV: _rafsv}),
+        (-1, {_sV: _rafsi}),
+        (-1, {_sV: _rmfsv}),
+        (-1, {_sV: _rmfsi}),
+        (-1, {_sV: _rmfsv_}),
+        (-1, {_sV: _rmfsi_}),
+        (-1, {_sV: _racsv}),
+        (-1, {_sV: _racsi}),
+        (-1, {_sV: _rmcsv}),
+        (-1, {_sV: _rmcsi}),
+        (-1, {_sV: _rmcsv_}),
+        (-1, {_sV: _rmcsi_}),
+        (-1, {_sV: _rtuhv}),
+        (-1, {_sV: _rtuhi}),
+        (-1, {_sV: _rtec_}),
+        (-1, {_sV: _utuhv}),
+        (-1, {_sV: _utuhi}),
+        (-1, {_sV: _utec}),
+        (-1, {_sV: _stuhv}),
+        (-1, {_sV: _stuhi}),
+        (-1, {_sV: _stec}),
+        (-1, {_sV: _sartbii}),
+        (-1, {_sV: _smrtbii}),
+        (-1, {_sV: _smrtbii_}),
+        (-1, {_sV: _stii}),
+        (-1, {_sV: _stiv}),
+        (-1, {_sV: _stci}),
+        (-1, {_sV: _stcv}),
+        (-1, {_sV: _siri}),
+        (-1, {_sV: _sirv}),
+        (-1, {_sV: _ctrv}),
+        (-1, {_sV: _ctfv}),
+        (-1, {_sV: _sctrv}),
+        (-1, {_sV: _sctfv}),
+        (-1, {_sV: _crfr}),
+        (-1, {_sV: _aiacprv}),
+        (-1, {_sV: _iafr}),
+        (-1, {_sV: _scrfr}),
+        (-1, {_sV: _saiacprv}),
+        (-1, {_sV: _siafr}),
+    ),
+)
+
+METRIC_SET: StaticSchema = (16, n0, _MSe, 0, (_me,), ((METRIC, {_sN: _i}),))
+
+PERIOD: StaticSchema = (7, n0, _Per, 0)
+
+GET_CAPACITY_MANAGER_METRIC_DATA_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GCMMDI,
+    {_sSI: _cGCMMDR, _sm: None},
+    (_MN, _ST, _ETnd, _Per, _GB, _FB, _MR, _NTex, _DR),
+    (
+        (METRIC_SET, {_sN: _MNe, _sO: None, _smi: None}),
+        (lambda: schemas.MILLISECOND_DATE_TIME, {_sO: None, _smi: None}),
+        (lambda: schemas.MILLISECOND_DATE_TIME, {_sO: None, _smi: None}),
+        (PERIOD, {_sO: None, _smi: None}),
+        (lambda: schemas.GROUP_BY_SET, {_sN: _GB}),
+        (lambda: schemas.CAPACITY_MANAGER_CONDITION_SET, 0),
+        (lambda: schemas.MAX_RESULTS, 0),
+        (lambda: schemas.NEXT_TOKEN, 0),
+        (lambda: schemas.BOOLEAN, 0),
+    ),
+)
+
+GET_CAPACITY_MANAGER_METRIC_DATA_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GCMMDO,
+    {_sSI: _cGCMMDRo, _smit: None},
+    (_MDRe, _NTex),
+    (
+        (lambda: METRIC_DATA_RESULT_SET, {_aQN: _MDRS, _sN: _mDRS}),
+        (lambda: schemas.NEXT_TOKEN, {_aQN: _NTex, _sN: _nT}),
+    ),
+)
+
+GET_CAPACITY_MANAGER_METRIC_DATA: StaticOperationSchema = (
+    23,
+    n0,
+    _GCMMD,
+    0,
+    GET_CAPACITY_MANAGER_METRIC_DATA_INPUT,
+    GET_CAPACITY_MANAGER_METRIC_DATA_OUTPUT,
+    (),
+)
+
+RESERVATION_END_DATE_TYPE: StaticSchema = (
+    14,
+    n0,
+    _REDTe,
+    0,
+    (_LIMITED, _UNLIMITED),
+    ((-1, {_sV: _li}), (-1, {_sV: _unl})),
+)
+
+RESERVATION_TYPE: StaticSchema = (
+    14,
+    n0,
+    _RTes,
+    0,
+    (_CB_, _ODCR_),
+    ((-1, {_sV: _cb_}), (-1, {_sV: _odc})),
+)
+
+CAPACITY_MANAGER_TAG_DIMENSION: StaticSchema = (
+    18,
+    n0,
+    _CMTD,
+    0,
+    (_Ke, _Va),
+    (
+        (lambda: schemas.STRING, {_aQN: _Ke, _sN: _ke}),
+        (lambda: schemas.STRING, {_aQN: _Va, _sN: _va}),
+    ),
+)
+
+CAPACITY_MANAGER_TAG_DIMENSION_SET: StaticSchema = (
+    16,
+    n0,
+    _CMTDS,
+    0,
+    (_me,),
+    ((CAPACITY_MANAGER_TAG_DIMENSION, {_sN: _i}),),
+)
+
+CAPACITY_TENANCY: StaticSchema = (
+    14,
+    n0,
+    _CTap,
+    0,
+    (_DEFAULT, _DEDICATED),
+    ((-1, {_sV: _def}), (-1, {_sV: _ded})),
+)
+
+CAPACITY_MANAGER_DIMENSION: StaticSchema = (
+    18,
+    n0,
+    _CMD,
+    0,
+    (
+        _RR,
+        _AZI,
+        _AIcco,
+        _ANcc,
+        _IF,
+        _IT,
+        _IPns,
+        _RAese,
+        _RI,
+        _RTes,
+        _RCTe,
+        _RSTe,
+        _RETe,
+        _REDTe,
+        _Ten,
+        _RSes,
+        _RIMCe,
+        _RUFOe,
+        _Tag,
+    ),
+    (
+        (lambda: schemas.STRING, {_aQN: _RR, _sN: _rR}),
+        (lambda: schemas.STRING, {_aQN: _AZI, _sN: _aZI}),
+        (lambda: schemas.STRING, {_aQN: _AIcco, _sN: _aIc}),
+        (lambda: schemas.STRING, {_aQN: _ANcc, _sN: _aNc}),
+        (lambda: schemas.STRING, {_aQN: _IF, _sN: _iF}),
+        (lambda: schemas.STRING, {_aQN: _IT, _sN: _iT}),
+        (lambda: schemas.STRING, {_aQN: _IPns, _sN: _iPns}),
+        (lambda: schemas.STRING, {_aQN: _RAese, _sN: _rAese}),
+        (lambda: schemas.STRING, {_aQN: _RI, _sN: _rIes}),
+        (RESERVATION_TYPE, {_aQN: _RTes, _sN: _rTe}),
+        (lambda: schemas.MILLISECOND_DATE_TIME, {_aQN: _RCTe, _sN: _rCTe}),
+        (lambda: schemas.MILLISECOND_DATE_TIME, {_aQN: _RSTe, _sN: _rST}),
+        (lambda: schemas.MILLISECOND_DATE_TIME, {_aQN: _RETe, _sN: _rETe}),
+        (RESERVATION_END_DATE_TYPE, {_aQN: _REDTe, _sN: _rEDT}),
+        (CAPACITY_TENANCY, {_aQN: _Ten, _sN: _ten}),
+        (lambda: schemas.RESERVATION_STATE, {_aQN: _RSes, _sN: _rSes}),
+        (lambda: schemas.STRING, {_aQN: _RIMCe, _sN: _rIMC}),
+        (lambda: schemas.STRING, {_aQN: _RUFOe, _sN: _rUFO}),
+        (CAPACITY_MANAGER_TAG_DIMENSION_SET, {_aQN: _TSag, _sN: _tS}),
+    ),
+)
+
+METRIC_VALUE: StaticSchema = (
+    18,
+    n0,
+    _MVe,
+    0,
+    (_Metr, _Va),
+    (
+        (METRIC, {_aQN: _Metr, _sN: _met}),
+        (lambda: schemas.DOUBLE, {_aQN: _Va, _sN: _va}),
+    ),
+)
+
+METRIC_VALUE_SET: StaticSchema = (16, n0, _MVS, 0, (_me,), ((METRIC_VALUE, {_sN: _i}),))
+
+METRIC_DATA_RESULT: StaticSchema = (
+    18,
+    n0,
+    _MDR,
+    0,
+    (_Dime, _Ti, _MVet),
+    (
+        (CAPACITY_MANAGER_DIMENSION, {_aQN: _Dime, _sN: _dim}),
+        (lambda: schemas.MILLISECOND_DATE_TIME, {_aQN: _Ti, _sN: _ti}),
+        (METRIC_VALUE_SET, {_aQN: _MVS, _sN: _mVS}),
+    ),
+)
+
+METRIC_DATA_RESULT_SET: StaticSchema = (
+    16,
+    n0,
+    _MDRS,
+    0,
+    (_me,),
+    ((METRIC_DATA_RESULT, {_sN: _i}),),
+)
+
+GET_CAPACITY_MANAGER_METRIC_DIMENSIONS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GCMMDIe,
+    {_sSI: _cGCMMDRom, _sm: None},
+    (_GB, _FB, _ST, _ETnd, _MN, _MR, _NTex, _DR),
+    (
+        (lambda: schemas.GROUP_BY_SET, {_sN: _GB, _sO: None, _smi: None}),
+        (lambda: schemas.CAPACITY_MANAGER_CONDITION_SET, 0),
+        (lambda: schemas.MILLISECOND_DATE_TIME, {_sO: None, _smi: None}),
+        (lambda: schemas.MILLISECOND_DATE_TIME, {_sO: None, _smi: None}),
+        (METRIC_SET, {_sN: _MNe, _sO: None, _smi: None}),
+        (lambda: schemas.MAX_RESULTS, 0),
+        (lambda: schemas.NEXT_TOKEN, 0),
+        (lambda: schemas.BOOLEAN, 0),
+    ),
+)
+
+GET_CAPACITY_MANAGER_METRIC_DIMENSIONS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GCMMDOe,
+    {_sSI: _cGCMMDRoma, _smit: None},
+    (_MDRet, _NTex),
+    (
+        (lambda: METRIC_DIMENSION_RESULT_SET, {_aQN: _MDRSe, _sN: _mDRSe}),
+        (lambda: schemas.NEXT_TOKEN, {_aQN: _NTex, _sN: _nT}),
+    ),
+)
+
+GET_CAPACITY_MANAGER_METRIC_DIMENSIONS: StaticOperationSchema = (
+    23,
+    n0,
+    _GCMMDe,
+    0,
+    GET_CAPACITY_MANAGER_METRIC_DIMENSIONS_INPUT,
+    GET_CAPACITY_MANAGER_METRIC_DIMENSIONS_OUTPUT,
+    (),
+)
+
+METRIC_DIMENSION_RESULT_SET: StaticSchema = (
+    16,
+    n0,
+    _MDRSe,
+    0,
+    (_me,),
+    ((CAPACITY_MANAGER_DIMENSION, {_sN: _i}),),
+)
+
+GET_CAPACITY_MANAGER_MONITORED_TAG_KEYS_REQUEST_MAX_RESULTS: StaticSchema = (
+    7,
+    n0,
+    _GCMMTKRMR,
+    0,
+)
+
+GET_CAPACITY_MANAGER_MONITORED_TAG_KEYS_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GCMMTKI,
+    {_sSI: _cGCMMTKR, _sm: None},
+    (_MR, _NTex, _DR),
+    (
+        (GET_CAPACITY_MANAGER_MONITORED_TAG_KEYS_REQUEST_MAX_RESULTS, 0),
+        (lambda: schemas.STRING, 0),
+        (lambda: schemas.BOOLEAN, 0),
+    ),
+)
+
+GET_CAPACITY_MANAGER_MONITORED_TAG_KEYS_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GCMMTKO,
+    {_sSI: _cGCMMTKRo, _smit: None},
+    (_CMTK, _NTex),
+    (
+        (lambda: CAPACITY_MANAGER_MONITORED_TAG_KEY_LIST, {_aQN: _CMTKS, _sN: _cMTKS}),
+        (lambda: schemas.STRING, {_aQN: _NTex, _sN: _nT}),
+    ),
+)
+
+GET_CAPACITY_MANAGER_MONITORED_TAG_KEYS: StaticOperationSchema = (
+    23,
+    n0,
+    _GCMMTK,
+    0,
+    GET_CAPACITY_MANAGER_MONITORED_TAG_KEYS_INPUT,
+    GET_CAPACITY_MANAGER_MONITORED_TAG_KEYS_OUTPUT,
+    (),
+)
+
+CAPACITY_MANAGER_MONITORED_TAG_KEY_STATUS: StaticSchema = (
+    14,
+    n0,
+    _CMMTKS,
+    0,
+    (_ACTIVATING, _ACTIVATED, _DEACTIVATING, _SUSPENDED),
+    ((-1, {_sV: _acti}), (-1, {_sV: _activ}), (-1, {_sV: _deac}), (-1, {_sV: _sus})),
+)
+
+CAPACITY_MANAGER_MONITORED_TAG_KEY: StaticSchema = (
+    18,
+    n0,
+    _CMMTK,
+    0,
+    (_TK, _Sta, _SMt, _CMP, _EDTa),
+    (
+        (lambda: schemas.STRING, {_aQN: _TK, _sN: _tK}),
+        (CAPACITY_MANAGER_MONITORED_TAG_KEY_STATUS, {_aQN: _Sta, _sN: _sta}),
+        (lambda: schemas.STRING, {_aQN: _SMt, _sN: _sMt}),
+        (lambda: schemas.BOOLEAN, {_aQN: _CMP, _sN: _cMP}),
+        (lambda: schemas.MILLISECOND_DATE_TIME, {_aQN: _EDTa, _sN: _eDTa}),
+    ),
+)
+
+CAPACITY_MANAGER_MONITORED_TAG_KEY_LIST: StaticSchema = (
+    16,
+    n0,
+    _CMMTKL,
+    0,
+    (_me,),
+    ((CAPACITY_MANAGER_MONITORED_TAG_KEY, {_sN: _i}),),
+)
+
+CAPACITY_AMOUNT: StaticSchema = (7, n0, _CAapa, 0)
+
+CAPACITY_AVAILABILITY_ZONE_ID_LIST: StaticSchema = (
+    16,
+    n0,
+    _CAZIL,
+    0,
+    (_me,),
+    ((lambda: schemas.STRING, {_sN: _i}),),
+)
+
+CAPACITY_UNIT: StaticSchema = (
+    14,
+    n0,
+    _CU,
+    0,
+    (_VCPUS, _INSTANCES),
+    ((-1, {_sV: _vcpu}), (-1, {_sV: _insta})),
+)
+
+ARCHITECTURE_TYPE_SET: StaticSchema = (
+    16,
+    n0,
+    _ATSr,
+    0,
+    (_me,),
+    ((lambda: schemas.ARCHITECTURE_TYPE, {_sN: _i}),),
+)
+
+VIRTUALIZATION_TYPE_SET: StaticSchema = (
+    16,
+    n0,
+    _VTS,
+    0,
+    (_me,),
+    ((lambda: schemas.VIRTUALIZATION_TYPE, {_sN: _i}),),
+)
+
+INSTANCE_REQUIREMENTS_WITH_METADATA_REQUEST: StaticSchema = (
+    18,
+    n0,
+    _IRWMR,
+    0,
+    (_ATrc, _VTir, _IRn),
+    (
+        (ARCHITECTURE_TYPE_SET, {_sN: _ATr}),
+        (VIRTUALIZATION_TYPE_SET, {_sN: _VTi}),
+        (lambda: schemas.INSTANCE_REQUIREMENTS_REQUEST, 0),
+    ),
+)
+
+SUPPORTABILITY_INSTANCE_TYPE_LIST: StaticSchema = (
+    16,
+    n0,
+    _SITL,
+    0,
+    (_me,),
+    ((lambda: schemas.STRING, {_sN: _i}),),
+)
+
+SUPPORTABILITY_MARKET_TYPE: StaticSchema = (
+    14,
+    n0,
+    _SMT,
+    0,
+    (_OD, _SPOT),
+    ((-1, {_sV: _od}), (-1, {_sV: _spo})),
+)
+
+GET_CAPACITY_MANAGER_SUPPORTABILITY_SCORES_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GCMSSI,
+    {_sSI: _cGCMSSR, _sm: None},
+    (_MTar, _CAapa, _CU, _CAZI, _ITnsta, _IRWM, _DR),
+    (
+        (SUPPORTABILITY_MARKET_TYPE, {_sO: None, _smi: None}),
+        (CAPACITY_AMOUNT, {_sO: None, _smi: None}),
+        (CAPACITY_UNIT, {_sO: None, _smi: None}),
+        (CAPACITY_AVAILABILITY_ZONE_ID_LIST, {_sN: _CAZIa, _sO: None, _smi: None}),
+        (SUPPORTABILITY_INSTANCE_TYPE_LIST, {_sN: _IT}),
+        (INSTANCE_REQUIREMENTS_WITH_METADATA_REQUEST, 0),
+        (lambda: schemas.BOOLEAN, 0),
+    ),
+)
+
+GET_CAPACITY_MANAGER_SUPPORTABILITY_SCORES_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GCMSSO,
+    {_sSI: _cGCMSSRo, _smit: None},
+    (_ASg, _CMSSa),
+    (
+        (lambda: SUPPORTABILITY_SCORE, {_aQN: _ASg, _sN: _aSg}),
+        (
+            lambda: CAPACITY_MANAGER_SUPPORTABILITY_SCORE_SET,
+            {_aQN: _CMSSS, _sN: _cMSSS},
+        ),
+    ),
+)
+
+GET_CAPACITY_MANAGER_SUPPORTABILITY_SCORES: StaticOperationSchema = (
+    23,
+    n0,
+    _GCMSS,
+    0,
+    GET_CAPACITY_MANAGER_SUPPORTABILITY_SCORES_INPUT,
+    GET_CAPACITY_MANAGER_SUPPORTABILITY_SCORES_OUTPUT,
+    (),
+)
+
+SUPPORTABILITY_SCORE: StaticSchema = (
+    14,
+    n0,
+    _SSupp,
+    0,
+    (_HIGH, _MEDIUM, _LOW, _UNSUPPORTED),
+    ((-1, {_sV: _hig}), (-1, {_sV: _medi}), (-1, {_sV: _low}), (-1, {_sV: _uns})),
+)
+
+CAPACITY_MANAGER_SUPPORTABILITY_SCORE: StaticSchema = (
+    18,
+    n0,
+    _CMSS,
+    0,
+    (_IT, _AZI, _Scor),
+    (
+        (lambda: schemas.STRING, {_aQN: _IT, _sN: _iT}),
+        (lambda: schemas.AVAILABILITY_ZONE_ID, {_aQN: _AZI, _sN: _aZI}),
+        (SUPPORTABILITY_SCORE, {_aQN: _Scor, _sN: _scor}),
+    ),
+)
+
+CAPACITY_MANAGER_SUPPORTABILITY_SCORE_SET: StaticSchema = (
+    16,
+    n0,
+    _CMSSS,
+    0,
+    (_me,),
+    ((CAPACITY_MANAGER_SUPPORTABILITY_SCORE, {_sN: _i}),),
+)
+
+GET_CAPACITY_RESERVATION_USAGE_REQUEST_MAX_RESULTS: StaticSchema = (7, n0, _GCRURMR, 0)
+
+GET_CAPACITY_RESERVATION_USAGE_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GCRUI,
+    {_sSI: _cGCRUR, _sm: None},
+    (_CRI, _NTex, _MR, _DR),
+    (
+        (lambda: schemas.CAPACITY_RESERVATION_ID, {_sO: None, _smi: None}),
+        (lambda: schemas.STRING, 0),
+        (GET_CAPACITY_RESERVATION_USAGE_REQUEST_MAX_RESULTS, 0),
+        (lambda: schemas.BOOLEAN, 0),
+    ),
+)
+
+GET_CAPACITY_RESERVATION_USAGE_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GCRUO,
+    {_sSI: _cGCRURo, _smit: None},
+    (_NTex, _CRI, _IT, _TICo, _AIC, _St, _IUn, _Inte, _ICA, _IInt),
+    (
+        (lambda: schemas.STRING, {_aQN: _NTex, _sN: _nT}),
+        (lambda: schemas.STRING, {_aQN: _CRI, _sN: _cRI}),
+        (lambda: schemas.STRING, {_aQN: _IT, _sN: _iT}),
+        (lambda: schemas.INTEGER, {_aQN: _TICo, _sN: _tICo}),
+        (lambda: schemas.INTEGER, {_aQN: _AIC, _sN: _aIC}),
+        (lambda: schemas.CAPACITY_RESERVATION_STATE, {_aQN: _St, _sN: _st}),
+        (lambda: INSTANCE_USAGE_SET, {_aQN: _IUS, _sN: _iUS}),
+        (lambda: schemas.BOXED_BOOLEAN, {_aQN: _Inte, _sN: _inte}),
+        (lambda: schemas.INTERRUPTIBLE_CAPACITY_ALLOCATION, {_aQN: _ICA, _sN: _iCA}),
+        (lambda: schemas.INTERRUPTION_INFO, {_aQN: _IInt, _sN: _iIn}),
+    ),
+)
+
+GET_CAPACITY_RESERVATION_USAGE: StaticOperationSchema = (
+    23,
+    n0,
+    _GCRU,
+    0,
+    GET_CAPACITY_RESERVATION_USAGE_INPUT,
+    GET_CAPACITY_RESERVATION_USAGE_OUTPUT,
+    (),
+)
+
+INSTANCE_USAGE: StaticSchema = (
+    18,
+    n0,
+    _IU,
+    0,
+    (_AIcco, _UIC),
+    (
+        (lambda: schemas.STRING, {_aQN: _AIcco, _sN: _aIc}),
+        (lambda: schemas.INTEGER, {_aQN: _UIC, _sN: _uIC}),
+    ),
+)
+
+INSTANCE_USAGE_SET: StaticSchema = (
+    16,
+    n0,
+    _IUS,
+    0,
+    (_me,),
+    ((INSTANCE_USAGE, {_sN: _i}),),
+)
+
+GET_CLIENT_VPN_ENDPOINT_AUTHORIZATION_POLICY_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GCVEAPI,
+    {_sSI: _cGCVEAPR, _sm: None},
+    (_CVEI, _DR),
+    (
+        (lambda: schemas.CLIENT_VPN_ENDPOINT_ID, {_sO: None, _smi: None}),
+        (lambda: schemas.BOOLEAN, 0),
+    ),
+)
+
+GET_CLIENT_VPN_ENDPOINT_AUTHORIZATION_POLICY_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GCVEAPO,
+    {_sSI: _cGCVEAPRo, _smit: None},
+    (_CVEI, _PDo, _Des, _SMh, _Sta),
+    (
+        (lambda: schemas.STRING, {_aQN: _CVEI, _sN: _cVEI}),
+        (lambda: schemas.STRING, {_aQN: _PDo, _sN: _pDo}),
+        (lambda: schemas.STRING, {_aQN: _Des, _sN: _desc}),
+        (lambda: CLIENT_VPN_AUTHORIZATION_POLICY_SHADOW_MODE, {_aQN: _SMh, _sN: _sMh}),
+        (CLIENT_VPN_AUTHORIZATION_POLICY_STATUS, {_aQN: _Sta, _sN: _sta}),
+    ),
+)
+
+GET_CLIENT_VPN_ENDPOINT_AUTHORIZATION_POLICY: StaticOperationSchema = (
+    23,
+    n0,
+    _GCVEAP,
+    0,
+    GET_CLIENT_VPN_ENDPOINT_AUTHORIZATION_POLICY_INPUT,
+    GET_CLIENT_VPN_ENDPOINT_AUTHORIZATION_POLICY_OUTPUT,
+    (),
+)
+
+CLIENT_VPN_AUTHORIZATION_POLICY_SHADOW_MODE: StaticSchema = (
+    14,
+    n0,
+    _CVAPSM,
+    0,
+    (_en, _d),
+    ((-1, {_sV: _en}), (-1, {_sV: _d})),
+)
+
+GET_COIP_POOL_USAGE_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GCPUI,
+    {_sSI: _cGCPUR, _sm: None},
+    (_PIo, _Fil, _MR, _NTex, _DR),
+    (
+        (lambda: schemas.IPV4_POOL_COIP_ID, {_sO: None, _smi: None}),
+        (lambda: schemas.FILTER_LIST, {_sN: _Fi}),
+        (lambda: schemas.COIP_POOL_MAX_RESULTS, 0),
+        (lambda: schemas.STRING, 0),
+        (lambda: schemas.BOOLEAN, 0),
+    ),
+)
+
+GET_COIP_POOL_USAGE_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GCPUO,
+    {_sSI: _cGCPURo, _smit: None},
+    (_CPIo, _CAUo, _LGRTI, _NTex),
+    (
+        (lambda: schemas.STRING, {_aQN: _CPIo, _sN: _cPI}),
+        (lambda: COIP_ADDRESS_USAGE_SET, {_aQN: _CAUS, _sN: _cAUS}),
+        (lambda: schemas.STRING, {_aQN: _LGRTI, _sN: _lGRTI}),
+        (lambda: schemas.STRING, {_aQN: _NTex, _sN: _nT}),
+    ),
+)
+
+GET_COIP_POOL_USAGE: StaticOperationSchema = (
+    23,
+    n0,
+    _GCPU,
+    0,
+    GET_COIP_POOL_USAGE_INPUT,
+    GET_COIP_POOL_USAGE_OUTPUT,
+    (),
+)
+
+COIP_ADDRESS_USAGE: StaticSchema = (
+    18,
+    n0,
+    _CAU,
+    0,
+    (_AI, _AAIw, _ASw, _CIop_),
+    (
+        (lambda: schemas.STRING, {_aQN: _AI, _sN: _aI}),
+        (lambda: schemas.STRING, {_aQN: _AAIw, _sN: _aAI}),
+        (lambda: schemas.STRING, {_aQN: _ASw, _sN: _aSw}),
+        (lambda: schemas.STRING, {_aQN: _CIop_, _sN: _cIop}),
+    ),
+)
+
+COIP_ADDRESS_USAGE_SET: StaticSchema = (
+    16,
+    n0,
+    _CAUS,
+    0,
+    (_me,),
+    ((COIP_ADDRESS_USAGE, {_sN: _i}),),
+)
+
+GET_CONSOLE_OUTPUT_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GCOI,
+    {_sSI: _cGCOR, _sm: None},
+    (_II, _Lat, _DR),
+    (
+        (lambda: schemas.INSTANCE_ID, {_sO: None, _smi: None}),
+        (lambda: schemas.BOOLEAN, 0),
+        (lambda: schemas.BOOLEAN, {_aQN: _DR, _sN: _dRr}),
+    ),
+)
+
+GET_CONSOLE_OUTPUT_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GCOO,
+    {_sSI: _cGCORo, _smit: None},
+    (_II, _Ti, _Ou),
+    (
+        (lambda: schemas.STRING, {_aQN: _II, _sN: _iI}),
+        (lambda: schemas.DATE_TIME, {_aQN: _Ti, _sN: _ti}),
+        (lambda: schemas.STRING, {_aQN: _Ou, _sN: _outp}),
+    ),
+)
+
+GET_CONSOLE_OUTPUT: StaticOperationSchema = (
+    23,
+    n0,
+    _GCO,
+    0,
+    GET_CONSOLE_OUTPUT_INPUT,
+    GET_CONSOLE_OUTPUT_OUTPUT,
+    (),
+)
+
+GET_CONSOLE_SCREENSHOT_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GCSI,
+    {_sSI: _cGCSR, _sm: None},
+    (_DR, _II, _WU),
+    (
+        (lambda: schemas.BOOLEAN, 0),
+        (lambda: schemas.INSTANCE_ID, {_sO: None, _smi: None}),
+        (lambda: schemas.BOOLEAN, 0),
+    ),
+)
+
+GET_CONSOLE_SCREENSHOT_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GCSO,
+    {_sSI: _cGCSRo, _smit: None},
+    (_IDm, _II),
+    (
+        (lambda: schemas.STRING, {_aQN: _IDm, _sN: _iDm}),
+        (lambda: schemas.STRING, {_aQN: _II, _sN: _iI}),
+    ),
+)
+
+GET_CONSOLE_SCREENSHOT: StaticOperationSchema = (
+    23,
+    n0,
+    _GCS,
+    0,
+    GET_CONSOLE_SCREENSHOT_INPUT,
+    GET_CONSOLE_SCREENSHOT_OUTPUT,
+    (),
+)
 
 GET_DECLARATIVE_POLICIES_REPORT_SUMMARY_INPUT: StaticSchema = (
     18,
@@ -738,957 +1564,4 @@ IPAM_POLICY_MANAGED_BY: StaticSchema = (
     0,
     (_acc, _dafi),
     ((-1, {_sV: _acc}), (-1, {_sV: _dafi_})),
-)
-
-PARTITION_LOAD_FREQUENCY: StaticSchema = (
-    14,
-    n0,
-    _PLF,
-    0,
-    (_NONE, _DAILY, _WEEKLY, _MONTHLY),
-    ((-1, {_sV: _no}), (-1, {_sV: _da}), (-1, {_sV: _wee}), (-1, {_sV: _mont})),
-)
-
-ATHENA_INTEGRATION: StaticSchema = (
-    18,
-    n0,
-    _AIth,
-    0,
-    (_IRSDA, _PLF, _PSD, _PED),
-    (
-        (lambda: schemas.STRING, {_sO: None, _smi: None}),
-        (PARTITION_LOAD_FREQUENCY, {_sO: None, _smi: None}),
-        (lambda: schemas.MILLISECOND_DATE_TIME, 0),
-        (lambda: schemas.MILLISECOND_DATE_TIME, 0),
-    ),
-)
-
-ATHENA_INTEGRATIONS_SET: StaticSchema = (
-    16,
-    n0,
-    _AISt,
-    0,
-    (_me,),
-    ((ATHENA_INTEGRATION, {_sN: _i}),),
-)
-
-INTEGRATE_SERVICES: StaticSchema = (
-    18,
-    n0,
-    _ISnte,
-    0,
-    (_AIthe,),
-    ((ATHENA_INTEGRATIONS_SET, {_sN: _AIth}),),
-)
-
-GET_FLOW_LOGS_INTEGRATION_TEMPLATE_INPUT: StaticSchema = (
-    18,
-    n0,
-    _GFLITI,
-    {_sSI: _cGFLITR, _sm: None},
-    (_DR, _FLIl, _CDSDA, _ISnte),
-    (
-        (lambda: schemas.BOOLEAN, 0),
-        (lambda: schemas.VPC_FLOW_LOG_ID, {_sO: None, _smi: None}),
-        (lambda: schemas.STRING, {_sO: None, _smi: None}),
-        (INTEGRATE_SERVICES, {_sN: _ISnteg, _sO: None, _smi: None}),
-    ),
-)
-
-GET_FLOW_LOGS_INTEGRATION_TEMPLATE_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _GFLITO,
-    {_sSI: _cGFLITRo, _smit: None},
-    (_Resu,),
-    ((lambda: schemas.STRING, {_aQN: _Resu, _sN: _resu}),),
-)
-
-GET_FLOW_LOGS_INTEGRATION_TEMPLATE: StaticOperationSchema = (
-    23,
-    n0,
-    _GFLIT,
-    0,
-    GET_FLOW_LOGS_INTEGRATION_TEMPLATE_INPUT,
-    GET_FLOW_LOGS_INTEGRATION_TEMPLATE_OUTPUT,
-    (),
-)
-
-GET_GROUPS_FOR_CAPACITY_RESERVATION_REQUEST_MAX_RESULTS: StaticSchema = (
-    7,
-    n0,
-    _GGFCRRMR,
-    0,
-)
-
-GET_GROUPS_FOR_CAPACITY_RESERVATION_INPUT: StaticSchema = (
-    18,
-    n0,
-    _GGFCRI,
-    {_sSI: _cGGFCRR, _sm: None},
-    (_CRI, _NTex, _MR, _DR),
-    (
-        (lambda: schemas.CAPACITY_RESERVATION_ID, {_sO: None, _smi: None}),
-        (lambda: schemas.STRING, 0),
-        (GET_GROUPS_FOR_CAPACITY_RESERVATION_REQUEST_MAX_RESULTS, 0),
-        (lambda: schemas.BOOLEAN, 0),
-    ),
-)
-
-GET_GROUPS_FOR_CAPACITY_RESERVATION_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _GGFCRO,
-    {_sSI: _cGGFCRRo, _smit: None},
-    (_NTex, _CRGa),
-    (
-        (lambda: schemas.STRING, {_aQN: _NTex, _sN: _nT}),
-        (lambda: CAPACITY_RESERVATION_GROUP_SET, {_aQN: _CRGS, _sN: _cRGS}),
-    ),
-)
-
-GET_GROUPS_FOR_CAPACITY_RESERVATION: StaticOperationSchema = (
-    23,
-    n0,
-    _GGFCR,
-    0,
-    GET_GROUPS_FOR_CAPACITY_RESERVATION_INPUT,
-    GET_GROUPS_FOR_CAPACITY_RESERVATION_OUTPUT,
-    (),
-)
-
-CAPACITY_RESERVATION_GROUP: StaticSchema = (
-    18,
-    n0,
-    _CRG,
-    0,
-    (_GAr, _OIw),
-    (
-        (lambda: schemas.STRING, {_aQN: _GAr, _sN: _gAr}),
-        (lambda: schemas.STRING, {_aQN: _OIw, _sN: _oI}),
-    ),
-)
-
-CAPACITY_RESERVATION_GROUP_SET: StaticSchema = (
-    16,
-    n0,
-    _CRGS,
-    0,
-    (_me,),
-    ((CAPACITY_RESERVATION_GROUP, {_sN: _i}),),
-)
-
-REQUEST_HOST_ID_SET: StaticSchema = (
-    16,
-    n0,
-    _RHISe,
-    0,
-    (_me,),
-    ((lambda: schemas.DEDICATED_HOST_ID, {_sN: _i}),),
-)
-
-GET_HOST_RESERVATION_PURCHASE_PREVIEW_INPUT: StaticSchema = (
-    18,
-    n0,
-    _GHRPPI,
-    {_sSI: _cGHRPPR, _sm: None},
-    (_HIS, _OI),
-    (
-        (REQUEST_HOST_ID_SET, {_sO: None, _smi: None}),
-        (lambda: schemas.OFFERING_ID, {_sO: None, _smi: None}),
-    ),
-)
-
-GET_HOST_RESERVATION_PURCHASE_PREVIEW_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _GHRPPO,
-    {_sSI: _cGHRPPRo, _smit: None},
-    (_CC, _Pur, _THP, _TUP),
-    (
-        (lambda: schemas.CURRENCY_CODE_VALUES, {_aQN: _CC, _sN: _cC}),
-        (lambda: PURCHASE_SET, {_aQN: _Pur, _sN: _pur}),
-        (lambda: schemas.STRING, {_aQN: _THP, _sN: _tHP}),
-        (lambda: schemas.STRING, {_aQN: _TUP, _sN: _tUP}),
-    ),
-)
-
-GET_HOST_RESERVATION_PURCHASE_PREVIEW: StaticOperationSchema = (
-    23,
-    n0,
-    _GHRPP,
-    0,
-    GET_HOST_RESERVATION_PURCHASE_PREVIEW_INPUT,
-    GET_HOST_RESERVATION_PURCHASE_PREVIEW_OUTPUT,
-    (),
-)
-
-PURCHASE: StaticSchema = (
-    18,
-    n0,
-    _Pur,
-    0,
-    (_CC, _Dur, _HIS, _HRI, _HP, _IF, _POa, _UPp),
-    (
-        (lambda: schemas.CURRENCY_CODE_VALUES, {_aQN: _CC, _sN: _cC}),
-        (lambda: schemas.INTEGER, {_aQN: _Dur, _sN: _dur}),
-        (lambda: schemas.RESPONSE_HOST_ID_SET, {_aQN: _HIS, _sN: _hIS}),
-        (lambda: schemas.HOST_RESERVATION_ID, {_aQN: _HRI, _sN: _hRI}),
-        (lambda: schemas.STRING, {_aQN: _HP, _sN: _hP}),
-        (lambda: schemas.STRING, {_aQN: _IF, _sN: _iF}),
-        (lambda: schemas.PAYMENT_OPTION, {_aQN: _POa, _sN: _pOa}),
-        (lambda: schemas.STRING, {_aQN: _UPp, _sN: _uPp}),
-    ),
-)
-
-PURCHASE_SET: StaticSchema = (16, n0, _PSu, 0, (_me,), ((PURCHASE, {_sN: _i}),))
-
-GET_IMAGE_ANCESTRY_INPUT: StaticSchema = (
-    18,
-    n0,
-    _GIAI,
-    {_sSI: _cGIAR, _sm: None},
-    (_IIm, _DR),
-    ((lambda: schemas.IMAGE_ID, {_sO: None, _smi: None}), (lambda: schemas.BOOLEAN, 0)),
-)
-
-GET_IMAGE_ANCESTRY_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _GIAO,
-    {_sSI: _cGIARo, _smit: None},
-    (_IAEm,),
-    ((lambda: IMAGE_ANCESTRY_ENTRY_LIST, {_aQN: _IAES, _sN: _iAES}),),
-)
-
-GET_IMAGE_ANCESTRY: StaticOperationSchema = (
-    23,
-    n0,
-    _GIAe,
-    0,
-    GET_IMAGE_ANCESTRY_INPUT,
-    GET_IMAGE_ANCESTRY_OUTPUT,
-    (),
-)
-
-IMAGE_ANCESTRY_ENTRY: StaticSchema = (
-    18,
-    n0,
-    _IAE,
-    0,
-    (_CDre, _IIm, _IOA, _SII, _SIR),
-    (
-        (lambda: schemas.MILLISECOND_DATE_TIME, {_aQN: _CDre, _sN: _cDre}),
-        (lambda: schemas.IMAGE_ID, {_aQN: _IIm, _sN: _iIm}),
-        (lambda: schemas.STRING, {_aQN: _IOA, _sN: _iOA}),
-        (lambda: schemas.IMAGE_ID, {_aQN: _SII, _sN: _sII}),
-        (lambda: schemas.STRING, {_aQN: _SIR, _sN: _sIR}),
-    ),
-)
-
-IMAGE_ANCESTRY_ENTRY_LIST: StaticSchema = (
-    16,
-    n0,
-    _IAEL,
-    0,
-    (_me,),
-    ((IMAGE_ANCESTRY_ENTRY, {_sN: _i}),),
-)
-
-GET_IMAGE_BLOCK_PUBLIC_ACCESS_STATE_INPUT: StaticSchema = (
-    18,
-    n0,
-    _GIBPASI,
-    {_sSI: _cGIBPASR, _sm: None},
-    (_DR,),
-    ((lambda: schemas.BOOLEAN, 0),),
-)
-
-GET_IMAGE_BLOCK_PUBLIC_ACCESS_STATE_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _GIBPASO,
-    {_sSI: _cGIBPASRo, _smit: None},
-    (_IBPAS, _MB),
-    (
-        (lambda: schemas.STRING, {_aQN: _IBPAS, _sN: _iBPAS}),
-        (lambda: schemas.MANAGED_BY, {_aQN: _MB, _sN: _mB}),
-    ),
-)
-
-GET_IMAGE_BLOCK_PUBLIC_ACCESS_STATE: StaticOperationSchema = (
-    23,
-    n0,
-    _GIBPAS,
-    0,
-    GET_IMAGE_BLOCK_PUBLIC_ACCESS_STATE_INPUT,
-    GET_IMAGE_BLOCK_PUBLIC_ACCESS_STATE_OUTPUT,
-    (),
-)
-
-GET_IMAGE_FINDINGS_MAX_RESULTS: StaticSchema = (7, n0, _GIFMR, 0)
-
-GET_IMAGE_FINDINGS_INPUT: StaticSchema = (
-    18,
-    n0,
-    _GIFI,
-    {_sSI: _cGIFR, _sm: None},
-    (_IIm, _MR, _NTex, _DR),
-    (
-        (lambda: schemas.IMAGE_ID, {_sO: None, _smi: None}),
-        (GET_IMAGE_FINDINGS_MAX_RESULTS, 0),
-        (lambda: schemas.STRING, 0),
-        (lambda: schemas.BOOLEAN, 0),
-    ),
-)
-
-GET_IMAGE_FINDINGS_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _GIFO,
-    {_sSI: _cGIFRo, _smit: None},
-    (_IFma, _NTex),
-    (
-        (lambda: GET_IMAGE_FINDINGS_ENTRY_SET, {_aQN: _IFS, _sN: _iFS}),
-        (lambda: schemas.STRING, {_aQN: _NTex, _sN: _nT}),
-    ),
-)
-
-GET_IMAGE_FINDINGS: StaticOperationSchema = (
-    23,
-    n0,
-    _GIF,
-    0,
-    GET_IMAGE_FINDINGS_INPUT,
-    GET_IMAGE_FINDINGS_OUTPUT,
-    (),
-)
-
-IMAGE_FINDING_PATH_SET: StaticSchema = (
-    16,
-    n0,
-    _IFPS,
-    0,
-    (_me,),
-    ((lambda: schemas.STRING, {_sN: _i}),),
-)
-
-IMAGE_FINDING: StaticSchema = (
-    18,
-    n0,
-    _IFm,
-    0,
-    (_FAix, _Scor, _FOAi, _UA, _Tit, _Pat, _SLe, _SIn),
-    (
-        (lambda: schemas.BOOLEAN, {_aQN: _FAix, _sN: _fAix}),
-        (lambda: schemas.DOUBLE, {_aQN: _Scor, _sN: _scor}),
-        (lambda: schemas.MILLISECOND_DATE_TIME, {_aQN: _FOAi, _sN: _fOA}),
-        (lambda: schemas.MILLISECOND_DATE_TIME, {_aQN: _UA, _sN: _uA}),
-        (lambda: schemas.STRING, {_aQN: _Tit, _sN: _tit}),
-        (IMAGE_FINDING_PATH_SET, {_aQN: _PSat, _sN: _pSa}),
-        (lambda: schemas.SEVERITY_LABEL, {_aQN: _SLe, _sN: _sLe}),
-        (lambda: schemas.SNAPSHOT_ID, {_aQN: _SIn, _sN: _sIn}),
-    ),
-)
-
-GET_IMAGE_FINDINGS_ENTRY_SET: StaticSchema = (
-    16,
-    n0,
-    _GIFES,
-    0,
-    (_me,),
-    ((IMAGE_FINDING, {_sN: _i}),),
-)
-
-GET_INSTANCE_METADATA_DEFAULTS_INPUT: StaticSchema = (
-    18,
-    n0,
-    _GIMDI,
-    {_sSI: _cGIMDR, _sm: None},
-    (_DR,),
-    ((lambda: schemas.BOOLEAN, 0),),
-)
-
-GET_INSTANCE_METADATA_DEFAULTS_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _GIMDO,
-    {_sSI: _cGIMDRo, _smit: None},
-    (_ALcc,),
-    ((lambda: INSTANCE_METADATA_DEFAULTS_RESPONSE, {_aQN: _ALcc, _sN: _aLc}),),
-)
-
-GET_INSTANCE_METADATA_DEFAULTS: StaticOperationSchema = (
-    23,
-    n0,
-    _GIMD,
-    0,
-    GET_INSTANCE_METADATA_DEFAULTS_INPUT,
-    GET_INSTANCE_METADATA_DEFAULTS_OUTPUT,
-    (),
-)
-
-HTTP_TOKENS_ENFORCED_STATE: StaticSchema = (
-    14,
-    n0,
-    _HTES,
-    0,
-    (_d, _ena),
-    ((-1, {_sV: _d}), (-1, {_sV: _ena})),
-)
-
-INSTANCE_METADATA_DEFAULTS_RESPONSE: StaticSchema = (
-    18,
-    n0,
-    _IMDR,
-    0,
-    (_HTt, _HPRHL, _HE, _IMT, _MB, _MEM, _HTE),
-    (
-        (lambda: schemas.HTTP_TOKENS_STATE, {_aQN: _HTt, _sN: _hTt}),
-        (lambda: schemas.BOXED_INTEGER, {_aQN: _HPRHL, _sN: _hPRHL}),
-        (lambda: schemas.INSTANCE_METADATA_ENDPOINT_STATE, {_aQN: _HE, _sN: _hE}),
-        (lambda: schemas.INSTANCE_METADATA_TAGS_STATE, {_aQN: _IMT, _sN: _iMT}),
-        (lambda: schemas.MANAGED_BY, {_aQN: _MB, _sN: _mB}),
-        (lambda: schemas.STRING, {_aQN: _MEM, _sN: _mEM}),
-        (HTTP_TOKENS_ENFORCED_STATE, {_aQN: _HTE, _sN: _hTE}),
-    ),
-)
-
-EK_PUB_KEY_FORMAT: StaticSchema = (
-    14,
-    n0,
-    _EPKF,
-    0,
-    (_der_, _tpm),
-    ((-1, {_sV: _der_}), (-1, {_sV: _tpm})),
-)
-
-EK_PUB_KEY_TYPE: StaticSchema = (
-    14,
-    n0,
-    _EPKT,
-    0,
-    (_R_, _ESP),
-    (
-        (
-            -1,
-            {
-                _sV: _r___________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________
-            },
-        ),
-        (-1, {_sV: _esp}),
-    ),
-)
-
-GET_INSTANCE_TPM_EK_PUB_INPUT: StaticSchema = (
-    18,
-    n0,
-    _GITEPI,
-    {_sSI: _cGITEPR, _sm: None},
-    (_II, _KT, _KF, _DR),
-    (
-        (lambda: schemas.INSTANCE_ID, {_sN: _II, _sO: None, _smi: None}),
-        (EK_PUB_KEY_TYPE, {_sO: None, _smi: None}),
-        (EK_PUB_KEY_FORMAT, {_sO: None, _smi: None}),
-        (lambda: schemas.BOOLEAN, 0),
-    ),
-)
-
-GET_INSTANCE_TPM_EK_PUB_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _GITEPO,
-    {_sSI: _cGITEPRo, _smit: None},
-    (_II, _KT, _KF, _KV),
-    (
-        (lambda: schemas.INSTANCE_ID, {_aQN: _II, _sN: _iI}),
-        (EK_PUB_KEY_TYPE, {_aQN: _KT, _sN: _kT}),
-        (EK_PUB_KEY_FORMAT, {_aQN: _KF, _sN: _kFe}),
-        (lambda: EK_PUB_KEY_VALUE, {_aQN: _KV, _sN: _kV}),
-    ),
-)
-
-GET_INSTANCE_TPM_EK_PUB: StaticOperationSchema = (
-    23,
-    n0,
-    _GITEP,
-    0,
-    GET_INSTANCE_TPM_EK_PUB_INPUT,
-    GET_INSTANCE_TPM_EK_PUB_OUTPUT,
-    (),
-)
-
-EK_PUB_KEY_VALUE: StaticSchema = (3, n0, _EPKV, 4)
-
-GET_INSTANCE_TYPES_FROM_INSTANCE_REQUIREMENTS_INPUT: StaticSchema = (
-    18,
-    n0,
-    _GITFIRI,
-    {_sSI: _cGITFIRR, _sm: None},
-    (_DR, _ATrc, _VTir, _IRn, _MR, _NTex, _Con),
-    (
-        (lambda: schemas.BOOLEAN, 0),
-        (lambda: schemas.ARCHITECTURE_TYPE_SET, {_sN: _ATr, _sO: None, _smi: None}),
-        (lambda: schemas.VIRTUALIZATION_TYPE_SET, {_sN: _VTi, _sO: None, _smi: None}),
-        (lambda: schemas.INSTANCE_REQUIREMENTS_REQUEST, {_sO: None, _smi: None}),
-        (lambda: schemas.INTEGER, 0),
-        (lambda: schemas.STRING, 0),
-        (lambda: schemas.STRING, 0),
-    ),
-)
-
-GET_INSTANCE_TYPES_FROM_INSTANCE_REQUIREMENTS_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _GITFIRO,
-    {_sSI: _cGITFIRRo, _smit: None},
-    (_ITnsta, _NTex),
-    (
-        (
-            lambda: INSTANCE_TYPE_INFO_FROM_INSTANCE_REQUIREMENTS_SET,
-            {_aQN: _ITSns, _sN: _iTSns},
-        ),
-        (lambda: schemas.STRING, {_aQN: _NTex, _sN: _nT}),
-    ),
-)
-
-GET_INSTANCE_TYPES_FROM_INSTANCE_REQUIREMENTS: StaticOperationSchema = (
-    23,
-    n0,
-    _GITFIR,
-    0,
-    GET_INSTANCE_TYPES_FROM_INSTANCE_REQUIREMENTS_INPUT,
-    GET_INSTANCE_TYPES_FROM_INSTANCE_REQUIREMENTS_OUTPUT,
-    (),
-)
-
-INSTANCE_TYPE_INFO_FROM_INSTANCE_REQUIREMENTS: StaticSchema = (
-    18,
-    n0,
-    _ITIFIR,
-    0,
-    (_IT,),
-    ((lambda: schemas.STRING, {_aQN: _IT, _sN: _iT}),),
-)
-
-INSTANCE_TYPE_INFO_FROM_INSTANCE_REQUIREMENTS_SET: StaticSchema = (
-    16,
-    n0,
-    _ITIFIRS,
-    0,
-    (_me,),
-    ((INSTANCE_TYPE_INFO_FROM_INSTANCE_REQUIREMENTS, {_sN: _i}),),
-)
-
-GET_INSTANCE_UEFI_DATA_INPUT: StaticSchema = (
-    18,
-    n0,
-    _GIUDI,
-    {_sSI: _cGIUDR, _sm: None},
-    (_II, _DR),
-    (
-        (lambda: schemas.INSTANCE_ID, {_sN: _II, _sO: None, _smi: None}),
-        (lambda: schemas.BOOLEAN, 0),
-    ),
-)
-
-GET_INSTANCE_UEFI_DATA_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _GIUDO,
-    {_sSI: _cGIUDRo, _smit: None},
-    (_II, _UDe),
-    (
-        (lambda: schemas.INSTANCE_ID, {_aQN: _II, _sN: _iI}),
-        (lambda: SENSITIVE_STRING, {_aQN: _UDe, _sN: _uDe}),
-    ),
-)
-
-GET_INSTANCE_UEFI_DATA: StaticOperationSchema = (
-    23,
-    n0,
-    _GIUD,
-    0,
-    GET_INSTANCE_UEFI_DATA_INPUT,
-    GET_INSTANCE_UEFI_DATA_OUTPUT,
-    (),
-)
-
-SENSITIVE_STRING: StaticSchema = (3, n0, _SSen, 4)
-
-IPAM_ADDRESS_HISTORY_MAX_RESULTS: StaticSchema = (7, n0, _IAHMR, 0)
-
-GET_IPAM_ADDRESS_HISTORY_INPUT: StaticSchema = (
-    18,
-    n0,
-    _GIAHI,
-    {_sSI: _cGIAHR, _sm: None},
-    (_DR, _Ci, _ISI, _VI, _ST, _ETnd, _MR, _NTex),
-    (
-        (lambda: schemas.BOOLEAN, 0),
-        (lambda: schemas.STRING, {_sO: None, _smi: None}),
-        (lambda: schemas.IPAM_SCOPE_ID, {_sO: None, _smi: None}),
-        (lambda: schemas.STRING, 0),
-        (lambda: schemas.MILLISECOND_DATE_TIME, 0),
-        (lambda: schemas.MILLISECOND_DATE_TIME, 0),
-        (IPAM_ADDRESS_HISTORY_MAX_RESULTS, 0),
-        (lambda: schemas.NEXT_TOKEN, 0),
-    ),
-)
-
-GET_IPAM_ADDRESS_HISTORY_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _GIAHO,
-    {_sSI: _cGIAHRo, _smit: None},
-    (_HRi, _NTex),
-    (
-        (lambda: IPAM_ADDRESS_HISTORY_RECORD_SET, {_aQN: _HRS, _sN: _hRS}),
-        (lambda: schemas.NEXT_TOKEN, {_aQN: _NTex, _sN: _nT}),
-    ),
-)
-
-GET_IPAM_ADDRESS_HISTORY: StaticOperationSchema = (
-    23,
-    n0,
-    _GIAH,
-    0,
-    GET_IPAM_ADDRESS_HISTORY_INPUT,
-    GET_IPAM_ADDRESS_HISTORY_OUTPUT,
-    (),
-)
-
-IPAM_COMPLIANCE_STATUS: StaticSchema = (
-    14,
-    n0,
-    _ICSp,
-    0,
-    (_complia, _non, _unm, _ign),
-    ((-1, {_sV: _complia}), (-1, {_sV: _non}), (-1, {_sV: _unm}), (-1, {_sV: _ign})),
-)
-
-IPAM_OVERLAP_STATUS: StaticSchema = (
-    14,
-    n0,
-    _IOSp,
-    0,
-    (_ove, _nono, _ign),
-    ((-1, {_sV: _ove}), (-1, {_sV: _nono}), (-1, {_sV: _ign})),
-)
-
-IPAM_ADDRESS_HISTORY_RESOURCE_TYPE: StaticSchema = (
-    14,
-    n0,
-    _IAHRT,
-    0,
-    (_eip, _vp, _su, _ni, _ins),
-    (
-        (-1, {_sV: _eip}),
-        (-1, {_sV: _vp}),
-        (-1, {_sV: _su}),
-        (-1, {_sV: _ni_}),
-        (-1, {_sV: _ins}),
-    ),
-)
-
-IPAM_ADDRESS_HISTORY_RECORD: StaticSchema = (
-    18,
-    n0,
-    _IAHR,
-    0,
-    (_ROI, _RR, _RT, _RIe, _RCes, _RNes, _RCS, _ROSe, _VI, _SST, _SET),
-    (
-        (lambda: schemas.STRING, {_aQN: _ROI, _sN: _rOI}),
-        (lambda: schemas.STRING, {_aQN: _RR, _sN: _rR}),
-        (IPAM_ADDRESS_HISTORY_RESOURCE_TYPE, {_aQN: _RT, _sN: _rT}),
-        (lambda: schemas.STRING, {_aQN: _RIe, _sN: _rI}),
-        (lambda: schemas.STRING, {_aQN: _RCes, _sN: _rCes}),
-        (lambda: schemas.STRING, {_aQN: _RNes, _sN: _rNes}),
-        (IPAM_COMPLIANCE_STATUS, {_aQN: _RCS, _sN: _rCS}),
-        (IPAM_OVERLAP_STATUS, {_aQN: _ROSe, _sN: _rOSe}),
-        (lambda: schemas.STRING, {_aQN: _VI, _sN: _vI}),
-        (lambda: schemas.MILLISECOND_DATE_TIME, {_aQN: _SST, _sN: _sST}),
-        (lambda: schemas.MILLISECOND_DATE_TIME, {_aQN: _SET, _sN: _sET}),
-    ),
-)
-
-IPAM_ADDRESS_HISTORY_RECORD_SET: StaticSchema = (
-    16,
-    n0,
-    _IAHRS,
-    0,
-    (_me,),
-    ((IPAM_ADDRESS_HISTORY_RECORD, {_sN: _i}),),
-)
-
-GET_IPAM_DISCOVERED_ACCOUNTS_INPUT: StaticSchema = (
-    18,
-    n0,
-    _GIDAI,
-    {_sSI: _cGIDAR, _sm: None},
-    (_DR, _IRDI, _DRi, _Fil, _NTex, _MR),
-    (
-        (lambda: schemas.BOOLEAN, 0),
-        (lambda: schemas.IPAM_RESOURCE_DISCOVERY_ID, {_sO: None, _smi: None}),
-        (lambda: schemas.STRING, {_sO: None, _smi: None}),
-        (lambda: schemas.FILTER_LIST, {_sN: _Fi}),
-        (lambda: schemas.NEXT_TOKEN, 0),
-        (lambda: schemas.IPAM_MAX_RESULTS, 0),
-    ),
-)
-
-GET_IPAM_DISCOVERED_ACCOUNTS_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _GIDAO,
-    {_sSI: _cGIDARo, _smit: None},
-    (_IDAp, _NTex),
-    (
-        (lambda: IPAM_DISCOVERED_ACCOUNT_SET, {_aQN: _IDAS, _sN: _iDAS}),
-        (lambda: schemas.NEXT_TOKEN, {_aQN: _NTex, _sN: _nT}),
-    ),
-)
-
-GET_IPAM_DISCOVERED_ACCOUNTS: StaticOperationSchema = (
-    23,
-    n0,
-    _GIDA,
-    0,
-    GET_IPAM_DISCOVERED_ACCOUNTS_INPUT,
-    GET_IPAM_DISCOVERED_ACCOUNTS_OUTPUT,
-    (),
-)
-
-IPAM_DISCOVERY_FAILURE_CODE: StaticSchema = (
-    14,
-    n0,
-    _IDFC,
-    0,
-    (_arf, _tf__, _uf__),
-    ((-1, {_sV: _arf_}), (-1, {_sV: _tf___}), (-1, {_sV: _uf___})),
-)
-
-IPAM_DISCOVERY_FAILURE_REASON: StaticSchema = (
-    18,
-    n0,
-    _IDFR,
-    0,
-    (_C, _Me),
-    (
-        (IPAM_DISCOVERY_FAILURE_CODE, {_aQN: _C, _sN: _co}),
-        (lambda: schemas.STRING, {_aQN: _Me, _sN: _mes}),
-    ),
-)
-
-IPAM_DISCOVERED_ACCOUNT: StaticSchema = (
-    18,
-    n0,
-    _IDA,
-    0,
-    (_AIcco, _DRi, _FR, _LADT, _LSDT, _OUI),
-    (
-        (lambda: schemas.STRING, {_aQN: _AIcco, _sN: _aIc}),
-        (lambda: schemas.STRING, {_aQN: _DRi, _sN: _dRi}),
-        (IPAM_DISCOVERY_FAILURE_REASON, {_aQN: _FR, _sN: _fR}),
-        (lambda: schemas.MILLISECOND_DATE_TIME, {_aQN: _LADT, _sN: _lADT}),
-        (lambda: schemas.MILLISECOND_DATE_TIME, {_aQN: _LSDT, _sN: _lSDT}),
-        (lambda: schemas.STRING, {_aQN: _OUI, _sN: _oUI}),
-    ),
-)
-
-IPAM_DISCOVERED_ACCOUNT_SET: StaticSchema = (
-    16,
-    n0,
-    _IDAS,
-    0,
-    (_me,),
-    ((IPAM_DISCOVERED_ACCOUNT, {_sN: _i}),),
-)
-
-GET_IPAM_DISCOVERED_PUBLIC_ADDRESSES_INPUT: StaticSchema = (
-    18,
-    n0,
-    _GIDPAI,
-    {_sSI: _cGIDPAR, _sm: None},
-    (_DR, _IRDI, _ARd, _Fil, _NTex, _MR),
-    (
-        (lambda: schemas.BOOLEAN, 0),
-        (lambda: schemas.IPAM_RESOURCE_DISCOVERY_ID, {_sO: None, _smi: None}),
-        (lambda: schemas.STRING, {_sO: None, _smi: None}),
-        (lambda: schemas.FILTER_LIST, {_sN: _Fi}),
-        (lambda: schemas.NEXT_TOKEN, 0),
-        (lambda: schemas.IPAM_MAX_RESULTS, 0),
-    ),
-)
-
-GET_IPAM_DISCOVERED_PUBLIC_ADDRESSES_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _GIDPAO,
-    {_sSI: _cGIDPARo, _smit: None},
-    (_IDPAp, _OST, _NTex),
-    (
-        (
-            lambda: schemas.IPAM_DISCOVERED_PUBLIC_ADDRESS_SET,
-            {_aQN: _IDPAS, _sN: _iDPAS},
-        ),
-        (lambda: schemas.MILLISECOND_DATE_TIME, {_aQN: _OST, _sN: _oST}),
-        (lambda: schemas.NEXT_TOKEN, {_aQN: _NTex, _sN: _nT}),
-    ),
-)
-
-GET_IPAM_DISCOVERED_PUBLIC_ADDRESSES: StaticOperationSchema = (
-    23,
-    n0,
-    _GIDPA,
-    0,
-    GET_IPAM_DISCOVERED_PUBLIC_ADDRESSES_INPUT,
-    GET_IPAM_DISCOVERED_PUBLIC_ADDRESSES_OUTPUT,
-    (),
-)
-
-IPAM_PUBLIC_ADDRESS_TYPE: StaticSchema = (
-    14,
-    n0,
-    _IPAT,
-    0,
-    (_SMI, _SMB, _AOE, _AOC, _BYOIP, _EPI_, _AILI),
-    (
-        (-1, {_sV: _smi_}),
-        (-1, {_sV: _smb}),
-        (-1, {_sV: _aoe}),
-        (-1, {_sV: _aoc}),
-        (-1, {_sV: _b}),
-        (-1, {_sV: _epi}),
-        (-1, {_sV: _aili}),
-    ),
-)
-
-IPAM_PUBLIC_ADDRESS_ASSOCIATION_STATUS: StaticSchema = (
-    14,
-    n0,
-    _IPAAS,
-    0,
-    (_ASSOCIATED, _DISASSOCIATED),
-    ((-1, {_sV: _ass}), (-1, {_sV: _dis})),
-)
-
-IPAM_PUBLIC_ADDRESS_SECURITY_GROUP: StaticSchema = (
-    18,
-    n0,
-    _IPASG,
-    0,
-    (_GN, _GIr),
-    (
-        (lambda: schemas.STRING, {_aQN: _GN, _sN: _gN}),
-        (lambda: schemas.STRING, {_aQN: _GIr, _sN: _gIr}),
-    ),
-)
-
-IPAM_PUBLIC_ADDRESS_SECURITY_GROUP_LIST: StaticSchema = (
-    16,
-    n0,
-    _IPASGL,
-    0,
-    (_me,),
-    ((IPAM_PUBLIC_ADDRESS_SECURITY_GROUP, {_sN: _i}),),
-)
-
-IPAM_PUBLIC_ADDRESS_AWS_SERVICE: StaticSchema = (
-    14,
-    n0,
-    _IPAASp,
-    0,
-    (_NG_, _DMS, _REDSHIFT, _ECS_, _RDS_, _SV_, _EL_, _AGA, _CLOUDFRONT, _OTHER),
-    (
-        (-1, {_sV: _ng}),
-        (-1, {_sV: _dms}),
-        (-1, {_sV: _red}),
-        (-1, {_sV: _ecs}),
-        (-1, {_sV: _rds}),
-        (-1, {_sV: _stsv}),
-        (-1, {_sV: _lb_}),
-        (-1, {_sV: _ga_}),
-        (-1, {_sV: _clo}),
-        (-1, {_sV: _oth}),
-    ),
-)
-
-IPAM_PUBLIC_ADDRESS_TAG: StaticSchema = (
-    18,
-    n0,
-    _IPATp,
-    0,
-    (_Ke, _Va),
-    (
-        (lambda: schemas.STRING, {_aQN: _Ke, _sN: _ke}),
-        (lambda: schemas.STRING, {_aQN: _Va, _sN: _va}),
-    ),
-)
-
-IPAM_PUBLIC_ADDRESS_TAG_LIST: StaticSchema = (
-    16,
-    n0,
-    _IPATL,
-    0,
-    (_me,),
-    ((IPAM_PUBLIC_ADDRESS_TAG, {_sN: _i}),),
-)
-
-IPAM_PUBLIC_ADDRESS_TAGS: StaticSchema = (
-    18,
-    n0,
-    _IPATpa,
-    0,
-    (_ETi,),
-    ((IPAM_PUBLIC_ADDRESS_TAG_LIST, {_aQN: _ETSi, _sN: _eTSi}),),
-)
-
-IPAM_DISCOVERED_PUBLIC_ADDRESS: StaticSchema = (
-    18,
-    n0,
-    _IDPA,
-    0,
-    (
-        _IRDI,
-        _ARd,
-        _Ad,
-        _AOI,
-        _AAId,
-        _ASs,
-        _ATddre,
-        _Ser,
-        _SRerv,
-        _VI,
-        _SIu,
-        _PIPI,
-        _NII,
-        _NID,
-        _II,
-        _Tag,
-        _NBG,
-        _SGe,
-        _STa,
-    ),
-    (
-        (lambda: schemas.IPAM_RESOURCE_DISCOVERY_ID, {_aQN: _IRDI, _sN: _iRDI}),
-        (lambda: schemas.STRING, {_aQN: _ARd, _sN: _aRd}),
-        (lambda: schemas.STRING, {_aQN: _Ad, _sN: _ad}),
-        (lambda: schemas.STRING, {_aQN: _AOI, _sN: _aOI}),
-        (lambda: schemas.STRING, {_aQN: _AAId, _sN: _aAId}),
-        (IPAM_PUBLIC_ADDRESS_ASSOCIATION_STATUS, {_aQN: _ASs, _sN: _aSsso}),
-        (IPAM_PUBLIC_ADDRESS_TYPE, {_aQN: _ATddre, _sN: _aTddr}),
-        (IPAM_PUBLIC_ADDRESS_AWS_SERVICE, {_aQN: _Ser, _sN: _ser}),
-        (lambda: schemas.STRING, {_aQN: _SRerv, _sN: _sRer}),
-        (lambda: schemas.STRING, {_aQN: _VI, _sN: _vI}),
-        (lambda: schemas.STRING, {_aQN: _SIu, _sN: _sI}),
-        (lambda: schemas.STRING, {_aQN: _PIPI, _sN: _pIPI}),
-        (lambda: schemas.STRING, {_aQN: _NII, _sN: _nII}),
-        (lambda: schemas.STRING, {_aQN: _NID, _sN: _nID}),
-        (lambda: schemas.STRING, {_aQN: _II, _sN: _iI}),
-        (IPAM_PUBLIC_ADDRESS_TAGS, {_aQN: _Tag, _sN: _tags}),
-        (lambda: schemas.STRING, {_aQN: _NBG, _sN: _nBG}),
-        (IPAM_PUBLIC_ADDRESS_SECURITY_GROUP_LIST, {_aQN: _SGS, _sN: _sGS}),
-        (lambda: schemas.MILLISECOND_DATE_TIME, {_aQN: _STa, _sN: _sTa}),
-    ),
 )

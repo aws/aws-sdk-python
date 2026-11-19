@@ -12,6 +12,11 @@ from aws_sdk_bedrock_agentcore.models import (
     ActorSummary,
     AffectedSession,
     AgentCardDefinition,
+    AgentCoreRuntimeInvocation,
+    AgentCoreRuntimeInvocationDetails,
+    AgentCoreRuntimeInvocationDict,
+    AgentInsightSummary,
+    AgentInvocationConfigDict,
     AgentSkillsDescriptor,
     AgentTracesConfigDict,
     Amount,
@@ -28,6 +33,8 @@ from aws_sdk_bedrock_agentcore.models import (
     BatchDeleteMemoryRecordsInput,
     BatchDeleteMemoryRecordsInputDict,
     BatchDeleteMemoryRecordsOutput,
+    BatchEvaluationSourceConfig,
+    BatchEvaluationSourceConfigDict,
     BatchEvaluationSummary,
     BatchEvaluationTraceConfig,
     BatchEvaluationTraceConfigDict,
@@ -57,6 +64,8 @@ from aws_sdk_bedrock_agentcore.models import (
     CloudWatchLogsRule,
     CloudWatchLogsRuleDict,
     CloudWatchLogsSource,
+    CloudWatchLogsSourceConfig,
+    CloudWatchLogsSourceConfigDict,
     CloudWatchLogsSourceDict,
     CloudWatchLogsTraceConfig,
     CloudWatchLogsTraceConfigDict,
@@ -100,8 +109,17 @@ from aws_sdk_bedrock_agentcore.models import (
     CryptoX402PaymentInput,
     CryptoX402PaymentInputDict,
     CryptoX402PaymentOutput,
+    CustomDataIdentifier,
+    CustomDataIdentifierDict,
     CustomDescriptor,
     DataSourceConfigDict,
+    DatasetDetails,
+    DatasetExecutionConfig,
+    DatasetExecutionConfigDict,
+    DatasetExecutionDetails,
+    DatasetGenerationSummary,
+    DatasetSource,
+    DatasetSourceDict,
     DeleteABTestInput,
     DeleteABTestInputDict,
     DeleteABTestOutput,
@@ -111,6 +129,9 @@ from aws_sdk_bedrock_agentcore.models import (
     DeleteCapacityProviderSessionInput,
     DeleteCapacityProviderSessionInputDict,
     DeleteCapacityProviderSessionOutput,
+    DeleteDatasetGenerationInput,
+    DeleteDatasetGenerationInputDict,
+    DeleteDatasetGenerationOutput,
     DeleteEventInput,
     DeleteEventInputDict,
     DeleteEventOutput,
@@ -148,6 +169,8 @@ from aws_sdk_bedrock_agentcore.models import (
     EvaluationTargetDict,
     Evaluator,
     EvaluatorDict,
+    EvaluatorFilter,
+    EvaluatorFilterDict,
     EvaluatorMetric,
     EvaluatorStatistics,
     EvaluatorSummary,
@@ -175,12 +198,29 @@ from aws_sdk_bedrock_agentcore.models import (
     FilterValueDict,
     GatewayFilter,
     GatewayFilterDict,
+    GenerationAttributeFilter,
+    GenerationAttributeFilterDict,
+    GenerationErrorDetail,
+    GenerationFilterValueDict,
+    GenerationFilters,
+    GenerationFiltersDict,
+    GenerationIdentifierCounts,
+    GenerationIdentifiers,
+    GenerationIdentifiersDict,
+    GenerationResults,
+    GenerationSamplingConfig,
+    GenerationSamplingConfigDict,
+    GenerationSelectionDict,
+    GenerationSourceDict,
     GetABTestInput,
     GetABTestInputDict,
     GetABTestOutput,
     GetAgentCardInput,
     GetAgentCardInputDict,
     GetAgentCardOutput,
+    GetAgentInsightInput,
+    GetAgentInsightInputDict,
+    GetAgentInsightOutput,
     GetBatchEvaluationInput,
     GetBatchEvaluationInputDict,
     GetBatchEvaluationOutput,
@@ -190,6 +230,9 @@ from aws_sdk_bedrock_agentcore.models import (
     GetCodeInterpreterSessionInput,
     GetCodeInterpreterSessionInputDict,
     GetCodeInterpreterSessionOutput,
+    GetDatasetGenerationInput,
+    GetDatasetGenerationInputDict,
+    GetDatasetGenerationOutput,
     GetEventInput,
     GetEventInputDict,
     GetEventOutput,
@@ -226,6 +269,8 @@ from aws_sdk_bedrock_agentcore.models import (
     GetWorkloadAccessTokenInput,
     GetWorkloadAccessTokenInputDict,
     GetWorkloadAccessTokenOutput,
+    GroundTruthConfig,
+    GroundTruthConfigDict,
     GroundTruthSourceDict,
     GroundTruthTurn,
     GroundTruthTurnDict,
@@ -349,6 +394,9 @@ from aws_sdk_bedrock_agentcore.models import (
     ListActorsInput,
     ListActorsInputDict,
     ListActorsOutput,
+    ListAgentInsightsInput,
+    ListAgentInsightsInputDict,
+    ListAgentInsightsOutput,
     ListBatchEvaluationsInput,
     ListBatchEvaluationsInputDict,
     ListBatchEvaluationsOutput,
@@ -358,6 +406,9 @@ from aws_sdk_bedrock_agentcore.models import (
     ListCodeInterpreterSessionsInput,
     ListCodeInterpreterSessionsInputDict,
     ListCodeInterpreterSessionsOutput,
+    ListDatasetGenerationsInput,
+    ListDatasetGenerationsInputDict,
+    ListDatasetGenerationsOutput,
     ListEventsInput,
     ListEventsInputDict,
     ListEventsOutput,
@@ -421,6 +472,8 @@ from aws_sdk_bedrock_agentcore.models import (
     OAuthCredentialProviderDict,
     OnlineEvaluationConfigSource,
     OnlineEvaluationConfigSourceDict,
+    OnlineEvaluationSourceConfig,
+    OnlineEvaluationSourceConfigDict,
     OnlineEvaluationTraceConfig,
     OnlineEvaluationTraceConfigDict,
     OutputConfigDict,
@@ -453,6 +506,9 @@ from aws_sdk_bedrock_agentcore.models import (
     RecommendationResultConfigurationBundle,
     RecommendationSummary,
     RecordExpirySpecificationDict,
+    RedactionConfiguration,
+    RedactionConfigurationDict,
+    RedactionSummary,
     RegistryRecordSummary,
     ResourceContent,
     ResourceLocationDict,
@@ -506,6 +562,9 @@ from aws_sdk_bedrock_agentcore.models import (
     StartCodeInterpreterSessionInput,
     StartCodeInterpreterSessionInputDict,
     StartCodeInterpreterSessionOutput,
+    StartDatasetGenerationInput,
+    StartDatasetGenerationInputDict,
+    StartDatasetGenerationOutput,
     StartMemoryExtractionJobInput,
     StartMemoryExtractionJobInputDict,
     StartMemoryExtractionJobOutput,
@@ -555,11 +614,20 @@ from aws_sdk_bedrock_agentcore.models import (
     ToolResultStructuredContent,
     ToolsDefinition,
     ToolsFileSystemConfigurationDict,
+    TraceGenerationRecord,
+    TraceGenerationSource,
+    TraceGenerationSourceDict,
+    TraceSourceConfigDict,
+    TurnCountRange,
+    TurnCountRangeDict,
     Unit,
     UnitDict,
     UpdateABTestInput,
     UpdateABTestInputDict,
     UpdateABTestOutput,
+    UpdateAgentInsightInput,
+    UpdateAgentInsightInputDict,
+    UpdateAgentInsightOutput,
     UpdateBrowserStreamInput,
     UpdateBrowserStreamInputDict,
     UpdateBrowserStreamOutput,
@@ -603,6 +671,19 @@ AffectedSession(
     session_id=_, explanation=_, fix_type=_, recommendation=_, failure_spans=_
 )
 AgentCardDefinition()
+AgentCoreRuntimeInvocation(agent_runtime_endpoint_arn=_)
+AgentCoreRuntimeInvocationDetails(agent_runtime_endpoint_arn=_, agent_runtime_version=_)
+AgentInsightSummary(
+    type=_,
+    name=_,
+    description=_,
+    created_at=_,
+    agent_insight_id=_,
+    application_name=_,
+    customer_metadata_status=_,
+    updated_at=_,
+    archive_status=_,
+)
 AgentSkillsDescriptor(skill_md=_)
 Amount(value=_, currency=_)
 AutomationStream(stream_endpoint=_, stream_status=_)
@@ -613,6 +694,7 @@ BatchCreateMemoryRecordsInput()
 BatchCreateMemoryRecordsOutput(successful_records=_, failed_records=_)
 BatchDeleteMemoryRecordsInput()
 BatchDeleteMemoryRecordsOutput(successful_records=_, failed_records=_)
+BatchEvaluationSourceConfig(batch_evaluation_arn=_)
 BatchEvaluationSummary(
     batch_evaluation_id=_,
     batch_evaluation_arn=_,
@@ -635,6 +717,7 @@ CloudWatchFilterConfig()
 CloudWatchLogsFilter(key=_, operator=_, value=_)
 CloudWatchLogsRule()
 CloudWatchLogsSource(service_names=_)
+CloudWatchLogsSourceConfig(service_names=_)
 CloudWatchLogsTraceConfig(log_group_arns=_, service_names=_, start_time=_, end_time=_)
 CloudWatchOutputConfig()
 CodeInterpreterResult(content=_)
@@ -666,13 +749,23 @@ CreatePaymentSessionInput()
 CreatePaymentSessionOutput(payment_session=_)
 CryptoX402PaymentInput(version=_, payload=_)
 CryptoX402PaymentOutput(version=_, payload=_)
+CustomDataIdentifier(name=_, regex=_)
 CustomDescriptor()
+DatasetDetails(dataset_id=_, dataset_version=_)
+DatasetExecutionConfig(dataset=_, agent_invocation=_)
+DatasetExecutionDetails(dataset=_, agent_invocation=_)
+DatasetGenerationSummary(
+    generation_id=_, dataset_id=_, name=_, scenario_type=_, status=_, created_at=_
+)
+DatasetSource(dataset_id=_)
 DeleteABTestInput()
 DeleteABTestOutput(ab_test_id=_, ab_test_arn=_, status=_)
 DeleteBatchEvaluationInput()
 DeleteBatchEvaluationOutput(batch_evaluation_id=_, batch_evaluation_arn=_, status=_)
 DeleteCapacityProviderSessionInput()
 DeleteCapacityProviderSessionOutput(capacity_provider_arn=_, session_id=_, status=_)
+DeleteDatasetGenerationInput()
+DeleteDatasetGenerationOutput(generation_id=_, status=_)
 DeleteEventInput()
 DeleteEventOutput(event_id=_)
 DeleteMemoryRecordInput()
@@ -694,6 +787,7 @@ EvaluationJobResults()
 EvaluationReferenceInput(context=_)
 EvaluationResultContent(evaluator_arn=_, evaluator_id=_, evaluator_name=_, context=_)
 Evaluator(evaluator_id=_)
+EvaluatorFilter(evaluator_id=_, operator=_, value=_)
 EvaluatorMetric(evaluator_arn=_, control_stats=_, variant_results=_)
 EvaluatorStatistics()
 EvaluatorSummary()
@@ -719,6 +813,13 @@ FailureSubCategoryCluster(
 )
 FilterInput()
 GatewayFilter()
+GenerationAttributeFilter(key=_, operator=_, value=_)
+GenerationErrorDetail()
+GenerationFilters()
+GenerationIdentifierCounts()
+GenerationIdentifiers()
+GenerationResults()
+GenerationSamplingConfig()
 GetABTestInput()
 GetABTestOutput(
     ab_test_id=_,
@@ -734,6 +835,18 @@ GetABTestOutput(
 )
 GetAgentCardInput()
 GetAgentCardOutput(agent_card=_)
+GetAgentInsightInput()
+GetAgentInsightOutput(
+    type=_,
+    name=_,
+    description=_,
+    created_at=_,
+    agent_insight_id=_,
+    application_name=_,
+    customer_metadata_status=_,
+    updated_at=_,
+    archive_status=_,
+)
 GetBatchEvaluationInput()
 GetBatchEvaluationOutput(
     batch_evaluation_id=_,
@@ -747,6 +860,10 @@ GetBrowserSessionOutput(browser_identifier=_, session_id=_, created_at=_)
 GetCodeInterpreterSessionInput()
 GetCodeInterpreterSessionOutput(
     code_interpreter_identifier=_, session_id=_, created_at=_
+)
+GetDatasetGenerationInput()
+GetDatasetGenerationOutput(
+    generation_id=_, name=_, dataset_id=_, scenario_type=_, status=_, created_at=_
 )
 GetEventInput()
 GetEventOutput(event=_)
@@ -781,6 +898,7 @@ GetWorkloadAccessTokenForUserIdInput()
 GetWorkloadAccessTokenForUserIdOutput(workload_access_token=_)
 GetWorkloadAccessTokenInput()
 GetWorkloadAccessTokenOutput(workload_access_token=_)
+GroundTruthConfig(fields=_)
 GroundTruthTurn()
 HarnessAgentCoreBrowserConfig()
 HarnessAgentCoreCodeInterpreterConfig()
@@ -849,12 +967,16 @@ ListABTestsInput()
 ListABTestsOutput(ab_tests=_)
 ListActorsInput()
 ListActorsOutput(actor_summaries=_)
+ListAgentInsightsInput()
+ListAgentInsightsOutput(agent_insights=_)
 ListBatchEvaluationsInput()
 ListBatchEvaluationsOutput(batch_evaluations=_)
 ListBrowserSessionsInput()
 ListBrowserSessionsOutput(items=_)
 ListCodeInterpreterSessionsInput()
 ListCodeInterpreterSessionsOutput(items=_)
+ListDatasetGenerationsInput()
+ListDatasetGenerationsOutput(dataset_generations=_)
 ListEventsInput()
 ListEventsOutput(events=_)
 ListMemoryExtractionJobsInput()
@@ -897,6 +1019,7 @@ MppPaymentOutput(version=_, selected_payment_id=_, payment_credential=_)
 OAuth2Authentication(sub=_)
 OAuthCredentialProvider(provider_arn=_, scopes=_)
 OnlineEvaluationConfigSource(online_evaluation_config_arn=_)
+OnlineEvaluationSourceConfig(online_evaluation_config_arn=_)
 OnlineEvaluationTraceConfig(online_evaluation_config_arn=_, start_time=_, end_time=_)
 PaymentInstrument(
     payment_instrument_id=_,
@@ -963,6 +1086,8 @@ RecommendationSummary(
     created_at=_,
     updated_at=_,
 )
+RedactionConfiguration()
+RedactionSummary()
 RegistryRecordSummary(
     registry_arn=_,
     record_arn=_,
@@ -1025,6 +1150,10 @@ StartCodeInterpreterSessionInput()
 StartCodeInterpreterSessionOutput(
     code_interpreter_identifier=_, session_id=_, created_at=_
 )
+StartDatasetGenerationInput()
+StartDatasetGenerationOutput(
+    generation_id=_, name=_, dataset_id=_, status=_, created_at=_
+)
 StartMemoryExtractionJobInput()
 StartMemoryExtractionJobOutput(job_id=_)
 StartRecommendationInput()
@@ -1065,10 +1194,15 @@ ToolDescriptionRecommendationResult()
 ToolDescriptionTextInput(tools=_)
 ToolResultStructuredContent()
 ToolsDefinition()
+TraceGenerationRecord()
+TraceGenerationSource(source_config=_)
+TurnCountRange()
 UpdateABTestInput()
 UpdateABTestOutput(
     ab_test_id=_, ab_test_arn=_, status=_, execution_status=_, updated_at=_
 )
+UpdateAgentInsightInput()
+UpdateAgentInsightOutput(agent_insight_id=_, archive_status=_, updated_at=_)
 UpdateBrowserStreamInput()
 UpdateBrowserStreamOutput(browser_identifier=_, session_id=_, streams=_, updated_at=_)
 UserIntentAffectedSession(session_id=_, user_messages=_)
@@ -1085,398 +1219,430 @@ WebSearchFilters()
 WebSearchResult(text=_)
 Unit()
 _params_0: ABTestEvaluationConfigDict = {"online_evaluation_config_arn": _}
-_params_1: AgentTracesConfigDict = {"session_spans": _}
-_params_2: AmountDict = {"value": _, "currency": _}
-_params_3: AutomationStreamUpdateDict = {}
-_params_4: BasicAuthDict = {"secret_arn": _}
-_params_5: BatchCreateMemoryRecordsInputDict = {"memory_id": _, "records": _}
-_params_6: BatchDeleteMemoryRecordsInputDict = {"memory_id": _, "records": _}
-_params_7: BatchEvaluationTraceConfigDict = {"batch_evaluation_arn": _}
-_params_8: BatchUpdateMemoryRecordsInputDict = {"memory_id": _, "records": _}
-_params_9: BranchDict = {"name": _}
-_params_10: BranchFilterDict = {"name": _}
-_params_11: BrowserActionDict = {"mouse_click": _}
-_params_12: BrowserEnterprisePolicyDict = {"location": _}
-_params_13: BrowserExtensionDict = {"location": _}
-_params_14: BrowserProfileConfigurationDict = {"profile_identifier": _}
-_params_15: CertificateDict = {"location": _}
-_params_16: CertificateLocationDict = {"secrets_manager": _}
-_params_17: CloudWatchFilterConfigDict = {}
-_params_18: CloudWatchLogsFilterDict = {"key": _, "operator": _, "value": _}
-_params_19: CloudWatchLogsRuleDict = {}
-_params_20: CloudWatchLogsSourceDict = {"service_names": _}
-_params_21: CloudWatchLogsTraceConfigDict = {
+_params_1: AgentCoreRuntimeInvocationDict = {"agent_runtime_endpoint_arn": _}
+_params_2: AgentInvocationConfigDict = {"agent_core_runtime": _}
+_params_3: AgentTracesConfigDict = {"session_spans": _}
+_params_4: AmountDict = {"value": _, "currency": _}
+_params_5: AutomationStreamUpdateDict = {}
+_params_6: BasicAuthDict = {"secret_arn": _}
+_params_7: BatchCreateMemoryRecordsInputDict = {"memory_id": _, "records": _}
+_params_8: BatchDeleteMemoryRecordsInputDict = {"memory_id": _, "records": _}
+_params_9: BatchEvaluationSourceConfigDict = {"batch_evaluation_arn": _}
+_params_10: BatchEvaluationTraceConfigDict = {"batch_evaluation_arn": _}
+_params_11: BatchUpdateMemoryRecordsInputDict = {"memory_id": _, "records": _}
+_params_12: BranchDict = {"name": _}
+_params_13: BranchFilterDict = {"name": _}
+_params_14: BrowserActionDict = {"mouse_click": _}
+_params_15: BrowserEnterprisePolicyDict = {"location": _}
+_params_16: BrowserExtensionDict = {"location": _}
+_params_17: BrowserProfileConfigurationDict = {"profile_identifier": _}
+_params_18: CertificateDict = {"location": _}
+_params_19: CertificateLocationDict = {"secrets_manager": _}
+_params_20: CloudWatchFilterConfigDict = {}
+_params_21: CloudWatchLogsFilterDict = {"key": _, "operator": _, "value": _}
+_params_22: CloudWatchLogsRuleDict = {}
+_params_23: CloudWatchLogsSourceDict = {"service_names": _}
+_params_24: CloudWatchLogsSourceConfigDict = {"service_names": _}
+_params_25: CloudWatchLogsTraceConfigDict = {
     "log_group_arns": _,
     "service_names": _,
     "start_time": _,
     "end_time": _,
 }
-_params_22: CloudWatchOutputConfigDict = {}
-_params_23: CoinbaseCdpTokenRequestInputDict = {"request_method": _, "request_path": _}
-_params_24: CompleteResourceTokenAuthInputDict = {
+_params_26: CloudWatchOutputConfigDict = {}
+_params_27: CoinbaseCdpTokenRequestInputDict = {"request_method": _, "request_path": _}
+_params_28: CompleteResourceTokenAuthInputDict = {
     "user_identifier": _,
     "session_uri": _,
 }
-_params_25: ConfigurationBundleRefDict = {"bundle_arn": _, "bundle_version": _}
-_params_26: ConfigurationBundleToolEntryDict = {
+_params_29: ConfigurationBundleRefDict = {"bundle_arn": _, "bundle_version": _}
+_params_30: ConfigurationBundleToolEntryDict = {
     "tool_name": _,
     "tool_description_json_path": _,
 }
-_params_27: ContentDict = {"text": _}
-_params_28: ContentSourceDict = {"inline": _}
-_params_29: ContextDict = {"span_context": _}
-_params_30: ConversationalDict = {"content": _, "role": _}
-_params_31: CreateABTestInputDict = {
+_params_31: ContentDict = {"text": _}
+_params_32: ContentSourceDict = {"inline": _}
+_params_33: ContextDict = {"span_context": _}
+_params_34: ConversationalDict = {"content": _, "role": _}
+_params_35: CreateABTestInputDict = {
     "name": _,
     "gateway_arn": _,
     "variants": _,
     "evaluation_config": _,
     "role_arn": _,
 }
-_params_32: CreateEventInputDict = {
+_params_36: CreateEventInputDict = {
     "memory_id": _,
     "actor_id": _,
     "event_timestamp": _,
     "payload": _,
 }
-_params_33: CreatePaymentInstrumentInputDict = {
+_params_37: CreatePaymentInstrumentInputDict = {
     "payment_manager_arn": _,
     "payment_connector_id": _,
     "payment_instrument_type": _,
     "payment_instrument_details": _,
 }
-_params_34: CreatePaymentSessionInputDict = {
+_params_38: CreatePaymentSessionInputDict = {
     "payment_manager_arn": _,
     "expiry_time_in_minutes": _,
 }
-_params_35: CryptoX402PaymentInputDict = {"version": _, "payload": _}
-_params_36: DataSourceConfigDict = {"cloud_watch_logs": _}
-_params_37: DeleteABTestInputDict = {"ab_test_id": _}
-_params_38: DeleteBatchEvaluationInputDict = {"batch_evaluation_id": _}
-_params_39: DeleteCapacityProviderSessionInputDict = {
+_params_39: CryptoX402PaymentInputDict = {"version": _, "payload": _}
+_params_40: CustomDataIdentifierDict = {"name": _, "regex": _}
+_params_41: DatasetExecutionConfigDict = {"dataset": _, "agent_invocation": _}
+_params_42: DatasetSourceDict = {"dataset_id": _}
+_params_43: DataSourceConfigDict = {"cloud_watch_logs": _}
+_params_44: DeleteABTestInputDict = {"ab_test_id": _}
+_params_45: DeleteBatchEvaluationInputDict = {"batch_evaluation_id": _}
+_params_46: DeleteCapacityProviderSessionInputDict = {
     "capacity_provider_id": _,
     "session_id": _,
 }
-_params_40: DeleteEventInputDict = {
+_params_47: DeleteDatasetGenerationInputDict = {"dataset_id": _, "generation_id": _}
+_params_48: DeleteEventInputDict = {
     "memory_id": _,
     "session_id": _,
     "event_id": _,
     "actor_id": _,
 }
-_params_41: DeleteMemoryRecordInputDict = {"memory_id": _, "memory_record_id": _}
-_params_42: DeletePaymentInstrumentInputDict = {
+_params_49: DeleteMemoryRecordInputDict = {"memory_id": _, "memory_record_id": _}
+_params_50: DeletePaymentInstrumentInputDict = {
     "payment_manager_arn": _,
     "payment_connector_id": _,
     "payment_instrument_id": _,
 }
-_params_43: DeletePaymentSessionInputDict = {
+_params_51: DeletePaymentSessionInputDict = {
     "payment_manager_arn": _,
     "payment_session_id": _,
 }
-_params_44: DeleteRecommendationInputDict = {"recommendation_id": _}
-_params_45: DomainFilterDict = {}
-_params_46: EfsConfigurationDict = {
+_params_52: DeleteRecommendationInputDict = {"recommendation_id": _}
+_params_53: DomainFilterDict = {}
+_params_54: EfsConfigurationDict = {
     "access_point_arn": _,
     "mount_path": _,
     "file_system_arn": _,
 }
-_params_47: EmbeddedCryptoWalletDict = {"network": _, "linked_accounts": _}
-_params_48: EvaluateInputDict = {"evaluator_id": _, "evaluation_input": _}
-_params_49: EvaluationContentDict = {"text": _}
-_params_50: EvaluationExpectedTrajectoryDict = {}
-_params_51: EvaluationInputDict = {"session_spans": _}
-_params_52: EvaluationMetadataDict = {"session_metadata": _}
-_params_53: EvaluationReferenceInputDict = {"context": _}
-_params_54: EvaluationTargetDict = {"span_ids": _}
-_params_55: EvaluatorDict = {"evaluator_id": _}
-_params_56: EventMetadataFilterExpressionDict = {"left": _, "operator": _}
-_params_57: ExternalProxyDict = {"server": _, "port": _}
-_params_58: ExtractionConfigDict = {}
-_params_59: ExtractionJobDict = {"job_id": _}
-_params_60: ExtractionJobFilterInputDict = {}
-_params_61: FilterInputDict = {}
-_params_62: FilterValueDict = {"string_value": _}
-_params_63: GatewayFilterDict = {}
-_params_64: GetABTestInputDict = {"ab_test_id": _}
-_params_65: GetAgentCardInputDict = {"agent_runtime_arn": _}
-_params_66: GetBatchEvaluationInputDict = {"batch_evaluation_id": _}
-_params_67: GetBrowserSessionInputDict = {"browser_identifier": _, "session_id": _}
-_params_68: GetCodeInterpreterSessionInputDict = {
+_params_55: EmbeddedCryptoWalletDict = {"network": _, "linked_accounts": _}
+_params_56: EvaluateInputDict = {"evaluator_id": _, "evaluation_input": _}
+_params_57: EvaluationContentDict = {"text": _}
+_params_58: EvaluationExpectedTrajectoryDict = {}
+_params_59: EvaluationInputDict = {"session_spans": _}
+_params_60: EvaluationMetadataDict = {"session_metadata": _}
+_params_61: EvaluationReferenceInputDict = {"context": _}
+_params_62: EvaluationTargetDict = {"span_ids": _}
+_params_63: EvaluatorDict = {"evaluator_id": _}
+_params_64: EvaluatorFilterDict = {"evaluator_id": _, "operator": _, "value": _}
+_params_65: EventMetadataFilterExpressionDict = {"left": _, "operator": _}
+_params_66: ExternalProxyDict = {"server": _, "port": _}
+_params_67: ExtractionConfigDict = {}
+_params_68: ExtractionJobDict = {"job_id": _}
+_params_69: ExtractionJobFilterInputDict = {}
+_params_70: FilterInputDict = {}
+_params_71: FilterValueDict = {"string_value": _}
+_params_72: GatewayFilterDict = {}
+_params_73: GenerationAttributeFilterDict = {"key": _, "operator": _, "value": _}
+_params_74: GenerationFiltersDict = {}
+_params_75: GenerationFilterValueDict = {"string_value": _}
+_params_76: GenerationIdentifiersDict = {}
+_params_77: GenerationSamplingConfigDict = {}
+_params_78: GenerationSelectionDict = {"filters": _}
+_params_79: GenerationSourceDict = {"trace_generation": _}
+_params_80: GetABTestInputDict = {"ab_test_id": _}
+_params_81: GetAgentCardInputDict = {"agent_runtime_arn": _}
+_params_82: GetAgentInsightInputDict = {"application_name": _, "agent_insight_id": _}
+_params_83: GetBatchEvaluationInputDict = {"batch_evaluation_id": _}
+_params_84: GetBrowserSessionInputDict = {"browser_identifier": _, "session_id": _}
+_params_85: GetCodeInterpreterSessionInputDict = {
     "code_interpreter_identifier": _,
     "session_id": _,
 }
-_params_69: GetEventInputDict = {
+_params_86: GetDatasetGenerationInputDict = {"dataset_id": _, "generation_id": _}
+_params_87: GetEventInputDict = {
     "memory_id": _,
     "session_id": _,
     "actor_id": _,
     "event_id": _,
 }
-_params_70: GetMemoryRecordInputDict = {"memory_id": _, "memory_record_id": _}
-_params_71: GetPaymentInstrumentBalanceInputDict = {
+_params_88: GetMemoryRecordInputDict = {"memory_id": _, "memory_record_id": _}
+_params_89: GetPaymentInstrumentBalanceInputDict = {
     "payment_manager_arn": _,
     "payment_connector_id": _,
     "payment_instrument_id": _,
     "chain": _,
     "token": _,
 }
-_params_72: GetPaymentInstrumentInputDict = {
+_params_90: GetPaymentInstrumentInputDict = {
     "payment_manager_arn": _,
     "payment_instrument_id": _,
 }
-_params_73: GetPaymentSessionInputDict = {
+_params_91: GetPaymentSessionInputDict = {
     "payment_manager_arn": _,
     "payment_session_id": _,
 }
-_params_74: GetRecommendationInputDict = {"recommendation_id": _}
-_params_75: GetResourceApiKeyInputDict = {
+_params_92: GetRecommendationInputDict = {"recommendation_id": _}
+_params_93: GetResourceApiKeyInputDict = {
     "workload_identity_token": _,
     "resource_credential_provider_name": _,
 }
-_params_76: GetResourceOauth2TokenInputDict = {
+_params_94: GetResourceOauth2TokenInputDict = {
     "workload_identity_token": _,
     "resource_credential_provider_name": _,
     "scopes": _,
     "oauth2_flow": _,
 }
-_params_77: GetResourcePaymentTokenInputDict = {
+_params_95: GetResourcePaymentTokenInputDict = {
     "workload_identity_token": _,
     "resource_credential_provider_name": _,
     "payment_token_request": _,
 }
-_params_78: GetWorkloadAccessTokenForJWTInputDict = {
+_params_96: GetWorkloadAccessTokenForJWTInputDict = {
     "workload_name": _,
     "user_token": _,
 }
-_params_79: GetWorkloadAccessTokenForUserIdInputDict = {
+_params_97: GetWorkloadAccessTokenForUserIdInputDict = {
     "workload_name": _,
     "user_id": _,
 }
-_params_80: GetWorkloadAccessTokenInputDict = {"workload_name": _}
-_params_81: GroundTruthSourceDict = {"inline": _}
-_params_82: GroundTruthTurnDict = {}
-_params_83: GroundTruthTurnInputDict = {"prompt": _}
-_params_84: HarnessAgentCoreBrowserConfigDict = {}
-_params_85: HarnessAgentCoreCodeInterpreterConfigDict = {}
-_params_86: HarnessAgentCoreGatewayConfigDict = {"gateway_arn": _}
-_params_87: HarnessBedrockModelConfigDict = {"model_id": _}
-_params_88: HarnessContentBlockDict = {"text": _}
-_params_89: HarnessGatewayOutboundAuthDict = {"aws_iam": _}
-_params_90: HarnessGeminiModelConfigDict = {"model_id": _, "api_key_arn": _}
-_params_91: HarnessInlineFunctionConfigDict = {"description": _, "input_schema": _}
-_params_92: HarnessLiteLlmModelConfigDict = {"model_id": _}
-_params_93: HarnessMessageDict = {"role": _, "content": _}
-_params_94: HarnessModelConfigurationDict = {"bedrock_model_config": _}
-_params_95: HarnessOpenAiModelConfigDict = {"model_id": _, "api_key_arn": _}
-_params_96: HarnessReasoningContentBlockDict = {"reasoning_text": _}
-_params_97: HarnessReasoningTextBlockDict = {"text": _}
-_params_98: HarnessRemoteMcpConfigDict = {"url": _}
-_params_99: HarnessRemoteMcpOutboundAuthDict = {"aws_iam": _}
-_params_100: HarnessSkillDict = {"path": _}
-_params_101: HarnessSkillAwsSkillsSourceDict = {}
-_params_102: HarnessSkillGitAuthDict = {"credential_arn": _}
-_params_103: HarnessSkillGitSourceDict = {"url": _}
-_params_104: HarnessSkillS3SourceDict = {"uri": _}
-_params_105: HarnessSystemContentBlockDict = {"text": _}
-_params_106: HarnessToolDict = {"type": _}
-_params_107: HarnessToolConfigurationDict = {"remote_mcp": _}
-_params_108: HarnessToolResultBlockDict = {"tool_use_id": _, "content": _}
-_params_109: HarnessToolResultContentBlockDict = {"text": _}
-_params_110: HarnessToolUseBlockDict = {"name": _, "tool_use_id": _, "input": _}
-_params_111: IamCredentialProviderDict = {"service": _}
-_params_112: IngestDataInputDict = {
+_params_98: GetWorkloadAccessTokenInputDict = {"workload_name": _}
+_params_99: GroundTruthConfigDict = {"fields": _}
+_params_100: GroundTruthSourceDict = {"inline": _}
+_params_101: GroundTruthTurnDict = {}
+_params_102: GroundTruthTurnInputDict = {"prompt": _}
+_params_103: HarnessAgentCoreBrowserConfigDict = {}
+_params_104: HarnessAgentCoreCodeInterpreterConfigDict = {}
+_params_105: HarnessAgentCoreGatewayConfigDict = {"gateway_arn": _}
+_params_106: HarnessBedrockModelConfigDict = {"model_id": _}
+_params_107: HarnessContentBlockDict = {"text": _}
+_params_108: HarnessGatewayOutboundAuthDict = {"aws_iam": _}
+_params_109: HarnessGeminiModelConfigDict = {"model_id": _, "api_key_arn": _}
+_params_110: HarnessInlineFunctionConfigDict = {"description": _, "input_schema": _}
+_params_111: HarnessLiteLlmModelConfigDict = {"model_id": _}
+_params_112: HarnessMessageDict = {"role": _, "content": _}
+_params_113: HarnessModelConfigurationDict = {"bedrock_model_config": _}
+_params_114: HarnessOpenAiModelConfigDict = {"model_id": _, "api_key_arn": _}
+_params_115: HarnessReasoningContentBlockDict = {"reasoning_text": _}
+_params_116: HarnessReasoningTextBlockDict = {"text": _}
+_params_117: HarnessRemoteMcpConfigDict = {"url": _}
+_params_118: HarnessRemoteMcpOutboundAuthDict = {"aws_iam": _}
+_params_119: HarnessSkillDict = {"path": _}
+_params_120: HarnessSkillAwsSkillsSourceDict = {}
+_params_121: HarnessSkillGitAuthDict = {"credential_arn": _}
+_params_122: HarnessSkillGitSourceDict = {"url": _}
+_params_123: HarnessSkillS3SourceDict = {"uri": _}
+_params_124: HarnessSystemContentBlockDict = {"text": _}
+_params_125: HarnessToolDict = {"type": _}
+_params_126: HarnessToolConfigurationDict = {"remote_mcp": _}
+_params_127: HarnessToolResultBlockDict = {"tool_use_id": _, "content": _}
+_params_128: HarnessToolResultContentBlockDict = {"text": _}
+_params_129: HarnessToolUseBlockDict = {"name": _, "tool_use_id": _, "input": _}
+_params_130: IamCredentialProviderDict = {"service": _}
+_params_131: IngestDataInputDict = {
     "memory_id": _,
     "source": _,
     "content_timestamp": _,
     "actor_id": _,
 }
-_params_113: IngestPayloadTypeDict = {"conversational": _}
-_params_114: InlineGroundTruthDict = {}
-_params_115: InlineMemoryContentDict = {"payload": _}
-_params_116: InputContentBlockDict = {"path": _}
-_params_117: InsightDict = {"insight_id": _}
-_params_118: InvokeAgentRuntimeCommandInputDict = {"agent_runtime_arn": _, "body": _}
-_params_119: InvokeAgentRuntimeCommandRequestBodyDict = {"command": _}
-_params_120: InvokeAgentRuntimeInputDict = {"agent_runtime_arn": _, "payload": _}
-_params_121: InvokeBrowserInputDict = {
+_params_132: IngestPayloadTypeDict = {"conversational": _}
+_params_133: InlineGroundTruthDict = {}
+_params_134: InlineMemoryContentDict = {"payload": _}
+_params_135: InputContentBlockDict = {"path": _}
+_params_136: InsightDict = {"insight_id": _}
+_params_137: InvokeAgentRuntimeCommandInputDict = {"agent_runtime_arn": _, "body": _}
+_params_138: InvokeAgentRuntimeCommandRequestBodyDict = {"command": _}
+_params_139: InvokeAgentRuntimeInputDict = {"agent_runtime_arn": _, "payload": _}
+_params_140: InvokeBrowserInputDict = {
     "browser_identifier": _,
     "session_id": _,
     "action": _,
 }
-_params_122: InvokeCodeInterpreterInputDict = {
+_params_141: InvokeCodeInterpreterInputDict = {
     "code_interpreter_identifier": _,
     "name": _,
 }
-_params_123: InvokeHarnessInputDict = {
+_params_142: InvokeHarnessInputDict = {
     "harness_arn": _,
     "runtime_session_id": _,
     "messages": _,
 }
-_params_124: InvokeWebSearchInputDict = {"web_search_id": _, "search_query": _}
-_params_125: KeyPressArgumentsDict = {"key": _}
-_params_126: KeyShortcutArgumentsDict = {"keys": _}
-_params_127: KeyTypeArgumentsDict = {"text": _}
-_params_128: LeftExpressionDict = {"metadata_key": _}
-_params_129: LinkedAccountDict = {"email": _}
-_params_130: LinkedAccountDeveloperJwtDict = {"kid": _, "sub": _}
-_params_131: LinkedAccountEmailDict = {"email_address": _}
-_params_132: LinkedAccountOAuth2Dict = {"google": _}
-_params_133: LinkedAccountSmsDict = {"phone_number": _}
-_params_134: ListABTestsInputDict = {}
-_params_135: ListActorsInputDict = {"memory_id": _}
-_params_136: ListBatchEvaluationsInputDict = {}
-_params_137: ListBrowserSessionsInputDict = {"browser_identifier": _}
-_params_138: ListCodeInterpreterSessionsInputDict = {"code_interpreter_identifier": _}
-_params_139: ListEventsInputDict = {"memory_id": _, "session_id": _, "actor_id": _}
-_params_140: ListMemoryExtractionJobsInputDict = {"memory_id": _}
-_params_141: ListMemoryRecordsInputDict = {"memory_id": _}
-_params_142: ListPaymentInstrumentsInputDict = {"payment_manager_arn": _}
-_params_143: ListPaymentSessionsInputDict = {"payment_manager_arn": _}
-_params_144: ListRecommendationsInputDict = {}
-_params_145: ListSessionsInputDict = {"memory_id": _, "actor_id": _}
-_params_146: MemoryContentDict = {"text": _}
-_params_147: MemoryJsonDataDict = {"content": _}
-_params_148: MemoryMetadataFilterExpressionDict = {"left": _, "operator": _}
-_params_149: MemoryRecordCreateInputDict = {
+_params_143: InvokeWebSearchInputDict = {"web_search_id": _, "search_query": _}
+_params_144: KeyPressArgumentsDict = {"key": _}
+_params_145: KeyShortcutArgumentsDict = {"keys": _}
+_params_146: KeyTypeArgumentsDict = {"text": _}
+_params_147: LeftExpressionDict = {"metadata_key": _}
+_params_148: LinkedAccountDict = {"email": _}
+_params_149: LinkedAccountDeveloperJwtDict = {"kid": _, "sub": _}
+_params_150: LinkedAccountEmailDict = {"email_address": _}
+_params_151: LinkedAccountOAuth2Dict = {"google": _}
+_params_152: LinkedAccountSmsDict = {"phone_number": _}
+_params_153: ListABTestsInputDict = {}
+_params_154: ListActorsInputDict = {"memory_id": _}
+_params_155: ListAgentInsightsInputDict = {}
+_params_156: ListBatchEvaluationsInputDict = {}
+_params_157: ListBrowserSessionsInputDict = {"browser_identifier": _}
+_params_158: ListCodeInterpreterSessionsInputDict = {"code_interpreter_identifier": _}
+_params_159: ListDatasetGenerationsInputDict = {"dataset_id": _}
+_params_160: ListEventsInputDict = {"memory_id": _, "session_id": _, "actor_id": _}
+_params_161: ListMemoryExtractionJobsInputDict = {"memory_id": _}
+_params_162: ListMemoryRecordsInputDict = {"memory_id": _}
+_params_163: ListPaymentInstrumentsInputDict = {"payment_manager_arn": _}
+_params_164: ListPaymentSessionsInputDict = {"payment_manager_arn": _}
+_params_165: ListRecommendationsInputDict = {}
+_params_166: ListSessionsInputDict = {"memory_id": _, "actor_id": _}
+_params_167: MemoryContentDict = {"text": _}
+_params_168: MemoryJsonDataDict = {"content": _}
+_params_169: MemoryMetadataFilterExpressionDict = {"left": _, "operator": _}
+_params_170: MemoryRecordCreateInputDict = {
     "request_identifier": _,
     "namespaces": _,
     "content": _,
     "timestamp": _,
 }
-_params_150: MemoryRecordDeleteInputDict = {"memory_record_id": _}
-_params_151: MemoryRecordLeftExpressionDict = {"metadata_key": _}
-_params_152: MemoryRecordMetadataValueDict = {"string_value": _}
-_params_153: MemoryRecordRightExpressionDict = {"metadata_value": _}
-_params_154: MemoryRecordUpdateInputDict = {"memory_record_id": _, "timestamp": _}
-_params_155: MetadataValueDict = {"string_value": _}
-_params_156: MouseClickArgumentsDict = {"x": _, "y": _}
-_params_157: MouseDragArgumentsDict = {
+_params_171: MemoryRecordDeleteInputDict = {"memory_record_id": _}
+_params_172: MemoryRecordLeftExpressionDict = {"metadata_key": _}
+_params_173: MemoryRecordMetadataValueDict = {"string_value": _}
+_params_174: MemoryRecordRightExpressionDict = {"metadata_value": _}
+_params_175: MemoryRecordUpdateInputDict = {"memory_record_id": _, "timestamp": _}
+_params_176: MetadataValueDict = {"string_value": _}
+_params_177: MouseClickArgumentsDict = {"x": _, "y": _}
+_params_178: MouseDragArgumentsDict = {
     "end_x": _,
     "end_y": _,
     "start_x": _,
     "start_y": _,
 }
-_params_158: MouseMoveArgumentsDict = {"x": _, "y": _}
-_params_159: MouseScrollArgumentsDict = {"x": _, "y": _}
-_params_160: MppPaymentInputDict = {"version": _, "www_authenticate_headers": _}
-_params_161: OAuth2AuthenticationDict = {"sub": _}
-_params_162: OAuthCredentialProviderDict = {"provider_arn": _, "scopes": _}
-_params_163: OnlineEvaluationConfigSourceDict = {"online_evaluation_config_arn": _}
-_params_164: OnlineEvaluationTraceConfigDict = {
+_params_179: MouseMoveArgumentsDict = {"x": _, "y": _}
+_params_180: MouseScrollArgumentsDict = {"x": _, "y": _}
+_params_181: MppPaymentInputDict = {"version": _, "www_authenticate_headers": _}
+_params_182: OAuth2AuthenticationDict = {"sub": _}
+_params_183: OAuthCredentialProviderDict = {"provider_arn": _, "scopes": _}
+_params_184: OnlineEvaluationConfigSourceDict = {"online_evaluation_config_arn": _}
+_params_185: OnlineEvaluationSourceConfigDict = {"online_evaluation_config_arn": _}
+_params_186: OnlineEvaluationTraceConfigDict = {
     "online_evaluation_config_arn": _,
     "start_time": _,
     "end_time": _,
 }
-_params_165: OutputConfigDict = {"cloud_watch_config": _}
-_params_166: PayloadTypeDict = {"conversational": _}
-_params_167: PaymentInputDict = {"crypto_x402": _}
-_params_168: PaymentInstrumentDetailsDict = {"embedded_crypto_wallet": _}
-_params_169: PaymentTokenRequestInputDict = {"coinbase_cdp_token_request": _}
-_params_170: PerVariantOnlineEvaluationConfigDict = {
+_params_187: OutputConfigDict = {"cloud_watch_config": _}
+_params_188: PayloadTypeDict = {"conversational": _}
+_params_189: PaymentInputDict = {"crypto_x402": _}
+_params_190: PaymentInstrumentDetailsDict = {"embedded_crypto_wallet": _}
+_params_191: PaymentTokenRequestInputDict = {"coinbase_cdp_token_request": _}
+_params_192: PerVariantOnlineEvaluationConfigDict = {
     "name": _,
     "online_evaluation_config_arn": _,
 }
-_params_171: ProcessPaymentInputDict = {
+_params_193: ProcessPaymentInputDict = {
     "payment_manager_arn": _,
     "payment_session_id": _,
     "payment_instrument_id": _,
     "payment_type": _,
     "payment_input": _,
 }
-_params_172: ProxyDict = {"external_proxy": _}
-_params_173: ProxyBypassDict = {}
-_params_174: ProxyConfigurationDict = {"proxies": _}
-_params_175: ProxyCredentialsDict = {"basic_auth": _}
-_params_176: PublishedDateFilterDict = {}
-_params_177: RecommendationConfigDict = {"system_prompt_recommendation_config": _}
-_params_178: RecommendationEvaluationConfigDict = {"evaluators": _}
-_params_179: RecommendationEvaluatorReferenceDict = {"evaluator_arn": _}
-_params_180: RecordExpirySpecificationDict = {"record_expiry_duration_days": _}
-_params_181: ResourceLocationDict = {"s3": _}
-_params_182: RetrieveMemoryRecordsInputDict = {"memory_id": _, "search_criteria": _}
-_params_183: RightExpressionDict = {"metadata_value": _}
-_params_184: S3FilesConfigurationDict = {
+_params_194: ProxyDict = {"external_proxy": _}
+_params_195: ProxyBypassDict = {}
+_params_196: ProxyConfigurationDict = {"proxies": _}
+_params_197: ProxyCredentialsDict = {"basic_auth": _}
+_params_198: PublishedDateFilterDict = {}
+_params_199: RecommendationConfigDict = {"system_prompt_recommendation_config": _}
+_params_200: RecommendationEvaluationConfigDict = {"evaluators": _}
+_params_201: RecommendationEvaluatorReferenceDict = {"evaluator_arn": _}
+_params_202: RecordExpirySpecificationDict = {"record_expiry_duration_days": _}
+_params_203: RedactionConfigurationDict = {}
+_params_204: ResourceLocationDict = {"s3": _}
+_params_205: RetrieveMemoryRecordsInputDict = {"memory_id": _, "search_criteria": _}
+_params_206: RightExpressionDict = {"metadata_value": _}
+_params_207: S3FilesConfigurationDict = {
     "access_point_arn": _,
     "mount_path": _,
     "file_system_arn": _,
 }
-_params_185: S3LocationDict = {"bucket": _, "prefix": _}
-_params_186: SaveBrowserSessionProfileInputDict = {
+_params_208: S3LocationDict = {"bucket": _, "prefix": _}
+_params_209: SaveBrowserSessionProfileInputDict = {
     "profile_identifier": _,
     "browser_identifier": _,
     "session_id": _,
 }
-_params_187: ScreenshotArgumentsDict = {}
-_params_188: SearchCriteriaDict = {"search_query": _}
-_params_189: SearchRegistryRecordsInputDict = {"search_query": _, "registry_ids": _}
-_params_190: SecretsManagerLocationDict = {"secret_arn": _}
-_params_191: SessionFilterDict = {}
-_params_192: SessionFilterConfigDict = {}
-_params_193: SessionLimitsDict = {"max_spend_amount": _}
-_params_194: SessionMetadataShapeDict = {"session_id": _}
-_params_195: SessionTraceIdsDict = {"session_id": _, "trace_ids": _}
-_params_196: SpanContextDict = {"session_id": _}
-_params_197: StartBatchEvaluationInputDict = {
+_params_210: ScreenshotArgumentsDict = {}
+_params_211: SearchCriteriaDict = {"search_query": _}
+_params_212: SearchRegistryRecordsInputDict = {"search_query": _, "registry_ids": _}
+_params_213: SecretsManagerLocationDict = {"secret_arn": _}
+_params_214: SessionFilterDict = {}
+_params_215: SessionFilterConfigDict = {}
+_params_216: SessionLimitsDict = {"max_spend_amount": _}
+_params_217: SessionMetadataShapeDict = {"session_id": _}
+_params_218: SessionTraceIdsDict = {"session_id": _, "trace_ids": _}
+_params_219: SpanContextDict = {"session_id": _}
+_params_220: StartBatchEvaluationInputDict = {
     "batch_evaluation_name": _,
     "data_source_config": _,
 }
-_params_198: StartBrowserSessionInputDict = {"browser_identifier": _}
-_params_199: StartCodeInterpreterSessionInputDict = {"code_interpreter_identifier": _}
-_params_200: StartMemoryExtractionJobInputDict = {"memory_id": _, "extraction_job": _}
-_params_201: StartRecommendationInputDict = {
+_params_221: StartBrowserSessionInputDict = {"browser_identifier": _}
+_params_222: StartCodeInterpreterSessionInputDict = {"code_interpreter_identifier": _}
+_params_223: StartDatasetGenerationInputDict = {"dataset_id": _, "name": _, "source": _}
+_params_224: StartMemoryExtractionJobInputDict = {"memory_id": _, "extraction_job": _}
+_params_225: StartRecommendationInputDict = {
     "name": _,
     "type": _,
     "recommendation_config": _,
 }
-_params_202: StopBatchEvaluationInputDict = {"batch_evaluation_id": _}
-_params_203: StopBrowserSessionInputDict = {"browser_identifier": _, "session_id": _}
-_params_204: StopCodeInterpreterSessionInputDict = {
+_params_226: StopBatchEvaluationInputDict = {"batch_evaluation_id": _}
+_params_227: StopBrowserSessionInputDict = {"browser_identifier": _, "session_id": _}
+_params_228: StopCodeInterpreterSessionInputDict = {
     "code_interpreter_identifier": _,
     "session_id": _,
 }
-_params_205: StopRuntimeSessionInputDict = {
+_params_229: StopRuntimeSessionInputDict = {
     "runtime_session_id": _,
     "agent_runtime_arn": _,
 }
-_params_206: StreamUpdateDict = {"automation_stream_update": _}
-_params_207: StripePrivyTokenRequestInputDict = {"request_path": _, "request_body": _}
-_params_208: SystemPromptConfigDict = {"text": _}
-_params_209: SystemPromptConfigurationBundleDict = {
+_params_230: StreamUpdateDict = {"automation_stream_update": _}
+_params_231: StripePrivyTokenRequestInputDict = {"request_path": _, "request_body": _}
+_params_232: SystemPromptConfigDict = {"text": _}
+_params_233: SystemPromptConfigurationBundleDict = {
     "bundle_arn": _,
     "version_id": _,
     "system_prompt_json_path": _,
 }
-_params_210: SystemPromptRecommendationConfigDict = {
+_params_234: SystemPromptRecommendationConfigDict = {
     "system_prompt": _,
     "agent_traces": _,
 }
-_params_211: TargetRefDict = {"name": _}
-_params_212: ToolArgumentsDict = {}
-_params_213: ToolDescriptionConfigDict = {"text": _}
-_params_214: ToolDescriptionConfigurationBundleDict = {
+_params_235: TargetRefDict = {"name": _}
+_params_236: ToolArgumentsDict = {}
+_params_237: ToolDescriptionConfigDict = {"text": _}
+_params_238: ToolDescriptionConfigurationBundleDict = {
     "bundle_arn": _,
     "version_id": _,
     "tools": _,
 }
-_params_215: ToolDescriptionInputDict = {"tool_name": _, "tool_description": _}
-_params_216: ToolDescriptionRecommendationConfigDict = {
+_params_239: ToolDescriptionInputDict = {"tool_name": _, "tool_description": _}
+_params_240: ToolDescriptionRecommendationConfigDict = {
     "tool_description": _,
     "agent_traces": _,
 }
-_params_217: ToolDescriptionSourceDict = {"tool_description_text": _}
-_params_218: ToolDescriptionTextInputDict = {"tools": _}
-_params_219: ToolsFileSystemConfigurationDict = {"s3_files_configuration": _}
-_params_220: UpdateABTestInputDict = {"ab_test_id": _}
-_params_221: UpdateBrowserStreamInputDict = {
+_params_241: ToolDescriptionSourceDict = {"tool_description_text": _}
+_params_242: ToolDescriptionTextInputDict = {"tools": _}
+_params_243: ToolsFileSystemConfigurationDict = {"s3_files_configuration": _}
+_params_244: TraceGenerationSourceDict = {"source_config": _}
+_params_245: TraceSourceConfigDict = {"cloud_watch_logs": _}
+_params_246: TurnCountRangeDict = {}
+_params_247: UpdateABTestInputDict = {"ab_test_id": _}
+_params_248: UpdateAgentInsightInputDict = {
+    "application_name": _,
+    "agent_insight_id": _,
+    "archive_status": _,
+}
+_params_249: UpdateBrowserStreamInputDict = {
     "browser_identifier": _,
     "session_id": _,
     "stream_update": _,
 }
-_params_222: UserIdentifierDict = {"user_token": _}
-_params_223: VariantDict = {"name": _, "weight": _, "variant_configuration": _}
-_params_224: VariantConfigurationDict = {}
-_params_225: ViewPortDict = {"width": _, "height": _}
-_params_226: WebSearchFiltersDict = {}
-_params_227: UnitDict = {}
+_params_250: UserIdentifierDict = {"user_token": _}
+_params_251: VariantDict = {"name": _, "weight": _, "variant_configuration": _}
+_params_252: VariantConfigurationDict = {}
+_params_253: ViewPortDict = {"width": _, "height": _}
+_params_254: WebSearchFiltersDict = {}
+_params_255: UnitDict = {}
 
 
 def _request[T](form: type[T]) -> T:
@@ -1558,6 +1724,10 @@ async def check_async_calls(client: AsyncBedrockAgentCoreClient) -> None:
     await client.delete_capacity_provider_session(
         _request(DeleteCapacityProviderSessionInputDict)
     )
+    await client.delete_dataset_generation(dataset_id=_, generation_id=_)
+    await client.delete_dataset_generation(**_request(DeleteDatasetGenerationInputDict))
+    await client.delete_dataset_generation(_request(DeleteDatasetGenerationInput))
+    await client.delete_dataset_generation(_request(DeleteDatasetGenerationInputDict))
     await client.delete_event(memory_id=_, session_id=_, event_id=_, actor_id=_)
     await client.delete_event(**_request(DeleteEventInputDict))
     await client.delete_event(_request(DeleteEventInput))
@@ -1592,6 +1762,10 @@ async def check_async_calls(client: AsyncBedrockAgentCoreClient) -> None:
     await client.get_agent_card(**_request(GetAgentCardInputDict))
     await client.get_agent_card(_request(GetAgentCardInput))
     await client.get_agent_card(_request(GetAgentCardInputDict))
+    await client.get_agent_insight(application_name=_, agent_insight_id=_)
+    await client.get_agent_insight(**_request(GetAgentInsightInputDict))
+    await client.get_agent_insight(_request(GetAgentInsightInput))
+    await client.get_agent_insight(_request(GetAgentInsightInputDict))
     await client.get_batch_evaluation(batch_evaluation_id=_)
     await client.get_batch_evaluation(**_request(GetBatchEvaluationInputDict))
     await client.get_batch_evaluation(_request(GetBatchEvaluationInput))
@@ -1610,6 +1784,10 @@ async def check_async_calls(client: AsyncBedrockAgentCoreClient) -> None:
     await client.get_code_interpreter_session(
         _request(GetCodeInterpreterSessionInputDict)
     )
+    await client.get_dataset_generation(dataset_id=_, generation_id=_)
+    await client.get_dataset_generation(**_request(GetDatasetGenerationInputDict))
+    await client.get_dataset_generation(_request(GetDatasetGenerationInput))
+    await client.get_dataset_generation(_request(GetDatasetGenerationInputDict))
     await client.get_event(memory_id=_, session_id=_, actor_id=_, event_id=_)
     await client.get_event(**_request(GetEventInputDict))
     await client.get_event(_request(GetEventInput))
@@ -1735,6 +1913,10 @@ async def check_async_calls(client: AsyncBedrockAgentCoreClient) -> None:
     await client.list_actors(**_request(ListActorsInputDict))
     await client.list_actors(_request(ListActorsInput))
     await client.list_actors(_request(ListActorsInputDict))
+    await client.list_agent_insights()
+    await client.list_agent_insights(**_request(ListAgentInsightsInputDict))
+    await client.list_agent_insights(_request(ListAgentInsightsInput))
+    await client.list_agent_insights(_request(ListAgentInsightsInputDict))
     await client.list_batch_evaluations()
     await client.list_batch_evaluations(**_request(ListBatchEvaluationsInputDict))
     await client.list_batch_evaluations(_request(ListBatchEvaluationsInput))
@@ -1753,6 +1935,10 @@ async def check_async_calls(client: AsyncBedrockAgentCoreClient) -> None:
     await client.list_code_interpreter_sessions(
         _request(ListCodeInterpreterSessionsInputDict)
     )
+    await client.list_dataset_generations(dataset_id=_)
+    await client.list_dataset_generations(**_request(ListDatasetGenerationsInputDict))
+    await client.list_dataset_generations(_request(ListDatasetGenerationsInput))
+    await client.list_dataset_generations(_request(ListDatasetGenerationsInputDict))
     await client.list_events(memory_id=_, session_id=_, actor_id=_)
     await client.list_events(**_request(ListEventsInputDict))
     await client.list_events(_request(ListEventsInput))
@@ -1831,6 +2017,10 @@ async def check_async_calls(client: AsyncBedrockAgentCoreClient) -> None:
     await client.start_code_interpreter_session(
         _request(StartCodeInterpreterSessionInputDict)
     )
+    await client.start_dataset_generation(dataset_id=_, name=_, source=_)
+    await client.start_dataset_generation(**_request(StartDatasetGenerationInputDict))
+    await client.start_dataset_generation(_request(StartDatasetGenerationInput))
+    await client.start_dataset_generation(_request(StartDatasetGenerationInputDict))
     await client.start_memory_extraction_job(memory_id=_, extraction_job=_)
     await client.start_memory_extraction_job(
         **_request(StartMemoryExtractionJobInputDict)
@@ -1871,6 +2061,12 @@ async def check_async_calls(client: AsyncBedrockAgentCoreClient) -> None:
     await client.update_ab_test(**_request(UpdateABTestInputDict))
     await client.update_ab_test(_request(UpdateABTestInput))
     await client.update_ab_test(_request(UpdateABTestInputDict))
+    await client.update_agent_insight(
+        application_name=_, agent_insight_id=_, archive_status=_
+    )
+    await client.update_agent_insight(**_request(UpdateAgentInsightInputDict))
+    await client.update_agent_insight(_request(UpdateAgentInsightInput))
+    await client.update_agent_insight(_request(UpdateAgentInsightInputDict))
     await client.update_browser_stream(
         browser_identifier=_, session_id=_, stream_update=_
     )
@@ -1938,6 +2134,10 @@ def check_sync_calls(client: BedrockAgentCoreClient) -> None:
     client.delete_capacity_provider_session(
         _request(DeleteCapacityProviderSessionInputDict)
     )
+    client.delete_dataset_generation(dataset_id=_, generation_id=_)
+    client.delete_dataset_generation(**_request(DeleteDatasetGenerationInputDict))
+    client.delete_dataset_generation(_request(DeleteDatasetGenerationInput))
+    client.delete_dataset_generation(_request(DeleteDatasetGenerationInputDict))
     client.delete_event(memory_id=_, session_id=_, event_id=_, actor_id=_)
     client.delete_event(**_request(DeleteEventInputDict))
     client.delete_event(_request(DeleteEventInput))
@@ -1972,6 +2172,10 @@ def check_sync_calls(client: BedrockAgentCoreClient) -> None:
     client.get_agent_card(**_request(GetAgentCardInputDict))
     client.get_agent_card(_request(GetAgentCardInput))
     client.get_agent_card(_request(GetAgentCardInputDict))
+    client.get_agent_insight(application_name=_, agent_insight_id=_)
+    client.get_agent_insight(**_request(GetAgentInsightInputDict))
+    client.get_agent_insight(_request(GetAgentInsightInput))
+    client.get_agent_insight(_request(GetAgentInsightInputDict))
     client.get_batch_evaluation(batch_evaluation_id=_)
     client.get_batch_evaluation(**_request(GetBatchEvaluationInputDict))
     client.get_batch_evaluation(_request(GetBatchEvaluationInput))
@@ -1984,6 +2188,10 @@ def check_sync_calls(client: BedrockAgentCoreClient) -> None:
     client.get_code_interpreter_session(**_request(GetCodeInterpreterSessionInputDict))
     client.get_code_interpreter_session(_request(GetCodeInterpreterSessionInput))
     client.get_code_interpreter_session(_request(GetCodeInterpreterSessionInputDict))
+    client.get_dataset_generation(dataset_id=_, generation_id=_)
+    client.get_dataset_generation(**_request(GetDatasetGenerationInputDict))
+    client.get_dataset_generation(_request(GetDatasetGenerationInput))
+    client.get_dataset_generation(_request(GetDatasetGenerationInputDict))
     client.get_event(memory_id=_, session_id=_, actor_id=_, event_id=_)
     client.get_event(**_request(GetEventInputDict))
     client.get_event(_request(GetEventInput))
@@ -2089,6 +2297,10 @@ def check_sync_calls(client: BedrockAgentCoreClient) -> None:
     client.list_actors(**_request(ListActorsInputDict))
     client.list_actors(_request(ListActorsInput))
     client.list_actors(_request(ListActorsInputDict))
+    client.list_agent_insights()
+    client.list_agent_insights(**_request(ListAgentInsightsInputDict))
+    client.list_agent_insights(_request(ListAgentInsightsInput))
+    client.list_agent_insights(_request(ListAgentInsightsInputDict))
     client.list_batch_evaluations()
     client.list_batch_evaluations(**_request(ListBatchEvaluationsInputDict))
     client.list_batch_evaluations(_request(ListBatchEvaluationsInput))
@@ -2105,6 +2317,10 @@ def check_sync_calls(client: BedrockAgentCoreClient) -> None:
     client.list_code_interpreter_sessions(
         _request(ListCodeInterpreterSessionsInputDict)
     )
+    client.list_dataset_generations(dataset_id=_)
+    client.list_dataset_generations(**_request(ListDatasetGenerationsInputDict))
+    client.list_dataset_generations(_request(ListDatasetGenerationsInput))
+    client.list_dataset_generations(_request(ListDatasetGenerationsInputDict))
     client.list_events(memory_id=_, session_id=_, actor_id=_)
     client.list_events(**_request(ListEventsInputDict))
     client.list_events(_request(ListEventsInput))
@@ -2173,6 +2389,10 @@ def check_sync_calls(client: BedrockAgentCoreClient) -> None:
     client.start_code_interpreter_session(
         _request(StartCodeInterpreterSessionInputDict)
     )
+    client.start_dataset_generation(dataset_id=_, name=_, source=_)
+    client.start_dataset_generation(**_request(StartDatasetGenerationInputDict))
+    client.start_dataset_generation(_request(StartDatasetGenerationInput))
+    client.start_dataset_generation(_request(StartDatasetGenerationInputDict))
     client.start_memory_extraction_job(memory_id=_, extraction_job=_)
     client.start_memory_extraction_job(**_request(StartMemoryExtractionJobInputDict))
     client.start_memory_extraction_job(_request(StartMemoryExtractionJobInput))
@@ -2203,6 +2423,12 @@ def check_sync_calls(client: BedrockAgentCoreClient) -> None:
     client.update_ab_test(**_request(UpdateABTestInputDict))
     client.update_ab_test(_request(UpdateABTestInput))
     client.update_ab_test(_request(UpdateABTestInputDict))
+    client.update_agent_insight(
+        application_name=_, agent_insight_id=_, archive_status=_
+    )
+    client.update_agent_insight(**_request(UpdateAgentInsightInputDict))
+    client.update_agent_insight(_request(UpdateAgentInsightInput))
+    client.update_agent_insight(_request(UpdateAgentInsightInputDict))
     client.update_browser_stream(browser_identifier=_, session_id=_, stream_update=_)
     client.update_browser_stream(**_request(UpdateBrowserStreamInputDict))
     client.update_browser_stream(_request(UpdateBrowserStreamInput))

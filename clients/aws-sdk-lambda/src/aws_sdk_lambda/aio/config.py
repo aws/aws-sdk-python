@@ -76,6 +76,8 @@ if TYPE_CHECKING:
         DeleteCapacityProviderOutput,
         DeleteCodeSigningConfigInput,
         DeleteCodeSigningConfigOutput,
+        DeleteDurableExecutionInput,
+        DeleteDurableExecutionOutput,
         DeleteEventSourceMappingInput,
         DeleteEventSourceMappingOutput,
         DeleteFunctionCodeSigningConfigInput,
@@ -176,6 +178,8 @@ if TYPE_CHECKING:
         ListTagsOutput,
         ListVersionsByFunctionInput,
         ListVersionsByFunctionOutput,
+        PauseDurableExecutionInput,
+        PauseDurableExecutionOutput,
         PublishLayerVersionInput,
         PublishLayerVersionOutput,
         PublishVersionInput,
@@ -200,6 +204,8 @@ if TYPE_CHECKING:
         RemoveLayerVersionPermissionOutput,
         RemovePermissionInput,
         RemovePermissionOutput,
+        ResumeDurableExecutionInput,
+        ResumeDurableExecutionOutput,
         SendDurableExecutionCallbackFailureInput,
         SendDurableExecutionCallbackFailureOutput,
         SendDurableExecutionCallbackHeartbeatInput,
@@ -258,6 +264,9 @@ if TYPE_CHECKING:
         ],
         Interceptor[
             DeleteCodeSigningConfigInput, DeleteCodeSigningConfigOutput, Any, Any
+        ],
+        Interceptor[
+            DeleteDurableExecutionInput, DeleteDurableExecutionOutput, Any, Any
         ],
         Interceptor[
             DeleteEventSourceMappingInput, DeleteEventSourceMappingOutput, Any, Any
@@ -394,6 +403,7 @@ if TYPE_CHECKING:
         Interceptor[
             ListVersionsByFunctionInput, ListVersionsByFunctionOutput, Any, Any
         ],
+        Interceptor[PauseDurableExecutionInput, PauseDurableExecutionOutput, Any, Any],
         Interceptor[PublishLayerVersionInput, PublishLayerVersionOutput, Any, Any],
         Interceptor[PublishVersionInput, PublishVersionOutput, Any, Any],
         Interceptor[
@@ -434,6 +444,9 @@ if TYPE_CHECKING:
             Any,
         ],
         Interceptor[RemovePermissionInput, RemovePermissionOutput, Any, Any],
+        Interceptor[
+            ResumeDurableExecutionInput, ResumeDurableExecutionOutput, Any, Any
+        ],
         Interceptor[
             SendDurableExecutionCallbackFailureInput,
             SendDurableExecutionCallbackFailureOutput,

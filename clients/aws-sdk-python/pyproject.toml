@@ -69,6 +69,8 @@ secrets_manager = ["aws_sdk_secrets_manager~=0.13.0"]
 signin = ["aws_sdk_signin~=0.13.0"]
 sns = ["aws_sdk_sns~=0.13.0"]
 sqs = ["aws_sdk_sqs~=0.13.0"]
+sso = ["aws_sdk_sso~=0.13.0"]
+sso_oidc = ["aws_sdk_sso_oidc~=0.13.0"]
 sts = ["aws_sdk_sts~=0.13.0"]
 transcribe_streaming = ["aws_sdk_transcribe_streaming~=0.13.0"]
 
@@ -108,6 +110,8 @@ all = [
     "aws_sdk_python[signin]",
     "aws_sdk_python[sns]",
     "aws_sdk_python[sqs]",
+    "aws_sdk_python[sso]",
+    "aws_sdk_python[sso_oidc]",
     "aws_sdk_python[sts]",
     "aws_sdk_python[transcribe_streaming]",
 ]
@@ -148,6 +152,8 @@ aws-sdk-secrets-manager = { path = "../aws-sdk-secrets-manager", editable = true
 aws-sdk-signin = { path = "../aws-sdk-signin", editable = true }
 aws-sdk-sns = { path = "../aws-sdk-sns", editable = true }
 aws-sdk-sqs = { path = "../aws-sdk-sqs", editable = true }
+aws-sdk-sso = { path = "../aws-sdk-sso", editable = true }
+aws-sdk-sso-oidc = { path = "../aws-sdk-sso-oidc", editable = true }
 aws-sdk-sts = { path = "../aws-sdk-sts", editable = true }
 aws-sdk-transcribe-streaming = { path = "../aws-sdk-transcribe-streaming", editable = true }
 

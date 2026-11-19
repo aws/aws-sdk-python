@@ -5527,7 +5527,7 @@ class GetKeyPolicyInput(_SerdeShape):
 
     key_id: str | None = ...
     """
-    Gets the key policy for the specified KMS key.
+    Identifies the KMS key whose key policy you want to get.
 
     Specify the key ID or key ARN of the KMS key.
 
@@ -5544,8 +5544,11 @@ class GetKeyPolicyInput(_SerdeShape):
     policy_name: str | None = ...
     """
     Specifies the name of the key policy. If no policy name is specified,
-    the default value is `default`. The only valid name is `default`. To get
-    the names of key policies, use ListKeyPolicies.
+    the default value is `default`. Valid values are `default` and
+    `AWS_RAM`. Use `AWS_RAM` to get the key policy that RAM manages for a
+    KMS key that you share through RAM. If the KMS key doesn't have an
+    `AWS_RAM` key policy, the request fails with a `NotFoundException`. To
+    get the names of key policies, use ListKeyPolicies.
     """
 
 class GetKeyPolicyInputDict(TypedDict, total=False):
@@ -5553,7 +5556,7 @@ class GetKeyPolicyInputDict(TypedDict, total=False):
 
     key_id: Required[str]
     """
-    Gets the key policy for the specified KMS key.
+    Identifies the KMS key whose key policy you want to get.
 
     Specify the key ID or key ARN of the KMS key.
 
@@ -5570,8 +5573,11 @@ class GetKeyPolicyInputDict(TypedDict, total=False):
     policy_name: str | None
     """
     Specifies the name of the key policy. If no policy name is specified,
-    the default value is `default`. The only valid name is `default`. To get
-    the names of key policies, use ListKeyPolicies.
+    the default value is `default`. Valid values are `default` and
+    `AWS_RAM`. Use `AWS_RAM` to get the key policy that RAM manages for a
+    KMS key that you share through RAM. If the KMS key doesn't have an
+    `AWS_RAM` key policy, the request fails with a `NotFoundException`. To
+    get the names of key policies, use ListKeyPolicies.
     """
 
 @dataclass(kw_only=True)
@@ -5581,7 +5587,18 @@ class GetKeyPolicyOutput(_SerdeShape):
     policy: str | None = ...
     """A key policy document in JSON format."""
     policy_name: str | None = ...
-    """The name of the key policy. The only valid value is `default`."""
+    """
+    The name of the key policy. Valid values are:
+
+    default
+
+    :   The key policy that you manage.
+
+    AWS_RAM
+
+    :   The key policy that RAM manages for KMS keys that you share through
+        RAM.
+    """
     response_metadata: ResponseMetadata = ...
     """
     Metadata about the response that produced this output. Use this to
@@ -7376,7 +7393,7 @@ class ListKeyPoliciesInput(_SerdeShape):
     This value is optional. If you include a value, it must be between 1 and
     1000, inclusive. If you do not include a value, it defaults to 100.
 
-    Only one policy can be attached to a key.
+    A KMS key can have at most two key policies, `default` and `AWS_RAM`.
     """
     marker: str | None = ...
     """
@@ -7413,7 +7430,7 @@ class ListKeyPoliciesInputDict(TypedDict, total=False):
     This value is optional. If you include a value, it must be between 1 and
     1000, inclusive. If you do not include a value, it defaults to 100.
 
-    Only one policy can be attached to a key.
+    A KMS key can have at most two key policies, `default` and `AWS_RAM`.
     """
     marker: str | None
     """
@@ -7427,7 +7444,18 @@ class ListKeyPoliciesOutput(_SerdeShape):
     """Dataclass for ListKeyPoliciesOutput structure."""
 
     policy_names: list[str] | None = ...
-    """A list of key policy names. The only valid value is `default`."""
+    """
+    A list of key policy names. Valid values are:
+
+    default
+
+    :   The key policy that you manage.
+
+    AWS_RAM
+
+    :   The key policy that RAM manages for KMS keys that you share through
+        RAM.
+    """
     next_marker: str | None = ...
     """
     When `Truncated` is true, this element is present and contains the value
@@ -7591,6 +7619,46 @@ class ListKeysInput(_SerdeShape):
     with truncated results. Set it to the value of `NextMarker` from the
     truncated response you just received.
     """
+    resource_owners: list[str] | None = ...
+    """
+    Specifies whose KMS keys to list. Use this parameter to list KMS keys
+    that other Amazon Web Services accounts shared with your Amazon Web
+    Services account through Resource Access Manager (RAM).
+
+    Specify one or two values. Valid values are:
+
+    SELF
+
+    :   Lists the KMS keys in your Amazon Web Services account and Region.
+
+    OTHER_ACCOUNTS_VIA_RAM
+
+    :   Lists the KMS keys in the Region that other Amazon Web Services
+        accounts currently share with your Amazon Web Services account
+        through RAM. This list doesn't include KMS keys that your Amazon
+        Web Services account owns. For each of these KMS keys, the key ARN
+        in the response contains the account ID of the Amazon Web Services
+        account that owns the KMS key.
+
+    If you omit this parameter, `ListKeys` lists only the KMS keys in your
+    Amazon Web Services account. If you specify both values, in either
+    order, `ListKeys` returns the KMS keys in your Amazon Web Services
+    account first, and then the KMS keys that other Amazon Web Services
+    accounts shared with you. A single response doesn't contain both kinds
+    of KMS keys.
+
+    When `ResourceOwners` includes `OTHER_ACCOUNTS_VIA_RAM`, a response can
+    contain fewer KMS keys than the `Limit` value, or none, even when
+    `Truncated` is true. To get all of the KMS keys, continue calling
+    `ListKeys` with the `NextMarker` value from each response until
+    `Truncated` is false. Use a `NextMarker` value only in a request that
+    has the same `ResourceOwners` value as the request that returned it.
+    Otherwise, the request can fail with an `InvalidMarkerException`.
+
+    KMS keys that other Amazon Web Services accounts share with you can take
+    some time to appear in or disappear from the results after changes to
+    resource shares.
+    """
 
 class ListKeysInputDict(TypedDict, total=False):
     """Dictionary form of `ListKeysInput`."""
@@ -7610,13 +7678,57 @@ class ListKeysInputDict(TypedDict, total=False):
     with truncated results. Set it to the value of `NextMarker` from the
     truncated response you just received.
     """
+    resource_owners: Sequence[str] | None
+    """
+    Specifies whose KMS keys to list. Use this parameter to list KMS keys
+    that other Amazon Web Services accounts shared with your Amazon Web
+    Services account through Resource Access Manager (RAM).
+
+    Specify one or two values. Valid values are:
+
+    SELF
+
+    :   Lists the KMS keys in your Amazon Web Services account and Region.
+
+    OTHER_ACCOUNTS_VIA_RAM
+
+    :   Lists the KMS keys in the Region that other Amazon Web Services
+        accounts currently share with your Amazon Web Services account
+        through RAM. This list doesn't include KMS keys that your Amazon
+        Web Services account owns. For each of these KMS keys, the key ARN
+        in the response contains the account ID of the Amazon Web Services
+        account that owns the KMS key.
+
+    If you omit this parameter, `ListKeys` lists only the KMS keys in your
+    Amazon Web Services account. If you specify both values, in either
+    order, `ListKeys` returns the KMS keys in your Amazon Web Services
+    account first, and then the KMS keys that other Amazon Web Services
+    accounts shared with you. A single response doesn't contain both kinds
+    of KMS keys.
+
+    When `ResourceOwners` includes `OTHER_ACCOUNTS_VIA_RAM`, a response can
+    contain fewer KMS keys than the `Limit` value, or none, even when
+    `Truncated` is true. To get all of the KMS keys, continue calling
+    `ListKeys` with the `NextMarker` value from each response until
+    `Truncated` is false. Use a `NextMarker` value only in a request that
+    has the same `ResourceOwners` value as the request that returned it.
+    Otherwise, the request can fail with an `InvalidMarkerException`.
+
+    KMS keys that other Amazon Web Services accounts share with you can take
+    some time to appear in or disappear from the results after changes to
+    resource shares.
+    """
 
 @dataclass(kw_only=True)
 class ListKeysOutput(_SerdeShape):
     """Dataclass for ListKeysOutput structure."""
 
     keys: list[KeyListEntry] | None = ...
-    """A list of KMS keys."""
+    """
+    A list of KMS keys. For a KMS key that another Amazon Web Services
+    account shared with you through RAM, the key ARN contains the account ID
+    of the Amazon Web Services account that owns the KMS key.
+    """
     next_marker: str | None = ...
     """
     When `Truncated` is true, this element is present and contains the value
@@ -7972,7 +8084,12 @@ class PutKeyPolicyInput(_SerdeShape):
     policy_name: str | None = ...
     """
     The name of the key policy. If no policy name is specified, the default
-    value is `default`. The only valid value is `default`.
+    value is `default`. Valid values are `default` and `AWS_RAM`, but you
+    can set only the `default` key policy. RAM manages the `AWS_RAM` key
+    policy for KMS keys that you share through RAM. If you specify
+    `AWS_RAM`, the request fails with a `ValidationException`, or with an
+    `AccessDeniedException` if you don't have permission to call
+    `PutKeyPolicy` with that policy name.
     """
     policy: str | None = ...
     """
@@ -8048,6 +8165,12 @@ class PutKeyPolicyInput(_SerdeShape):
     making the request from making a subsequent
     [PutKeyPolicy](https://docs.aws.amazon.com/kms/latest/APIReference/API_PutKeyPolicy.html)
     request on the KMS key.
+
+    The key policy lockout safety check and the
+    `BypassPolicyLockoutSafetyCheck` parameter apply only to the `default`
+    key policy. The check evaluates only the new `default` key policy, with
+    `kms:PolicyName` set to `default`. It doesn't consider permissions in
+    the `AWS_RAM` key policy.
     """
 
 class PutKeyPolicyInputDict(TypedDict, total=False):
@@ -8072,7 +8195,12 @@ class PutKeyPolicyInputDict(TypedDict, total=False):
     policy_name: str | None
     """
     The name of the key policy. If no policy name is specified, the default
-    value is `default`. The only valid value is `default`.
+    value is `default`. Valid values are `default` and `AWS_RAM`, but you
+    can set only the `default` key policy. RAM manages the `AWS_RAM` key
+    policy for KMS keys that you share through RAM. If you specify
+    `AWS_RAM`, the request fails with a `ValidationException`, or with an
+    `AccessDeniedException` if you don't have permission to call
+    `PutKeyPolicy` with that policy name.
     """
     policy: Required[str]
     """
@@ -8148,6 +8276,12 @@ class PutKeyPolicyInputDict(TypedDict, total=False):
     making the request from making a subsequent
     [PutKeyPolicy](https://docs.aws.amazon.com/kms/latest/APIReference/API_PutKeyPolicy.html)
     request on the KMS key.
+
+    The key policy lockout safety check and the
+    `BypassPolicyLockoutSafetyCheck` parameter apply only to the `default`
+    key policy. The check evaluates only the new `default` key policy, with
+    `kms:PolicyName` set to `default`. It doesn't consider permissions in
+    the `AWS_RAM` key policy.
     """
 
 @dataclass(kw_only=True)
@@ -8948,6 +9082,17 @@ class ReplicateKeyOutput(_SerdeShape):
     to investigate a call. Members of the metadata are individually
     optional.
     """
+
+class ResourceOwnerType(UnknownEnumMixin, StrEnum):
+    """
+    Identifies whose KMS keys ListKeys lists. `SELF` identifies the KMS keys
+    in your Amazon Web Services account. `OTHER_ACCOUNTS_VIA_RAM` identifies
+    the KMS keys that other Amazon Web Services accounts shared with your
+    Amazon Web Services account through Resource Access Manager (RAM).
+    """
+
+    SELF = "SELF"
+    OTHER_ACCOUNTS_VIA_RAM = "OTHER_ACCOUNTS_VIA_RAM"
 
 @dataclass(kw_only=True)
 class RetireGrantInput(_SerdeShape):

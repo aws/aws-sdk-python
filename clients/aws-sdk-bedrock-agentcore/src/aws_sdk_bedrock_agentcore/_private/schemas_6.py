@@ -14,1178 +14,1159 @@ _m = "member"
 _sVm = "smithy.api#enumValue"
 _FAILED = "FAILED"
 _st = "status"
-_sm = "smithy.api#error"
-_c = "client"
-_sE = "smithy.api#httpError"
-_mes = "message"
+_d = "description"
 _smi = "smithy.api#sensitive"
-_aI = "actorId"
-_OTHER = "OTHER"
 _tI = "traceId"
+_sIe = "sessionId"
 _sSI = "smithy.synthetic#originalShapeId"
 _smit = "smithy.api#input"
-_rSI = "runtimeSessionId"
 _sH = "smithy.api#httpHeader"
-_XABARSI = "X-Amzn-Bedrock-AgentCore-Runtime-Session-Id"
-_sT = "smithy.api#idempotencyToken"
 _sL = "smithy.api#httpLabel"
-_q = "qualifier"
-_sQ = "smithy.api#httpQuery"
 _smith = "smithy.api#output"
 _sP = "smithy.api#httpPayload"
-_se = "server"
-_re = "reason"
 _smithy = "smithy.api#http"
-_rUI = "runtimeUserId"
-_XABARUI = "X-Amzn-Bedrock-AgentCore-Runtime-User-Id"
 _XATI = "X-Amzn-Trace-Id"
 _tP = "traceParent"
 _t = "traceparent"
-_tS = "traceState"
-_tr = "tracestate"
-_b = "baggage"
 _smithya = "smithy.api#streaming"
+_smithyap = "smithy.api#default"
+_com = "command"
+_std = "stdout"
+_stde = "stderr"
+_COMPLETED = "COMPLETED"
+_eC = "exitCode"
+_aDE = "accessDeniedException"
 _iSE = "internalServerException"
+_rNFE = "resourceNotFoundException"
+_sQEE = "serviceQuotaExceededException"
+_tE = "throttlingException"
 _vE = "validationException"
-_rCE = "runtimeClientError"
 _str = "stream"
-_cTl = "clientToken"
-_sVt = "stringValue"
+_ty = "type"
 _k = "key"
 _va = "value"
-_f = "filters"
-_ty = "type"
+_s_ = "s3"
 _te = "text"
-_ac = "action"
-_mR = "maxResults"
-_iT = "inputTokens"
-_oT = "outputTokens"
-_tT = "totalTokens"
-_eMr = "errorMessage"
-_eCr = "errorCode"
-_resul = "results"
-_sPy = "systemPrompt"
-_to = "tools"
+_SUCCESS = "SUCCESS"
+_er = "error"
+_da = "data"
+_resu = "result"
+_cII = "codeInterpreterIdentifier"
+_uT = "userToken"
+_uI = "userId"
 _inp = "input"
-_met = "metadata"
+_wIT = "workloadIdentityToken"
+_rCPN = "resourceCredentialProviderName"
+_rH = "requestHost"
+_rP = "requestPath"
+_rB = "requestBody"
+_SPRPT = "StripePrivyRequestPathType"
+_SPTRI = "StripePrivyTokenRequestInput"
+_iAS = "includeAuthorizationSignature"
+_PTRI = "PaymentTokenRequestInput"
+_cCTR = "coinbaseCdpTokenRequest"
+_sPTR = "stripePrivyTokenRequest"
+_GRPTI = "GetResourcePaymentTokenInput"
+_cGRPTR = "com.amazonaws.bedrockagentcore#GetResourcePaymentTokenRequest"
+_pTR = "paymentTokenRequest"
+_CCPJTT = "CoinbaseCdpPaymentJwtTokenType"
+_CCTRO = "CoinbaseCdpTokenResponseOutput"
+_bT = "bearerToken"
+_wAT = "walletAuthToken"
+_SPAIT = "StripePrivyAppIdType"
+_SPAST = "StripePrivyAuthorizationSignatureType"
+_SPBATT = "StripePrivyBasicAuthTokenType"
+_SPTRO = "StripePrivyTokenResponseOutput"
+_aSut = "authorizationSignature"
+_rE = "requestExpiry"
+_aIp = "appId"
+_bAT = "basicAuthToken"
+_PTRO = "PaymentTokenResponseOutput"
+_cCTRo = "coinbaseCdpTokenResponse"
+_sPTRt = "stripePrivyTokenResponse"
+_GRPTO = "GetResourcePaymentTokenOutput"
+_cGRPTRo = "com.amazonaws.bedrockagentcore#GetResourcePaymentTokenResponse"
+_pTRa = "paymentTokenResponse"
+_GRPT = "GetResourcePaymentToken"
+_WINT = "WorkloadIdentityNameType"
+_GWATI = "GetWorkloadAccessTokenInput"
+_cGWATR = "com.amazonaws.bedrockagentcore#GetWorkloadAccessTokenRequest"
+_wN = "workloadName"
+_GWATO = "GetWorkloadAccessTokenOutput"
+_cGWATRo = "com.amazonaws.bedrockagentcore#GetWorkloadAccessTokenResponse"
+_wATo = "workloadAccessToken"
+_GWAT = "GetWorkloadAccessToken"
+_GWATFJWTI = "GetWorkloadAccessTokenForJWTInput"
+_cGWATFJWTR = "com.amazonaws.bedrockagentcore#GetWorkloadAccessTokenForJWTRequest"
+_GWATFJWTO = "GetWorkloadAccessTokenForJWTOutput"
+_cGWATFJWTRo = "com.amazonaws.bedrockagentcore#GetWorkloadAccessTokenForJWTResponse"
+_GWATFJWT = "GetWorkloadAccessTokenForJWT"
+_GWATFUII = "GetWorkloadAccessTokenForUserIdInput"
+_cGWATFUIR = "com.amazonaws.bedrockagentcore#GetWorkloadAccessTokenForUserIdRequest"
+_GWATFUIO = "GetWorkloadAccessTokenForUserIdOutput"
+_cGWATFUIRo = "com.amazonaws.bedrockagentcore#GetWorkloadAccessTokenForUserIdResponse"
+_GWATFUI = "GetWorkloadAccessTokenForUserId"
+_MLS = "MaxLenString"
+_ICB = "InputContentBlock"
+_pa = "path"
 _bl = "blob"
+_ICBL = "InputContentBlockList"
+_PL = "ProgrammingLanguage"
+_PYTHON = "PYTHON"
+_py = "python"
+_JAVASCRIPT = "JAVASCRIPT"
+_j = "javascript"
+_TYPESCRIPT = "TYPESCRIPT"
+_typ = "typescript"
+_SLt = "StringList"
+_LRa = "LanguageRuntime"
+_NODEJS = "NODEJS"
+_no = "nodejs"
+_DENO = "DENO"
+_de = "deno"
+_TA = "ToolArguments"
+_cod = "code"
+_lan = "language"
+_cCl = "clearContext"
+_pat = "paths"
 _cont = "content"
+_dPi = "directoryPath"
+_tIas = "taskId"
+_run = "runtime"
+_TNo = "ToolName"
+_EC_ = "EXECUTE_CODE"
+_eCx = "executeCode"
+_EC__ = "EXECUTE_COMMAND"
+_eCxe = "executeCommand"
+_RF = "READ_FILES"
+_rF = "readFiles"
+_LF = "LIST_FILES"
+_lF = "listFiles"
+_RF_ = "REMOVE_FILES"
+_rFe = "removeFiles"
+_WF = "WRITE_FILES"
+_wF = "writeFiles"
+_SCE = "START_COMMAND_EXECUTION"
+_sCE = "startCommandExecution"
+_GT_ = "GET_TASK"
+_gTe = "getTask"
+_ST_ = "STOP_TASK"
+_sTto = "stopTask"
+_ICII = "InvokeCodeInterpreterInput"
+_cICIR = "com.amazonaws.bedrockagentcore#InvokeCodeInterpreterRequest"
+_xacisi = "x-amzn-code-interpreter-session-id"
+_ar = "arguments"
+_RCT = "ResourceContentType"
+_TEXT = "TEXT"
+_BLOB = "BLOB"
+_RCeso = "ResourceContent"
+_ur = "uri"
+_mT = "mimeType"
+_CBT = "ContentBlockType"
+_IMAGE = "IMAGE"
+_im = "image"
+_ER__ = "EMBEDDED_RESOURCE"
+_resou = "resource"
+_RL_ = "RESOURCE_LINK"
+_rl = "resource_link"
+_CBo = "ContentBlock"
+_siz = "size"
+_CBL = "ContentBlockList"
+_TS = "TaskStatus"
+_SUBMITTED = "SUBMITTED"
+_su = "submitted"
+_WORKING = "WORKING"
+_wo = "working"
+_comp = "completed"
+_CANCELED = "CANCELED"
+_can = "canceled"
+_fai = "failed"
+_TRSC = "ToolResultStructuredContent"
+_tSa = "taskStatus"
+_eTxe = "executionTime"
+_CIR = "CodeInterpreterResult"
+_sCt = "structuredContent"
+_iE = "isError"
+_CISO = "CodeInterpreterStreamOutput"
+_cE = "conflictException"
+_ICIO = "InvokeCodeInterpreterOutput"
+_cICIRo = "com.amazonaws.bedrockagentcore#InvokeCodeInterpreterResponse"
+_ICI = "InvokeCodeInterpreter"
+_HAT = "HarnessAllowedTool"
+_HATa = "HarnessAllowedTools"
+_HA = "HarnessArn"
+_HRTB = "HarnessReasoningTextBlock"
 _sig = "signature"
+_HRCB = "HarnessReasoningContentBlock"
+_rTe = "reasoningText"
 _rCed = "redactedContent"
+_STe = "SensitiveText"
+_SJ = "SensitiveJson"
+_HTRCB = "HarnessToolResultContentBlock"
 _js = "json"
+_HTRCBa = "HarnessToolResultContentBlocks"
+_HTUS = "HarnessToolUseStatus"
+_suc = "success"
+_ERROR = "ERROR"
+_HTUI = "HarnessToolUseId"
+_HTUT = "HarnessToolUseType"
 _TU_ = "TOOL_USE"
 _tu_ = "tool_use"
+_STU = "SERVER_TOOL_USE"
+_stu = "server_tool_use"
+_MTU = "MCP_TOOL_USE"
+_mtu = "mcp_tool_use"
+_HTRB = "HarnessToolResultBlock"
 _tUI = "toolUseId"
+_HTN = "HarnessToolName"
+_HTUB = "HarnessToolUseBlock"
 _sNe = "serverName"
+_HCB = "HarnessContentBlock"
 _tUo = "toolUse"
 _tRo = "toolResult"
 _rCea = "reasoningContent"
+_HCBa = "HarnessContentBlocks"
+_HCR = "HarnessConversationRole"
 _USER = "USER"
+_us = "user"
 _ASSISTANT = "ASSISTANT"
+_ass = "assistant"
+_HMa = "HarnessMessage"
 _ro = "role"
+_HMar = "HarnessMessages"
+_HBAF = "HarnessBedrockApiFormat"
+_CS_ = "CONVERSE_STREAM"
+_cs = "converse_stream"
+_RESPONSES = "RESPONSES"
+_resp = "responses"
+_CC = "CHAT_COMPLETIONS"
+_cc = "chat_completions"
+_MTa = "MaxTokens"
+_MI = "ModelId"
+_T = "Temperature"
+_TP = "TopP"
+_HBMC = "HarnessBedrockModelConfig"
+_mI = "modelId"
 _mTa = "maxTokens"
+_tem = "temperature"
+_tPo = "topP"
+_aFp = "apiFormat"
+_aP = "additionalParams"
+_AKA = "ApiKeyArn"
+_TKo = "TopK"
+_HGMC = "HarnessGeminiModelConfig"
+_aKA = "apiKeyArn"
+_tK = "topK"
+_HLLAB = "HarnessLiteLlmApiBase"
+_HLLMC = "HarnessLiteLlmModelConfig"
+_aB = "apiBase"
+_HOAAB = "HarnessOpenAiApiBase"
+_HOAAF = "HarnessOpenAiApiFormat"
+_HOAMC = "HarnessOpenAiModelConfig"
+_HMC = "HarnessModelConfiguration"
+_bMC = "bedrockModelConfig"
+_oAMC = "openAiModelConfig"
+_gMC = "geminiModelConfig"
+_lLMC = "liteLlmModelConfig"
+_HEN = "HarnessEndpointName"
+_HASP = "HarnessAwsSkillPath"
+_HASPa = "HarnessAwsSkillPaths"
+_HSASS = "HarnessSkillAwsSkillsSource"
+_HSGA = "HarnessSkillGitAuth"
+_cAr = "credentialArn"
+_use = "username"
+_HSGU = "HarnessSkillGitUrl"
+_HSGS = "HarnessSkillGitSource"
 _url = "url"
-_HTC = "HarnessToolConfiguration"
-_rMe = "remoteMcp"
-_aCB = "agentCoreBrowser"
-_aCG = "agentCoreGateway"
-_iF = "inlineFunction"
-_aCCI = "agentCoreCodeInterpreter"
-_HTT = "HarnessToolType"
-_RM = "REMOTE_MCP"
-_rm = "remote_mcp"
-_AB = "AGENTCORE_BROWSER"
-_ab = "agentcore_browser"
-_AG = "AGENTCORE_GATEWAY"
-_ag = "agentcore_gateway"
-_IF = "INLINE_FUNCTION"
-_if = "inline_function"
-_ACI = "AGENTCORE_CODE_INTERPRETER"
-_aci = "agentcore_code_interpreter"
-_HT = "HarnessTool"
-_conf = "config"
-_HTa = "HarnessTools"
-_IHI = "InvokeHarnessInput"
-_cIHR = "com.amazonaws.bedrockagentcore#InvokeHarnessRequest"
-_hA = "harnessArn"
-_mess = "messages"
-_mo = "model"
-_sk = "skills"
-_aTl = "allowedTools"
-_mIa = "maxIterations"
-_tSi = "timeoutSeconds"
-_HRCBD = "HarnessReasoningContentBlockDelta"
-_HTRBD = "HarnessToolResultBlockDelta"
-_HTRBDa = "HarnessToolResultBlocksDelta"
-_HTRMBD = "HarnessToolResultMetadataBlockDelta"
-_HTUBD = "HarnessToolUseBlockDelta"
-_HCBD = "HarnessContentBlockDelta"
-_tRM = "toolResultMetadata"
-_HCBDE = "HarnessContentBlockDeltaEvent"
-_cBI = "contentBlockIndex"
-_del = "delta"
-_HTRBS = "HarnessToolResultBlockStart"
-_HTUBS = "HarnessToolUseBlockStart"
-_HCBS = "HarnessContentBlockStart"
-_HCBSE = "HarnessContentBlockStartEvent"
-_star = "start"
-_HCBSEa = "HarnessContentBlockStopEvent"
-_HHD = "HarnessHookDecision"
-_ALLOW = "ALLOW"
-_al = "allow"
-_DENY = "DENY"
-_den = "deny"
-_HHEI = "HarnessHookEventId"
-_HHN = "HarnessHookName"
-_HHET = "HarnessHookEventType"
-_BTC = "BEFORE_TOOL_CALL"
-_btc = "before_tool_call"
-_ATC_ = "AFTER_TOOL_CALL"
-_atc = "after_tool_call"
-_BI = "BEFORE_INVOCATION"
-_bi = "before_invocation"
-_AI_ = "AFTER_INVOCATION"
-_ai = "after_invocation"
-_HHE = "HarnessHookEvent"
-_hEI = "hookEventId"
-_dec = "decision"
-_HMSE = "HarnessMessageStartEvent"
-_HSR = "HarnessStopReason"
-_ET_ = "END_TURN"
-_et = "end_turn"
-_TR_ = "TOOL_RESULT"
-_tr_ = "tool_result"
-_MT_ = "MAX_TOKENS"
-_mt = "max_tokens"
-_SS_ = "STOP_SEQUENCE"
-_ss = "stop_sequence"
-_CF_ = "CONTENT_FILTERED"
-_cf = "content_filtered"
-_MMO = "MALFORMED_MODEL_OUTPUT"
-_mmo = "malformed_model_output"
-_MTU_ = "MALFORMED_TOOL_USE"
-_mtu_ = "malformed_tool_use"
-_INTERRUPTED = "INTERRUPTED"
-_int = "interrupted"
-_PT = "PARTIAL_TURN"
-_pt = "partial_turn"
-_MCWE = "MODEL_CONTEXT_WINDOW_EXCEEDED"
-_mcwe = "model_context_window_exceeded"
-_MIE = "MAX_ITERATIONS_EXCEEDED"
-_mie = "max_iterations_exceeded"
-_MOTE = "MAX_OUTPUT_TOKENS_EXCEEDED"
-_mote = "max_output_tokens_exceeded"
-_TE__ = "TIMEOUT_EXCEEDED"
-_te_ = "timeout_exceeded"
-_HS_ = "HOOK_STOPPED"
-_hs = "hook_stopped"
-_HMSEa = "HarnessMessageStopEvent"
-_sR = "stopReason"
-_HSM = "HarnessStreamMetrics"
-_lM = "latencyMs"
-_HTU = "HarnessTokenUsage"
-_cRIT = "cacheReadInputTokens"
-_cWIT = "cacheWriteInputTokens"
-_HME = "HarnessMetadataEvent"
-_usa = "usage"
-_metr = "metrics"
-_IHSO = "InvokeHarnessStreamOutput"
-_mSe = "messageStart"
-_cBS = "contentBlockStart"
-_cBD = "contentBlockDelta"
-_cBSo = "contentBlockStop"
-_mSes = "messageStop"
-_hE = "hookEvent"
-_IHO = "InvokeHarnessOutput"
-_cIHRo = "com.amazonaws.bedrockagentcore#InvokeHarnessResponse"
-_IH = "InvokeHarness"
-_DN = "DomainName"
-_DL = "DomainList"
-_DFo = "DomainFilter"
-_inc = "include"
-_exc = "exclude"
-_PDF = "PublishedDateFilter"
-_pAu = "publishedAfter"
-_pB = "publishedBefore"
-_WSF = "WebSearchFilters"
-_dF = "domainFilter"
-_pDF = "publishedDateFilter"
-_WSI = "WebSearchId"
-_IWSI = "InvokeWebSearchInput"
-_wSI = "webSearchId"
-_sQe = "searchQuery"
-_WSR = "WebSearchResult"
-_tit = "title"
-_pAub = "publishedAt"
-_WSRL = "WebSearchResultList"
-_IWSO = "InvokeWebSearchOutput"
-_SUE = "ServiceUnavailableException"
-_rAS = "retryAfterSeconds"
-_IWS = "InvokeWebSearch"
-_MIe = "MemoryId"
-_REA = "RecordExpiryAction"
-_REMOVE = "REMOVE"
-_REDD = "RecordExpiryDurationDays"
-_RES = "RecordExpirySpecification"
-_rEDD = "recordExpiryDurationDays"
-_SSen = "SensitiveString"
-_MC = "MemoryContent"
-_MSIe = "MemoryStrategyId"
-_MK = "MetadataKey"
-_SLMV = "StringListMemberValue"
-_SVL = "StringValueList"
-_SVt = "StringValue"
-_MRMV = "MemoryRecordMetadataValue"
-_sLV = "stringListValue"
-_nV = "numberValue"
-_dTV = "dateTimeValue"
-_MRMM = "MemoryRecordMetadataMap"
-_Na = "Namespace"
-_NL = "NamespacesList"
-_RIe = "RequestIdentifier"
-_MRCI = "MemoryRecordCreateInput"
-_rIe = "requestIdentifier"
-_na = "namespaces"
-_tim = "timestamp"
-_mSIe = "memoryStrategyId"
-_MRCIL = "MemoryRecordsCreateInputList"
-_BCMRI = "BatchCreateMemoryRecordsInput"
-_mIe = "memoryId"
-_rec = "records"
-_rES = "recordExpirySpecification"
-_MRI = "MemoryRecordId"
-_MRS = "MemoryRecordStatus"
-_SUCCEEDED = "SUCCEEDED"
-_MRO = "MemoryRecordOutput"
-_mRI = "memoryRecordId"
-_MROL = "MemoryRecordsOutputList"
-_BCMRO = "BatchCreateMemoryRecordsOutput"
-_sRu = "successfulRecords"
-_fR = "failedRecords"
-_SE = "ServiceException"
-_TEh = "ThrottledException"
-_BCMR = "BatchCreateMemoryRecords"
-_MRDI = "MemoryRecordDeleteInput"
-_nam = "namespace"
-_MRDIL = "MemoryRecordsDeleteInputList"
-_BDMRI = "BatchDeleteMemoryRecordsInput"
-_BDMRO = "BatchDeleteMemoryRecordsOutput"
-_BDMR = "BatchDeleteMemoryRecords"
-_MRUI = "MemoryRecordUpdateInput"
-_sNo = "sourceNamespaces"
-_MRUIL = "MemoryRecordsUpdateInputList"
-_BUMRI = "BatchUpdateMemoryRecordsInput"
-_BUMRO = "BatchUpdateMemoryRecordsOutput"
-_BUMR = "BatchUpdateMemoryRecords"
-_BN = "BranchName"
-_EIve = "EventId"
-_Br = "Branch"
-_rEI = "rootEventId"
-_NVN = "NamespaceVariableName"
-_NVV = "NamespaceVariableValue"
-_NVM = "NamespaceVariablesMap"
-_ECx = "ExtractionConfig"
-_nVa = "namespaceVariables"
-_EMx = "ExtractionMode"
-_SKIP = "SKIP"
-_MV = "MetadataValue"
-_MMe = "MetadataMap"
-_MD = "MemoryDocument"
-_Con = "Content"
-_R = "Role"
-_TOOL = "TOOL"
-_Conv = "Conversational"
-_MJDC = "MemoryJsonDataContent"
-_MJD = "MemoryJsonData"
-_PTa = "PayloadType"
-_conv = "conversational"
-_PTL = "PayloadTypeList"
+_aut = "auth"
+_HSP = "HarnessSkillPath"
+_HSSU = "HarnessSkillS3Uri"
+_HSSS = "HarnessSkillS3Source"
+_HS = "HarnessSkill"
+_g = "git"
+_aSw = "awsSkills"
+_HSa = "HarnessSkills"
+_HSCB = "HarnessSystemContentBlock"
+_HSPa = "HarnessSystemPrompt"
+_HBA = "HarnessBrowserArn"
+_HACBC = "HarnessAgentCoreBrowserConfig"
+_bAr = "browserArn"
+_HCIA = "HarnessCodeInterpreterArn"
+_HACCIC = "HarnessAgentCoreCodeInterpreterConfig"
+_cIA = "codeInterpreterArn"
+_OACPK = "OAuthCustomParametersKey"
+_OACPV = "OAuthCustomParametersValue"
+_OACP = "OAuthCustomParameters"
+_OADRU = "OAuthDefaultReturnUrl"
+_OAGT = "OAuthGrantType"
+_CC_ = "CLIENT_CREDENTIALS"
+_AC_ = "AUTHORIZATION_CODE"
+_TE_ = "TOKEN_EXCHANGE"
+_OACPA = "OAuthCredentialProviderArn"
+_OAS = "OAuthScope"
+_OASu = "OAuthScopes"
 
-HARNESS_TOOL_CONFIGURATION: StaticSchema = (
+STRIPE_PRIVY_REQUEST_PATH_TYPE: StaticSchema = (3, n0, _SPRPT, 0)
+
+STRIPE_PRIVY_TOKEN_REQUEST_INPUT: StaticSchema = (
+    18,
+    n0,
+    _SPTRI,
+    0,
+    (_rH, _rP, _rB, _iAS),
+    (
+        (lambda: schemas.STRIPE_PRIVY_REQUEST_HOST_TYPE, 0),
+        (STRIPE_PRIVY_REQUEST_PATH_TYPE, 1),
+        (lambda: schemas.STRIPE_PRIVY_REQUEST_BODY_TYPE, 1),
+        (2, {_smithyap: False}),
+    ),
+)
+
+PAYMENT_TOKEN_REQUEST_INPUT: StaticSchema = (
     19,
     n0,
-    _HTC,
+    _PTRI,
     0,
-    (_rMe, _aCB, _aCG, _iF, _aCCI),
+    (_cCTR, _sPTR),
     (
-        (lambda: schemas.HARNESS_REMOTE_MCP_CONFIG, 0),
-        (lambda: schemas.HARNESS_AGENT_CORE_BROWSER_CONFIG, 0),
-        (lambda: schemas.HARNESS_AGENT_CORE_GATEWAY_CONFIG, 0),
-        (lambda: schemas.HARNESS_INLINE_FUNCTION_CONFIG, 0),
-        (lambda: schemas.HARNESS_AGENT_CORE_CODE_INTERPRETER_CONFIG, 0),
+        (lambda: schemas.COINBASE_CDP_TOKEN_REQUEST_INPUT, 0),
+        (STRIPE_PRIVY_TOKEN_REQUEST_INPUT, 0),
     ),
 )
 
-HARNESS_TOOL_TYPE: StaticSchema = (
+GET_RESOURCE_PAYMENT_TOKEN_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GRPTI,
+    {_sSI: _cGRPTR, _smit: None},
+    (_wIT, _rCPN, _pTR),
+    (
+        (lambda: schemas.WORKLOAD_IDENTITY_TOKEN_TYPE, 1),
+        (lambda: schemas.CREDENTIAL_PROVIDER_NAME, 1),
+        (PAYMENT_TOKEN_REQUEST_INPUT, 1),
+    ),
+)
+
+GET_RESOURCE_PAYMENT_TOKEN_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GRPTO,
+    {_sSI: _cGRPTRo, _smith: None},
+    (_pTRa,),
+    ((lambda: PAYMENT_TOKEN_RESPONSE_OUTPUT, 1),),
+)
+
+GET_RESOURCE_PAYMENT_TOKEN: StaticOperationSchema = (
+    23,
+    n0,
+    _GRPT,
+    {_smithy: MappingProxyType({"uri": "/identities/payment/token", "method": "POST"})},
+    GET_RESOURCE_PAYMENT_TOKEN_INPUT,
+    GET_RESOURCE_PAYMENT_TOKEN_OUTPUT,
+    (
+        lambda: schemas.ACCESS_DENIED_EXCEPTION,
+        lambda: schemas.INTERNAL_SERVER_EXCEPTION,
+        lambda: schemas.RESOURCE_NOT_FOUND_EXCEPTION,
+        lambda: schemas.THROTTLING_EXCEPTION,
+        lambda: schemas.UNAUTHORIZED_EXCEPTION,
+        lambda: schemas.VALIDATION_EXCEPTION,
+    ),
+)
+
+COINBASE_CDP_PAYMENT_JWT_TOKEN_TYPE: StaticSchema = (3, n0, _CCPJTT, 4)
+
+COINBASE_CDP_TOKEN_RESPONSE_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _CCTRO,
+    0,
+    (_bT, _wAT),
+    (
+        (COINBASE_CDP_PAYMENT_JWT_TOKEN_TYPE, 1),
+        (COINBASE_CDP_PAYMENT_JWT_TOKEN_TYPE, 0),
+    ),
+)
+
+STRIPE_PRIVY_APP_ID_TYPE: StaticSchema = (3, n0, _SPAIT, 0)
+
+STRIPE_PRIVY_AUTHORIZATION_SIGNATURE_TYPE: StaticSchema = (3, n0, _SPAST, 4)
+
+STRIPE_PRIVY_BASIC_AUTH_TOKEN_TYPE: StaticSchema = (3, n0, _SPBATT, 4)
+
+STRIPE_PRIVY_TOKEN_RESPONSE_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _SPTRO,
+    0,
+    (_aSut, _rE, _aIp, _bAT),
+    (
+        (STRIPE_PRIVY_AUTHORIZATION_SIGNATURE_TYPE, 0),
+        (8, 0),
+        (STRIPE_PRIVY_APP_ID_TYPE, 1),
+        (STRIPE_PRIVY_BASIC_AUTH_TOKEN_TYPE, 1),
+    ),
+)
+
+PAYMENT_TOKEN_RESPONSE_OUTPUT: StaticSchema = (
+    19,
+    n0,
+    _PTRO,
+    0,
+    (_cCTRo, _sPTRt),
+    ((COINBASE_CDP_TOKEN_RESPONSE_OUTPUT, 0), (STRIPE_PRIVY_TOKEN_RESPONSE_OUTPUT, 0)),
+)
+
+WORKLOAD_IDENTITY_NAME_TYPE: StaticSchema = (3, n0, _WINT, 0)
+
+GET_WORKLOAD_ACCESS_TOKEN_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GWATI,
+    {_sSI: _cGWATR, _smit: None},
+    (_wN,),
+    ((WORKLOAD_IDENTITY_NAME_TYPE, 1),),
+)
+
+GET_WORKLOAD_ACCESS_TOKEN_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GWATO,
+    {_sSI: _cGWATRo, _smith: None},
+    (_wATo,),
+    ((lambda: schemas.WORKLOAD_IDENTITY_TOKEN_TYPE, 1),),
+)
+
+GET_WORKLOAD_ACCESS_TOKEN: StaticOperationSchema = (
+    23,
+    n0,
+    _GWAT,
+    {
+        _smithy: MappingProxyType(
+            {"uri": "/identities/GetWorkloadAccessToken", "method": "POST"}
+        )
+    },
+    GET_WORKLOAD_ACCESS_TOKEN_INPUT,
+    GET_WORKLOAD_ACCESS_TOKEN_OUTPUT,
+    (
+        lambda: schemas.ACCESS_DENIED_EXCEPTION,
+        lambda: schemas.INTERNAL_SERVER_EXCEPTION,
+        lambda: schemas.RESOURCE_NOT_FOUND_EXCEPTION,
+        lambda: schemas.THROTTLING_EXCEPTION,
+        lambda: schemas.UNAUTHORIZED_EXCEPTION,
+        lambda: schemas.VALIDATION_EXCEPTION,
+    ),
+)
+
+GET_WORKLOAD_ACCESS_TOKEN_FOR_JWT_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GWATFJWTI,
+    {_sSI: _cGWATFJWTR, _smit: None},
+    (_wN, _uT),
+    ((WORKLOAD_IDENTITY_NAME_TYPE, 1), (lambda: schemas.USER_TOKEN_TYPE, 1)),
+)
+
+GET_WORKLOAD_ACCESS_TOKEN_FOR_JWT_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GWATFJWTO,
+    {_sSI: _cGWATFJWTRo, _smith: None},
+    (_wATo,),
+    ((lambda: schemas.WORKLOAD_IDENTITY_TOKEN_TYPE, 1),),
+)
+
+GET_WORKLOAD_ACCESS_TOKEN_FOR_JWT: StaticOperationSchema = (
+    23,
+    n0,
+    _GWATFJWT,
+    {
+        _smithy: MappingProxyType(
+            {"uri": "/identities/GetWorkloadAccessTokenForJWT", "method": "POST"}
+        )
+    },
+    GET_WORKLOAD_ACCESS_TOKEN_FOR_JWT_INPUT,
+    GET_WORKLOAD_ACCESS_TOKEN_FOR_JWT_OUTPUT,
+    (
+        lambda: schemas.ACCESS_DENIED_EXCEPTION,
+        lambda: schemas.INTERNAL_SERVER_EXCEPTION,
+        lambda: schemas.RESOURCE_NOT_FOUND_EXCEPTION,
+        lambda: schemas.THROTTLING_EXCEPTION,
+        lambda: schemas.UNAUTHORIZED_EXCEPTION,
+        lambda: schemas.VALIDATION_EXCEPTION,
+    ),
+)
+
+GET_WORKLOAD_ACCESS_TOKEN_FOR_USER_ID_INPUT: StaticSchema = (
+    18,
+    n0,
+    _GWATFUII,
+    {_sSI: _cGWATFUIR, _smit: None},
+    (_wN, _uI),
+    ((WORKLOAD_IDENTITY_NAME_TYPE, 1), (lambda: schemas.USER_ID_TYPE, 1)),
+)
+
+GET_WORKLOAD_ACCESS_TOKEN_FOR_USER_ID_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GWATFUIO,
+    {_sSI: _cGWATFUIRo, _smith: None},
+    (_wATo,),
+    ((lambda: schemas.WORKLOAD_IDENTITY_TOKEN_TYPE, 1),),
+)
+
+GET_WORKLOAD_ACCESS_TOKEN_FOR_USER_ID: StaticOperationSchema = (
+    23,
+    n0,
+    _GWATFUI,
+    {
+        _smithy: MappingProxyType(
+            {"uri": "/identities/GetWorkloadAccessTokenForUserId", "method": "POST"}
+        )
+    },
+    GET_WORKLOAD_ACCESS_TOKEN_FOR_USER_ID_INPUT,
+    GET_WORKLOAD_ACCESS_TOKEN_FOR_USER_ID_OUTPUT,
+    (
+        lambda: schemas.ACCESS_DENIED_EXCEPTION,
+        lambda: schemas.INTERNAL_SERVER_EXCEPTION,
+        lambda: schemas.RESOURCE_NOT_FOUND_EXCEPTION,
+        lambda: schemas.THROTTLING_EXCEPTION,
+        lambda: schemas.UNAUTHORIZED_EXCEPTION,
+        lambda: schemas.VALIDATION_EXCEPTION,
+    ),
+)
+
+MAX_LEN_STRING: StaticSchema = (3, n0, _MLS, 0)
+
+INPUT_CONTENT_BLOCK: StaticSchema = (
+    18,
+    n0,
+    _ICB,
+    0,
+    (_pa, _te, _bl),
+    ((MAX_LEN_STRING, 1), (MAX_LEN_STRING, 0), (lambda: schemas.BODY, 0)),
+)
+
+INPUT_CONTENT_BLOCK_LIST: StaticSchema = (
+    16,
+    n0,
+    _ICBL,
+    0,
+    (_m,),
+    ((INPUT_CONTENT_BLOCK, 0),),
+)
+
+PROGRAMMING_LANGUAGE: StaticSchema = (
     14,
     n0,
-    _HTT,
+    _PL,
     0,
-    (_RM, _AB, _AG, _IF, _ACI),
+    (_PYTHON, _JAVASCRIPT, _TYPESCRIPT),
+    ((-1, {_sVm: _py}), (-1, {_sVm: _j}), (-1, {_sVm: _typ})),
+)
+
+STRING_LIST: StaticSchema = (16, n0, _SLt, 0, (_m,), ((MAX_LEN_STRING, 0),))
+
+LANGUAGE_RUNTIME: StaticSchema = (
+    14,
+    n0,
+    _LRa,
+    0,
+    (_NODEJS, _DENO, _PYTHON),
+    ((-1, {_sVm: _no}), (-1, {_sVm: _de}), (-1, {_sVm: _py})),
+)
+
+TOOL_ARGUMENTS: StaticSchema = (
+    18,
+    n0,
+    _TA,
+    0,
+    (_cod, _lan, _cCl, _com, _pa, _pat, _cont, _dPi, _tIas, _run),
     (
-        (-1, {_sVm: _rm}),
-        (-1, {_sVm: _ab}),
-        (-1, {_sVm: _ag}),
-        (-1, {_sVm: _if}),
-        (-1, {_sVm: _aci}),
+        (MAX_LEN_STRING, 0),
+        (PROGRAMMING_LANGUAGE, 0),
+        (2, 0),
+        (MAX_LEN_STRING, 0),
+        (MAX_LEN_STRING, 0),
+        (STRING_LIST, 0),
+        (INPUT_CONTENT_BLOCK_LIST, 0),
+        (MAX_LEN_STRING, 0),
+        (MAX_LEN_STRING, 0),
+        (LANGUAGE_RUNTIME, 0),
     ),
 )
 
-HARNESS_TOOL: StaticSchema = (
-    18,
+TOOL_NAME: StaticSchema = (
+    14,
     n0,
-    _HT,
+    _TNo,
     0,
-    (_ty, _n, _conf),
+    (_EC_, _EC__, _RF, _LF, _RF_, _WF, _SCE, _GT_, _ST_),
     (
-        (HARNESS_TOOL_TYPE, 1),
-        (lambda: schemas.HARNESS_TOOL_NAME, 0),
-        (HARNESS_TOOL_CONFIGURATION, 0),
+        (-1, {_sVm: _eCx}),
+        (-1, {_sVm: _eCxe}),
+        (-1, {_sVm: _rF}),
+        (-1, {_sVm: _lF}),
+        (-1, {_sVm: _rFe}),
+        (-1, {_sVm: _wF}),
+        (-1, {_sVm: _sCE}),
+        (-1, {_sVm: _gTe}),
+        (-1, {_sVm: _sTto}),
     ),
 )
 
-HARNESS_TOOLS: StaticSchema = (16, n0, _HTa, 0, (_m,), ((HARNESS_TOOL, 0),))
-
-INVOKE_HARNESS_INPUT: StaticSchema = (
+INVOKE_CODE_INTERPRETER_INPUT: StaticSchema = (
     18,
     n0,
-    _IHI,
-    {_sSI: _cIHR, _smit: None},
+    _ICII,
+    {_sSI: _cICIR, _smit: None},
+    (_cII, _sIe, _tI, _tP, _n, _ar),
     (
-        _hA,
-        _q,
-        _rSI,
-        _rUI,
-        _tP,
-        _tS,
-        _tI,
-        _b,
-        _mess,
-        _mo,
-        _sPy,
-        _to,
-        _sk,
-        _aTl,
-        _mIa,
-        _mTa,
-        _tSi,
-        _aI,
-    ),
-    (
-        (lambda: schemas.HARNESS_ARN, {_sQ: _hA, _s: None}),
-        (lambda: schemas.HARNESS_ENDPOINT_NAME, {_sQ: _q}),
-        (lambda: schemas.SESSION_ID, {_sH: _XABARSI, _s: None}),
-        (3, {_sH: _XABARUI}),
-        (3, {_sH: _t}),
-        (3, {_sH: _tr}),
+        (3, 9),
+        (lambda: schemas.CODE_INTERPRETER_SESSION_ID, {_sH: _xacisi}),
         (3, {_sH: _XATI}),
-        (3, {_sH: _b}),
-        (lambda: schemas.HARNESS_MESSAGES, 1),
-        (lambda: schemas.HARNESS_MODEL_CONFIGURATION, 0),
-        (lambda: schemas.HARNESS_SYSTEM_PROMPT, 0),
-        (HARNESS_TOOLS, 0),
-        (lambda: schemas.HARNESS_SKILLS, 0),
-        (lambda: schemas.HARNESS_ALLOWED_TOOLS, 0),
-        (7, 0),
-        (7, 0),
-        (7, 0),
-        (3, 0),
+        (3, {_sH: _t}),
+        (TOOL_NAME, 1),
+        (TOOL_ARGUMENTS, 0),
     ),
 )
 
-INVOKE_HARNESS_OUTPUT: StaticSchema = (
+INVOKE_CODE_INTERPRETER_OUTPUT: StaticSchema = (
     18,
     n0,
-    _IHO,
-    {_sSI: _cIHRo, _smith: None},
-    (_str,),
-    ((lambda: INVOKE_HARNESS_STREAM_OUTPUT, 17),),
+    _ICIO,
+    {_sSI: _cICIRo, _smith: None},
+    (_sIe, _str),
+    (
+        (lambda: schemas.CODE_INTERPRETER_SESSION_ID, {_sH: _xacisi}),
+        (lambda: CODE_INTERPRETER_STREAM_OUTPUT, 17),
+    ),
 )
 
-INVOKE_HARNESS: StaticOperationSchema = (
+INVOKE_CODE_INTERPRETER: StaticOperationSchema = (
     23,
     n0,
-    _IH,
-    {
-        _smithy: MappingProxyType(
-            {"code": 200, "method": "POST", "uri": "/harnesses/invoke"}
-        )
-    },
-    INVOKE_HARNESS_INPUT,
-    INVOKE_HARNESS_OUTPUT,
-    (
-        lambda: schemas.ACCESS_DENIED_EXCEPTION,
-        lambda: schemas.INTERNAL_SERVER_EXCEPTION,
-        lambda: schemas.RESOURCE_NOT_FOUND_EXCEPTION,
-        lambda: schemas.RUNTIME_CLIENT_ERROR,
-        lambda: schemas.SERVICE_QUOTA_EXCEEDED_EXCEPTION,
-        lambda: schemas.THROTTLING_EXCEPTION,
-        lambda: schemas.VALIDATION_EXCEPTION,
-    ),
-)
-
-HARNESS_REASONING_CONTENT_BLOCK_DELTA: StaticSchema = (
-    19,
-    n0,
-    _HRCBD,
-    4,
-    (_te, _rCed, _sig),
-    ((3, 0), (lambda: schemas.BODY, 0), (3, 0)),
-)
-
-HARNESS_TOOL_RESULT_BLOCK_DELTA: StaticSchema = (
-    19,
-    n0,
-    _HTRBD,
-    0,
-    (_te, _js),
-    ((lambda: schemas.SENSITIVE_TEXT, 0), (lambda: schemas.SENSITIVE_JSON, 0)),
-)
-
-HARNESS_TOOL_RESULT_BLOCKS_DELTA: StaticSchema = (
-    16,
-    n0,
-    _HTRBDa,
-    0,
-    (_m,),
-    ((HARNESS_TOOL_RESULT_BLOCK_DELTA, 0),),
-)
-
-HARNESS_TOOL_RESULT_METADATA_BLOCK_DELTA: StaticSchema = (
-    18,
-    n0,
-    _HTRMBD,
-    0,
-    (_met,),
-    ((lambda: schemas.SENSITIVE_TEXT, 1),),
-)
-
-HARNESS_TOOL_USE_BLOCK_DELTA: StaticSchema = (
-    18,
-    n0,
-    _HTUBD,
-    0,
-    (_inp,),
-    ((lambda: schemas.SENSITIVE_TEXT, 1),),
-)
-
-HARNESS_CONTENT_BLOCK_DELTA: StaticSchema = (
-    19,
-    n0,
-    _HCBD,
-    0,
-    (_te, _tUo, _tRo, _rCea, _tRM),
-    (
-        (lambda: schemas.SENSITIVE_TEXT, 0),
-        (HARNESS_TOOL_USE_BLOCK_DELTA, 0),
-        (HARNESS_TOOL_RESULT_BLOCKS_DELTA, 0),
-        (HARNESS_REASONING_CONTENT_BLOCK_DELTA, 0),
-        (HARNESS_TOOL_RESULT_METADATA_BLOCK_DELTA, 0),
-    ),
-)
-
-HARNESS_CONTENT_BLOCK_DELTA_EVENT: StaticSchema = (
-    18,
-    n0,
-    _HCBDE,
-    0,
-    (_cBI, _del),
-    ((7, 1), (HARNESS_CONTENT_BLOCK_DELTA, 1)),
-)
-
-HARNESS_TOOL_RESULT_BLOCK_START: StaticSchema = (
-    18,
-    n0,
-    _HTRBS,
-    0,
-    (_tUI, _st),
-    (
-        (lambda: schemas.HARNESS_TOOL_USE_ID, 1),
-        (lambda: schemas.HARNESS_TOOL_USE_STATUS, 0),
-    ),
-)
-
-HARNESS_TOOL_USE_BLOCK_START: StaticSchema = (
-    18,
-    n0,
-    _HTUBS,
-    0,
-    (_tUI, _n, _ty, _sNe),
-    (
-        (lambda: schemas.HARNESS_TOOL_USE_ID, 1),
-        (lambda: schemas.HARNESS_TOOL_NAME, 1),
-        (lambda: schemas.HARNESS_TOOL_USE_TYPE, 0),
-        (3, 0),
-    ),
-)
-
-HARNESS_CONTENT_BLOCK_START: StaticSchema = (
-    19,
-    n0,
-    _HCBS,
-    0,
-    (_tUo, _tRo),
-    ((HARNESS_TOOL_USE_BLOCK_START, 0), (HARNESS_TOOL_RESULT_BLOCK_START, 0)),
-)
-
-HARNESS_CONTENT_BLOCK_START_EVENT: StaticSchema = (
-    18,
-    n0,
-    _HCBSE,
-    0,
-    (_cBI, _star),
-    ((7, 1), (HARNESS_CONTENT_BLOCK_START, 1)),
-)
-
-HARNESS_CONTENT_BLOCK_STOP_EVENT: StaticSchema = (
-    18,
-    n0,
-    _HCBSEa,
-    0,
-    (_cBI,),
-    ((7, 1),),
-)
-
-HARNESS_HOOK_DECISION: StaticSchema = (
-    14,
-    n0,
-    _HHD,
-    0,
-    (_ALLOW, _DENY),
-    ((-1, {_sVm: _al}), (-1, {_sVm: _den})),
-)
-
-HARNESS_HOOK_EVENT_ID: StaticSchema = (3, n0, _HHEI, 0)
-
-HARNESS_HOOK_NAME: StaticSchema = (3, n0, _HHN, 0)
-
-HARNESS_HOOK_EVENT_TYPE: StaticSchema = (
-    14,
-    n0,
-    _HHET,
-    0,
-    (_BTC, _ATC_, _BI, _AI_),
-    ((-1, {_sVm: _btc}), (-1, {_sVm: _atc}), (-1, {_sVm: _bi}), (-1, {_sVm: _ai})),
-)
-
-HARNESS_HOOK_EVENT: StaticSchema = (
-    18,
-    n0,
-    _HHE,
-    0,
-    (_hEI, _n, _ty, _dec, _re),
-    (
-        (HARNESS_HOOK_EVENT_ID, 1),
-        (HARNESS_HOOK_NAME, 1),
-        (HARNESS_HOOK_EVENT_TYPE, 1),
-        (HARNESS_HOOK_DECISION, 0),
-        (3, 0),
-    ),
-)
-
-HARNESS_MESSAGE_START_EVENT: StaticSchema = (
-    18,
-    n0,
-    _HMSE,
-    0,
-    (_ro,),
-    ((lambda: schemas.HARNESS_CONVERSATION_ROLE, 1),),
-)
-
-HARNESS_STOP_REASON: StaticSchema = (
-    14,
-    n0,
-    _HSR,
-    0,
-    (
-        _ET_,
-        _TU_,
-        _TR_,
-        _MT_,
-        _SS_,
-        _CF_,
-        _MMO,
-        _MTU_,
-        _INTERRUPTED,
-        _PT,
-        _MCWE,
-        _MIE,
-        _MOTE,
-        _TE__,
-        _HS_,
-    ),
-    (
-        (-1, {_sVm: _et}),
-        (-1, {_sVm: _tu_}),
-        (-1, {_sVm: _tr_}),
-        (-1, {_sVm: _mt}),
-        (-1, {_sVm: _ss}),
-        (-1, {_sVm: _cf}),
-        (-1, {_sVm: _mmo}),
-        (-1, {_sVm: _mtu_}),
-        (-1, {_sVm: _int}),
-        (-1, {_sVm: _pt}),
-        (-1, {_sVm: _mcwe}),
-        (-1, {_sVm: _mie}),
-        (-1, {_sVm: _mote}),
-        (-1, {_sVm: _te_}),
-        (-1, {_sVm: _hs}),
-    ),
-)
-
-HARNESS_MESSAGE_STOP_EVENT: StaticSchema = (
-    18,
-    n0,
-    _HMSEa,
-    0,
-    (_sR,),
-    ((HARNESS_STOP_REASON, 1),),
-)
-
-HARNESS_STREAM_METRICS: StaticSchema = (18, n0, _HSM, 0, (_lM,), ((8, 1),))
-
-HARNESS_TOKEN_USAGE: StaticSchema = (
-    18,
-    n0,
-    _HTU,
-    0,
-    (_iT, _oT, _tT, _cRIT, _cWIT),
-    ((7, 1), (7, 1), (7, 1), (7, 0), (7, 0)),
-)
-
-HARNESS_METADATA_EVENT: StaticSchema = (
-    18,
-    n0,
-    _HME,
-    0,
-    (_usa, _metr),
-    ((HARNESS_TOKEN_USAGE, 1), (HARNESS_STREAM_METRICS, 1)),
-)
-
-INVOKE_HARNESS_STREAM_OUTPUT: StaticSchema = (
-    19,
-    n0,
-    _IHSO,
-    {_smithya: None},
-    (_mSe, _cBS, _cBD, _cBSo, _mSes, _met, _iSE, _vE, _rCE, _hE),
-    (
-        (HARNESS_MESSAGE_START_EVENT, 0),
-        (HARNESS_CONTENT_BLOCK_START_EVENT, 0),
-        (HARNESS_CONTENT_BLOCK_DELTA_EVENT, 0),
-        (HARNESS_CONTENT_BLOCK_STOP_EVENT, 0),
-        (HARNESS_MESSAGE_STOP_EVENT, 0),
-        (HARNESS_METADATA_EVENT, 0),
-        (lambda: schemas.INTERNAL_SERVER_EXCEPTION, 0),
-        (lambda: schemas.VALIDATION_EXCEPTION, 0),
-        (lambda: schemas.RUNTIME_CLIENT_ERROR, 0),
-        (HARNESS_HOOK_EVENT, 0),
-    ),
-)
-
-DOMAIN_NAME: StaticSchema = (3, n0, _DN, 0)
-
-DOMAIN_LIST: StaticSchema = (16, n0, _DL, 0, (_m,), ((DOMAIN_NAME, 0),))
-
-DOMAIN_FILTER: StaticSchema = (
-    18,
-    n0,
-    _DFo,
-    0,
-    (_inc, _exc),
-    ((DOMAIN_LIST, 0), (DOMAIN_LIST, 0)),
-)
-
-PUBLISHED_DATE_FILTER: StaticSchema = (
-    18,
-    n0,
-    _PDF,
-    0,
-    (_pAu, _pB),
-    ((lambda: schemas.DATE_TIMESTAMP, 0), (lambda: schemas.DATE_TIMESTAMP, 0)),
-)
-
-WEB_SEARCH_FILTERS: StaticSchema = (
-    18,
-    n0,
-    _WSF,
-    0,
-    (_dF, _pDF),
-    ((DOMAIN_FILTER, 0), (PUBLISHED_DATE_FILTER, 0)),
-)
-
-WEB_SEARCH_ID: StaticSchema = (3, n0, _WSI, 0)
-
-INVOKE_WEB_SEARCH_INPUT: StaticSchema = (
-    18,
-    n0,
-    _IWSI,
-    {_smit: None},
-    (_wSI, _sQe, _mR, _f),
-    ((WEB_SEARCH_ID, 9), (3, 1), (7, 0), (WEB_SEARCH_FILTERS, 0)),
-)
-
-INVOKE_WEB_SEARCH_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _IWSO,
-    {_smith: None},
-    (_resul,),
-    ((lambda: WEB_SEARCH_RESULT_LIST, 1),),
-)
-
-INVOKE_WEB_SEARCH: StaticOperationSchema = (
-    23,
-    n0,
-    _IWS,
-    {
-        _smithy: MappingProxyType(
-            {"method": "POST", "uri": "/web-search/{webSearchId}/invoke", "code": 200}
-        )
-    },
-    INVOKE_WEB_SEARCH_INPUT,
-    INVOKE_WEB_SEARCH_OUTPUT,
-    (
-        lambda: schemas.ACCESS_DENIED_EXCEPTION,
-        lambda: schemas.INTERNAL_SERVER_EXCEPTION,
-        lambda: schemas.RESOURCE_NOT_FOUND_EXCEPTION,
-        lambda: SERVICE_UNAVAILABLE_EXCEPTION,
-        lambda: schemas.THROTTLING_EXCEPTION,
-        lambda: schemas.VALIDATION_EXCEPTION,
-    ),
-)
-
-WEB_SEARCH_RESULT: StaticSchema = (
-    18,
-    n0,
-    _WSR,
-    0,
-    (_tit, _url, _te, _pAub),
-    ((3, 0), (3, 0), (3, 1), (lambda: schemas.DATE_TIMESTAMP, 0)),
-)
-
-WEB_SEARCH_RESULT_LIST: StaticSchema = (
-    16,
-    n0,
-    _WSRL,
-    0,
-    (_m,),
-    ((WEB_SEARCH_RESULT, 0),),
-)
-
-SERVICE_UNAVAILABLE_EXCEPTION: StaticSchema = (
-    18,
-    n0,
-    _SUE,
-    {_sm: _se, _sE: 503},
-    (_mes, _rAS),
-    ((3, 1), (7, 0)),
-)
-
-MEMORY_ID: StaticSchema = (3, n0, _MIe, 0)
-
-RECORD_EXPIRY_ACTION: StaticSchema = (
-    14,
-    n0,
-    _REA,
-    0,
-    (_REMOVE,),
-    ((-1, {_sVm: _REMOVE}),),
-)
-
-RECORD_EXPIRY_DURATION_DAYS: StaticSchema = (7, n0, _REDD, 0)
-
-RECORD_EXPIRY_SPECIFICATION: StaticSchema = (
-    19,
-    n0,
-    _RES,
-    0,
-    (_rEDD, _ac),
-    ((RECORD_EXPIRY_DURATION_DAYS, 0), (RECORD_EXPIRY_ACTION, 0)),
-)
-
-SENSITIVE_STRING: StaticSchema = (3, n0, _SSen, 4)
-
-MEMORY_CONTENT: StaticSchema = (19, n0, _MC, 0, (_te,), ((SENSITIVE_STRING, 0),))
-
-MEMORY_STRATEGY_ID: StaticSchema = (3, n0, _MSIe, 0)
-
-METADATA_KEY: StaticSchema = (3, n0, _MK, 0)
-
-STRING_LIST_MEMBER_VALUE: StaticSchema = (3, n0, _SLMV, 0)
-
-STRING_VALUE_LIST: StaticSchema = (
-    16,
-    n0,
-    _SVL,
-    0,
-    (_m,),
-    ((STRING_LIST_MEMBER_VALUE, 0),),
-)
-
-STRING_VALUE: StaticSchema = (3, n0, _SVt, 0)
-
-MEMORY_RECORD_METADATA_VALUE: StaticSchema = (
-    19,
-    n0,
-    _MRMV,
-    0,
-    (_sVt, _sLV, _nV, _dTV),
-    ((STRING_VALUE, 0), (STRING_VALUE_LIST, 0), (10, 0), (4, 0)),
-)
-
-MEMORY_RECORD_METADATA_MAP: StaticSchema = (
-    17,
-    n0,
-    _MRMM,
-    0,
-    (_k, _va),
-    ((METADATA_KEY, 0), (MEMORY_RECORD_METADATA_VALUE, 0)),
-)
-
-NAMESPACE: StaticSchema = (3, n0, _Na, 0)
-
-NAMESPACES_LIST: StaticSchema = (16, n0, _NL, 0, (_m,), ((NAMESPACE, 0),))
-
-REQUEST_IDENTIFIER: StaticSchema = (3, n0, _RIe, 0)
-
-MEMORY_RECORD_CREATE_INPUT: StaticSchema = (
-    18,
-    n0,
-    _MRCI,
-    0,
-    (_rIe, _na, _cont, _tim, _mSIe, _met),
-    (
-        (REQUEST_IDENTIFIER, 1),
-        (NAMESPACES_LIST, 1),
-        (MEMORY_CONTENT, 1),
-        (4, 1),
-        (MEMORY_STRATEGY_ID, 0),
-        (MEMORY_RECORD_METADATA_MAP, 0),
-    ),
-)
-
-MEMORY_RECORDS_CREATE_INPUT_LIST: StaticSchema = (
-    16,
-    n0,
-    _MRCIL,
-    0,
-    (_m,),
-    ((MEMORY_RECORD_CREATE_INPUT, 0),),
-)
-
-BATCH_CREATE_MEMORY_RECORDS_INPUT: StaticSchema = (
-    18,
-    n0,
-    _BCMRI,
-    {_smit: None},
-    (_mIe, _rec, _cTl, _rES),
-    (
-        (MEMORY_ID, 9),
-        (MEMORY_RECORDS_CREATE_INPUT_LIST, 1),
-        (3, 2),
-        (RECORD_EXPIRY_SPECIFICATION, 0),
-    ),
-)
-
-BATCH_CREATE_MEMORY_RECORDS_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _BCMRO,
-    {_smith: None},
-    (_sRu, _fR),
-    ((lambda: MEMORY_RECORDS_OUTPUT_LIST, 1), (lambda: MEMORY_RECORDS_OUTPUT_LIST, 1)),
-)
-
-BATCH_CREATE_MEMORY_RECORDS: StaticOperationSchema = (
-    23,
-    n0,
-    _BCMR,
+    _ICI,
     {
         _smithy: MappingProxyType(
             {
-                "code": 201,
                 "method": "POST",
-                "uri": "/memories/{memoryId}/memoryRecords/batchCreate",
+                "uri": "/code-interpreters/{codeInterpreterIdentifier}/tools/invoke",
+                "code": 200,
             }
         )
     },
-    BATCH_CREATE_MEMORY_RECORDS_INPUT,
-    BATCH_CREATE_MEMORY_RECORDS_OUTPUT,
+    INVOKE_CODE_INTERPRETER_INPUT,
+    INVOKE_CODE_INTERPRETER_OUTPUT,
     (
         lambda: schemas.ACCESS_DENIED_EXCEPTION,
+        lambda: schemas.CONFLICT_EXCEPTION,
+        lambda: schemas.INTERNAL_SERVER_EXCEPTION,
         lambda: schemas.RESOURCE_NOT_FOUND_EXCEPTION,
-        lambda: SERVICE_EXCEPTION,
         lambda: schemas.SERVICE_QUOTA_EXCEEDED_EXCEPTION,
-        lambda: THROTTLED_EXCEPTION,
+        lambda: schemas.THROTTLING_EXCEPTION,
         lambda: schemas.VALIDATION_EXCEPTION,
     ),
 )
 
-MEMORY_RECORD_ID: StaticSchema = (3, n0, _MRI, 0)
-
-MEMORY_RECORD_STATUS: StaticSchema = (
+RESOURCE_CONTENT_TYPE: StaticSchema = (
     14,
     n0,
-    _MRS,
+    _RCT,
     0,
-    (_SUCCEEDED, _FAILED),
-    ((-1, {_sVm: _SUCCEEDED}), (-1, {_sVm: _FAILED})),
+    (_TEXT, _BLOB),
+    ((-1, {_sVm: _te}), (-1, {_sVm: _bl})),
 )
 
-MEMORY_RECORD_OUTPUT: StaticSchema = (
+RESOURCE_CONTENT: StaticSchema = (
     18,
     n0,
-    _MRO,
+    _RCeso,
     0,
-    (_mRI, _st, _rIe, _eCr, _eMr),
+    (_ty, _ur, _mT, _te, _bl),
+    ((RESOURCE_CONTENT_TYPE, 1), (3, 0), (3, 0), (3, 0), (1, 0)),
+)
+
+CONTENT_BLOCK_TYPE: StaticSchema = (
+    14,
+    n0,
+    _CBT,
+    0,
+    (_TEXT, _IMAGE, _ER__, _RL_),
+    ((-1, {_sVm: _te}), (-1, {_sVm: _im}), (-1, {_sVm: _resou}), (-1, {_sVm: _rl})),
+)
+
+CONTENT_BLOCK: StaticSchema = (
+    18,
+    n0,
+    _CBo,
+    0,
+    (_ty, _te, _da, _mT, _ur, _n, _d, _siz, _resou),
     (
-        (MEMORY_RECORD_ID, 1),
-        (MEMORY_RECORD_STATUS, 1),
-        (REQUEST_IDENTIFIER, 0),
-        (7, 0),
+        (CONTENT_BLOCK_TYPE, 1),
+        (3, 0),
+        (1, 0),
+        (3, 0),
+        (3, 0),
+        (3, 0),
+        (3, 0),
+        (8, 0),
+        (RESOURCE_CONTENT, 0),
+    ),
+)
+
+CONTENT_BLOCK_LIST: StaticSchema = (16, n0, _CBL, 0, (_m,), ((CONTENT_BLOCK, 0),))
+
+TASK_STATUS: StaticSchema = (
+    14,
+    n0,
+    _TS,
+    0,
+    (_SUBMITTED, _WORKING, _COMPLETED, _CANCELED, _FAILED),
+    (
+        (-1, {_sVm: _su}),
+        (-1, {_sVm: _wo}),
+        (-1, {_sVm: _comp}),
+        (-1, {_sVm: _can}),
+        (-1, {_sVm: _fai}),
+    ),
+)
+
+TOOL_RESULT_STRUCTURED_CONTENT: StaticSchema = (
+    18,
+    n0,
+    _TRSC,
+    0,
+    (_tIas, _tSa, _std, _stde, _eC, _eTxe),
+    ((3, 0), (TASK_STATUS, 0), (3, 0), (3, 0), (7, 0), (10, 0)),
+)
+
+CODE_INTERPRETER_RESULT: StaticSchema = (
+    18,
+    n0,
+    _CIR,
+    0,
+    (_cont, _sCt, _iE),
+    ((CONTENT_BLOCK_LIST, 1), (TOOL_RESULT_STRUCTURED_CONTENT, 0), (2, 0)),
+)
+
+CODE_INTERPRETER_STREAM_OUTPUT: StaticSchema = (
+    19,
+    n0,
+    _CISO,
+    {_smithya: None},
+    (_resu, _aDE, _cE, _iSE, _rNFE, _sQEE, _tE, _vE),
+    (
+        (CODE_INTERPRETER_RESULT, 0),
+        (lambda: schemas.ACCESS_DENIED_EXCEPTION, 0),
+        (lambda: schemas.CONFLICT_EXCEPTION, 0),
+        (lambda: schemas.INTERNAL_SERVER_EXCEPTION, 0),
+        (lambda: schemas.RESOURCE_NOT_FOUND_EXCEPTION, 0),
+        (lambda: schemas.SERVICE_QUOTA_EXCEEDED_EXCEPTION, 0),
+        (lambda: schemas.THROTTLING_EXCEPTION, 0),
+        (lambda: schemas.VALIDATION_EXCEPTION, 0),
+    ),
+)
+
+HARNESS_ALLOWED_TOOL: StaticSchema = (3, n0, _HAT, 0)
+
+HARNESS_ALLOWED_TOOLS: StaticSchema = (
+    16,
+    n0,
+    _HATa,
+    0,
+    (_m,),
+    ((HARNESS_ALLOWED_TOOL, 0),),
+)
+
+HARNESS_ARN: StaticSchema = (3, n0, _HA, 0)
+
+HARNESS_REASONING_TEXT_BLOCK: StaticSchema = (
+    18,
+    n0,
+    _HRTB,
+    4,
+    (_te, _sig),
+    ((3, 1), (3, 0)),
+)
+
+HARNESS_REASONING_CONTENT_BLOCK: StaticSchema = (
+    19,
+    n0,
+    _HRCB,
+    4,
+    (_rTe, _rCed),
+    ((HARNESS_REASONING_TEXT_BLOCK, 0), (1, 0)),
+)
+
+SENSITIVE_TEXT: StaticSchema = (3, n0, _STe, 4)
+
+SENSITIVE_JSON: StaticSchema = (13, n0, _SJ, 4)
+
+HARNESS_TOOL_RESULT_CONTENT_BLOCK: StaticSchema = (
+    19,
+    n0,
+    _HTRCB,
+    0,
+    (_te, _js),
+    ((SENSITIVE_TEXT, 0), (SENSITIVE_JSON, 0)),
+)
+
+HARNESS_TOOL_RESULT_CONTENT_BLOCKS: StaticSchema = (
+    16,
+    n0,
+    _HTRCBa,
+    0,
+    (_m,),
+    ((HARNESS_TOOL_RESULT_CONTENT_BLOCK, 0),),
+)
+
+HARNESS_TOOL_USE_STATUS: StaticSchema = (
+    14,
+    n0,
+    _HTUS,
+    0,
+    (_SUCCESS, _ERROR),
+    ((-1, {_sVm: _suc}), (-1, {_sVm: _er})),
+)
+
+HARNESS_TOOL_USE_ID: StaticSchema = (3, n0, _HTUI, 0)
+
+HARNESS_TOOL_USE_TYPE: StaticSchema = (
+    14,
+    n0,
+    _HTUT,
+    0,
+    (_TU_, _STU, _MTU),
+    ((-1, {_sVm: _tu_}), (-1, {_sVm: _stu}), (-1, {_sVm: _mtu})),
+)
+
+HARNESS_TOOL_RESULT_BLOCK: StaticSchema = (
+    18,
+    n0,
+    _HTRB,
+    0,
+    (_tUI, _cont, _st, _ty),
+    (
+        (HARNESS_TOOL_USE_ID, 1),
+        (HARNESS_TOOL_RESULT_CONTENT_BLOCKS, 1),
+        (HARNESS_TOOL_USE_STATUS, 0),
+        (HARNESS_TOOL_USE_TYPE, 0),
+    ),
+)
+
+HARNESS_TOOL_NAME: StaticSchema = (3, n0, _HTN, 0)
+
+HARNESS_TOOL_USE_BLOCK: StaticSchema = (
+    18,
+    n0,
+    _HTUB,
+    0,
+    (_n, _tUI, _inp, _ty, _sNe),
+    (
+        (HARNESS_TOOL_NAME, 1),
+        (HARNESS_TOOL_USE_ID, 1),
+        (SENSITIVE_JSON, 1),
+        (HARNESS_TOOL_USE_TYPE, 0),
         (3, 0),
     ),
 )
 
-MEMORY_RECORDS_OUTPUT_LIST: StaticSchema = (
-    16,
-    n0,
-    _MROL,
-    0,
-    (_m,),
-    ((MEMORY_RECORD_OUTPUT, 0),),
-)
-
-SERVICE_EXCEPTION: StaticSchema = (
-    18,
-    n0,
-    _SE,
-    {_sm: _se, _sE: 500},
-    (_mes,),
-    ((3, 1),),
-)
-
-THROTTLED_EXCEPTION: StaticSchema = (
-    18,
-    n0,
-    _TEh,
-    {_sm: _c, _sE: 429},
-    (_mes,),
-    ((3, 1),),
-)
-
-MEMORY_RECORD_DELETE_INPUT: StaticSchema = (
-    18,
-    n0,
-    _MRDI,
-    0,
-    (_mRI, _nam),
-    ((MEMORY_RECORD_ID, 1), (NAMESPACE, 0)),
-)
-
-MEMORY_RECORDS_DELETE_INPUT_LIST: StaticSchema = (
-    16,
-    n0,
-    _MRDIL,
-    0,
-    (_m,),
-    ((MEMORY_RECORD_DELETE_INPUT, 0),),
-)
-
-BATCH_DELETE_MEMORY_RECORDS_INPUT: StaticSchema = (
-    18,
-    n0,
-    _BDMRI,
-    {_smit: None},
-    (_mIe, _rec),
-    ((MEMORY_ID, 9), (MEMORY_RECORDS_DELETE_INPUT_LIST, 1)),
-)
-
-BATCH_DELETE_MEMORY_RECORDS_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _BDMRO,
-    {_smith: None},
-    (_sRu, _fR),
-    ((MEMORY_RECORDS_OUTPUT_LIST, 1), (MEMORY_RECORDS_OUTPUT_LIST, 1)),
-)
-
-BATCH_DELETE_MEMORY_RECORDS: StaticOperationSchema = (
-    23,
-    n0,
-    _BDMR,
-    {
-        _smithy: MappingProxyType(
-            {"method": "POST", "uri": "/memories/{memoryId}/memoryRecords/batchDelete"}
-        )
-    },
-    BATCH_DELETE_MEMORY_RECORDS_INPUT,
-    BATCH_DELETE_MEMORY_RECORDS_OUTPUT,
-    (
-        lambda: schemas.ACCESS_DENIED_EXCEPTION,
-        lambda: schemas.RESOURCE_NOT_FOUND_EXCEPTION,
-        SERVICE_EXCEPTION,
-        lambda: schemas.SERVICE_QUOTA_EXCEEDED_EXCEPTION,
-        THROTTLED_EXCEPTION,
-        lambda: schemas.VALIDATION_EXCEPTION,
-    ),
-)
-
-MEMORY_RECORD_UPDATE_INPUT: StaticSchema = (
-    18,
-    n0,
-    _MRUI,
-    0,
-    (_mRI, _tim, _cont, _na, _sNo, _mSIe, _met),
-    (
-        (MEMORY_RECORD_ID, 1),
-        (4, 1),
-        (MEMORY_CONTENT, 0),
-        (NAMESPACES_LIST, 0),
-        (NAMESPACES_LIST, 0),
-        (MEMORY_STRATEGY_ID, 0),
-        (MEMORY_RECORD_METADATA_MAP, 0),
-    ),
-)
-
-MEMORY_RECORDS_UPDATE_INPUT_LIST: StaticSchema = (
-    16,
-    n0,
-    _MRUIL,
-    0,
-    (_m,),
-    ((MEMORY_RECORD_UPDATE_INPUT, 0),),
-)
-
-BATCH_UPDATE_MEMORY_RECORDS_INPUT: StaticSchema = (
-    18,
-    n0,
-    _BUMRI,
-    {_smit: None},
-    (_mIe, _rec, _rES),
-    (
-        (MEMORY_ID, 9),
-        (MEMORY_RECORDS_UPDATE_INPUT_LIST, 1),
-        (RECORD_EXPIRY_SPECIFICATION, 0),
-    ),
-)
-
-BATCH_UPDATE_MEMORY_RECORDS_OUTPUT: StaticSchema = (
-    18,
-    n0,
-    _BUMRO,
-    {_smith: None},
-    (_sRu, _fR),
-    ((MEMORY_RECORDS_OUTPUT_LIST, 1), (MEMORY_RECORDS_OUTPUT_LIST, 1)),
-)
-
-BATCH_UPDATE_MEMORY_RECORDS: StaticOperationSchema = (
-    23,
-    n0,
-    _BUMR,
-    {
-        _smithy: MappingProxyType(
-            {"method": "POST", "uri": "/memories/{memoryId}/memoryRecords/batchUpdate"}
-        )
-    },
-    BATCH_UPDATE_MEMORY_RECORDS_INPUT,
-    BATCH_UPDATE_MEMORY_RECORDS_OUTPUT,
-    (
-        lambda: schemas.ACCESS_DENIED_EXCEPTION,
-        lambda: schemas.RESOURCE_NOT_FOUND_EXCEPTION,
-        SERVICE_EXCEPTION,
-        lambda: schemas.SERVICE_QUOTA_EXCEEDED_EXCEPTION,
-        THROTTLED_EXCEPTION,
-        lambda: schemas.VALIDATION_EXCEPTION,
-    ),
-)
-
-BRANCH_NAME: StaticSchema = (3, n0, _BN, 0)
-
-EVENT_ID: StaticSchema = (3, n0, _EIve, 0)
-
-BRANCH: StaticSchema = (18, n0, _Br, 0, (_rEI, _n), ((EVENT_ID, 0), (BRANCH_NAME, 1)))
-
-NAMESPACE_VARIABLE_NAME: StaticSchema = (3, n0, _NVN, 0)
-
-NAMESPACE_VARIABLE_VALUE: StaticSchema = (3, n0, _NVV, 0)
-
-NAMESPACE_VARIABLES_MAP: StaticSchema = (
-    17,
-    n0,
-    _NVM,
-    0,
-    (_k, _va),
-    ((NAMESPACE_VARIABLE_NAME, 0), (NAMESPACE_VARIABLE_VALUE, 0)),
-)
-
-EXTRACTION_CONFIG: StaticSchema = (
-    18,
-    n0,
-    _ECx,
-    0,
-    (_nVa,),
-    ((NAMESPACE_VARIABLES_MAP, 0),),
-)
-
-EXTRACTION_MODE: StaticSchema = (14, n0, _EMx, 0, (_SKIP,), ((-1, {_sVm: _SKIP}),))
-
-METADATA_VALUE: StaticSchema = (19, n0, _MV, 0, (_sVt,), ((3, 0),))
-
-METADATA_MAP: StaticSchema = (
-    17,
-    n0,
-    _MMe,
-    0,
-    (_k, _va),
-    ((METADATA_KEY, 0), (METADATA_VALUE, 0)),
-)
-
-MEMORY_DOCUMENT: StaticSchema = (13, n0, _MD, 4)
-
-CONTENT: StaticSchema = (19, n0, _Con, 0, (_te,), ((SENSITIVE_STRING, 0),))
-
-ROLE: StaticSchema = (
-    14,
-    n0,
-    _R,
-    0,
-    (_ASSISTANT, _USER, _TOOL, _OTHER),
-    (
-        (-1, {_sVm: _ASSISTANT}),
-        (-1, {_sVm: _USER}),
-        (-1, {_sVm: _TOOL}),
-        (-1, {_sVm: _OTHER}),
-    ),
-)
-
-CONVERSATIONAL: StaticSchema = (
-    18,
-    n0,
-    _Conv,
-    0,
-    (_cont, _ro),
-    ((CONTENT, 1), (ROLE, 1)),
-)
-
-MEMORY_JSON_DATA_CONTENT: StaticSchema = (13, n0, _MJDC, 4)
-
-MEMORY_JSON_DATA: StaticSchema = (
-    18,
-    n0,
-    _MJD,
-    4,
-    (_cont,),
-    ((MEMORY_JSON_DATA_CONTENT, 1),),
-)
-
-PAYLOAD_TYPE: StaticSchema = (
+HARNESS_CONTENT_BLOCK: StaticSchema = (
     19,
     n0,
-    _PTa,
+    _HCB,
     0,
-    (_conv, _bl, _js),
-    ((CONVERSATIONAL, 0), (MEMORY_DOCUMENT, 0), (MEMORY_JSON_DATA, 0)),
+    (_te, _tUo, _tRo, _rCea),
+    (
+        (SENSITIVE_TEXT, 0),
+        (HARNESS_TOOL_USE_BLOCK, 0),
+        (HARNESS_TOOL_RESULT_BLOCK, 0),
+        (HARNESS_REASONING_CONTENT_BLOCK, 0),
+    ),
 )
 
-PAYLOAD_TYPE_LIST: StaticSchema = (16, n0, _PTL, 0, (_m,), ((PAYLOAD_TYPE, 0),))
+HARNESS_CONTENT_BLOCKS: StaticSchema = (
+    16,
+    n0,
+    _HCBa,
+    0,
+    (_m,),
+    ((HARNESS_CONTENT_BLOCK, 0),),
+)
+
+HARNESS_CONVERSATION_ROLE: StaticSchema = (
+    14,
+    n0,
+    _HCR,
+    0,
+    (_USER, _ASSISTANT),
+    ((-1, {_sVm: _us}), (-1, {_sVm: _ass})),
+)
+
+HARNESS_MESSAGE: StaticSchema = (
+    18,
+    n0,
+    _HMa,
+    0,
+    (_ro, _cont),
+    ((HARNESS_CONVERSATION_ROLE, 1), (HARNESS_CONTENT_BLOCKS, 1)),
+)
+
+HARNESS_MESSAGES: StaticSchema = (16, n0, _HMar, 0, (_m,), ((HARNESS_MESSAGE, 0),))
+
+HARNESS_BEDROCK_API_FORMAT: StaticSchema = (
+    14,
+    n0,
+    _HBAF,
+    0,
+    (_CS_, _RESPONSES, _CC),
+    ((-1, {_sVm: _cs}), (-1, {_sVm: _resp}), (-1, {_sVm: _cc})),
+)
+
+MAX_TOKENS: StaticSchema = (7, n0, _MTa, 0)
+
+MODEL_ID: StaticSchema = (3, n0, _MI, 0)
+
+TEMPERATURE: StaticSchema = (9, n0, _T, 0)
+
+TOP_P: StaticSchema = (9, n0, _TP, 0)
+
+HARNESS_BEDROCK_MODEL_CONFIG: StaticSchema = (
+    18,
+    n0,
+    _HBMC,
+    0,
+    (_mI, _mTa, _tem, _tPo, _aFp, _aP),
+    (
+        (MODEL_ID, 1),
+        (MAX_TOKENS, 0),
+        (TEMPERATURE, 0),
+        (TOP_P, 0),
+        (HARNESS_BEDROCK_API_FORMAT, 0),
+        (13, 0),
+    ),
+)
+
+API_KEY_ARN: StaticSchema = (3, n0, _AKA, 0)
+
+TOP_K: StaticSchema = (7, n0, _TKo, 0)
+
+HARNESS_GEMINI_MODEL_CONFIG: StaticSchema = (
+    18,
+    n0,
+    _HGMC,
+    0,
+    (_mI, _aKA, _mTa, _tem, _tPo, _tK, _aP),
+    (
+        (MODEL_ID, 1),
+        (API_KEY_ARN, 1),
+        (MAX_TOKENS, 0),
+        (TEMPERATURE, 0),
+        (TOP_P, 0),
+        (TOP_K, 0),
+        (13, 0),
+    ),
+)
+
+HARNESS_LITE_LLM_API_BASE: StaticSchema = (3, n0, _HLLAB, 4)
+
+HARNESS_LITE_LLM_MODEL_CONFIG: StaticSchema = (
+    18,
+    n0,
+    _HLLMC,
+    0,
+    (_mI, _aKA, _aB, _mTa, _tem, _tPo, _aP),
+    (
+        (MODEL_ID, 1),
+        (API_KEY_ARN, 0),
+        (HARNESS_LITE_LLM_API_BASE, 0),
+        (MAX_TOKENS, 0),
+        (TEMPERATURE, 0),
+        (TOP_P, 0),
+        (13, 0),
+    ),
+)
+
+HARNESS_OPEN_AI_API_BASE: StaticSchema = (3, n0, _HOAAB, 4)
+
+HARNESS_OPEN_AI_API_FORMAT: StaticSchema = (
+    14,
+    n0,
+    _HOAAF,
+    0,
+    (_CC, _RESPONSES),
+    ((-1, {_sVm: _cc}), (-1, {_sVm: _resp})),
+)
+
+HARNESS_OPEN_AI_MODEL_CONFIG: StaticSchema = (
+    18,
+    n0,
+    _HOAMC,
+    0,
+    (_mI, _aKA, _aB, _mTa, _tem, _tPo, _aFp, _aP),
+    (
+        (MODEL_ID, 1),
+        (API_KEY_ARN, 1),
+        (HARNESS_OPEN_AI_API_BASE, 0),
+        (MAX_TOKENS, 0),
+        (TEMPERATURE, 0),
+        (TOP_P, 0),
+        (HARNESS_OPEN_AI_API_FORMAT, 0),
+        (13, 0),
+    ),
+)
+
+HARNESS_MODEL_CONFIGURATION: StaticSchema = (
+    19,
+    n0,
+    _HMC,
+    0,
+    (_bMC, _oAMC, _gMC, _lLMC),
+    (
+        (HARNESS_BEDROCK_MODEL_CONFIG, 0),
+        (HARNESS_OPEN_AI_MODEL_CONFIG, 0),
+        (HARNESS_GEMINI_MODEL_CONFIG, 0),
+        (HARNESS_LITE_LLM_MODEL_CONFIG, 0),
+    ),
+)
+
+HARNESS_ENDPOINT_NAME: StaticSchema = (3, n0, _HEN, 0)
+
+HARNESS_AWS_SKILL_PATH: StaticSchema = (3, n0, _HASP, 0)
+
+HARNESS_AWS_SKILL_PATHS: StaticSchema = (
+    16,
+    n0,
+    _HASPa,
+    0,
+    (_m,),
+    ((HARNESS_AWS_SKILL_PATH, 0),),
+)
+
+HARNESS_SKILL_AWS_SKILLS_SOURCE: StaticSchema = (
+    18,
+    n0,
+    _HSASS,
+    0,
+    (_pat,),
+    ((HARNESS_AWS_SKILL_PATHS, 0),),
+)
+
+HARNESS_SKILL_GIT_AUTH: StaticSchema = (
+    18,
+    n0,
+    _HSGA,
+    0,
+    (_cAr, _use),
+    ((API_KEY_ARN, 1), (3, 0)),
+)
+
+HARNESS_SKILL_GIT_URL: StaticSchema = (3, n0, _HSGU, 0)
+
+HARNESS_SKILL_GIT_SOURCE: StaticSchema = (
+    18,
+    n0,
+    _HSGS,
+    0,
+    (_url, _pa, _aut),
+    ((HARNESS_SKILL_GIT_URL, 1), (3, 0), (HARNESS_SKILL_GIT_AUTH, 0)),
+)
+
+HARNESS_SKILL_PATH: StaticSchema = (3, n0, _HSP, 0)
+
+HARNESS_SKILL_S3_URI: StaticSchema = (3, n0, _HSSU, 0)
+
+HARNESS_SKILL_S3_SOURCE: StaticSchema = (
+    18,
+    n0,
+    _HSSS,
+    0,
+    (_ur,),
+    ((HARNESS_SKILL_S3_URI, 1),),
+)
+
+HARNESS_SKILL: StaticSchema = (
+    19,
+    n0,
+    _HS,
+    0,
+    (_pa, _s_, _g, _aSw),
+    (
+        (HARNESS_SKILL_PATH, 0),
+        (HARNESS_SKILL_S3_SOURCE, 0),
+        (HARNESS_SKILL_GIT_SOURCE, 0),
+        (HARNESS_SKILL_AWS_SKILLS_SOURCE, 0),
+    ),
+)
+
+HARNESS_SKILLS: StaticSchema = (16, n0, _HSa, 0, (_m,), ((HARNESS_SKILL, 0),))
+
+HARNESS_SYSTEM_CONTENT_BLOCK: StaticSchema = (
+    19,
+    n0,
+    _HSCB,
+    0,
+    (_te,),
+    ((SENSITIVE_TEXT, 0),),
+)
+
+HARNESS_SYSTEM_PROMPT: StaticSchema = (
+    16,
+    n0,
+    _HSPa,
+    0,
+    (_m,),
+    ((HARNESS_SYSTEM_CONTENT_BLOCK, 0),),
+)
+
+HARNESS_BROWSER_ARN: StaticSchema = (3, n0, _HBA, 0)
+
+HARNESS_AGENT_CORE_BROWSER_CONFIG: StaticSchema = (
+    18,
+    n0,
+    _HACBC,
+    0,
+    (_bAr,),
+    ((HARNESS_BROWSER_ARN, 0),),
+)
+
+HARNESS_CODE_INTERPRETER_ARN: StaticSchema = (3, n0, _HCIA, 0)
+
+HARNESS_AGENT_CORE_CODE_INTERPRETER_CONFIG: StaticSchema = (
+    18,
+    n0,
+    _HACCIC,
+    0,
+    (_cIA,),
+    ((HARNESS_CODE_INTERPRETER_ARN, 0),),
+)
+
+O_AUTH_CUSTOM_PARAMETERS_KEY: StaticSchema = (3, n0, _OACPK, 0)
+
+O_AUTH_CUSTOM_PARAMETERS_VALUE: StaticSchema = (3, n0, _OACPV, 4)
+
+O_AUTH_CUSTOM_PARAMETERS: StaticSchema = (
+    17,
+    n0,
+    _OACP,
+    0,
+    (_k, _va),
+    ((O_AUTH_CUSTOM_PARAMETERS_KEY, 0), (O_AUTH_CUSTOM_PARAMETERS_VALUE, 0)),
+)
+
+O_AUTH_DEFAULT_RETURN_URL: StaticSchema = (3, n0, _OADRU, 0)
+
+O_AUTH_GRANT_TYPE: StaticSchema = (
+    14,
+    n0,
+    _OAGT,
+    0,
+    (_CC_, _AC_, _TE_),
+    ((-1, {_sVm: _CC_}), (-1, {_sVm: _AC_}), (-1, {_sVm: _TE_})),
+)
+
+O_AUTH_CREDENTIAL_PROVIDER_ARN: StaticSchema = (3, n0, _OACPA, 0)
+
+O_AUTH_SCOPE: StaticSchema = (3, n0, _OAS, 0)
+
+O_AUTH_SCOPES: StaticSchema = (16, n0, _OASu, 0, (_m,), ((O_AUTH_SCOPE, 0),))

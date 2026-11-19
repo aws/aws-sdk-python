@@ -1409,6 +1409,17 @@ class CreateLoginProfileInput(_SerdeShape):
     Specifies whether the user is required to set a new password on next
     sign-in.
     """
+    max_signin_session_duration: int | None = ...
+    """
+    The maximum duration (in seconds) of an Amazon Web Services Sign-In
+    session for this IAM user. This setting can have a value from 1 hour
+    (3600 seconds) to 90 days (7776000 seconds), inclusive. If you do not
+    specify a value, the setting remains unset and the existing sign-in
+    session behavior applies.
+
+    Note:
+        This setting is not supported for the root user.
+    """
 
 class CreateLoginProfileInputDict(TypedDict, total=False):
     """Dictionary form of `CreateLoginProfileInput`."""
@@ -1451,6 +1462,17 @@ class CreateLoginProfileInputDict(TypedDict, total=False):
     """
     Specifies whether the user is required to set a new password on next
     sign-in.
+    """
+    max_signin_session_duration: int | None
+    """
+    The maximum duration (in seconds) of an Amazon Web Services Sign-In
+    session for this IAM user. This setting can have a value from 1 hour
+    (3600 seconds) to 90 days (7776000 seconds), inclusive. If you do not
+    specify a value, the setting remains unset and the existing sign-in
+    session behavior applies.
+
+    Note:
+        This setting is not supported for the root user.
     """
 
 @dataclass(kw_only=True)
@@ -2066,6 +2088,16 @@ class CreateRoleInput(_SerdeShape):
     roles](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use.html)
     in the *IAM User Guide*.
     """
+    max_signin_session_duration: int | None = ...
+    """
+    The maximum duration (in seconds) of an Amazon Web Services Sign-In
+    session for users who sign in with this role. This setting can have a
+    value from 1 hour (3600 seconds) to 90 days (7776000 seconds),
+    inclusive. If you do not specify a value, the setting remains unset and
+    the existing sign-in session behavior applies.
+
+    This setting is independent of `MaxSessionDuration`.
+    """
     permissions_boundary: str | None = ...
     """
     The ARN of the managed policy that is used to set the permissions
@@ -2175,6 +2207,16 @@ class CreateRoleInputDict(TypedDict, total=False):
     operations to create a console URL. For more information, see [Using IAM
     roles](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use.html)
     in the *IAM User Guide*.
+    """
+    max_signin_session_duration: int | None
+    """
+    The maximum duration (in seconds) of an Amazon Web Services Sign-In
+    session for users who sign in with this role. This setting can have a
+    value from 1 hour (3600 seconds) to 90 days (7776000 seconds),
+    inclusive. If you do not specify a value, the setting remains unset and
+    the existing sign-in session behavior applies.
+
+    This setting is independent of `MaxSessionDuration`.
     """
     permissions_boundary: str | None
     """

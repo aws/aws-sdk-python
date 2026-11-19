@@ -217,59 +217,49 @@ _cUARER = "com.amazonaws.bedrockagentcorecontrol#UpdateAgentRuntimeEndpointReque
 _UAREO = "UpdateAgentRuntimeEndpointOutput"
 _cUARERo = "com.amazonaws.bedrockagentcorecontrol#UpdateAgentRuntimeEndpointResponse"
 _UARE = "UpdateAgentRuntimeEndpoint"
-_AMRT = "AgentManagedRuntimeType"
-_P = "PYTHON_3_10"
-_P_ = "PYTHON_3_11"
-_P__ = "PYTHON_3_12"
-_P___ = "PYTHON_3_13"
-_P____ = "PYTHON_3_14"
-_N = "NODE_22"
-_SL = "S3Location"
-_b = "bucket"
-_p = "prefix"
-_vI = "versionId"
-_C = "Code"
-_s_ = "s3"
-_eP = "entryPoint"
-_EP = "EntryPoints"
-_CC = "CodeConfiguration"
-_co = "code"
-_ru = "runtime"
-_RCU = "RuntimeContainerUri"
-_CCo = "ContainerConfiguration"
-_cU = "containerUri"
-_ARAg = "AgentRuntimeArtifact"
-_cC = "containerConfiguration"
-_cCo = "codeConfiguration"
-_ARN = "AgentRuntimeName"
-_Po = "Port"
-_PR = "PortRange"
-_fr = "from"
-_to = "to"
-_AP = "AllowedPort"
-_po = "port"
-_pR = "portRange"
-_APl = "AllowedPorts"
-_AA = "AllowedAudience"
-_AAL = "AllowedAudienceList"
-_ACl = "AllowedClient"
-_ACL = "AllowedClientsList"
-_ASTl = "AllowedScopesType"
-_BARA = "BedrockAgentcoreResourceArn"
-_HE = "HostingEnvironment"
-_a = "arn"
-_HELT = "HostingEnvironmentListType"
-_WINT = "WorkloadIdentityNameType"
-_WINLT = "WorkloadIdentityNameListType"
-_AWC = "AllowedWorkloadConfiguration"
-_hE = "hostingEnvironments"
-_wI = "workloadIdentities"
-_CBOAI = "CertificateBucketOwnerAccountId"
-_CSU = "CertificateS3Uri"
-_SCC = "S3CertificateConfiguration"
-_u = "uri"
-_bOAI = "bucketOwnerAccountId"
-_CSA = "CertificateSecretArn"
+_AISI = "AgentInsightStoreId"
+_GAISI = "GetAgentInsightStoreInput"
+_cGAISR = "com.amazonaws.bedrockagentcorecontrol#GetAgentInsightStoreRequest"
+_aISI = "agentInsightStoreId"
+_AISA = "AgentInsightStoreArn"
+_AISES = "AgentInsightStoreEnablementStatus"
+_KKA = "KmsKeyArn"
+_AISEM = "AgentInsightStoreEncryptionMode"
+_AOKK = "AWS_OWNED_KMS_KEY"
+_CMK = "CUSTOMER_MANAGED_KMS"
+_AISEC = "AgentInsightStoreEncryptionConfiguration"
+_kKA = "kmsKeyArn"
+_AISFR = "AgentInsightStoreFailureReason"
+_AISS = "AgentInsightStoreStatus"
+_INACTIVE = "INACTIVE"
+_ERROR = "ERROR"
+_GAISO = "GetAgentInsightStoreOutput"
+_cGAISRo = "com.amazonaws.bedrockagentcorecontrol#GetAgentInsightStoreResponse"
+_aISA = "agentInsightStoreArn"
+_eS = "enablementStatus"
+_eC = "encryptionConfiguration"
+_GAIS = "GetAgentInsightStore"
+_LAISI = "ListAgentInsightStoresInput"
+_cLAISR = "com.amazonaws.bedrockagentcorecontrol#ListAgentInsightStoresRequest"
+_AISSg = "AgentInsightStoreSummary"
+_AISSL = "AgentInsightStoreSummaryList"
+_LAISO = "ListAgentInsightStoresOutput"
+_cLAISRo = "com.amazonaws.bedrockagentcorecontrol#ListAgentInsightStoresResponse"
+_aIS = "agentInsightStores"
+_LAIS = "ListAgentInsightStores"
+_UAISI = "UpdateAgentInsightStoreInput"
+_cUAISR = "com.amazonaws.bedrockagentcorecontrol#UpdateAgentInsightStoreRequest"
+_UAISO = "UpdateAgentInsightStoreOutput"
+_cUAISRo = "com.amazonaws.bedrockagentcorecontrol#UpdateAgentInsightStoreResponse"
+_UAIS = "UpdateAgentInsightStore"
+_CPA = "CapacityProviderArn"
+_ARS = "AgentRuntimeStatus"
+_EIv = "EvaluatorId"
+_NES = "NonEmptyString"
+_MI = "ModelId"
+_TRA = "TaggableResourcesArn"
+_RIe = "RegistryIdentifier"
+_RAe = "RegistryArn"
 
 INLINE_CONTENT: StaticSchema = (3, n0, _IC, 0)
 
@@ -1055,144 +1045,244 @@ UPDATE_AGENT_RUNTIME_ENDPOINT: StaticOperationSchema = (
     ),
 )
 
-AGENT_MANAGED_RUNTIME_TYPE: StaticSchema = (
-    14,
+AGENT_INSIGHT_STORE_ID: StaticSchema = (3, n0, _AISI, 0)
+
+GET_AGENT_INSIGHT_STORE_INPUT: StaticSchema = (
+    18,
     n0,
-    _AMRT,
-    0,
-    (_P, _P_, _P__, _P___, _P____, _N),
+    _GAISI,
+    {_sSI: _cGAISR, _smith: None},
+    (_aISI,),
+    ((AGENT_INSIGHT_STORE_ID, 9),),
+)
+
+GET_AGENT_INSIGHT_STORE_OUTPUT: StaticSchema = (
+    18,
+    n0,
+    _GAISO,
+    {_sSI: _cGAISRo, _smithy: None},
+    (_aISA, _aISI, _st, _eS, _eC, _cA, _uA, _fR),
     (
-        (-1, {_sVm: _P}),
-        (-1, {_sVm: _P_}),
-        (-1, {_sVm: _P__}),
-        (-1, {_sVm: _P___}),
-        (-1, {_sVm: _P____}),
-        (-1, {_sVm: _N}),
+        (lambda: AGENT_INSIGHT_STORE_ARN, 1),
+        (AGENT_INSIGHT_STORE_ID, 1),
+        (lambda: AGENT_INSIGHT_STORE_STATUS, 1),
+        (lambda: AGENT_INSIGHT_STORE_ENABLEMENT_STATUS, 1),
+        (lambda: AGENT_INSIGHT_STORE_ENCRYPTION_CONFIGURATION, 1),
+        (4, 1),
+        (4, 1),
+        (lambda: AGENT_INSIGHT_STORE_FAILURE_REASON, 0),
     ),
 )
 
-S3_LOCATION: StaticSchema = (18, n0, _SL, 0, (_b, _p, _vI), ((3, 1), (3, 1), (3, 0)))
+GET_AGENT_INSIGHT_STORE: StaticOperationSchema = (
+    23,
+    n0,
+    _GAIS,
+    {
+        _smithya: MappingProxyType(
+            {"method": "GET", "uri": "/agent-insight-stores/{agentInsightStoreId}"}
+        )
+    },
+    GET_AGENT_INSIGHT_STORE_INPUT,
+    GET_AGENT_INSIGHT_STORE_OUTPUT,
+    (
+        ACCESS_DENIED_EXCEPTION,
+        INTERNAL_SERVER_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        THROTTLING_EXCEPTION,
+        VALIDATION_EXCEPTION,
+    ),
+)
 
-CODE: StaticSchema = (19, n0, _C, 0, (_s_,), ((S3_LOCATION, 0),))
+AGENT_INSIGHT_STORE_ARN: StaticSchema = (3, n0, _AISA, 0)
 
-ENTRY_POINT: StaticSchema = (3, n0, _eP, 0)
+AGENT_INSIGHT_STORE_ENABLEMENT_STATUS: StaticSchema = (
+    14,
+    n0,
+    _AISES,
+    0,
+    (_ENABLED, _DISABLED),
+    ((-1, {_sVm: _ENABLED}), (-1, {_sVm: _DISABLED})),
+)
 
-ENTRY_POINTS: StaticSchema = (16, n0, _EP, 0, (_mem,), ((ENTRY_POINT, 0),))
+KMS_KEY_ARN: StaticSchema = (3, n0, _KKA, 0)
 
-CODE_CONFIGURATION: StaticSchema = (
+AGENT_INSIGHT_STORE_ENCRYPTION_MODE: StaticSchema = (
+    14,
+    n0,
+    _AISEM,
+    0,
+    (_AOKK, _CMK),
+    ((-1, {_sVm: _AOKK}), (-1, {_sVm: _CMK})),
+)
+
+AGENT_INSIGHT_STORE_ENCRYPTION_CONFIGURATION: StaticSchema = (
     18,
     n0,
-    _CC,
+    _AISEC,
     0,
-    (_co, _ru, _eP),
-    ((CODE, 1), (AGENT_MANAGED_RUNTIME_TYPE, 1), (ENTRY_POINTS, 1)),
+    (_mo, _kKA),
+    ((AGENT_INSIGHT_STORE_ENCRYPTION_MODE, 1), (KMS_KEY_ARN, 0)),
 )
 
-RUNTIME_CONTAINER_URI: StaticSchema = (3, n0, _RCU, 0)
+AGENT_INSIGHT_STORE_FAILURE_REASON: StaticSchema = (3, n0, _AISFR, 4)
 
-CONTAINER_CONFIGURATION: StaticSchema = (
+AGENT_INSIGHT_STORE_STATUS: StaticSchema = (
+    14,
+    n0,
+    _AISS,
+    0,
+    (_ACTIVE, _UPDATING, _INACTIVE, _ERROR),
+    (
+        (-1, {_sVm: _ACTIVE}),
+        (-1, {_sVm: _UPDATING}),
+        (-1, {_sVm: _INACTIVE}),
+        (-1, {_sVm: _ERROR}),
+    ),
+)
+
+LIST_AGENT_INSIGHT_STORES_INPUT: StaticSchema = (
     18,
     n0,
-    _CCo,
-    0,
-    (_cU,),
-    ((RUNTIME_CONTAINER_URI, 1),),
+    _LAISI,
+    {_sSI: _cLAISR, _smith: None},
+    (_nT, _mR),
+    ((3, {_sQ: _nT}), (7, {_sQ: _mR})),
 )
 
-AGENT_RUNTIME_ARTIFACT: StaticSchema = (
-    19,
+LIST_AGENT_INSIGHT_STORES_OUTPUT: StaticSchema = (
+    18,
     n0,
-    _ARAg,
-    0,
-    (_cC, _cCo),
-    ((CONTAINER_CONFIGURATION, 0), (CODE_CONFIGURATION, 0)),
+    _LAISO,
+    {_sSI: _cLAISRo, _smithy: None},
+    (_aIS, _nT),
+    ((lambda: AGENT_INSIGHT_STORE_SUMMARY_LIST, 1), (3, 0)),
 )
 
-AGENT_RUNTIME_NAME: StaticSchema = (3, n0, _ARN, 0)
+LIST_AGENT_INSIGHT_STORES: StaticOperationSchema = (
+    23,
+    n0,
+    _LAIS,
+    {_smithya: MappingProxyType({"method": "POST", "uri": "/agent-insight-stores"})},
+    LIST_AGENT_INSIGHT_STORES_INPUT,
+    LIST_AGENT_INSIGHT_STORES_OUTPUT,
+    (
+        ACCESS_DENIED_EXCEPTION,
+        INTERNAL_SERVER_EXCEPTION,
+        THROTTLING_EXCEPTION,
+        VALIDATION_EXCEPTION,
+    ),
+)
 
-PORT: StaticSchema = (7, n0, _Po, 0)
+AGENT_INSIGHT_STORE_SUMMARY: StaticSchema = (
+    18,
+    n0,
+    _AISSg,
+    0,
+    (_aISA, _aISI, _st, _eS, _eC, _cA, _uA),
+    (
+        (AGENT_INSIGHT_STORE_ARN, 1),
+        (AGENT_INSIGHT_STORE_ID, 1),
+        (AGENT_INSIGHT_STORE_STATUS, 1),
+        (AGENT_INSIGHT_STORE_ENABLEMENT_STATUS, 1),
+        (AGENT_INSIGHT_STORE_ENCRYPTION_CONFIGURATION, 1),
+        (4, 1),
+        (4, 1),
+    ),
+)
 
-PORT_RANGE: StaticSchema = (18, n0, _PR, 0, (_fr, _to), ((PORT, 1), (PORT, 1)))
-
-ALLOWED_PORT: StaticSchema = (19, n0, _AP, 0, (_po, _pR), ((PORT, 0), (PORT_RANGE, 0)))
-
-ALLOWED_PORTS: StaticSchema = (16, n0, _APl, 0, (_mem,), ((ALLOWED_PORT, 0),))
-
-ALLOWED_AUDIENCE: StaticSchema = (3, n0, _AA, 0)
-
-ALLOWED_AUDIENCE_LIST: StaticSchema = (
+AGENT_INSIGHT_STORE_SUMMARY_LIST: StaticSchema = (
     16,
     n0,
-    _AAL,
+    _AISSL,
     0,
     (_mem,),
-    ((ALLOWED_AUDIENCE, 0),),
+    ((AGENT_INSIGHT_STORE_SUMMARY, 0),),
 )
 
-ALLOWED_CLIENT: StaticSchema = (3, n0, _ACl, 0)
-
-ALLOWED_CLIENTS_LIST: StaticSchema = (16, n0, _ACL, 0, (_mem,), ((ALLOWED_CLIENT, 0),))
-
-ALLOWED_SCOPES_TYPE: StaticSchema = (
-    16,
-    n0,
-    _ASTl,
-    0,
-    (_mem,),
-    ((ALLOWED_SCOPE_TYPE, 0),),
-)
-
-BEDROCK_AGENTCORE_RESOURCE_ARN: StaticSchema = (3, n0, _BARA, 0)
-
-HOSTING_ENVIRONMENT: StaticSchema = (
+UPDATE_AGENT_INSIGHT_STORE_INPUT: StaticSchema = (
     18,
     n0,
-    _HE,
-    0,
-    (_a,),
-    ((BEDROCK_AGENTCORE_RESOURCE_ARN, 1),),
+    _UAISI,
+    {_sSI: _cUAISR, _smith: None},
+    (_cT, _aISI, _eS, _eC),
+    (
+        (CLIENT_TOKEN, 2),
+        (AGENT_INSIGHT_STORE_ID, 9),
+        (AGENT_INSIGHT_STORE_ENABLEMENT_STATUS, 0),
+        (AGENT_INSIGHT_STORE_ENCRYPTION_CONFIGURATION, 0),
+    ),
 )
 
-HOSTING_ENVIRONMENT_LIST_TYPE: StaticSchema = (
-    16,
-    n0,
-    _HELT,
-    0,
-    (_mem,),
-    ((HOSTING_ENVIRONMENT, 0),),
-)
-
-WORKLOAD_IDENTITY_NAME_TYPE: StaticSchema = (3, n0, _WINT, 0)
-
-WORKLOAD_IDENTITY_NAME_LIST_TYPE: StaticSchema = (
-    16,
-    n0,
-    _WINLT,
-    0,
-    (_mem,),
-    ((WORKLOAD_IDENTITY_NAME_TYPE, 0),),
-)
-
-ALLOWED_WORKLOAD_CONFIGURATION: StaticSchema = (
+UPDATE_AGENT_INSIGHT_STORE_OUTPUT: StaticSchema = (
     18,
     n0,
-    _AWC,
-    0,
-    (_hE, _wI),
-    ((HOSTING_ENVIRONMENT_LIST_TYPE, 0), (WORKLOAD_IDENTITY_NAME_LIST_TYPE, 0)),
+    _UAISO,
+    {_sSI: _cUAISRo, _smithy: None},
+    (_aISA, _aISI, _st, _eS, _uA, _fR),
+    (
+        (AGENT_INSIGHT_STORE_ARN, 1),
+        (AGENT_INSIGHT_STORE_ID, 1),
+        (AGENT_INSIGHT_STORE_STATUS, 1),
+        (AGENT_INSIGHT_STORE_ENABLEMENT_STATUS, 1),
+        (4, 1),
+        (AGENT_INSIGHT_STORE_FAILURE_REASON, 0),
+    ),
 )
 
-CERTIFICATE_BUCKET_OWNER_ACCOUNT_ID: StaticSchema = (3, n0, _CBOAI, 0)
-
-CERTIFICATE_S3_URI: StaticSchema = (3, n0, _CSU, 0)
-
-S3_CERTIFICATE_CONFIGURATION: StaticSchema = (
-    18,
+UPDATE_AGENT_INSIGHT_STORE: StaticOperationSchema = (
+    23,
     n0,
-    _SCC,
-    0,
-    (_u, _bOAI),
-    ((CERTIFICATE_S3_URI, 1), (CERTIFICATE_BUCKET_OWNER_ACCOUNT_ID, 0)),
+    _UAIS,
+    {
+        _smithya: MappingProxyType(
+            {
+                "method": "PUT",
+                "uri": "/agent-insight-stores/{agentInsightStoreId}",
+                "code": 202,
+            }
+        )
+    },
+    UPDATE_AGENT_INSIGHT_STORE_INPUT,
+    UPDATE_AGENT_INSIGHT_STORE_OUTPUT,
+    (
+        ACCESS_DENIED_EXCEPTION,
+        CONFLICT_EXCEPTION,
+        INTERNAL_SERVER_EXCEPTION,
+        RESOURCE_NOT_FOUND_EXCEPTION,
+        SERVICE_QUOTA_EXCEEDED_EXCEPTION,
+        THROTTLING_EXCEPTION,
+        VALIDATION_EXCEPTION,
+    ),
 )
 
-CERTIFICATE_SECRET_ARN: StaticSchema = (3, n0, _CSA, 0)
+CAPACITY_PROVIDER_ARN: StaticSchema = (3, n0, _CPA, 0)
+
+AGENT_RUNTIME_STATUS: StaticSchema = (
+    14,
+    n0,
+    _ARS,
+    0,
+    (_CREATING, _CF, _UPDATING, _UF, _READY, _DELETING, _DF),
+    (
+        (-1, {_sVm: _CREATING}),
+        (-1, {_sVm: _CF}),
+        (-1, {_sVm: _UPDATING}),
+        (-1, {_sVm: _UF}),
+        (-1, {_sVm: _READY}),
+        (-1, {_sVm: _DELETING}),
+        (-1, {_sVm: _DF}),
+    ),
+)
+
+EVALUATOR_ID: StaticSchema = (3, n0, _EIv, 0)
+
+NON_EMPTY_STRING: StaticSchema = (3, n0, _NES, 0)
+
+MODEL_ID: StaticSchema = (3, n0, _MI, 0)
+
+TAGGABLE_RESOURCES_ARN: StaticSchema = (3, n0, _TRA, 0)
+
+REGISTRY_IDENTIFIER: StaticSchema = (3, n0, _RIe, 0)
+
+REGISTRY_ARN: StaticSchema = (3, n0, _RAe, 0)

@@ -302,7 +302,7 @@ _dCep = "deploymentController"
 _pCe = "pendingCount"
 _pF = "platformFamily"
 _Ser = "Service"
-_tSa = "taskSets"
+_tSas = "taskSets"
 _dep = "deployments"
 _ev = "events"
 _cSD = "currentServiceDeployment"
@@ -1342,7 +1342,7 @@ SERVICE: StaticSchema = (
         _pF,
         _tD,
         _dC,
-        _tSa,
+        _tSas,
         _dep,
         _rA,
         _ev,

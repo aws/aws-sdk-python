@@ -77,31 +77,16 @@ _ama = "amazon"
 _b = "byoip"
 _pu = "public"
 _priv = "private"
-_ECI = "EbsCardIndex"
-_DOT = "DeleteOnTermination"
 _IIRAI = "IpamInternetRegistryAssociationId"
 _Fo = "Force"
 _IRPRD = "IpamRoutingPolicyRegistrationDelta"
 _SMta = "StateMessage"
 _sMta = "stateMessage"
 _iRPRD = "ipamRoutingPolicyRegistrationDelta"
-_KKI = "KmsKeyId"
-_En = "Encrypted"
-_SIn = "SnapshotId"
-_VT = "VolumeType"
-_Io = "Iops"
-_Th = "Throughput"
-_VIR = "VolumeInitializationRate"
 _Ty = "Type"
-_DNe = "DeviceName"
 _ty = "type"
 _df___ = "delete_failed"
 _df____ = "delete-failed"
-_VSol = "VolumeSize"
-_VN = "VirtualName"
-_Eb = "Ebs"
-_ND = "NoDevice"
-_BDM = "BlockDeviceMapping"
 _KN = "KeyName"
 _cip = "create_in_progress"
 _cip_ = "create-in-progress"
@@ -135,6 +120,21 @@ _DC__ = "DELETE_COMPLETE"
 _DF_ = "DELETE_FAILED"
 _Ri = "Rir"
 _OHr = "OrganizationHandle"
+_IIRAS = "IpamInternetRegistryAssociationState"
+_pe_ = "pending_enable"
+_pe__ = "pending-enable"
+_eip___ = "enable_in_progress"
+_eip____ = "enable-in-progress"
+_ec = "enable_complete"
+_ec_ = "enable-complete"
+_ef__ = "enable_failed"
+_ef___ = "enable-failed"
+_dip___ = "disable_in_progress"
+_dip____ = "disable-in-progress"
+_dc___ = "disable_complete"
+_dc____ = "disable-complete"
+_df_____ = "disable_failed"
+_df______ = "disable-failed"
 _IIRA = "IpamInternetRegistryAssociation"
 _iIRAI = "ipamInternetRegistryAssociationId"
 _IIRAA = "IpamInternetRegistryAssociationArn"
@@ -354,11 +354,44 @@ _kF = "keyFingerprint"
 _KM = "KeyMaterial"
 _kM = "keyMaterial"
 _CKP = "CreateKeyPair"
-_LTEBDR = "LaunchTemplateEbsBlockDeviceRequest"
-_LTBDMR = "LaunchTemplateBlockDeviceMappingRequest"
-_LTBDMRL = "LaunchTemplateBlockDeviceMappingRequestList"
+_IMRp = "IpamMaxResults"
 
 IPAM_INTERNET_REGISTRY_ASSOCIATION_ID: StaticSchema = (3, n0, _IIRAI, 0)
+
+IPAM_INTERNET_REGISTRY_ASSOCIATION_STATE: StaticSchema = (
+    14,
+    n0,
+    _IIRAS,
+    0,
+    (
+        _pe_,
+        _cip,
+        _cf________________________,
+        _eip___,
+        _ec,
+        _ef__,
+        _dip___,
+        _dc___,
+        _df_____,
+        _dip_,
+        _dc_,
+        _df___,
+    ),
+    (
+        (-1, {_sV: _pe__}),
+        (-1, {_sV: _cip_}),
+        (-1, {_sV: _cf_________________________}),
+        (-1, {_sV: _eip____}),
+        (-1, {_sV: _ec_}),
+        (-1, {_sV: _ef___}),
+        (-1, {_sV: _dip____}),
+        (-1, {_sV: _dc____}),
+        (-1, {_sV: _df______}),
+        (-1, {_sV: _dip__}),
+        (-1, {_sV: _dc__}),
+        (-1, {_sV: _df____}),
+    ),
+)
 
 IPAM_INTERNET_REGISTRY_ASSOCIATION: StaticSchema = (
     18,
@@ -375,10 +408,7 @@ IPAM_INTERNET_REGISTRY_ASSOCIATION: StaticSchema = (
         (lambda: schemas.RIR, {_aQN: _Ri, _sN: _rir}),
         (lambda: schemas.STRING, {_aQN: _OHr, _sN: _oHr}),
         (lambda: schemas.STRING, {_aQN: _Des, _sN: _desc}),
-        (
-            lambda: schemas.IPAM_INTERNET_REGISTRY_ASSOCIATION_STATE,
-            {_aQN: _St, _sN: _st},
-        ),
+        (IPAM_INTERNET_REGISTRY_ASSOCIATION_STATE, {_aQN: _St, _sN: _st}),
         (lambda: schemas.STRING, {_aQN: _SMta, _sN: _sMta}),
         (lambda: schemas.STRING, {_aQN: _CRX, _sN: _cRX}),
         (lambda: schemas.TAG_LIST, {_aQN: _TSag, _sN: _tS}),
@@ -1354,45 +1384,4 @@ CREATE_KEY_PAIR: StaticOperationSchema = (
     (),
 )
 
-LAUNCH_TEMPLATE_EBS_BLOCK_DEVICE_REQUEST: StaticSchema = (
-    18,
-    n0,
-    _LTEBDR,
-    0,
-    (_En, _DOT, _Io, _KKI, _SIn, _VSol, _VT, _Th, _VIR, _ECI),
-    (
-        (lambda: schemas.BOOLEAN, 0),
-        (lambda: schemas.BOOLEAN, 0),
-        (lambda: schemas.INTEGER, 0),
-        (lambda: schemas.KMS_KEY_ID, 0),
-        (lambda: schemas.SNAPSHOT_ID, 0),
-        (lambda: schemas.INTEGER, 0),
-        (lambda: schemas.VOLUME_TYPE, 0),
-        (lambda: schemas.INTEGER, 0),
-        (lambda: schemas.INTEGER, 0),
-        (lambda: schemas.INTEGER, 0),
-    ),
-)
-
-LAUNCH_TEMPLATE_BLOCK_DEVICE_MAPPING_REQUEST: StaticSchema = (
-    18,
-    n0,
-    _LTBDMR,
-    0,
-    (_DNe, _VN, _Eb, _ND),
-    (
-        (lambda: schemas.STRING, 0),
-        (lambda: schemas.STRING, 0),
-        (LAUNCH_TEMPLATE_EBS_BLOCK_DEVICE_REQUEST, 0),
-        (lambda: schemas.STRING, 0),
-    ),
-)
-
-LAUNCH_TEMPLATE_BLOCK_DEVICE_MAPPING_REQUEST_LIST: StaticSchema = (
-    16,
-    n0,
-    _LTBDMRL,
-    0,
-    (_me,),
-    ((LAUNCH_TEMPLATE_BLOCK_DEVICE_MAPPING_REQUEST, {_sN: _BDM}),),
-)
+IPAM_MAX_RESULTS: StaticSchema = (7, n0, _IMRp, 0)

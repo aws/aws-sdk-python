@@ -157,7 +157,7 @@ class APIGatewayClient(Client[APIGatewayConfig]):
     mobile and web application back ends. API Gateway allows developers to
     securely connect mobile and web applications to APIs that run on Lambda,
     Amazon EC2, or other publicly addressable web services that are hosted
-    outside of AWS.
+    outside of Amazon Web Services.
     """
 
     _client_plugins = (accept_header_plugin, aws_user_agent_plugin, user_agent_plugin)
@@ -1186,9 +1186,10 @@ class APIGatewayClient(Client[APIGatewayConfig]):
         """
         Deletes the DomainNameAccessAssociation resource.
 
-        Only the AWS account that created the DomainNameAccessAssociation
-        resource can delete it. To stop an access association source in another
-        AWS account from accessing your private custom domain name, use the
+        Only the Amazon Web Services account that created the
+        DomainNameAccessAssociation resource can delete it. To stop an access
+        association source in another Amazon Web Services account from accessing
+        your private custom domain name, use the
         RejectDomainNameAccessAssociation operation.
 
         Args:
@@ -4226,9 +4227,10 @@ class APIGatewayClient(Client[APIGatewayConfig]):
         name.
 
         To reject a domain name access association with an access association
-        source in another AWS account, use this operation. To remove a domain
-        name access association with an access association source in your own
-        account, use the DeleteDomainNameAccessAssociation operation.
+        source in another Amazon Web Services account, use this operation. To
+        remove a domain name access association with an access association
+        source in your own account, use the DeleteDomainNameAccessAssociation
+        operation.
 
         Args:
             plugins:
@@ -4520,7 +4522,12 @@ class APIGatewayClient(Client[APIGatewayConfig]):
         **kwargs: _Unpack[_models.UpdateAuthorizerInputDict],
     ) -> UpdateAuthorizerOutput:
         """
-        Updates an existing Authorizer resource.
+        Updates an existing Authorizer resource. For a `JWT` authorizer, the
+        only JWT patch operation is `replace` on the path `/jwtConfiguration`.
+        Its value is the complete configuration as a JSON string in the
+        `JwtConfigurationInput` shape. This replaces the entire configuration;
+        nothing from the previous configuration is retained. A `replace`
+        operation on the path `/type` is supported in both directions.
 
         Args:
             plugins:

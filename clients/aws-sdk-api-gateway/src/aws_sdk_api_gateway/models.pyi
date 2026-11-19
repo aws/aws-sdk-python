@@ -322,6 +322,16 @@ from ._private.models_0 import (
     IntegrationResponse as IntegrationResponse,
     IntegrationType as IntegrationType,
     IpAddressType as IpAddressType,
+    JwtAdditionalClaim as JwtAdditionalClaim,
+    JwtAdditionalClaimDict as JwtAdditionalClaimDict,
+    JwtClaimFormat as JwtClaimFormat,
+    JwtConfiguration as JwtConfiguration,
+    JwtConfigurationInput as JwtConfigurationInput,
+    JwtConfigurationInputDict as JwtConfigurationInputDict,
+    JwtIssuer as JwtIssuer,
+    JwtIssuerInput as JwtIssuerInput,
+    JwtIssuerInputDict as JwtIssuerInputDict,
+    JwtSigningAlgorithm as JwtSigningAlgorithm,
     LimitExceededException as LimitExceededException,
     LocationStatusType as LocationStatusType,
     Method as Method,
@@ -355,6 +365,9 @@ from ._private.models_0 import (
     PutRestApiInput as PutRestApiInput,
     PutRestApiInputDict as PutRestApiInputDict,
     PutRestApiOutput as PutRestApiOutput,
+)
+
+from ._private.models_1 import (
     QuotaPeriodType as QuotaPeriodType,
     QuotaSettings as QuotaSettings,
     QuotaSettingsDict as QuotaSettingsDict,
@@ -364,9 +377,6 @@ from ._private.models_0 import (
     RequestValidator as RequestValidator,
     Resource as Resource,
     ResourceOwner as ResourceOwner,
-)
-
-from ._private.models_1 import (
     ResponseTransferMode as ResponseTransferMode,
     RestApi as RestApi,
     RoutingMode as RoutingMode,

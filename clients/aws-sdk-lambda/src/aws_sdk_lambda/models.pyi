@@ -8,6 +8,9 @@ from smithy_core.schemas import APIOperation
 from smithy_core.serializers import ShapeSerializer
 
 from ._private.models_0 import (
+    AcceleratorConfig as AcceleratorConfig,
+    AcceleratorConfigDict as AcceleratorConfigDict,
+    AcceleratorMemoryGB as AcceleratorMemoryGB,
     AccountLimit as AccountLimit,
     AccountUsage as AccountUsage,
     AddLayerVersionPermissionInput as AddLayerVersionPermissionInput,
@@ -111,6 +114,9 @@ from ._private.models_0 import (
     DeleteCodeSigningConfigInput as DeleteCodeSigningConfigInput,
     DeleteCodeSigningConfigInputDict as DeleteCodeSigningConfigInputDict,
     DeleteCodeSigningConfigOutput as DeleteCodeSigningConfigOutput,
+    DeleteDurableExecutionInput as DeleteDurableExecutionInput,
+    DeleteDurableExecutionInputDict as DeleteDurableExecutionInputDict,
+    DeleteDurableExecutionOutput as DeleteDurableExecutionOutput,
     DeleteEventSourceMappingInput as DeleteEventSourceMappingInput,
     DeleteEventSourceMappingInputDict as DeleteEventSourceMappingInputDict,
     DeleteEventSourceMappingOutput as DeleteEventSourceMappingOutput,
@@ -167,7 +173,9 @@ from ._private.models_0 import (
     Event as Event,
     EventError as EventError,
     EventInput as EventInput,
+    EventPauseReason as EventPauseReason,
     EventResult as EventResult,
+    EventResumeReason as EventResumeReason,
     EventSourceMappingConfiguration as EventSourceMappingConfiguration,
     EventSourceMappingLoggingConfig as EventSourceMappingLoggingConfig,
     EventSourceMappingLoggingConfigDict as EventSourceMappingLoggingConfigDict,
@@ -180,6 +188,8 @@ from ._private.models_0 import (
     Execution as Execution,
     ExecutionDetails as ExecutionDetails,
     ExecutionFailedDetails as ExecutionFailedDetails,
+    ExecutionPausedDetails as ExecutionPausedDetails,
+    ExecutionResumedDetails as ExecutionResumedDetails,
     ExecutionStartedDetails as ExecutionStartedDetails,
     ExecutionStatus as ExecutionStatus,
     ExecutionStoppedDetails as ExecutionStoppedDetails,
@@ -340,6 +350,9 @@ from ._private.models_0 import (
     ListAliasesOutput as ListAliasesOutput,
     ListCapacityProvidersInput as ListCapacityProvidersInput,
     ListCapacityProvidersInputDict as ListCapacityProvidersInputDict,
+)
+
+from ._private.models_1 import (
     ListCapacityProvidersOutput as ListCapacityProvidersOutput,
     ListCodeSigningConfigsInput as ListCodeSigningConfigsInput,
     ListCodeSigningConfigsInputDict as ListCodeSigningConfigsInputDict,
@@ -352,9 +365,6 @@ from ._private.models_0 import (
     ListEventSourceMappingsOutput as ListEventSourceMappingsOutput,
     ListFunctionEventInvokeConfigsInput as ListFunctionEventInvokeConfigsInput,
     ListFunctionEventInvokeConfigsInputDict as ListFunctionEventInvokeConfigsInputDict,
-)
-
-from ._private.models_1 import (
     ListFunctionEventInvokeConfigsOutput as ListFunctionEventInvokeConfigsOutput,
     ListFunctionsByCodeSigningConfigInput as ListFunctionsByCodeSigningConfigInput,
     ListFunctionsByCodeSigningConfigInputDict as ListFunctionsByCodeSigningConfigInputDict,
@@ -400,6 +410,10 @@ from ._private.models_1 import (
     OperationUpdate as OperationUpdate,
     OperationUpdateDict as OperationUpdateDict,
     PackageType as PackageType,
+    PauseDetails as PauseDetails,
+    PauseDurableExecutionInput as PauseDurableExecutionInput,
+    PauseDurableExecutionInputDict as PauseDurableExecutionInputDict,
+    PauseDurableExecutionOutput as PauseDurableExecutionOutput,
     PolicyLengthExceededException as PolicyLengthExceededException,
     PreconditionFailedException as PreconditionFailedException,
     PropagateTags as PropagateTags,
@@ -456,6 +470,9 @@ from ._private.models_1 import (
     ResourceNotFoundException as ResourceNotFoundException,
     ResourceNotReadyException as ResourceNotReadyException,
     ResponseStreamingInvocationType as ResponseStreamingInvocationType,
+    ResumeDurableExecutionInput as ResumeDurableExecutionInput,
+    ResumeDurableExecutionInputDict as ResumeDurableExecutionInputDict,
+    ResumeDurableExecutionOutput as ResumeDurableExecutionOutput,
     RetryDetails as RetryDetails,
     Runtime as Runtime,
     RuntimeAliasDeletedException as RuntimeAliasDeletedException,
@@ -610,6 +627,9 @@ DELETE_CAPACITY_PROVIDER: APIOperation[
 DELETE_CODE_SIGNING_CONFIG: APIOperation[
     DeleteCodeSigningConfigInput, DeleteCodeSigningConfigOutput
 ]
+DELETE_DURABLE_EXECUTION: APIOperation[
+    DeleteDurableExecutionInput, DeleteDurableExecutionOutput
+]
 DELETE_EVENT_SOURCE_MAPPING: APIOperation[
     DeleteEventSourceMappingInput, DeleteEventSourceMappingOutput
 ]
@@ -727,6 +747,9 @@ LIST_TAGS: APIOperation[ListTagsInput, ListTagsOutput]
 LIST_VERSIONS_BY_FUNCTION: APIOperation[
     ListVersionsByFunctionInput, ListVersionsByFunctionOutput
 ]
+PAUSE_DURABLE_EXECUTION: APIOperation[
+    PauseDurableExecutionInput, PauseDurableExecutionOutput
+]
 PUBLISH_LAYER_VERSION: APIOperation[PublishLayerVersionInput, PublishLayerVersionOutput]
 PUBLISH_VERSION: APIOperation[PublishVersionInput, PublishVersionOutput]
 PUT_FUNCTION_CODE_SIGNING_CONFIG: APIOperation[
@@ -755,6 +778,9 @@ REMOVE_LAYER_VERSION_PERMISSION: APIOperation[
     RemoveLayerVersionPermissionInput, RemoveLayerVersionPermissionOutput
 ]
 REMOVE_PERMISSION: APIOperation[RemovePermissionInput, RemovePermissionOutput]
+RESUME_DURABLE_EXECUTION: APIOperation[
+    ResumeDurableExecutionInput, ResumeDurableExecutionOutput
+]
 SEND_DURABLE_EXECUTION_CALLBACK_FAILURE: APIOperation[
     SendDurableExecutionCallbackFailureInput, SendDurableExecutionCallbackFailureOutput
 ]

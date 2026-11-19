@@ -43,6 +43,7 @@ if TYPE_CHECKING:
         DeleteABTestOutput,
         DeleteBatchEvaluationOutput,
         DeleteCapacityProviderSessionOutput,
+        DeleteDatasetGenerationOutput,
         DeleteEventOutput,
         DeleteMemoryRecordOutput,
         DeletePaymentInstrumentOutput,
@@ -51,9 +52,11 @@ if TYPE_CHECKING:
         EvaluateOutput,
         GetABTestOutput,
         GetAgentCardOutput,
+        GetAgentInsightOutput,
         GetBatchEvaluationOutput,
         GetBrowserSessionOutput,
         GetCodeInterpreterSessionOutput,
+        GetDatasetGenerationOutput,
         GetEventOutput,
         GetMemoryRecordOutput,
         GetPaymentInstrumentBalanceOutput,
@@ -72,9 +75,11 @@ if TYPE_CHECKING:
         InvokeWebSearchOutput,
         ListABTestsOutput,
         ListActorsOutput,
+        ListAgentInsightsOutput,
         ListBatchEvaluationsOutput,
         ListBrowserSessionsOutput,
         ListCodeInterpreterSessionsOutput,
+        ListDatasetGenerationsOutput,
         ListEventsOutput,
         ListMemoryExtractionJobsOutput,
         ListMemoryRecordsOutput,
@@ -89,6 +94,7 @@ if TYPE_CHECKING:
         StartBatchEvaluationOutput,
         StartBrowserSessionOutput,
         StartCodeInterpreterSessionOutput,
+        StartDatasetGenerationOutput,
         StartMemoryExtractionJobOutput,
         StartRecommendationOutput,
         StopBatchEvaluationOutput,
@@ -96,6 +102,7 @@ if TYPE_CHECKING:
         StopCodeInterpreterSessionOutput,
         StopRuntimeSessionOutput,
         UpdateABTestOutput,
+        UpdateAgentInsightOutput,
         UpdateBrowserStreamOutput,
     )
 
@@ -589,6 +596,51 @@ class AsyncBedrockAgentCoreClient(AsyncClient[AsyncBedrockAgentCoreConfig]):
         )
 
     @_overload
+    async def delete_dataset_generation(
+        self,
+        request: _models.DeleteDatasetGenerationInput
+        | _models.DeleteDatasetGenerationInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> DeleteDatasetGenerationOutput: ...
+
+    @_overload
+    async def delete_dataset_generation(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.DeleteDatasetGenerationInputDict],
+    ) -> DeleteDatasetGenerationOutput:
+        """
+        Deletes the record of a dataset generation. The examples the generation
+        added stay in the dataset's draft. To remove them, find them with the
+        `generationIds` filter of `ListDatasetExamples`, then call
+        `DeleteDatasetExamples`.
+
+        Args:
+            plugins:
+                A list of callables that modify the configuration dynamically.
+                Changes made by these plugins only apply for the duration of the
+                operation execution and will not affect any other operation
+                invocations.
+
+        Returns:
+            An instance of `DeleteDatasetGenerationOutput`.
+        """
+
+    async def delete_dataset_generation(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> DeleteDatasetGenerationOutput:
+        return await self._invoke(
+            self._select_input(_models.DELETE_DATASET_GENERATION, args, kwargs),
+            _models.DELETE_DATASET_GENERATION,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def delete_event(
         self,
         request: _models.DeleteEventInput | _models.DeleteEventInputDict,
@@ -933,6 +985,53 @@ class AsyncBedrockAgentCoreClient(AsyncClient[AsyncBedrockAgentCoreConfig]):
         )
 
     @_overload
+    async def get_agent_insight(
+        self,
+        request: _models.GetAgentInsightInput | _models.GetAgentInsightInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetAgentInsightOutput: ...
+
+    @_overload
+    async def get_agent_insight(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetAgentInsightInputDict],
+    ) -> GetAgentInsightOutput:
+        """
+        Amazon Bedrock AgentCore Agent Insights identifies patterns detected
+        across your agent sessions. Use Agent Insights to identify recurring
+        issues and prioritize fixes.
+
+        Retrieves detailed information about an Amazon Bedrock AgentCore Agent
+        Insight, including its archive status, affected sessions, and, when
+        applicable, the batch evaluation that produced it.
+
+        Args:
+            plugins:
+                A list of callables that modify the configuration dynamically.
+                Changes made by these plugins only apply for the duration of the
+                operation execution and will not affect any other operation
+                invocations.
+
+        Returns:
+            An instance of `GetAgentInsightOutput`.
+        """
+
+    async def get_agent_insight(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetAgentInsightOutput:
+        return await self._invoke(
+            self._select_input(_models.GET_AGENT_INSIGHT, args, kwargs),
+            _models.GET_AGENT_INSIGHT,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def get_batch_evaluation(
         self,
         request: _models.GetBatchEvaluationInput | _models.GetBatchEvaluationInputDict,
@@ -1082,6 +1181,51 @@ class AsyncBedrockAgentCoreClient(AsyncClient[AsyncBedrockAgentCoreConfig]):
         return await self._invoke(
             self._select_input(_models.GET_CODE_INTERPRETER_SESSION, args, kwargs),
             _models.GET_CODE_INTERPRETER_SESSION,
+            [],
+            plugins,
+        )
+
+    @_overload
+    async def get_dataset_generation(
+        self,
+        request: _models.GetDatasetGenerationInput
+        | _models.GetDatasetGenerationInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> GetDatasetGenerationOutput: ...
+
+    @_overload
+    async def get_dataset_generation(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.GetDatasetGenerationInputDict],
+    ) -> GetDatasetGenerationOutput:
+        """
+        Gets a dataset generation, including its status, the request it was
+        started with, its progress counts, its redaction summary and its errors.
+        Call this operation to track a generation that you started with
+        `StartDatasetGeneration`.
+
+        Args:
+            plugins:
+                A list of callables that modify the configuration dynamically.
+                Changes made by these plugins only apply for the duration of the
+                operation execution and will not affect any other operation
+                invocations.
+
+        Returns:
+            An instance of `GetDatasetGenerationOutput`.
+        """
+
+    async def get_dataset_generation(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> GetDatasetGenerationOutput:
+        return await self._invoke(
+            self._select_input(_models.GET_DATASET_GENERATION, args, kwargs),
+            _models.GET_DATASET_GENERATION,
             [],
             plugins,
         )
@@ -2086,6 +2230,50 @@ class AsyncBedrockAgentCoreClient(AsyncClient[AsyncBedrockAgentCoreConfig]):
         )
 
     @_overload
+    async def list_agent_insights(
+        self,
+        request: _models.ListAgentInsightsInput | _models.ListAgentInsightsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListAgentInsightsOutput: ...
+
+    @_overload
+    async def list_agent_insights(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListAgentInsightsInputDict],
+    ) -> ListAgentInsightsOutput:
+        """
+        Lists Amazon Bedrock AgentCore Agent Insight summaries in your account
+        and Region. Use this operation to review patterns across sessions before
+        you investigate or archive an insight. The response paginates the
+        results. Use the `nextToken` parameter to retrieve additional results.
+
+        Args:
+            plugins:
+                A list of callables that modify the configuration dynamically.
+                Changes made by these plugins only apply for the duration of the
+                operation execution and will not affect any other operation
+                invocations.
+
+        Returns:
+            An instance of `ListAgentInsightsOutput`.
+        """
+
+    async def list_agent_insights(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListAgentInsightsOutput:
+        return await self._invoke(
+            self._select_input(_models.LIST_AGENT_INSIGHTS, args, kwargs),
+            _models.LIST_AGENT_INSIGHTS,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def list_batch_evaluations(
         self,
         request: _models.ListBatchEvaluationsInput
@@ -2238,6 +2426,51 @@ class AsyncBedrockAgentCoreClient(AsyncClient[AsyncBedrockAgentCoreConfig]):
         return await self._invoke(
             self._select_input(_models.LIST_CODE_INTERPRETER_SESSIONS, args, kwargs),
             _models.LIST_CODE_INTERPRETER_SESSIONS,
+            [],
+            plugins,
+        )
+
+    @_overload
+    async def list_dataset_generations(
+        self,
+        request: _models.ListDatasetGenerationsInput
+        | _models.ListDatasetGenerationsInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> ListDatasetGenerationsOutput: ...
+
+    @_overload
+    async def list_dataset_generations(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.ListDatasetGenerationsInputDict],
+    ) -> ListDatasetGenerationsOutput:
+        """
+        Lists the generations for a dataset. AgentCore keeps a generation until
+        you delete it with `DeleteDatasetGeneration` or delete the dataset. To
+        get a generation's counts and the request it was started with, call
+        `GetDatasetGeneration`.
+
+        Args:
+            plugins:
+                A list of callables that modify the configuration dynamically.
+                Changes made by these plugins only apply for the duration of the
+                operation execution and will not affect any other operation
+                invocations.
+
+        Returns:
+            An instance of `ListDatasetGenerationsOutput`.
+        """
+
+    async def list_dataset_generations(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> ListDatasetGenerationsOutput:
+        return await self._invoke(
+            self._select_input(_models.LIST_DATASET_GENERATIONS, args, kwargs),
+            _models.LIST_DATASET_GENERATIONS,
             [],
             plugins,
         )
@@ -2914,6 +3147,66 @@ class AsyncBedrockAgentCoreClient(AsyncClient[AsyncBedrockAgentCoreConfig]):
         )
 
     @_overload
+    async def start_dataset_generation(
+        self,
+        request: _models.StartDatasetGenerationInput
+        | _models.StartDatasetGenerationInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> StartDatasetGenerationOutput: ...
+
+    @_overload
+    async def start_dataset_generation(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.StartDatasetGenerationInputDict],
+    ) -> StartDatasetGenerationOutput:
+        """
+        Starts a dataset generation, which creates examples for an existing
+        dataset from your agent's traces. The dataset must be `ACTIVE`. Each
+        generation produces one scenario type, set by `scenarioType`. When the
+        generation finishes, AgentCore adds the examples to the dataset's
+        draft. Examples that duplicate each other, or that duplicate examples
+        already in the draft, are left out.
+
+        A dataset can have only one generation in progress at a time. While it
+        runs, requests that change the dataset's draft or publish a version are
+        rejected with a `ConflictException`.
+
+        AgentCore reads the traces with your credentials, so you need read
+        access to the trace log groups, and to the dataset's KMS key if the
+        dataset uses a customer managed key. The draft can hold at most 1,000
+        examples, including the examples this generation can add
+        (`maxScenarios`).
+
+        The operation returns immediately. To track progress, call
+        `GetDatasetGeneration`.
+
+        Args:
+            plugins:
+                A list of callables that modify the configuration dynamically.
+                Changes made by these plugins only apply for the duration of the
+                operation execution and will not affect any other operation
+                invocations.
+
+        Returns:
+            An instance of `StartDatasetGenerationOutput`.
+        """
+
+    async def start_dataset_generation(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> StartDatasetGenerationOutput:
+        return await self._invoke(
+            self._select_input(_models.START_DATASET_GENERATION, args, kwargs),
+            _models.START_DATASET_GENERATION,
+            [],
+            plugins,
+        )
+
+    @_overload
     async def start_memory_extraction_job(
         self,
         request: _models.StartMemoryExtractionJobInput
@@ -3235,6 +3528,47 @@ class AsyncBedrockAgentCoreClient(AsyncClient[AsyncBedrockAgentCoreConfig]):
         return await self._invoke(
             self._select_input(_models.UPDATE_AB_TEST, args, kwargs),
             _models.UPDATE_AB_TEST,
+            [],
+            plugins,
+        )
+
+    @_overload
+    async def update_agent_insight(
+        self,
+        request: _models.UpdateAgentInsightInput | _models.UpdateAgentInsightInputDict,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+    ) -> UpdateAgentInsightOutput: ...
+
+    @_overload
+    async def update_agent_insight(
+        self,
+        /,
+        *,
+        plugins: list[Plugin] | None = None,
+        **kwargs: _Unpack[_models.UpdateAgentInsightInputDict],
+    ) -> UpdateAgentInsightOutput:
+        """
+        Updates the archive status of an Amazon Bedrock AgentCore Agent Insight.
+
+        Args:
+            plugins:
+                A list of callables that modify the configuration dynamically.
+                Changes made by these plugins only apply for the duration of the
+                operation execution and will not affect any other operation
+                invocations.
+
+        Returns:
+            An instance of `UpdateAgentInsightOutput`.
+        """
+
+    async def update_agent_insight(
+        self, /, *args: object, plugins: list[Plugin] | None = None, **kwargs: object
+    ) -> UpdateAgentInsightOutput:
+        return await self._invoke(
+            self._select_input(_models.UPDATE_AGENT_INSIGHT, args, kwargs),
+            _models.UPDATE_AGENT_INSIGHT,
             [],
             plugins,
         )

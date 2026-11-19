@@ -13,12 +13,11 @@ from smithy_core.response import ResponseMetadata
 from smithy_core.types import UnknownEnumMixin
 
 from ..models import (
-    ABTestEvaluationConfig,
-    ABTestEvaluationConfigDict,
     ABTestSummary,
     AccessDeniedException,
     ActorSummary,
     AffectedSession,
+    AgentInsightSummary,
     AgentTracesConfig,
     AgentTracesConfigDict,
     Amount,
@@ -48,12 +47,9 @@ from ..models import (
     CoinbaseCdpTokenRequestInput,
     CoinbaseCdpTokenRequestInputDict,
     CoinbaseCdpTokenResponseOutput,
-    ConfidenceInterval,
-    ConfigurationBundleRef,
-    ConfigurationBundleRefDict,
-    ConfigurationBundleToolEntry,
-    ConfigurationBundleToolEntryDict,
     ContentDeltaEvent,
+    ContentSource,
+    ContentSourceDict,
     ContentStartEvent,
     ContentStopEvent,
     Conversational,
@@ -61,15 +57,20 @@ from ..models import (
     CryptoX402PaymentInput,
     CryptoX402PaymentInputDict,
     CryptoX402PaymentOutput,
+    CustomDataIdentifier,
+    CustomDataIdentifierDict,
     DataSourceConfig,
     DataSourceConfigDict,
+    DatasetExecutionConfig,
+    DatasetExecutionConfigDict,
+    DatasetGenerationSummary,
     Descriptors,
-    DomainFilter,
-    DomainFilterDict,
-    EfsConfiguration,
-    EfsConfigurationDict,
     EmbeddedCryptoWallet,
     EmbeddedCryptoWalletDict,
+    EvaluationContent,
+    EvaluationContentDict,
+    EvaluationExpectedTrajectory,
+    EvaluationExpectedTrajectoryDict,
     EvaluationMetadata,
     EvaluationMetadataDict,
     Evaluator,
@@ -77,6 +78,8 @@ from ..models import (
     Event,
     ExternalProxy,
     ExternalProxyDict,
+    ExtractionConfig,
+    ExtractionConfigDict,
     ExtractionJob,
     ExtractionJobDict,
     ExtractionJobFilterInput,
@@ -84,14 +87,24 @@ from ..models import (
     ExtractionJobMetadata,
     FilterInput,
     FilterInputDict,
-    GatewayFilter,
-    GatewayFilterDict,
+    GenerationSource,
+    GenerationSourceDict,
     GroundTruthSource,
     GroundTruthSourceDict,
+    GroundTruthTurn,
+    GroundTruthTurnDict,
+    HarnessAgentCoreBrowserConfig,
+    HarnessAgentCoreBrowserConfigDict,
+    HarnessAgentCoreCodeInterpreterConfig,
+    HarnessAgentCoreCodeInterpreterConfigDict,
+    HarnessAgentCoreGatewayConfig,
+    HarnessAgentCoreGatewayConfigDict,
     HarnessContentBlockDeltaEvent,
     HarnessContentBlockStartEvent,
     HarnessContentBlockStopEvent,
     HarnessHookEvent,
+    HarnessInlineFunctionConfig,
+    HarnessInlineFunctionConfigDict,
     HarnessMessage,
     HarnessMessageDict,
     HarnessMessageStartEvent,
@@ -99,20 +112,1041 @@ from ..models import (
     HarnessMetadataEvent,
     HarnessModelConfiguration,
     HarnessModelConfigurationDict,
-    HarnessSkill,
-    HarnessSkillDict,
-    HarnessSystemContentBlock,
-    HarnessSystemContentBlockDict,
-    HarnessTool,
-    HarnessToolDict,
-    InputContentBlock,
-    InputContentBlockDict,
-    Insight,
-    InsightDict,
-    InternalServerException,
+    HarnessRemoteMcpConfig,
+    HarnessRemoteMcpConfigDict,
     ServiceError,
+    ToolDescriptionRecommendationConfig,
+    ToolDescriptionRecommendationConfigDict,
+    ToolDescriptionRecommendationResult,
+    ToolsDefinition,
+    ToolsFileSystemConfiguration,
+    ToolsFileSystemConfigurationDict,
+    Unit,
+    UnitDict,
+    ValidationException,
+    ViewPort,
+    ViewPortDict,
+    WebSearchFilters,
+    WebSearchFiltersDict,
+    WebSearchResult,
     _SerdeShape,
 )
+
+@dataclass
+class HarnessRemoteMcpOutboundAuthAwsIam(_SerdeShape):
+    """
+    Sign requests to the remote MCP server with Signature Version 4 (SigV4)
+    using the harness execution role. If you don't specify a Region, the
+    harness Region is used.
+    """
+
+    value: IamCredentialProvider
+
+@dataclass
+class HarnessRemoteMcpOutboundAuthNone(_SerdeShape):
+    """No authentication."""
+
+    value: Unit
+
+@dataclass
+class HarnessRemoteMcpOutboundAuthUnknown(_SerdeShape):
+    """
+    Represents an unknown variant. If you receive this value, you will need
+    to update your library to receive the parsed value. This value may not
+    be deliberately sent.
+    """
+
+    tag: str
+
+HarnessRemoteMcpOutboundAuth = Union[
+    HarnessRemoteMcpOutboundAuthAwsIam
+    | HarnessRemoteMcpOutboundAuthNone
+    | HarnessRemoteMcpOutboundAuthUnknown
+]
+"""Authentication method for calling a remote MCP server."""
+
+class _HarnessRemoteMcpOutboundAuthDeserializer:
+    def deserialize(
+        self, deserializer: ShapeDeserializer
+    ) -> HarnessRemoteMcpOutboundAuth: ...
+
+class HarnessRemoteMcpOutboundAuthAwsIamDict(TypedDict):
+    aws_iam: IamCredentialProvider | IamCredentialProviderDict
+    """
+    Sign requests to the remote MCP server with Signature Version 4 (SigV4)
+    using the harness execution role. If you don't specify a Region, the
+    harness Region is used.
+    """
+
+class HarnessRemoteMcpOutboundAuthNoneDict(TypedDict):
+    none: Unit | UnitDict
+    """No authentication."""
+
+HarnessRemoteMcpOutboundAuthDict = Union[
+    HarnessRemoteMcpOutboundAuthAwsIamDict | HarnessRemoteMcpOutboundAuthNoneDict
+]
+"""
+Dictionary form of `HarnessRemoteMcpOutboundAuth`, setting exactly one
+variant.
+"""
+
+@dataclass
+class HarnessSkillPath(_SerdeShape):
+    """The filesystem path to the skill definition."""
+
+    value: str
+
+@dataclass
+class HarnessSkillS3(_SerdeShape):
+    """An S3 source containing the skill."""
+
+    value: HarnessSkillS3Source
+
+@dataclass
+class HarnessSkillGit(_SerdeShape):
+    """A git repository containing the skill."""
+
+    value: HarnessSkillGitSource
+
+@dataclass
+class HarnessSkillAwsSkills(_SerdeShape):
+    """Amazon Web Services Skills baked into the Harness's underlying Runtime."""
+
+    value: HarnessSkillAwsSkillsSource
+
+@dataclass
+class HarnessSkillUnknown(_SerdeShape):
+    """
+    Represents an unknown variant. If you receive this value, you will need
+    to update your library to receive the parsed value. This value may not
+    be deliberately sent.
+    """
+
+    tag: str
+
+HarnessSkill = Union[
+    HarnessSkillPath
+    | HarnessSkillS3
+    | HarnessSkillGit
+    | HarnessSkillAwsSkills
+    | HarnessSkillUnknown
+]
+"""A skill available to the agent."""
+
+class _HarnessSkillDeserializer:
+    def deserialize(self, deserializer: ShapeDeserializer) -> HarnessSkill: ...
+
+class HarnessSkillPathDict(TypedDict):
+    path: str
+    """The filesystem path to the skill definition."""
+
+class HarnessSkillS3Dict(TypedDict):
+    s3: HarnessSkillS3Source | HarnessSkillS3SourceDict
+    """An S3 source containing the skill."""
+
+class HarnessSkillGitDict(TypedDict):
+    git: HarnessSkillGitSource | HarnessSkillGitSourceDict
+    """A git repository containing the skill."""
+
+class HarnessSkillAwsSkillsDict(TypedDict):
+    aws_skills: HarnessSkillAwsSkillsSource | HarnessSkillAwsSkillsSourceDict
+    """Amazon Web Services Skills baked into the Harness's underlying Runtime."""
+
+HarnessSkillDict = Union[
+    HarnessSkillPathDict
+    | HarnessSkillS3Dict
+    | HarnessSkillGitDict
+    | HarnessSkillAwsSkillsDict
+]
+"""Dictionary form of `HarnessSkill`, setting exactly one variant."""
+
+@dataclass(kw_only=True)
+class HarnessSkillAwsSkillsSource(_SerdeShape):
+    """Passed to show that Amazon Web Services Skills should be included."""
+
+    paths: list[str] | None = ...
+    """
+    Optionally filter allowed skills with glob syntax, e.g.,
+    ['core-skills/*'].
+    """
+
+class HarnessSkillAwsSkillsSourceDict(TypedDict, total=False):
+    """Dictionary form of `HarnessSkillAwsSkillsSource`."""
+
+    paths: Sequence[str] | None
+    """
+    Optionally filter allowed skills with glob syntax, e.g.,
+    ['core-skills/*'].
+    """
+
+@dataclass(kw_only=True)
+class HarnessSkillGitAuth(_SerdeShape):
+    """Authentication configuration for accessing a private git repository."""
+
+    credential_arn: str
+    """
+    The ARN of the credential in AgentCore Identity containing the password
+    or personal access token.
+    """
+    username: str | None = ...
+    """Username for authentication. Defaults to 'oauth2' if not specified."""
+
+class HarnessSkillGitAuthDict(TypedDict, total=False):
+    """Dictionary form of `HarnessSkillGitAuth`."""
+
+    credential_arn: Required[str]
+    """
+    The ARN of the credential in AgentCore Identity containing the password
+    or personal access token.
+    """
+    username: str | None
+    """Username for authentication. Defaults to 'oauth2' if not specified."""
+
+@dataclass(kw_only=True)
+class HarnessSkillGitSource(_SerdeShape):
+    """A git repository source for a skill."""
+
+    url: str
+    """The HTTPS URL of the git repository."""
+    path: str | None = ...
+    """Subdirectory within the repository containing the skill."""
+    auth: HarnessSkillGitAuth | None = ...
+    """Authentication configuration for private repositories."""
+
+class HarnessSkillGitSourceDict(TypedDict, total=False):
+    """Dictionary form of `HarnessSkillGitSource`."""
+
+    url: Required[str]
+    """The HTTPS URL of the git repository."""
+    path: str | None
+    """Subdirectory within the repository containing the skill."""
+    auth: HarnessSkillGitAuth | HarnessSkillGitAuthDict | None
+    """Authentication configuration for private repositories."""
+
+@dataclass(kw_only=True)
+class HarnessSkillS3Source(_SerdeShape):
+    """An S3 source for a skill."""
+
+    uri: str
+    """
+    The S3 URI pointing to the skill directory (e.g.,
+    s3://bucket/skills/my-skill/).
+    """
+
+class HarnessSkillS3SourceDict(TypedDict, total=False):
+    """Dictionary form of `HarnessSkillS3Source`."""
+
+    uri: Required[str]
+    """
+    The S3 URI pointing to the skill directory (e.g.,
+    s3://bucket/skills/my-skill/).
+    """
+
+class HarnessStopReason(UnknownEnumMixin, StrEnum):
+    END_TURN = "end_turn"
+    TOOL_USE = "tool_use"
+    TOOL_RESULT = "tool_result"
+    MAX_TOKENS = "max_tokens"
+    STOP_SEQUENCE = "stop_sequence"
+    CONTENT_FILTERED = "content_filtered"
+    MALFORMED_MODEL_OUTPUT = "malformed_model_output"
+    MALFORMED_TOOL_USE = "malformed_tool_use"
+    INTERRUPTED = "interrupted"
+    PARTIAL_TURN = "partial_turn"
+    MODEL_CONTEXT_WINDOW_EXCEEDED = "model_context_window_exceeded"
+    MAX_ITERATIONS_EXCEEDED = "max_iterations_exceeded"
+    MAX_OUTPUT_TOKENS_EXCEEDED = "max_output_tokens_exceeded"
+    TIMEOUT_EXCEEDED = "timeout_exceeded"
+    HOOK_STOPPED = "hook_stopped"
+
+@dataclass(kw_only=True)
+class HarnessStreamMetrics(_SerdeShape):
+    """Latency metrics for the invocation."""
+
+    latency_ms: int
+    """The end-to-end latency of the invocation in milliseconds."""
+
+@dataclass
+class HarnessSystemContentBlockText(_SerdeShape):
+    """The text content of the system prompt block."""
+
+    value: str
+
+@dataclass
+class HarnessSystemContentBlockUnknown(_SerdeShape):
+    """
+    Represents an unknown variant. If you receive this value, you will need
+    to update your library to receive the parsed value. This value may not
+    be deliberately sent.
+    """
+
+    tag: str
+
+HarnessSystemContentBlock = Union[
+    HarnessSystemContentBlockText | HarnessSystemContentBlockUnknown
+]
+"""A content block in the system prompt."""
+
+class _HarnessSystemContentBlockDeserializer:
+    def deserialize(
+        self, deserializer: ShapeDeserializer
+    ) -> HarnessSystemContentBlock: ...
+
+class HarnessSystemContentBlockTextDict(TypedDict):
+    text: str
+    """The text content of the system prompt block."""
+
+HarnessSystemContentBlockDict = Union[HarnessSystemContentBlockTextDict]
+"""
+Dictionary form of `HarnessSystemContentBlock`, setting exactly one
+variant.
+"""
+
+@dataclass(kw_only=True)
+class HarnessTokenUsage(_SerdeShape):
+    """Token usage counts for the invocation."""
+
+    input_tokens: int
+    """The number of input tokens consumed."""
+    output_tokens: int
+    """The number of output tokens generated."""
+    total_tokens: int
+    """The total number of tokens consumed."""
+    cache_read_input_tokens: int | None = ...
+    """The number of input tokens read from cache."""
+    cache_write_input_tokens: int | None = ...
+    """The number of input tokens written to cache."""
+
+@dataclass(kw_only=True)
+class HarnessTool(_SerdeShape):
+    """A tool available to the agent loop."""
+
+    type: str
+    """The type of tool."""
+    name: str | None = ...
+    """
+    Unique name for the tool. If not provided, a name will be inferred or
+    generated.
+    """
+    config: HarnessToolConfiguration | None = ...
+    """Tool-specific configuration."""
+
+class HarnessToolDict(TypedDict, total=False):
+    """Dictionary form of `HarnessTool`."""
+
+    type: Required[str]
+    """The type of tool."""
+    name: str | None
+    """
+    Unique name for the tool. If not provided, a name will be inferred or
+    generated.
+    """
+    config: HarnessToolConfiguration | HarnessToolConfigurationDict | None
+    """Tool-specific configuration."""
+
+@dataclass
+class HarnessToolConfigurationRemoteMcp(_SerdeShape):
+    """Configuration for remote MCP server."""
+
+    value: HarnessRemoteMcpConfig
+
+@dataclass
+class HarnessToolConfigurationAgentCoreBrowser(_SerdeShape):
+    """Configuration for AgentCore Browser."""
+
+    value: HarnessAgentCoreBrowserConfig
+
+@dataclass
+class HarnessToolConfigurationAgentCoreGateway(_SerdeShape):
+    """Configuration for AgentCore Gateway."""
+
+    value: HarnessAgentCoreGatewayConfig
+
+@dataclass
+class HarnessToolConfigurationInlineFunction(_SerdeShape):
+    """Configuration for an inline function tool."""
+
+    value: HarnessInlineFunctionConfig
+
+@dataclass
+class HarnessToolConfigurationAgentCoreCodeInterpreter(_SerdeShape):
+    """Configuration for AgentCore Code Interpreter."""
+
+    value: HarnessAgentCoreCodeInterpreterConfig
+
+@dataclass
+class HarnessToolConfigurationUnknown(_SerdeShape):
+    """
+    Represents an unknown variant. If you receive this value, you will need
+    to update your library to receive the parsed value. This value may not
+    be deliberately sent.
+    """
+
+    tag: str
+
+HarnessToolConfiguration = Union[
+    HarnessToolConfigurationRemoteMcp
+    | HarnessToolConfigurationAgentCoreBrowser
+    | HarnessToolConfigurationAgentCoreGateway
+    | HarnessToolConfigurationInlineFunction
+    | HarnessToolConfigurationAgentCoreCodeInterpreter
+    | HarnessToolConfigurationUnknown
+]
+"""Configuration union for different tool types."""
+
+class _HarnessToolConfigurationDeserializer:
+    def deserialize(
+        self, deserializer: ShapeDeserializer
+    ) -> HarnessToolConfiguration: ...
+
+class HarnessToolConfigurationRemoteMcpDict(TypedDict):
+    remote_mcp: HarnessRemoteMcpConfig | HarnessRemoteMcpConfigDict
+    """Configuration for remote MCP server."""
+
+class HarnessToolConfigurationAgentCoreBrowserDict(TypedDict):
+    agent_core_browser: (
+        HarnessAgentCoreBrowserConfig | HarnessAgentCoreBrowserConfigDict
+    )
+    """Configuration for AgentCore Browser."""
+
+class HarnessToolConfigurationAgentCoreGatewayDict(TypedDict):
+    agent_core_gateway: (
+        HarnessAgentCoreGatewayConfig | HarnessAgentCoreGatewayConfigDict
+    )
+    """Configuration for AgentCore Gateway."""
+
+class HarnessToolConfigurationInlineFunctionDict(TypedDict):
+    inline_function: HarnessInlineFunctionConfig | HarnessInlineFunctionConfigDict
+    """Configuration for an inline function tool."""
+
+class HarnessToolConfigurationAgentCoreCodeInterpreterDict(TypedDict):
+    agent_core_code_interpreter: (
+        HarnessAgentCoreCodeInterpreterConfig
+        | HarnessAgentCoreCodeInterpreterConfigDict
+    )
+    """Configuration for AgentCore Code Interpreter."""
+
+HarnessToolConfigurationDict = Union[
+    HarnessToolConfigurationRemoteMcpDict
+    | HarnessToolConfigurationAgentCoreBrowserDict
+    | HarnessToolConfigurationAgentCoreGatewayDict
+    | HarnessToolConfigurationInlineFunctionDict
+    | HarnessToolConfigurationAgentCoreCodeInterpreterDict
+]
+"""
+Dictionary form of `HarnessToolConfiguration`, setting exactly one
+variant.
+"""
+
+@dataclass(kw_only=True)
+class HarnessToolResultBlock(_SerdeShape):
+    """The result of a tool execution."""
+
+    tool_use_id: str
+    """The tool use ID that this result corresponds to."""
+    content: list[HarnessToolResultContentBlock]
+    """The content of the tool result."""
+    status: str | None = ...
+    """The status of the tool execution."""
+    type: str | None = ...
+    """The type of tool use that produced this result."""
+
+class HarnessToolResultBlockDict(TypedDict, total=False):
+    """Dictionary form of `HarnessToolResultBlock`."""
+
+    tool_use_id: Required[str]
+    """The tool use ID that this result corresponds to."""
+    content: Required[
+        Sequence[HarnessToolResultContentBlock | HarnessToolResultContentBlockDict]
+    ]
+    """The content of the tool result."""
+    status: str | None
+    """The status of the tool execution."""
+    type: str | None
+    """The type of tool use that produced this result."""
+
+@dataclass
+class HarnessToolResultBlockDeltaText(_SerdeShape):
+    """A text tool result delta."""
+
+    value: str
+
+@dataclass
+class HarnessToolResultBlockDeltaJson(_SerdeShape):
+    """A JSON tool result delta."""
+
+    value: Document
+
+@dataclass
+class HarnessToolResultBlockDeltaUnknown(_SerdeShape):
+    """
+    Represents an unknown variant. If you receive this value, you will need
+    to update your library to receive the parsed value. This value may not
+    be deliberately sent.
+    """
+
+    tag: str
+
+HarnessToolResultBlockDelta = Union[
+    HarnessToolResultBlockDeltaText
+    | HarnessToolResultBlockDeltaJson
+    | HarnessToolResultBlockDeltaUnknown
+]
+"""A delta update to a tool result content block."""
+
+class _HarnessToolResultBlockDeltaDeserializer:
+    def deserialize(
+        self, deserializer: ShapeDeserializer
+    ) -> HarnessToolResultBlockDelta: ...
+
+@dataclass(kw_only=True)
+class HarnessToolResultBlockStart(_SerdeShape):
+    """Start payload for a tool result content block."""
+
+    tool_use_id: str
+    """The tool use ID that this result corresponds to."""
+    status: str | None = ...
+    """The status of the tool execution."""
+
+@dataclass
+class HarnessToolResultContentBlockText(_SerdeShape):
+    """Text content."""
+
+    value: str
+
+@dataclass
+class HarnessToolResultContentBlockJson(_SerdeShape):
+    """JSON content."""
+
+    value: Document
+
+@dataclass
+class HarnessToolResultContentBlockUnknown(_SerdeShape):
+    """
+    Represents an unknown variant. If you receive this value, you will need
+    to update your library to receive the parsed value. This value may not
+    be deliberately sent.
+    """
+
+    tag: str
+
+HarnessToolResultContentBlock = Union[
+    HarnessToolResultContentBlockText
+    | HarnessToolResultContentBlockJson
+    | HarnessToolResultContentBlockUnknown
+]
+"""A content block within a tool result."""
+
+class _HarnessToolResultContentBlockDeserializer:
+    def deserialize(
+        self, deserializer: ShapeDeserializer
+    ) -> HarnessToolResultContentBlock: ...
+
+class HarnessToolResultContentBlockTextDict(TypedDict):
+    text: str
+    """Text content."""
+
+class HarnessToolResultContentBlockJsonDict(TypedDict):
+    json: Document
+    """JSON content."""
+
+HarnessToolResultContentBlockDict = Union[
+    HarnessToolResultContentBlockTextDict | HarnessToolResultContentBlockJsonDict
+]
+"""
+Dictionary form of `HarnessToolResultContentBlock`, setting exactly
+one variant.
+"""
+
+@dataclass(kw_only=True)
+class HarnessToolResultMetadataBlockDelta(_SerdeShape):
+    """Delta payload for a tool result metadata."""
+
+    metadata: str
+    """The partial JSON-string fragment of the tool result metadata."""
+
+class HarnessToolType(UnknownEnumMixin, StrEnum):
+    REMOTE_MCP = "remote_mcp"
+    AGENTCORE_BROWSER = "agentcore_browser"
+    AGENTCORE_GATEWAY = "agentcore_gateway"
+    INLINE_FUNCTION = "inline_function"
+    AGENTCORE_CODE_INTERPRETER = "agentcore_code_interpreter"
+
+@dataclass(kw_only=True)
+class HarnessToolUseBlock(_SerdeShape):
+    """A tool use request from the model."""
+
+    name: str
+    """The name of the tool to call."""
+    tool_use_id: str
+    """The unique ID of this tool use."""
+    input: Document
+    """The JSON input to pass to the tool."""
+    type: str | None = ...
+    """The type of tool use."""
+    server_name: str | None = ...
+    """The name of the MCP server providing this tool."""
+
+class HarnessToolUseBlockDict(TypedDict, total=False):
+    """Dictionary form of `HarnessToolUseBlock`."""
+
+    name: Required[str]
+    """The name of the tool to call."""
+    tool_use_id: Required[str]
+    """The unique ID of this tool use."""
+    input: Required[Document]
+    """The JSON input to pass to the tool."""
+    type: str | None
+    """The type of tool use."""
+    server_name: str | None
+    """The name of the MCP server providing this tool."""
+
+@dataclass(kw_only=True)
+class HarnessToolUseBlockDelta(_SerdeShape):
+    """Delta payload for tool use input."""
+
+    input: str
+    """The partial JSON input for the tool call."""
+
+@dataclass(kw_only=True)
+class HarnessToolUseBlockStart(_SerdeShape):
+    """Start payload for a tool use content block."""
+
+    tool_use_id: str
+    """The unique ID of this tool use."""
+    name: str
+    """The name of the tool being called."""
+    type: str | None = ...
+    """The type of tool use."""
+    server_name: str | None = ...
+    """The name of the MCP server providing this tool."""
+
+class HarnessToolUseStatus(UnknownEnumMixin, StrEnum):
+    SUCCESS = "success"
+    ERROR = "error"
+
+class HarnessToolUseType(UnknownEnumMixin, StrEnum):
+    TOOL_USE = "tool_use"
+    SERVER_TOOL_USE = "server_tool_use"
+    MCP_TOOL_USE = "mcp_tool_use"
+
+@dataclass(kw_only=True)
+class IamCredentialProvider(_SerdeShape):
+    """
+    An IAM credential provider for authenticating requests. This structure
+    contains the configuration for authenticating with a target endpoint
+    using IAM credentials and SigV4 signing.
+    """
+
+    service: str
+    """
+    The name of the Amazon Web Services service used for SigV4 signing. This
+    value identifies the service to authenticate with when sending requests
+    to the target endpoint.
+    """
+    region: str | None = ...
+    """
+    The Amazon Web Services Region used for SigV4 signing. If not specified,
+    defaults to the Region of the resource that makes the request.
+    """
+
+class IamCredentialProviderDict(TypedDict, total=False):
+    """Dictionary form of `IamCredentialProvider`."""
+
+    service: Required[str]
+    """
+    The name of the Amazon Web Services service used for SigV4 signing. This
+    value identifies the service to authenticate with when sending requests
+    to the target endpoint.
+    """
+    region: str | None
+    """
+    The Amazon Web Services Region used for SigV4 signing. If not specified,
+    defaults to the Region of the resource that makes the request.
+    """
+
+@dataclass(kw_only=True)
+class IngestDataInput(_SerdeShape):
+    """Dataclass for IngestDataInput structure."""
+
+    memory_id: str | None = ...
+    """The identifier of the AgentCore Memory resource to ingest content into."""
+    source: ContentSource | None = ...
+    """The content to ingest. Only inline content is supported."""
+    content_timestamp: datetime | None = ...
+    """The timestamp of when the content occurred."""
+    actor_id: str | None = ...
+    """
+    The identifier of the actor associated with this content. An actor
+    represents an entity that participates in sessions and generates
+    content.
+    """
+    session_id: str | None = ...
+    """
+    The identifier of the session that the content belongs to. If not
+    provided, a session identifier is generated and returned in the
+    response.
+    """
+    extraction_config: ExtractionConfig | None = ...
+    """
+    The extraction configuration for long-term memory records. Use this
+    parameter to specify namespace variable keys and their values for
+    namespace substitution during extraction.
+    """
+    metadata: dict[str, MetadataValue] | None = ...
+    """The key-value metadata to attach to the content."""
+    client_token: str | None = ...
+    """
+    A unique, case-sensitive identifier to ensure that the operation
+    completes no more than one time. If this token matches a previous
+    request, AgentCore ignores the request, but does not return an error.
+
+    This field is autopopulated if not provided.
+    """
+
+class IngestDataInputDict(TypedDict, total=False):
+    """Dictionary form of `IngestDataInput`."""
+
+    memory_id: Required[str]
+    """The identifier of the AgentCore Memory resource to ingest content into."""
+    source: Required[ContentSource | ContentSourceDict]
+    """The content to ingest. Only inline content is supported."""
+    content_timestamp: Required[datetime]
+    """The timestamp of when the content occurred."""
+    actor_id: Required[str]
+    """
+    The identifier of the actor associated with this content. An actor
+    represents an entity that participates in sessions and generates
+    content.
+    """
+    session_id: str | None
+    """
+    The identifier of the session that the content belongs to. If not
+    provided, a session identifier is generated and returned in the
+    response.
+    """
+    extraction_config: ExtractionConfig | ExtractionConfigDict | None
+    """
+    The extraction configuration for long-term memory records. Use this
+    parameter to specify namespace variable keys and their values for
+    namespace substitution during extraction.
+    """
+    metadata: Mapping[str, MetadataValue | MetadataValueDict] | None
+    """The key-value metadata to attach to the content."""
+    client_token: str | None
+    """
+    A unique, case-sensitive identifier to ensure that the operation
+    completes no more than one time. If this token matches a previous
+    request, AgentCore ignores the request, but does not return an error.
+
+    This field is autopopulated if not provided.
+    """
+
+@dataclass(kw_only=True)
+class IngestDataOutput(_SerdeShape):
+    """Dataclass for IngestDataOutput structure."""
+
+    session_id: str
+    """
+    The identifier of the session that the service ingested the content
+    into. This value echoes the session identifier from the request, or the
+    identifier that the service generated when you did not provide one.
+    """
+    response_metadata: ResponseMetadata = ...
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+@dataclass
+class IngestPayloadTypeConversational(_SerdeShape):
+    """The conversational content for this payload item."""
+
+    value: Conversational
+
+@dataclass
+class IngestPayloadTypeJson(_SerdeShape):
+    """The JSON content for this payload item."""
+
+    value: MemoryJsonData
+
+@dataclass
+class IngestPayloadTypeUnknown(_SerdeShape):
+    """
+    Represents an unknown variant. If you receive this value, you will need
+    to update your library to receive the parsed value. This value may not
+    be deliberately sent.
+    """
+
+    tag: str
+
+IngestPayloadType = Union[
+    IngestPayloadTypeConversational | IngestPayloadTypeJson | IngestPayloadTypeUnknown
+]
+"""
+A single content payload item to ingest. A payload item contains either
+conversational or JSON content.
+"""
+
+class _IngestPayloadTypeDeserializer:
+    def deserialize(self, deserializer: ShapeDeserializer) -> IngestPayloadType: ...
+
+class IngestPayloadTypeConversationalDict(TypedDict):
+    conversational: Conversational | ConversationalDict
+    """The conversational content for this payload item."""
+
+class IngestPayloadTypeJsonDict(TypedDict):
+    json: MemoryJsonData | MemoryJsonDataDict
+    """The JSON content for this payload item."""
+
+IngestPayloadTypeDict = Union[
+    IngestPayloadTypeConversationalDict | IngestPayloadTypeJsonDict
+]
+"""Dictionary form of `IngestPayloadType`, setting exactly one variant."""
+
+@dataclass(kw_only=True)
+class InlineGroundTruth(_SerdeShape):
+    """
+    Inline ground truth data containing assertions, expected trajectories,
+    and per-turn expected responses.
+    """
+
+    assertions: list[EvaluationContent] | None = ...
+    """Assertions for evaluation, reuses common model EvaluationContentList."""
+    expected_trajectory: EvaluationExpectedTrajectory | None = ...
+    """The expected tool call sequence for trajectory evaluation."""
+    turns: list[GroundTruthTurn] | None = ...
+    """
+    A list of per-turn ground truth data, each containing an input prompt
+    and expected response.
+    """
+
+class InlineGroundTruthDict(TypedDict, total=False):
+    """Dictionary form of `InlineGroundTruth`."""
+
+    assertions: Sequence[EvaluationContent | EvaluationContentDict] | None
+    """Assertions for evaluation, reuses common model EvaluationContentList."""
+    expected_trajectory: (
+        EvaluationExpectedTrajectory | EvaluationExpectedTrajectoryDict | None
+    )
+    """The expected tool call sequence for trajectory evaluation."""
+    turns: Sequence[GroundTruthTurn | GroundTruthTurnDict] | None
+    """
+    A list of per-turn ground truth data, each containing an input prompt
+    and expected response.
+    """
+
+@dataclass(kw_only=True)
+class InlineMemoryContent(_SerdeShape):
+    """
+    The content included directly in the request as one or more payload
+    items.
+    """
+
+    payload: list[IngestPayloadType]
+    """The list of content payload items to ingest."""
+
+class InlineMemoryContentDict(TypedDict, total=False):
+    """Dictionary form of `InlineMemoryContent`."""
+
+    payload: Required[Sequence[IngestPayloadType | IngestPayloadTypeDict]]
+    """The list of content payload items to ingest."""
+
+@dataclass(kw_only=True)
+class InputContentBlock(_SerdeShape):
+    """A block of input content."""
+
+    path: str
+    """The path to the input content."""
+    text: str | None = ...
+    """The text input content."""
+    blob: bytes | None = ...
+    """The binary input content."""
+
+class InputContentBlockDict(TypedDict, total=False):
+    """Dictionary form of `InputContentBlock`."""
+
+    path: Required[str]
+    """The path to the input content."""
+    text: str | None
+    """The text input content."""
+    blob: bytes | None
+    """The binary input content."""
+
+@dataclass(kw_only=True)
+class Insight(_SerdeShape):
+    """
+    A reference to an insight analysis to run against sessions during batch
+    evaluation. Insights provide deeper analysis beyond individual evaluator
+    scores, including failure detection, user intent clustering, and
+    execution summarization.
+    """
+
+    insight_id: str
+    """The unique identifier of the insight to run."""
+
+class InsightDict(TypedDict, total=False):
+    """Dictionary form of `Insight`."""
+
+    insight_id: Required[str]
+    """The unique identifier of the insight to run."""
+
+@dataclass(kw_only=True)
+class InsightResult(_SerdeShape):
+    """
+    An insight that groups related failures found across the sessions in a
+    batch evaluation.
+    """
+
+    type: str
+    """The type of insight. `FAILURE` indicates a group of related failures."""
+    name: str
+    """
+    A generated label for the insight. The name is not an identifier and can
+    differ between batch evaluations.
+    """
+    description: str
+    """A description of the failure pattern that the insight represents."""
+    created_at: datetime
+    """The timestamp when the insight was generated."""
+    affected_session_count: int | None = ...
+    """The number of distinct sessions affected by the insight."""
+    sample_sessions: list[SampleSession] | None = ...
+    """
+    A sample of up to 10 sessions affected by the insight. Returned only
+    when the insight has no root causes. Otherwise, sample sessions are
+    returned for each root cause.
+    """
+    root_causes: list[InsightRootCause] | None = ...
+    """The root causes identified for the insight."""
+
+@dataclass(kw_only=True)
+class InsightRootCause(_SerdeShape):
+    """A root cause that contributes to an insight."""
+
+    name: str
+    """A generated label for the root cause."""
+    explanation: str
+    """
+    An explanation of how the root cause leads to the failures in the
+    insight.
+    """
+    affected_session_count: int | None = ...
+    """
+    The number of distinct sessions affected by the root cause. A session
+    can be affected by more than one root cause of the same insight.
+    """
+    suggested_fix: str | None = ...
+    """A suggested change to the agent that addresses the root cause."""
+    sample_sessions: list[SampleSession] | None = ...
+    """A sample of up to 10 sessions affected by the root cause."""
+
+class InsightsFailureCategory(UnknownEnumMixin, StrEnum):
+    """
+    Failure category taxonomy for agent session insights. Values must stay
+    in sync with the category registry in AgentCoreLens
+    (amzn_agentcore_lens.config.failure_detection.FAILURE_CATEGORIES).
+    """
+
+    EXECUTION_ERROR_AUTHENTICATION = "execution-error-category-authentication"
+    EXECUTION_ERROR_RESOURCE_NOT_FOUND = "execution-error-category-resource-not-found"
+    EXECUTION_ERROR_SERVICE_ERRORS = "execution-error-category-service-errors"
+    EXECUTION_ERROR_RATE_LIMITING = "execution-error-category-rate-limiting"
+    EXECUTION_ERROR_FORMATTING = "execution-error-category-formatting"
+    EXECUTION_ERROR_TIMEOUT = "execution-error-category-timeout"
+    EXECUTION_ERROR_RESOURCE_EXHAUSTION = "execution-error-category-resource-exhaustion"
+    EXECUTION_ERROR_ENVIRONMENT = "execution-error-category-environment"
+    EXECUTION_ERROR_TOOL_SCHEMA = "execution-error-category-tool-schema"
+    TASK_INSTRUCTION_NON_COMPLIANCE = "task-instruction-category-non-compliance"
+    TASK_INSTRUCTION_PROBLEM_ID = "task-instruction-category-problem-id"
+    INCORRECT_ACTIONS_TOOL_SELECTION = "incorrect-actions-category-tool-selection"
+    INCORRECT_ACTIONS_POOR_INFORMATION_RETRIEVAL = (
+        "incorrect-actions-category-poor-information-retrieval"
+    )
+    INCORRECT_ACTIONS_CLARIFICATION = "incorrect-actions-category-clarification"
+    INCORRECT_ACTIONS_INAPPROPRIATE_INFO_REQUEST = (
+        "incorrect-actions-category-inappropriate-info-request"
+    )
+    CONTEXT_HANDLING_FAILURES = (
+        "context-handling-error-category-context-handling-failures"
+    )
+    HALLUCINATION_CAPABILITIES = "hallucination-category-hall-capabilities"
+    HALLUCINATION_MISUNDERSTAND = "hallucination-category-hall-misunderstand"
+    HALLUCINATION_USAGE = "hallucination-category-hall-usage"
+    HALLUCINATION_HISTORY = "hallucination-category-hall-history"
+    HALLUCINATION_PARAMS = "hallucination-category-hall-params"
+    HALLUCINATION_FABRICATE_TOOL_OUTPUTS = (
+        "hallucination-category-fabricate-tool-outputs"
+    )
+    REPETITIVE_BEHAVIOR_TOOL = "repetitive-behavior-category-repetition-tool"
+    REPETITIVE_BEHAVIOR_INFO = "repetitive-behavior-category-repetition-info"
+    REPETITIVE_BEHAVIOR_STEP = "repetitive-behavior-category-step-repetition"
+    ORCHESTRATION_REASONING_MISMATCH = (
+        "orchestration-related-errors-category-reasoning-mismatch"
+    )
+    ORCHESTRATION_GOAL_DEVIATION = (
+        "orchestration-related-errors-category-goal-deviation"
+    )
+    ORCHESTRATION_PREMATURE_TERMINATION = (
+        "orchestration-related-errors-category-premature-termination"
+    )
+    ORCHESTRATION_UNAWARE_TERMINATION = (
+        "orchestration-related-errors-category-unaware-termination"
+    )
+    LLM_OUTPUT_NONSENSICAL = "llm-output-category-nonsensical"
+    CONFIGURATION_MISMATCH_TOOL_DEFINITION = (
+        "configuration-mismatch-category-tool-definition"
+    )
+    CODING_EDGE_CASE_OVERSIGHTS = (
+        "coding-use-case-specific-failure-types-category-edge-case-oversights"
+    )
+    CODING_DEPENDENCY_ISSUES = (
+        "coding-use-case-specific-failure-types-category-dependency-issues"
+    )
+    OTHER = "other"
+
+@dataclass(kw_only=True)
+class InsightsFailureSignal(_SerdeShape):
+    """A signal indicating a detected failure within a span."""
+
+    category: str
+    """The failure category classification for this signal."""
+    evidence: str
+    """The evidence supporting the failure detection."""
+    confidence: float
+    """The confidence score of the failure detection."""
+
+class InsightType(UnknownEnumMixin, StrEnum):
+    """The type of insight."""
+
+    FAILURE = "FAILURE"
+
+class InstrumentBalanceToken(UnknownEnumMixin, StrEnum):
+    """
+    Supported tokens for instrument balance queries. Only tokens supported
+    for X402 payments are returned.
+    """
+
+    USDC = "USDC"
+
+@dataclass(kw_only=True)
+class InternalServerException(ServiceError, _SerdeShape):
+    """
+    The exception that occurs when the service encounters an unexpected
+    internal error. This is a temporary condition that will resolve itself
+    with retries. We recommend implementing exponential backoff retry logic
+    in your application.
+    """
+
+    response_metadata: ResponseMetadata = ...
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
 
 @dataclass(kw_only=True)
 class InvalidInputException(ServiceError, _SerdeShape):
@@ -1540,6 +2574,66 @@ class ListActorsOutput(_SerdeShape):
     """
 
 @dataclass(kw_only=True)
+class ListAgentInsightsInput(_SerdeShape):
+    """Dataclass for ListAgentInsightsInput structure."""
+
+    application_name: str | None = ...
+    """Filters the results to Agent Insights for an application."""
+    batch_evaluation_id: str | None = ...
+    """Filters the results to Agent Insights produced by a batch evaluation."""
+    archive_status: str | None = ...
+    """Filters the results by archive status."""
+    max_results: int | None = ...
+    """
+    The maximum number of Agent Insight summaries to return in one response.
+    If you don't specify a value, the operation returns up to 50 summaries.
+    """
+    next_token: str | None = ...
+    """
+    A token to specify where to start paginating the results. This token is
+    returned in a previous response.
+    """
+
+class ListAgentInsightsInputDict(TypedDict, total=False):
+    """Dictionary form of `ListAgentInsightsInput`."""
+
+    application_name: str | None
+    """Filters the results to Agent Insights for an application."""
+    batch_evaluation_id: str | None
+    """Filters the results to Agent Insights produced by a batch evaluation."""
+    archive_status: str | None
+    """Filters the results by archive status."""
+    max_results: int | None
+    """
+    The maximum number of Agent Insight summaries to return in one response.
+    If you don't specify a value, the operation returns up to 50 summaries.
+    """
+    next_token: str | None
+    """
+    A token to specify where to start paginating the results. This token is
+    returned in a previous response.
+    """
+
+@dataclass(kw_only=True)
+class ListAgentInsightsOutput(_SerdeShape):
+    """Dataclass for ListAgentInsightsOutput structure."""
+
+    agent_insights: list[AgentInsightSummary]
+    """The Agent Insight summaries."""
+    next_token: str | None = ...
+    """
+    A token to use to retrieve the next page of results. This value is
+    present only when additional results are available.
+    """
+    response_metadata: ResponseMetadata = ...
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+@dataclass(kw_only=True)
 class ListBatchEvaluationsInput(_SerdeShape):
     """Dataclass for ListBatchEvaluationsInput structure."""
 
@@ -1741,6 +2835,65 @@ class ListCodeInterpreterSessionsOutput(_SerdeShape):
     """
     The token to use in a subsequent `ListCodeInterpreterSessions` request
     to get the next set of results.
+    """
+    response_metadata: ResponseMetadata = ...
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+@dataclass(kw_only=True)
+class ListDatasetGenerationsInput(_SerdeShape):
+    """Dataclass for ListDatasetGenerationsInput structure."""
+
+    dataset_id: str | None = ...
+    """The unique identifier of the dataset."""
+    max_results: int | None = ...
+    """
+    The maximum number of results to return in the response. The default is
+    20. If the total number of results is greater than this value, use the
+    token returned in the response in the `nextToken` field when making
+    another request to return the next batch of results.
+    """
+    next_token: str | None = ...
+    """
+    If the total number of results is greater than the `maxResults` value
+    provided in the request, enter the token returned in the `nextToken`
+    field in the response in this field to return the next batch of results.
+    """
+
+class ListDatasetGenerationsInputDict(TypedDict, total=False):
+    """Dictionary form of `ListDatasetGenerationsInput`."""
+
+    dataset_id: Required[str]
+    """The unique identifier of the dataset."""
+    max_results: int | None
+    """
+    The maximum number of results to return in the response. The default is
+    20. If the total number of results is greater than this value, use the
+    token returned in the response in the `nextToken` field when making
+    another request to return the next batch of results.
+    """
+    next_token: str | None
+    """
+    If the total number of results is greater than the `maxResults` value
+    provided in the request, enter the token returned in the `nextToken`
+    field in the response in this field to return the next batch of results.
+    """
+
+@dataclass(kw_only=True)
+class ListDatasetGenerationsOutput(_SerdeShape):
+    """Dataclass for ListDatasetGenerationsOutput structure."""
+
+    dataset_generations: list[DatasetGenerationSummary]
+    """The dataset generations."""
+    next_token: str | None = ...
+    """
+    If the total number of results is greater than the `maxResults` value
+    provided in the request, use this token when making another request in
+    the `nextToken` field to return the next batch of results.
     """
     response_metadata: ResponseMetadata = ...
     """
@@ -3093,6 +4246,39 @@ class OnlineEvaluationConfigSourceDict(TypedDict, total=False):
     """
 
 @dataclass(kw_only=True)
+class OnlineEvaluationSourceConfig(_SerdeShape):
+    """An online evaluation source for a dataset generation."""
+
+    online_evaluation_config_arn: str
+    """The Amazon Resource Name (ARN) of the online evaluation configuration."""
+    start_time: datetime | None = ...
+    """
+    The start of the time window to read sessions from. The default is 7
+    days before `endTime`.
+    """
+    end_time: datetime | None = ...
+    """
+    The end of the time window to read sessions from. The default is the
+    time the generation starts.
+    """
+
+class OnlineEvaluationSourceConfigDict(TypedDict, total=False):
+    """Dictionary form of `OnlineEvaluationSourceConfig`."""
+
+    online_evaluation_config_arn: Required[str]
+    """The Amazon Resource Name (ARN) of the online evaluation configuration."""
+    start_time: datetime | None
+    """
+    The start of the time window to read sessions from. The default is 7
+    days before `endTime`.
+    """
+    end_time: datetime | None
+    """
+    The end of the time window to read sessions from. The default is the
+    time the generation starts.
+    """
+
+@dataclass(kw_only=True)
 class OnlineEvaluationTraceConfig(_SerdeShape):
     """
     Contains the configuration for reusing agent traces from an online
@@ -4070,6 +5256,161 @@ Dictionary form of `RecordExpirySpecification`, setting exactly one
 variant.
 """
 
+@dataclass(kw_only=True)
+class RedactionConfiguration(_SerdeShape):
+    """
+    Sensitive data to mask in generated examples. Nothing is redacted unless
+    you specify at least one identifier. Each character of a match is
+    replaced with `*`, so a masked value keeps its length. If detection
+    fails, the generation fails and no examples are written.
+    """
+
+    identifiers: list[str] | None = ...
+    """
+    The managed data identifiers to apply. These match the CloudWatch Logs
+    managed data identifiers.
+    """
+    custom_data_identifiers: list[CustomDataIdentifier] | None = ...
+    """
+    Custom data identifiers to apply, up to 10. You can use custom
+    identifiers without any managed identifiers.
+    """
+
+class RedactionConfigurationDict(TypedDict, total=False):
+    """Dictionary form of `RedactionConfiguration`."""
+
+    identifiers: Sequence[str] | None
+    """
+    The managed data identifiers to apply. These match the CloudWatch Logs
+    managed data identifiers.
+    """
+    custom_data_identifiers: (
+        Sequence[CustomDataIdentifier | CustomDataIdentifierDict] | None
+    )
+    """
+    Custom data identifiers to apply, up to 10. You can use custom
+    identifiers without any managed identifiers.
+    """
+
+class RedactionIdentifier(UnknownEnumMixin, StrEnum):
+    """
+    A managed data identifier. The values match the CloudWatch Logs managed
+    data identifiers.
+    """
+
+    ADDRESS = "ADDRESS"
+    AWS_SECRET_KEY = "AWS_SECRET_KEY"
+    BANK_ACCOUNT_NUMBER_DE = "BANK_ACCOUNT_NUMBER_DE"
+    BANK_ACCOUNT_NUMBER_ES = "BANK_ACCOUNT_NUMBER_ES"
+    BANK_ACCOUNT_NUMBER_FR = "BANK_ACCOUNT_NUMBER_FR"
+    BANK_ACCOUNT_NUMBER_GB = "BANK_ACCOUNT_NUMBER_GB"
+    BANK_ACCOUNT_NUMBER_IT = "BANK_ACCOUNT_NUMBER_IT"
+    BANK_ACCOUNT_NUMBER_US = "BANK_ACCOUNT_NUMBER_US"
+    CEP_CODE_BR = "CEP_CODE_BR"
+    CNPJ_BR = "CNPJ_BR"
+    CPF_CODE_BR = "CPF_CODE_BR"
+    CREDIT_CARD_EXPIRATION = "CREDIT_CARD_EXPIRATION"
+    CREDIT_CARD_MAGNETIC_STRIPE = "CREDIT_CARD_MAGNETIC_STRIPE"
+    CREDIT_CARD_NUMBER = "CREDIT_CARD_NUMBER"
+    CREDIT_CARD_SECURITY_CODE = "CREDIT_CARD_SECURITY_CODE"
+    DATE_OF_BIRTH = "DATE_OF_BIRTH"
+    DRIVERS_LICENSE_AT = "DRIVERS_LICENSE_AT"
+    DRIVERS_LICENSE_AU = "DRIVERS_LICENSE_AU"
+    DRIVERS_LICENSE_BE = "DRIVERS_LICENSE_BE"
+    DRIVERS_LICENSE_BG = "DRIVERS_LICENSE_BG"
+    DRIVERS_LICENSE_CA = "DRIVERS_LICENSE_CA"
+    DRIVERS_LICENSE_CY = "DRIVERS_LICENSE_CY"
+    DRIVERS_LICENSE_CZ = "DRIVERS_LICENSE_CZ"
+    DRIVERS_LICENSE_DE = "DRIVERS_LICENSE_DE"
+    DRIVERS_LICENSE_DK = "DRIVERS_LICENSE_DK"
+    DRIVERS_LICENSE_EE = "DRIVERS_LICENSE_EE"
+    DRIVERS_LICENSE_ES = "DRIVERS_LICENSE_ES"
+    DRIVERS_LICENSE_FI = "DRIVERS_LICENSE_FI"
+    DRIVERS_LICENSE_FR = "DRIVERS_LICENSE_FR"
+    DRIVERS_LICENSE_GB = "DRIVERS_LICENSE_GB"
+    DRIVERS_LICENSE_GR = "DRIVERS_LICENSE_GR"
+    DRIVERS_LICENSE_HR = "DRIVERS_LICENSE_HR"
+    DRIVERS_LICENSE_HU = "DRIVERS_LICENSE_HU"
+    DRIVERS_LICENSE_IE = "DRIVERS_LICENSE_IE"
+    DRIVERS_LICENSE_IT = "DRIVERS_LICENSE_IT"
+    DRIVERS_LICENSE_LT = "DRIVERS_LICENSE_LT"
+    DRIVERS_LICENSE_LU = "DRIVERS_LICENSE_LU"
+    DRIVERS_LICENSE_LV = "DRIVERS_LICENSE_LV"
+    DRIVERS_LICENSE_MT = "DRIVERS_LICENSE_MT"
+    DRIVERS_LICENSE_NL = "DRIVERS_LICENSE_NL"
+    DRIVERS_LICENSE_PL = "DRIVERS_LICENSE_PL"
+    DRIVERS_LICENSE_PT = "DRIVERS_LICENSE_PT"
+    DRIVERS_LICENSE_RO = "DRIVERS_LICENSE_RO"
+    DRIVERS_LICENSE_SE = "DRIVERS_LICENSE_SE"
+    DRIVERS_LICENSE_SI = "DRIVERS_LICENSE_SI"
+    DRIVERS_LICENSE_SK = "DRIVERS_LICENSE_SK"
+    DRIVERS_LICENSE_US = "DRIVERS_LICENSE_US"
+    DRUG_ENFORCEMENT_AGENCY_NUMBER_US = "DRUG_ENFORCEMENT_AGENCY_NUMBER_US"
+    ELECTORAL_ROLL_NUMBER_GB = "ELECTORAL_ROLL_NUMBER_GB"
+    EMAIL_ADDRESS = "EMAIL_ADDRESS"
+    HEALTH_INSURANCE_CARD_NUMBER_EU = "HEALTH_INSURANCE_CARD_NUMBER_EU"
+    HEALTH_INSURANCE_CLAIM_NUMBER_US = "HEALTH_INSURANCE_CLAIM_NUMBER_US"
+    HEALTH_INSURANCE_NUMBER_FR = "HEALTH_INSURANCE_NUMBER_FR"
+    HEALTHCARE_PROCEDURE_CODE_US = "HEALTHCARE_PROCEDURE_CODE_US"
+    INDIVIDUAL_TAX_IDENTIFICATION_NUMBER_US = "INDIVIDUAL_TAX_IDENTIFICATION_NUMBER_US"
+    INSEE_CODE_FR = "INSEE_CODE_FR"
+    IP_ADDRESS = "IP_ADDRESS"
+    LAT_LONG = "LAT_LONG"
+    MEDICARE_BENEFICIARY_NUMBER_US = "MEDICARE_BENEFICIARY_NUMBER_US"
+    NAME = "NAME"
+    NATIONAL_DRUG_CODE_US = "NATIONAL_DRUG_CODE_US"
+    NATIONAL_IDENTIFICATION_NUMBER_DE = "NATIONAL_IDENTIFICATION_NUMBER_DE"
+    NATIONAL_IDENTIFICATION_NUMBER_ES = "NATIONAL_IDENTIFICATION_NUMBER_ES"
+    NATIONAL_IDENTIFICATION_NUMBER_IT = "NATIONAL_IDENTIFICATION_NUMBER_IT"
+    NATIONAL_INSURANCE_NUMBER_GB = "NATIONAL_INSURANCE_NUMBER_GB"
+    NATIONAL_PROVIDER_ID_US = "NATIONAL_PROVIDER_ID_US"
+    NHS_NUMBER_GB = "NHS_NUMBER_GB"
+    NIE_NUMBER_ES = "NIE_NUMBER_ES"
+    NIF_NUMBER_ES = "NIF_NUMBER_ES"
+    OPEN_SSH_PRIVATE_KEY = "OPEN_SSH_PRIVATE_KEY"
+    PASSPORT_NUMBER_CA = "PASSPORT_NUMBER_CA"
+    PASSPORT_NUMBER_DE = "PASSPORT_NUMBER_DE"
+    PASSPORT_NUMBER_ES = "PASSPORT_NUMBER_ES"
+    PASSPORT_NUMBER_FR = "PASSPORT_NUMBER_FR"
+    PASSPORT_NUMBER_GB = "PASSPORT_NUMBER_GB"
+    PASSPORT_NUMBER_IT = "PASSPORT_NUMBER_IT"
+    PASSPORT_NUMBER_US = "PASSPORT_NUMBER_US"
+    PERMANENT_RESIDENCE_NUMBER_CA = "PERMANENT_RESIDENCE_NUMBER_CA"
+    PERSONAL_HEALTH_NUMBER_CA = "PERSONAL_HEALTH_NUMBER_CA"
+    PGP_PRIVATE_KEY = "PGP_PRIVATE_KEY"
+    PHONE_NUMBER_BR = "PHONE_NUMBER_BR"
+    PHONE_NUMBER_DE = "PHONE_NUMBER_DE"
+    PHONE_NUMBER_ES = "PHONE_NUMBER_ES"
+    PHONE_NUMBER_FR = "PHONE_NUMBER_FR"
+    PHONE_NUMBER_GB = "PHONE_NUMBER_GB"
+    PHONE_NUMBER_IT = "PHONE_NUMBER_IT"
+    PHONE_NUMBER_US = "PHONE_NUMBER_US"
+    PKCS_PRIVATE_KEY = "PKCS_PRIVATE_KEY"
+    POSTAL_CODE_CA = "POSTAL_CODE_CA"
+    PUTTY_PRIVATE_KEY = "PUTTY_PRIVATE_KEY"
+    RG_NUMBER_BR = "RG_NUMBER_BR"
+    SOCIAL_INSURANCE_NUMBER_CA = "SOCIAL_INSURANCE_NUMBER_CA"
+    SSN_ES = "SSN_ES"
+    SSN_US = "SSN_US"
+    TAX_ID_DE = "TAX_ID_DE"
+    TAX_ID_ES = "TAX_ID_ES"
+    TAX_ID_FR = "TAX_ID_FR"
+    TAX_ID_GB = "TAX_ID_GB"
+    VEHICLE_IDENTIFICATION_NUMBER = "VEHICLE_IDENTIFICATION_NUMBER"
+    ZIP_CODE_US = "ZIP_CODE_US"
+
+@dataclass(kw_only=True)
+class RedactionSummary(_SerdeShape):
+    """
+    A summary of what redaction found in a dataset generation. It contains
+    counts only, never the masked data.
+    """
+
+    scenarios_scanned: int | None = ...
+    """The number of scenarios scanned for sensitive data."""
+    finding_counts: dict[str, int] | None = ...
+    """The number of matches for each data identifier."""
+
 class RegistryRecordStatus(UnknownEnumMixin, StrEnum):
     """The status of a registry record in its lifecycle."""
 
@@ -4202,6 +5543,23 @@ class ResponseChunk(_SerdeShape):
     An event indicating the completion of the command execution, including
     the exit code and final status. This is the last chunk received.
     """
+
+class ResultAggregation(UnknownEnumMixin, StrEnum):
+    """
+    How to combine per-trace or per-span evaluation results into one result
+    for the session.
+    """
+
+    MIN = "Min"
+    """Uses the lowest score."""
+    MAX = "Max"
+    """Uses the highest score."""
+    MEAN = "Mean"
+    """Uses the average score."""
+    ALL_MATCH = "AllMatch"
+    """Matches when every result has the label."""
+    ANY_MATCH = "AnyMatch"
+    """Matches when at least one result has the label."""
 
 class ResultDestination(UnknownEnumMixin, StrEnum):
     """
@@ -4587,6 +5945,23 @@ class SaveBrowserSessionProfileOutput(_SerdeShape):
     recover the request identifiers a service's support team needs in order
     to investigate a call. Members of the metadata are individually
     optional.
+    """
+
+class ScenarioType(UnknownEnumMixin, StrEnum):
+    """
+    The type of scenario a dataset generation produces. Each generation
+    produces one type.
+    """
+
+    FIXED = "FIXED"
+    """
+    A fixed list of turns, with an optional expected response and expected
+    trajectory.
+    """
+    DYNAMIC = "DYNAMIC"
+    """
+    A conversation driven by a simulated user, described by an actor
+    profile, an initial input and a maximum number of turns.
     """
 
 @dataclass(kw_only=True)
@@ -5090,6 +6465,18 @@ class StartBatchEvaluationInput(_SerdeShape):
     """The description of the batch evaluation."""
     output_config: OutputConfig | None = ...
     """Output destination configuration."""
+    dataset_execution_config: DatasetExecutionConfig | None = ...
+    """
+    The configuration for running the scenarios in a dataset against an
+    agent before evaluating the resulting sessions. When you specify this
+    field, the batch evaluation runs each scenario in the dataset against
+    the agent. It then evaluates the sessions that the agent produces. You
+    must also specify `evaluators` and a `dataSourceConfig` that uses
+    `cloudWatchLogs`. Configure `cloudWatchLogs` with the service name and
+    log groups that the agent uses for its traces. You can't specify
+    `insights` or an `onlineEvaluationConfigSource` data source with this
+    field.
+    """
 
 class StartBatchEvaluationInputDict(TypedDict, total=False):
     """Dictionary form of `StartBatchEvaluationInput`."""
@@ -5136,6 +6523,18 @@ class StartBatchEvaluationInputDict(TypedDict, total=False):
     """The description of the batch evaluation."""
     output_config: OutputConfig | OutputConfigDict | None
     """Output destination configuration."""
+    dataset_execution_config: DatasetExecutionConfig | DatasetExecutionConfigDict | None
+    """
+    The configuration for running the scenarios in a dataset against an
+    agent before evaluating the resulting sessions. When you specify this
+    field, the batch evaluation runs each scenario in the dataset against
+    the agent. It then evaluates the sessions that the agent produces. You
+    must also specify `evaluators` and a `dataSourceConfig` that uses
+    `cloudWatchLogs`. Configure `cloudWatchLogs` with the service name and
+    log groups that the agent uses for its traces. You can't specify
+    `insights` or an `onlineEvaluationConfigSource` data source with this
+    field.
+    """
 
 @dataclass(kw_only=True)
 class StartBatchEvaluationOutput(_SerdeShape):
@@ -5455,6 +6854,97 @@ class StartCodeInterpreterSessionOutput(_SerdeShape):
     """The unique identifier of the created code interpreter session."""
     created_at: datetime
     """The time at which the code interpreter session was created."""
+    response_metadata: ResponseMetadata = ...
+    """
+    Metadata about the response that produced this output. Use this to
+    recover the request identifiers a service's support team needs in order
+    to investigate a call. Members of the metadata are individually
+    optional.
+    """
+
+@dataclass(kw_only=True)
+class StartDatasetGenerationInput(_SerdeShape):
+    """Dataclass for StartDatasetGenerationInput structure."""
+
+    dataset_id: str | None = ...
+    """
+    The unique identifier of the dataset to add the generated examples to.
+    The dataset must be `ACTIVE`.
+    """
+    name: str | None = ...
+    """
+    The name of the dataset generation. The generation ID starts with this
+    name.
+    """
+    description: str | None = ...
+    """A description of the dataset generation."""
+    scenario_type: str | None = ...
+    """
+    The type of scenario to generate. If you don't specify a value, the
+    generation produces `DYNAMIC` scenarios.
+    """
+    source: GenerationSource | None = ...
+    """
+    Where the generation reads sessions from, and how it selects, samples,
+    labels and redacts them.
+    """
+    client_token: str | None = ...
+    """
+    A unique, case-sensitive identifier to ensure that the API request
+    completes no more than one time. If this token matches a previous
+    request, the service ignores the request, but does not return an error.
+
+    This field is autopopulated if not provided.
+    """
+
+class StartDatasetGenerationInputDict(TypedDict, total=False):
+    """Dictionary form of `StartDatasetGenerationInput`."""
+
+    dataset_id: Required[str]
+    """
+    The unique identifier of the dataset to add the generated examples to.
+    The dataset must be `ACTIVE`.
+    """
+    name: Required[str]
+    """
+    The name of the dataset generation. The generation ID starts with this
+    name.
+    """
+    description: str | None
+    """A description of the dataset generation."""
+    scenario_type: str | None
+    """
+    The type of scenario to generate. If you don't specify a value, the
+    generation produces `DYNAMIC` scenarios.
+    """
+    source: Required[GenerationSource | GenerationSourceDict]
+    """
+    Where the generation reads sessions from, and how it selects, samples,
+    labels and redacts them.
+    """
+    client_token: str | None
+    """
+    A unique, case-sensitive identifier to ensure that the API request
+    completes no more than one time. If this token matches a previous
+    request, the service ignores the request, but does not return an error.
+
+    This field is autopopulated if not provided.
+    """
+
+@dataclass(kw_only=True)
+class StartDatasetGenerationOutput(_SerdeShape):
+    """Dataclass for StartDatasetGenerationOutput structure."""
+
+    generation_id: str
+    """The unique identifier of the dataset generation."""
+    name: str
+    """The name of the dataset generation."""
+    dataset_id: str
+    """The unique identifier of the dataset."""
+    status: str
+    """The status of the dataset generation."""
+    created_at: datetime
+    """The time at which the dataset generation started."""
     response_metadata: ResponseMetadata = ...
     """
     Metadata about the response that produced this output. Use this to
@@ -6224,776 +7714,3 @@ class ToolArgumentsDict(TypedDict, total=False):
     The runtime environment to use for code execution. If not specified,
     defaults to `deno` for JavaScript and TypeScript.
     """
-
-@dataclass
-class ToolDescriptionConfigText(_SerdeShape):
-    """The tool description as inline text."""
-
-    value: str
-
-@dataclass
-class ToolDescriptionConfigUnknown(_SerdeShape):
-    """
-    Represents an unknown variant. If you receive this value, you will need
-    to update your library to receive the parsed value. This value may not
-    be deliberately sent.
-    """
-
-    tag: str
-
-ToolDescriptionConfig = Union[ToolDescriptionConfigText | ToolDescriptionConfigUnknown]
-"""The tool description content."""
-
-class _ToolDescriptionConfigDeserializer:
-    def deserialize(self, deserializer: ShapeDeserializer) -> ToolDescriptionConfig: ...
-
-class ToolDescriptionConfigTextDict(TypedDict):
-    text: str
-    """The tool description as inline text."""
-
-ToolDescriptionConfigDict = Union[ToolDescriptionConfigTextDict]
-"""
-Dictionary form of `ToolDescriptionConfig`, setting exactly one
-variant.
-"""
-
-@dataclass(kw_only=True)
-class ToolDescriptionConfigurationBundle(_SerdeShape):
-    """Tool descriptions sourced from a configuration bundle version."""
-
-    bundle_arn: str
-    """The Amazon Resource Name (ARN) of the configuration bundle."""
-    version_id: str
-    """The version identifier of the configuration bundle."""
-    tools: list[ConfigurationBundleToolEntry]
-    """
-    The list of tool entries mapping tool names to their JSON paths within
-    the bundle.
-    """
-
-class ToolDescriptionConfigurationBundleDict(TypedDict, total=False):
-    """Dictionary form of `ToolDescriptionConfigurationBundle`."""
-
-    bundle_arn: Required[str]
-    """The Amazon Resource Name (ARN) of the configuration bundle."""
-    version_id: Required[str]
-    """The version identifier of the configuration bundle."""
-    tools: Required[
-        Sequence[ConfigurationBundleToolEntry | ConfigurationBundleToolEntryDict]
-    ]
-    """
-    The list of tool entries mapping tool names to their JSON paths within
-    the bundle.
-    """
-
-@dataclass(kw_only=True)
-class ToolDescriptionInput(_SerdeShape):
-    """
-    A tool description input containing the tool name and its current
-    description.
-    """
-
-    tool_name: str
-    """The name of the tool."""
-    tool_description: ToolDescriptionConfig
-    """The current description of the tool to optimize."""
-
-class ToolDescriptionInputDict(TypedDict, total=False):
-    """Dictionary form of `ToolDescriptionInput`."""
-
-    tool_name: Required[str]
-    """The name of the tool."""
-    tool_description: Required[ToolDescriptionConfig | ToolDescriptionConfigDict]
-    """The current description of the tool to optimize."""
-
-@dataclass(kw_only=True)
-class ToolDescriptionOutput(_SerdeShape):
-    """The output for a single tool description recommendation."""
-
-    tool_name: str
-    """The name of the tool."""
-    recommended_tool_description: str | None = ...
-    """The optimized tool description text generated by the recommendation."""
-    explanation: str | None = ...
-    """
-    An explanation of why the recommendation was generated for this tool and
-    what patterns were identified in the agent traces.
-    """
-
-@dataclass(kw_only=True)
-class ToolDescriptionRecommendationConfig(_SerdeShape):
-    """
-    Configuration for generating tool description optimization
-    recommendations.
-    """
-
-    tool_description: ToolDescriptionSource
-    """The current tool descriptions to optimize."""
-    agent_traces: AgentTracesConfig
-    """
-    The agent traces to analyze for generating tool description
-    recommendations.
-    """
-
-class ToolDescriptionRecommendationConfigDict(TypedDict, total=False):
-    """Dictionary form of `ToolDescriptionRecommendationConfig`."""
-
-    tool_description: Required[ToolDescriptionSource | ToolDescriptionSourceDict]
-    """The current tool descriptions to optimize."""
-    agent_traces: Required[AgentTracesConfig | AgentTracesConfigDict]
-    """
-    The agent traces to analyze for generating tool description
-    recommendations.
-    """
-
-@dataclass(kw_only=True)
-class ToolDescriptionRecommendationResult(_SerdeShape):
-    """
-    The result of a tool description recommendation, containing optimized
-    descriptions.
-    """
-
-    tools: list[ToolDescriptionOutput] | None = ...
-    """The list of tools with their recommended descriptions."""
-    configuration_bundle: RecommendationResultConfigurationBundle | None = ...
-    """
-    The configuration bundle containing the recommended tool descriptions,
-    if the input was sourced from a configuration bundle.
-    """
-    error_code: str | None = ...
-    """The error code if the recommendation failed."""
-    error_message: str | None = ...
-    """The error message if the recommendation failed."""
-
-@dataclass
-class ToolDescriptionSourceToolDescriptionText(_SerdeShape):
-    """Tool descriptions provided as inline text."""
-
-    value: ToolDescriptionTextInput
-
-@dataclass
-class ToolDescriptionSourceConfigurationBundle(_SerdeShape):
-    """Tool descriptions sourced from a configuration bundle version."""
-
-    value: ToolDescriptionConfigurationBundle
-
-@dataclass
-class ToolDescriptionSourceUnknown(_SerdeShape):
-    """
-    Represents an unknown variant. If you receive this value, you will need
-    to update your library to receive the parsed value. This value may not
-    be deliberately sent.
-    """
-
-    tag: str
-
-ToolDescriptionSource = Union[
-    ToolDescriptionSourceToolDescriptionText
-    | ToolDescriptionSourceConfigurationBundle
-    | ToolDescriptionSourceUnknown
-]
-"""
-The source of tool descriptions, either inline text or from a
-configuration bundle.
-"""
-
-class _ToolDescriptionSourceDeserializer:
-    def deserialize(self, deserializer: ShapeDeserializer) -> ToolDescriptionSource: ...
-
-class ToolDescriptionSourceToolDescriptionTextDict(TypedDict):
-    tool_description_text: ToolDescriptionTextInput | ToolDescriptionTextInputDict
-    """Tool descriptions provided as inline text."""
-
-class ToolDescriptionSourceConfigurationBundleDict(TypedDict):
-    configuration_bundle: (
-        ToolDescriptionConfigurationBundle | ToolDescriptionConfigurationBundleDict
-    )
-    """Tool descriptions sourced from a configuration bundle version."""
-
-ToolDescriptionSourceDict = Union[
-    ToolDescriptionSourceToolDescriptionTextDict
-    | ToolDescriptionSourceConfigurationBundleDict
-]
-"""
-Dictionary form of `ToolDescriptionSource`, setting exactly one
-variant.
-"""
-
-@dataclass(kw_only=True)
-class ToolDescriptionTextInput(_SerdeShape):
-    """Inline tool description input containing a list of tools."""
-
-    tools: list[ToolDescriptionInput]
-    """The list of tool descriptions to optimize."""
-
-class ToolDescriptionTextInputDict(TypedDict, total=False):
-    """Dictionary form of `ToolDescriptionTextInput`."""
-
-    tools: Required[Sequence[ToolDescriptionInput | ToolDescriptionInputDict]]
-    """The list of tool descriptions to optimize."""
-
-class ToolName(UnknownEnumMixin, StrEnum):
-    EXECUTE_CODE = "executeCode"
-    EXECUTE_COMMAND = "executeCommand"
-    READ_FILES = "readFiles"
-    LIST_FILES = "listFiles"
-    REMOVE_FILES = "removeFiles"
-    WRITE_FILES = "writeFiles"
-    START_COMMAND_EXECUTION = "startCommandExecution"
-    GET_TASK = "getTask"
-    STOP_TASK = "stopTask"
-
-@dataclass(kw_only=True)
-class ToolResultStructuredContent(_SerdeShape):
-    """Contains structured content from a tool result."""
-
-    task_id: str | None = ...
-    """The identifier of the task that produced the result."""
-    task_status: str | None = ...
-    """The status of the task that produced the result."""
-    stdout: str | None = ...
-    """The standard output from the tool execution."""
-    stderr: str | None = ...
-    """The standard error output from the tool execution."""
-    exit_code: int | None = ...
-    """The exit code from the tool execution."""
-    execution_time: float | None = ...
-    """The execution time of the tool operation in milliseconds."""
-
-@dataclass(kw_only=True)
-class ToolsDefinition(_SerdeShape):
-    """
-    The MCP tools definition with a protocol version and inline content. The
-    `protocolVersion` identifies the MCP protocol version that the tools
-    conform to. This differs from `schemaVersion` in the server definition,
-    which identifies the server configuration schema format.
-    """
-
-    protocol_version: str | None = ...
-    """
-    The MCP protocol version that the tools conform to. This differs from
-    the `schemaVersion` field in the server definition, which identifies the
-    server configuration schema format.
-    """
-    inline_content: str | None = ...
-    """The inline content of the tools definition."""
-
-@dataclass
-class ToolsFileSystemConfigurationS3FilesConfiguration(_SerdeShape):
-    """
-    The configuration for mounting your own Amazon Simple Storage Service
-    (Amazon S3) Files access point into the session.
-    """
-
-    value: S3FilesConfiguration
-
-@dataclass
-class ToolsFileSystemConfigurationEfsConfiguration(_SerdeShape):
-    """
-    The configuration for mounting your own Amazon Elastic File System
-    (Amazon EFS) access point into the session.
-    """
-
-    value: EfsConfiguration
-
-@dataclass
-class ToolsFileSystemConfigurationUnknown(_SerdeShape):
-    """
-    Represents an unknown variant. If you receive this value, you will need
-    to update your library to receive the parsed value. This value may not
-    be deliberately sent.
-    """
-
-    tag: str
-
-ToolsFileSystemConfiguration = Union[
-    ToolsFileSystemConfigurationS3FilesConfiguration
-    | ToolsFileSystemConfigurationEfsConfiguration
-    | ToolsFileSystemConfigurationUnknown
-]
-"""
-Specifies a file system to mount into the session by providing exactly
-one of the following:
-
-- `s3FilesConfiguration` - Mounts an Amazon Simple Storage Service
-  (Amazon S3) Files access point.
-
-- `efsConfiguration` - Mounts an Amazon Elastic File System (Amazon EFS)
-  access point.
-"""
-
-class _ToolsFileSystemConfigurationDeserializer:
-    def deserialize(
-        self, deserializer: ShapeDeserializer
-    ) -> ToolsFileSystemConfiguration: ...
-
-class ToolsFileSystemConfigurationS3FilesConfigurationDict(TypedDict):
-    s3_files_configuration: S3FilesConfiguration | S3FilesConfigurationDict
-    """
-    The configuration for mounting your own Amazon Simple Storage Service
-    (Amazon S3) Files access point into the session.
-    """
-
-class ToolsFileSystemConfigurationEfsConfigurationDict(TypedDict):
-    efs_configuration: EfsConfiguration | EfsConfigurationDict
-    """
-    The configuration for mounting your own Amazon Elastic File System
-    (Amazon EFS) access point into the session.
-    """
-
-ToolsFileSystemConfigurationDict = Union[
-    ToolsFileSystemConfigurationS3FilesConfigurationDict
-    | ToolsFileSystemConfigurationEfsConfigurationDict
-]
-"""
-Dictionary form of `ToolsFileSystemConfiguration`, setting exactly one
-variant.
-"""
-
-@dataclass(kw_only=True)
-class UnauthorizedException(ServiceError, _SerdeShape):
-    """
-    This exception is thrown when the JWT bearer token is invalid or not
-    found for OAuth bearer token based access
-    """
-
-    response_metadata: ResponseMetadata = ...
-    """
-    Metadata about the response that produced this output. Use this to
-    recover the request identifiers a service's support team needs in order
-    to investigate a call. Members of the metadata are individually
-    optional.
-    """
-
-@dataclass(kw_only=True)
-class UpdateABTestInput(_SerdeShape):
-    """Dataclass for UpdateABTestInput structure."""
-
-    ab_test_id: str | None = ...
-    """The unique identifier of the A/B test to update."""
-    client_token: str | None = ...
-    """
-    A unique, case-sensitive identifier to ensure that the API request
-    completes no more than one time. If this token matches a previous
-    request, the service ignores the request, but does not return an error.
-
-    This field is autopopulated if not provided.
-    """
-    name: str | None = ...
-    """The updated name of the A/B test."""
-    description: str | None = ...
-    """The updated description of the A/B test."""
-    variants: list[Variant] | None = ...
-    """The updated list of variants."""
-    gateway_filter: GatewayFilter | None = ...
-    """The updated gateway filter."""
-    evaluation_config: ABTestEvaluationConfig | None = ...
-    """The updated evaluation configuration."""
-    role_arn: str | None = ...
-    """The updated IAM role ARN."""
-    execution_status: str | None = ...
-    """The updated execution status to enable or disable the A/B test."""
-
-class UpdateABTestInputDict(TypedDict, total=False):
-    """Dictionary form of `UpdateABTestInput`."""
-
-    ab_test_id: Required[str]
-    """The unique identifier of the A/B test to update."""
-    client_token: str | None
-    """
-    A unique, case-sensitive identifier to ensure that the API request
-    completes no more than one time. If this token matches a previous
-    request, the service ignores the request, but does not return an error.
-
-    This field is autopopulated if not provided.
-    """
-    name: str | None
-    """The updated name of the A/B test."""
-    description: str | None
-    """The updated description of the A/B test."""
-    variants: Sequence[Variant | VariantDict] | None
-    """The updated list of variants."""
-    gateway_filter: GatewayFilter | GatewayFilterDict | None
-    """The updated gateway filter."""
-    evaluation_config: ABTestEvaluationConfig | ABTestEvaluationConfigDict | None
-    """The updated evaluation configuration."""
-    role_arn: str | None
-    """The updated IAM role ARN."""
-    execution_status: str | None
-    """The updated execution status to enable or disable the A/B test."""
-
-@dataclass(kw_only=True)
-class UpdateABTestOutput(_SerdeShape):
-    """Dataclass for UpdateABTestOutput structure."""
-
-    ab_test_id: str
-    """The unique identifier of the updated A/B test."""
-    ab_test_arn: str
-    """The Amazon Resource Name (ARN) of the updated A/B test."""
-    status: str
-    """The status of the A/B test."""
-    execution_status: str
-    """The execution status of the A/B test."""
-    updated_at: datetime
-    """The timestamp when the A/B test was updated."""
-    response_metadata: ResponseMetadata = ...
-    """
-    Metadata about the response that produced this output. Use this to
-    recover the request identifiers a service's support team needs in order
-    to investigate a call. Members of the metadata are individually
-    optional.
-    """
-
-@dataclass(kw_only=True)
-class UpdateBrowserStreamInput(_SerdeShape):
-    """Dataclass for UpdateBrowserStreamInput structure."""
-
-    browser_identifier: str | None = ...
-    """The identifier of the browser."""
-    session_id: str | None = ...
-    """The identifier of the browser session."""
-    stream_update: StreamUpdate | None = ...
-    """The update to apply to the browser stream."""
-    client_token: str | None = ...
-    """
-    A unique, case-sensitive identifier to ensure that the operation
-    completes no more than one time. If this token matches a previous
-    request, Amazon Bedrock ignores the request, but does not return an
-    error.
-
-    This field is autopopulated if not provided.
-    """
-
-class UpdateBrowserStreamInputDict(TypedDict, total=False):
-    """Dictionary form of `UpdateBrowserStreamInput`."""
-
-    browser_identifier: Required[str]
-    """The identifier of the browser."""
-    session_id: Required[str]
-    """The identifier of the browser session."""
-    stream_update: Required[StreamUpdate | StreamUpdateDict]
-    """The update to apply to the browser stream."""
-    client_token: str | None
-    """
-    A unique, case-sensitive identifier to ensure that the operation
-    completes no more than one time. If this token matches a previous
-    request, Amazon Bedrock ignores the request, but does not return an
-    error.
-
-    This field is autopopulated if not provided.
-    """
-
-@dataclass(kw_only=True)
-class UpdateBrowserStreamOutput(_SerdeShape):
-    """Dataclass for UpdateBrowserStreamOutput structure."""
-
-    browser_identifier: str
-    """The identifier of the browser."""
-    session_id: str
-    """The identifier of the browser session."""
-    streams: BrowserSessionStream
-    """
-    The collection of streams associated with a browser session in Amazon
-    Bedrock AgentCore. These streams provide different ways to interact with
-    and observe the browser session, including programmatic control and
-    visual representation of the browser content.
-    """
-    updated_at: datetime
-    """The time at which the browser stream was updated."""
-    response_metadata: ResponseMetadata = ...
-    """
-    Metadata about the response that produced this output. Use this to
-    recover the request identifiers a service's support team needs in order
-    to investigate a call. Members of the metadata are individually
-    optional.
-    """
-
-@dataclass
-class UserIdentifierUserToken(_SerdeShape):
-    """
-    The OAuth2.0 token issued by the user's identity provider that was used
-    to generate the workload access token
-    """
-
-    value: str
-
-@dataclass
-class UserIdentifierUserId(_SerdeShape):
-    """
-    The ID of the user for whom you have retrieved a workload access token
-    for
-    """
-
-    value: str
-
-@dataclass
-class UserIdentifierUnknown(_SerdeShape):
-    """
-    Represents an unknown variant. If you receive this value, you will need
-    to update your library to receive the parsed value. This value may not
-    be deliberately sent.
-    """
-
-    tag: str
-
-UserIdentifier = Union[
-    UserIdentifierUserToken | UserIdentifierUserId | UserIdentifierUnknown
-]
-"""
-The OAuth2.0 token or user ID that was used to generate the workload
-access token used for initiating the user authorization flow to retrieve
-OAuth2.0 tokens.
-"""
-
-class _UserIdentifierDeserializer:
-    def deserialize(self, deserializer: ShapeDeserializer) -> UserIdentifier: ...
-
-class UserIdentifierUserTokenDict(TypedDict):
-    user_token: str
-    """
-    The OAuth2.0 token issued by the user's identity provider that was used
-    to generate the workload access token
-    """
-
-class UserIdentifierUserIdDict(TypedDict):
-    user_id: str
-    """
-    The ID of the user for whom you have retrieved a workload access token
-    for
-    """
-
-UserIdentifierDict = Union[UserIdentifierUserTokenDict | UserIdentifierUserIdDict]
-"""Dictionary form of `UserIdentifier`, setting exactly one variant."""
-
-@dataclass(kw_only=True)
-class UserIntentAffectedSession(_SerdeShape):
-    """A session associated with a user intent cluster."""
-
-    session_id: str
-    """The unique identifier of the session."""
-    user_messages: list[str]
-    """
-    The user messages from this session that contributed to the intent
-    cluster.
-    """
-
-@dataclass(kw_only=True)
-class UserIntentCluster(_SerdeShape):
-    """A cluster of similar user intents identified across sessions."""
-
-    cluster_id: int
-    """The unique identifier of the user intent cluster."""
-    name: str
-    """The name of the user intent cluster."""
-    description: str
-    """A description of the user intent pattern."""
-    affected_session_count: int
-    """The number of sessions with this user intent."""
-    affected_sessions: list[UserIntentAffectedSession]
-    """The list of sessions with this user intent."""
-
-@dataclass(kw_only=True)
-class UserIntentClusteringResultContent(_SerdeShape):
-    """
-    The user intent clustering result containing grouped user intents
-    identified across evaluated sessions.
-    """
-
-    user_intents: list[UserIntentCluster]
-    """The list of user intent clusters identified across analyzed sessions."""
-
-@dataclass(kw_only=True)
-class ValidationException(ServiceError, _SerdeShape):
-    """
-    The exception that occurs when the input fails to satisfy the
-    constraints specified by the service. Check the error message for
-    details about which input parameter is invalid and correct your request.
-    """
-
-    reason: str
-    field_list: list[ValidationExceptionField] | None = ...
-    response_metadata: ResponseMetadata = ...
-    """
-    Metadata about the response that produced this output. Use this to
-    recover the request identifiers a service's support team needs in order
-    to investigate a call. Members of the metadata are individually
-    optional.
-    """
-
-@dataclass(kw_only=True)
-class ValidationExceptionField(_SerdeShape):
-    """
-    Stores information about a field passed inside a request that resulted
-    in an exception.
-    """
-
-    name: str
-    """The name of the field."""
-    message: str
-    """A message describing why this field failed validation."""
-
-class ValidationExceptionReason(UnknownEnumMixin, StrEnum):
-    CANNOT_PARSE = "CannotParse"
-    FIELD_VALIDATION_FAILED = "FieldValidationFailed"
-    IDEMPOTENT_PARAMETER_MISMATCH_EXCEPTION = "IdempotentParameterMismatchException"
-    ROOT_EVENT_IN_OTHER_SESSION = "EventInOtherSession"
-    RESOURCE_CONFLICT = "ResourceConflict"
-
-@dataclass(kw_only=True)
-class Variant(_SerdeShape):
-    """
-    A variant in an A/B test, representing either the control (C) or
-    treatment (T1) configuration.
-    """
-
-    name: str
-    """The name of the variant. Must be `C` for control or `T1` for treatment."""
-    weight: int
-    """
-    The percentage of traffic to route to this variant. Weights across all
-    variants must sum to 100.
-    """
-    variant_configuration: VariantConfiguration
-    """
-    The configuration for this variant, including the configuration bundle
-    or target reference.
-    """
-
-class VariantDict(TypedDict, total=False):
-    """Dictionary form of `Variant`."""
-
-    name: Required[str]
-    """The name of the variant. Must be `C` for control or `T1` for treatment."""
-    weight: Required[int]
-    """
-    The percentage of traffic to route to this variant. Weights across all
-    variants must sum to 100.
-    """
-    variant_configuration: Required[VariantConfiguration | VariantConfigurationDict]
-    """
-    The configuration for this variant, including the configuration bundle
-    or target reference.
-    """
-
-@dataclass(kw_only=True)
-class VariantConfiguration(_SerdeShape):
-    """The configuration for an A/B test variant."""
-
-    configuration_bundle: ConfigurationBundleRef | None = ...
-    """A reference to a configuration bundle version to use for this variant."""
-    target: TargetRef | None = ...
-    """A reference to a gateway target to route traffic to for this variant."""
-
-class VariantConfigurationDict(TypedDict, total=False):
-    """Dictionary form of `VariantConfiguration`."""
-
-    configuration_bundle: ConfigurationBundleRef | ConfigurationBundleRefDict | None
-    """A reference to a configuration bundle version to use for this variant."""
-    target: TargetRef | TargetRefDict | None
-    """A reference to a gateway target to route traffic to for this variant."""
-
-@dataclass(kw_only=True)
-class VariantResult(_SerdeShape):
-    """
-    Statistical results for a treatment variant compared against the
-    control.
-    """
-
-    variant_name: str
-    """The name of the treatment variant."""
-    sample_size: int
-    """The number of sessions evaluated for this variant."""
-    mean: float
-    """The mean evaluation score for this variant."""
-    absolute_change: float | None = ...
-    """The absolute change in mean score compared to the control variant."""
-    percent_change: float | None = ...
-    """The percentage change in mean score compared to the control variant."""
-    p_value: float | None = ...
-    """
-    The p-value indicating the statistical significance of the observed
-    difference.
-    """
-    confidence_interval: ConfidenceInterval | None = ...
-    """The confidence interval for the observed difference."""
-    is_significant: bool
-    """Whether the observed difference is statistically significant."""
-
-@dataclass(kw_only=True)
-class ViewPort(_SerdeShape):
-    """
-    The configuration that defines the dimensions of a browser viewport in a
-    browser session. The viewport determines the visible area of web content
-    and affects how web pages are rendered and displayed. Proper viewport
-    configuration ensures that web content is displayed correctly for the
-    agent's browsing tasks.
-    """
-
-    width: int
-    """
-    The width of the viewport in pixels. This value determines the
-    horizontal dimension of the visible area. Valid values range from 800 to
-    1920 pixels.
-    """
-    height: int
-    """
-    The height of the viewport in pixels. This value determines the vertical
-    dimension of the visible area. Valid values range from 600 to 1080
-    pixels.
-    """
-
-class ViewPortDict(TypedDict, total=False):
-    """Dictionary form of `ViewPort`."""
-
-    width: Required[int]
-    """
-    The width of the viewport in pixels. This value determines the
-    horizontal dimension of the visible area. Valid values range from 800 to
-    1920 pixels.
-    """
-    height: Required[int]
-    """
-    The height of the viewport in pixels. This value determines the vertical
-    dimension of the visible area. Valid values range from 600 to 1080
-    pixels.
-    """
-
-@dataclass(kw_only=True)
-class WebSearchFilters(_SerdeShape):
-    """The filters to apply to a web search."""
-
-    domain_filter: DomainFilter | None = ...
-    """The domains to include in or exclude from the results."""
-    published_date_filter: PublishedDateFilter | None = ...
-    """The publication time range of the results."""
-
-class WebSearchFiltersDict(TypedDict, total=False):
-    """Dictionary form of `WebSearchFilters`."""
-
-    domain_filter: DomainFilter | DomainFilterDict | None
-    """The domains to include in or exclude from the results."""
-    published_date_filter: PublishedDateFilter | PublishedDateFilterDict | None
-    """The publication time range of the results."""
-
-@dataclass(kw_only=True)
-class WebSearchResult(_SerdeShape):
-    """A web search result."""
-
-    title: str | None = ...
-    """The title of the page."""
-    url: str | None = ...
-    """The URL of the page."""
-    text: str
-    """A text extract from the page."""
-    published_at: datetime | None = ...
-    """
-    The time the page was published. This field is absent when the
-    publication time is not known.
-    """
-
-@dataclass(kw_only=True)
-class Unit(_SerdeShape):
-    """Dataclass for Unit structure."""
-
-class UnitDict(TypedDict, total=False):
-    """Dictionary form of `Unit`."""

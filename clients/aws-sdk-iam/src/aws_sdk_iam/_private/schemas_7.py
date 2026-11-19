@@ -36,6 +36,8 @@ _v_ = ""
 _SCA = "ServiceCredentialAlias"
 _SSCI = "ServiceSpecificCredentialId"
 _SCN = "ServerCertificateName"
+_cIT = "certificateIdType"
+_CI = "CertificateId"
 _SSHPKI = "SSHPublicKeyId"
 _MI = "MaxItems"
 _Ma = "Marker"
@@ -45,6 +47,7 @@ _Use = "Users"
 _No = "Notes"
 _VU = "ValidUntil"
 _UDp = "UploadDate"
+_CB = "CertificateBody"
 _PPat = "PathPrefix"
 _PNo = "PolicyNames"
 _LRPI = "ListRolePoliciesInput"
@@ -98,6 +101,7 @@ _SSCe = "ServiceSpecificCredentials"
 _LSSC = "ListServiceSpecificCredentials"
 _LSCIi = "ListSigningCertificatesInput"
 _cLSCRom = "com.amazonaws.iam#ListSigningCertificatesRequest"
+_SCi = "SigningCertificate"
 _cLT = "certificateListType"
 _LSCOi = "ListSigningCertificatesOutput"
 _cLSCRoma = "com.amazonaws.iam#ListSigningCertificatesResponse"
@@ -175,6 +179,8 @@ _RUFGI = "RemoveUserFromGroupInput"
 _cRUFGR = "com.amazonaws.iam#RemoveUserFromGroupRequest"
 _RUFGO = "RemoveUserFromGroupOutput"
 _RUFG = "RemoveUserFromGroup"
+
+CERTIFICATE_ID_TYPE: StaticSchema = (3, n0, _cIT, 0)
 
 LIST_ROLE_POLICIES_INPUT: StaticSchema = (
     18,
@@ -569,13 +575,28 @@ LIST_SIGNING_CERTIFICATES: StaticOperationSchema = (
     ),
 )
 
+SIGNING_CERTIFICATE: StaticSchema = (
+    18,
+    n0,
+    _SCi,
+    0,
+    (_UN, _CI, _CB, _S, _UDp),
+    (
+        (lambda: schemas.USER_NAME_TYPE, 1),
+        (CERTIFICATE_ID_TYPE, 1),
+        (lambda: schemas.CERTIFICATE_BODY_TYPE, 1),
+        (lambda: schemas.STATUS_TYPE, 1),
+        (lambda: schemas.DATE_TYPE, 0),
+    ),
+)
+
 CERTIFICATE_LIST_TYPE: StaticSchema = (
     16,
     n0,
     _cLT,
     0,
     (_me,),
-    ((lambda: schemas.SIGNING_CERTIFICATE, 0),),
+    ((SIGNING_CERTIFICATE, 0),),
 )
 
 LIST_SSH_PUBLIC_KEYS_INPUT: StaticSchema = (
