@@ -2,6 +2,10 @@
 #  SPDX-License-Identifier: Apache-2.0
 
 import re
+import threading
+from collections.abc import Iterator
+from contextlib import contextmanager
+from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from urllib.parse import parse_qs
 
 from smithy_core.aio.utils import read_streaming_blob_async
@@ -99,3 +103,41 @@ def _sts_response(action: str, role_name: str) -> bytes:
         "<Expiration>2999-01-01T00:00:00Z</Expiration></Credentials>"
         f"</{action}Result></{action}Response>"
     ).encode()
+
+
+@contextmanager
+def fake_imds() -> Iterator[str]:
+    """Serve IMDS credentials on 127.0.0.1 and yield its endpoint URL.
+
+    The sync IMDS resolver uses its own HTTP client rather than the chain's, so
+    a mock transport can't answer it.
+    """
+    server = ThreadingHTTPServer(("127.0.0.1", 0), _FakeIMDSHandler)
+    thread = threading.Thread(target=server.serve_forever, daemon=True)
+    thread.start()
+    try:
+        yield f"http://127.0.0.1:{server.server_address[1]}"
+    finally:
+        server.shutdown()
+        server.server_close()
+        thread.join()
+
+
+class _FakeIMDSHandler(BaseHTTPRequestHandler):
+    def do_PUT(self) -> None:
+        self._reply(b"imds-session-token")
+
+    def do_GET(self) -> None:
+        if self.path.rstrip("/").endswith("security-credentials"):
+            self._reply(b"imds-role")
+        else:
+            self._reply(_IMDS_RESPONSE)
+
+    def _reply(self, body: bytes) -> None:
+        self.send_response(200)
+        self.send_header("Content-Length", str(len(body)))
+        self.end_headers()
+        self.wfile.write(body)
+
+    def log_message(self, format: str, *args: object) -> None:
+        pass

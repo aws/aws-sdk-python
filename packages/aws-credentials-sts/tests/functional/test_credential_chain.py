@@ -10,7 +10,7 @@ from aws_sdk_s3.config import S3Config
 from aws_sdk_s3.models import ListBucketsInput
 from smithy_aws_core.identity.chain import IdentityChainError
 
-from ._transports import CredentialSourceTransport, signing_access_key
+from ._transports import CredentialSourceTransport, fake_imds, signing_access_key
 
 # CAUTION: these tests pin the order credential sources are tried in. Customers rely
 # on it staying the same across upgrades, whatever the specification says.
@@ -101,7 +101,9 @@ def test_each_source_is_used_until_it_is_gone(
 
     # EC2 instance metadata
     env.delenv("AWS_CONTAINER_CREDENTIALS_FULL_URI")
-    assert _signing_access_key() == "IMDS_AKID"
+    with fake_imds() as endpoint:
+        env.setenv("AWS_EC2_METADATA_SERVICE_ENDPOINT", endpoint)
+        assert _signing_access_key() == "IMDS_AKID"
 
     # No source left
     env.setenv("AWS_EC2_METADATA_DISABLED", "true")
