@@ -12,7 +12,6 @@ from smithy_http.aio.interfaces import AsyncHTTPClient, HTTPResponse
 from smithy_http.interfaces import HTTPRequestConfiguration
 
 from .._imds import (
-    TIMEOUT_SECONDS,
     IMDSConfig,
     IMDSToken,
     fetch_token,
@@ -52,7 +51,7 @@ class AsyncIMDSTokenCache:
                     send=lambda request, config: _send(
                         self._http_client, request, config
                     ),
-                    read_body=_read_body,
+                    read_body=lambda body: _read_body(body, self._config.timeout),
                     config=self._config,
                 )
             )
@@ -75,7 +74,7 @@ class AsyncIMDSClient:
         return await run_program_async(
             get_metadata(
                 send=lambda request, config: _send(self._http_client, request, config),
-                read_body=_read_body,
+                read_body=lambda body: _read_body(body, self._config.timeout),
                 sleep=asyncio.sleep,
                 get_token=self._token_cache.get_token,
                 invalidate_token=self._token_cache._invalidate,
@@ -86,19 +85,19 @@ class AsyncIMDSClient:
 
 
 # Async clients such as aiohttp don't apply HTTPRequestConfiguration.read_timeout,
-# so the IMDS timeout is enforced here for any client.
+# so the IMDS timeout is enforced here for any client. It covers connecting too.
 async def _send(
     http_client: AsyncHTTPClient,
     request: HTTPRequest,
     config: HTTPRequestConfiguration,
 ) -> HTTPResponse:
-    async with asyncio.timeout(TIMEOUT_SECONDS):
+    async with asyncio.timeout(config.read_timeout):
         return await http_client.send(request=request, request_config=config)
 
 
-async def _read_body(body: Any) -> bytes:
+async def _read_body(body: Any, timeout: float) -> bytes:
     try:
-        async with asyncio.timeout(TIMEOUT_SECONDS):
+        async with asyncio.timeout(timeout):
             return await read_streaming_blob_async(body)
     finally:
         # Hand the connection back, or drop it if the read was cut short, so a

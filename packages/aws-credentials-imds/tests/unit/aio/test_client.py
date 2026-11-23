@@ -10,7 +10,8 @@ from unittest.mock import AsyncMock, MagicMock, Mock, patch
 import pytest
 from aws_credentials_imds.aio.client import AsyncIMDSClient, AsyncIMDSTokenCache
 from aws_credentials_imds.client import IMDSConfig, IMDSToken
-from smithy_core.exceptions import SmithyIdentityError
+from smithy_core.exceptions import RetryError, SmithyIdentityError
+from smithy_core.retries import SimpleRetryStrategy
 from smithy_http import Field, Fields
 from smithy_http.aio import HTTPRequest
 
@@ -44,6 +45,7 @@ async def test_token_cache_refresh() -> None:
     http_client = AsyncMock()
     config = MagicMock()
     config.token_ttl = 100
+    config.timeout = 1.0
     config.endpoint_uri.scheme = "http"
     config.endpoint_uri.host = "169.254.169.254"
     response_mock = AsyncMock()
@@ -88,6 +90,7 @@ async def test_token_cache_refresh_non_200() -> None:
     http_client = AsyncMock()
     config = MagicMock()
     config.token_ttl = 100
+    config.timeout = 1.0
     config.endpoint_uri.scheme = "http"
     config.endpoint_uri.host = "169.254.169.254"
     response_mock = AsyncMock()
@@ -199,7 +202,7 @@ async def test_get_first_try_sends_token_put_then_get() -> None:
     sleep.assert_not_awaited()
 
 
-async def test_get_applies_one_second_read_timeout() -> None:
+async def test_get_applies_default_read_timeout() -> None:
     http_client = AsyncMock()
     http_client.send.side_effect = [_token(), _response(200, b"metadata")]
 
@@ -353,9 +356,8 @@ async def test_get_times_out_a_hanging_send() -> None:
     http_client = AsyncMock()
     http_client.send.side_effect = _hang
 
-    with patch("aws_credentials_imds.aio.client.TIMEOUT_SECONDS", 0.01):
-        with pytest.raises(SmithyIdentityError, match=r"after 1 attempt\(s\)") as exc:
-            await _get(http_client, IMDSConfig(max_attempts=1))
+    with pytest.raises(SmithyIdentityError, match=r"after 1 attempt\(s\)") as exc:
+        await _get(http_client, IMDSConfig(max_attempts=1, timeout=0.01))
 
     request_error = exc.value.__cause__
     assert request_error is not None
@@ -366,14 +368,11 @@ async def test_get_times_out_a_hanging_body_read() -> None:
     http_client = AsyncMock()
     http_client.send.side_effect = [_token(), _response(200, b"metadata")]
 
-    with (
-        patch("aws_credentials_imds.aio.client.TIMEOUT_SECONDS", 0.01),
-        patch(
-            "aws_credentials_imds.aio.client.read_streaming_blob_async", new=_hang_body
-        ),
+    with patch(
+        "aws_credentials_imds.aio.client.read_streaming_blob_async", new=_hang_body
     ):
         with pytest.raises(SmithyIdentityError) as exc:
-            await _get(http_client, IMDSConfig(max_attempts=1))
+            await _get(http_client, IMDSConfig(max_attempts=1, timeout=0.01))
 
     request_error = exc.value.__cause__
     assert request_error is not None
@@ -450,9 +449,8 @@ async def test_get_closes_a_body_whose_read_times_out() -> None:
     http_client = AsyncMock()
     http_client.send.side_effect = [_token(), Mock(status=200, body=body)]
 
-    with patch("aws_credentials_imds.aio.client.TIMEOUT_SECONDS", 0.01):
-        with pytest.raises(SmithyIdentityError):
-            await _get(http_client, IMDSConfig(max_attempts=1))
+    with pytest.raises(SmithyIdentityError):
+        await _get(http_client, IMDSConfig(max_attempts=1, timeout=0.01))
 
     assert body.closed
 
@@ -465,3 +463,72 @@ async def test_get_reads_a_body_with_a_synchronous_close() -> None:
     ]
 
     assert await _get(http_client, IMDSConfig(max_attempts=1)) == "metadata"
+
+
+class _FixedBackoff:
+    def compute_next_backoff_delay(self, retry_attempt: int) -> float:
+        return 0.123
+
+
+async def test_get_uses_a_custom_retry_strategy() -> None:
+    strategy = Mock(
+        wraps=SimpleRetryStrategy(backoff_strategy=_FixedBackoff(), max_attempts=2)
+    )
+    strategy.max_attempts = 2
+    http_client = AsyncMock()
+    http_client.send.side_effect = [_token(), _response(500), _response(200, b"ok")]
+
+    with _patch_sleep() as sleep:
+        assert await _get(http_client, IMDSConfig(retry_strategy=strategy)) == "ok"
+
+    strategy.refresh_retry_token_for_retry.assert_called_once()
+    strategy.record_success.assert_called_once()
+    sleep.assert_awaited_once_with(0.123)
+
+
+async def test_get_reports_a_retry_strategy_refusal() -> None:
+    strategy = Mock(wraps=SimpleRetryStrategy(max_attempts=5))
+    strategy.max_attempts = 5
+    strategy.refresh_retry_token_for_retry.side_effect = RetryError("quota spent")
+    http_client = AsyncMock()
+    http_client.send.side_effect = [_token(), _response(500)]
+
+    with pytest.raises(
+        SmithyIdentityError,
+        match=r"after 1 attempt\(s\): IMDS returned 500 .*\(quota spent\)",
+    ):
+        await _get(http_client, IMDSConfig(retry_strategy=strategy))
+
+    strategy.record_success.assert_not_called()
+
+
+async def test_get_raises_a_non_retryable_error_without_asking_the_strategy() -> None:
+    strategy = Mock(wraps=SimpleRetryStrategy(max_attempts=5))
+    strategy.max_attempts = 5
+    http_client = AsyncMock()
+    http_client.send.side_effect = [_token(), _response(404)]
+
+    with pytest.raises(SmithyIdentityError, match="returned 404"):
+        await _get(http_client, IMDSConfig(retry_strategy=strategy))
+
+    strategy.refresh_retry_token_for_retry.assert_not_called()
+
+
+async def test_get_passes_config_timeout_as_read_timeout() -> None:
+    http_client = AsyncMock()
+    http_client.send.side_effect = [_token(), _response(200, b"ok")]
+
+    await _get(http_client, IMDSConfig(timeout=2.5))
+
+    for call in http_client.send.call_args_list:
+        assert call.kwargs["request_config"].read_timeout == 2.5
+
+
+async def test_asyncio_timeout_is_flagged_as_a_timeout() -> None:
+    http_client = AsyncMock()
+    http_client.send.side_effect = _hang
+
+    with pytest.raises(SmithyIdentityError) as exc:
+        await _get(http_client, IMDSConfig(max_attempts=1, timeout=0.01))
+
+    assert getattr(exc.value.__cause__, "is_timeout_error") is True

@@ -4,8 +4,8 @@
 
 import functools
 import json
+import math
 import os
-import warnings
 from collections.abc import Callable
 from dataclasses import dataclass
 from datetime import UTC, datetime, timedelta
@@ -16,8 +16,8 @@ from urllib.parse import urlsplit
 from smithy_aws_core.config.merged_config import MergedConfig
 from smithy_aws_core.identity import AWSCredentialsIdentity
 from smithy_core import URI
-from smithy_core.exceptions import SmithyError, SmithyIdentityError
-from smithy_core.interfaces.retries import RetryStrategy
+from smithy_core.exceptions import RetryError, SmithyError, SmithyIdentityError
+from smithy_core.interfaces.retries import RetryStrategy, RetryToken
 from smithy_core.program import Program
 from smithy_core.retries import (
     ExponentialBackoffJitterType,
@@ -41,14 +41,15 @@ _PROFILE_NAME_ENV = "AWS_EC2_INSTANCE_PROFILE_NAME"
 _PROFILE_NAME_PROFILE = "ec2_instance_profile_name"
 _MAX_ATTEMPTS_ENV = "AWS_METADATA_SERVICE_NUM_ATTEMPTS"
 _MAX_ATTEMPTS_PROFILE = "metadata_service_num_attempts"
+_TIMEOUT_ENV = "AWS_METADATA_SERVICE_TIMEOUT"
+_TIMEOUT_PROFILE = "metadata_service_timeout"
 
 # 3 retries, so 4 attempts in all.
 DEFAULT_MAX_ATTEMPTS = 4
 # IMDS is a link-local endpoint, so a healthy instance answers well within a second.
-TIMEOUT_SECONDS = 1.0
-_REQUEST_CONFIG = HTTPRequestConfiguration(read_timeout=TIMEOUT_SECONDS)
+DEFAULT_TIMEOUT_SECONDS = 1.0
 # Waits of 0.25 s, 0.5 s and 1 s across the default 3 retries. IMDS is link-local,
-# so it gets a short fixed backoff rather than a service client's retry strategy.
+# so its default strategy uses a short fixed backoff.
 _BACKOFF = ExponentialRetryBackoffStrategy(
     backoff_scale_value=0.25,
     max_backoff=1.0,
@@ -70,50 +71,54 @@ class IMDSConfig:
     _MIN_TTL = 5
     _MAX_TTL = 21600
 
-    max_attempts: int
+    retry_strategy: RetryStrategy
+    timeout: float
     endpoint_uri: URI
     endpoint_mode: Literal["IPv4", "IPv6"]
     token_ttl: int
+    ec2_instance_profile_name: str | None
 
     def __init__(
         self,
         *,
         max_attempts: int | None = None,
         retry_strategy: RetryStrategy | None = None,
+        timeout: float = DEFAULT_TIMEOUT_SECONDS,
         endpoint_uri: URI | None = None,
         endpoint_mode: Literal["IPv4", "IPv6"] = "IPv4",
         token_ttl: int = _MAX_TTL,
         ec2_instance_profile_name: str | None = None,
     ):
-        if retry_strategy is not None:
-            warnings.warn(
-                "IMDSConfig's retry_strategy is deprecated; use max_attempts. Only the "
-                "strategy's max_attempts is used.",
-                DeprecationWarning,
-                stacklevel=2,
+        """
+        :param max_attempts: Total attempts for each metadata read, including the
+            first. Defaults to 4. Ignored when ``retry_strategy`` is given.
+        :param retry_strategy: Retry strategy for metadata reads. Overrides
+            ``max_attempts``. Defaults to a ``SimpleRetryStrategy`` with exponential
+            backoff of 0.25 s, 0.5 s and 1 s, without jitter.
+        :param timeout: IMDS request timeout in seconds. Sync clients use it as the
+            read timeout, which applies to each socket read rather than the whole
+            response, and the sync resolver's own client also uses it as its connect
+            timeout. Async clients bound each send and each body read with it.
+            Defaults to 1.
+        """
+        if retry_strategy is None:
+            retry_strategy = SimpleRetryStrategy(
+                backoff_strategy=_BACKOFF,
+                max_attempts=self._validate_max_attempts(
+                    DEFAULT_MAX_ATTEMPTS if max_attempts is None else max_attempts
+                ),
             )
-            if max_attempts is None:
-                max_attempts = retry_strategy.max_attempts
-        self.max_attempts = self._validate_max_attempts(
-            DEFAULT_MAX_ATTEMPTS if max_attempts is None else max_attempts
-        )
+        self.retry_strategy = retry_strategy
+        self.timeout = self._validate_timeout(timeout)
         self.endpoint_mode = endpoint_mode
         self.endpoint_uri = self._resolve_endpoint(endpoint_uri, endpoint_mode)
         self.token_ttl = self._validate_token_ttl(token_ttl)
         self.ec2_instance_profile_name = ec2_instance_profile_name
 
     @property
-    def retry_strategy(self) -> RetryStrategy:
-        """Deprecated: a strategy with this config's ``max_attempts``.
-
-        IMDS ignores its backoff, so read ``max_attempts`` instead.
-        """
-        warnings.warn(
-            "IMDSConfig's retry_strategy is deprecated; use max_attempts.",
-            DeprecationWarning,
-            stacklevel=2,
-        )
-        return SimpleRetryStrategy(max_attempts=self.max_attempts)
+    def max_attempts(self) -> int:
+        """Total attempts for each metadata read, from ``retry_strategy``."""
+        return self.retry_strategy.max_attempts
 
     def _validate_max_attempts(self, max_attempts: int) -> int:
         # bool is an int subclass, but True is not a meaningful attempt count.
@@ -126,6 +131,18 @@ class IMDSConfig:
                 f"IMDS max attempts must be an integer of at least 1, got {max_attempts!r}."
             )
         return max_attempts
+
+    def _validate_timeout(self, timeout: float) -> float:
+        if (
+            isinstance(timeout, bool)
+            or not isinstance(timeout, int | float)
+            or not math.isfinite(timeout)
+            or timeout <= 0
+        ):
+            raise IMDSConfigurationError(
+                f"IMDS timeout must be a positive number of seconds, got {timeout!r}."
+            )
+        return float(timeout)
 
     def _validate_token_ttl(self, ttl: int) -> int:
         if not self._MIN_TTL <= ttl <= self._MAX_TTL:
@@ -193,8 +210,10 @@ def provider_config(
     max_attempts = _resolve_value(
         config_file, profile_name, _MAX_ATTEMPTS_ENV, _MAX_ATTEMPTS_PROFILE
     )
+    timeout = _resolve_value(config_file, profile_name, _TIMEOUT_ENV, _TIMEOUT_PROFILE)
     return IMDSConfig(
         max_attempts=_parse_max_attempts(max_attempts),
+        timeout=_parse_timeout(timeout),
         endpoint_uri=_parse_endpoint_uri(endpoint),
         endpoint_mode=_parse_endpoint_mode(endpoint_mode),
         ec2_instance_profile_name=_validate_profile_name(instance_profile_name),
@@ -225,14 +244,14 @@ def fetch_token(
             ]
         ),
     )
-    status, fields, body = yield from _exchange(send, read_body, request)
+    status, fields, body = yield from _exchange(send, read_body, request, config)
     if status != 200:
         raise _IMDSRequestError(
             f"IMDS returned {status} when fetching a metadata token.",
             status=status,
             # Any other failure is retried. 400 and 403 mean IMDSv2 is unusable here,
             # so retrying can't help.
-            retryable=status not in (400, 403),
+            is_retry_safe=status not in (400, 403),
         )
     return IMDSToken(body.decode("utf-8"), _response_ttl(fields, config.token_ttl))
 
@@ -256,7 +275,7 @@ def fetch_metadata(
             ]
         ),
     )
-    status, _, body = yield from _exchange(send, read_body, request)
+    status, _, body = yield from _exchange(send, read_body, request, config)
     if status != 200:
         raise _IMDSRequestError(
             f"IMDS returned {status} for path '{path}'.",
@@ -264,7 +283,7 @@ def fetch_metadata(
             # Any other failure is retried. A 404 means the path doesn't exist and a 403
             # that access is denied, which a retry can't change. A 401 means the token
             # was rejected, so a retry with a new token can pass.
-            retryable=status not in (403, 404),
+            is_retry_safe=status not in (403, 404),
         )
     return body.decode("utf-8")
 
@@ -281,48 +300,46 @@ def get_metadata(
 ) -> Program[str]:
     """Read one metadata path, retrying the token fetch and read as one unit.
 
-    Any failed request is retried with capped exponential backoff until
-    ``config.max_attempts`` attempts are used, except a token request answered with
-    400 or 403 and a metadata request answered with 403 or 404. A response that
-    can't be decoded is raised at once.
+    Retries follow ``config.retry_strategy``. A failed request is safe to retry
+    except a token request answered with 400 or 403 and a metadata request answered
+    with 403 or 404, which are raised at once. A response that can't be decoded is
+    also raised at once.
     """
-    attempts = 0
-    last_exc: Exception | None = None
-    while attempts < config.max_attempts:
+    strategy = config.retry_strategy
+    retry_token: RetryToken = strategy.acquire_initial_retry_token()
+    while True:
         token: Any = None
         try:
             token = yield get_token
-            return (
-                yield from fetch_metadata(
-                    send=send,
-                    read_body=read_body,
-                    config=config,
-                    token=token.value,
-                    path=path,
-                )
+            result = yield from fetch_metadata(
+                send=send,
+                read_body=read_body,
+                config=config,
+                token=token.value,
+                path=path,
             )
         except _IMDSRequestError as error:
-            if not error.retryable:
+            if not error.is_retry_safe:
                 raise
             if error.status == 401 and token is not None:
                 # Drop the rejected token so the next attempt fetches a new one.
                 yield lambda: invalidate_token(token)
-            last_exc = error
-        attempts += 1
-        if attempts >= config.max_attempts:
-            break
-        delay = backoff_delay(attempts)
-        yield lambda: sleep(delay)
-
-    raise SmithyIdentityError(
-        f"Failed to retrieve IMDS metadata for path '{path}' "
-        f"after {attempts} attempt(s)."
-    ) from last_exc
-
-
-def backoff_delay(attempt: int) -> float:
-    """Return the delay in seconds after the given failed attempt (1-based)."""
-    return _BACKOFF.compute_next_backoff_delay(attempt)
+            attempts = retry_token.retry_count + 1
+            try:
+                retry_token = strategy.refresh_retry_token_for_retry(
+                    token_to_renew=retry_token, error=error
+                )
+            except RetryError as retry_error:
+                # Name the last failure, not just the strategy's reason for stopping.
+                raise SmithyIdentityError(
+                    f"Failed to retrieve IMDS metadata for path '{path}' after "
+                    f"{attempts} attempt(s): {error} ({retry_error})"
+                ) from error
+            delay = retry_token.retry_delay
+            yield lambda: sleep(delay)
+            continue
+        strategy.record_success(token=retry_token)
+        return result
 
 
 def resolve_credentials(
@@ -349,22 +366,39 @@ def _response_ttl(fields: Fields, requested: int) -> int:
 
 
 class _IMDSRequestError(SmithyIdentityError):
-    """A failed IMDS request: an unexpected status, or no response (``status`` None)."""
+    """A failed IMDS request: an unexpected status, or no response (``status`` None).
 
-    def __init__(self, message: str, *, status: int | None, retryable: bool):
+    Implements :py:class:`smithy_core.interfaces.retries.ErrorRetryInfo`, so any
+    retry strategy can decide whether to retry it.
+    """
+
+    retry_after: float | None = None
+    is_throttling_error: bool = False
+
+    def __init__(
+        self,
+        message: str,
+        *,
+        status: int | None,
+        is_retry_safe: bool,
+        is_timeout_error: bool = False,
+    ):
         super().__init__(message)
         self.status = status
-        self.retryable = retryable
+        self.is_retry_safe: bool | None = is_retry_safe
+        self.is_timeout_error = is_timeout_error
 
 
 def _exchange(
     send: Callable[[HTTPRequest, HTTPRequestConfiguration], Any],
     read_body: Callable[[Any], Any],
     request: HTTPRequest,
+    config: IMDSConfig,
 ) -> Program[tuple[int, Fields, bytes]]:
     """Send ``request`` and read its body, as one retryable step."""
+    request_config = HTTPRequestConfiguration(read_timeout=config.timeout)
     try:
-        response = yield lambda: send(request, _REQUEST_CONFIG)
+        response = yield lambda: send(request, request_config)
         body: bytes = yield lambda: read_body(response.body)
     except Exception as error:
         # A failure to get a response is retryable whatever the HTTP client raised:
@@ -372,7 +406,10 @@ def _exchange(
         raise _IMDSRequestError(
             f"IMDS request to {request.destination.path} failed: {error!r}",
             status=None,
-            retryable=True,
+            is_retry_safe=True,
+            # asyncio raises the built-in TimeoutError; smithy's errors set the flag.
+            is_timeout_error=isinstance(error, TimeoutError)
+            or getattr(error, "is_timeout_error", False) is True,
         ) from error
     return response.status, response.fields, body
 
@@ -466,6 +503,17 @@ def _parse_max_attempts(value: str | None) -> int:
     except ValueError as error:
         raise IMDSConfigurationError(
             f"Invalid IMDS max attempts {value!r}; expected a positive integer."
+        ) from error
+
+
+def _parse_timeout(value: str | None) -> float:
+    if value is None:
+        return DEFAULT_TIMEOUT_SECONDS
+    try:
+        return float(value)
+    except ValueError as error:
+        raise IMDSConfigurationError(
+            f"Invalid IMDS timeout {value!r}; expected a positive number of seconds."
         ) from error
 
 

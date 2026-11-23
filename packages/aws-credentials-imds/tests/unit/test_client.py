@@ -8,7 +8,7 @@ from typing import Any
 from unittest.mock import MagicMock, Mock, patch
 
 import pytest
-from aws_credentials_imds._imds import backoff_delay, get_metadata
+from aws_credentials_imds._imds import _BACKOFF, get_metadata
 from aws_credentials_imds.client import (
     IMDSClient,
     IMDSConfig,
@@ -17,7 +17,7 @@ from aws_credentials_imds.client import (
     IMDSTokenCache,
 )
 from smithy_core import URI
-from smithy_core.exceptions import SmithyIdentityError
+from smithy_core.exceptions import ClientTimeoutError, RetryError, SmithyIdentityError
 from smithy_core.program import run_program
 from smithy_core.retries import SimpleRetryStrategy
 from smithy_http import Field, Fields, HTTPRequest
@@ -233,28 +233,40 @@ def test_config_rejects_invalid_max_attempts(value: Any) -> None:
         IMDSConfig(max_attempts=value)
 
 
-def test_config_deprecated_retry_strategy_sets_max_attempts() -> None:
-    with pytest.warns(DeprecationWarning, match="retry_strategy is deprecated"):
-        config = IMDSConfig(retry_strategy=SimpleRetryStrategy(max_attempts=2))
+def test_config_default_retry_strategy() -> None:
+    strategy = IMDSConfig(max_attempts=3).retry_strategy
+    assert isinstance(strategy, SimpleRetryStrategy)
+    assert strategy.max_attempts == 3
+    assert strategy.backoff_strategy is _BACKOFF
+
+
+def test_config_retry_strategy_overrides_max_attempts() -> None:
+    strategy = SimpleRetryStrategy(max_attempts=2)
+    config = IMDSConfig(max_attempts=5, retry_strategy=strategy)
+    assert config.retry_strategy is strategy
     assert config.max_attempts == 2
 
 
-def test_config_max_attempts_wins_over_deprecated_retry_strategy() -> None:
-    with pytest.warns(DeprecationWarning):
-        config = IMDSConfig(
-            max_attempts=5, retry_strategy=SimpleRetryStrategy(max_attempts=2)
-        )
-    assert config.max_attempts == 5
+def test_config_retry_strategy_skips_max_attempts_validation() -> None:
+    # max_attempts is ignored when a strategy is given, so it isn't validated.
+    strategy = SimpleRetryStrategy(max_attempts=2)
+    assert IMDSConfig(max_attempts=0, retry_strategy=strategy).max_attempts == 2
 
 
-def test_config_deprecated_retry_strategy_attribute() -> None:
-    config = IMDSConfig(max_attempts=3)
-    with pytest.warns(DeprecationWarning, match="retry_strategy is deprecated"):
-        assert config.retry_strategy.max_attempts == 3
+def test_config_timeout() -> None:
+    assert IMDSConfig().timeout == 1.0
+    assert IMDSConfig(timeout=2).timeout == 2.0
+    assert IMDSConfig(timeout=0.5).timeout == 0.5
+
+
+@pytest.mark.parametrize("value", [0, -1, True, "1", float("nan"), float("inf"), None])
+def test_config_rejects_invalid_timeout(value: Any) -> None:
+    with pytest.raises(IMDSConfigurationError, match="timeout"):
+        IMDSConfig(timeout=value)
 
 
 def test_backoff_is_exponential_and_capped() -> None:
-    assert [backoff_delay(attempt) for attempt in range(1, 8)] == [
+    assert [_BACKOFF.compute_next_backoff_delay(n) for n in range(1, 8)] == [
         0.25,
         0.5,
         1.0,
@@ -325,7 +337,7 @@ def test_get_first_try_sends_token_put_then_get() -> None:
     sleep.assert_not_called()
 
 
-def test_get_applies_one_second_read_timeout() -> None:
+def test_get_applies_default_read_timeout() -> None:
     http_client = Mock()
     http_client.send.side_effect = [_token(), _response(200, b"metadata")]
 
@@ -584,3 +596,96 @@ def test_get_ignores_a_failing_close_after_a_good_read() -> None:
     ]
 
     assert _get(http_client, IMDSConfig(max_attempts=1)) == "metadata"
+
+
+class _FixedBackoff:
+    def compute_next_backoff_delay(self, retry_attempt: int) -> float:
+        return 0.123
+
+
+def test_get_uses_a_custom_retry_strategy() -> None:
+    strategy = Mock(
+        wraps=SimpleRetryStrategy(backoff_strategy=_FixedBackoff(), max_attempts=2)
+    )
+    strategy.max_attempts = 2
+    http_client = Mock()
+    http_client.send.side_effect = [_token(), _response(500), _response(200, b"ok")]
+
+    with patch("aws_credentials_imds.client.time.sleep") as sleep:
+        assert _get(http_client, IMDSConfig(retry_strategy=strategy)) == "ok"
+
+    strategy.acquire_initial_retry_token.assert_called_once()
+    strategy.refresh_retry_token_for_retry.assert_called_once()
+    strategy.record_success.assert_called_once()
+    # The strategy's backoff, not the IMDS default.
+    sleep.assert_called_once_with(0.123)
+
+
+def test_get_reports_a_retry_strategy_refusal() -> None:
+    # A strategy can refuse a retry-safe error, for example when its quota is spent.
+    strategy = Mock(wraps=SimpleRetryStrategy(max_attempts=5))
+    strategy.max_attempts = 5
+    strategy.refresh_retry_token_for_retry.side_effect = RetryError("quota spent")
+    http_client = Mock()
+    http_client.send.side_effect = [_token(), _response(500)]
+
+    with pytest.raises(
+        SmithyIdentityError,
+        match=r"after 1 attempt\(s\): IMDS returned 500 .*\(quota spent\)",
+    ) as exc:
+        _get(http_client, IMDSConfig(retry_strategy=strategy))
+
+    assert isinstance(exc.value.__cause__, SmithyIdentityError)
+    strategy.record_success.assert_not_called()
+
+
+def test_get_raises_a_non_retryable_error_without_asking_the_strategy() -> None:
+    strategy = Mock(wraps=SimpleRetryStrategy(max_attempts=5))
+    strategy.max_attempts = 5
+    http_client = Mock()
+    http_client.send.side_effect = [_token(), _response(404)]
+
+    with pytest.raises(SmithyIdentityError, match="returned 404"):
+        _get(http_client, IMDSConfig(retry_strategy=strategy))
+
+    strategy.refresh_retry_token_for_retry.assert_not_called()
+
+
+def test_get_passes_config_timeout_as_read_timeout() -> None:
+    http_client = Mock()
+    http_client.send.side_effect = [_token(), _response(200, b"ok")]
+
+    _get(http_client, IMDSConfig(timeout=2.5))
+
+    for call in http_client.send.call_args_list:
+        assert call.kwargs["request_config"].read_timeout == 2.5
+
+
+def test_exhausted_retries_name_the_last_failure() -> None:
+    http_client = Mock()
+    http_client.send.side_effect = [_token(), _response(500), _response(503)]
+
+    with patch("aws_credentials_imds.client.time.sleep"):
+        with pytest.raises(
+            SmithyIdentityError, match=r"after 2 attempt\(s\): IMDS returned 503"
+        ):
+            _get(http_client, IMDSConfig(max_attempts=2))
+
+
+@pytest.mark.parametrize(
+    ("error", "expected"),
+    [
+        (TimeoutError(), True),
+        (ClientTimeoutError(), True),
+        (ConnectionResetError(), False),
+    ],
+)
+def test_request_error_flags_timeouts(error: Exception, expected: bool) -> None:
+    http_client = Mock()
+    http_client.send.side_effect = error
+
+    with pytest.raises(SmithyIdentityError) as exc:
+        _get(http_client, IMDSConfig(max_attempts=1))
+
+    request_error = exc.value.__cause__
+    assert getattr(request_error, "is_timeout_error") is expected

@@ -10,12 +10,16 @@ import socket
 import struct
 import threading
 from collections.abc import Iterator
-from typing import Literal
+from typing import Any, Literal
 
 import pytest
+import urllib3.util.connection
 from aws_credentials_imds import IMDSConfig
 from aws_credentials_imds.aio.client import AsyncIMDSClient
 from aws_credentials_imds.client import IMDSClient
+from aws_credentials_imds.providers import Ec2InstanceMetadataProvider
+from smithy_aws_core.identity import AWSCredentialsIdentity
+from smithy_aws_core.identity.chain.provider import ChainSetup
 from smithy_core import URI
 from smithy_core.exceptions import SmithyIdentityError
 from smithy_http.aio.aiohttp import AIOHTTPClient
@@ -79,6 +83,9 @@ class _FailingServer:
     def config(self) -> IMDSConfig:
         return IMDSConfig(
             max_attempts=_ATTEMPTS,
+            # Short, so the "silent" case is quick and the setting is exercised on
+            # real clients.
+            timeout=0.2,
             endpoint_uri=URI(scheme="http", host="127.0.0.1", port=self.port),
         )
 
@@ -115,3 +122,35 @@ async def test_async_client_retries_socket_failures(server: _FailingServer) -> N
         with pytest.raises(SmithyIdentityError) as exc:
             await client.get(path="/latest/meta-data/iam/security-credentials")
     _assert_retried(exc.value, server)
+
+
+def test_default_chain_connects_with_the_imds_timeout(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    # The chain's shared client has a service client's long connect timeout. IMDS
+    # must not inherit it, or a network that drops IMDS traffic stalls each attempt
+    # for that long.
+    monkeypatch.setenv("AWS_EC2_METADATA_SERVICE_ENDPOINT", "http://192.0.2.1")
+    monkeypatch.setenv("AWS_METADATA_SERVICE_TIMEOUT", "0.5")
+    monkeypatch.setenv("AWS_METADATA_SERVICE_NUM_ATTEMPTS", "2")
+    connect_timeouts: list[float | None] = []
+
+    def blackholed(address: Any, timeout: Any = None, *args: Any, **kwargs: Any):
+        connect_timeouts.append(timeout)
+        raise TimeoutError("timed out")
+
+    monkeypatch.setattr(urllib3.util.connection, "create_connection", blackholed)
+    shared = Urllib3HTTPClient(
+        client_config=Urllib3HTTPClientConfig(connect_timeout=60.0)
+    )
+    setup = ChainSetup(config_file=None, profile_name=None, http_client=shared)
+    provider = Ec2InstanceMetadataProvider()
+    setup.set_current_provider(provider)
+    provider.setup(AWSCredentialsIdentity, setup)
+    resolver = setup.resolvers[0].resolver
+
+    with pytest.raises(SmithyIdentityError, match=r"after 2 attempt\(s\)"):
+        resolver.get_identity(properties={})
+
+    assert connect_timeouts
+    assert all(timeout == 0.5 for timeout in connect_timeouts)

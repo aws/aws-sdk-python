@@ -4,6 +4,7 @@
 # pyright: reportPrivateUsage=false
 from collections.abc import Callable, Mapping
 from typing import Any
+from unittest.mock import Mock
 
 import pytest
 from aws_credentials_imds.client import IMDSConfigurationError
@@ -21,6 +22,7 @@ _ENDPOINT_MODE_ENV = "AWS_EC2_METADATA_SERVICE_ENDPOINT_MODE"
 _DISABLED_ENV = "AWS_EC2_METADATA_DISABLED"
 _PROFILE_NAME_ENV = "AWS_EC2_INSTANCE_PROFILE_NAME"
 _MAX_ATTEMPTS_ENV = "AWS_METADATA_SERVICE_NUM_ATTEMPTS"
+_TIMEOUT_ENV = "AWS_METADATA_SERVICE_TIMEOUT"
 
 _ALL_ENV = (
     _ENDPOINT_ENV,
@@ -28,6 +30,7 @@ _ALL_ENV = (
     _DISABLED_ENV,
     _PROFILE_NAME_ENV,
     _MAX_ATTEMPTS_ENV,
+    _TIMEOUT_ENV,
 )
 
 
@@ -64,8 +67,11 @@ def setup_provider() -> Callable[..., ChainSetup]:
         identity_type: type[Identity] = AWSCredentialsIdentity,
         config_file: MergedConfig | None = None,
         profile_name: str | None = "default",
+        http_client: Any = None,
     ) -> ChainSetup:
-        setup = ChainSetup(config_file=config_file, profile_name=profile_name)
+        setup = ChainSetup(
+            config_file=config_file, profile_name=profile_name, http_client=http_client
+        )
         setup.set_current_provider(provider)
         provider.setup(identity_type, setup)
         return setup
@@ -348,3 +354,69 @@ def test_invalid_max_attempts_raises(
 
     with pytest.raises(IMDSConfigurationError, match="max attempts"):
         setup_provider(Ec2InstanceMetadataProvider())
+
+
+def test_timeout_defaults_to_one_second(
+    setup_provider: Callable[..., ChainSetup],
+) -> None:
+    setup = setup_provider(Ec2InstanceMetadataProvider())
+
+    assert _only_resolver(setup)._config.timeout == 1.0
+
+
+def test_timeout_from_env(
+    setup_provider: Callable[..., ChainSetup],
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    monkeypatch.setenv(_TIMEOUT_ENV, "2.5")
+
+    setup = setup_provider(Ec2InstanceMetadataProvider())
+
+    assert _only_resolver(setup)._config.timeout == 2.5
+
+
+def test_timeout_from_profile(
+    setup_provider: Callable[..., ChainSetup],
+    merged_config: Callable[..., MergedConfig],
+) -> None:
+    config = merged_config({"default": {"metadata_service_timeout": "3"}})
+
+    setup = setup_provider(Ec2InstanceMetadataProvider(), config_file=config)
+
+    assert _only_resolver(setup)._config.timeout == 3.0
+
+
+def test_timeout_env_overrides_profile(
+    setup_provider: Callable[..., ChainSetup],
+    merged_config: Callable[..., MergedConfig],
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    monkeypatch.setenv(_TIMEOUT_ENV, "2")
+    config = merged_config({"default": {"metadata_service_timeout": "3"}})
+
+    setup = setup_provider(Ec2InstanceMetadataProvider(), config_file=config)
+
+    assert _only_resolver(setup)._config.timeout == 2.0
+
+
+@pytest.mark.parametrize("value", ["0", "-1", "one", "nan", "inf"])
+def test_invalid_timeout_raises(
+    value: str,
+    setup_provider: Callable[..., ChainSetup],
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    monkeypatch.setenv(_TIMEOUT_ENV, value)
+
+    with pytest.raises(IMDSConfigurationError, match="timeout"):
+        setup_provider(Ec2InstanceMetadataProvider())
+
+
+def test_resolver_does_not_use_the_chain_http_client(
+    setup_provider: Callable[..., ChainSetup],
+) -> None:
+    # The chain's client has a service client's connect timeout, which a request
+    # can't override, so IMDS uses its own client with the IMDS timeout.
+    shared = Mock()
+    setup = setup_provider(Ec2InstanceMetadataProvider(), http_client=shared)
+
+    assert _only_resolver(setup)._imds_client._http_client is not shared
