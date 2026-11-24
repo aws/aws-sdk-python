@@ -12,7 +12,7 @@ env:
   DOWNLOAD_FOLDER: '.build-scripts/'
   SCRIPT_LOCATION: 'workflows/start-pull-request-build/pull-request-build-v1.sh'
   IAM_ROLE_ARN: 'arn:aws:iam::644726205228:role/AwsSdkPythonGitHubRole'
-  ROLE_SESSION_DURATION_SECONDS: 2700
+  ROLE_SESSION_DURATION_SECONDS: 3600
 
 jobs:
   aws-sdk-pr-build:
@@ -49,4 +49,4 @@ jobs:
             --branch "$HEAD_REF" \
             --pr-number "$PR_NUMBER" \
             --run-id "$RUN_ID"
-        timeout-minutes: 45
+        timeout-minutes: 60
