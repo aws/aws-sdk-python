@@ -50,6 +50,11 @@ CLIENTS_REQUIRING_BOTO3 = {
     "aws-sdk-transcribe-streaming": ["iam", "s3", "sts"],
 }
 
+# Clients whose tests call another client of this repo, resolved from source.
+CLIENTS_REQUIRING_CLIENTS = {
+    "aws-sdk-s3": ["aws-sdk-sts"],
+}
+
 # Shared test helpers, such as dual_mode, live in the repo-root tests/ folder.
 SHARED_TEST_PATH = (
     ("[tool.pytest.ini_options]\n", 'pythonpath = ["../../tests"]'),
@@ -290,6 +295,8 @@ def _install_client(slug: str) -> None:
     if name in CLIENTS_REQUIRING_BOTO3:
         services = ",".join(CLIENTS_REQUIRING_BOTO3[name])
         _uv_add(dest, "test", ["boto3", f"types-boto3-lite[{services}]"])
+    for dependency in CLIENTS_REQUIRING_CLIENTS.get(name, []):
+        _uv_add(dest, "test", ["--editable", f"../{dependency}"])
     print(f"wrote {dest}")
 
 
