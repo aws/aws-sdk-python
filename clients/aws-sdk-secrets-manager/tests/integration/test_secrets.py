@@ -44,6 +44,7 @@ async def test_new_version_rotates_current_and_previous_stages(
             GetSecretValueInput(secret_id=secret_name, version_stage="AWSPREVIOUS")
         ),
         done=lambda r: r.version_id == original.version_id,
+        retry_on=(ResourceNotFoundException,),
         interval=2,
     )
     assert previous.secret_string == SECRET_VALUE
