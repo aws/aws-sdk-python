@@ -1,8 +1,9 @@
 # Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 # SPDX-License-Identifier: Apache-2.0
 
-"""Stack lifecycle, validation and pagination, from JS v3 cloudformation-features.e2e."""
+"""Stack lifecycle and validation, from JS v3 cloudformation-features.e2e."""
 
+import pytest
 from aws_sdk_cloudformation.aio.client import AsyncCloudFormationClient
 from aws_sdk_cloudformation.models import (
     CreateStackInput,
@@ -15,6 +16,10 @@ from aws_sdk_cloudformation.models import (
 )
 
 from . import FAILING_TEMPLATE, QUEUE_TEMPLATE, unique_stack_name, wait_for_stack_status
+
+pytestmark = pytest.mark.skip(
+    reason="TODO: slow live stack waits; reintroduce as a recorded playback test."
+)
 
 
 async def test_create_describe_delete_stack(
