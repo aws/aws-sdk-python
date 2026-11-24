@@ -58,12 +58,29 @@ test-functional:
 	done
 
 # Calls live services, so it needs AWS credentials.
+# Each project tests its own service, so projects run at once. -k runs every project
+# even after one fails; make still exits non-zero if any failed.
+INTEGRATION_JOBS ?= 4
+INTEGRATION_PROJECTS := $(filter-out $(INTEGRATION_SKIP),$(patsubst %/tests/integration,%,$(wildcard $(addsuffix /tests/integration,$(PROJECTS)))))
+# Keeps each project's output together; needs GNU make 4.0 or later.
+OUTPUT_SYNC := $(if $(filter output-sync,$(.FEATURES)),--output-sync=target)
+
 test-integration:
-	@set -e; for p in $(filter-out $(INTEGRATION_SKIP),$(PROJECTS)); do \
-		[ -d $$p/tests/integration ] || continue; \
-		echo "== $$p"; \
-		$(UV_RUN) $$p --group test --all-extras pytest $$p/tests/integration; \
-	done
+	@start=$$(date +%s); \
+	$(MAKE) --no-print-directory -k -j$(INTEGRATION_JOBS) $(OUTPUT_SYNC) $(addprefix integration/,$(INTEGRATION_PROJECTS)); \
+	status=$$?; \
+	echo "== test-integration finished in $$(( $$(date +%s) - start ))s (exit $$status)"; \
+	exit $$status
+
+integration/%: FORCE
+	@start=$$(date +%s); \
+	echo "== $*"; \
+	$(UV_RUN) $* --group test --all-extras pytest $*/tests/integration --durations=5; \
+	status=$$?; \
+	echo "== $* finished in $$(( $$(date +%s) - start ))s (exit $$status)"; \
+	exit $$status
+
+FORCE:
 
 # Regenerate every client from codegen/aws-models with codegen built from the
 # smithy-python commit in codegen/smithy-python.toml. Each client is cleared first,
