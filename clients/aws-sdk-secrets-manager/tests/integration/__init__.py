@@ -11,9 +11,11 @@ from aws_sdk_secrets_manager.aio.config import AsyncSecretsManagerConfig
 from aws_sdk_secrets_manager.client import SecretsManagerClient
 from aws_sdk_secrets_manager.config import SecretsManagerConfig
 from aws_sdk_secrets_manager.models import (
+    DeleteSecretInput,
     InvalidRequestException,
     ResourceNotFoundException,
 )
+from smithy_core.exceptions import CallError
 from waiters import wait_until
 
 REGION = "us-west-2"
@@ -34,6 +36,33 @@ async def create_async_client() -> AsyncSecretsManagerClient:
 def create_sync_client() -> SecretsManagerClient:
     config = SecretsManagerConfig.resolve(region=REGION)
     return SecretsManagerClient(config=config)
+
+
+class DeleteThrottled(Exception):
+    """DeleteSecret answered with an unmodeled HTTP 400, which is how its throttle arrives today."""
+
+
+async def delete_secret_with_retry(
+    secrets: AsyncSecretsManagerClient, name: str
+) -> None:
+    """Force-deletes the secret, retrying the throttle that can hit a delete soon after the create."""
+
+    async def delete() -> None:
+        try:
+            await secrets.delete_secret(
+                DeleteSecretInput(secret_id=name, force_delete_without_recovery=True)
+            )
+        except CallError as error:
+            # TODO: remove when the pins move to a smithy-python release with
+            # smithy-lang/smithy-python#955. Until then the client raises HTTP 400
+            # ThrottlingException as a plain CallError with no error code, so any other
+            # unmodeled HTTP 400 is retried here too, for a few seconds.
+            status = error.response_metadata.http_status_code
+            if type(error) is CallError and status == 400:
+                raise DeleteThrottled() from error
+            raise
+
+    await wait_until(delete, retry_on=(DeleteThrottled,), interval=1, timeout=5)
 
 
 async def wait_until_secret_deleted(read: Callable[[], Awaitable[object]]) -> None:

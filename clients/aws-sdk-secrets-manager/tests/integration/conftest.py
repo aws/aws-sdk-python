@@ -13,18 +13,18 @@ from aws_sdk_secrets_manager.aio.client import AsyncSecretsManagerClient
 from aws_sdk_secrets_manager.client import SecretsManagerClient
 from aws_sdk_secrets_manager.models import (
     CreateSecretInput,
-    DeleteSecretInput,
     GetSecretValueInput,
     GetSecretValueOutput,
     ResourceNotFoundException,
     Tag,
 )
-from dual_mode import MODES, Mode, open_client
+from dual_mode import MODES, AwaitableClient, Mode, open_client
 from waiters import wait_until
 
 from . import (
     create_async_client,
     create_sync_client,
+    delete_secret_with_retry,
     unique_name,
     wait_until_secret_deleted,
 )
@@ -66,11 +66,16 @@ def secret_name() -> Iterator[str]:
             yield name
         finally:
             # Without this the name stays reserved for the recovery window.
-            client.delete_secret(
-                DeleteSecretInput(secret_id=name, force_delete_without_recovery=True)
-            )
+            asyncio.run(_delete(client, name))
             asyncio.run(wait_until_secret_deleted(lambda: _get(client, name)))
 
 
 async def _get(client: SecretsManagerClient, name: str) -> GetSecretValueOutput:
     return client.get_secret_value(GetSecretValueInput(secret_id=name))
+
+
+async def _delete(client: SecretsManagerClient, name: str) -> None:
+    # The adapter stands in for the async client, as in open_client.
+    await delete_secret_with_retry(
+        cast(AsyncSecretsManagerClient, AwaitableClient(client)), name
+    )
