@@ -30,6 +30,9 @@ class AsyncEc2InstanceMetadataProvider:
             return
         config = provider_config(setup.config_file, setup.profile_name)
         if config is not None:
+            # Unlike the sync chain, sharing the chain's client is safe here: the
+            # async IMDS client wraps each send in config.timeout, which bounds
+            # connecting too.
             setup.add_resolver(
                 AsyncIMDSCredentialsResolver(
                     http_client=setup.http_client, config=config

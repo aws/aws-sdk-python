@@ -3,13 +3,18 @@
 
 # pyright: reportPrivateUsage=false
 import json
+import threading
+import time
+from concurrent.futures import ThreadPoolExecutor
 from datetime import UTC, datetime, timedelta
+from typing import Any
 from unittest.mock import Mock, patch
 
 import pytest
 from aws_credentials_imds.client import IMDSConfig
 from aws_credentials_imds.resolvers import IMDSCredentialsResolver
 from smithy_core.exceptions import SmithyIdentityError
+from smithy_http import Fields
 
 ISO8601 = "%Y-%m-%dT%H:%M:%SZ"
 
@@ -122,15 +127,84 @@ def test_resolver_requires_access_key_and_secret() -> None:
         resolver.get_identity(properties={})
 
 
-def test_resolver_closes_default_http_client() -> None:
-    http_client = Mock()
-    http_client.send.side_effect = [
-        Mock(status=200, body=body)
-        for body in (b"token", b"test-profile", json.dumps(_CREDS).encode())
-    ]
-    with patch("aws_credentials_imds.resolvers.Urllib3HTTPClient") as default_client:
-        default_client.return_value.__enter__.return_value = http_client
-        credentials = IMDSCredentialsResolver().get_identity(properties={})
+def _ok_responses(*bodies: bytes) -> list[Mock]:
+    return [Mock(status=200, body=body, fields=Fields()) for body in bodies]
 
-    assert credentials.access_key_id == "test-access-key"
-    default_client.return_value.__exit__.assert_called_once()
+
+def test_resolver_owns_one_default_http_client() -> None:
+    expired = {**_CREDS, "Expiration": "2000-01-01T00:00:00Z"}
+    http_client = Mock()
+    http_client.send.side_effect = _ok_responses(
+        b"token",
+        b"test-profile",
+        json.dumps(expired).encode(),
+        # No second token request: the token is reused across calls.
+        b"test-profile",
+        json.dumps(_CREDS).encode(),
+    )
+    with patch(
+        "aws_credentials_imds.resolvers.Urllib3HTTPClient", return_value=http_client
+    ) as default_client:
+        resolver = IMDSCredentialsResolver()
+        resolver.get_identity(properties={})
+        resolver.get_identity(properties={})
+
+    default_client.assert_called_once()
+    assert http_client.send.call_count == 5
+    token_requests = [
+        call
+        for call in http_client.send.call_args_list
+        if call.kwargs["request"].method == "PUT"
+    ]
+    assert len(token_requests) == 1
+
+
+@pytest.mark.parametrize(
+    ("config", "expected"), [(None, 1.0), (IMDSConfig(timeout=2.5), 2.5)]
+)
+def test_resolver_default_http_client_uses_config_timeout(
+    config: IMDSConfig | None, expected: float
+) -> None:
+    with patch("aws_credentials_imds.resolvers.Urllib3HTTPClient") as default_client:
+        IMDSCredentialsResolver(config=config)
+
+    client_config = default_client.call_args.kwargs["client_config"]
+    assert client_config.connect_timeout == expected
+    assert client_config.read_timeout == expected
+
+
+def test_resolver_shares_token_between_concurrent_threads() -> None:
+    callers = 10
+    # Hold the token request so every caller reaches the token cache before the
+    # first token arrives.
+    release = threading.Event()
+    lock = threading.Lock()
+    methods: list[str] = []
+
+    def send(*, request: Any, request_config: Any) -> Mock:
+        with lock:
+            methods.append(request.method)
+        if request.method == "PUT":
+            release.wait(timeout=5)
+            return Mock(status=200, body=b"token", fields=Fields())
+        if request.destination.path.endswith("/test-profile"):
+            return Mock(status=200, body=json.dumps(_CREDS).encode(), fields=Fields())
+        return Mock(status=200, body=b"test-profile", fields=Fields())
+
+    http_client = Mock()
+    http_client.send.side_effect = send
+    with patch(
+        "aws_credentials_imds.resolvers.Urllib3HTTPClient", return_value=http_client
+    ):
+        resolver = IMDSCredentialsResolver()
+        with ThreadPoolExecutor(callers) as pool:
+            futures = [
+                pool.submit(resolver.get_identity, properties={})
+                for _ in range(callers)
+            ]
+            time.sleep(0.2)
+            release.set()
+            results = [future.result(timeout=5) for future in futures]
+
+    assert all(r.access_key_id == "test-access-key" for r in results)
+    assert methods.count("PUT") == 1

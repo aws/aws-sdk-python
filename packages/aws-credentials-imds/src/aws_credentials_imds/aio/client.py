@@ -1,12 +1,22 @@
 # Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 # SPDX-License-Identifier: Apache-2.0
 import asyncio
+from contextlib import suppress
+from inspect import isawaitable
+from typing import Any
 
 from smithy_core.aio.program import run_program_async
 from smithy_core.aio.utils import read_streaming_blob_async
-from smithy_http.aio.interfaces import AsyncHTTPClient
+from smithy_http import HTTPRequest
+from smithy_http.aio.interfaces import AsyncHTTPClient, HTTPResponse
+from smithy_http.interfaces import HTTPRequestConfiguration
 
-from .._imds import IMDSConfig, IMDSToken, fetch_metadata, fetch_token
+from .._imds import (
+    IMDSConfig,
+    IMDSToken,
+    fetch_token,
+    get_metadata,
+)
 
 
 class AsyncIMDSTokenCache:
@@ -20,26 +30,33 @@ class AsyncIMDSTokenCache:
 
     async def get_token(self) -> IMDSToken:
         """Return the cached session token, refreshing it once it expires."""
-        if self._should_refresh():
-            await self._refresh()
-        assert self._token is not None  # noqa: S101
-        return self._token
+        # Read the token once: another task may invalidate it at any point.
+        token = self._token
+        if token is None or token.is_expired():
+            token = await self._refresh()
+        return token
 
-    def _should_refresh(self) -> bool:
-        return self._token is None or self._token.is_expired()
+    def _invalidate(self, token: IMDSToken) -> None:
+        # Leave a token another task already refreshed in place.
+        if self._token is token:
+            self._token = None
 
-    async def _refresh(self) -> None:
+    async def _refresh(self) -> IMDSToken:
         async with self._refresh_lock:
-            if not self._should_refresh():
-                return
-            value = await run_program_async(
+            token = self._token
+            if token is not None and not token.is_expired():
+                return token
+            token = await run_program_async(
                 fetch_token(
-                    send=lambda request: self._http_client.send(request=request),
-                    read_body=read_streaming_blob_async,
+                    send=lambda request, config: _send(
+                        self._http_client, request, config
+                    ),
+                    read_body=lambda body: _read_body(body, self._config.timeout),
                     config=self._config,
                 )
             )
-            self._token = IMDSToken(value, self._config.token_ttl)
+            self._token = token
+            return token
 
 
 class AsyncIMDSClient:
@@ -54,13 +71,41 @@ class AsyncIMDSClient:
 
     async def get(self, *, path: str) -> str:
         """Fetch the instance metadata at ``path``."""
-        token = await self._token_cache.get_token()
         return await run_program_async(
-            fetch_metadata(
-                send=lambda request: self._http_client.send(request=request),
-                read_body=read_streaming_blob_async,
+            get_metadata(
+                send=lambda request, config: _send(self._http_client, request, config),
+                read_body=lambda body: _read_body(body, self._config.timeout),
+                sleep=asyncio.sleep,
+                get_token=self._token_cache.get_token,
+                invalidate_token=self._token_cache._invalidate,
                 config=self._config,
-                token=token.value,
                 path=path,
             )
         )
+
+
+# Async clients such as aiohttp don't apply HTTPRequestConfiguration.read_timeout,
+# so the IMDS timeout is enforced here for any client. It covers connecting too.
+async def _send(
+    http_client: AsyncHTTPClient,
+    request: HTTPRequest,
+    config: HTTPRequestConfiguration,
+) -> HTTPResponse:
+    async with asyncio.timeout(config.read_timeout):
+        return await http_client.send(request=request, request_config=config)
+
+
+async def _read_body(body: Any, timeout: float) -> bytes:
+    try:
+        async with asyncio.timeout(timeout):
+            return await read_streaming_blob_async(body)
+    finally:
+        # Hand the connection back, or drop it if the read was cut short, so a
+        # timed-out attempt doesn't hold a connection from the caller's pool.
+        # A close failure must not replace the read's own result or error.
+        close = getattr(body, "close", None)
+        if close is not None:
+            with suppress(Exception):
+                result = close()
+                if isawaitable(result):
+                    await result

@@ -30,16 +30,26 @@ service_client = ServiceClient(
 )
 ```
 
-Endpoint mode, token TTL, and other options can be customized through an
-`IMDSConfig`:
+Endpoint mode, token TTL, retries, timeout, and other options can be customized
+through an `IMDSConfig`:
 
 ```python
 from aws_credentials_imds import IMDSConfig, IMDSCredentialsResolver
 
 resolver = IMDSCredentialsResolver(
-    config=IMDSConfig(endpoint_mode="IPv6", token_ttl=300),
+    config=IMDSConfig(endpoint_mode="IPv6", token_ttl=300, max_attempts=2, timeout=2.0),
 )
 ```
+
+Each metadata read makes up to 4 attempts, with waits of 0.25, 0.5 and 1 seconds
+between them, and each request times out after 1 second. To change the backoff
+as well, pass a `retry_strategy`, which overrides `max_attempts`. The default
+chain reads these settings from the environment or the shared config file:
+
+| Setting | Environment variable | Config file key |
+| --- | --- | --- |
+| `max_attempts` | `AWS_METADATA_SERVICE_NUM_ATTEMPTS` | `metadata_service_num_attempts` |
+| `timeout` | `AWS_METADATA_SERVICE_TIMEOUT` | `metadata_service_timeout` |
 
 ## Standalone
 

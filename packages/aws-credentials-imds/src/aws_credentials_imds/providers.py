@@ -28,6 +28,7 @@ class Ec2InstanceMetadataProvider:
             return
         config = provider_config(setup.config_file, setup.profile_name)
         if config is not None:
-            setup.add_resolver(
-                IMDSCredentialsResolver(http_client=setup.http_client, config=config)
-            )
+            # The chain's shared client has a service client's connect timeout,
+            # often 60 s, which a request can't override. The resolver's own
+            # client connects within config.timeout instead.
+            setup.add_resolver(IMDSCredentialsResolver(config=config))
