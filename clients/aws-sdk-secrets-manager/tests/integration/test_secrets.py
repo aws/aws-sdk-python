@@ -6,7 +6,6 @@
 from aws_sdk_secrets_manager.aio.client import AsyncSecretsManagerClient
 from aws_sdk_secrets_manager.models import (
     CreateSecretInput,
-    DeleteSecretInput,
     GetSecretValueInput,
     ListSecretVersionIdsInput,
     PutSecretValueInput,
@@ -15,7 +14,7 @@ from aws_sdk_secrets_manager.models import (
 
 from waiters import wait_until
 
-from . import unique_name, wait_until_secret_deleted
+from . import delete_secret_with_retry, unique_name, wait_until_secret_deleted
 from .conftest import SECRET_VALUE
 
 
@@ -95,9 +94,7 @@ async def test_binary_secret_round_trip(secrets: AsyncSecretsManagerClient) -> N
         assert result.secret_binary == payload
         assert result.secret_string is None
     finally:
-        await secrets.delete_secret(
-            DeleteSecretInput(secret_id=name, force_delete_without_recovery=True)
-        )
+        await delete_secret_with_retry(secrets, name)
 
 
 async def test_force_deleted_secret_is_not_found(
@@ -111,9 +108,7 @@ async def test_force_deleted_secret_is_not_found(
         retry_on=(ResourceNotFoundException,),
         interval=2,
     )
-    await secrets.delete_secret(
-        DeleteSecretInput(secret_id=name, force_delete_without_recovery=True)
-    )
+    await delete_secret_with_retry(secrets, name)
 
     await wait_until_secret_deleted(
         lambda: secrets.get_secret_value(GetSecretValueInput(secret_id=name))
