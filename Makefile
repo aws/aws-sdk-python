@@ -237,10 +237,10 @@ lowest-bounds: $(VERIFY_STAMP) ## Proves the declared lower bounds actually work
 	$(VERIFY)/lowest_bounds.py
 
 venv:
-	uv venv --python $(PYTHON_VERSION)
+	uv venv --allow-existing --python $(PYTHON_VERSION)
 
 docs-lock: venv
-	uv pip compile requirements-docs.in -o requirements-docs.txt
+	uv pip compile --generate-hashes requirements-docs.in -o requirements-docs.txt
 
 docs-install: venv
 	uv pip install -r requirements-docs.txt
